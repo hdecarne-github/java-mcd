@@ -322,13 +322,13 @@ public final class MCDDecodeBuffer {
 	}
 
 	private void readBlocking(ByteBuffer buffer) throws IOException {
-		do {
+		while (buffer.remaining() > 0) {
 			int read = this.in.read(buffer);
 
 			if (read < 0) {
 				throw new EOFException();
 			}
-		} while (buffer.remaining() > 0);
+		}
 	}
 
 }
