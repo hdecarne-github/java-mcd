@@ -72,7 +72,7 @@ abstract class ClassPrinter {
 	public abstract void print() throws IOException;
 
 	public void increaseIdent() {
-		this.ident += "\t";
+		this.ident += "    ";
 	}
 
 	public void decreaseIdent() {
@@ -80,7 +80,7 @@ abstract class ClassPrinter {
 
 		Check.assertTrue(identLevel > 0);
 
-		this.ident = this.ident.substring(0, identLevel - 1);
+		this.ident = this.ident.substring(0, identLevel - 4);
 	}
 
 	public void printIdent() throws IOException {
