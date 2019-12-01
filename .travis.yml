@@ -1,0 +1,40 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+os:
+  - linux
+  - osx
+
+dist: trusty
+osx_image: xcode9.3
+
+env:
+  JAVA_OPTS="-Xmx2g -Dfile.encoding=UTF-8"
+
+addons:
+  sonarcloud:
+    organization: "hdecarne-github"
+
+git:
+  depth: false  
+
+install: ./gradlew -s --refresh-dependencies clean assemble testClasses
+
+before_script: if [[ -e "./.travis/$TRAVIS_OS_NAME/before_script.sh" ]]; then bash -x ./.travis/$TRAVIS_OS_NAME/before_script.sh; fi
+script: if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./gradlew -s build artifactoryPublish sonarqube checkDependencyVersions; else ./gradlew -s build; fi
+
+notifications:
+  email: false
+  webhooks: https://outlook.office.com/webhook/27c453a8-ba7e-434b-aa1c-3f3518bae970@204cfc34-134c-421b-9da1-8d11960a08c0/TravisCI/19103ea0fa0047e09b0b5f8e6dbca$
+  on_success: change
+
+# See https://docs.travis-ci.com/user/languages/java/#caching
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/

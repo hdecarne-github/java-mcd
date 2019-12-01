@@ -1,0 +1,3 @@
+dependencies {
+	api(group: "de.carne.common", name: "java-default", version: project.javaDefaultVersion)
+}
