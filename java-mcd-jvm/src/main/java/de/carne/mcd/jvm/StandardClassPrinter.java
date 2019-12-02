@@ -33,8 +33,8 @@ class StandardClassPrinter extends ClassPrinter {
 		printlnClassPackage();
 		printlnClassAnnotations();
 		printClassAccessFLagsKeywords();
-		this.out.printKeyword(S_CLASS).print(" ").print(this.classInfo.thisClass().getSimpleName()).print(" ");
 		printClassAccessFlagsComment();
+		this.out.printKeyword(S_CLASS).print(" ").print(this.classInfo.thisClass().getSimpleName()).print(" ");
 
 		ClassName superClass = this.classInfo.superClass();
 

@@ -36,6 +36,7 @@ abstract class ClassPrinter {
 	protected static final String S_CLASS = "class";
 	protected static final String S_INTERFACE = "interface";
 	protected static final String S_ENUM = "enum";
+	protected static final String S_SUPER = "super";
 	protected static final String S_EXTENDS = "extends";
 	protected static final String S_IMPLEMENTS = "implements";
 	protected static final String S_PUBLIC = "public";
@@ -45,6 +46,9 @@ abstract class ClassPrinter {
 	protected static final String S_FINAL = "final";
 	protected static final String S_VOLATILE = "volatile";
 	protected static final String S_TRANSIENT = "transient";
+	protected static final String S_BRIDGE = "bridge";
+	protected static final String S_VARARGS = "varargs";
+	protected static final String S_SYNTHETIC = "synthetic";
 	protected static final String S_SYNCHRONIZED = "synchronized";
 	protected static final String S_NATIVE = "native";
 	protected static final String S_ABSTRACT = "abstract";
@@ -190,22 +194,15 @@ abstract class ClassPrinter {
 		this.out.print(decodeTypeDescriptor(typeName, this.classPackage) + "." + value);
 	}
 
-	private static final Map<Integer, String> CLASS_ACCESS_FLAGS_SYMS = new LinkedHashMap<>();
+	private static final Map<Integer, String> CLASS_ACCESS_FLAGS_COMMENTS = new LinkedHashMap<>();
 
 	static {
-		CLASS_ACCESS_FLAGS_SYMS.put(0x0001, "ACC_PUBLIC");
-		CLASS_ACCESS_FLAGS_SYMS.put(0x0010, "ACC_FINAL");
-		CLASS_ACCESS_FLAGS_SYMS.put(0x0020, "ACC_SUPER");
-		CLASS_ACCESS_FLAGS_SYMS.put(0x0200, "ACC_INTERFACE");
-		CLASS_ACCESS_FLAGS_SYMS.put(0x0400, "ACC_ABSTRACT");
-		CLASS_ACCESS_FLAGS_SYMS.put(0x1000, "ACC_SYNTHETIC");
-		CLASS_ACCESS_FLAGS_SYMS.put(0x2000, "ACC_ANNOTATION");
-		CLASS_ACCESS_FLAGS_SYMS.put(0x4000, "ACC_ENUM");
-		CLASS_ACCESS_FLAGS_SYMS.put(0x8000, "ACC_MODULE");
+		CLASS_ACCESS_FLAGS_COMMENTS.put(0x0020, S_SUPER);
+		CLASS_ACCESS_FLAGS_COMMENTS.put(0x1000, S_SYNTHETIC);
 	}
 
 	public void printClassAccessFlagsComment() throws IOException {
-		this.out.printComment("/* " + formatAccessFlags(CLASS_ACCESS_FLAGS_SYMS, this.classInfo.accessFlags()) + " */");
+		printAccessFlagsComment(CLASS_ACCESS_FLAGS_COMMENTS, this.classInfo.accessFlags());
 	}
 
 	private static final Map<Integer, String> CLASS_ACCESS_FLAGS_KEYWORDS = new LinkedHashMap<>();
@@ -218,6 +215,17 @@ abstract class ClassPrinter {
 
 	public void printClassAccessFLagsKeywords() throws IOException {
 		printAccessFlagsKeywords(CLASS_ACCESS_FLAGS_KEYWORDS, this.classInfo.accessFlags());
+	}
+
+	private static final Map<Integer, String> FIELD_ACCESS_FLAGS_COMMENTS = new LinkedHashMap<>();
+
+	static {
+		FIELD_ACCESS_FLAGS_COMMENTS.put(0x1000, S_SYNTHETIC);
+		FIELD_ACCESS_FLAGS_COMMENTS.put(0x4000, S_ENUM);
+	}
+
+	public void printFieldAccessFLagsComment(int accessFlags) throws IOException {
+		printAccessFlagsComment(FIELD_ACCESS_FLAGS_COMMENTS, accessFlags);
 	}
 
 	private static final Map<Integer, String> FIELD_ACCESS_FLAGS_KEYWORDS = new LinkedHashMap<>();
@@ -236,13 +244,25 @@ abstract class ClassPrinter {
 		printAccessFlagsKeywords(FIELD_ACCESS_FLAGS_KEYWORDS, accessFlags);
 	}
 
+	private static final Map<Integer, String> METHOD_ACCESS_FLAGS_COMMENTS = new LinkedHashMap<>();
+
+	static {
+		METHOD_ACCESS_FLAGS_COMMENTS.put(0x0040, S_BRIDGE);
+		METHOD_ACCESS_FLAGS_COMMENTS.put(0x0080, S_VARARGS);
+		METHOD_ACCESS_FLAGS_COMMENTS.put(0x1000, S_SYNTHETIC);
+	}
+
+	public void printMethodAccessFLagsComment(int accessFlags) throws IOException {
+		printAccessFlagsComment(METHOD_ACCESS_FLAGS_COMMENTS, accessFlags);
+	}
+
 	private static final Map<Integer, String> METHOD_ACCESS_FLAGS_KEYWORDS = new LinkedHashMap<>();
 
 	static {
 		METHOD_ACCESS_FLAGS_KEYWORDS.put(0x0001, S_PUBLIC);
 		METHOD_ACCESS_FLAGS_KEYWORDS.put(0x0002, S_PRIVATE);
 		METHOD_ACCESS_FLAGS_KEYWORDS.put(0x0004, S_PROTECTED);
-		METHOD_ACCESS_FLAGS_KEYWORDS.put(0x0008, S_PRIVATE);
+		METHOD_ACCESS_FLAGS_KEYWORDS.put(0x0008, S_STATIC);
 		METHOD_ACCESS_FLAGS_KEYWORDS.put(0x0010, S_FINAL);
 		METHOD_ACCESS_FLAGS_KEYWORDS.put(0x0020, S_SYNCHRONIZED);
 		METHOD_ACCESS_FLAGS_KEYWORDS.put(0x0100, S_NATIVE);
@@ -251,6 +271,23 @@ abstract class ClassPrinter {
 
 	public void printMethodAccessFLagsKeywords(int accessFlags) throws IOException {
 		printAccessFlagsKeywords(METHOD_ACCESS_FLAGS_KEYWORDS, accessFlags);
+	}
+
+	private void printAccessFlagsComment(Map<Integer, String> comments, int flags) throws IOException {
+		StringBuilder buffer = new StringBuilder();
+
+		for (Map.Entry<Integer, String> commentEntry : comments.entrySet()) {
+			int flag = commentEntry.getKey().intValue();
+			String keyword = commentEntry.getValue();
+
+			if ((flags & flag) == flag) {
+				buffer.append(buffer.length() == 0 ? "/* " : "|").append(keyword);
+			}
+		}
+		if (buffer.length() > 0) {
+			buffer.append(" */");
+			this.out.printComment(buffer.toString()).print(" ");
+		}
 	}
 
 	private void printAccessFlagsKeywords(Map<Integer, String> keywords, int flags) throws IOException {
@@ -278,6 +315,7 @@ abstract class ClassPrinter {
 		printlnAnnotations(attributes);
 		printIdent();
 		printFieldAccessFLagsKeywords(accessFlags);
+		printFieldAccessFLagsComment(accessFlags);
 		this.out.print(decodeTypeDescriptor(descriptor, this.classPackage)).print(" ").print(name);
 
 		Optional<ConstantValueAttribute> valueHolder = Attributes.resolveOptionalAttribute(attributes,
@@ -308,6 +346,7 @@ abstract class ClassPrinter {
 		printlnAnnotations(attributes);
 		printIdent();
 		printMethodAccessFLagsKeywords(accessFlags);
+		printMethodAccessFLagsComment(accessFlags);
 
 		Deque<String> signature = decodeDescriptor(descriptor, this.classPackage);
 		String returnType = signature.removeLast();
@@ -331,23 +370,6 @@ abstract class ClassPrinter {
 
 	public void printValue(String value) throws IOException {
 		this.out.printValue(value);
-	}
-
-	private String formatAccessFlags(Map<Integer, String> syms, int flags) {
-		StringBuilder buffer = new StringBuilder();
-
-		for (int flag = 0x0001; flag < 0x10000; flag <<= 1) {
-			if ((flags & flag) == flag) {
-				if (buffer.length() > 0) {
-					buffer.append("|");
-				}
-
-				String flagSym = syms.get(flag);
-
-				buffer.append(flagSym != null ? flagSym : Integer.toHexString(flag));
-			}
-		}
-		return buffer.toString();
 	}
 
 	private String decodeTypeDescriptor(String descriptor, String packageName) throws IOException {

@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.carne.boot.check.Check;
+import de.carne.boot.logging.Log;
 import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutputChannel;
 import de.carne.mcd.common.MachineCodeDecoder;
@@ -38,6 +39,8 @@ import de.carne.util.Late;
  * Java byte code decoder.
  */
 public class JvmMachineCodeDecoder extends MachineCodeDecoder {
+
+	private static final Log LOG = new Log();
 
 	/**
 	 * Constructs a new {@linkplain JvmMachineCodeDecoder} instance.
@@ -415,6 +418,8 @@ public class JvmMachineCodeDecoder extends MachineCodeDecoder {
 		default:
 			buffer.skip(length);
 			attribute = new UndecodedAttribute(decoded, nameIndex, length);
+
+			LOG.info("Skipping attribute ''{0}''", attributeName);
 		}
 		return attribute;
 	}

@@ -49,6 +49,8 @@ class InterfaceClassPrinter extends ClassPrinter {
 			}
 		}
 		this.out.println(" {");
+		printlnFields();
+		printlnMethods();
 		this.out.println("}");
 	}
 

@@ -33,8 +33,8 @@ class EnumClassPrinter extends ClassPrinter {
 		printlnClassPackage();
 		printlnClassAnnotations();
 		printClassAccessFLagsKeywords();
-		this.out.printKeyword(S_ENUM).print(" ").print(this.classInfo.thisClass().getSimpleName()).print(" ");
 		printClassAccessFlagsComment();
+		this.out.printKeyword(S_ENUM).print(" ").print(this.classInfo.thisClass().getSimpleName()).print(" ");
 
 		ClassName superClass = this.classInfo.superClass();
 
@@ -58,6 +58,7 @@ class EnumClassPrinter extends ClassPrinter {
 		}
 		this.out.println(" {");
 		printlnFields();
+		printlnMethods();
 		this.out.println().println("}");
 	}
 
