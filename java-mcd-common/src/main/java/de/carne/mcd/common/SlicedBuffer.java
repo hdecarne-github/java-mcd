@@ -43,12 +43,25 @@ class SlicedBuffer implements SeekableByteChannel {
 	}
 
 	@Override
-	public int read(@Nullable ByteBuffer dst) throws IOException {
+	public synchronized int read(@Nullable ByteBuffer dst) throws IOException {
 		Objects.requireNonNull(dst);
 
-		dst.put(this.buffer);
-		// TODO Auto-generated method stub
-		return 0;
+		int dstRemaining = dst.remaining();
+		int bufferRemaining = this.buffer.remaining();
+		int read;
+
+		if (bufferRemaining <= dstRemaining) {
+			dst.put(this.buffer);
+			read = bufferRemaining;
+		} else {
+			ByteBuffer limitedBuffer = this.buffer.duplicate();
+
+			limitedBuffer.limit(limitedBuffer.position() + dstRemaining);
+			dst.put(limitedBuffer);
+			read = dstRemaining;
+			this.buffer.position(this.buffer.position() + read);
+		}
+		return read;
 	}
 
 	@Override

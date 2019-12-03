@@ -39,7 +39,13 @@ public final class MCDDecodeBuffer {
 	private ReadableByteChannel in;
 	private ByteBuffer decodeBuffer;
 
-	MCDDecodeBuffer(ReadableByteChannel in, ByteOrder byteOrder) {
+	/**
+	 * Constructs a new {@linkplain MCDDecodeBuffer} instance.
+	 * 
+	 * @param in the {@linkplain ReadableByteChannel} to decode from.
+	 * @param byteOrder the {@linkplain ByteOrder} to use for decoding.
+	 */
+	public MCDDecodeBuffer(ReadableByteChannel in, ByteOrder byteOrder) {
 		this.in = in;
 		this.decodeBuffer = ByteBuffer.allocate(Defaults.DEFAULT_BUFFER_SIZE).order(byteOrder);
 	}
