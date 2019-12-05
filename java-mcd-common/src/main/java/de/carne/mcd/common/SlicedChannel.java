@@ -57,7 +57,7 @@ class SlicedChannel implements SeekableByteChannel {
 
 	@Override
 	public long position() throws IOException {
-		return this.start + this.channel.position();
+		return this.channel.position() - this.start;
 	}
 
 	@Override

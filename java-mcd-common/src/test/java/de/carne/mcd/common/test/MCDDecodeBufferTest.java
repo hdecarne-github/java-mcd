@@ -23,15 +23,22 @@ import java.nio.ByteOrder;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.SeekableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import de.carne.mcd.common.MCDDecodeBuffer;
+import de.carne.test.api.io.TempFile;
+import de.carne.test.extension.TempPathExtension;
 
 /**
  * Test {@linkplain MCDDecodeBuffer} class.
  */
+@ExtendWith(TempPathExtension.class)
 class MCDDecodeBufferTest {
 
 	private static final byte[] TEST_BYTES = new byte[256];
@@ -43,42 +50,55 @@ class MCDDecodeBufferTest {
 	}
 
 	@Test
-	void testSkipAndSlice() throws IOException {
+	void testSkipAndSlice(
+			@TempFile(content = { (byte) 0x00, (byte) 0x01, (byte) 0x02, (byte) 0x03, (byte) 0x04, (byte) 0x05,
+					(byte) 0x06, (byte) 0x07, (byte) 0x08, (byte) 0x09, (byte) 0x0a, (byte) 0x0b, (byte) 0x0c,
+					(byte) 0x0d, (byte) 0x0e, (byte) 0x0f, (byte) 0x10, (byte) 0x11, (byte) 0x12, (byte) 0x13,
+					(byte) 0x14, (byte) 0x15, (byte) 0x16, (byte) 0x17, (byte) 0x18, (byte) 0x19, (byte) 0x01a,
+					(byte) 0x1b, (byte) 0x1c, (byte) 0x1d, (byte) 0x1e, (byte) 0x1f, (byte) 0x20 }) Path testFile)
+			throws IOException {
+		try (ReadableByteChannel channel = Files.newByteChannel(testFile, StandardOpenOption.READ)) {
+			testSkipAndSlice(channel);
+		}
 		try (ReadableByteChannel channel = Channels.newChannel(new ByteArrayInputStream(TEST_BYTES))) {
-			MCDDecodeBuffer buffer = new MCDDecodeBuffer(channel, ByteOrder.BIG_ENDIAN);
+			testSkipAndSlice(channel);
+		}
+	}
 
-			buffer.skip(16);
+	private void testSkipAndSlice(ReadableByteChannel channel) throws IOException {
+		MCDDecodeBuffer buffer = new MCDDecodeBuffer(channel, ByteOrder.BIG_ENDIAN);
 
-			Assertions.assertEquals((byte) 0x10, buffer.decodeI8());
+		buffer.skip(16);
 
-			try (SeekableByteChannel slice = buffer.slice(16)) {
+		Assertions.assertEquals((byte) 0x10, buffer.decodeI8());
 
-				Assertions.assertEquals(16, slice.size());
-				Assertions.assertEquals(0, slice.position());
+		try (SeekableByteChannel slice = buffer.slice(16)) {
 
-				slice.position(15);
+			Assertions.assertEquals(16, slice.size());
+			Assertions.assertEquals(0, slice.position());
 
-				Assertions.assertEquals(15, slice.position());
+			slice.position(15);
 
-				ByteBuffer byteBuffer = ByteBuffer.allocate(2);
-				int read;
+			Assertions.assertEquals(15, slice.position());
 
-				read = slice.read(byteBuffer);
-				byteBuffer.flip();
+			ByteBuffer byteBuffer = ByteBuffer.allocate(2);
+			int read;
 
-				Assertions.assertEquals(1, read);
-				Assertions.assertEquals((byte) 0x20, byteBuffer.get());
+			read = slice.read(byteBuffer);
+			byteBuffer.flip();
 
-				slice.position(0);
+			Assertions.assertEquals(1, read);
+			Assertions.assertEquals((byte) 0x20, byteBuffer.get());
 
-				Assertions.assertEquals(0, slice.position());
+			slice.position(0);
 
-				byteBuffer.clear();
-				read = slice.read(byteBuffer);
+			Assertions.assertEquals(0, slice.position());
 
-				Assertions.assertEquals(2, read);
-				Assertions.assertEquals(2, slice.position());
-			}
+			byteBuffer.clear();
+			read = slice.read(byteBuffer);
+
+			Assertions.assertEquals(2, read);
+			Assertions.assertEquals(2, slice.position());
 		}
 	}
 
