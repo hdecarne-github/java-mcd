@@ -26,6 +26,22 @@ import java.nio.channels.Channel;
 public interface MCDOutputChannel extends Channel {
 
 	/**
+	 * Increases the indent level of all following print calls:
+	 * 
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	MCDOutputChannel increaseIndent() throws IOException;
+
+	/**
+	 * Decreases the indent level of all following print calls:
+	 * 
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	MCDOutputChannel decreaseIndent() throws IOException;
+
+	/**
 	 * Prints a line break.
 	 *
 	 * @return this instance for chaining.

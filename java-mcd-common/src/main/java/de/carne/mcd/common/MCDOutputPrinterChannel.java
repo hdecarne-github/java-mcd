@@ -21,15 +21,23 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.nio.channels.ClosedChannelException;
 
+import org.eclipse.jdt.annotation.NonNull;
+
+import de.carne.boot.check.Check;
+
 /**
  * {@linkplain MCDOutputChannel} implementation which emits the decoded to data to a {@linkplain PrintWriter} or
  * {@linkplain PrintStream}.
  */
 public class MCDOutputPrinterChannel implements MCDOutputChannel {
 
+	private static final String INDENT = "    ";
+
 	private final PrintWriter pw;
 	private final boolean autoClose;
 	private boolean closed = false;
+	private int indentLevel = 0;
+	private boolean newLine = true;
 
 	/**
 	 * Constructs a new {@linkplain MCDOutputChannel} instance.
@@ -68,15 +76,32 @@ public class MCDOutputPrinterChannel implements MCDOutputChannel {
 	}
 
 	@Override
+	public @NonNull MCDOutputChannel increaseIndent() throws IOException {
+		this.indentLevel++;
+		return this;
+	}
+
+	@Override
+	public @NonNull MCDOutputChannel decreaseIndent() throws IOException {
+		Check.isTrue(this.indentLevel > 0);
+
+		this.indentLevel--;
+		return this;
+	}
+
+	@Override
 	public MCDOutputChannel println() throws IOException {
 		ensureNotClosed();
+		printIndentIfNeeded();
 		this.pw.println();
+		this.newLine = true;
 		return this;
 	}
 
 	@Override
 	public MCDOutputChannel print(String text) throws IOException {
 		ensureNotClosed();
+		printIndentIfNeeded();
 		this.pw.print(text);
 		return this;
 	}
@@ -84,7 +109,9 @@ public class MCDOutputPrinterChannel implements MCDOutputChannel {
 	@Override
 	public MCDOutputChannel println(String text) throws IOException {
 		ensureNotClosed();
+		printIndentIfNeeded();
 		this.pw.println(text);
+		this.newLine = true;
 		return this;
 	}
 
@@ -141,6 +168,15 @@ public class MCDOutputPrinterChannel implements MCDOutputChannel {
 	private void ensureNotClosed() throws IOException {
 		if (this.closed) {
 			throw new ClosedChannelException();
+		}
+	}
+
+	private void printIndentIfNeeded() {
+		if (this.newLine) {
+			for (int indentCount = 0; indentCount < this.indentLevel; indentCount++) {
+				this.pw.print(INDENT);
+			}
+			this.newLine = false;
 		}
 	}
 

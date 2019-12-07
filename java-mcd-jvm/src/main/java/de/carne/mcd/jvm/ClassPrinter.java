@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.common.MCDOutputChannel;
 import de.carne.util.Strings;
 
@@ -65,7 +64,6 @@ abstract class ClassPrinter {
 	protected final MCDOutputChannel out;
 	protected final ClassInfo classInfo;
 	protected final String classPackage;
-	private String ident = "";
 
 	protected ClassPrinter(MCDOutputChannel out, ClassInfo classInfo) {
 		this.out = out;
@@ -74,22 +72,6 @@ abstract class ClassPrinter {
 	}
 
 	public abstract void print() throws IOException;
-
-	public void increaseIdent() {
-		this.ident += "    ";
-	}
-
-	public void decreaseIdent() {
-		int identLevel = this.ident.length();
-
-		Check.assertTrue(identLevel > 0);
-
-		this.ident = this.ident.substring(0, identLevel - 4);
-	}
-
-	public void printIdent() throws IOException {
-		this.out.print(this.ident);
-	}
 
 	public void printlnClassComment() throws IOException {
 		this.out.printlnComment("/*");
@@ -130,7 +112,6 @@ abstract class ClassPrinter {
 	}
 
 	public void printlnAnnotation(String typeName, List<AnnotationElement> elements) throws IOException {
-		printIdent();
 		this.out.printLabel("@");
 		this.out.printLabel(decodeTypeDescriptor(typeName, this.classPackage));
 
@@ -302,18 +283,17 @@ abstract class ClassPrinter {
 	}
 
 	public void printlnFields() throws IOException {
-		increaseIdent();
+		this.out.increaseIndent();
 		for (Field field : this.classInfo.fields()) {
 			field.print(this);
 		}
-		decreaseIdent();
+		this.out.decreaseIndent();
 	}
 
 	public void printlnField(int accessFlags, String descriptor, String name, List<Attribute> attributes)
 			throws IOException {
 		this.out.println();
 		printlnAnnotations(attributes);
-		printIdent();
 		printFieldAccessFLagsKeywords(accessFlags);
 		printFieldAccessFLagsComment(accessFlags);
 		this.out.print(decodeTypeDescriptor(descriptor, this.classPackage)).print(" ").print(name);
@@ -333,18 +313,17 @@ abstract class ClassPrinter {
 	}
 
 	public void printlnMethods() throws IOException {
-		increaseIdent();
+		this.out.increaseIndent();
 		for (Method method : this.classInfo.methods()) {
 			method.print(this);
 		}
-		decreaseIdent();
+		this.out.decreaseIndent();
 	}
 
 	public void printlnMethod(int accessFlags, String descriptor, String name, List<Attribute> attributes)
 			throws IOException {
 		this.out.println();
 		printlnAnnotations(attributes);
-		printIdent();
 		printMethodAccessFLagsKeywords(accessFlags);
 		printMethodAccessFLagsComment(accessFlags);
 
