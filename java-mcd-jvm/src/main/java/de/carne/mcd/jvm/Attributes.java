@@ -38,8 +38,7 @@ final class Attributes {
 		int resolvedCount = resolved.size();
 
 		if (resolvedCount != 1) {
-			throw new IOException(
-					"Unexpected number of '" + type.getSimpleName() + "' attributes: " + resolvedCount);
+			throw new IOException("Unexpected number of '" + type.getSimpleName() + "' attributes: " + resolvedCount);
 		}
 		return resolved.get(0);
 	}
@@ -50,10 +49,21 @@ final class Attributes {
 		int resolvedCount = resolved.size();
 
 		if (resolvedCount > 1) {
-			throw new IOException(
-					"Unexpected number of '" + type.getSimpleName() + "' attributes: " + resolvedCount);
+			throw new IOException("Unexpected number of '" + type.getSimpleName() + "' attributes: " + resolvedCount);
 		}
 		return (resolvedCount == 0 ? Optional.empty() : Optional.of(resolved.get(0)));
+	}
+
+	public static <T extends Attribute> void print(List<T> attributes, ClassPrinter out) throws IOException {
+		for (T attribute : attributes) {
+			attribute.print(out);
+		}
+	}
+
+	public static <T extends Attribute> void print(Optional<T> attributeHolder, ClassPrinter out) throws IOException {
+		if (attributeHolder.isPresent()) {
+			attributeHolder.get().print(out);
+		}
 	}
 
 }

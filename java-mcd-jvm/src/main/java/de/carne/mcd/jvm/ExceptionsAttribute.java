@@ -16,14 +16,22 @@
  */
 package de.carne.mcd.jvm;
 
-import java.util.List;
+import java.io.IOException;
 
-class RuntimeVisibleAnnotationsAttribute extends AbstractRuntimeAnnotationsAttribute {
+class ExceptionsAttribute extends Attribute {
 
-	public static final String NAME = "RuntimeVisibleAnnotations";
+	public static final String NAME = "Exceptions";
 
-	public RuntimeVisibleAnnotationsAttribute(ClassInfo classInfo, int nameIndex, List<Annotation> annotations) {
-		super(classInfo, nameIndex, annotations);
+	private final int[] exceptions;
+
+	public ExceptionsAttribute(ClassInfo classInfo, int nameIndex, int[] exceptions) {
+		super(classInfo, nameIndex);
+		this.exceptions = exceptions;
+	}
+
+	@Override
+	public void print(ClassPrinter out) throws IOException {
+		out.printMethodExceptions(this.exceptions);
 	}
 
 }

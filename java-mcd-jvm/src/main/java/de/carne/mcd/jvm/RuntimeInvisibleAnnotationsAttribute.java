@@ -16,7 +16,6 @@
  */
 package de.carne.mcd.jvm;
 
-import java.io.IOException;
 import java.util.List;
 
 class RuntimeInvisibleAnnotationsAttribute extends AbstractRuntimeAnnotationsAttribute {
@@ -25,11 +24,6 @@ class RuntimeInvisibleAnnotationsAttribute extends AbstractRuntimeAnnotationsAtt
 
 	public RuntimeInvisibleAnnotationsAttribute(ClassInfo classInfo, int nameIndex, List<Annotation> annotations) {
 		super(classInfo, nameIndex, annotations);
-	}
-
-	@Override
-	public void print(ClassPrinter out) throws IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

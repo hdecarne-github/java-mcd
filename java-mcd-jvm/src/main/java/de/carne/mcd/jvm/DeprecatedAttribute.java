@@ -16,14 +16,19 @@
  */
 package de.carne.mcd.jvm;
 
-import java.util.List;
+import java.io.IOException;
 
-class RuntimeVisibleAnnotationsAttribute extends AbstractRuntimeAnnotationsAttribute {
+class DeprecatedAttribute extends Attribute {
 
-	public static final String NAME = "RuntimeVisibleAnnotations";
+	public static final String NAME = "Deprecated";
 
-	public RuntimeVisibleAnnotationsAttribute(ClassInfo classInfo, int nameIndex, List<Annotation> annotations) {
-		super(classInfo, nameIndex, annotations);
+	public DeprecatedAttribute(ClassInfo classInfo, int nameIndex) {
+		super(classInfo, nameIndex);
+	}
+
+	@Override
+	public void print(ClassPrinter out) throws IOException {
+		out.printlnDeprecatedAnnotation();
 	}
 
 }

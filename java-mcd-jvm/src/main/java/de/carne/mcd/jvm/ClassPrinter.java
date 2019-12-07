@@ -38,6 +38,7 @@ abstract class ClassPrinter {
 	protected static final String S_SUPER = "super";
 	protected static final String S_EXTENDS = "extends";
 	protected static final String S_IMPLEMENTS = "implements";
+	protected static final String S_THROWS = "throws";
 	protected static final String S_PUBLIC = "public";
 	protected static final String S_PRIVATE = "private";
 	protected static final String S_PROTECTED = "protected";
@@ -77,15 +78,14 @@ abstract class ClassPrinter {
 		this.out.printlnComment("/*");
 		this.out.printlnComment(
 				" * Byte code version: " + this.classInfo.majorVersion() + "." + this.classInfo.minorVersion());
-
-		Optional<SourceFileAttribute> sourceFile = Attributes.resolveOptionalAttribute(this.classInfo.attributes(),
-				SourceFileAttribute.class);
-
-		if (sourceFile.isPresent()) {
-			this.out.printlnComment(" *");
-			this.out.printlnComment(" * Source file:" + sourceFile.get().getValue());
-		}
+		Attributes.print(Attributes.resolveOptionalAttribute(this.classInfo.attributes(), SourceFileAttribute.class),
+				this);
 		this.out.printlnComment(" */");
+	}
+
+	public void printlnClassSourceFileComment(String sourceFile) throws IOException {
+		this.out.printlnComment(" *");
+		this.out.printlnComment(" * Source file: " + sourceFile);
 	}
 
 	public void printlnClassPackage() throws IOException {
@@ -94,44 +94,40 @@ abstract class ClassPrinter {
 		}
 	}
 
-	public void printlnClassAnnotations() throws IOException {
-		printlnAnnotations(this.classInfo.attributes());
+	public void printlnAnnotations(List<Attribute> attributes) throws IOException {
+		Attributes.print(Attributes.resolveOptionalAttribute(attributes, DeprecatedAttribute.class), this);
+		Attributes.print(Attributes.resolveAttributes(attributes, AbstractRuntimeAnnotationsAttribute.class), this);
 	}
 
-	public void printlnAnnotations(List<Attribute> attributes) throws IOException {
-		List<AbstractRuntimeAnnotationsAttribute> annotationAttributes = Attributes.resolveAttributes(attributes,
-				AbstractRuntimeAnnotationsAttribute.class);
-
-		for (AbstractRuntimeAnnotationsAttribute annotationAttribute : annotationAttributes) {
-			List<Annotation> annotations = annotationAttribute.annotations();
-
-			for (Annotation annotation : annotations) {
-				annotation.print(this);
-			}
-		}
+	public void printlnDeprecatedAnnotation() throws IOException {
+		this.out.printlnLabel("@Deprecated");
 	}
 
 	public void printlnAnnotation(String typeName, List<AnnotationElement> elements) throws IOException {
-		this.out.printLabel("@");
-		this.out.printLabel(decodeTypeDescriptor(typeName, this.classPackage));
+		String annotationType = decodeTypeDescriptor(typeName, this.classPackage);
 
-		int elementsSize = elements.size();
+		if (!Deprecated.class.getSimpleName().equals(annotationType)) {
+			this.out.printLabel("@");
+			this.out.printLabel(annotationType);
 
-		if (elementsSize > 0) {
-			this.out.print("(");
+			int elementsSize = elements.size();
 
-			boolean firstElement = true;
+			if (elementsSize > 0) {
+				this.out.print("(");
 
-			for (AnnotationElement element : elements) {
-				if (!firstElement) {
-					this.out.print(", ");
+				boolean firstElement = true;
+
+				for (AnnotationElement element : elements) {
+					if (!firstElement) {
+						this.out.print(", ");
+					}
+					firstElement = false;
+					element.print(this);
 				}
-				firstElement = false;
-				element.print(this);
+				this.out.print(")");
 			}
-			this.out.print(")");
+			this.out.println();
 		}
-		this.out.println();
 	}
 
 	public void printAnnotationElement(String elementName, AnnotationElementValue value) throws IOException {
@@ -297,16 +293,13 @@ abstract class ClassPrinter {
 		printFieldAccessFLagsKeywords(accessFlags);
 		printFieldAccessFLagsComment(accessFlags);
 		this.out.print(decodeTypeDescriptor(descriptor, this.classPackage)).print(" ").print(name);
-
 		Optional<ConstantValueAttribute> valueHolder = Attributes.resolveOptionalAttribute(attributes,
 				ConstantValueAttribute.class);
 
 		if (valueHolder.isPresent()) {
 			ConstantValueAttribute value = valueHolder.get();
 
-			this.out.print(" ");
-			this.out.printOperator("=");
-			this.out.print(" ");
+			this.out.print(" ").printOperator("=").print(" ");
 			value.print(this);
 		}
 		this.out.println(";");
@@ -344,7 +337,36 @@ abstract class ClassPrinter {
 			this.out.print(argumentType);
 		}
 		this.out.print(")");
-		this.out.println(";");
+		Attributes.print(Attributes.resolveOptionalAttribute(attributes, ExceptionsAttribute.class), this);
+		Optional<CodeAttribute> codeHolder = Attributes.resolveOptionalAttribute(attributes, CodeAttribute.class);
+
+		if (codeHolder.isPresent()) {
+			this.out.println(" {");
+			this.out.increaseIndent();
+			codeHolder.get().print(this);
+			this.out.decreaseIndent();
+			this.out.println("}");
+		} else {
+			this.out.println(";");
+		}
+	}
+
+	public void printMethodExceptions(int[] exceptions) throws IOException {
+		boolean first = true;
+
+		for (int exception : exceptions) {
+			if (first) {
+				this.out.print(" ").printKeyword(S_THROWS).print(" ");
+				first = false;
+			} else {
+				this.out.print(", ");
+			}
+
+			ClassName exceptionName = ClassName
+					.fromConstant(this.classInfo.resolveConstant(exception, ClassConstant.class));
+
+			this.out.print(exceptionName.getName(this.classPackage));
+		}
 	}
 
 	public void printValue(String value) throws IOException {

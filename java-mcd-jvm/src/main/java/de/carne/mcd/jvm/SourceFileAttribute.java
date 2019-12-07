@@ -29,13 +29,11 @@ class SourceFileAttribute extends Attribute {
 		this.sourceFileIndex = sourceFileIndex;
 	}
 
-	public String getValue() throws IOException {
-		return this.classInfo.resolveConstant(this.sourceFileIndex, Utf8Constant.class).getValue();
-	}
-
 	@Override
 	public void print(ClassPrinter out) throws IOException {
-		// TODO Auto-generated method stub
+		String sourceFile = this.classInfo.resolveConstant(this.sourceFileIndex, Utf8Constant.class).getValue();
+
+		out.printlnClassSourceFileComment(sourceFile);
 	}
 
 }

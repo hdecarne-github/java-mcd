@@ -29,7 +29,7 @@ class PackageClassPrinter extends ClassPrinter {
 	@Override
 	public void print() throws IOException {
 		printlnClassComment();
-		printlnClassAnnotations();
+		printlnAnnotations(this.classInfo.attributes());
 		printlnClassPackage();
 		printClassAccessFlagsComment();
 	}

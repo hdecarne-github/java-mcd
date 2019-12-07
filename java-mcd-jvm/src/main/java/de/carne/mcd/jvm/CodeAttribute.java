@@ -16,14 +16,23 @@
  */
 package de.carne.mcd.jvm;
 
-import java.util.List;
+import java.io.IOException;
+import java.nio.channels.SeekableByteChannel;
 
-class RuntimeVisibleAnnotationsAttribute extends AbstractRuntimeAnnotationsAttribute {
+class CodeAttribute extends Attribute {
 
-	public static final String NAME = "RuntimeVisibleAnnotations";
+	public static final String NAME = "Code";
 
-	public RuntimeVisibleAnnotationsAttribute(ClassInfo classInfo, int nameIndex, List<Annotation> annotations) {
-		super(classInfo, nameIndex, annotations);
+	private final SeekableByteChannel code;
+
+	public CodeAttribute(ClassInfo classInfo, int nameIndex, SeekableByteChannel code) {
+		super(classInfo, nameIndex);
+		this.code = code;
+	}
+
+	@Override
+	public void print(ClassPrinter out) throws IOException {
+
 	}
 
 }

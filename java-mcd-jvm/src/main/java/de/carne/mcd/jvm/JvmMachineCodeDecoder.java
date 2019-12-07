@@ -409,17 +409,26 @@ public class JvmMachineCodeDecoder extends MachineCodeDecoder {
 		case ConstantValueAttribute.NAME:
 			attribute = decodeConstantValueAttribute(decoded, buffer, nameIndex);
 			break;
+		case DeprecatedAttribute.NAME:
+			attribute = new DeprecatedAttribute(decoded, nameIndex);
+			break;
 		case RuntimeVisibleAnnotationsAttribute.NAME:
 			attribute = decodeRuntimeVisibleAnnotationsAttribute(decoded, buffer, nameIndex);
 			break;
 		case RuntimeInvisibleAnnotationsAttribute.NAME:
 			attribute = decodeRuntimeInvisibleAnnotationsAttribute(decoded, buffer, nameIndex);
 			break;
+		case ExceptionsAttribute.NAME:
+			attribute = decodeExceptionsAttribute(decoded, buffer, nameIndex);
+			break;
+		case CodeAttribute.NAME:
+			attribute = new CodeAttribute(decoded, nameIndex, buffer.slice(Integer.toUnsignedLong(length)));
+			break;
 		default:
 			buffer.skip(length);
 			attribute = new UndecodedAttribute(decoded, nameIndex, length);
 
-			LOG.info("Skipping attribute ''{0}''", attributeName);
+			LOG.debug("Skipping attribute ''{0}''", attributeName);
 		}
 		return attribute;
 	}
@@ -539,6 +548,18 @@ public class JvmMachineCodeDecoder extends MachineCodeDecoder {
 			elementValues.add(decodeAnnotationElementValue(decoded, buffer));
 		}
 		return elementValues;
+	}
+
+	private ExceptionsAttribute decodeExceptionsAttribute(DecodedClassInfo decoded, MCDDecodeBuffer buffer,
+			int nameIndex) throws IOException {
+		int exceptionsCount = Short.toUnsignedInt(buffer.decodeI16());
+		ByteBuffer exceptionsBuffer = buffer.decodeI16Array(exceptionsCount);
+		int[] exceptions = new int[exceptionsCount];
+
+		for (int exceptionIndex = 0; exceptionIndex < exceptionsCount; exceptionIndex++) {
+			exceptions[exceptionIndex] = Short.toUnsignedInt(exceptionsBuffer.getShort());
+		}
+		return new ExceptionsAttribute(decoded, nameIndex, exceptions);
 	}
 
 	private static class DecodedClassInfo implements ClassInfo {

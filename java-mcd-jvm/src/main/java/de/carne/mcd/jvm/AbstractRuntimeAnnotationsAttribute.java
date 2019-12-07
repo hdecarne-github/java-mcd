@@ -16,6 +16,7 @@
  */
 package de.carne.mcd.jvm;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,8 +29,11 @@ abstract class AbstractRuntimeAnnotationsAttribute extends Attribute {
 		this.annotations = Collections.unmodifiableList(annotations);
 	}
 
-	public List<Annotation> annotations() {
-		return this.annotations;
+	@Override
+	public void print(ClassPrinter out) throws IOException {
+		for (Annotation annotation : this.annotations) {
+			annotation.print(out);
+		}
 	}
 
 }

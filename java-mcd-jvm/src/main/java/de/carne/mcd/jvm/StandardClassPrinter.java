@@ -31,10 +31,10 @@ class StandardClassPrinter extends ClassPrinter {
 	public void print() throws IOException {
 		printlnClassComment();
 		printlnClassPackage();
-		printlnClassAnnotations();
+		printlnAnnotations(this.classInfo.attributes());
 		printClassAccessFLagsKeywords();
 		printClassAccessFlagsComment();
-		this.out.printKeyword(S_CLASS).print(" ").print(this.classInfo.thisClass().getSimpleName()).print(" ");
+		this.out.printKeyword(S_CLASS).print(" ").print(this.classInfo.thisClass().getSimpleName());
 
 		ClassName superClass = this.classInfo.superClass();
 

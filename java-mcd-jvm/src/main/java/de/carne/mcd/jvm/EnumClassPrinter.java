@@ -31,7 +31,7 @@ class EnumClassPrinter extends ClassPrinter {
 	public void print() throws IOException {
 		printlnClassComment();
 		printlnClassPackage();
-		printlnClassAnnotations();
+		printlnAnnotations(this.classInfo.attributes());
 		printClassAccessFLagsKeywords();
 		printClassAccessFlagsComment();
 		this.out.printKeyword(S_ENUM).print(" ").print(this.classInfo.thisClass().getSimpleName()).print(" ");
