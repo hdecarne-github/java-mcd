@@ -39,7 +39,7 @@ class StringConstant extends Constant {
 
 	@Override
 	public void print(ClassPrinter out) throws IOException {
-		// TODO Auto-generated method stub
+		this.classInfo.resolveConstant(this.stringIndex, Utf8Constant.class).print(out);
 	}
 
 	@Override

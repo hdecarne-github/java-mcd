@@ -36,4 +36,9 @@ class SourceFileAttribute extends Attribute {
 		out.printlnClassSourceFileComment(sourceFile);
 	}
 
+	@Override
+	public String toString() {
+		return "#" + this.sourceFileIndex;
+	}
+
 }

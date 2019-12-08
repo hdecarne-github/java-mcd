@@ -37,7 +37,7 @@ class Utf8Constant extends Constant {
 
 	@Override
 	public void print(ClassPrinter out) throws IOException {
-		// TODO Auto-generated method stub
+		out.printValue(toString());
 	}
 
 	@Override

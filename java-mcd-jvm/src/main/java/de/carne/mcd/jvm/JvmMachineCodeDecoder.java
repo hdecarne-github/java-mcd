@@ -418,6 +418,9 @@ public class JvmMachineCodeDecoder extends MachineCodeDecoder {
 		case RuntimeInvisibleAnnotationsAttribute.NAME:
 			attribute = decodeRuntimeInvisibleAnnotationsAttribute(decoded, buffer, nameIndex);
 			break;
+		case SignatureAttribute.NAME:
+			attribute = decodeSignatureAttribute(decoded, buffer, nameIndex);
+			break;
 		case ExceptionsAttribute.NAME:
 			attribute = decodeExceptionsAttribute(decoded, buffer, nameIndex);
 			break;
@@ -548,6 +551,13 @@ public class JvmMachineCodeDecoder extends MachineCodeDecoder {
 			elementValues.add(decodeAnnotationElementValue(decoded, buffer));
 		}
 		return elementValues;
+	}
+
+	private SignatureAttribute decodeSignatureAttribute(DecodedClassInfo decoded, MCDDecodeBuffer buffer, int nameIndex)
+			throws IOException {
+		int signatureIndex = Short.toUnsignedInt(buffer.decodeI16());
+
+		return new SignatureAttribute(decoded, nameIndex, signatureIndex);
 	}
 
 	private ExceptionsAttribute decodeExceptionsAttribute(DecodedClassInfo decoded, MCDDecodeBuffer buffer,

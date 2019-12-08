@@ -18,6 +18,7 @@ package de.carne.mcd.jvm;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import de.carne.mcd.common.MCDOutputChannel;
 
@@ -34,6 +35,14 @@ class StandardClassPrinter extends ClassPrinter {
 		printlnAnnotations(this.classInfo.attributes());
 		printClassAccessFLagsKeywords();
 		printClassAccessFlagsComment();
+
+		Optional<SignatureAttribute> signatureHolder = Attributes.resolveOptionalAttribute(this.classInfo.attributes(),
+				SignatureAttribute.class);
+
+		if (signatureHolder.isPresent()) {
+			signatureHolder.get().print(this);
+		}
+
 		this.out.printKeyword(S_CLASS).print(" ").print(this.classInfo.thisClass().getSimpleName());
 
 		ClassName superClass = this.classInfo.superClass();

@@ -18,19 +18,26 @@ package de.carne.mcd.jvm;
 
 import java.io.IOException;
 
-import de.carne.mcd.common.MCDOutputChannel;
+class SignatureAttribute extends Attribute {
 
-class PackageClassPrinter extends ClassPrinter {
+	public static final String NAME = "Signature";
 
-	public PackageClassPrinter(MCDOutputChannel out, ClassInfo classInfo) {
-		super(out, classInfo);
+	private final int signatureIndex;
+
+	public SignatureAttribute(ClassInfo classInfo, int nameIndex, int signatureIndex) {
+		super(classInfo, nameIndex);
+		this.signatureIndex = signatureIndex;
 	}
 
 	@Override
-	public void print() throws IOException {
-		printlnClassComment();
-		printlnAnnotations(this.classInfo.attributes());
-		printlnClassPackage();
+	public void print(ClassPrinter out) throws IOException {
+		String signature = this.classInfo.resolveConstant(this.signatureIndex, Utf8Constant.class).getValue();
+
+	}
+
+	@Override
+	public String toString() {
+		return "#" + this.signatureIndex;
 	}
 
 }
