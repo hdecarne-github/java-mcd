@@ -28,11 +28,13 @@ import de.carne.mcd.common.MachineCodeDecoder;
  */
 public class X86MachineCodeDecoder extends MachineCodeDecoder {
 
+	private static final String NAME = "X86 instructions";
+
 	/**
 	 * Constructs a new {@linkplain X86MachineCodeDecoder} instance.
 	 */
 	public X86MachineCodeDecoder() {
-		super(ByteOrder.LITTLE_ENDIAN);
+		super(NAME, ByteOrder.LITTLE_ENDIAN);
 	}
 
 	@Override

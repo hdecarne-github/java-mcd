@@ -25,10 +25,21 @@ import java.nio.channels.ReadableByteChannel;
  */
 public abstract class MachineCodeDecoder {
 
+	private final String name;
 	private ByteOrder byteOrder = ByteOrder.nativeOrder();
 
-	protected MachineCodeDecoder(ByteOrder byteOrder) {
-		setByteOrder(byteOrder);
+	protected MachineCodeDecoder(String name, ByteOrder byteOrder) {
+		this.name = name;
+		this.byteOrder = byteOrder;
+	}
+
+	/**
+	 * Gets this decoder's name.
+	 * 
+	 * @return this decoder's name.
+	 */
+	public String name() {
+		return this.name;
 	}
 
 	/**

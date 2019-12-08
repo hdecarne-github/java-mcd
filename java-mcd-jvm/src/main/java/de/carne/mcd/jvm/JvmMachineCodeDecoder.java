@@ -42,11 +42,13 @@ public class JvmMachineCodeDecoder extends MachineCodeDecoder {
 
 	private static final Log LOG = new Log();
 
+	private static final String NAME = "Java Byte Code";
+
 	/**
 	 * Constructs a new {@linkplain JvmMachineCodeDecoder} instance.
 	 */
 	public JvmMachineCodeDecoder() {
-		super(ByteOrder.BIG_ENDIAN);
+		super(NAME, ByteOrder.BIG_ENDIAN);
 	}
 
 	@Override
