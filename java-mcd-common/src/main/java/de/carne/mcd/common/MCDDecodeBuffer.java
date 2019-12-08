@@ -41,7 +41,7 @@ public final class MCDDecodeBuffer {
 
 	/**
 	 * Constructs a new {@linkplain MCDDecodeBuffer} instance.
-	 * 
+	 *
 	 * @param in the {@linkplain ReadableByteChannel} to decode from.
 	 * @param byteOrder the {@linkplain ByteOrder} to use for decoding.
 	 */
@@ -70,8 +70,10 @@ public final class MCDDecodeBuffer {
 
 		if (this.in instanceof SeekableByteChannel) {
 			SeekableByteChannel channel = (SeekableByteChannel) this.in;
+			long position = channel.position();
 
-			slice = new SlicedChannel(channel, channel.position());
+			slice = new SlicedChannel(channel, position, length);
+			channel.position(position + length);
 		} else {
 			ByteBuffer buffer = ByteBuffer.allocate((int) Math.min(length, Defaults.MAX_BUFFER_SIZE))
 					.order(this.decodeBuffer.order());

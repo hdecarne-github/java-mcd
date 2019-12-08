@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.NonWritableChannelException;
 import java.nio.channels.SeekableByteChannel;
+import java.util.Objects;
 
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -29,10 +30,14 @@ class SlicedChannel implements SeekableByteChannel {
 
 	private final SeekableByteChannel channel;
 	private final long start;
+	private final long length;
+	private long position;
 
-	SlicedChannel(SeekableByteChannel channel, long start) {
+	SlicedChannel(SeekableByteChannel channel, long start, long length) {
 		this.channel = channel;
 		this.start = start;
+		this.length = length;
+		this.position = 0;
 	}
 
 	@Override
@@ -47,7 +52,21 @@ class SlicedChannel implements SeekableByteChannel {
 
 	@Override
 	public int read(@Nullable ByteBuffer dst) throws IOException {
-		return this.channel.read(dst);
+		Objects.requireNonNull(dst);
+
+		int readLimit = (int) Math.min(this.length - this.position, dst.remaining());
+		ByteBuffer limitedDst = dst.duplicate();
+
+		limitedDst.limit(limitedDst.position() + readLimit);
+		this.channel.position(this.start + this.position);
+
+		int read = this.channel.read(limitedDst);
+
+		if (read > 0) {
+			dst.position(dst.position() + read);
+			this.position += read;
+		}
+		return read;
 	}
 
 	@Override
@@ -57,20 +76,23 @@ class SlicedChannel implements SeekableByteChannel {
 
 	@Override
 	public long position() throws IOException {
-		return this.channel.position() - this.start;
+		return this.position;
 	}
 
 	@Override
 	public SeekableByteChannel position(long newPosition) throws IOException {
 		Check.isTrue(newPosition >= 0);
 
-		this.channel.position(this.start + newPosition);
+		if (newPosition > this.length) {
+			throw new NonWritableChannelException();
+		}
+		this.position = newPosition;
 		return this;
 	}
 
 	@Override
 	public long size() throws IOException {
-		return this.channel.size() - this.start;
+		return this.length;
 	}
 
 	@Override
