@@ -20,11 +20,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import de.carne.mcd.common.MCDOutputChannel;
+import de.carne.mcd.common.MCDOutput;
 
 class StandardClassPrinter extends ClassPrinter {
 
-	public StandardClassPrinter(MCDOutputChannel out, ClassInfo classInfo) {
+	public StandardClassPrinter(MCDOutput out, ClassInfo classInfo) {
 		super(out, classInfo);
 	}
 

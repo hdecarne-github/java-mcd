@@ -18,11 +18,11 @@ package de.carne.mcd.jvm;
 
 import java.io.IOException;
 
-import de.carne.mcd.common.MCDOutputChannel;
+import de.carne.mcd.common.MCDOutput;
 
 class PackageClassPrinter extends ClassPrinter {
 
-	public PackageClassPrinter(MCDOutputChannel out, ClassInfo classInfo) {
+	public PackageClassPrinter(MCDOutput out, ClassInfo classInfo) {
 		super(out, classInfo);
 	}
 

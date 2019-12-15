@@ -19,11 +19,11 @@ package de.carne.mcd.jvm;
 import java.io.IOException;
 import java.util.List;
 
-import de.carne.mcd.common.MCDOutputChannel;
+import de.carne.mcd.common.MCDOutput;
 
 class EnumClassPrinter extends ClassPrinter {
 
-	public EnumClassPrinter(MCDOutputChannel out, ClassInfo classInfo) {
+	public EnumClassPrinter(MCDOutput out, ClassInfo classInfo) {
 		super(out, classInfo);
 	}
 

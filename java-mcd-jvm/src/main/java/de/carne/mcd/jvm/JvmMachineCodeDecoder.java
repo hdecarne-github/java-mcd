@@ -31,7 +31,7 @@ import java.util.Map;
 import de.carne.boot.check.Check;
 import de.carne.boot.logging.Log;
 import de.carne.mcd.common.MCDDecodeBuffer;
-import de.carne.mcd.common.MCDOutputChannel;
+import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.MachineCodeDecoder;
 import de.carne.util.Late;
 
@@ -52,7 +52,7 @@ public class JvmMachineCodeDecoder extends MachineCodeDecoder {
 	}
 
 	@Override
-	public void decode(ReadableByteChannel in, MCDOutputChannel out) throws IOException {
+	public void decode(ReadableByteChannel in, MCDOutput out) throws IOException {
 		MCDDecodeBuffer buffer = newDecodeBuffer(in);
 
 		buffer.decodeMagic(0xcafebabe);

@@ -16,30 +16,31 @@
  */
 package de.carne.mcd.common;
 
+import java.io.Closeable;
+import java.io.Flushable;
 import java.io.IOException;
-import java.nio.channels.Channel;
 
 /**
  * Output channel receiving the decoded data during a
- * {@linkplain MachineCodeDecoder#decode(java.nio.channels.ReadableByteChannel, MCDOutputChannel)} call..
+ * {@linkplain MachineCodeDecoder#decode(java.nio.channels.ReadableByteChannel, MCDOutput)} call..
  */
-public interface MCDOutputChannel extends Channel {
+public interface MCDOutput extends Appendable, Closeable, Flushable {
 
 	/**
 	 * Increases the indent level of all following print calls:
-	 * 
+	 *
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel increaseIndent() throws IOException;
+	MCDOutput increaseIndent() throws IOException;
 
 	/**
 	 * Decreases the indent level of all following print calls:
-	 * 
+	 *
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel decreaseIndent() throws IOException;
+	MCDOutput decreaseIndent() throws IOException;
 
 	/**
 	 * Prints a line break.
@@ -47,7 +48,7 @@ public interface MCDOutputChannel extends Channel {
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel println() throws IOException;
+	MCDOutput println() throws IOException;
 
 	/**
 	 * Prints a standard text.
@@ -56,7 +57,7 @@ public interface MCDOutputChannel extends Channel {
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel print(String text) throws IOException;
+	MCDOutput print(String text) throws IOException;
 
 	/**
 	 * Prints a standard text and a line break.
@@ -65,7 +66,7 @@ public interface MCDOutputChannel extends Channel {
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel println(String text) throws IOException;
+	MCDOutput println(String text) throws IOException;
 
 	/**
 	 * Prints a value text.
@@ -74,7 +75,7 @@ public interface MCDOutputChannel extends Channel {
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel printValue(String value) throws IOException;
+	MCDOutput printValue(String value) throws IOException;
 
 	/**
 	 * Prints a value text and a line break.
@@ -83,7 +84,7 @@ public interface MCDOutputChannel extends Channel {
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel printlnValue(String value) throws IOException;
+	MCDOutput printlnValue(String value) throws IOException;
 
 	/**
 	 * Prints a comment text.
@@ -92,7 +93,7 @@ public interface MCDOutputChannel extends Channel {
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel printComment(String comment) throws IOException;
+	MCDOutput printComment(String comment) throws IOException;
 
 	/**
 	 * Prints a comment text and a line break.
@@ -101,7 +102,7 @@ public interface MCDOutputChannel extends Channel {
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel printlnComment(String comment) throws IOException;
+	MCDOutput printlnComment(String comment) throws IOException;
 
 	/**
 	 * Prints a keyword text.
@@ -110,7 +111,7 @@ public interface MCDOutputChannel extends Channel {
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel printKeyword(String keyword) throws IOException;
+	MCDOutput printKeyword(String keyword) throws IOException;
 
 	/**
 	 * Prints a keyword text and a line break.
@@ -119,7 +120,7 @@ public interface MCDOutputChannel extends Channel {
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel printlnKeyword(String keyword) throws IOException;
+	MCDOutput printlnKeyword(String keyword) throws IOException;
 
 	/**
 	 * Prints an operator text.
@@ -128,7 +129,7 @@ public interface MCDOutputChannel extends Channel {
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel printOperator(String operator) throws IOException;
+	MCDOutput printOperator(String operator) throws IOException;
 
 	/**
 	 * Prints an operator text and a line break.
@@ -137,7 +138,7 @@ public interface MCDOutputChannel extends Channel {
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel printlnOperator(String operator) throws IOException;
+	MCDOutput printlnOperator(String operator) throws IOException;
 
 	/**
 	 * Prints a label text.
@@ -146,7 +147,7 @@ public interface MCDOutputChannel extends Channel {
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel printLabel(String label) throws IOException;
+	MCDOutput printLabel(String label) throws IOException;
 
 	/**
 	 * Prints a label text and a line break.
@@ -155,6 +156,6 @@ public interface MCDOutputChannel extends Channel {
 	 * @return this instance for chaining.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	MCDOutputChannel printlnLabel(String label) throws IOException;
+	MCDOutput printlnLabel(String label) throws IOException;
 
 }

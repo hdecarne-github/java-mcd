@@ -19,17 +19,20 @@ package de.carne.mcd.common;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.nio.channels.Channels;
 import java.nio.channels.ClosedChannelException;
+import java.nio.channels.WritableByteChannel;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import de.carne.boot.check.Check;
 
 /**
- * {@linkplain MCDOutputChannel} implementation which emits the decoded to data to a {@linkplain PrintWriter} or
+ * {@linkplain MCDOutput} implementation which emits the decoded to data to a {@linkplain PrintWriter} or
  * {@linkplain PrintStream}.
  */
-public class MCDOutputPrinterChannel implements MCDOutputChannel {
+public class PlainMCDOutput implements MCDOutput {
 
 	private static final String INDENT = "    ";
 
@@ -40,29 +43,57 @@ public class MCDOutputPrinterChannel implements MCDOutputChannel {
 	private boolean newLine = true;
 
 	/**
-	 * Constructs a new {@linkplain MCDOutputChannel} instance.
+	 * Constructs a new {@linkplain MCDOutput} instance.
 	 *
 	 * @param pw the {@linkplain PrintWriter} to emit the decoded data to.
 	 * @param autoClose whether to automatically close the {@linkplain PrintWriter} when this channel is closed.
 	 */
-	public MCDOutputPrinterChannel(PrintWriter pw, boolean autoClose) {
+	public PlainMCDOutput(PrintWriter pw, boolean autoClose) {
 		this.pw = pw;
 		this.autoClose = autoClose;
 	}
 
 	/**
-	 * Constructs a new {@linkplain MCDOutputChannel} instance.
+	 * Constructs a new {@linkplain MCDOutput} instance.
 	 *
 	 * @param ps the {@linkplain PrintStream} to emit the decoded data to.
 	 * @param autoClose whether to automatically close the {@linkplain PrintWriter} when this channel is closed.
 	 */
-	public MCDOutputPrinterChannel(PrintStream ps, boolean autoClose) {
+	public PlainMCDOutput(PrintStream ps, boolean autoClose) {
 		this(new PrintWriter(ps), autoClose);
 	}
 
+	/**
+	 * Constructs a new {@linkplain MCDOutput} instance.
+	 *
+	 * @param channel the {@linkplain WritableByteChannel} to emit the decoded data to.
+	 * @param autoClose whether to automatically close the {@linkplain PrintWriter} when this channel is closed.
+	 */
+	public PlainMCDOutput(WritableByteChannel channel, boolean autoClose) {
+		this(new PrintWriter(Channels.newOutputStream(channel)), autoClose);
+	}
+
 	@Override
-	public boolean isOpen() {
-		return !this.closed;
+	public Appendable append(@Nullable CharSequence csq) throws IOException {
+		this.pw.append(csq);
+		return this;
+	}
+
+	@Override
+	public Appendable append(@Nullable CharSequence csq, int start, int end) throws IOException {
+		this.pw.append(csq, start, end);
+		return this;
+	}
+
+	@Override
+	public Appendable append(char c) throws IOException {
+		this.pw.append(c);
+		return this;
+	}
+
+	@Override
+	public void flush() throws IOException {
+		this.pw.flush();
 	}
 
 	@Override
@@ -76,13 +107,13 @@ public class MCDOutputPrinterChannel implements MCDOutputChannel {
 	}
 
 	@Override
-	public @NonNull MCDOutputChannel increaseIndent() throws IOException {
+	public @NonNull MCDOutput increaseIndent() throws IOException {
 		this.indentLevel++;
 		return this;
 	}
 
 	@Override
-	public @NonNull MCDOutputChannel decreaseIndent() throws IOException {
+	public @NonNull MCDOutput decreaseIndent() throws IOException {
 		Check.isTrue(this.indentLevel > 0);
 
 		this.indentLevel--;
@@ -90,7 +121,7 @@ public class MCDOutputPrinterChannel implements MCDOutputChannel {
 	}
 
 	@Override
-	public MCDOutputChannel println() throws IOException {
+	public MCDOutput println() throws IOException {
 		ensureNotClosed();
 		printIndentIfNeeded();
 		this.pw.println();
@@ -99,7 +130,7 @@ public class MCDOutputPrinterChannel implements MCDOutputChannel {
 	}
 
 	@Override
-	public MCDOutputChannel print(String text) throws IOException {
+	public MCDOutput print(String text) throws IOException {
 		ensureNotClosed();
 		printIndentIfNeeded();
 		this.pw.print(text);
@@ -107,7 +138,7 @@ public class MCDOutputPrinterChannel implements MCDOutputChannel {
 	}
 
 	@Override
-	public MCDOutputChannel println(String text) throws IOException {
+	public MCDOutput println(String text) throws IOException {
 		ensureNotClosed();
 		printIndentIfNeeded();
 		this.pw.println(text);
@@ -116,52 +147,52 @@ public class MCDOutputPrinterChannel implements MCDOutputChannel {
 	}
 
 	@Override
-	public MCDOutputChannel printValue(String value) throws IOException {
+	public MCDOutput printValue(String value) throws IOException {
 		return print(value);
 	}
 
 	@Override
-	public MCDOutputChannel printlnValue(String value) throws IOException {
+	public MCDOutput printlnValue(String value) throws IOException {
 		return println(value);
 	}
 
 	@Override
-	public MCDOutputChannel printComment(String comment) throws IOException {
+	public MCDOutput printComment(String comment) throws IOException {
 		return print(comment);
 	}
 
 	@Override
-	public MCDOutputChannel printlnComment(String comment) throws IOException {
+	public MCDOutput printlnComment(String comment) throws IOException {
 		return println(comment);
 	}
 
 	@Override
-	public MCDOutputChannel printKeyword(String keyword) throws IOException {
+	public MCDOutput printKeyword(String keyword) throws IOException {
 		return print(keyword);
 	}
 
 	@Override
-	public MCDOutputChannel printlnKeyword(String keyword) throws IOException {
+	public MCDOutput printlnKeyword(String keyword) throws IOException {
 		return println(keyword);
 	}
 
 	@Override
-	public MCDOutputChannel printOperator(String operator) throws IOException {
+	public MCDOutput printOperator(String operator) throws IOException {
 		return print(operator);
 	}
 
 	@Override
-	public MCDOutputChannel printlnOperator(String operator) throws IOException {
+	public MCDOutput printlnOperator(String operator) throws IOException {
 		return println(operator);
 	}
 
 	@Override
-	public MCDOutputChannel printLabel(String label) throws IOException {
+	public MCDOutput printLabel(String label) throws IOException {
 		return print(label);
 	}
 
 	@Override
-	public MCDOutputChannel printlnLabel(String label) throws IOException {
+	public MCDOutput printlnLabel(String label) throws IOException {
 		return println(label);
 	}
 

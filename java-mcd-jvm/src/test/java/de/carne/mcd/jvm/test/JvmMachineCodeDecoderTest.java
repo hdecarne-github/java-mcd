@@ -28,8 +28,8 @@ import java.util.Objects;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 
-import de.carne.mcd.common.MCDOutputChannel;
-import de.carne.mcd.common.MCDOutputPrinterChannel;
+import de.carne.mcd.common.MCDOutput;
+import de.carne.mcd.common.PlainMCDOutput;
 import de.carne.mcd.jvm.JvmMachineCodeDecoder;
 
 /**
@@ -101,7 +101,7 @@ class JvmMachineCodeDecoderTest {
 		JvmMachineCodeDecoder decoder = new JvmMachineCodeDecoder();
 
 		try (ReadableByteChannel in = getByteCode(resource);
-				MCDOutputChannel out = new MCDOutputPrinterChannel(System.out, false)) {
+				MCDOutput out = new PlainMCDOutput(System.out, false)) {
 			decoder.decode(in, out);
 		}
 	}

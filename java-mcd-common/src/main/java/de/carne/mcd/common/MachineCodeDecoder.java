@@ -19,6 +19,7 @@ package de.carne.mcd.common;
 import java.io.IOException;
 import java.nio.ByteOrder;
 import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.WritableByteChannel;
 
 /**
  * Base class for all kinds of machine code decoders.
@@ -35,7 +36,7 @@ public abstract class MachineCodeDecoder {
 
 	/**
 	 * Gets this decoder's name.
-	 * 
+	 *
 	 * @return this decoder's name.
 	 */
 	public String name() {
@@ -55,10 +56,23 @@ public abstract class MachineCodeDecoder {
 	 * Decodes the given byte channel data.
 	 *
 	 * @param in the {@linkplain ReadableByteChannel} to decode from.
-	 * @param out the {@linkplain MCDOutputChannel} to decode to.
+	 * @param out the {@linkplain MCDOutput} to decode to.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	public abstract void decode(ReadableByteChannel in, MCDOutputChannel out) throws IOException;
+	public abstract void decode(ReadableByteChannel in, MCDOutput out) throws IOException;
+
+	/**
+	 * Decodes the given byte channel data.
+	 *
+	 * @param in the {@linkplain ReadableByteChannel} to decode from.
+	 * @param out the {@linkplain WritableByteChannel} to decode to.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public void decode(ReadableByteChannel in, WritableByteChannel out) throws IOException {
+		try (MCDOutput out0 = new PlainMCDOutput(out, false)) {
+			decode(in, out0);
+		}
+	}
 
 	protected MCDDecodeBuffer newDecodeBuffer(ReadableByteChannel in) {
 		return new MCDDecodeBuffer(in, this.byteOrder);

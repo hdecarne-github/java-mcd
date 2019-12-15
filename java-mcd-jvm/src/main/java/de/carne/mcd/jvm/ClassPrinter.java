@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import de.carne.mcd.common.MCDOutputChannel;
+import de.carne.mcd.common.MCDOutput;
 import de.carne.util.Strings;
 
 abstract class ClassPrinter {
@@ -62,11 +62,11 @@ abstract class ClassPrinter {
 	protected static final String S_BOOLEAN = "boolean";
 	protected static final String S_VOID = "void";
 
-	protected final MCDOutputChannel out;
+	protected final MCDOutput out;
 	protected final ClassInfo classInfo;
 	protected final String classPackage;
 
-	protected ClassPrinter(MCDOutputChannel out, ClassInfo classInfo) {
+	protected ClassPrinter(MCDOutput out, ClassInfo classInfo) {
 		this.out = out;
 		this.classInfo = classInfo;
 		this.classPackage = this.classInfo.thisClass().getPackage();

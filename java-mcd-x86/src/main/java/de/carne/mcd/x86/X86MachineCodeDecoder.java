@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.nio.ByteOrder;
 import java.nio.channels.ReadableByteChannel;
 
-import de.carne.mcd.common.MCDOutputChannel;
+import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.MachineCodeDecoder;
 
 /**
@@ -38,7 +38,7 @@ public class X86MachineCodeDecoder extends MachineCodeDecoder {
 	}
 
 	@Override
-	public void decode(ReadableByteChannel in, MCDOutputChannel out) throws IOException {
+	public void decode(ReadableByteChannel in, MCDOutput out) throws IOException {
 		// TODO Auto-generated method stub
 	}
 
