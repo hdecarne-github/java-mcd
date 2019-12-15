@@ -43,11 +43,6 @@ class JvmMachineCodeDecoderTest {
 	private static final Log LOG = new Log();
 
 	@Test
-	void testDecodeThis() throws IOException {
-		testDecode(getClass());
-	}
-
-	@Test
 	void testDecodeAbstract() throws IOException {
 		testDecode(InputStream.class);
 	}
