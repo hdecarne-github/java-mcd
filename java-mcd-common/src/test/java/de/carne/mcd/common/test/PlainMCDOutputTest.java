@@ -16,9 +16,11 @@
  */
 package de.carne.mcd.common.test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.nio.channels.Channels;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -46,33 +48,53 @@ class PlainMCDOutputTest {
 			+ "    label\n" + "<<< end\n" + "".replace("\n", System.lineSeparator());
 
 	@Test
-	void testOutput() throws IOException {
-		try (StringWriter buffer = new StringWriter();
+	void testPrintWriterOutput() throws IOException {
+		try (ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 				PlainMCDOutput out = new PlainMCDOutput(new PrintWriter(buffer), true)) {
-			out.println(OUTPUT_BEGIN);
-			printOutput(out);
-			out.increaseIndent();
-			printOutput(out);
-			out.decreaseIndent();
-			out.println(OUTPUT_END);
-			out.flush();
-			Assertions.assertEquals(OUTPUT_TOTAL, buffer.toString());
+			testOutput(buffer, out);
 		}
+	}
+
+	@Test
+	void testPrintStreamOutput() throws IOException {
+		try (ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+				PlainMCDOutput out = new PlainMCDOutput(new PrintStream(buffer), true)) {
+			testOutput(buffer, out);
+		}
+	}
+
+	@Test
+	void testWritableChannelOutput() throws IOException {
+		try (ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+				PlainMCDOutput out = new PlainMCDOutput(Channels.newChannel(buffer), true)) {
+			testOutput(buffer, out);
+		}
+	}
+
+	private void testOutput(ByteArrayOutputStream buffer, PlainMCDOutput out) throws IOException {
+		out.println(OUTPUT_BEGIN);
+		printOutput(out);
+		out.increaseIndent();
+		printOutput(out);
+		out.decreaseIndent();
+		out.println(OUTPUT_END);
+		out.flush();
+		Assertions.assertEquals(OUTPUT_TOTAL, new String(buffer.toByteArray()));
 	}
 
 	private void printOutput(PlainMCDOutput out) throws IOException {
 		out.print(OUTPUT_NORMAL).println();
 		out.println(OUTPUT_NORMAL);
-		out.print(OUTPUT_VALUE).println();
-		out.println(OUTPUT_VALUE);
-		out.print(OUTPUT_COMMENT).println();
-		out.println(OUTPUT_COMMENT);
-		out.print(OUTPUT_KEYWORD).println();
-		out.println(OUTPUT_KEYWORD);
-		out.print(OUTPUT_OPERATOR).println();
-		out.println(OUTPUT_OPERATOR);
-		out.print(OUTPUT_LABEL).println();
-		out.println(OUTPUT_LABEL);
+		out.printValue(OUTPUT_VALUE).println();
+		out.printlnValue(OUTPUT_VALUE);
+		out.printComment(OUTPUT_COMMENT).println();
+		out.printlnComment(OUTPUT_COMMENT);
+		out.printKeyword(OUTPUT_KEYWORD).println();
+		out.printlnKeyword(OUTPUT_KEYWORD);
+		out.printOperator(OUTPUT_OPERATOR).println();
+		out.printlnOperator(OUTPUT_OPERATOR);
+		out.printLabel(OUTPUT_LABEL).println();
+		out.printlnLabel(OUTPUT_LABEL);
 	}
 
 }
