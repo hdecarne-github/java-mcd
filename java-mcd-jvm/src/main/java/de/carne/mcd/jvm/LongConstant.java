@@ -34,7 +34,7 @@ class LongConstant extends Constant {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
 		out.printValue(toString());
 	}
 

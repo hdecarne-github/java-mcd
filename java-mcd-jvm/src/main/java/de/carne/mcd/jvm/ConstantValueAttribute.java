@@ -30,8 +30,8 @@ class ConstantValueAttribute extends Attribute {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
-		this.classInfo.resolveConstant(this.constantValueIndex, Constant.class).print(out);
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
+		this.classInfo.resolveConstant(this.constantValueIndex, Constant.class).print(out, context);
 	}
 
 }

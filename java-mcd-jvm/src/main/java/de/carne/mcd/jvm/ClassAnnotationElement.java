@@ -30,7 +30,7 @@ class ClassAnnotationElement extends AnnotationElementValue {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
 		out.printClassAnnotationElement(
 				this.classInfo.resolveConstant(this.descriptorIndex, Utf8Constant.class).getValue());
 	}

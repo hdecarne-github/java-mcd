@@ -1,0 +1,16 @@
+/*
+ * Byte code version: 52.0
+ *
+ * Source file: DisabledOnOs.java
+ */
+package org.junit.jupiter.api.condition;
+@java.lang.annotation.Target(value = { java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.METHOD })
+@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Documented
+@org.junit.jupiter.api.extension.ExtendWith(value = DisabledOnOsCondition.class)
+@org.apiguardian.api.API(status = org.apiguardian.api.API$Status.STABLE, since = "5.1")
+public abstract class DisabledOnOs implements java.lang.annotation.Annotation {
+    
+    public abstract OS[] value();
+
+}

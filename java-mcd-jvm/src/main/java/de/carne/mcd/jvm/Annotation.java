@@ -40,8 +40,8 @@ class Annotation extends ClassElement {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
-		out.printlnAnnotation(typeName(), this.elements);
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
+		out.printAnnotation(typeName(), this.elements, context);
 	}
 
 }

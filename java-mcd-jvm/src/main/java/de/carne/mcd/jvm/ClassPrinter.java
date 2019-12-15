@@ -61,6 +61,7 @@ abstract class ClassPrinter {
 	protected static final String S_SHORT = "short";
 	protected static final String S_BOOLEAN = "boolean";
 	protected static final String S_VOID = "void";
+	protected static final String S_DEPRECATED = "@Deprecated";
 
 	protected final MCDOutput out;
 	protected final ClassInfo classInfo;
@@ -74,36 +75,42 @@ abstract class ClassPrinter {
 
 	public abstract void print() throws IOException;
 
-	public void printlnClassComment() throws IOException {
+	public void printClassComment() throws IOException {
 		this.out.printlnComment("/*");
 		this.out.printlnComment(
 				" * Byte code version: " + this.classInfo.majorVersion() + "." + this.classInfo.minorVersion());
 		Attributes.print(Attributes.resolveOptionalAttribute(this.classInfo.attributes(), SourceFileAttribute.class),
-				this);
+				this, ClassContext.CLASS);
 		this.out.printlnComment(" */");
 	}
 
-	public void printlnClassSourceFileComment(String sourceFile) throws IOException {
+	public void printClassCommentSourceFile(String sourceFile) throws IOException {
 		this.out.printlnComment(" *");
 		this.out.printlnComment(" * Source file: " + sourceFile);
 	}
 
-	public void printlnClassPackage() throws IOException {
+	public void printClassPackage() throws IOException {
 		if (Strings.notEmpty(this.classPackage)) {
-			this.out.printKeyword(S_PACKAGE).print(" ").print(this.classPackage).println(";").println();
+			this.out.printKeyword(S_PACKAGE).print(" ").print(this.classPackage).println(";");
 		}
 	}
 
-	public void printlnAnnotations(List<Attribute> attributes) throws IOException {
-		Attributes.print(Attributes.resolveOptionalAttribute(attributes, DeprecatedAttribute.class), this);
-		Attributes.print(Attributes.resolveAttributes(attributes, AbstractRuntimeAnnotationsAttribute.class), this);
+	public void printAnnotations(List<Attribute> attributes, ClassContext context) throws IOException {
+		Attributes.print(Attributes.resolveOptionalAttribute(attributes, DeprecatedAttribute.class), this, context);
+		Attributes.print(Attributes.resolveAttributes(attributes, AbstractRuntimeAnnotationsAttribute.class), this,
+				context);
 	}
 
-	public void printlnDeprecatedAnnotation() throws IOException {
-		this.out.printlnLabel("@Deprecated");
+	public void printDeprecatedAnnotation(ClassContext context) throws IOException {
+		if (context.isOneOf(ClassContext.CLASS, ClassContext.METHOD)) {
+			this.out.printlnLabel(S_DEPRECATED);
+		} else {
+			this.out.printLabel(S_DEPRECATED).print(" ");
+		}
 	}
 
-	public void printlnAnnotation(String typeName, List<AnnotationElement> elements) throws IOException {
+	public void printAnnotation(String typeName, List<AnnotationElement> elements, ClassContext context)
+			throws IOException {
 		String annotationType = decodeTypeDescriptor(typeName, this.classPackage);
 
 		if (!Deprecated.class.getSimpleName().equals(annotationType)) {
@@ -122,27 +129,29 @@ abstract class ClassPrinter {
 						this.out.print(", ");
 					}
 					firstElement = false;
-					element.print(this);
+					element.print(this, context);
 				}
 				this.out.print(")");
 			}
-			this.out.println();
+			if (context.isOneOf(ClassContext.CLASS, ClassContext.METHOD)) {
+				this.out.println();
+			} else {
+				this.out.print(" ");
+			}
 		}
 	}
 
-	public void printAnnotationElement(String elementName, AnnotationElementValue value) throws IOException {
+	public void printAnnotationElement(String elementName, AnnotationElementValue value, ClassContext context)
+			throws IOException {
 		this.out.print(elementName);
 		this.out.print(" ");
 		this.out.printOperator("=");
 		this.out.print(" ");
-		value.print(this);
+		value.print(this, context);
 	}
 
-	public void printConstantValueAnnotationElement(String value) throws IOException {
-		this.out.printValue(value);
-	}
-
-	public void printArrayAnnotationElement(List<AnnotationElementValue> elementValues) throws IOException {
+	public void printArrayAnnotationElement(List<AnnotationElementValue> elementValues, ClassContext context)
+			throws IOException {
 		int elementValuesSize = elementValues.size();
 
 		if (elementValuesSize > 1) {
@@ -156,7 +165,7 @@ abstract class ClassPrinter {
 				this.out.print(", ");
 			}
 			firstElement = false;
-			elementValue.print(this);
+			elementValue.print(this, context);
 		}
 		if (elementValuesSize > 1) {
 			this.out.print(" }");
@@ -278,18 +287,18 @@ abstract class ClassPrinter {
 		}
 	}
 
-	public void printlnFields() throws IOException {
+	public void printFields() throws IOException {
 		this.out.increaseIndent();
 		for (Field field : this.classInfo.fields()) {
-			field.print(this);
+			field.print(this, ClassContext.FIELD);
 		}
 		this.out.decreaseIndent();
 	}
 
-	public void printlnField(int accessFlags, String descriptor, String name, List<Attribute> attributes)
+	public void printField(int accessFlags, String descriptor, String name, List<Attribute> attributes)
 			throws IOException {
 		this.out.println();
-		printlnAnnotations(attributes);
+		printAnnotations(attributes, ClassContext.FIELD);
 		printFieldAccessFLagsKeywords(accessFlags);
 		printFieldAccessFLagsComment(accessFlags);
 		this.out.print(decodeTypeDescriptor(descriptor, this.classPackage)).print(" ").print(name);
@@ -300,23 +309,23 @@ abstract class ClassPrinter {
 			ConstantValueAttribute value = valueHolder.get();
 
 			this.out.print(" ").printOperator("=").print(" ");
-			value.print(this);
+			value.print(this, ClassContext.FIELD);
 		}
 		this.out.println(";");
 	}
 
-	public void printlnMethods() throws IOException {
+	public void printMethods() throws IOException {
 		this.out.increaseIndent();
 		for (Method method : this.classInfo.methods()) {
-			method.print(this);
+			method.print(this, ClassContext.METHOD);
 		}
 		this.out.decreaseIndent();
 	}
 
-	public void printlnMethod(int accessFlags, String descriptor, String name, List<Attribute> attributes)
+	public void printMethod(int accessFlags, String descriptor, String name, List<Attribute> attributes)
 			throws IOException {
 		this.out.println();
-		printlnAnnotations(attributes);
+		printAnnotations(attributes, ClassContext.METHOD);
 		printMethodAccessFLagsKeywords(accessFlags);
 		printMethodAccessFLagsComment(accessFlags);
 
@@ -337,13 +346,14 @@ abstract class ClassPrinter {
 			this.out.print(argumentType);
 		}
 		this.out.print(")");
-		Attributes.print(Attributes.resolveOptionalAttribute(attributes, ExceptionsAttribute.class), this);
+		Attributes.print(Attributes.resolveOptionalAttribute(attributes, ExceptionsAttribute.class), this,
+				ClassContext.METHOD);
 		Optional<CodeAttribute> codeHolder = Attributes.resolveOptionalAttribute(attributes, CodeAttribute.class);
 
 		if (codeHolder.isPresent()) {
 			this.out.println(" {");
 			this.out.increaseIndent();
-			codeHolder.get().print(this);
+			codeHolder.get().print(this, ClassContext.METHOD);
 			this.out.decreaseIndent();
 			this.out.println("}");
 		} else {

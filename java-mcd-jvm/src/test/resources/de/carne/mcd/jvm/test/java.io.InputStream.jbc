@@ -1,0 +1,40 @@
+/*
+ * Byte code version: 52.0
+ *
+ * Source file: InputStream.java
+ */
+package java.io;
+public abstract /* super */ class InputStream implements Closeable {
+    
+    private static final int MAX_SKIP_BUFFER_SIZE = 2048;
+    
+    public void <init>() {
+    }
+    
+    public abstract int read() throws IOException;
+    
+    public int read(byte[]) throws IOException {
+    }
+    
+    public int read(byte[], int, int) throws IOException {
+    }
+    
+    public long skip(long) throws IOException {
+    }
+    
+    public int available() throws IOException {
+    }
+    
+    public void close() throws IOException {
+    }
+    
+    public synchronized void mark(int) {
+    }
+    
+    public synchronized void reset() throws IOException {
+    }
+    
+    public boolean markSupported() {
+    }
+
+}

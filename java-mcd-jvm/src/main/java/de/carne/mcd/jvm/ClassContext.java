@@ -16,19 +16,20 @@
  */
 package de.carne.mcd.jvm;
 
-import java.io.IOException;
+import java.util.Arrays;
 
-class MethodRefConstant extends AbstractRefConstant {
+enum ClassContext {
 
-	public static final int TAG = 10;
+	CLASS,
 
-	public MethodRefConstant(ClassInfo classInfo, int classIndex, int nameAndTypeIndex) {
-		super(classInfo, classIndex, nameAndTypeIndex);
-	}
+	FIELD,
 
-	@Override
-	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		// TODO Auto-generated method stub
+	METHOD,
+
+	PARAMETER;
+
+	public boolean isOneOf(ClassContext... contexts) {
+		return Arrays.asList(contexts).indexOf(this) >= 0;
 	}
 
 }

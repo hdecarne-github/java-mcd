@@ -29,9 +29,9 @@ class InterfaceClassPrinter extends ClassPrinter {
 
 	@Override
 	public void print() throws IOException {
-		printlnClassComment();
-		printlnClassPackage();
-		printlnAnnotations(this.classInfo.attributes());
+		printClassComment();
+		printClassPackage();
+		printAnnotations(this.classInfo.attributes(), ClassContext.CLASS);
 		this.out.printKeyword(S_INTERFACE).print(" ").print(this.classInfo.thisClass().getSimpleName());
 		printClassAccessFlagsComment();
 		List<ClassName> interfaces = this.classInfo.interfaces();
@@ -49,8 +49,8 @@ class InterfaceClassPrinter extends ClassPrinter {
 			}
 		}
 		this.out.println(" {");
-		printlnFields();
-		printlnMethods();
+		printFields();
+		printMethods();
 		this.out.println().println("}");
 	}
 

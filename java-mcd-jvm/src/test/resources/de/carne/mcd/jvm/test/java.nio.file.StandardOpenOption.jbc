@@ -1,0 +1,43 @@
+/*
+ * Byte code version: 52.0
+ *
+ * Source file: StandardOpenOption.java
+ */
+package java.nio.file;
+public final /* super */ enum StandardOpenOption implements OpenOption {
+    
+    public static final /* enum */ StandardOpenOption READ;
+    
+    public static final /* enum */ StandardOpenOption WRITE;
+    
+    public static final /* enum */ StandardOpenOption APPEND;
+    
+    public static final /* enum */ StandardOpenOption TRUNCATE_EXISTING;
+    
+    public static final /* enum */ StandardOpenOption CREATE;
+    
+    public static final /* enum */ StandardOpenOption CREATE_NEW;
+    
+    public static final /* enum */ StandardOpenOption DELETE_ON_CLOSE;
+    
+    public static final /* enum */ StandardOpenOption SPARSE;
+    
+    public static final /* enum */ StandardOpenOption SYNC;
+    
+    public static final /* enum */ StandardOpenOption DSYNC;
+    
+    private static final /* synthetic */ StandardOpenOption[] $VALUES;
+    
+    public static StandardOpenOption[] values() {
+    }
+    
+    public static StandardOpenOption valueOf(String) {
+    }
+    
+    private void <init>(String, int) {
+    }
+    
+    static void <clinit>() {
+    }
+
+}

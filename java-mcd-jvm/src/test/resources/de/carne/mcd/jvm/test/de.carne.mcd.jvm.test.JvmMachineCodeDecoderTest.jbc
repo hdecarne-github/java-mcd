@@ -1,0 +1,65 @@
+/*
+ * Byte code version: 52.0
+ *
+ * Source file: JvmMachineCodeDecoderTest.java
+ */
+package de.carne.mcd.jvm.test;
+/* super */ class JvmMachineCodeDecoderTest {
+    
+    private static final de.carne.boot.logging.Log LOG;
+    
+    static void <clinit>() {
+    }
+    
+    void <init>() {
+    }
+    
+    @org.junit.jupiter.api.Test
+    void testDecodeThis() throws java.io.IOException {
+    }
+    
+    @org.junit.jupiter.api.Test
+    void testDecodeAbstract() throws java.io.IOException {
+    }
+    
+    @org.junit.jupiter.api.Test
+    void testDecodeFinal() throws java.io.IOException {
+    }
+    
+    @org.junit.jupiter.api.Test
+    void testDecodeNested() throws java.io.IOException {
+    }
+    
+    @org.junit.jupiter.api.Test
+    void testDecodeObject() throws java.io.IOException {
+    }
+    
+    @org.junit.jupiter.api.Test
+    void testDecodeInterface() throws java.io.IOException {
+    }
+    
+    @org.junit.jupiter.api.Test
+    void testDecodeEnum() throws java.io.IOException {
+    }
+    
+    @org.junit.jupiter.api.Test
+    void testDecodeAnnotation() throws java.io.IOException {
+    }
+    
+    @org.junit.jupiter.api.Test
+    void testDecodePackage() throws java.io.IOException {
+    }
+    
+    private void testDecode(Class) throws java.io.IOException {
+    }
+    
+    private void testDecode(String) throws java.io.IOException {
+    }
+    
+    private java.nio.channels.ReadableByteChannel getByteCode(String) {
+    }
+    
+    private String getReferenceOutput(String) throws java.io.IOException {
+    }
+
+}

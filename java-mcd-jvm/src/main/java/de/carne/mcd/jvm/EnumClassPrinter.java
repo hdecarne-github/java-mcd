@@ -29,9 +29,9 @@ class EnumClassPrinter extends ClassPrinter {
 
 	@Override
 	public void print() throws IOException {
-		printlnClassComment();
-		printlnClassPackage();
-		printlnAnnotations(this.classInfo.attributes());
+		printClassComment();
+		printClassPackage();
+		printAnnotations(this.classInfo.attributes(), ClassContext.CLASS);
 		printClassAccessFLagsKeywords();
 		printClassAccessFlagsComment();
 		this.out.printKeyword(S_ENUM).print(" ").print(this.classInfo.thisClass().getSimpleName());
@@ -57,8 +57,8 @@ class EnumClassPrinter extends ClassPrinter {
 			}
 		}
 		this.out.println(" {");
-		printlnFields();
-		printlnMethods();
+		printFields();
+		printMethods();
 		this.out.println().println("}");
 	}
 

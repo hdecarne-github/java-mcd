@@ -30,10 +30,10 @@ class SourceFileAttribute extends Attribute {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
 		String sourceFile = this.classInfo.resolveConstant(this.sourceFileIndex, Utf8Constant.class).getValue();
 
-		out.printlnClassSourceFileComment(sourceFile);
+		out.printClassCommentSourceFile(sourceFile);
 	}
 
 	@Override

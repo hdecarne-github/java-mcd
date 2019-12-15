@@ -54,15 +54,17 @@ final class Attributes {
 		return (resolvedCount == 0 ? Optional.empty() : Optional.of(resolved.get(0)));
 	}
 
-	public static <T extends Attribute> void print(List<T> attributes, ClassPrinter out) throws IOException {
+	public static <T extends Attribute> void print(List<T> attributes, ClassPrinter out, ClassContext context)
+			throws IOException {
 		for (T attribute : attributes) {
-			attribute.print(out);
+			attribute.print(out, context);
 		}
 	}
 
-	public static <T extends Attribute> void print(Optional<T> attributeHolder, ClassPrinter out) throws IOException {
+	public static <T extends Attribute> void print(Optional<T> attributeHolder, ClassPrinter out, ClassContext context)
+			throws IOException {
 		if (attributeHolder.isPresent()) {
-			attributeHolder.get().print(out);
+			attributeHolder.get().print(out, context);
 		}
 	}
 

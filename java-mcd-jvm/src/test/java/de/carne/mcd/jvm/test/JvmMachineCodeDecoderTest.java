@@ -18,16 +18,19 @@ package de.carne.mcd.jvm.test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
+import java.io.StringWriter;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.StandardOpenOption;
 import java.util.Calendar;
 import java.util.Objects;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 
+import de.carne.boot.logging.Log;
+import de.carne.io.IOUtil;
 import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.PlainMCDOutput;
 import de.carne.mcd.jvm.JvmMachineCodeDecoder;
@@ -37,20 +40,11 @@ import de.carne.mcd.jvm.JvmMachineCodeDecoder;
  */
 class JvmMachineCodeDecoderTest {
 
-	private static class NestedPrivateClass implements Serializable {
-
-		private static final long serialVersionUID = 3839160795528862484L;
-
-	}
+	private static final Log LOG = new Log();
 
 	@Test
 	void testDecodeThis() throws IOException {
 		testDecode(getClass());
-	}
-
-	@Test
-	void testDecodeNestedPrivate() throws IOException {
-		testDecode(NestedPrivateClass.class);
 	}
 
 	@Test
@@ -99,15 +93,40 @@ class JvmMachineCodeDecoderTest {
 
 	private void testDecode(String resource) throws IOException {
 		JvmMachineCodeDecoder decoder = new JvmMachineCodeDecoder();
+		StringWriter decodeBuffer = new StringWriter();
 
-		try (ReadableByteChannel in = getByteCode(resource);
-				MCDOutput out = new PlainMCDOutput(System.out, false)) {
+		try (ReadableByteChannel in = getByteCode(resource); MCDOutput out = new PlainMCDOutput(decodeBuffer, false)) {
 			decoder.decode(in, out);
 		}
+
+		String decodeOutput = decodeBuffer.toString();
+		String referenceOutput = getReferenceOutput(resource);
+
+		System.out.println(decodeOutput);
+
+		Assertions.assertEquals(referenceOutput, decodeOutput);
 	}
 
 	private ReadableByteChannel getByteCode(String resource) {
 		return Channels.newChannel(Objects.requireNonNull(getClass().getResourceAsStream(resource)));
+	}
+
+	private String getReferenceOutput(String resource) throws IOException {
+		String referenceResource = resource.replace('/', '.').replaceAll("^\\.", "").replaceAll("\\$", "_")
+				.replaceAll("\\.class$", ".jbc");
+		String output;
+
+		try (InputStream referenceStream = getClass().getResourceAsStream(referenceResource)) {
+			if (referenceStream != null) {
+				output = new String(IOUtil.readAllBytes(referenceStream));
+				output.replaceAll("\\\r\\\n|\\\\r|\\\n", System.lineSeparator());
+			} else {
+				output = "";
+
+				LOG.warning("No reference resource ''{0}'' defined; test will fail", referenceResource);
+			}
+		}
+		return output;
 	}
 
 }

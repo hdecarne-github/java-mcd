@@ -26,6 +26,6 @@ abstract class ClassElement {
 		this.classInfo = classInfo;
 	}
 
-	public abstract void print(ClassPrinter out) throws IOException;
+	public abstract void print(ClassPrinter out, ClassContext context) throws IOException;
 
 }

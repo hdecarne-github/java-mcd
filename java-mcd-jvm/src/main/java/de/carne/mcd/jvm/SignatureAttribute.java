@@ -30,7 +30,7 @@ class SignatureAttribute extends Attribute {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
 		String signature = this.classInfo.resolveConstant(this.signatureIndex, Utf8Constant.class).getValue();
 
 	}

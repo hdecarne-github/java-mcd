@@ -30,9 +30,9 @@ class StandardClassPrinter extends ClassPrinter {
 
 	@Override
 	public void print() throws IOException {
-		printlnClassComment();
-		printlnClassPackage();
-		printlnAnnotations(this.classInfo.attributes());
+		printClassComment();
+		printClassPackage();
+		printAnnotations(this.classInfo.attributes(), ClassContext.CLASS);
 		printClassAccessFLagsKeywords();
 		printClassAccessFlagsComment();
 
@@ -40,7 +40,7 @@ class StandardClassPrinter extends ClassPrinter {
 				SignatureAttribute.class);
 
 		if (signatureHolder.isPresent()) {
-			signatureHolder.get().print(this);
+			signatureHolder.get().print(this, ClassContext.CLASS);
 		}
 
 		this.out.printKeyword(S_CLASS).print(" ").print(this.classInfo.thisClass().getSimpleName());
@@ -66,8 +66,8 @@ class StandardClassPrinter extends ClassPrinter {
 			}
 		}
 		this.out.println(" {");
-		printlnFields();
-		printlnMethods();
+		printFields();
+		printMethods();
 		this.out.println().println("}");
 	}
 

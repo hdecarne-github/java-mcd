@@ -32,7 +32,7 @@ class EnumAnnotationElement extends AnnotationElementValue {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
 		out.printEnumAnnotationElement(this.classInfo.resolveConstant(this.nameIndex, Utf8Constant.class).getValue(),
 				this.classInfo.resolveConstant(this.valueIndex, Utf8Constant.class).getValue());
 	}

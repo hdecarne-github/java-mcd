@@ -35,13 +35,13 @@ class Method extends ClassElement {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
 		String descriptor = this.classInfo
 				.resolveConstant(this.nameDescriptorIndex.descriptorIndex(), Utf8Constant.class).getValue();
 		String name = this.classInfo.resolveConstant(this.nameDescriptorIndex.nameIndex(), Utf8Constant.class)
 				.getValue();
 
-		out.printlnMethod(this.accessFlags, descriptor, name, this.attributes);
+		out.printMethod(this.accessFlags, descriptor, name, this.attributes);
 	}
 
 	@Override

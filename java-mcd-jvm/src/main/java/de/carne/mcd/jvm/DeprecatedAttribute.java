@@ -27,8 +27,8 @@ class DeprecatedAttribute extends Attribute {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
-		out.printlnDeprecatedAnnotation();
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
+		out.printDeprecatedAnnotation(context);
 	}
 
 }

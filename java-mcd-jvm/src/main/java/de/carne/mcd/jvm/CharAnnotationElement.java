@@ -18,6 +18,8 @@ package de.carne.mcd.jvm;
 
 import java.io.IOException;
 
+import de.carne.util.Strings;
+
 class CharAnnotationElement extends AbstractConstantValueAnnotationElement {
 
 	public static final int TAG = 'C';
@@ -27,8 +29,11 @@ class CharAnnotationElement extends AbstractConstantValueAnnotationElement {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
-		// TODO Auto-generated method stub
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
+		out.printValue("'"
+				+ Strings.encode(Character.toString(
+						(char) this.classInfo.resolveConstant(this.valueIndex, IntegerConstant.class).getValue()))
+				+ "'");
 	}
 
 }

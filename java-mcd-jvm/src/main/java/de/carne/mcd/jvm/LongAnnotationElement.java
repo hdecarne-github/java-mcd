@@ -27,8 +27,8 @@ class LongAnnotationElement extends AbstractConstantValueAnnotationElement {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
-		// TODO Auto-generated method stub
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
+		out.printValue(this.classInfo.resolveConstant(this.valueIndex, LongConstant.class).toString());
 	}
 
 }

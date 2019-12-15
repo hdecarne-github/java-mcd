@@ -1,0 +1,93 @@
+/*
+ * Byte code version: 52.0
+ *
+ * Source file: Calendar.java
+ */
+package java.util;
+public /* super */ class Calendar$Builder {
+    
+    private static final int NFIELDS = 18;
+    
+    private static final int WEEK_YEAR = 17;
+    
+    private long instant;
+    
+    private int[] fields;
+    
+    private int nextStamp;
+    
+    private int maxFieldIndex;
+    
+    private String type;
+    
+    private TimeZone zone;
+    
+    private boolean lenient;
+    
+    private Locale locale;
+    
+    private int firstDayOfWeek;
+    
+    private int minimalDaysInFirstWeek;
+    
+    public void <init>() {
+    }
+    
+    public Calendar$Builder setInstant(long) {
+    }
+    
+    public Calendar$Builder setInstant(Date) {
+    }
+    
+    public Calendar$Builder set(int, int) {
+    }
+    
+    public /* varargs */ Calendar$Builder setFields(int[]) {
+    }
+    
+    public Calendar$Builder setDate(int, int, int) {
+    }
+    
+    public Calendar$Builder setTimeOfDay(int, int, int) {
+    }
+    
+    public Calendar$Builder setTimeOfDay(int, int, int, int) {
+    }
+    
+    public Calendar$Builder setWeekDate(int, int, int) {
+    }
+    
+    public Calendar$Builder setTimeZone(TimeZone) {
+    }
+    
+    public Calendar$Builder setLenient(boolean) {
+    }
+    
+    public Calendar$Builder setCalendarType(String) {
+    }
+    
+    public Calendar$Builder setLocale(Locale) {
+    }
+    
+    public Calendar$Builder setWeekDefinition(int, int) {
+    }
+    
+    public Calendar build() {
+    }
+    
+    private void allocateFields() {
+    }
+    
+    private void internalSet(int, int) {
+    }
+    
+    private boolean isInstantSet() {
+    }
+    
+    private boolean isSet(int) {
+    }
+    
+    private boolean isValidWeekParameter(int) {
+    }
+
+}

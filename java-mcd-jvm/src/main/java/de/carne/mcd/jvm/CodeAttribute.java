@@ -31,7 +31,7 @@ class CodeAttribute extends Attribute {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
 
 	}
 

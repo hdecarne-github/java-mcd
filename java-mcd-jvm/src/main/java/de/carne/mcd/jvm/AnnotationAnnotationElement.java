@@ -30,7 +30,7 @@ class AnnotationAnnotationElement extends AnnotationElementValue {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
 		// TODO Auto-generated method stub
 	}
 

@@ -29,8 +29,8 @@ class StringAnnotationElement extends AbstractConstantValueAnnotationElement {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
-		out.printConstantValueAnnotationElement(
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
+		out.printValue(
 				"\"" + Strings.encode(this.classInfo.resolveConstant(this.valueIndex, Utf8Constant.class).getValue())
 						+ "\"");
 	}

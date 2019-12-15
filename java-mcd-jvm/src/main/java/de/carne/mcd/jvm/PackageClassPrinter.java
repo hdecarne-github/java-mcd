@@ -28,9 +28,9 @@ class PackageClassPrinter extends ClassPrinter {
 
 	@Override
 	public void print() throws IOException {
-		printlnClassComment();
-		printlnAnnotations(this.classInfo.attributes());
-		printlnClassPackage();
+		printClassComment();
+		printAnnotations(this.classInfo.attributes(), ClassContext.CLASS);
+		printClassPackage();
 	}
 
 }

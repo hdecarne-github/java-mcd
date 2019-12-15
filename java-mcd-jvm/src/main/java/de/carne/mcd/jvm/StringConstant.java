@@ -38,8 +38,8 @@ class StringConstant extends Constant {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
-		this.classInfo.resolveConstant(this.stringIndex, Utf8Constant.class).print(out);
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
+		this.classInfo.resolveConstant(this.stringIndex, Utf8Constant.class).print(out, context);
 	}
 
 	@Override

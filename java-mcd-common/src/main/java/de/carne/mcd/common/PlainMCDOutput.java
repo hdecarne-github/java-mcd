@@ -19,6 +19,7 @@ package de.carne.mcd.common;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.nio.channels.Channels;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.WritableByteChannel;
@@ -45,11 +46,11 @@ public class PlainMCDOutput implements MCDOutput {
 	/**
 	 * Constructs a new {@linkplain MCDOutput} instance.
 	 *
-	 * @param pw the {@linkplain PrintWriter} to emit the decoded data to.
+	 * @param out the {@linkplain Writer} to emit the decoded data to.
 	 * @param autoClose whether to automatically close the {@linkplain PrintWriter} when this channel is closed.
 	 */
-	public PlainMCDOutput(PrintWriter pw, boolean autoClose) {
-		this.pw = pw;
+	public PlainMCDOutput(Writer out, boolean autoClose) {
+		this.pw = (out instanceof PrintWriter ? (PrintWriter) out : new PrintWriter(out));
 		this.autoClose = autoClose;
 	}
 

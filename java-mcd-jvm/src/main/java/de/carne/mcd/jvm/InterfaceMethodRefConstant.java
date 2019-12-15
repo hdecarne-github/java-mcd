@@ -27,7 +27,7 @@ class InterfaceMethodRefConstant extends AbstractRefConstant {
 	}
 
 	@Override
-	public void print(ClassPrinter out) throws IOException {
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
 		// TODO Auto-generated method stub
 	}
 
