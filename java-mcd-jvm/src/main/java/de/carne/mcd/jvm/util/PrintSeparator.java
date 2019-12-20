@@ -24,7 +24,7 @@ import de.carne.mcd.jvm.Printable;
 import de.carne.mcd.jvm.Printer;
 
 /**
- *
+ * Utility class used print a list of elements by adding a given separator beginning with the 2nd element.
  */
 public final class PrintSeparator implements Printable {
 
@@ -33,14 +33,17 @@ public final class PrintSeparator implements Printable {
 	private final String separator;
 
 	/**
-	 *
+	 * Constructs a new {@linkplain PrintSeparator} instance.
 	 */
 	public PrintSeparator() {
 		this(ClassPrinter::print, ", ");
 	}
 
 	/**
-	 *
+	 * Constructs a new {@linkplain PrintSeparator} instance.
+	 * 
+	 * @param printer the printer function to use for separator printing.
+	 * @param separator the separator to print.
 	 */
 	public PrintSeparator(Printer printer, String separator) {
 		this.printer = printer;

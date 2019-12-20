@@ -20,7 +20,7 @@ import de.carne.mcd.jvm.ClassInfo;
 import de.carne.mcd.jvm.ClassName;
 
 /**
- * Utility class providing class related functions.
+ * Utility class providing class information related functions.
  */
 public final class ClassUtil {
 
@@ -58,6 +58,12 @@ public final class ClassUtil {
 		return isPrivate(classInfo.accessFlags());
 	}
 
+	/**
+	 * Determines whether the given access flags have the private flag set.
+	 *
+	 * @param accessFlags the access flags to examine.
+	 * @return {@code true} if the public flag is set.
+	 */
 	public static boolean isPrivate(int accessFlags) {
 		return (accessFlags & 0x0002) == 0x0002;
 	}
@@ -72,6 +78,12 @@ public final class ClassUtil {
 		return isFinal(classInfo.accessFlags());
 	}
 
+	/**
+	 * Determines whether the given access flags have the final flag set.
+	 *
+	 * @param accessFlags the access flags to examine.
+	 * @return {@code true} if the final flag is set.
+	 */
 	public static boolean isFinal(int accessFlags) {
 		return (accessFlags & 0x0010) == 0x0010;
 	}
@@ -86,6 +98,12 @@ public final class ClassUtil {
 		return isInterface(classInfo.accessFlags());
 	}
 
+	/**
+	 * Determines whether the given access flags indicate an interface class.
+	 *
+	 * @param accessFlags the access flags to examine.
+	 * @return {@code true} if the interface class flags are set.
+	 */
 	public static boolean isInterface(int accessFlags) {
 		return (accessFlags & (0x0200 | 0x2000 | 0x8000)) == 0x0200;
 	}
@@ -100,6 +118,12 @@ public final class ClassUtil {
 		return isAbstract(classInfo.accessFlags());
 	}
 
+	/**
+	 * Determines whether the given access flags indicate an abstract class.
+	 *
+	 * @param accessFlags the access flags to examine.
+	 * @return {@code true} if the abstract class flags are set.
+	 */
 	public static boolean isAbstract(int accessFlags) {
 		return (accessFlags & (0x0200 | 0x0400)) == 0x0400;
 	}
@@ -114,6 +138,12 @@ public final class ClassUtil {
 		return isAnnotation(classInfo.accessFlags());
 	}
 
+	/**
+	 * Determines whether the given access flags indicate an annotation class.
+	 *
+	 * @param accessFlags the access flags to examine.
+	 * @return {@code true} if the annotation class flags are set.
+	 */
 	public static boolean isAnnotation(int accessFlags) {
 		return (accessFlags & 0x2000) == 0x2000;
 	}
@@ -128,6 +158,12 @@ public final class ClassUtil {
 		return isEnum(classInfo.accessFlags());
 	}
 
+	/**
+	 * Determines whether the given access flags indicate an enum class.
+	 *
+	 * @param accessFlags the access flags to examine.
+	 * @return {@code true} if the enum class flags are set.
+	 */
 	public static boolean isEnum(int accessFlags) {
 		return (accessFlags & 0x4000) == 0x4000;
 	}
@@ -142,6 +178,12 @@ public final class ClassUtil {
 		return isPackageInfo(classInfo.thisClass());
 	}
 
+	/**
+	 * Determines whether the given class name indicates a package-info class.
+	 *
+	 * @param className the class name to examine.
+	 * @return {@code true} if the class name indicates a package-info class.
+	 */
 	public static boolean isPackageInfo(ClassName className) {
 		return className.isPackageInfo();
 	}
@@ -156,6 +198,12 @@ public final class ClassUtil {
 		return isModuleInfo(classInfo.thisClass());
 	}
 
+	/**
+	 * Determines whether the given class name indicates a module-info class.
+	 *
+	 * @param className the class name to examine.
+	 * @return {@code true} if the class name indicates a module-info class.
+	 */
 	public static boolean isModuleInfo(ClassName className) {
 		return className.isModuleInfo();
 	}
