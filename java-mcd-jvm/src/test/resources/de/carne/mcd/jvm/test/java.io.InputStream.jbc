@@ -1,9 +1,10 @@
 /*
- * Byte code version: 52.0
+ * Class file version: 52.0
  *
  * Source file: InputStream.java
  */
 package java.io;
+
 public abstract /* super */ class InputStream implements Closeable {
     
     private static final int MAX_SKIP_BUFFER_SIZE = 2048;

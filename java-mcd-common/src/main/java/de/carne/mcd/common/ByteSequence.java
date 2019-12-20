@@ -163,7 +163,7 @@ public final class ByteSequence implements Comparable<ByteSequence> {
 	public String toString() {
 		StringBuilder buffer = new StringBuilder();
 
-		buffer.append("[").append(this.offset).append(":").append(this.offset).append("] = {");
+		buffer.append("[").append(this.offset).append(":").append(this.offset + this.length).append("] = {");
 
 		HexFormatter formatter = new HexFormatter();
 

@@ -1,0 +1,222 @@
+/*
+ * Class file version: 52.0
+ *
+ * Source file: HashMap.java
+ */
+package java.util;
+
+// Signature: <K:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/util/AbstractMap<TK;TV;>;Ljava/util/Map<TK;TV;>;Ljava/lang/Cloneable;Ljava/io/Serializable;
+public /* super */ class HashMap extends AbstractMap implements Map, Cloneable, java.io.Serializable {
+    
+    private static final long serialVersionUID = 362498820763181265l;
+    
+    static final int DEFAULT_INITIAL_CAPACITY = 16;
+    
+    static final int MAXIMUM_CAPACITY = 1073741824;
+    
+    static final float DEFAULT_LOAD_FACTOR = 0.75f;
+    
+    static final int TREEIFY_THRESHOLD = 8;
+    
+    static final int UNTREEIFY_THRESHOLD = 6;
+    
+    static final int MIN_TREEIFY_CAPACITY = 64;
+    
+    transient HashMap$Node[] table;
+    
+    transient Set entrySet;
+    
+    transient int size;
+    
+    transient int modCount;
+    
+    int threshold;
+    
+    final float loadFactor;
+    
+    static final int hash(Object) {
+    }
+    
+    // Signature: (Ljava/lang/Object;)Ljava/lang/Class<*>;
+    static Class comparableClassFor(Object) {
+    }
+    
+    // Signature: (Ljava/lang/Class<*>;Ljava/lang/Object;Ljava/lang/Object;)I
+    static int compareComparables(Class, Object, Object) {
+    }
+    
+    static final int tableSizeFor(int) {
+    }
+    
+    public void <init>(int, float) {
+    }
+    
+    public void <init>(int) {
+    }
+    
+    public void <init>() {
+    }
+    
+    // Signature: (Ljava/util/Map<+TK;+TV;>;)V
+    public void <init>(Map) {
+    }
+    
+    // Signature: (Ljava/util/Map<+TK;+TV;>;Z)V
+    final void putMapEntries(Map, boolean) {
+    }
+    
+    public int size() {
+    }
+    
+    public boolean isEmpty() {
+    }
+    
+    // Signature: (Ljava/lang/Object;)TV;
+    public Object get(Object) {
+    }
+    
+    // Signature: (ILjava/lang/Object;)Ljava/util/HashMap$Node<TK;TV;>;
+    final HashMap$Node getNode(int, Object) {
+    }
+    
+    public boolean containsKey(Object) {
+    }
+    
+    // Signature: (TK;TV;)TV;
+    public Object put(Object, Object) {
+    }
+    
+    // Signature: (ITK;TV;ZZ)TV;
+    final Object putVal(int, Object, Object, boolean, boolean) {
+    }
+    
+    // Signature: ()[Ljava/util/HashMap$Node<TK;TV;>;
+    final HashMap$Node[] resize() {
+    }
+    
+    // Signature: ([Ljava/util/HashMap$Node<TK;TV;>;I)V
+    final void treeifyBin(HashMap$Node[], int) {
+    }
+    
+    // Signature: (Ljava/util/Map<+TK;+TV;>;)V
+    public void putAll(Map) {
+    }
+    
+    // Signature: (Ljava/lang/Object;)TV;
+    public Object remove(Object) {
+    }
+    
+    // Signature: (ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/util/HashMap$Node<TK;TV;>;
+    final HashMap$Node removeNode(int, Object, Object, boolean, boolean) {
+    }
+    
+    public void clear() {
+    }
+    
+    public boolean containsValue(Object) {
+    }
+    
+    // Signature: ()Ljava/util/Set<TK;>;
+    public Set keySet() {
+    }
+    
+    // Signature: ()Ljava/util/Collection<TV;>;
+    public Collection values() {
+    }
+    
+    // Signature: ()Ljava/util/Set<Ljava/util/Map$Entry<TK;TV;>;>;
+    public Set entrySet() {
+    }
+    
+    // Signature: (Ljava/lang/Object;TV;)TV;
+    public Object getOrDefault(Object, Object) {
+    }
+    
+    // Signature: (TK;TV;)TV;
+    public Object putIfAbsent(Object, Object) {
+    }
+    
+    public boolean remove(Object, Object) {
+    }
+    
+    // Signature: (TK;TV;TV;)Z
+    public boolean replace(Object, Object, Object) {
+    }
+    
+    // Signature: (TK;TV;)TV;
+    public Object replace(Object, Object) {
+    }
+    
+    // Signature: (TK;Ljava/util/function/Function<-TK;+TV;>;)TV;
+    public Object computeIfAbsent(Object, java.util.function.Function) {
+    }
+    
+    // Signature: (TK;Ljava/util/function/BiFunction<-TK;-TV;+TV;>;)TV;
+    public Object computeIfPresent(Object, java.util.function.BiFunction) {
+    }
+    
+    // Signature: (TK;Ljava/util/function/BiFunction<-TK;-TV;+TV;>;)TV;
+    public Object compute(Object, java.util.function.BiFunction) {
+    }
+    
+    // Signature: (TK;TV;Ljava/util/function/BiFunction<-TV;-TV;+TV;>;)TV;
+    public Object merge(Object, Object, java.util.function.BiFunction) {
+    }
+    
+    // Signature: (Ljava/util/function/BiConsumer<-TK;-TV;>;)V
+    public void forEach(java.util.function.BiConsumer) {
+    }
+    
+    // Signature: (Ljava/util/function/BiFunction<-TK;-TV;+TV;>;)V
+    public void replaceAll(java.util.function.BiFunction) {
+    }
+    
+    public Object clone() {
+    }
+    
+    final float loadFactor() {
+    }
+    
+    final int capacity() {
+    }
+    
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException {
+    }
+    
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, ClassNotFoundException {
+    }
+    
+    // Signature: (ITK;TV;Ljava/util/HashMap$Node<TK;TV;>;)Ljava/util/HashMap$Node<TK;TV;>;
+    HashMap$Node newNode(int, Object, Object, HashMap$Node) {
+    }
+    
+    // Signature: (Ljava/util/HashMap$Node<TK;TV;>;Ljava/util/HashMap$Node<TK;TV;>;)Ljava/util/HashMap$Node<TK;TV;>;
+    HashMap$Node replacementNode(HashMap$Node, HashMap$Node) {
+    }
+    
+    // Signature: (ITK;TV;Ljava/util/HashMap$Node<TK;TV;>;)Ljava/util/HashMap$TreeNode<TK;TV;>;
+    HashMap$TreeNode newTreeNode(int, Object, Object, HashMap$Node) {
+    }
+    
+    // Signature: (Ljava/util/HashMap$Node<TK;TV;>;Ljava/util/HashMap$Node<TK;TV;>;)Ljava/util/HashMap$TreeNode<TK;TV;>;
+    HashMap$TreeNode replacementTreeNode(HashMap$Node, HashMap$Node) {
+    }
+    
+    void reinitialize() {
+    }
+    
+    // Signature: (Ljava/util/HashMap$Node<TK;TV;>;)V
+    void afterNodeAccess(HashMap$Node) {
+    }
+    
+    void afterNodeInsertion(boolean) {
+    }
+    
+    // Signature: (Ljava/util/HashMap$Node<TK;TV;>;)V
+    void afterNodeRemoval(HashMap$Node) {
+    }
+    
+    void internalWriteEntries(java.io.ObjectOutputStream) throws java.io.IOException {
+    }
+
+}

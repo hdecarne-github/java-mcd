@@ -1,9 +1,10 @@
 /*
- * Byte code version: 52.0
+ * Class file version: 52.0
  *
  * Source file: Calendar.java
  */
 package java.util;
+
 public /* super */ class Calendar$Builder {
     
     private static final int NFIELDS = 18;

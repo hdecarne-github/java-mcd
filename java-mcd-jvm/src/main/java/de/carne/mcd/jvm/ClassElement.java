@@ -16,16 +16,15 @@
  */
 package de.carne.mcd.jvm;
 
-import java.io.IOException;
-
-abstract class ClassElement {
+/**
+ * Base class for all kind of decoded class elements.
+ */
+public abstract class ClassElement implements Printable {
 
 	protected final ClassInfo classInfo;
 
-	public ClassElement(ClassInfo classInfo) {
+	protected ClassElement(ClassInfo classInfo) {
 		this.classInfo = classInfo;
 	}
-
-	public abstract void print(ClassPrinter out, ClassContext context) throws IOException;
 
 }

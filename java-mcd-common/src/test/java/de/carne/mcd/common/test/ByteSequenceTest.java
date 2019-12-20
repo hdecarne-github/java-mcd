@@ -98,4 +98,11 @@ class ByteSequenceTest {
 		Assertions.assertEquals(-1, Integer.signum(bs3.compareTo(bs2)));
 	}
 
+	@Test
+	void testToString() {
+		ByteSequence bsAll = ByteSequence.wrap(TEST_BYTES_ALL);
+
+		Assertions.assertEquals("[0:17] = { 00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 }", bsAll.toString());
+	}
+
 }

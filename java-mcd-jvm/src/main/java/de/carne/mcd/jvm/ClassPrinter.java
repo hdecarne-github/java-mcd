@@ -17,51 +17,158 @@
 package de.carne.mcd.jvm;
 
 import java.io.IOException;
-import java.util.Deque;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 import de.carne.mcd.common.MCDOutput;
+import de.carne.mcd.jvm.decode.AbstractRuntimeAnnotationsAttribute;
+import de.carne.mcd.jvm.decode.Attribute;
+import de.carne.mcd.jvm.decode.CodeAttribute;
+import de.carne.mcd.jvm.decode.ConstantValueAttribute;
+import de.carne.mcd.jvm.decode.DeprecatedAttribute;
+import de.carne.mcd.jvm.decode.ExceptionsAttribute;
+import de.carne.mcd.jvm.decode.SignatureAttribute;
+import de.carne.mcd.jvm.decode.SourceFileAttribute;
+import de.carne.mcd.jvm.decode.descriptor.Descriptor;
+import de.carne.mcd.jvm.decode.descriptor.FieldDescriptor;
+import de.carne.mcd.jvm.decode.descriptor.FieldTypeDescriptor;
+import de.carne.mcd.jvm.decode.descriptor.MethodDescriptor;
+import de.carne.mcd.jvm.util.Attributes;
+import de.carne.mcd.jvm.util.ClassUtil;
+import de.carne.mcd.jvm.util.PrintSeparator;
 import de.carne.util.Strings;
 
-abstract class ClassPrinter {
+/**
+ *
+ */
+public abstract class ClassPrinter {
 
-	protected static final String S_PACKAGE = "package";
-	protected static final String S_CLASS = "class";
-	protected static final String S_INTERFACE = "interface";
-	protected static final String S_ENUM = "enum";
-	protected static final String S_SUPER = "super";
-	protected static final String S_EXTENDS = "extends";
-	protected static final String S_IMPLEMENTS = "implements";
-	protected static final String S_THROWS = "throws";
-	protected static final String S_PUBLIC = "public";
-	protected static final String S_PRIVATE = "private";
-	protected static final String S_PROTECTED = "protected";
-	protected static final String S_STATIC = "static";
-	protected static final String S_FINAL = "final";
-	protected static final String S_VOLATILE = "volatile";
-	protected static final String S_TRANSIENT = "transient";
-	protected static final String S_BRIDGE = "bridge";
-	protected static final String S_VARARGS = "varargs";
-	protected static final String S_SYNTHETIC = "synthetic";
-	protected static final String S_SYNCHRONIZED = "synchronized";
-	protected static final String S_NATIVE = "native";
-	protected static final String S_ABSTRACT = "abstract";
-	protected static final String S_BYTE = "byte";
-	protected static final String S_CHAR = "char";
-	protected static final String S_DOUBLE = "double";
-	protected static final String S_FLOAT = "float";
-	protected static final String S_INT = "int";
-	protected static final String S_LONG = "long";
-	protected static final String S_SHORT = "short";
-	protected static final String S_BOOLEAN = "boolean";
-	protected static final String S_VOID = "void";
-	protected static final String S_DEPRECATED = "@Deprecated";
+	/**
+	 * "package"
+	 */
+	public static final String S_PACKAGE = "package";
+	/**
+	 * "class"
+	 */
+	public static final String S_CLASS = "class";
+	/**
+	 * "interface"
+	 */
+	public static final String S_INTERFACE = "interface";
+	/**
+	 * "enum"
+	 */
+	public static final String S_ENUM = "enum";
+	/**
+	 * "super"
+	 */
+	public static final String S_SUPER = "super";
+	/**
+	 * "extends"
+	 */
+	public static final String S_EXTENDS = "extends";
+	/**
+	 * "package"
+	 */
+	public static final String S_IMPLEMENTS = "implements";
+	/**
+	 * "implements"
+	 */
+	public static final String S_THROWS = "throws";
+	/**
+	 * "public"
+	 */
+	public static final String S_PUBLIC = "public";
+	/**
+	 * "private"
+	 */
+	public static final String S_PRIVATE = "private";
+	/**
+	 * "protected"
+	 */
+	public static final String S_PROTECTED = "protected";
+	/**
+	 * "static"
+	 */
+	public static final String S_STATIC = "static";
+	/**
+	 * "final"
+	 */
+	public static final String S_FINAL = "final";
+	/**
+	 * "volatile"
+	 */
+	public static final String S_VOLATILE = "volatile";
+	/**
+	 * "transient"
+	 */
+	public static final String S_TRANSIENT = "transient";
+	/**
+	 * "bridge"
+	 */
+	public static final String S_BRIDGE = "bridge";
+	/**
+	 * "varargs"
+	 */
+	public static final String S_VARARGS = "varargs";
+	/**
+	 * "package"
+	 */
+	public static final String S_SYNTHETIC = "synthetic";
+	/**
+	 * "synthetic"
+	 */
+	public static final String S_SYNCHRONIZED = "synchronized";
+	/**
+	 * "native"
+	 */
+	public static final String S_NATIVE = "native";
+	/**
+	 * "abstract"
+	 */
+	public static final String S_ABSTRACT = "abstract";
+	/**
+	 * "byte"
+	 */
+	public static final String S_BYTE = "byte";
+	/**
+	 * "char"
+	 */
+	public static final String S_CHAR = "char";
+	/**
+	 * "double"
+	 */
+	public static final String S_DOUBLE = "double";
+	/**
+	 * "float"
+	 */
+	public static final String S_FLOAT = "float";
+	/**
+	 * "int"
+	 */
+	public static final String S_INT = "int";
+	/**
+	 * "long"
+	 */
+	public static final String S_LONG = "long";
+	/**
+	 * "short"
+	 */
+	public static final String S_SHORT = "short";
+	/**
+	 * "boolean"
+	 */
+	public static final String S_BOOLEAN = "boolean";
+	/**
+	 * "void"
+	 */
+	public static final String S_VOID = "void";
+	/**
+	 * "@Deprecated"
+	 */
+	public static final String S_DEPRECATED = "@Deprecated";
 
 	protected final MCDOutput out;
 	protected final ClassInfo classInfo;
@@ -70,125 +177,286 @@ abstract class ClassPrinter {
 	protected ClassPrinter(MCDOutput out, ClassInfo classInfo) {
 		this.out = out;
 		this.classInfo = classInfo;
-		this.classPackage = this.classInfo.thisClass().getPackage();
+		this.classPackage = this.classInfo.thisClass().getPackageName();
 	}
 
+	/**
+	 * Gets a {@linkplain ClassPrinter} instance suitable for printing the submitted class information.
+	 *
+	 * @param out the {@linkplain MCDOutput} to print to.
+	 * @param classInfo the {@linkplain ClassInfo} to print.
+	 * @return a {@linkplain ClassPrinter} instance suitable for the submitted class information.
+	 */
+	public static ClassPrinter getInstance(MCDOutput out, ClassInfo classInfo) {
+		ClassPrinter classPrinter;
+
+		if (ClassUtil.isPackageInfo(classInfo)) {
+			classPrinter = new PackageInfoClassPrinter(out, classInfo);
+		} else if (ClassUtil.isModuleInfo(classInfo)) {
+			classPrinter = new ModuleInfoClassPrinter(out, classInfo);
+		} else if (ClassUtil.isInterface(classInfo)) {
+			classPrinter = new InterfaceClassPrinter(out, classInfo);
+		} else if (ClassUtil.isEnum(classInfo)) {
+			classPrinter = new EnumClassPrinter(out, classInfo);
+		} else {
+			classPrinter = new DefaultClassPrinter(out, classInfo);
+		}
+		return classPrinter;
+	}
+
+	/**
+	 * Prints the class information.
+	 *
+	 * @throws IOException if an I/O error occurs.
+	 */
 	public abstract void print() throws IOException;
 
-	public void printClassComment() throws IOException {
+	/**
+	 * Prints a line break.
+	 *
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public ClassPrinter println() throws IOException {
+		this.out.println();
+		return this;
+	}
+
+	/**
+	 * Prints a standard text.
+	 *
+	 * @param text the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public ClassPrinter print(String text) throws IOException {
+		this.out.print(text);
+		return this;
+	}
+
+	/**
+	 * Prints a standard text and a line break.
+	 *
+	 * @param text the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public ClassPrinter println(String text) throws IOException {
+		this.out.println(text);
+		return this;
+	}
+
+	/**
+	 * Prints a value text.
+	 *
+	 * @param value the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public ClassPrinter printValue(String value) throws IOException {
+		this.out.printValue(value);
+		return this;
+	}
+
+	/**
+	 * Prints a value text and a line break.
+	 *
+	 * @param value the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public ClassPrinter printlnValue(String value) throws IOException {
+		this.out.printlnValue(value);
+		return this;
+	}
+
+	/**
+	 * Prints a comment text.
+	 *
+	 * @param comment the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public ClassPrinter printComment(String comment) throws IOException {
+		this.out.printComment(comment);
+		return this;
+	}
+
+	/**
+	 * Prints a comment text and a line break.
+	 *
+	 * @param comment the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public ClassPrinter printlnComment(String comment) throws IOException {
+		this.out.printlnComment(comment);
+		return this;
+	}
+
+	/**
+	 * Prints a keyword text.
+	 *
+	 * @param keyword the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public ClassPrinter printKeyword(String keyword) throws IOException {
+		this.out.printKeyword(keyword);
+		return this;
+	}
+
+	/**
+	 * Prints a keyword text and a line break.
+	 *
+	 * @param keyword the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public ClassPrinter printlnKeyword(String keyword) throws IOException {
+		this.out.printlnKeyword(keyword);
+		return this;
+	}
+
+	/**
+	 * Prints an operator text.
+	 *
+	 * @param operator the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public ClassPrinter printOperator(String operator) throws IOException {
+		this.out.printOperator(operator);
+		return this;
+	}
+
+	/**
+	 * Prints an operator text and a line break.
+	 *
+	 * @param operator the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public ClassPrinter printlnOperator(String operator) throws IOException {
+		this.out.printlnOperator(operator);
+		return this;
+	}
+
+	/**
+	 * Prints a label text.
+	 *
+	 * @param label the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public ClassPrinter printLabel(String label) throws IOException {
+		this.out.printLabel(label);
+		return this;
+	}
+
+	/**
+	 * Prints a label text and a line break.
+	 *
+	 * @param label the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public ClassPrinter printlnLabel(String label) throws IOException {
+		this.out.printlnLabel(label);
+		return this;
+	}
+
+	protected void printClassComment() throws IOException {
 		this.out.printlnComment("/*");
-		this.out.printlnComment(
-				" * Byte code version: " + this.classInfo.majorVersion() + "." + this.classInfo.minorVersion());
-		Attributes.print(Attributes.resolveOptionalAttribute(this.classInfo.attributes(), SourceFileAttribute.class),
-				this, ClassContext.CLASS);
+
+		int major = this.classInfo.majorVersion();
+		int minor = this.classInfo.minorVersion();
+
+		this.out.printlnComment(" * Class file version: " + major + "." + minor);
+
+		Optional<SourceFileAttribute> optionalSourceFileAttribute = Attributes
+				.resolveOptionalAttribute(this.classInfo.attributes(), SourceFileAttribute.class);
+
+		if (optionalSourceFileAttribute.isPresent()) {
+			String sourceFile = optionalSourceFileAttribute.get().getValue();
+
+			this.out.printlnComment(" *");
+			this.out.printlnComment(" * Source file: " + sourceFile);
+		}
 		this.out.printlnComment(" */");
 	}
 
-	public void printClassCommentSourceFile(String sourceFile) throws IOException {
-		this.out.printlnComment(" *");
-		this.out.printlnComment(" * Source file: " + sourceFile);
-	}
-
-	public void printClassPackage() throws IOException {
+	protected void printClassPackage() throws IOException {
 		if (Strings.notEmpty(this.classPackage)) {
 			this.out.printKeyword(S_PACKAGE).print(" ").print(this.classPackage).println(";");
 		}
 	}
 
-	public void printAnnotations(List<Attribute> attributes, ClassContext context) throws IOException {
+	protected void printClassAnnotation() throws IOException {
+		printAnnotations(this.classInfo.attributes(), ClassContext.CLASS);
+	}
+
+	protected void printAnnotations(List<Attribute> attributes, ClassContext context) throws IOException {
 		Attributes.print(Attributes.resolveOptionalAttribute(attributes, DeprecatedAttribute.class), this, context);
 		Attributes.print(Attributes.resolveAttributes(attributes, AbstractRuntimeAnnotationsAttribute.class), this,
 				context);
 	}
 
-	public void printDeprecatedAnnotation(ClassContext context) throws IOException {
-		if (context.isOneOf(ClassContext.CLASS, ClassContext.METHOD)) {
-			this.out.printlnLabel(S_DEPRECATED);
-		} else {
-			this.out.printLabel(S_DEPRECATED).print(" ");
+	protected void printInterfaceClassSignature() throws IOException {
+		Attributes.print(Attributes.resolveOptionalAttribute(this.classInfo.attributes(), SignatureAttribute.class),
+				this, ClassContext.CLASS);
+		printClassAccessFLagsKeywords();
+		printClassAccessFlagsComment();
+		this.out.print(S_INTERFACE);
+		this.out.print(" ").print(this.classInfo.thisClass().getEffectiveName(this.classPackage));
+		printClassImplements();
+	}
+
+	protected void printEnumClassSignature() throws IOException {
+		Attributes.print(Attributes.resolveOptionalAttribute(this.classInfo.attributes(), SignatureAttribute.class),
+				this, ClassContext.CLASS);
+		printClassAccessFLagsKeywords();
+		printClassAccessFlagsComment();
+		this.out.print(S_ENUM);
+		this.out.print(" ").print(this.classInfo.thisClass().getEffectiveName(this.classPackage));
+		printClassImplements();
+	}
+
+	protected void printDefaultClassSignature() throws IOException {
+		Attributes.print(Attributes.resolveOptionalAttribute(this.classInfo.attributes(), SignatureAttribute.class),
+				this, ClassContext.CLASS);
+		printClassAccessFLagsKeywords();
+		printClassAccessFlagsComment();
+		this.out.print(S_CLASS);
+		this.out.print(" ").print(this.classInfo.thisClass().getEffectiveName(this.classPackage));
+		printClassExtends();
+		printClassImplements();
+	}
+
+	private void printClassExtends() throws IOException {
+		ClassName superClass = this.classInfo.superClass();
+
+		if (!superClass.isObject()) {
+			this.out.print(" ").printKeyword(S_EXTENDS).print(" ");
+			this.out.print(superClass.getEffectiveName(this.classPackage));
 		}
 	}
 
-	public void printAnnotation(String typeName, List<AnnotationElement> elements, ClassContext context)
-			throws IOException {
-		String annotationType = decodeTypeDescriptor(typeName, this.classPackage);
+	private void printClassImplements() throws IOException {
+		List<ClassName> interfaces = this.classInfo.interfaces();
 
-		if (!Deprecated.class.getSimpleName().equals(annotationType)) {
-			this.out.printLabel("@");
-			this.out.printLabel(annotationType);
+		if (!interfaces.isEmpty()) {
+			boolean interfaceClass = ClassUtil.isInterface(this.classInfo.accessFlags());
 
-			int elementsSize = elements.size();
+			this.out.print(" ").printKeyword(interfaceClass ? S_EXTENDS : S_IMPLEMENTS).print(" ");
 
-			if (elementsSize > 0) {
-				this.out.print("(");
+			PrintSeparator interfaceSeparator = new PrintSeparator();
 
-				boolean firstElement = true;
-
-				for (AnnotationElement element : elements) {
-					if (!firstElement) {
-						this.out.print(", ");
-					}
-					firstElement = false;
-					element.print(this, context);
-				}
-				this.out.print(")");
+			for (ClassName interfaceName : interfaces) {
+				interfaceSeparator.print(this, ClassContext.CLASS);
+				this.out.print(interfaceName.getEffectiveName(this.classPackage));
 			}
-			if (context.isOneOf(ClassContext.CLASS, ClassContext.METHOD)) {
-				this.out.println();
-			} else {
-				this.out.print(" ");
-			}
 		}
-	}
-
-	public void printAnnotationElement(String elementName, AnnotationElementValue value, ClassContext context)
-			throws IOException {
-		this.out.print(elementName);
-		this.out.print(" ");
-		this.out.printOperator("=");
-		this.out.print(" ");
-		value.print(this, context);
-	}
-
-	public void printArrayAnnotationElement(List<AnnotationElementValue> elementValues, ClassContext context)
-			throws IOException {
-		int elementValuesSize = elementValues.size();
-
-		if (elementValuesSize > 1) {
-			this.out.print("{ ");
-		}
-
-		boolean firstElement = true;
-
-		for (AnnotationElementValue elementValue : elementValues) {
-			if (!firstElement) {
-				this.out.print(", ");
-			}
-			firstElement = false;
-			elementValue.print(this, context);
-		}
-		if (elementValuesSize > 1) {
-			this.out.print(" }");
-		}
-	}
-
-	public void printClassAnnotationElement(String typeName) throws IOException {
-		this.out.print(decodeTypeDescriptor(typeName, this.classPackage) + ".class");
-	}
-
-	public void printEnumAnnotationElement(String typeName, String value) throws IOException {
-		this.out.print(decodeTypeDescriptor(typeName, this.classPackage) + "." + value);
-	}
-
-	private static final Map<Integer, String> CLASS_ACCESS_FLAGS_COMMENTS = new LinkedHashMap<>();
-
-	static {
-		CLASS_ACCESS_FLAGS_COMMENTS.put(0x0020, S_SUPER);
-		CLASS_ACCESS_FLAGS_COMMENTS.put(0x1000, S_SYNTHETIC);
-	}
-
-	public void printClassAccessFlagsComment() throws IOException {
-		printAccessFlagsComment(CLASS_ACCESS_FLAGS_COMMENTS, this.classInfo.accessFlags());
 	}
 
 	private static final Map<Integer, String> CLASS_ACCESS_FLAGS_KEYWORDS = new LinkedHashMap<>();
@@ -199,19 +467,24 @@ abstract class ClassPrinter {
 		CLASS_ACCESS_FLAGS_KEYWORDS.put(0x0400, S_ABSTRACT);
 	}
 
-	public void printClassAccessFLagsKeywords() throws IOException {
-		printAccessFlagsKeywords(CLASS_ACCESS_FLAGS_KEYWORDS, this.classInfo.accessFlags());
+	private void printClassAccessFLagsKeywords() throws IOException {
+		int maskedAccessFlags = this.classInfo.accessFlags();
+
+		if (ClassUtil.isInterface(maskedAccessFlags)) {
+			maskedAccessFlags &= ~0x0400;
+		}
+		printAccessFlagsKeywords(CLASS_ACCESS_FLAGS_KEYWORDS, maskedAccessFlags);
 	}
 
-	private static final Map<Integer, String> FIELD_ACCESS_FLAGS_COMMENTS = new LinkedHashMap<>();
+	private static final Map<Integer, String> CLASS_ACCESS_FLAGS_COMMENTS = new LinkedHashMap<>();
 
 	static {
-		FIELD_ACCESS_FLAGS_COMMENTS.put(0x1000, S_SYNTHETIC);
-		FIELD_ACCESS_FLAGS_COMMENTS.put(0x4000, S_ENUM);
+		CLASS_ACCESS_FLAGS_COMMENTS.put(0x0020, S_SUPER);
+		CLASS_ACCESS_FLAGS_COMMENTS.put(0x1000, S_SYNTHETIC);
 	}
 
-	public void printFieldAccessFLagsComment(int accessFlags) throws IOException {
-		printAccessFlagsComment(FIELD_ACCESS_FLAGS_COMMENTS, accessFlags);
+	private void printClassAccessFlagsComment() throws IOException {
+		printAccessFlagsComment(CLASS_ACCESS_FLAGS_COMMENTS, this.classInfo.accessFlags());
 	}
 
 	private static final Map<Integer, String> FIELD_ACCESS_FLAGS_KEYWORDS = new LinkedHashMap<>();
@@ -226,20 +499,19 @@ abstract class ClassPrinter {
 		FIELD_ACCESS_FLAGS_KEYWORDS.put(0x0080, S_TRANSIENT);
 	}
 
-	public void printFieldAccessFLagsKeywords(int accessFlags) throws IOException {
+	private void printFieldAccessFLagsKeywords(int accessFlags) throws IOException {
 		printAccessFlagsKeywords(FIELD_ACCESS_FLAGS_KEYWORDS, accessFlags);
 	}
 
-	private static final Map<Integer, String> METHOD_ACCESS_FLAGS_COMMENTS = new LinkedHashMap<>();
+	private static final Map<Integer, String> FIELD_ACCESS_FLAGS_COMMENTS = new LinkedHashMap<>();
 
 	static {
-		METHOD_ACCESS_FLAGS_COMMENTS.put(0x0040, S_BRIDGE);
-		METHOD_ACCESS_FLAGS_COMMENTS.put(0x0080, S_VARARGS);
-		METHOD_ACCESS_FLAGS_COMMENTS.put(0x1000, S_SYNTHETIC);
+		FIELD_ACCESS_FLAGS_COMMENTS.put(0x1000, S_SYNTHETIC);
+		FIELD_ACCESS_FLAGS_COMMENTS.put(0x4000, S_ENUM);
 	}
 
-	public void printMethodAccessFLagsComment(int accessFlags) throws IOException {
-		printAccessFlagsComment(METHOD_ACCESS_FLAGS_COMMENTS, accessFlags);
+	private void printFieldAccessFLagsComment(int accessFlags) throws IOException {
+		printAccessFlagsComment(FIELD_ACCESS_FLAGS_COMMENTS, accessFlags);
 	}
 
 	private static final Map<Integer, String> METHOD_ACCESS_FLAGS_KEYWORDS = new LinkedHashMap<>();
@@ -255,8 +527,26 @@ abstract class ClassPrinter {
 		METHOD_ACCESS_FLAGS_KEYWORDS.put(0x0400, S_ABSTRACT);
 	}
 
-	public void printMethodAccessFLagsKeywords(int accessFlags) throws IOException {
-		printAccessFlagsKeywords(METHOD_ACCESS_FLAGS_KEYWORDS, accessFlags);
+	private void printMethodAccessFLagsKeywords(int accessFlags) throws IOException {
+		int maskedAccessFlags = accessFlags;
+		int classAccessFlags = this.classInfo.accessFlags();
+
+		if (ClassUtil.isInterface(classAccessFlags)) {
+			maskedAccessFlags &= ~0x0400;
+		}
+		printAccessFlagsKeywords(METHOD_ACCESS_FLAGS_KEYWORDS, maskedAccessFlags);
+	}
+
+	private static final Map<Integer, String> METHOD_ACCESS_FLAGS_COMMENTS = new LinkedHashMap<>();
+
+	static {
+		METHOD_ACCESS_FLAGS_COMMENTS.put(0x0040, S_BRIDGE);
+		METHOD_ACCESS_FLAGS_COMMENTS.put(0x0080, S_VARARGS);
+		METHOD_ACCESS_FLAGS_COMMENTS.put(0x1000, S_SYNTHETIC);
+	}
+
+	private void printMethodAccessFLagsComment(int accessFlags) throws IOException {
+		printAccessFlagsComment(METHOD_ACCESS_FLAGS_COMMENTS, accessFlags);
 	}
 
 	private void printAccessFlagsComment(Map<Integer, String> comments, int flags) throws IOException {
@@ -287,172 +577,169 @@ abstract class ClassPrinter {
 		}
 	}
 
-	public void printFields() throws IOException {
+	protected void printFields() throws IOException {
 		this.out.increaseIndent();
-		for (Field field : this.classInfo.fields()) {
-			field.print(this, ClassContext.FIELD);
+		for (FieldInfo field : this.classInfo.fields()) {
+			printField(field);
 		}
 		this.out.decreaseIndent();
 	}
 
-	public void printField(int accessFlags, String descriptor, String name, List<Attribute> attributes)
-			throws IOException {
+	private void printField(FieldInfo field) throws IOException {
 		this.out.println();
-		printAnnotations(attributes, ClassContext.FIELD);
-		printFieldAccessFLagsKeywords(accessFlags);
-		printFieldAccessFLagsComment(accessFlags);
-		this.out.print(decodeTypeDescriptor(descriptor, this.classPackage)).print(" ").print(name);
-		Optional<ConstantValueAttribute> valueHolder = Attributes.resolveOptionalAttribute(attributes,
+		printAnnotations(field.attributes(), ClassContext.FIELD);
+		printFieldAccessFLagsKeywords(field.accessFlags());
+		printFieldAccessFLagsComment(field.accessFlags());
+
+		FieldDescriptor descriptor = Descriptor.decodeFieldDescriptor(field.descriptor(), this.classPackage);
+
+		descriptor.print(this, ClassContext.FIELD);
+		this.out.print(" ").print(field.name());
+
+		Optional<ConstantValueAttribute> optionalValue = Attributes.resolveOptionalAttribute(field.attributes(),
 				ConstantValueAttribute.class);
 
-		if (valueHolder.isPresent()) {
-			ConstantValueAttribute value = valueHolder.get();
-
+		if (optionalValue.isPresent()) {
 			this.out.print(" ").printOperator("=").print(" ");
-			value.print(this, ClassContext.FIELD);
+			optionalValue.get().print(this, ClassContext.FIELD);
 		}
+
 		this.out.println(";");
 	}
 
-	public void printMethods() throws IOException {
+	protected void printMethods() throws IOException {
 		this.out.increaseIndent();
-		for (Method method : this.classInfo.methods()) {
-			method.print(this, ClassContext.METHOD);
+		for (MethodInfo method : this.classInfo.methods()) {
+			printMethod(method);
 		}
 		this.out.decreaseIndent();
 	}
 
-	public void printMethod(int accessFlags, String descriptor, String name, List<Attribute> attributes)
-			throws IOException {
+	private void printMethod(MethodInfo method) throws IOException {
 		this.out.println();
-		printAnnotations(attributes, ClassContext.METHOD);
-		printMethodAccessFLagsKeywords(accessFlags);
-		printMethodAccessFLagsComment(accessFlags);
+		printAnnotations(method.attributes(), ClassContext.METHOD);
+		Attributes.print(Attributes.resolveOptionalAttribute(method.attributes(), SignatureAttribute.class), this,
+				ClassContext.CLASS);
+		printMethodAccessFLagsKeywords(method.accessFlags());
+		printMethodAccessFLagsComment(method.accessFlags());
 
-		Deque<String> signature = decodeDescriptor(descriptor, this.classPackage);
-		String returnType = signature.removeLast();
+		MethodDescriptor descriptor = Descriptor.decodeMethodDescriptor(method.descriptor(), this.classPackage);
 
-		this.out.print(returnType).print(" ");
-		this.out.print(name).print("(");
+		descriptor.getReturnType().print(this, ClassContext.METHOD);
+		this.out.print(" ").print(method.name()).print("(");
 
-		boolean first = true;
+		PrintSeparator parameterSeparator = new PrintSeparator();
 
-		for (String argumentType : signature) {
-			if (!first) {
-				this.out.print(", ");
-			} else {
-				first = false;
-			}
-			this.out.print(argumentType);
+		for (FieldTypeDescriptor parameterType : descriptor.getParameterTypes()) {
+			parameterSeparator.print(this, ClassContext.METHOD);
+			parameterType.print(this, ClassContext.METHOD);
 		}
 		this.out.print(")");
-		Attributes.print(Attributes.resolveOptionalAttribute(attributes, ExceptionsAttribute.class), this,
+		Attributes.print(Attributes.resolveOptionalAttribute(method.attributes(), ExceptionsAttribute.class), this,
 				ClassContext.METHOD);
-		Optional<CodeAttribute> codeHolder = Attributes.resolveOptionalAttribute(attributes, CodeAttribute.class);
 
-		if (codeHolder.isPresent()) {
+		Optional<CodeAttribute> optionalCode = Attributes.resolveOptionalAttribute(method.attributes(),
+				CodeAttribute.class);
+
+		if (optionalCode.isPresent()) {
 			this.out.println(" {");
-			this.out.increaseIndent();
-			codeHolder.get().print(this, ClassContext.METHOD);
-			this.out.decreaseIndent();
 			this.out.println("}");
 		} else {
 			this.out.println(";");
 		}
 	}
 
-	public void printMethodExceptions(int[] exceptions) throws IOException {
-		boolean first = true;
+	private static class PackageInfoClassPrinter extends ClassPrinter {
 
-		for (int exception : exceptions) {
-			if (first) {
-				this.out.print(" ").printKeyword(S_THROWS).print(" ");
-				first = false;
-			} else {
-				this.out.print(", ");
-			}
-
-			ClassName exceptionName = ClassName
-					.fromConstant(this.classInfo.resolveConstant(exception, ClassConstant.class));
-
-			this.out.print(exceptionName.getName(this.classPackage));
+		PackageInfoClassPrinter(MCDOutput out, ClassInfo classInfo) {
+			super(out, classInfo);
 		}
-	}
 
-	public void printValue(String value) throws IOException {
-		this.out.printValue(value);
-	}
-
-	private String decodeTypeDescriptor(String descriptor, String packageName) throws IOException {
-		Deque<String> decoded = decodeDescriptor(descriptor, packageName);
-
-		if (decoded.size() != 1) {
-			throw new IOException("Unexpected field descriptor: " + descriptor);
+		@Override
+		public void print() throws IOException {
+			printClassComment();
+			printClassAnnotation();
+			printClassPackage();
 		}
-		return decoded.getFirst();
+
 	}
 
-	private Deque<String> decodeDescriptor(String descriptor, String packageName) throws IOException {
-		Deque<String> decoded = new LinkedList<>();
-		int descriptorLength = descriptor.length();
-		int position = 0;
+	private static class ModuleInfoClassPrinter extends ClassPrinter {
 
-		while (position < descriptorLength) {
-			position = decodeDescriptorHelper(decoded, descriptor, position, packageName);
+		ModuleInfoClassPrinter(MCDOutput out, ClassInfo classInfo) {
+			super(out, classInfo);
 		}
-		return decoded;
-	}
 
-	private static final Map<Character, String> DESCRIPTOR_BASE_TYPES = new HashMap<>();
-
-	static {
-		DESCRIPTOR_BASE_TYPES.put('B', S_BYTE);
-		DESCRIPTOR_BASE_TYPES.put('C', S_CHAR);
-		DESCRIPTOR_BASE_TYPES.put('D', S_DOUBLE);
-		DESCRIPTOR_BASE_TYPES.put('F', S_FLOAT);
-		DESCRIPTOR_BASE_TYPES.put('I', S_INT);
-		DESCRIPTOR_BASE_TYPES.put('J', S_LONG);
-		DESCRIPTOR_BASE_TYPES.put('S', S_SHORT);
-		DESCRIPTOR_BASE_TYPES.put('V', S_VOID);
-		DESCRIPTOR_BASE_TYPES.put('Z', S_BOOLEAN);
-	}
-
-	private int decodeDescriptorHelper(Deque<String> decoded, String descriptor, int position, String packageName)
-			throws IOException {
-		int nextPosition = position;
-		char c = descriptor.charAt(position);
-		ClassName decodedClassName;
-
-		switch (c) {
-		case '(':
-		case ')':
-			nextPosition += 1;
-			break;
-		case 'B':
-		case 'C':
-		case 'D':
-		case 'F':
-		case 'I':
-		case 'J':
-		case 'S':
-		case 'V':
-		case 'Z':
-			decoded.add(Objects.requireNonNull(DESCRIPTOR_BASE_TYPES.get(c)));
-			nextPosition += 1;
-			break;
-		case 'L':
-			decodedClassName = ClassName.fromDescriptor(descriptor, nextPosition + 1);
-			decoded.add(decodedClassName.getName(packageName));
-			nextPosition += decodedClassName.getName().length() + 2;
-			break;
-		case '[':
-			nextPosition = decodeDescriptorHelper(decoded, descriptor, nextPosition + 1, packageName);
-			decoded.add(decoded.removeLast() + "[]");
-			break;
-		default:
-			throw new IOException("Unexpected descriptor: " + descriptor + "(" + position + ")");
+		@Override
+		public void print() throws IOException {
+			printClassComment();
+			printClassAnnotation();
+			printClassPackage();
 		}
-		return nextPosition;
+
+	}
+
+	private static class InterfaceClassPrinter extends ClassPrinter {
+
+		InterfaceClassPrinter(MCDOutput out, ClassInfo classInfo) {
+			super(out, classInfo);
+		}
+
+		@Override
+		public void print() throws IOException {
+			printClassComment();
+			printClassPackage();
+			this.out.println();
+			printClassAnnotation();
+			printInterfaceClassSignature();
+			this.out.println(" {");
+			printFields();
+			printMethods();
+			this.out.println().println("}");
+		}
+
+	}
+
+	private static class EnumClassPrinter extends ClassPrinter {
+
+		EnumClassPrinter(MCDOutput out, ClassInfo classInfo) {
+			super(out, classInfo);
+		}
+
+		@Override
+		public void print() throws IOException {
+			printClassComment();
+			printClassPackage();
+			this.out.println();
+			printClassAnnotation();
+			printEnumClassSignature();
+			this.out.println(" {");
+			printFields();
+			printMethods();
+			this.out.println().println("}");
+		}
+
+	}
+
+	private static class DefaultClassPrinter extends ClassPrinter {
+
+		DefaultClassPrinter(MCDOutput out, ClassInfo classInfo) {
+			super(out, classInfo);
+		}
+
+		@Override
+		public void print() throws IOException {
+			printClassComment();
+			printClassPackage();
+			this.out.println();
+			printClassAnnotation();
+			printDefaultClassSignature();
+			this.out.println(" {");
+			printFields();
+			printMethods();
+			this.out.println().println("}");
+		}
+
 	}
 
 }

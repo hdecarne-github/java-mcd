@@ -175,6 +175,8 @@ subprojects {
 							if(eeaPath != null) {
 								it.entryAttributes.put("annotationpath", eeaPath)
 							}
+						} else if(it.path.contains("/generated-src/")) {
+							it.entryAttributes.put("ignore_optional_problems", "true")
 						}
 					}
 				}

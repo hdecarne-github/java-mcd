@@ -18,16 +18,42 @@ package de.carne.mcd.jvm;
 
 import java.util.Arrays;
 
-enum ClassContext {
+/**
+ * Enum for context depending class element processing.
+ */
+public enum ClassContext {
 
+	/**
+	 * Class (global) context.
+	 */
 	CLASS,
 
+	/**
+	 * Annotation context.
+	 */
+	ANNOTATION,
+
+	/**
+	 * Field context.
+	 */
 	FIELD,
 
+	/**
+	 * Method context.
+	 */
 	METHOD,
 
+	/**
+	 * (Method) parameter context.
+	 */
 	PARAMETER;
 
+	/**
+	 * Checks whether this context is one of the listed ones.
+	 *
+	 * @param contexts the contexts to consider.
+	 * @return {@code true} if this context is one of the listed ones.
+	 */
 	public boolean isOneOf(ClassContext... contexts) {
 		return Arrays.asList(contexts).indexOf(this) >= 0;
 	}

@@ -1,9 +1,11 @@
 /*
- * Byte code version: 52.0
+ * Class file version: 52.0
  *
  * Source file: StandardOpenOption.java
  */
 package java.nio.file;
+
+// Signature: Ljava/lang/Enum<Ljava/nio/file/StandardOpenOption;>;Ljava/nio/file/OpenOption;
 public final /* super */ enum StandardOpenOption implements OpenOption {
     
     public static final /* enum */ StandardOpenOption READ;
@@ -34,6 +36,7 @@ public final /* super */ enum StandardOpenOption implements OpenOption {
     public static StandardOpenOption valueOf(String) {
     }
     
+    // Signature: ()V
     private void <init>(String, int) {
     }
     

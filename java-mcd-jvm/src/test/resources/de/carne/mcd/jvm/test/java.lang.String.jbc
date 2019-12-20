@@ -1,16 +1,18 @@
 /*
- * Byte code version: 52.0
+ * Class file version: 52.0
  *
  * Source file: String.java
  */
 package java.lang;
+
+// Signature: Ljava/lang/Object;Ljava/io/Serializable;Ljava/lang/Comparable<Ljava/lang/String;>;Ljava/lang/CharSequence;
 public final /* super */ class String implements java.io.Serializable, Comparable, CharSequence {
     
     private final char[] value;
     
     private int hash;
     
-    private static final long serialVersionUID = -6849794470754667710;
+    private static final long serialVersionUID = -6849794470754667710l;
     
     private static final java.io.ObjectStreamField[] serialPersistentFields;
     
@@ -229,6 +231,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
     public static /* varargs */ String join(CharSequence, CharSequence[]) {
     }
     
+    // Signature: (Ljava/lang/CharSequence;Ljava/lang/Iterable<+Ljava/lang/CharSequence;>;)Ljava/lang/String;
     public static String join(CharSequence, Iterable) {
     }
     

@@ -19,26 +19,87 @@ package de.carne.mcd.jvm;
 import java.io.IOException;
 import java.util.List;
 
-interface ClassInfo {
+import de.carne.mcd.jvm.decode.Attribute;
+import de.carne.mcd.jvm.decode.Constant;
 
+/**
+ * Class information interface (see <a href="https://docs.oracle.com/javase/specs/jvms/se13/html/jvms-4.html">Class File
+ * Format specification</a>)
+ */
+public interface ClassInfo {
+
+	/**
+	 * Gets the class file's major version.
+	 *
+	 * @return the class file's major version.
+	 */
 	int majorVersion();
 
+	/**
+	 * Gets the class file's minor version.
+	 *
+	 * @return the class file's minor version.
+	 */
 	int minorVersion();
 
+	/**
+	 * Resolves a constant from the class file's constant pool.
+	 *
+	 * @param <T> the actual type of the constant to resolve.
+	 * @param index the index of the constant to resolve.
+	 * @param type the type of the constant to resolve.
+	 * @return the resolved constant.
+	 * @throws IOException if the constant cannot be resolved.
+	 */
 	<T extends Constant> T resolveConstant(int index, Class<T> type) throws IOException;
 
+	/**
+	 * Gets the class' access flags.
+	 *
+	 * @return the class' access flags.
+	 */
 	int accessFlags();
 
+	/**
+	 * Gets the class' name.
+	 *
+	 * @return the class' name.
+	 */
 	ClassName thisClass();
 
+	/**
+	 * Gets the class' super class.
+	 *
+	 * @return the class' super class.
+	 */
 	ClassName superClass();
 
+	/**
+	 * Gets the class' super interfaces.
+	 *
+	 * @return the class' super interfaces.
+	 */
 	List<ClassName> interfaces();
 
-	List<Field> fields();
+	/**
+	 * Gets the class' field informations.
+	 *
+	 * @return the class' field informations.
+	 */
+	List<FieldInfo> fields();
 
-	List<Method> methods();
+	/**
+	 * Gets the class' method informations.
+	 *
+	 * @return the class' method informations.
+	 */
+	List<MethodInfo> methods();
 
+	/**
+	 * Gets the class' attributes.
+	 *
+	 * @return the class' attributes.
+	 */
 	List<Attribute> attributes();
 
 }

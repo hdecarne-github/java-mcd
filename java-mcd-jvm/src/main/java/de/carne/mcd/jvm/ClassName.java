@@ -20,74 +20,163 @@ import java.io.IOException;
 
 import org.eclipse.jdt.annotation.Nullable;
 
-class ClassName {
+import de.carne.mcd.jvm.decode.AbstractNameConstant;
+
+/**
+ * A class name.
+ */
+public class ClassName {
+
+	private static final String JAVA_LANG_PACKAGE = Object.class.getPackage().getName();
 
 	private final String fullName;
+	private final String packageName;
 	private final String simpleName;
 
-	private ClassName(String fullName, String simpleName) {
+	private ClassName(String fullName, String packageName, String simpleName) {
 		this.fullName = fullName;
+		this.packageName = packageName;
 		this.simpleName = simpleName;
 	}
 
-	private static ClassName fromName(String name) {
-		String externalName = name.replace('/', '.');
-		int baseIndex = externalName.lastIndexOf('.');
-		String simpleName = (baseIndex >= 0 ? externalName.substring(baseIndex + 1) : "");
-
-		return new ClassName(externalName, simpleName);
+	/**
+	 * Decodes an internal or so called binary class name to it's standard form.
+	 *
+	 * @param internal the class name to decode.
+	 * @return the decoded class name.
+	 */
+	public static String decode(String internal) {
+		return internal.replace('/', '.');
 	}
 
-	public static ClassName fromConstant(@Nullable AbstractNameConstant nameConstant) throws IOException {
-		return fromName(nameConstant != null ? nameConstant.getNameValue() : Object.class.getName());
-	}
+	/**
+	 * Gets the effective class name by removing any unnecessary package prefix.
+	 *
+	 * @param name the class name to get the effective name for.
+	 * @param classPackage the class package the class name is accessed in.
+	 * @return the effective class name.
+	 */
+	public static String effectiveName(String name, String classPackage) {
+		String effectiveName;
 
-	public static ClassName fromDescriptor(String descriptor, int position) throws IOException {
-		int nextPosition = descriptor.indexOf(';', position);
-
-		if (nextPosition < 0) {
-			throw new IOException("Unexpected class name descriptor: " + descriptor + "(" + position + ")");
+		if (isPackage(name, classPackage)) {
+			effectiveName = name.substring(classPackage.length() + 1);
+		} else if (isPackage(name, JAVA_LANG_PACKAGE)) {
+			effectiveName = name.substring(JAVA_LANG_PACKAGE.length() + 1);
+		} else {
+			effectiveName = name;
 		}
-		return fromName(descriptor.substring(position, nextPosition));
+		return effectiveName;
 	}
 
+	private static boolean isPackage(String name, String classPackage) {
+		int classPackageLength = classPackage.length();
+
+		return name.startsWith(classPackage) && name.lastIndexOf('.') == classPackageLength;
+	}
+
+	/**
+	 * Constructs a new {@linkplain ClassName} instance from an internal class name.
+	 *
+	 * @param internal the internal class name to create the {@linkplain ClassName} instance from.
+	 * @return the {@linkplain ClassName} instance representing the submitted class name.
+	 */
+	public static ClassName fromInternalName(String internal) {
+		String name = decode(internal);
+		int baseIndex = name.lastIndexOf('.');
+		String packageName;
+		String simpleName;
+
+		if (baseIndex >= 0) {
+			packageName = name.substring(0, baseIndex);
+			simpleName = name.substring(baseIndex + 1);
+		} else {
+			packageName = "";
+			simpleName = name;
+		}
+		return new ClassName(name, packageName, simpleName);
+	}
+
+	/**
+	 * Constructs a new {@linkplain ClassName} instance from a name constant.
+	 *
+	 * @param nameConstant the name constant to create the {@linkplain ClassName} instance from (may be {@code null} to
+	 * point to class {@linkplain Object}).
+	 * @return the {@linkplain ClassName} instance representing the submitted name constant.
+	 * @throws IOException if the name constant cannot be resolved.
+	 */
+	public static ClassName fromConstant(@Nullable AbstractNameConstant nameConstant) throws IOException {
+		return fromInternalName(nameConstant != null ? nameConstant.getNameValue() : Object.class.getName());
+	}
+
+	/**
+	 * Checks whether this instance denotes a package info class.
+	 *
+	 * @return {@code true} if this instance denotes a package info class.
+	 */
 	public boolean isPackageInfo() {
-		return "package-info".equals(getSimpleName());
+		return this.simpleName.equals("package-info");
 	}
 
+	/**
+	 * Checks whether this instance denotes a module info class.
+	 *
+	 * @return {@code true} if this instance denotes a module info class.
+	 */
 	public boolean isModuleInfo() {
-		return "module-info".equals(getSimpleName());
+		return this.simpleName.equals("module-info");
 	}
 
+	/**
+	 * Checks whether this instance denotes the class {@linkplain Object}.
+	 *
+	 * @return {@code true} if this instance denotes the class {@linkplain Object}.
+	 */
 	public boolean isObject() {
 		return Object.class.getName().equals(this.fullName);
 	}
 
+	/**
+	 * Checks whether this instance denotes the class {@linkplain Enum}.
+	 *
+	 * @return {@code true} if this instance denotes the class {@linkplain Enum}.
+	 */
 	public boolean isEnum() {
 		return Enum.class.getName().equals(this.fullName);
 	}
 
+	/**
+	 * Gets the full class name.
+	 *
+	 * @return the full class name.
+	 */
 	public String getName() {
 		return this.fullName;
 	}
 
-	public String getName(String packageName) {
-		return (isPackage(packageName) || isPackage("java.lang") ? this.simpleName : this.fullName);
+	/**
+	 * Gets the effective class name by removing any unnecessary package prefix.
+	 *
+	 * @param classPackage the class package the class name is accessed in.
+	 * @return the effective class name.
+	 */
+	public String getEffectiveName(String classPackage) {
+		return (this.packageName.equals(classPackage) || this.packageName.equals(JAVA_LANG_PACKAGE) ? this.simpleName
+				: this.fullName);
 	}
 
-	private boolean isPackage(String packageName) {
-		return this.fullName.startsWith(packageName)
-				&& packageName.length() + 1 + this.simpleName.length() == this.fullName.length();
+	/**
+	 * Gets the package name.
+	 *
+	 * @return the package name.
+	 */
+	public String getPackageName() {
+		return this.packageName;
 	}
 
-	public String getSimpleName() {
-		return this.simpleName;
-	}
-
-	public String getPackage() {
-		int baseIndex = this.fullName.lastIndexOf('.');
-
-		return (baseIndex >= 0 ? this.fullName.substring(0, baseIndex) : "");
+	@Override
+	public String toString() {
+		return this.fullName;
 	}
 
 }

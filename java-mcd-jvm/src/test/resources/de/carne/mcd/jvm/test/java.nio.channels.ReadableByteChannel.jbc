@@ -1,11 +1,12 @@
 /*
- * Byte code version: 52.0
+ * Class file version: 52.0
  *
  * Source file: ReadableByteChannel.java
  */
 package java.nio.channels;
-interface ReadableByteChannel extends Channel {
+
+public interface ReadableByteChannel extends Channel {
     
-    public abstract int read(java.nio.ByteBuffer) throws java.io.IOException;
+    public int read(java.nio.ByteBuffer) throws java.io.IOException;
 
 }
