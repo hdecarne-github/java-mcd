@@ -6,7 +6,7 @@
 package java.nio.file;
 
 // Signature: Ljava/lang/Enum<Ljava/nio/file/StandardOpenOption;>;Ljava/nio/file/OpenOption;
-public final /* super */ enum StandardOpenOption implements OpenOption {
+public final /* super */ enum StandardOpenOption extends Enum implements OpenOption {
     
     public static final /* enum */ StandardOpenOption READ;
     

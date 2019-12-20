@@ -62,6 +62,10 @@ public abstract class ClassPrinter {
 	 */
 	public static final String S_ENUM = "enum";
 	/**
+	 * "@interface"
+	 */
+	public static final String S_ANNOTATION = "@interface";
+	/**
 	 * "super"
 	 */
 	public static final String S_SUPER = "super";
@@ -196,6 +200,8 @@ public abstract class ClassPrinter {
 			classPrinter = new ModuleInfoClassPrinter(out, classInfo);
 		} else if (ClassUtil.isInterface(classInfo)) {
 			classPrinter = new InterfaceClassPrinter(out, classInfo);
+		} else if (ClassUtil.isAnnotation(classInfo)) {
+			classPrinter = new AnnotationClassPrinter(out, classInfo);
 		} else if (ClassUtil.isEnum(classInfo)) {
 			classPrinter = new EnumClassPrinter(out, classInfo);
 		} else {
@@ -407,7 +413,17 @@ public abstract class ClassPrinter {
 				this, ClassContext.CLASS);
 		printClassAccessFLagsKeywords();
 		printClassAccessFlagsComment();
-		this.out.print(S_INTERFACE);
+		this.out.printKeyword(S_INTERFACE);
+		this.out.print(" ").print(this.classInfo.thisClass().getEffectiveName(this.classPackage));
+		printClassImplements();
+	}
+
+	protected void printAnnotationClassSignature() throws IOException {
+		Attributes.print(Attributes.resolveOptionalAttribute(this.classInfo.attributes(), SignatureAttribute.class),
+				this, ClassContext.CLASS);
+		printClassAccessFLagsKeywords();
+		printClassAccessFlagsComment();
+		this.out.printKeyword(S_ANNOTATION);
 		this.out.print(" ").print(this.classInfo.thisClass().getEffectiveName(this.classPackage));
 		printClassImplements();
 	}
@@ -417,8 +433,9 @@ public abstract class ClassPrinter {
 				this, ClassContext.CLASS);
 		printClassAccessFLagsKeywords();
 		printClassAccessFlagsComment();
-		this.out.print(S_ENUM);
+		this.out.printKeyword(S_ENUM);
 		this.out.print(" ").print(this.classInfo.thisClass().getEffectiveName(this.classPackage));
+		printClassExtends();
 		printClassImplements();
 	}
 
@@ -427,7 +444,7 @@ public abstract class ClassPrinter {
 				this, ClassContext.CLASS);
 		printClassAccessFLagsKeywords();
 		printClassAccessFlagsComment();
-		this.out.print(S_CLASS);
+		this.out.printKeyword(S_CLASS);
 		this.out.print(" ").print(this.classInfo.thisClass().getEffectiveName(this.classPackage));
 		printClassExtends();
 		printClassImplements();
@@ -470,7 +487,7 @@ public abstract class ClassPrinter {
 	private void printClassAccessFLagsKeywords() throws IOException {
 		int maskedAccessFlags = this.classInfo.accessFlags();
 
-		if (ClassUtil.isInterface(maskedAccessFlags)) {
+		if (ClassUtil.isInterface(maskedAccessFlags) || ClassUtil.isAnnotation(maskedAccessFlags)) {
 			maskedAccessFlags &= ~0x0400;
 		}
 		printAccessFlagsKeywords(CLASS_ACCESS_FLAGS_KEYWORDS, maskedAccessFlags);
@@ -692,6 +709,27 @@ public abstract class ClassPrinter {
 			this.out.println();
 			printClassAnnotation();
 			printInterfaceClassSignature();
+			this.out.println(" {");
+			printFields();
+			printMethods();
+			this.out.println().println("}");
+		}
+
+	}
+
+	private static class AnnotationClassPrinter extends ClassPrinter {
+
+		AnnotationClassPrinter(MCDOutput out, ClassInfo classInfo) {
+			super(out, classInfo);
+		}
+
+		@Override
+		public void print() throws IOException {
+			printClassComment();
+			printClassPackage();
+			this.out.println();
+			printClassAnnotation();
+			printAnnotationClassSignature();
 			this.out.println(" {");
 			printFields();
 			printMethods();

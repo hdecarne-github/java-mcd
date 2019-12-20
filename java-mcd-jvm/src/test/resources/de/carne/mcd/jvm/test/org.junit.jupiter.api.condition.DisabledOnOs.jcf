@@ -10,7 +10,7 @@ package org.junit.jupiter.api.condition;
 @java.lang.annotation.Documented
 @org.junit.jupiter.api.extension.ExtendWith(value = DisabledOnOsCondition.class)
 @org.apiguardian.api.API(status = org.apiguardian.api.API$Status.STABLE, since = "5.1")
-public abstract class DisabledOnOs implements java.lang.annotation.Annotation {
+public @interface DisabledOnOs implements java.lang.annotation.Annotation {
     
     public abstract OS[] value();
 

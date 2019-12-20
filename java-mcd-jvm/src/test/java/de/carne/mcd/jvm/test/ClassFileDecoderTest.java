@@ -114,7 +114,7 @@ class ClassFileDecoderTest {
 
 	private String getReferenceOutput(String resource) throws IOException {
 		String referenceResource = resource.replace('/', '.').replaceAll("^\\.", "").replaceAll("\\$", "_")
-				.replaceAll("\\.class$", ".jbc");
+				.replaceAll("\\.class$", ".jcf");
 		String output;
 
 		try (InputStream referenceStream = getClass().getResourceAsStream(referenceResource)) {
