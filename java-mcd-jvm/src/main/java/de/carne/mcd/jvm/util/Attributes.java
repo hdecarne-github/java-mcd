@@ -105,6 +105,7 @@ public final class Attributes {
 	/**
 	 * Prints an optional attribute.
 	 *
+	 * @param <T> the actual attribute type.
 	 * @param attributeHolder the optional attribute to print.
 	 * @param out the {@linkplain ClassPrinter} instance to print to.
 	 * @param context the context of this print invocation.
