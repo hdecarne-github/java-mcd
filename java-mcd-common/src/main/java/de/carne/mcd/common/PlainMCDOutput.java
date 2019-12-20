@@ -25,7 +25,6 @@ import java.nio.channels.ClosedChannelException;
 import java.nio.channels.WritableByteChannel;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 import de.carne.boot.check.Check;
 
@@ -72,24 +71,6 @@ public class PlainMCDOutput implements MCDOutput {
 	 */
 	public PlainMCDOutput(WritableByteChannel channel, boolean autoClose) {
 		this(new PrintWriter(Channels.newOutputStream(channel)), autoClose);
-	}
-
-	@Override
-	public Appendable append(@Nullable CharSequence csq) throws IOException {
-		this.pw.append(csq);
-		return this;
-	}
-
-	@Override
-	public Appendable append(@Nullable CharSequence csq, int start, int end) throws IOException {
-		this.pw.append(csq, start, end);
-		return this;
-	}
-
-	@Override
-	public Appendable append(char c) throws IOException {
-		this.pw.append(c);
-		return this;
 	}
 
 	@Override

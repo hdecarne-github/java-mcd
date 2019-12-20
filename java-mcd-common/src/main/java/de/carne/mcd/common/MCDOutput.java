@@ -20,31 +20,11 @@ import java.io.Closeable;
 import java.io.Flushable;
 import java.io.IOException;
 
-import org.eclipse.jdt.annotation.Nullable;
-
 /**
  * Output channel receiving the decoded data during a
  * {@linkplain MachineCodeDecoder#decode(java.nio.channels.ReadableByteChannel, MCDOutput)} call..
  */
-public interface MCDOutput extends Appendable, Closeable, Flushable {
-
-	@Override
-	default Appendable append(@Nullable CharSequence csq) throws IOException {
-		print(String.valueOf(csq));
-		return this;
-	}
-
-	@Override
-	default Appendable append(@Nullable CharSequence csq, int start, int end) throws IOException {
-		print(csq != null ? csq.subSequence(start, end).toString() : String.valueOf(csq));
-		return this;
-	}
-
-	@Override
-	default Appendable append(char c) throws IOException {
-		print(Character.toString(c));
-		return this;
-	}
+public interface MCDOutput extends Closeable, Flushable {
 
 	/**
 	 * Increases the indent level of all following print calls:
