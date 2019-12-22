@@ -16,23 +16,16 @@
  */
 package de.carne.mcd.jvm.decode;
 
-import java.io.IOException;
+import java.util.List;
 
-import de.carne.mcd.jvm.ClassContext;
 import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassPrinter;
 
-class PackageConstant extends NameConstant {
+class RuntimeInvisibleTypeAnnotationsAttribute extends RuntimeTypeAnnotationsAttribute {
 
-	public static final byte TAG = 20;
+	public static final String NAME = "RuntimeInvisibleTypeAnnotations";
 
-	PackageConstant(ClassInfo classInfo, int nameIndex) {
-		super(classInfo, nameIndex);
-	}
-
-	@Override
-	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		// TODO Auto-generated method stub
+	public RuntimeInvisibleTypeAnnotationsAttribute(ClassInfo classInfo, List<TypeAnnotation> annotations) {
+		super(classInfo, annotations);
 	}
 
 }

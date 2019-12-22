@@ -20,11 +20,11 @@ import java.util.List;
 
 import de.carne.mcd.jvm.ClassInfo;
 
-class RuntimeVisibleParameterAnnotationsAttribute extends AbstractRuntimeAnnotationsAttribute {
+class RuntimeVisibleTypeAnnotationsAttribute extends RuntimeTypeAnnotationsAttribute {
 
-	public static final String NAME = "RuntimeVisibleParameterAnnotations";
+	public static final String NAME = "RuntimeVisibleTypeAnnotations";
 
-	public RuntimeVisibleParameterAnnotationsAttribute(ClassInfo classInfo, List<Annotation> annotations) {
+	public RuntimeVisibleTypeAnnotationsAttribute(ClassInfo classInfo, List<TypeAnnotation> annotations) {
 		super(classInfo, annotations);
 	}
 

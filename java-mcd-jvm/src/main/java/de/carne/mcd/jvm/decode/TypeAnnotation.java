@@ -29,22 +29,28 @@ import de.carne.mcd.jvm.decode.descriptor.FieldDescriptor;
 import de.carne.mcd.jvm.util.PrintSeparator;
 
 /**
- * Annotation
+ * Type annotation
  */
-public class Annotation extends ClassElement {
+public class TypeAnnotation extends ClassElement {
 
 	private final int typeIndex;
+	private final TypeAnnotationTarget target;
+	private final TypeAnnotationPath path;
 	private final List<AnnotationElement> elements;
 
-	Annotation(ClassInfo classInfo, int typeIndex, List<AnnotationElement> elements) {
+	TypeAnnotation(ClassInfo classInfo, int typeIndex, TypeAnnotationTarget target, TypeAnnotationPath path,
+			List<AnnotationElement> elements) {
 		super(classInfo);
 		this.typeIndex = typeIndex;
+		this.target = target;
+		this.path = path;
 		this.elements = Collections.unmodifiableList(elements);
 	}
 
 	@Override
 	public void print(ClassPrinter out, ClassContext context) throws IOException {
 		String typeName = this.classInfo.resolveConstant(this.typeIndex, Utf8Constant.class).getValue();
+
 		FieldDescriptor annotationType = Descriptor.decodeFieldDescriptor(typeName,
 				this.classInfo.thisClass().getPackageName());
 

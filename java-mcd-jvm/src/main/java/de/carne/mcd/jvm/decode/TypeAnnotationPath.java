@@ -16,33 +16,15 @@
  */
 package de.carne.mcd.jvm.decode;
 
-import java.io.IOException;
-
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassPrinter;
-
 /**
- * Deprecated attribute: "Deprecated"
+ *
  */
-public class DeprecatedAttribute extends Attribute {
+public class TypeAnnotationPath {
 
-	/**
-	 * Attribute name: "Deprecated"
-	 */
-	public static final String NAME = "Deprecated";
+	private final byte[] path;
 
-	DeprecatedAttribute(ClassInfo classInfo) {
-		super(classInfo);
-	}
-
-	@Override
-	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		if (context.isOneOf(ClassContext.CLASS, ClassContext.METHOD)) {
-			out.printlnLabel(ClassPrinter.S_DEPRECATED);
-		} else {
-			out.printLabel(ClassPrinter.S_DEPRECATED).print(" ");
-		}
+	TypeAnnotationPath(byte[] path) {
+		this.path = path;
 	}
 
 }

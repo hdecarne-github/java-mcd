@@ -31,6 +31,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 
 import de.carne.boot.logging.Log;
+import de.carne.io.Closeables;
 import de.carne.io.IOUtil;
 import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.PlainMCDOutput;
@@ -44,48 +45,53 @@ class ClassFileDecoderTest {
 	private static final Log LOG = new Log();
 
 	@Test
-	void testDecodeAbstract() throws IOException {
-		testDecode(InputStream.class);
-	}
-
-	@Test
-	void testDecodeFinal() throws IOException {
-		testDecode(String.class);
-	}
-
-	@Test
-	void testDecodeGeneric() throws IOException {
-		testDecode(HashMap.class);
-	}
-
-	@Test
-	void testDecodeNested() throws IOException {
-		testDecode(Calendar.Builder.class);
-	}
-
-	@Test
 	void testDecodeObject() throws IOException {
 		testDecode(Object.class);
 	}
 
 	@Test
-	void testDecodeInterface() throws IOException {
+	void testDecodeAbstractClass() throws IOException {
+		testDecode(InputStream.class);
+	}
+
+	@Test
+	void testDecodeFinalClass() throws IOException {
+		testDecode(String.class);
+	}
+
+	@Test
+	void testDecodeGenericClass() throws IOException {
+		testDecode(HashMap.class);
+	}
+
+	@Test
+	void testDecodeNestedClass() throws IOException {
+		testDecode(Calendar.Builder.class);
+	}
+
+	@Test
+	void testDecodeInterfaceClass() throws IOException {
 		testDecode(ReadableByteChannel.class);
 	}
 
 	@Test
-	void testDecodeEnum() throws IOException {
+	void testDecodeEnumClass() throws IOException {
 		testDecode(StandardOpenOption.class);
 	}
 
 	@Test
-	void testDecodeAnnotation() throws IOException {
+	void testDecodeAnnotationClass() throws IOException {
 		testDecode(DisabledOnOs.class);
 	}
 
 	@Test
-	void testDecodePackage() throws IOException {
+	void testDecodePackageClass() throws IOException {
 		testDecode("package-info.class");
+	}
+
+	@Test
+	void testDecodeTypeAnnotations() throws IOException {
+		testDecode(Closeables.class);
 	}
 
 	private void testDecode(Class<?> clazz) throws IOException {
@@ -102,8 +108,6 @@ class ClassFileDecoderTest {
 
 		String decodeOutput = decodeBuffer.toString();
 		String referenceOutput = getReferenceOutput(resource);
-
-		System.out.println(decodeOutput);
 
 		Assertions.assertEquals(referenceOutput, decodeOutput);
 	}

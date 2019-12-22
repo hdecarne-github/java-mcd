@@ -1,0 +1,25 @@
+/*
+ * Class file version: 52.0
+ *
+ * Source file: Closeables.java
+ */
+package de.carne.io;
+
+public final /* super */ class Closeables {
+    
+    private void <init>() {
+    }
+    
+    public static void close(Object) throws java.io.IOException {
+    }
+    
+    public static /* varargs */ void closeAll(java.io.Closeable[]) throws java.io.IOException {
+    }
+    
+    public static void safeClose(Object) {
+    }
+    
+    public static void safeClose(Throwable, Object) {
+    }
+
+}

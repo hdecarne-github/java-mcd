@@ -16,16 +16,31 @@
  */
 package de.carne.mcd.jvm.decode;
 
+import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
+import de.carne.mcd.jvm.ClassContext;
 import de.carne.mcd.jvm.ClassInfo;
+import de.carne.mcd.jvm.ClassPrinter;
 
-class RuntimeInvisibleParameterAnnotationsAttribute extends AbstractRuntimeAnnotationsAttribute {
+/**
+ * Base class for all kinds of runtime visible annotations attributes.
+ */
+public abstract class RuntimeAnnotationsAttribute extends Attribute {
 
-	public static final String NAME = "RuntimeInvisibleParameterAnnotations";
+	private final List<Annotation> annotations;
 
-	public RuntimeInvisibleParameterAnnotationsAttribute(ClassInfo classInfo, List<Annotation> annotations) {
-		super(classInfo, annotations);
+	RuntimeAnnotationsAttribute(ClassInfo classInfo, List<Annotation> annotations) {
+		super(classInfo);
+		this.annotations = Collections.unmodifiableList(annotations);
+	}
+
+	@Override
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
+		for (Annotation annotation : this.annotations) {
+			annotation.print(out, context);
+		}
 	}
 
 }

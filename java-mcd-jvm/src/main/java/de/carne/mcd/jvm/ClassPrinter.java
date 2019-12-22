@@ -23,12 +23,11 @@ import java.util.Map;
 import java.util.Optional;
 
 import de.carne.mcd.common.MCDOutput;
-import de.carne.mcd.jvm.decode.AbstractRuntimeAnnotationsAttribute;
 import de.carne.mcd.jvm.decode.Attribute;
 import de.carne.mcd.jvm.decode.CodeAttribute;
 import de.carne.mcd.jvm.decode.ConstantValueAttribute;
-import de.carne.mcd.jvm.decode.DeprecatedAttribute;
 import de.carne.mcd.jvm.decode.ExceptionsAttribute;
+import de.carne.mcd.jvm.decode.RuntimeAnnotationsAttribute;
 import de.carne.mcd.jvm.decode.SignatureAttribute;
 import de.carne.mcd.jvm.decode.SourceFileAttribute;
 import de.carne.mcd.jvm.decode.descriptor.Descriptor;
@@ -41,7 +40,7 @@ import de.carne.mcd.jvm.util.PrintSeparator;
 import de.carne.util.Strings;
 
 /**
- *
+ * Class file printing code responsible for presenting all kind decoded class information.
  */
 public abstract class ClassPrinter {
 
@@ -403,9 +402,7 @@ public abstract class ClassPrinter {
 	}
 
 	protected void printAnnotations(List<Attribute> attributes, ClassContext context) throws IOException {
-		Attributes.print(Attributes.resolveOptionalAttribute(attributes, DeprecatedAttribute.class), this, context);
-		Attributes.print(Attributes.resolveAttributes(attributes, AbstractRuntimeAnnotationsAttribute.class), this,
-				context);
+		Attributes.print(Attributes.resolveAttributes(attributes, RuntimeAnnotationsAttribute.class), this, context);
 	}
 
 	protected void printInterfaceClassSignature() throws IOException {

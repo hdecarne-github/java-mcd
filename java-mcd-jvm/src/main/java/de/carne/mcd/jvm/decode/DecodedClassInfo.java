@@ -398,20 +398,17 @@ public class DecodedClassInfo implements ClassInfo {
 		case ConstantValueAttribute.NAME:
 			attributes.add(decodeConstantValueAttribute(buffer));
 			break;
-		case DeprecatedAttribute.NAME:
-			attributes.add(new DeprecatedAttribute(this));
-			break;
 		case RuntimeVisibleAnnotationsAttribute.NAME:
 			attributes.add(decodeRuntimeVisibleAnnotationsAttribute(buffer));
 			break;
 		case RuntimeInvisibleAnnotationsAttribute.NAME:
 			attributes.add(decodeRuntimeInvisibleAnnotationsAttribute(buffer));
 			break;
-		case RuntimeVisibleParameterAnnotationsAttribute.NAME:
-			attributes.add(decodeRuntimeVisibleParameterAnnotationsAttribute(buffer));
+		case RuntimeVisibleTypeAnnotationsAttribute.NAME:
+			attributes.add(decodeRuntimeVisibleTypeAnnotationsAttribute(buffer));
 			break;
-		case RuntimeInvisibleParameterAnnotationsAttribute.NAME:
-			attributes.add(decodeRuntimeInvisibleParameterAnnotationsAttribute(buffer));
+		case RuntimeInvisibleTypeAnnotationsAttribute.NAME:
+			attributes.add(decodeRuntimeInvisibleTypeAnnotationsAttribute(buffer));
 			break;
 		case SignatureAttribute.NAME:
 			attributes.add(decodeSignatureAttribute(buffer));
@@ -455,18 +452,18 @@ public class DecodedClassInfo implements ClassInfo {
 		return new RuntimeInvisibleAnnotationsAttribute(this, annotations);
 	}
 
-	private RuntimeVisibleParameterAnnotationsAttribute decodeRuntimeVisibleParameterAnnotationsAttribute(
-			MCDDecodeBuffer buffer) throws IOException {
-		List<Annotation> annotations = decodeAnnotations(buffer);
+	private RuntimeVisibleTypeAnnotationsAttribute decodeRuntimeVisibleTypeAnnotationsAttribute(MCDDecodeBuffer buffer)
+			throws IOException {
+		List<TypeAnnotation> annotations = decodeTypeAnnotations(buffer);
 
-		return new RuntimeVisibleParameterAnnotationsAttribute(this, annotations);
+		return new RuntimeVisibleTypeAnnotationsAttribute(this, annotations);
 	}
 
-	private RuntimeInvisibleParameterAnnotationsAttribute decodeRuntimeInvisibleParameterAnnotationsAttribute(
+	private RuntimeInvisibleTypeAnnotationsAttribute decodeRuntimeInvisibleTypeAnnotationsAttribute(
 			MCDDecodeBuffer buffer) throws IOException {
-		List<Annotation> annotations = decodeAnnotations(buffer);
+		List<TypeAnnotation> annotations = decodeTypeAnnotations(buffer);
 
-		return new RuntimeInvisibleParameterAnnotationsAttribute(this, annotations);
+		return new RuntimeInvisibleTypeAnnotationsAttribute(this, annotations);
 	}
 
 	private List<Annotation> decodeAnnotations(MCDDecodeBuffer buffer) throws IOException {
@@ -483,6 +480,152 @@ public class DecodedClassInfo implements ClassInfo {
 
 	private Annotation decodeAnnotation(MCDDecodeBuffer buffer) throws IOException {
 		int typeIndex = Short.toUnsignedInt(buffer.decodeI16());
+		List<AnnotationElement> elements = decodeAnnotationElements(buffer);
+
+		return new Annotation(this, typeIndex, elements);
+	}
+
+	private List<TypeAnnotation> decodeTypeAnnotations(MCDDecodeBuffer buffer) throws IOException {
+		int count = Short.toUnsignedInt(buffer.decodeI16());
+		List<TypeAnnotation> annotations = new LinkedList<>();
+
+		for (int index = 0; index < count; index++) {
+			TypeAnnotation annotation = decodeTypeAnnotation(buffer);
+
+			annotations.add(annotation);
+		}
+		return annotations;
+	}
+
+	private TypeAnnotation decodeTypeAnnotation(MCDDecodeBuffer buffer) throws IOException {
+		TypeAnnotationTarget target = decodeTypeAnnotationTarget(buffer);
+		TypeAnnotationPath path = decodeTypeAnnotationPath(buffer);
+		int typeIndex = Short.toUnsignedInt(buffer.decodeI16());
+		List<AnnotationElement> elements = decodeAnnotationElements(buffer);
+
+		return new TypeAnnotation(this, typeIndex, target, path, elements);
+	}
+
+	private TypeAnnotationTarget decodeTypeAnnotationTarget(MCDDecodeBuffer buffer) throws IOException {
+		int targetType = Byte.toUnsignedInt(buffer.decodeI8());
+		TypeAnnotationTarget target;
+
+		switch (targetType) {
+		case 0x00:
+		case 0x01:
+			target = decodeTypeParameterTarget(targetType, buffer);
+			break;
+		case 0x10:
+			target = decodeSupertypeTarget(targetType, buffer);
+			break;
+		case 0x11:
+		case 0x12:
+			target = decodeTypeParameterBoundTarget(targetType, buffer);
+			break;
+		case 0x13:
+		case 0x14:
+		case 0x15:
+			target = new TypeAnnotationTarget.Empty(targetType);
+			break;
+		case 0x16:
+			target = decodeFormalParameterTarget(targetType, buffer);
+			break;
+		case 0x17:
+			target = decodeThrowsTypeTarget(targetType, buffer);
+			break;
+		case 0x40:
+		case 0x41:
+			target = decodeLocalvarTarget(targetType, buffer);
+			break;
+		case 0x42:
+			target = decodeCatchTypeTarget(targetType, buffer);
+			break;
+		case 0x43:
+		case 0x44:
+		case 0x45:
+		case 0x46:
+			target = decodeOffsetTarget(targetType, buffer);
+			break;
+		case 0x47:
+		case 0x48:
+		case 0x49:
+		case 0x4a:
+		case 0x4b:
+			target = decodeTypeArgumentTarget(targetType, buffer);
+			break;
+		default:
+			throw new IOException("Unrecognized target type: " + targetType);
+		}
+		return target;
+	}
+
+	private TypeAnnotationTarget decodeTypeParameterTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+		int parameterIndex = Byte.toUnsignedInt(buffer.decodeI8());
+
+		return new TypeAnnotationTarget.TypeParameter(targetType, parameterIndex);
+	}
+
+	private TypeAnnotationTarget decodeSupertypeTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+		int supertypeIndex = Short.toUnsignedInt(buffer.decodeI16());
+
+		return new TypeAnnotationTarget.Supertype(targetType, supertypeIndex);
+	}
+
+	private TypeAnnotationTarget decodeTypeParameterBoundTarget(int targetType, MCDDecodeBuffer buffer)
+			throws IOException {
+		int parameterIndex = Byte.toUnsignedInt(buffer.decodeI8());
+		int boundIndex = Byte.toUnsignedInt(buffer.decodeI8());
+
+		return new TypeAnnotationTarget.TypeParameterBound(targetType, parameterIndex, boundIndex);
+	}
+
+	private TypeAnnotationTarget decodeFormalParameterTarget(int targetType, MCDDecodeBuffer buffer)
+			throws IOException {
+		int parameterIndex = Byte.toUnsignedInt(buffer.decodeI8());
+
+		return new TypeAnnotationTarget.FormalParameter(targetType, parameterIndex);
+	}
+
+	private TypeAnnotationTarget decodeThrowsTypeTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+		int throwsIndex = Short.toUnsignedInt(buffer.decodeI16());
+
+		return new TypeAnnotationTarget.ThrowsType(targetType, throwsIndex);
+	}
+
+	private TypeAnnotationTarget decodeLocalvarTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+		int tableLength = Short.toUnsignedInt(buffer.decodeI16());
+		short[] table = MCDDecodeBuffer.toI16Array(buffer.decodeI16Array(tableLength));
+
+		return new TypeAnnotationTarget.Localvar(targetType, table);
+	}
+
+	private TypeAnnotationTarget decodeCatchTypeTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+		int exceptionIndex = Short.toUnsignedInt(buffer.decodeI16());
+
+		return new TypeAnnotationTarget.CatchType(targetType, exceptionIndex);
+	}
+
+	private TypeAnnotationTarget decodeOffsetTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+		int offset = Short.toUnsignedInt(buffer.decodeI16());
+
+		return new TypeAnnotationTarget.Offset(targetType, offset);
+	}
+
+	private TypeAnnotationTarget decodeTypeArgumentTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+		int offset = Short.toUnsignedInt(buffer.decodeI16());
+		int argumentIndex = Byte.toUnsignedInt(buffer.decodeI8());
+
+		return new TypeAnnotationTarget.TypeArgument(targetType, offset, argumentIndex);
+	}
+
+	private TypeAnnotationPath decodeTypeAnnotationPath(MCDDecodeBuffer buffer) throws IOException {
+		int pathLength = Byte.toUnsignedInt(buffer.decodeI8());
+		byte[] path = MCDDecodeBuffer.toI8Array(buffer.decodeI8Array(pathLength));
+
+		return new TypeAnnotationPath(path);
+	}
+
+	private List<AnnotationElement> decodeAnnotationElements(MCDDecodeBuffer buffer) throws IOException {
 		int elementsCount = Short.toUnsignedInt(buffer.decodeI16());
 		List<AnnotationElement> elements = new ArrayList<>(elementsCount);
 
@@ -492,7 +635,7 @@ public class DecodedClassInfo implements ClassInfo {
 
 			elements.add(new AnnotationElement(this, elementNameIndex, elementValue));
 		}
-		return new Annotation(this, typeIndex, elements);
+		return elements;
 	}
 
 	private AnnotationElementValue decodeAnnotationElementValue(MCDDecodeBuffer buffer) throws IOException {

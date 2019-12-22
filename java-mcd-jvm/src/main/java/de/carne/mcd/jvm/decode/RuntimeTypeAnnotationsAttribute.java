@@ -17,44 +17,30 @@
 package de.carne.mcd.jvm.decode;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
+import de.carne.mcd.jvm.ClassContext;
 import de.carne.mcd.jvm.ClassInfo;
+import de.carne.mcd.jvm.ClassPrinter;
 
 /**
- * Base class for all kinds of name constants.
+ * Base class for all kinds of runtime visible annotations attributes.
  */
-public abstract class AbstractNameConstant extends Constant {
+public abstract class RuntimeTypeAnnotationsAttribute extends Attribute {
 
-	private final int nameIndex;
+	private final List<TypeAnnotation> annotations;
 
-	AbstractNameConstant(ClassInfo classInfo, int nameIndex) {
+	RuntimeTypeAnnotationsAttribute(ClassInfo classInfo, List<TypeAnnotation> annotations) {
 		super(classInfo);
-		this.nameIndex = nameIndex;
-	}
-
-	/**
-	 * Resolves this name constant's value.
-	 *
-	 * @return this name constant's value.
-	 * @throws IOException if the constant cannot be resolved.
-	 */
-	public String getNameValue() throws IOException {
-		return getName().getValue();
-	}
-
-	/**
-	 * Resolves this name constant.
-	 *
-	 * @return this name constant.
-	 * @throws IOException if the constant cannot be resolved.
-	 */
-	public Utf8Constant getName() throws IOException {
-		return this.classInfo.resolveConstant(this.nameIndex, Utf8Constant.class);
+		this.annotations = Collections.unmodifiableList(annotations);
 	}
 
 	@Override
-	public String toString() {
-		return "#" + this.nameIndex;
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
+		for (TypeAnnotation annotation : this.annotations) {
+			annotation.print(out, context);
+		}
 	}
 
 }

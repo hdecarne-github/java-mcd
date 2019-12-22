@@ -20,7 +20,7 @@ import java.util.List;
 
 import de.carne.mcd.jvm.ClassInfo;
 
-class RuntimeInvisibleAnnotationsAttribute extends AbstractRuntimeAnnotationsAttribute {
+class RuntimeInvisibleAnnotationsAttribute extends RuntimeAnnotationsAttribute {
 
 	public static final String NAME = "RuntimeInvisibleAnnotations";
 

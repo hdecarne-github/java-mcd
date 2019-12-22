@@ -23,7 +23,7 @@ import de.carne.mcd.jvm.ClassInfo;
 import de.carne.mcd.jvm.ClassName;
 import de.carne.mcd.jvm.ClassPrinter;
 
-class ClassConstant extends AbstractNameConstant {
+class ClassConstant extends NameConstant {
 
 	public static final byte TAG = 7;
 

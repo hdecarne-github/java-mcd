@@ -149,6 +149,20 @@ public final class MCDDecodeBuffer {
 	}
 
 	/**
+	 * Decodes a byte array from a buffer returned from {@linkplain #decodeI8Array(int)}.
+	 *
+	 * @param buffer the buffer to decode.
+	 * @return the decoded byte array.
+	 */
+	public static byte[] toI8Array(ByteBuffer buffer) {
+		int length = buffer.remaining();
+		byte[] array = new byte[length];
+
+		buffer.get(array);
+		return array;
+	}
+
+	/**
 	 * Decodes the given magic byte.
 	 *
 	 * @param expectedMagic the expected magic byte.
@@ -189,6 +203,22 @@ public final class MCDDecodeBuffer {
 		readBlocking();
 		this.decodeBuffer.flip();
 		return this.decodeBuffer.asReadOnlyBuffer();
+	}
+
+	/**
+	 * Decodes a short array from a buffer returned from {@linkplain #decodeI16Array(int)}.
+	 *
+	 * @param buffer the buffer to decode.
+	 * @return the decoded byte array.
+	 */
+	public static short[] toI16Array(ByteBuffer buffer) {
+		int length = buffer.remaining() / Short.BYTES;
+		short[] array = new short[length];
+
+		for (int index = 0; index < length; index++) {
+			array[index] = buffer.getShort();
+		}
+		return array;
 	}
 
 	/**

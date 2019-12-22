@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import org.eclipse.jdt.annotation.Nullable;
 
-import de.carne.mcd.jvm.decode.AbstractNameConstant;
+import de.carne.mcd.jvm.decode.NameConstant;
 
 /**
  * A class name.
@@ -105,7 +105,7 @@ public class ClassName {
 	 * @return the {@linkplain ClassName} instance representing the submitted name constant.
 	 * @throws IOException if the name constant cannot be resolved.
 	 */
-	public static ClassName fromConstant(@Nullable AbstractNameConstant nameConstant) throws IOException {
+	public static ClassName fromConstant(@Nullable NameConstant nameConstant) throws IOException {
 		return fromInternalName(nameConstant != null ? nameConstant.getNameValue() : Object.class.getName());
 	}
 
