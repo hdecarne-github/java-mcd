@@ -19,12 +19,17 @@ package de.carne.mcd.jvm.test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.net.JarURLConnection;
+import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.StandardOpenOption;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -36,6 +41,7 @@ import de.carne.io.IOUtil;
 import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.PlainMCDOutput;
 import de.carne.mcd.jvm.ClassFileDecoder;
+import de.carne.util.Debug;
 
 /**
  * Test {@linkplain ClassFileDecoder} class.
@@ -43,6 +49,16 @@ import de.carne.mcd.jvm.ClassFileDecoder;
 class ClassFileDecoderTest {
 
 	private static final Log LOG = new Log();
+
+	@Test
+	void testDecodeRtJar() throws IOException {
+		testDecodeAll(Object.class);
+	}
+
+	@Test
+	void testJavaDefaultJar() throws IOException {
+		testDecodeAll(Debug.class);
+	}
 
 	@Test
 	void testDecodeObject() throws IOException {
@@ -94,11 +110,49 @@ class ClassFileDecoderTest {
 		testDecode(Closeables.class);
 	}
 
+	private String getClassResourceName(Class<?> clazz) {
+		return "/" + clazz.getName().replace('.', '/') + ".class";
+	}
+
+	private void testDecodeAll(Class<?> clazz) throws IOException {
+		URL clazzUrl = getClass().getResource(getClassResourceName(clazz));
+
+		Assertions.assertEquals("jar", clazzUrl.getProtocol());
+
+		StringWriter decodeBuffer = new StringWriter();
+
+		try (JarFile jarFile = ((JarURLConnection) clazzUrl.openConnection()).getJarFile()) {
+			ClassFileDecoder decoder = new ClassFileDecoder();
+			Enumeration<JarEntry> jarEntries = jarFile.entries();
+
+			while (jarEntries.hasMoreElements()) {
+				JarEntry jarEntry = jarEntries.nextElement();
+				String jarEntryName = jarEntry.getName();
+
+				if (jarEntryName.endsWith(".class")) {
+					LOG.info("Decode class {0}...", jarEntryName);
+
+					try (InputStream jarEntryStream = jarFile.getInputStream(jarEntry);
+							ReadableByteChannel jarEntryChannel = Channels.newChannel(jarEntryStream);
+							PlainMCDOutput out = new PlainMCDOutput(decodeBuffer, false)) {
+						decoder.decode(jarEntryChannel, out);
+					}
+				}
+			}
+		} catch (IOException e) {
+			LOG.error(e, "Decode failure; decode ouput so far:");
+
+			throw e;
+		}
+	}
+
 	private void testDecode(Class<?> clazz) throws IOException {
-		testDecode("/" + clazz.getName().replace('.', '/') + ".class");
+		testDecode(getClassResourceName(clazz));
 	}
 
 	private void testDecode(String resource) throws IOException {
+		LOG.info("Decode class {0}...", resource);
+
 		ClassFileDecoder decoder = new ClassFileDecoder();
 		StringWriter decodeBuffer = new StringWriter();
 

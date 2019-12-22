@@ -619,7 +619,7 @@ public class DecodedClassInfo implements ClassInfo {
 	}
 
 	private TypeAnnotationPath decodeTypeAnnotationPath(MCDDecodeBuffer buffer) throws IOException {
-		int pathLength = Byte.toUnsignedInt(buffer.decodeI8());
+		int pathLength = Byte.toUnsignedInt(buffer.decodeI8()) * 2;
 		byte[] path = MCDDecodeBuffer.toI8Array(buffer.decodeI8Array(pathLength));
 
 		return new TypeAnnotationPath(path);
