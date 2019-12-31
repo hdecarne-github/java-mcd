@@ -23,12 +23,14 @@ import java.nio.ByteOrder;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.SeekableByteChannel;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 import de.carne.boot.check.Check;
 import de.carne.boot.logging.Log;
 import de.carne.io.Defaults;
 
 /**
- * Helper class providing the low level decoding functions for byte channel access.
+ * Helper class providing the low level read and decoding functions for byte channel access.
  */
 public final class MCDDecodeBuffer {
 
@@ -36,8 +38,9 @@ public final class MCDDecodeBuffer {
 
 	private static final String MESSAGE_UNEXPECTED_MAGIC_VALUE = "Unexpected magic value: ";
 
-	private ReadableByteChannel in;
+	private final ReadableByteChannel in;
 	private ByteBuffer decodeBuffer;
+	private @Nullable ByteBuffer rereadBuffer = null;
 
 	/**
 	 * Constructs a new {@linkplain MCDDecodeBuffer} instance.
@@ -78,7 +81,7 @@ public final class MCDDecodeBuffer {
 			ByteBuffer buffer = ByteBuffer.allocate((int) Math.min(length, Defaults.MAX_BUFFER_SIZE))
 					.order(this.decodeBuffer.order());
 
-			readBlocking(buffer);
+			readFully(buffer);
 			buffer.flip();
 
 			long remaining = length - buffer.remaining();
@@ -113,10 +116,43 @@ public final class MCDDecodeBuffer {
 				int readLimit = (int) Math.min(remaining, Defaults.DEFAULT_BUFFER_SIZE);
 
 				this.decodeBuffer.clear().limit(readLimit);
-				readBlocking();
+				readFully();
 				remaining -= readLimit;
 			}
 		}
+	}
+
+	/**
+	 * Reads a single byte value.
+	 * <p>
+	 * In contrast to the decode functions this function handles EOF gracefully by returning {@code -1}.
+	 * </p>
+	 *
+	 * @return the read byte value or {@code -1} if EOF has been reached.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public int read() throws IOException {
+		ensureDecodeBufferCapacity(Byte.BYTES);
+		this.decodeBuffer.clear().limit(Byte.BYTES);
+
+		int read = readAny();
+
+		this.decodeBuffer.flip();
+		return (read > 0 ? Byte.toUnsignedInt(this.decodeBuffer.get()) : -1);
+	}
+
+	/**
+	 * Pushes the given bytes back to the buffer to be re-read on following read or decode calls.
+	 * <p>
+	 * The submitted byte array is used directly without copying it.
+	 * </p>
+	 * 
+	 * @param bytes the bytes to re-read.
+	 * @param offset the offset of the first byte to re-read.
+	 * @param length the number of bytes to re-read.
+	 */
+	public void reread(byte[] bytes, int offset, int length) {
+		this.rereadBuffer = ByteBuffer.wrap(bytes, offset, length).order(this.decodeBuffer.order());
 	}
 
 	/**
@@ -126,9 +162,9 @@ public final class MCDDecodeBuffer {
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public byte decodeI8() throws IOException {
-		ensureDecodeBufferCapacity(Byte.SIZE >> 3);
-		this.decodeBuffer.clear().limit(Byte.SIZE >> 3);
-		readBlocking();
+		ensureDecodeBufferCapacity(Byte.BYTES);
+		this.decodeBuffer.clear().limit(Byte.BYTES);
+		readFully();
 		this.decodeBuffer.flip();
 		return this.decodeBuffer.get();
 	}
@@ -141,9 +177,9 @@ public final class MCDDecodeBuffer {
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public ByteBuffer decodeI8Array(int length) throws IOException {
-		ensureDecodeBufferCapacity(length * (Byte.SIZE >> 3));
-		this.decodeBuffer.clear().limit(length * (Byte.SIZE >> 3));
-		readBlocking();
+		ensureDecodeBufferCapacity(length * (Byte.BYTES));
+		this.decodeBuffer.clear().limit(length * (Byte.BYTES));
+		readFully();
 		this.decodeBuffer.flip();
 		return this.decodeBuffer.asReadOnlyBuffer();
 	}
@@ -183,9 +219,9 @@ public final class MCDDecodeBuffer {
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public short decodeI16() throws IOException {
-		ensureDecodeBufferCapacity(Short.SIZE >> 3);
-		this.decodeBuffer.clear().limit(Short.SIZE >> 3);
-		readBlocking();
+		ensureDecodeBufferCapacity(Short.BYTES);
+		this.decodeBuffer.clear().limit(Short.BYTES);
+		readFully();
 		this.decodeBuffer.flip();
 		return this.decodeBuffer.getShort();
 	}
@@ -198,9 +234,9 @@ public final class MCDDecodeBuffer {
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public ByteBuffer decodeI16Array(int length) throws IOException {
-		ensureDecodeBufferCapacity(length * (Short.SIZE >> 3));
-		this.decodeBuffer.clear().limit(length * (Short.SIZE >> 3));
-		readBlocking();
+		ensureDecodeBufferCapacity(length * (Short.BYTES));
+		this.decodeBuffer.clear().limit(length * (Short.BYTES));
+		readFully();
 		this.decodeBuffer.flip();
 		return this.decodeBuffer.asReadOnlyBuffer();
 	}
@@ -242,9 +278,9 @@ public final class MCDDecodeBuffer {
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public int decodeI32() throws IOException {
-		ensureDecodeBufferCapacity(Integer.SIZE >> 3);
-		this.decodeBuffer.clear().limit(Integer.SIZE >> 3);
-		readBlocking();
+		ensureDecodeBufferCapacity(Integer.BYTES);
+		this.decodeBuffer.clear().limit(Integer.BYTES);
+		readFully();
 		this.decodeBuffer.flip();
 		return this.decodeBuffer.getInt();
 	}
@@ -257,9 +293,9 @@ public final class MCDDecodeBuffer {
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public ByteBuffer decodeI32Array(int length) throws IOException {
-		ensureDecodeBufferCapacity(length * (Integer.SIZE >> 3));
-		this.decodeBuffer.clear().limit(length * (Integer.SIZE >> 3));
-		readBlocking();
+		ensureDecodeBufferCapacity(length * (Integer.BYTES));
+		this.decodeBuffer.clear().limit(length * (Integer.BYTES));
+		readFully();
 		this.decodeBuffer.flip();
 		return this.decodeBuffer.asReadOnlyBuffer();
 	}
@@ -285,9 +321,9 @@ public final class MCDDecodeBuffer {
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public long decodeI64() throws IOException {
-		ensureDecodeBufferCapacity(Long.SIZE >> 3);
-		this.decodeBuffer.clear().limit(Long.SIZE >> 3);
-		readBlocking();
+		ensureDecodeBufferCapacity(Long.BYTES);
+		this.decodeBuffer.clear().limit(Long.BYTES);
+		readFully();
 		this.decodeBuffer.flip();
 		return this.decodeBuffer.getLong();
 	}
@@ -300,9 +336,9 @@ public final class MCDDecodeBuffer {
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public ByteBuffer decodeI64Array(int length) throws IOException {
-		ensureDecodeBufferCapacity(length * (Long.SIZE >> 3));
-		this.decodeBuffer.clear().limit(length * (Long.SIZE >> 3));
-		readBlocking();
+		ensureDecodeBufferCapacity(length * (Long.BYTES));
+		this.decodeBuffer.clear().limit(length * (Long.BYTES));
+		readFully();
 		this.decodeBuffer.flip();
 		return this.decodeBuffer.asReadOnlyBuffer();
 	}
@@ -328,9 +364,9 @@ public final class MCDDecodeBuffer {
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public float decodeF32() throws IOException {
-		ensureDecodeBufferCapacity(Float.SIZE >> 3);
-		this.decodeBuffer.clear().limit(Float.SIZE >> 3);
-		readBlocking();
+		ensureDecodeBufferCapacity(Float.BYTES);
+		this.decodeBuffer.clear().limit(Float.BYTES);
+		readFully();
 		this.decodeBuffer.flip();
 		return this.decodeBuffer.getFloat();
 	}
@@ -342,9 +378,9 @@ public final class MCDDecodeBuffer {
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public double decodeF64() throws IOException {
-		ensureDecodeBufferCapacity(Double.SIZE >> 3);
-		this.decodeBuffer.clear().limit(Double.SIZE >> 3);
-		readBlocking();
+		ensureDecodeBufferCapacity(Double.BYTES);
+		this.decodeBuffer.clear().limit(Double.BYTES);
+		readFully();
 		this.decodeBuffer.flip();
 		return this.decodeBuffer.getDouble();
 	}
@@ -355,18 +391,59 @@ public final class MCDDecodeBuffer {
 		}
 	}
 
-	private void readBlocking() throws IOException {
-		readBlocking(this.decodeBuffer);
-	}
+	private int readAny() throws IOException {
+		int totalRead = 0;
+		int read = 0;
 
-	private void readBlocking(ByteBuffer buffer) throws IOException {
-		while (buffer.remaining() > 0) {
-			int read = this.in.read(buffer);
+		while (read >= 0 && this.decodeBuffer.hasRemaining()) {
+			ByteBuffer checkedRereadBuffer = checkRereadBuffer();
 
-			if (read < 0) {
-				throw new EOFException();
+			if (checkedRereadBuffer != null) {
+				this.decodeBuffer.put(checkedRereadBuffer.get());
+				read = 1;
+				totalRead++;
+			} else {
+				read = this.in.read(this.decodeBuffer);
+				if (read > 0) {
+					totalRead += read;
+				}
 			}
 		}
+		return totalRead;
+	}
+
+	private void readFully() throws IOException {
+		readFully(this.decodeBuffer);
+	}
+
+	private void readFully(ByteBuffer buffer) throws IOException {
+		while (buffer.hasRemaining()) {
+			ByteBuffer checkedRereadBuffer = checkRereadBuffer();
+
+			if (checkedRereadBuffer != null) {
+				this.decodeBuffer.put(checkedRereadBuffer.get());
+			} else {
+				int read = this.in.read(buffer);
+
+				if (read < 0) {
+					throw new EOFException();
+				}
+			}
+		}
+	}
+
+	@Nullable
+	private ByteBuffer checkRereadBuffer() {
+		ByteBuffer checkedRereadBuffer = null;
+
+		if (this.rereadBuffer != null) {
+			if (this.rereadBuffer.hasRemaining()) {
+				checkedRereadBuffer = this.rereadBuffer;
+			} else {
+				this.rereadBuffer = null;
+			}
+		}
+		return checkedRereadBuffer;
 	}
 
 }

@@ -158,4 +158,22 @@ public interface MCDOutput extends Closeable, Flushable {
 	 */
 	MCDOutput printlnLabel(String label) throws IOException;
 
+	/**
+	 * Prints an error text.
+	 *
+	 * @param error the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	MCDOutput printError(String error) throws IOException;
+
+	/**
+	 * Prints an error text and a line break.
+	 *
+	 * @param error the text to print.
+	 * @return this instance for chaining.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	MCDOutput printlnError(String error) throws IOException;
+
 }

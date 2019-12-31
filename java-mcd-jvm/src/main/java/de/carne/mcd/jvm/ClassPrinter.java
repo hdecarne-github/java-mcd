@@ -23,17 +23,17 @@ import java.util.Map;
 import java.util.Optional;
 
 import de.carne.mcd.common.MCDOutput;
-import de.carne.mcd.jvm.decode.Attribute;
-import de.carne.mcd.jvm.decode.CodeAttribute;
-import de.carne.mcd.jvm.decode.ConstantValueAttribute;
-import de.carne.mcd.jvm.decode.ExceptionsAttribute;
-import de.carne.mcd.jvm.decode.RuntimeAnnotationsAttribute;
-import de.carne.mcd.jvm.decode.SignatureAttribute;
-import de.carne.mcd.jvm.decode.SourceFileAttribute;
-import de.carne.mcd.jvm.decode.descriptor.Descriptor;
-import de.carne.mcd.jvm.decode.descriptor.FieldDescriptor;
-import de.carne.mcd.jvm.decode.descriptor.FieldTypeDescriptor;
-import de.carne.mcd.jvm.decode.descriptor.MethodDescriptor;
+import de.carne.mcd.jvm.classfile.Attribute;
+import de.carne.mcd.jvm.classfile.CodeAttribute;
+import de.carne.mcd.jvm.classfile.ConstantValueAttribute;
+import de.carne.mcd.jvm.classfile.ExceptionsAttribute;
+import de.carne.mcd.jvm.classfile.RuntimeAnnotationsAttribute;
+import de.carne.mcd.jvm.classfile.SignatureAttribute;
+import de.carne.mcd.jvm.classfile.SourceFileAttribute;
+import de.carne.mcd.jvm.classfile.descriptor.Descriptor;
+import de.carne.mcd.jvm.classfile.descriptor.FieldDescriptor;
+import de.carne.mcd.jvm.classfile.descriptor.FieldTypeDescriptor;
+import de.carne.mcd.jvm.classfile.descriptor.MethodDescriptor;
 import de.carne.mcd.jvm.util.Attributes;
 import de.carne.mcd.jvm.util.ClassUtil;
 import de.carne.mcd.jvm.util.PrintSeparator;
@@ -207,6 +207,15 @@ public abstract class ClassPrinter {
 			classPrinter = new DefaultClassPrinter(out, classInfo);
 		}
 		return classPrinter;
+	}
+
+	/**
+	 * Gets the underlying {@linkplain MCDOutput} instance.
+	 *
+	 * @return the underlying {@linkplain MCDOutput} instance.
+	 */
+	public MCDOutput output() {
+		return this.out;
 	}
 
 	/**
@@ -657,6 +666,9 @@ public abstract class ClassPrinter {
 
 		if (optionalCode.isPresent()) {
 			this.out.println(" {");
+			this.out.increaseIndent();
+			optionalCode.get().print(this, ClassContext.METHOD);
+			this.out.decreaseIndent();
 			this.out.println("}");
 		} else {
 			this.out.println(";");

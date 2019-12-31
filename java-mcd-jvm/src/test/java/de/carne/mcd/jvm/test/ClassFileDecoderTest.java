@@ -31,6 +31,8 @@ import java.util.Objects;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import javax.crypto.Cipher;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
@@ -51,8 +53,8 @@ class ClassFileDecoderTest {
 	private static final Log LOG = new Log();
 
 	@Test
-	void testDecodeRtJar() throws IOException {
-		testDecodeAll(Object.class);
+	void testDecodeJceJar() throws IOException {
+		testDecodeAll(Cipher.class);
 	}
 
 	@Test
@@ -102,7 +104,7 @@ class ClassFileDecoderTest {
 
 	@Test
 	void testDecodePackageClass() throws IOException {
-		testDecode("package-info.class");
+		testDecode("/de/carne/boot/package-info.class");
 	}
 
 	@Test

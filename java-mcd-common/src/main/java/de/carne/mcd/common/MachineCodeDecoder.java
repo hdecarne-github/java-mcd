@@ -27,7 +27,7 @@ import java.nio.channels.WritableByteChannel;
 public abstract class MachineCodeDecoder {
 
 	private final String name;
-	private ByteOrder byteOrder = ByteOrder.nativeOrder();
+	private ByteOrder byteOrder;
 
 	protected MachineCodeDecoder(String name, ByteOrder byteOrder) {
 		this.name = name;

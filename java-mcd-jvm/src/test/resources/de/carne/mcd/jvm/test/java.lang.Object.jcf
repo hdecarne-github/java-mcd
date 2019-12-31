@@ -8,6 +8,23 @@ package java.lang;
 public /* super */ class Object {
     
     public void <init>() {
+        return
+        nop
+        nop
+        nop
+        aconst_null
+        nop
+        iload
+        nop
+        nop
+        nop
+        iconst_3
+        nop
+        aconst_null
+        nop
+        nop
+        nop
+        fload_3
     }
     
     private static native void registerNatives();
@@ -18,12 +35,101 @@ public /* super */ class Object {
     public native int hashCode();
     
     public boolean equals(Object) {
+        aload_0
+        aload_1
+        if_acmpne
+        nop
+        iconst_4
+        iconst_1
+        goto
+        nop
+        iconst_1
+        iconst_0
+        ireturn
+        nop
+        nop
+        nop
+        iconst_m1
+        nop
+        iload
+        nop
+        nop
+        nop
+        iconst_3
+        nop
+        aconst_null
+        nop
+        nop
+        nop
+        fcmpl
+        nop
+        lload_1
+        nop
+        nop
+        nop
+        iconst_2
+        nop
+        iconst_m1
+        lconst_0
+        lstore_1
+        aconst_null
     }
     
     protected native Object clone() throws CloneNotSupportedException;
     
     public String toString() {
-    }
+        new
+        nop
+        aconst_null
+        dup
+        invokespecial
+        nop
+        iconst_m1
+        aload_0
+        invokevirtual
+        nop
+        iconst_0
+        invokevirtual
+        nop
+        iconst_1
+        invokevirtual
+        nop
+        iconst_2
+        ldc
+        iconst_3
+        invokevirtual
+        nop
+        iconst_2
+        aload_0
+        invokevirtual
+        nop
+        iconst_4
+        invokestatic
+        nop
+        iconst_5
+        invokevirtual
+        nop
+        iconst_2
+        invokevirtual
+        nop
+        lconst_0
+        areturn
+        nop
+        nop
+        nop
+        aconst_null
+        nop
+        iload
+        nop
+        nop
+        nop
+        iconst_3
+        nop
+        aconst_null
+        nop
+        nop
+        nop
+        EC 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}
     
     public final native void notify();
     
@@ -32,15 +138,183 @@ public /* super */ class Object {
     public final native void wait(long) throws InterruptedException;
     
     public final void wait(long, int) throws InterruptedException {
+        lload_1
+        lconst_0
+        lcmp
+        ifge
+        nop
+        fconst_2
+        new
+        nop
+        lconst_1
+        dup
+        ldc
+        fconst_0
+        invokespecial
+        nop
+        fconst_1
+        athrow
+        iload_3
+        iflt
+        nop
+        lconst_0
+        iload_3
+        ldc
+        fconst_2
+        if_icmple
+        nop
+        fconst_2
+        new
+        nop
+        lconst_1
+        dup
+        ldc
+        dconst_0
+        invokespecial
+        nop
+        fconst_1
+        athrow
+        iload_3
+        ifle
+        nop
+        iconst_4
+        lload_1
+        lconst_1
+        ladd
+        lstore_1
+        aload_0
+        lload_1
+        invokevirtual
+        nop
+        dconst_1
+        return
+        nop
+        nop
+        nop
+        iconst_m1
+        nop
+        iload
+        nop
+        nop
+        nop
+        fload_0
+        nop
+        iconst_5
+        nop
+        nop
+        aconst_null
+        athrow
+        nop
+        iconst_3
+        aconst_null
+        checkcast
+        nop
+        bipush
+        aconst_null
+        monitorexit
+        nop
+        iload_0
+        aconst_null
+        C4nop
+        fload_2
+        aconst_null
+        goto_w
+        nop
+        dload_2
+        aconst_null
+        jsr_w
+        nop
+        aload_2
+        aconst_null
+        CCnop
+        daload
+        aconst_null
+        CDnop
+        lload_1
+        nop
+        nop
+        nop
+        iconst_3
+        nop
+        iconst_1
+        bipush
+        lconst_0
+        lconst_0
+        iconst_4
     }
     
     public final void wait() throws InterruptedException {
-    }
+        aload_0
+        lconst_0
+        invokevirtual
+        nop
+        dconst_1
+        return
+        nop
+        nop
+        nop
+        aconst_null
+        nop
+        iload
+        nop
+        nop
+        nop
+        lconst_1
+        nop
+        iconst_m1
+        nop
+        nop
+        aconst_null
+        F6nop
+        iconst_2
+        aconst_null
+        F7 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}
     
     protected void finalize() throws Throwable {
+        return
+        nop
+        nop
+        nop
+        aconst_null
+        nop
+        iload
+        nop
+        nop
+        nop
+        iconst_3
+        nop
+        aconst_null
+        nop
+        nop
+        iconst_m1
+        aload_1
     }
     
     static void <clinit>() {
+        invokestatic
+        nop
+        bipush
+        return
+        nop
+        nop
+        nop
+        aconst_null
+        nop
+        iload
+        nop
+        nop
+        nop
+        lconst_1
+        nop
+        iconst_m1
+        nop
+        nop
+        nop
+        dload_3
+        nop
+        iconst_0
+        nop
+        aload_0
     }
 
 }

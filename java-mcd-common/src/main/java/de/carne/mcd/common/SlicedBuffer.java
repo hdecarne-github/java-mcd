@@ -50,7 +50,9 @@ class SlicedBuffer implements SeekableByteChannel {
 		int bufferRemaining = this.buffer.remaining();
 		int read;
 
-		if (bufferRemaining <= dstRemaining) {
+		if (bufferRemaining == 0) {
+			read = -1;
+		} else if (bufferRemaining <= dstRemaining) {
 			dst.put(this.buffer);
 			read = bufferRemaining;
 		} else {

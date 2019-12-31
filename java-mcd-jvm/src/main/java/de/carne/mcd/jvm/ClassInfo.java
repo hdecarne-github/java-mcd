@@ -19,8 +19,8 @@ package de.carne.mcd.jvm;
 import java.io.IOException;
 import java.util.List;
 
-import de.carne.mcd.jvm.decode.Attribute;
-import de.carne.mcd.jvm.decode.Constant;
+import de.carne.mcd.jvm.classfile.Attribute;
+import de.carne.mcd.jvm.classfile.Constant;
 
 /**
  * Class information interface (see <a href="https://docs.oracle.com/javase/specs/jvms/se13/html/jvms-4.html">Class File

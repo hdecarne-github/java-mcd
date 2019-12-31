@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 import de.carne.mcd.jvm.ClassContext;
 import de.carne.mcd.jvm.ClassPrinter;
-import de.carne.mcd.jvm.decode.Attribute;
+import de.carne.mcd.jvm.classfile.Attribute;
 
 /**
  * Utility class providing {@linkplain Attribute} related functions.

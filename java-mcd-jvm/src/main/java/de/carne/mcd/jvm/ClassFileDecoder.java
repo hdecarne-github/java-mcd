@@ -22,14 +22,14 @@ import java.nio.channels.ReadableByteChannel;
 
 import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.MachineCodeDecoder;
-import de.carne.mcd.jvm.decode.DecodedClassInfo;
+import de.carne.mcd.jvm.classfile.DecodedClassInfo;
 
 /**
- * Java Bytecode decoder.
+ * Java class file decoder.
  */
 public class ClassFileDecoder extends MachineCodeDecoder {
 
-	private static final String NAME = "Java Bytecode";
+	private static final String NAME = "Java class file";
 
 	/**
 	 * Constructs a new {@linkplain ClassFileDecoder} instance.

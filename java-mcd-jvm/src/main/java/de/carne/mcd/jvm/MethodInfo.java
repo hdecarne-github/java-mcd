@@ -19,7 +19,7 @@ package de.carne.mcd.jvm;
 import java.io.IOException;
 import java.util.List;
 
-import de.carne.mcd.jvm.decode.Attribute;
+import de.carne.mcd.jvm.classfile.Attribute;
 
 /**
  * Class method information interface (see

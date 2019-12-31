@@ -178,6 +178,16 @@ public class PlainMCDOutput implements MCDOutput {
 		return println(label);
 	}
 
+	@Override
+	public MCDOutput printError(String error) throws IOException {
+		return print(error);
+	}
+
+	@Override
+	public MCDOutput printlnError(String error) throws IOException {
+		return println(error);
+	}
+
 	private void ensureNotClosed() throws IOException {
 		if (this.closed) {
 			throw new ClosedChannelException();
