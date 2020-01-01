@@ -27,6 +27,7 @@ import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.MachineCodeDecoder;
 import de.carne.mcd.jvm.bytecode.BytecodeInstructionIndex;
+import de.carne.text.HexFormatter;
 import de.carne.util.Late;
 
 /**
@@ -38,24 +39,35 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 
 	private static final Late<InstructionIndex> BYTECODE_INSTRUCTION_INDEX_HOLDER = new Late<>();
 
+	private static final HexFormatter PC_FORMATTER = new HexFormatter(false);
+
+	private final ClassInfo classInfo;
+
 	/**
 	 * Constructs a new {@linkplain BytecodeDecoder} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} of the surrounding class.
 	 */
-	public BytecodeDecoder() {
+	public BytecodeDecoder(ClassInfo classInfo) {
 		super(NAME, ByteOrder.BIG_ENDIAN);
+		this.classInfo = classInfo;
 	}
 
 	@Override
 	public void decode(ReadableByteChannel in, MCDOutput out) throws IOException {
 		MCDDecodeBuffer buffer = newDecodeBuffer(in);
 
-		buffer.skip(4);
+		out.printComment("// max_stack: ").printlnComment(Integer.toString(Short.toUnsignedInt(buffer.decodeI16())));
+		out.printComment("// max_locals: ").printlnComment(Integer.toString(Short.toUnsignedInt(buffer.decodeI16())));
 
 		long codeLength = Integer.toUnsignedLong(buffer.decodeI32());
+		MCDDecodeBuffer codeBuffer = newDecodeBuffer(buffer.slice(codeLength));
 		InstructionIndex instructionIndex = getBytecodeInstructionIndex();
 		Instruction instruction;
+		long instructionPc = 0;
 
-		while ((instruction = instructionIndex.lookupNextInstruction(buffer)) != null) {
+		while ((instruction = instructionIndex.lookupNextInstruction(codeBuffer)) != null) {
+			out.printLabel(PC_FORMATTER.format((short) instructionPc)).printLabel(":").print(" ");
 			instruction.decode(buffer, out);
 		}
 	}

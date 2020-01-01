@@ -41,6 +41,7 @@ public final class MCDDecodeBuffer {
 	private final ReadableByteChannel in;
 	private ByteBuffer decodeBuffer;
 	private @Nullable ByteBuffer rereadBuffer = null;
+	private long totalRead = 0;
 
 	/**
 	 * Constructs a new {@linkplain MCDDecodeBuffer} instance.
@@ -51,6 +52,15 @@ public final class MCDDecodeBuffer {
 	public MCDDecodeBuffer(ReadableByteChannel in, ByteOrder byteOrder) {
 		this.in = in;
 		this.decodeBuffer = ByteBuffer.allocate(Defaults.DEFAULT_BUFFER_SIZE).order(byteOrder);
+	}
+
+	/**
+	 * Gets the total number of bytes ready via this {@linkplain MCDDecodeBuffer} instance.
+	 * 
+	 * @return the total number of bytes ready via this {@linkplain MCDDecodeBuffer} instance.
+	 */
+	public long getTotalRead() {
+		return this.totalRead;
 	}
 
 	/**
@@ -93,6 +103,7 @@ public final class MCDDecodeBuffer {
 			}
 			slice = new SlicedBuffer(buffer);
 		}
+		this.totalRead += length;
 		return slice;
 	}
 
@@ -120,6 +131,7 @@ public final class MCDDecodeBuffer {
 				remaining -= readLimit;
 			}
 		}
+		this.totalRead += length;
 	}
 
 	/**
@@ -146,13 +158,14 @@ public final class MCDDecodeBuffer {
 	 * <p>
 	 * The submitted byte array is used directly without copying it.
 	 * </p>
-	 * 
+	 *
 	 * @param bytes the bytes to re-read.
 	 * @param offset the offset of the first byte to re-read.
 	 * @param length the number of bytes to re-read.
 	 */
 	public void reread(byte[] bytes, int offset, int length) {
 		this.rereadBuffer = ByteBuffer.wrap(bytes, offset, length).order(this.decodeBuffer.order());
+		this.totalRead -= length;
 	}
 
 	/**
@@ -392,24 +405,25 @@ public final class MCDDecodeBuffer {
 	}
 
 	private int readAny() throws IOException {
-		int totalRead = 0;
 		int read = 0;
+		int lastRead = 0;
 
-		while (read >= 0 && this.decodeBuffer.hasRemaining()) {
+		while (lastRead >= 0 && this.decodeBuffer.hasRemaining()) {
 			ByteBuffer checkedRereadBuffer = checkRereadBuffer();
 
 			if (checkedRereadBuffer != null) {
 				this.decodeBuffer.put(checkedRereadBuffer.get());
-				read = 1;
-				totalRead++;
+				lastRead = 1;
+				read++;
 			} else {
-				read = this.in.read(this.decodeBuffer);
-				if (read > 0) {
-					totalRead += read;
+				lastRead = this.in.read(this.decodeBuffer);
+				if (lastRead > 0) {
+					read += lastRead;
 				}
 			}
 		}
-		return totalRead;
+		this.totalRead += read;
+		return read;
 	}
 
 	private void readFully() throws IOException {
@@ -422,12 +436,14 @@ public final class MCDDecodeBuffer {
 
 			if (checkedRereadBuffer != null) {
 				this.decodeBuffer.put(checkedRereadBuffer.get());
+				this.totalRead++;
 			} else {
 				int read = this.in.read(buffer);
 
 				if (read < 0) {
 					throw new EOFException();
 				}
+				this.totalRead += read;
 			}
 		}
 	}

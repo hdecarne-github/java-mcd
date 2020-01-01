@@ -43,7 +43,7 @@ public class CodeAttribute extends Attribute {
 
 	@Override
 	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		BytecodeDecoder decoder = new BytecodeDecoder();
+		BytecodeDecoder decoder = new BytecodeDecoder(this.classInfo);
 
 		decoder.decode(this.code, out.output());
 	}

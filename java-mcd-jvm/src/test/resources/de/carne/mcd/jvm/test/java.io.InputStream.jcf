@@ -10,588 +10,257 @@ public abstract /* super */ class InputStream implements Closeable {
     private static final int MAX_SKIP_BUFFER_SIZE = 2048;
     
     public void <init>() {
-        aload_0
-        invokespecial
-        nop
-        aconst_null
-        return
-        nop
-        nop
-        nop
-        aconst_null
-        nop
-        dload
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        nop
-        aload_3
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0000: invokespecial
+        0000: nop
+        0000: aconst_null
+        0000: return
     }
     
     public abstract int read() throws IOException;
     
     public int read(byte[]) throws IOException {
-        aload_0
-        aload_1
-        iconst_0
-        aload_1
-        arraylength
-        invokevirtual
-        nop
-        iconst_m1
-        ireturn
-        nop
-        nop
-        nop
-        aconst_null
-        nop
-        dload
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        nop
-        lsub
+        // max_stack: 4
+        // max_locals: 2
+        0000: aload_0
+        0000: aload_1
+        0000: iconst_0
+        0000: aload_1
+        0000: arraylength
+        0000: invokevirtual
+        0000: nop
+        0000: iconst_m1
+        0000: ireturn
     }
     
     public int read(byte[], int, int) throws IOException {
-        aload_1
-        ifnonnull
-        nop
-        fconst_0
-        new
-        nop
-        iconst_0
-        dup
-        invokespecial
-        nop
-        iconst_1
-        athrow
-        iload_2
-        iflt
-        nop
-        dconst_1
-        iload_3
-        iflt
-        nop
-        fconst_0
-        iload_3
-        aload_1
-        arraylength
-        iload_2
-        isub
-        if_icmple
-        nop
-        fconst_0
-        new
-        nop
-        iconst_2
-        dup
-        invokespecial
-        nop
-        iconst_3
-        athrow
-        iload_3
-        ifne
-        nop
-        iconst_2
-        iconst_0
-        ireturn
-        aload_0
-        invokevirtual
-        nop
-        iconst_4
-        istore
-        iconst_1
-        iload
-        iconst_1
-        iconst_m1
-        if_icmpne
-        nop
-        iconst_2
-        iconst_m1
-        ireturn
-        aload_1
-        iload_2
-        iload
-        iconst_1
-        i2b
-        bastore
-        iconst_1
-        istore
-        iconst_2
-        iload
-        iconst_2
-        iload_3
-        if_icmpge
-        nop
-        lload_3
-        aload_0
-        invokevirtual
-        nop
-        iconst_4
-        istore
-        iconst_1
-        iload
-        iconst_1
-        iconst_m1
-        if_icmpne
-        nop
-        iconst_3
-        goto
-        nop
-        ldc
-        aload_1
-        iload_2
-        iload
-        iconst_2
-        iadd
-        iload
-        iconst_1
-        i2b
-        bastore
-        iinc
-        iconst_2
-        aconst_null
-        goto
-        FF DF
-        goto
-        nop
-        iconst_2
-        astore
-        iconst_3
-        iload
-        iconst_2
-        ireturn
-        nop
-        aconst_null
-        nop
-        lstore_2
-        nop
-        lsub
-        nop
-        imul
-        nop
-        iconst_5
-        nop
-        iconst_m1
-        nop
-        dload
-        nop
-        nop
-        nop
-        dastore
-        nop
-        ldc2_w
-        nop
-        nop
-        nop
-        if_icmpge
-        nop
-        iconst_1
-        nop
-        if_icmpgt
-        nop
-        fconst_1
-        nop
-        if_icmple
-        nop
-        iload_2
-        nop
-        if_acmpeq
-        nop
-        fload_2
-        nop
-        if_acmpne
-        nop
-        dload_2
-        nop
-        goto
-        nop
-        aload_0
-        nop
-        tableswitch
-        nop
-        faload
-        nop
-        lookupswitch
-        nop
-        istore
-        nop
-        ireturn
-        nop
-        fstore
-        nop
-        freturn
-        nop
-        istore_3
-        nop
-        areturn
-        nop
-        lstore_2
-        nop
-        getstatic
-        nop
-        dstore_0
-        nop
-        putstatic
-        nop
-        astore_2
-        nop
-        getfield
-        nop
-        aastore
-        nop
-        putfield
-        nop
-        sastore
-        nop
-        invokespecial
-        nop
-        swap
-        nop
-        getstatic
-        nop
-        lsub
-        nop
-        invokedynamic
-        nop
-        imul
-        nop
-        invokeinterface
-        nop
-        fmul
-        nop
-        new
-        nop
-        lload_0
-        nop
-        nop
-        nop
-        iload
-        nop
-        lconst_1
-        fconst_1
-        dconst_1
-        iconst_4
-        iconst_2
-        FC
-        nop
-        fconst_2
-        aconst_null
-        FC
-        nop
-        iconst_5
-        aconst_null
-        ldc2_w
-        dconst_0
-        lstore_3
-        iconst_4
-        nop
-        lload_1
-        aconst_null
+        // max_stack: 3
+        // max_locals: 7
+        0000: aload_1
+        0000: ifnonnull
+        0000: nop
+        0000: fconst_0
+        0000: new
+        0000: nop
+        0000: iconst_0
+        0000: dup
+        0000: invokespecial
+        0000: nop
+        0000: iconst_1
+        0000: athrow
+        0000: iload_2
+        0000: iflt
+        0000: nop
+        0000: dconst_1
+        0000: iload_3
+        0000: iflt
+        0000: nop
+        0000: fconst_0
+        0000: iload_3
+        0000: aload_1
+        0000: arraylength
+        0000: iload_2
+        0000: isub
+        0000: if_icmple
+        0000: nop
+        0000: fconst_0
+        0000: new
+        0000: nop
+        0000: iconst_2
+        0000: dup
+        0000: invokespecial
+        0000: nop
+        0000: iconst_3
+        0000: athrow
+        0000: iload_3
+        0000: ifne
+        0000: nop
+        0000: iconst_2
+        0000: iconst_0
+        0000: ireturn
+        0000: aload_0
+        0000: invokevirtual
+        0000: nop
+        0000: iconst_4
+        0000: istore
+        0000: iconst_1
+        0000: iload
+        0000: iconst_1
+        0000: iconst_m1
+        0000: if_icmpne
+        0000: nop
+        0000: iconst_2
+        0000: iconst_m1
+        0000: ireturn
+        0000: aload_1
+        0000: iload_2
+        0000: iload
+        0000: iconst_1
+        0000: i2b
+        0000: bastore
+        0000: iconst_1
+        0000: istore
+        0000: iconst_2
+        0000: iload
+        0000: iconst_2
+        0000: iload_3
+        0000: if_icmpge
+        0000: nop
+        0000: lload_3
+        0000: aload_0
+        0000: invokevirtual
+        0000: nop
+        0000: iconst_4
+        0000: istore
+        0000: iconst_1
+        0000: iload
+        0000: iconst_1
+        0000: iconst_m1
+        0000: if_icmpne
+        0000: nop
+        0000: iconst_3
+        0000: goto
+        0000: nop
+        0000: ldc
+        0000: aload_1
+        0000: iload_2
+        0000: iload
+        0000: iconst_2
+        0000: iadd
+        0000: iload
+        0000: iconst_1
+        0000: i2b
+        0000: bastore
+        0000: iinc
+        0000: iconst_2
+        0000: aconst_null
+        0000: goto
+        0000: FF DF
+        0000: goto
+        0000: nop
+        0000: iconst_2
+        0000: astore
+        0000: iconst_3
+        0000: iload
+        0000: iconst_2
+        0000: ireturn
     }
     
     public long skip(long) throws IOException {
-        lload_1
-        lstore_3
-        lload_1
-        lconst_0
-        lcmp
-        ifgt
-        nop
-        iconst_2
-        lconst_0
-        lreturn
-        ldc2_w
-        nop
-        lconst_1
-        lload_3
-        invokestatic
-        nop
-        fconst_1
-        l2i
-        istore
-        iconst_3
-        iload
-        iconst_3
-        newarray
-        iconst_5
-        astore
-        iconst_4
-        lload_3
-        lconst_0
-        lcmp
-        ifle
-        nop
-        fload_3
-        aload_0
-        aload
-        iconst_4
-        iconst_0
-        iload
-        iconst_3
-        i2l
-        lload_3
-        invokestatic
-        nop
-        fconst_1
-        l2i
-        invokevirtual
-        nop
-        iconst_m1
-        istore
-        iconst_2
-        iload
-        iconst_2
-        ifge
-        nop
-        iconst_3
-        goto
-        nop
-        fconst_1
-        lload_3
-        iload
-        iconst_2
-        i2l
-        lsub
-        lstore_3
-        goto
-        FF DB
-        lload_1
-        lload_3
-        lsub
-        lreturn
-        nop
-        nop
-        nop
-        iconst_m1
-        nop
-        dload
-        nop
-        nop
-        nop
-        iaload
-        nop
-        fconst_0
-        nop
-        nop
-        nop
-        D6
-        nop
-        iconst_m1
-        nop
-        D9
-        nop
-        iconst_5
-        nop
-        DA
-        nop
-        lconst_1
-        nop
-        DD
-        nop
-        ldc2_w
-        nop
-        DE
-        nop
-        iload_0
-        nop
-        DF
-        nop
-        lload_2
-        nop
-        E0
-        nop
-        daload
-        nop
-        E1
-        nop
-        istore
-        nop
-        E2
-        nop
-        dstore
-        nop
-        E4
-        nop
-        lstore_3
-        nop
-        E7
-        nop
-        lload_0
-        nop
-        nop
-        nop
-        faload
-        nop
-        iconst_1
-        FC
-        nop
-        lconst_1
-        iconst_1
-        FE
-        nop
-        dconst_1
-        nop
-        aconst_null
-        iconst_4
-        nop
-        fload_0
-        FF
-        nop
-        lload_0
-        nop
-        iconst_3
-        iconst_4
-        nop
-        fload_1
-        iconst_1
-        iconst_1
-        aconst_null
-        aconst_null
-        iconst_4
-        nop
-        fload_0
-        nop
-        nop
-        FF
-        nop
-        iconst_5
-        nop
-        iconst_3
-        iconst_4
-        nop
-        fload_1
-        iconst_1
-        iconst_1
-        nop
-        aconst_null
-        iconst_4
-        nop
-        fload_0
-        nop
-        nop
+        // max_stack: 7
+        // max_locals: 8
+        0000: lload_1
+        0000: lstore_3
+        0000: lload_1
+        0000: lconst_0
+        0000: lcmp
+        0000: ifgt
+        0000: nop
+        0000: iconst_2
+        0000: lconst_0
+        0000: lreturn
+        0000: ldc2_w
+        0000: nop
+        0000: lconst_1
+        0000: lload_3
+        0000: invokestatic
+        0000: nop
+        0000: fconst_1
+        0000: l2i
+        0000: istore
+        0000: iconst_3
+        0000: iload
+        0000: iconst_3
+        0000: newarray
+        0000: iconst_5
+        0000: astore
+        0000: iconst_4
+        0000: lload_3
+        0000: lconst_0
+        0000: lcmp
+        0000: ifle
+        0000: nop
+        0000: fload_3
+        0000: aload_0
+        0000: aload
+        0000: iconst_4
+        0000: iconst_0
+        0000: iload
+        0000: iconst_3
+        0000: i2l
+        0000: lload_3
+        0000: invokestatic
+        0000: nop
+        0000: fconst_1
+        0000: l2i
+        0000: invokevirtual
+        0000: nop
+        0000: iconst_m1
+        0000: istore
+        0000: iconst_2
+        0000: iload
+        0000: iconst_2
+        0000: ifge
+        0000: nop
+        0000: iconst_3
+        0000: goto
+        0000: nop
+        0000: fconst_1
+        0000: lload_3
+        0000: iload
+        0000: iconst_2
+        0000: i2l
+        0000: lsub
+        0000: lstore_3
+        0000: goto
+        0000: FF DB
+        0000: lload_1
+        0000: lload_3
+        0000: lsub
+        0000: lreturn
     }
     
     public int available() throws IOException {
-        iconst_0
-        ireturn
-        nop
-        nop
-        nop
-        aconst_null
-        nop
-        dload
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        aconst_null
-        iconst_2
+        // max_stack: 1
+        // max_locals: 1
+        0000: iconst_0
+        0000: ireturn
     }
     
     public void close() throws IOException {
-        return
-        nop
-        nop
-        nop
-        aconst_null
-        nop
-        dload
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        aconst_null
-        sipush
+        // max_stack: 0
+        // max_locals: 1
+        0000: return
     }
     
     public synchronized void mark(int) {
-        return
-        nop
-        nop
-        nop
-        aconst_null
-        nop
-        dload
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        aconst_null
-        aload_3
+        // max_stack: 0
+        // max_locals: 2
+        0000: return
     }
     
     public synchronized void reset() throws IOException {
-        new
-        nop
-        iconst_5
-        dup
-        ldc
-        fconst_2
-        invokespecial
-        nop
-        dconst_0
-        athrow
-        nop
-        nop
-        nop
-        aconst_null
-        nop
-        dload
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        aconst_null
-        dup2
+        // max_stack: 3
+        // max_locals: 1
+        0000: new
+        0000: nop
+        0000: iconst_5
+        0000: dup
+        0000: ldc
+        0000: fconst_2
+        0000: invokespecial
+        0000: nop
+        0000: dconst_0
+        0000: athrow
     }
     
     public boolean markSupported() {
-        iconst_0
-        ireturn
-        nop
-        nop
-        nop
-        aconst_null
-        nop
-        dload
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        aconst_null
-        idiv
+        // max_stack: 1
+        // max_locals: 1
+        0000: iconst_0
+        0000: ireturn
     }
 
 }

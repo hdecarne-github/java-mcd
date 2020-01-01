@@ -13,941 +13,449 @@ public final /* super */ class Optional {
     private final Object value;
     
     private void <init>() {
-        aload_0
-        invokespecial
-        nop
-        aconst_null
-        aload_0
-        aconst_null
-        putfield
-        nop
-        iconst_m1
-        return
-        nop
-        nop
-        nop
-        aconst_null
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        dconst_0
-        nop
-        iconst_0
-        nop
-        nop
-        nop
-        fstore_0
-        nop
-        iconst_1
-        nop
-        fstore_1
-        nop
-        lconst_0
-        nop
-        fstore_2
+        // max_stack: 2
+        // max_locals: 1
+        0000: aload_0
+        0000: invokespecial
+        0000: nop
+        0000: aconst_null
+        0000: aload_0
+        0000: aconst_null
+        0000: putfield
+        0000: nop
+        0000: iconst_m1
+        0000: return
     }
     
     // Signature: <T:Ljava/lang/Object;>()Ljava/util/Optional<TT;>;
     public static Optional empty() {
-        getstatic
-        nop
-        iconst_0
-        astore_0
-        aload_0
-        areturn
-        nop
-        nop
-        nop
-        aconst_null
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        lconst_1
-        nop
-        iconst_m1
-        nop
-        nop
-        nop
-        castore
-        nop
-        iconst_1
-        nop
-        sastore
+        // max_stack: 1
+        // max_locals: 1
+        0000: getstatic
+        0000: nop
+        0000: iconst_0
+        0000: astore_0
+        0000: aload_0
+        0000: areturn
     }
     
     // Signature: (TT;)V
     private void <init>(Object) {
-        aload_0
-        invokespecial
-        nop
-        aconst_null
-        aload_0
-        aload_1
-        invokestatic
-        nop
-        iconst_1
-        putfield
-        nop
-        iconst_m1
-        return
-        nop
-        nop
-        nop
-        aconst_null
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        dconst_0
-        nop
-        iconst_0
-        nop
-        nop
-        nop
-        swap
-        nop
-        iconst_1
-        nop
-        iadd
-        nop
-        fconst_1
-        nop
-        ladd
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0000: invokespecial
+        0000: nop
+        0000: aconst_null
+        0000: aload_0
+        0000: aload_1
+        0000: invokestatic
+        0000: nop
+        0000: iconst_1
+        0000: putfield
+        0000: nop
+        0000: iconst_m1
+        0000: return
     }
     
     // Signature: <T:Ljava/lang/Object;>(TT;)Ljava/util/Optional<TT;>;
     public static Optional of(Object) {
-        new
-        nop
-        iconst_2
-        dup
-        aload_0
-        invokespecial
-        nop
-        iconst_3
-        areturn
-        nop
-        nop
-        nop
-        aconst_null
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        nop
-        idiv
+        // max_stack: 3
+        // max_locals: 1
+        0000: new
+        0000: nop
+        0000: iconst_2
+        0000: dup
+        0000: aload_0
+        0000: invokespecial
+        0000: nop
+        0000: iconst_3
+        0000: areturn
     }
     
     // Signature: <T:Ljava/lang/Object;>(TT;)Ljava/util/Optional<TT;>;
     public static Optional ofNullable(Object) {
-        aload_0
-        ifnonnull
-        nop
-        lconst_0
-        invokestatic
-        nop
-        iconst_4
-        goto
-        nop
-        iconst_4
-        aload_0
-        invokestatic
-        nop
-        iconst_5
-        areturn
-        nop
-        nop
-        nop
-        iconst_m1
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        nop
-        lshl
-        nop
-        iaload
-        nop
-        nop
-        nop
-        iconst_4
-        nop
-        iconst_m1
-        lconst_1
-        fstore_0
-        iconst_4
-        nop
-        laload
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0000: ifnonnull
+        0000: nop
+        0000: lconst_0
+        0000: invokestatic
+        0000: nop
+        0000: iconst_4
+        0000: goto
+        0000: nop
+        0000: iconst_4
+        0000: aload_0
+        0000: invokestatic
+        0000: nop
+        0000: iconst_5
+        0000: areturn
     }
     
     // Signature: ()TT;
     public Object get() {
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        ifnonnull
-        nop
-        fconst_2
-        new
-        nop
-        lconst_0
-        dup
-        ldc
-        lconst_1
-        invokespecial
-        nop
-        fconst_0
-        athrow
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        areturn
-        nop
-        nop
-        nop
-        iconst_m1
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        dconst_0
-        nop
-        iconst_0
-        nop
-        nop
-        nop
-        i2f
-        nop
-        iconst_4
-        nop
-        i2d
-        nop
-        sipush
-        nop
-        l2f
-        nop
-        iaload
-        nop
-        nop
-        nop
-        iconst_0
-        nop
-        aconst_null
-        sipush
+        // max_stack: 3
+        // max_locals: 1
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: ifnonnull
+        0000: nop
+        0000: fconst_2
+        0000: new
+        0000: nop
+        0000: lconst_0
+        0000: dup
+        0000: ldc
+        0000: lconst_1
+        0000: invokespecial
+        0000: nop
+        0000: fconst_0
+        0000: athrow
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: areturn
     }
     
     public boolean isPresent() {
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        ifnull
-        nop
-        iconst_4
-        iconst_1
-        goto
-        nop
-        iconst_1
-        iconst_0
-        ireturn
-        nop
-        nop
-        nop
-        iconst_m1
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        nop
-        i2c
-        nop
-        iaload
-        nop
-        nop
-        nop
-        iconst_2
-        nop
-        iconst_m1
-        fconst_0
-        lstore_1
-        aconst_null
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: ifnull
+        0000: nop
+        0000: iconst_4
+        0000: iconst_1
+        0000: goto
+        0000: nop
+        0000: iconst_1
+        0000: iconst_0
+        0000: ireturn
     }
     
     // Signature: (Ljava/util/function/Consumer<-TT;>;)V
     public void ifPresent(java.util.function.Consumer) {
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        ifnull
-        nop
-        fconst_2
-        aload_1
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        invokeinterface
-        nop
-        fconst_1
-        iconst_m1
-        nop
-        return
-        nop
-        nop
-        nop
-        iconst_m1
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        dconst_0
-        nop
-        iconst_0
-        nop
-        nop
-        nop
-        ifle
-        nop
-        iconst_4
-        nop
-        if_icmpeq
-        nop
-        sipush
-        nop
-        if_icmpne
-        nop
-        iaload
-        nop
-        nop
-        nop
-        iconst_0
-        nop
-        aconst_null
-        sipush
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: ifnull
+        0000: nop
+        0000: fconst_2
+        0000: aload_1
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: invokeinterface
+        0000: nop
+        0000: fconst_1
+        0000: iconst_m1
+        0000: nop
+        0000: return
     }
     
     // Signature: (Ljava/util/function/Predicate<-TT;>;)Ljava/util/Optional<TT;>;
     public Optional filter(java.util.function.Predicate) {
-        aload_1
-        invokestatic
-        nop
-        iconst_1
-        pop
-        aload_0
-        invokevirtual
-        nop
-        fconst_2
-        ifne
-        nop
-        iconst_2
-        aload_0
-        areturn
-        aload_1
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        invokeinterface
-        nop
-        dconst_0
-        iconst_m1
-        nop
-        ifeq
-        nop
-        iconst_4
-        aload_0
-        goto
-        nop
-        iconst_3
-        invokestatic
-        nop
-        iconst_4
-        areturn
-        nop
-        nop
-        nop
-        iconst_m1
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        ldc
-        nop
-        iconst_1
-        nop
-        nop
-        nop
-        freturn
-        nop
-        iconst_2
-        nop
-        dreturn
-        nop
-        fconst_1
-        nop
-        areturn
-        nop
-        dconst_0
-        nop
-        getstatic
-        nop
-        iaload
-        nop
-        nop
-        nop
-        iconst_5
-        nop
-        iconst_0
-        dconst_0
-        bipush
-        lstore_3
-        iconst_4
-        nop
-        laload
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_1
+        0000: invokestatic
+        0000: nop
+        0000: iconst_1
+        0000: pop
+        0000: aload_0
+        0000: invokevirtual
+        0000: nop
+        0000: fconst_2
+        0000: ifne
+        0000: nop
+        0000: iconst_2
+        0000: aload_0
+        0000: areturn
+        0000: aload_1
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: invokeinterface
+        0000: nop
+        0000: dconst_0
+        0000: iconst_m1
+        0000: nop
+        0000: ifeq
+        0000: nop
+        0000: iconst_4
+        0000: aload_0
+        0000: goto
+        0000: nop
+        0000: iconst_3
+        0000: invokestatic
+        0000: nop
+        0000: iconst_4
+        0000: areturn
     }
     
     // Signature: <U:Ljava/lang/Object;>(Ljava/util/function/Function<-TT;+TU;>;)Ljava/util/Optional<TU;>;
     public Optional map(java.util.function.Function) {
-        aload_1
-        invokestatic
-        nop
-        iconst_1
-        pop
-        aload_0
-        invokevirtual
-        nop
-        fconst_2
-        ifne
-        nop
-        iconst_4
-        invokestatic
-        nop
-        iconst_4
-        areturn
-        aload_1
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        invokeinterface
-        nop
-        dconst_1
-        iconst_m1
-        nop
-        invokestatic
-        nop
-        bipush
-        areturn
-        nop
-        nop
-        nop
-        iconst_m1
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        ldc
-        nop
-        iconst_1
-        nop
-        nop
-        nop
-        D3
-        nop
-        iconst_2
-        nop
-        D4
-        nop
-        fconst_1
-        nop
-        D5
-        nop
-        bipush
-        nop
-        D7
-        nop
-        iaload
-        nop
-        nop
-        nop
-        iconst_0
-        nop
-        aconst_null
-        bipush
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_1
+        0000: invokestatic
+        0000: nop
+        0000: iconst_1
+        0000: pop
+        0000: aload_0
+        0000: invokevirtual
+        0000: nop
+        0000: fconst_2
+        0000: ifne
+        0000: nop
+        0000: iconst_4
+        0000: invokestatic
+        0000: nop
+        0000: iconst_4
+        0000: areturn
+        0000: aload_1
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: invokeinterface
+        0000: nop
+        0000: dconst_1
+        0000: iconst_m1
+        0000: nop
+        0000: invokestatic
+        0000: nop
+        0000: bipush
+        0000: areturn
     }
     
     // Signature: <U:Ljava/lang/Object;>(Ljava/util/function/Function<-TT;Ljava/util/Optional<TU;>;>;)Ljava/util/Optional<TU;>;
     public Optional flatMap(java.util.function.Function) {
-        aload_1
-        invokestatic
-        nop
-        iconst_1
-        pop
-        aload_0
-        invokevirtual
-        nop
-        fconst_2
-        ifne
-        nop
-        iconst_4
-        invokestatic
-        nop
-        iconst_4
-        areturn
-        aload_1
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        invokeinterface
-        nop
-        dconst_1
-        iconst_m1
-        nop
-        invokestatic
-        nop
-        iconst_1
-        checkcast
-        nop
-        iconst_2
-        areturn
-        nop
-        nop
-        nop
-        iconst_m1
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        ldc
-        nop
-        iconst_1
-        nop
-        nop
-        nop
-        ED
-        nop
-        iconst_2
-        nop
-        EE
-        nop
-        fconst_1
-        nop
-        EF
-        nop
-        bipush
-        nop
-        F1
-        nop
-        iaload
-        nop
-        nop
-        nop
-        iconst_0
-        nop
-        aconst_null
-        bipush
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_1
+        0000: invokestatic
+        0000: nop
+        0000: iconst_1
+        0000: pop
+        0000: aload_0
+        0000: invokevirtual
+        0000: nop
+        0000: fconst_2
+        0000: ifne
+        0000: nop
+        0000: iconst_4
+        0000: invokestatic
+        0000: nop
+        0000: iconst_4
+        0000: areturn
+        0000: aload_1
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: invokeinterface
+        0000: nop
+        0000: dconst_1
+        0000: iconst_m1
+        0000: nop
+        0000: invokestatic
+        0000: nop
+        0000: iconst_1
+        0000: checkcast
+        0000: nop
+        0000: iconst_2
+        0000: areturn
     }
     
     // Signature: (TT;)TT;
     public Object orElse(Object) {
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        ifnull
-        nop
-        lconst_1
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        goto
-        nop
-        iconst_1
-        aload_1
-        areturn
-        nop
-        nop
-        nop
-        iconst_m1
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        nop
-        FD
-        nop
-        iaload
-        nop
-        nop
-        nop
-        iconst_4
-        nop
-        iconst_m1
-        dconst_0
-        lstore_1
-        iconst_4
-        nop
-        lstore_3
+        // max_stack: 1
+        // max_locals: 2
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: ifnull
+        0000: nop
+        0000: lconst_1
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: goto
+        0000: nop
+        0000: iconst_1
+        0000: aload_1
+        0000: areturn
     }
     
     // Signature: (Ljava/util/function/Supplier<+TT;>;)TT;
     public Object orElseGet(java.util.function.Supplier) {
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        ifnull
-        nop
-        lconst_1
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        goto
-        nop
-        lconst_0
-        aload_1
-        invokeinterface
-        nop
-        sipush
-        aconst_null
-        nop
-        areturn
-        nop
-        nop
-        nop
-        iconst_m1
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        aconst_null
-        fconst_0
-        nop
-        iaload
-        nop
-        nop
-        nop
-        iconst_4
-        nop
-        iconst_m1
-        dconst_0
-        fstore_2
-        iconst_4
-        nop
-        lstore_3
+        // max_stack: 1
+        // max_locals: 2
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: ifnull
+        0000: nop
+        0000: lconst_1
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: goto
+        0000: nop
+        0000: lconst_0
+        0000: aload_1
+        0000: invokeinterface
+        0000: nop
+        0000: sipush
+        0000: aconst_null
+        0000: nop
+        0000: areturn
     }
     
     // Signature: <X:Ljava/lang/Throwable;>(Ljava/util/function/Supplier<+TX;>;)TT;^TX;
     public Object orElseThrow(java.util.function.Supplier) throws Throwable {
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        ifnull
-        nop
-        iconst_5
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        areturn
-        aload_1
-        invokeinterface
-        nop
-        sipush
-        aconst_null
-        nop
-        checkcast
-        nop
-        ldc
-        athrow
-        nop
-        nop
-        nop
-        iconst_m1
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        dconst_0
-        nop
-        iconst_0
-        nop
-        nop
-        aconst_null
-        lload_1
-        nop
-        iconst_4
-        aconst_null
-        lload_2
-        nop
-        fconst_1
-        aconst_null
-        fload_0
-        nop
-        iaload
-        nop
-        nop
-        nop
-        iconst_0
-        nop
-        aconst_null
-        fconst_1
+        // max_stack: 1
+        // max_locals: 2
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: ifnull
+        0000: nop
+        0000: iconst_5
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: areturn
+        0000: aload_1
+        0000: invokeinterface
+        0000: nop
+        0000: sipush
+        0000: aconst_null
+        0000: nop
+        0000: checkcast
+        0000: nop
+        0000: ldc
+        0000: athrow
     }
     
     public boolean equals(Object) {
-        aload_0
-        aload_1
-        if_acmpne
-        nop
-        iconst_2
-        iconst_1
-        ireturn
-        aload_1
-        instanceof
-        nop
-        iconst_2
-        ifne
-        nop
-        iconst_2
-        iconst_0
-        ireturn
-        aload_1
-        checkcast
-        nop
-        iconst_2
-        astore_2
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        aload_2
-        getfield
-        nop
-        iconst_m1
-        invokestatic
-        nop
-        ldc_w
-        ireturn
-        nop
-        nop
-        nop
-        iconst_m1
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        iload_0
-        nop
-        iconst_3
-        nop
-        nop
-        aconst_null
-        saload
-        nop
-        iconst_2
-        aconst_null
-        istore
-        nop
-        iconst_4
-        aconst_null
-        dstore
-        nop
-        dconst_0
-        aconst_null
-        astore
-        nop
-        bipush
-        aconst_null
-        istore_2
-        nop
-        iload
-        aconst_null
-        istore_3
-        nop
-        iaload
-        nop
-        nop
-        nop
-        iconst_1
-        nop
-        iconst_m1
-        iconst_4
-        iconst_5
+        // max_stack: 2
+        // max_locals: 3
+        0000: aload_0
+        0000: aload_1
+        0000: if_acmpne
+        0000: nop
+        0000: iconst_2
+        0000: iconst_1
+        0000: ireturn
+        0000: aload_1
+        0000: instanceof
+        0000: nop
+        0000: iconst_2
+        0000: ifne
+        0000: nop
+        0000: iconst_2
+        0000: iconst_0
+        0000: ireturn
+        0000: aload_1
+        0000: checkcast
+        0000: nop
+        0000: iconst_2
+        0000: astore_2
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: aload_2
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: invokestatic
+        0000: nop
+        0000: ldc_w
+        0000: ireturn
     }
     
     public int hashCode() {
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        invokestatic
-        nop
-        ldc2_w
-        ireturn
-        nop
-        nop
-        nop
-        aconst_null
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        aconst_null
-        dstore_2
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: invokestatic
+        0000: nop
+        0000: ldc2_w
+        0000: ireturn
     }
     
     public String toString() {
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        ifnull
-        nop
-        lload
-        ldc
-        iload
-        iconst_1
-        anewarray
-        nop
-        lload
-        dup
-        iconst_0
-        aload_0
-        getfield
-        nop
-        iconst_m1
-        aastore
-        invokestatic
-        nop
-        fload
-        goto
-        nop
-        iconst_2
-        ldc
-        dload
-        areturn
-        nop
-        nop
-        nop
-        iconst_m1
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        dconst_0
-        nop
-        iconst_0
-        nop
-        nop
-        aconst_null
-        dup
-        nop
-        ldc2_w
-        aconst_null
-        dup_x1
-        nop
-        iload_2
-        aconst_null
-        dup
-        nop
-        iaload
-        nop
-        nop
-        nop
-        iconst_4
-        nop
-        iconst_m1
-        iload_0
-        lstore_2
-        iconst_4
-        nop
-        lastore
+        // max_stack: 5
+        // max_locals: 1
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: ifnull
+        0000: nop
+        0000: lload
+        0000: ldc
+        0000: iload
+        0000: iconst_1
+        0000: anewarray
+        0000: nop
+        0000: lload
+        0000: dup
+        0000: iconst_0
+        0000: aload_0
+        0000: getfield
+        0000: nop
+        0000: iconst_m1
+        0000: aastore
+        0000: invokestatic
+        0000: nop
+        0000: fload
+        0000: goto
+        0000: nop
+        0000: iconst_2
+        0000: ldc
+        0000: dload
+        0000: areturn
     }
     
     static void <clinit>() {
-        new
-        nop
-        iconst_2
-        dup
-        invokespecial
-        nop
-        aload
-        putstatic
-        nop
-        iconst_0
-        return
-        nop
-        nop
-        nop
-        aconst_null
-        nop
-        fload_2
-        nop
-        nop
-        nop
-        iconst_3
-        nop
-        aconst_null
-        nop
-        nop
-        nop
-        istore
+        // max_stack: 2
+        // max_locals: 0
+        0000: new
+        0000: nop
+        0000: iconst_2
+        0000: dup
+        0000: invokespecial
+        0000: nop
+        0000: aload
+        0000: putstatic
+        0000: nop
+        0000: iconst_0
+        0000: return
     }
 
 }

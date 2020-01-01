@@ -55,16 +55,18 @@ class SlicedChannel implements SeekableByteChannel {
 		Objects.requireNonNull(dst);
 
 		int readLimit = (int) Math.min(this.length - this.position, dst.remaining());
-		ByteBuffer limitedDst = dst.duplicate();
+		int read = -1;
 
-		limitedDst.limit(limitedDst.position() + readLimit);
-		this.channel.position(this.start + this.position);
+		if (readLimit > 0) {
+			ByteBuffer limitedDst = dst.duplicate();
 
-		int read = this.channel.read(limitedDst);
-
-		if (read > 0) {
-			dst.position(dst.position() + read);
-			this.position += read;
+			limitedDst.limit(limitedDst.position() + readLimit);
+			this.channel.position(this.start + this.position);
+			read = this.channel.read(limitedDst);
+			if (read > 0) {
+				dst.position(dst.position() + read);
+				this.position += read;
+			}
 		}
 		return read;
 	}
