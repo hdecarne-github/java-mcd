@@ -380,7 +380,8 @@ public /* super */ class Calendar$Builder {
         nop
         ldc
         goto
-        FF D1aload_0
+        FF D1
+        aload_0
         areturn
         nop
         nop
@@ -462,19 +463,23 @@ public /* super */ class Calendar$Builder {
         ldc2_w
         nop
         iconst_4
-        FCnop
+        FC
+        nop
         sipush
         aconst_null
         bipush
         ldc2_w
-        FCnop
+        FC
+        nop
         iconst_2
         aconst_null
-        FCnop
+        FC
+        nop
         dload
         aconst_null
         lconst_0
-        F9nop
+        F9
+        nop
         dconst_0
     }
     
@@ -527,7 +532,8 @@ public /* super */ class Calendar$Builder {
         nop
         nop
         iconst_1
-        D1 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}
+        D1 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    }
     
     public Calendar$Builder setTimeOfDay(int, int, int) {
         aload_0
@@ -554,7 +560,8 @@ public /* super */ class Calendar$Builder {
         nop
         nop
         iconst_1
-        E2 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}
+        E2 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    }
     
     public Calendar$Builder setTimeOfDay(int, int, int, int) {
         aload_0
@@ -620,7 +627,8 @@ public /* super */ class Calendar$Builder {
         nop
         nop
         iconst_1
-        F7 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}
+        F7 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    }
     
     public Calendar$Builder setWeekDate(int, int, int) {
         aload_0
@@ -1200,12 +1208,14 @@ public /* super */ class Calendar$Builder {
         iconst_1
         if_icmplt
         monitorenter
-        EDputfield
+        ED
+        putfield
         nop
         nop
         nop
         dstore_0
-        D3fload_0
+        D3
+        fload_0
         lstore_0
         return
         nop
@@ -1213,14 +1223,16 @@ public /* super */ class Calendar$Builder {
         nop
         castore
         bipush
-        EAiload
+        EA
+        iload
         lconst_0
         nop
         nop
         nop
         aload_1
         iushr
-        E2ldc_w
+        E2
+        ldc_w
         iinc
         nop
         nop
@@ -1507,7 +1519,8 @@ public /* super */ class Calendar$Builder {
         iconst_1
         ifnull
         nop
-        CEaload_0
+        CE
+        aload_0
         bipush
         sipush
         invokespecial
@@ -1635,11 +1648,13 @@ public /* super */ class Calendar$Builder {
         iconst_1
         aconst_null
         goto
-        FF D6iinc
+        FF D6
+        iinc
         iconst_0
         aconst_null
         goto
-        FFmultianewarray
+        FF
+        multianewarray
         iload_2
         ifeq
         nop
@@ -1718,7 +1733,8 @@ public /* super */ class Calendar$Builder {
         nop
         nop
         nop
-        CEnop
+        CE
+        nop
         baload
         nop
         nop
@@ -1769,111 +1785,154 @@ public /* super */ class Calendar$Builder {
         iconst_2
         goto_w
         nop
-        E8iconst_2
-        CAnop
-        F9iconst_2
-        CBnop
-        FCiconst_2
-        CDaconst_null
+        E8
+        iconst_2
+        CA
+        nop
+        F9
+        iconst_2
+        CB
+        nop
+        FC
+        iconst_2
+        CD
+        aconst_null
         dconst_0
         iconst_2
-        CFaconst_null
+        CF
+        aconst_null
         iload_3
         iconst_2
-        D1aconst_null
+        D1
+        aconst_null
         fload_2
         iconst_2
-        D2aconst_null
+        D2
+        aconst_null
         dload_1
         iconst_2
-        D3aconst_null
+        D3
+        aconst_null
         aload_0
         iconst_2
-        D5aconst_null
+        D5
+        aconst_null
         astore
         iconst_2
-        D6aconst_null
+        D6
+        aconst_null
         istore_3
         iconst_2
-        D7aconst_null
+        D7
+        aconst_null
         lstore_2
         iconst_2
-        D9aconst_null
+        D9
+        aconst_null
         dastore
         iconst_2
-        DAaconst_null
+        DA
+        aconst_null
         castore
         iconst_2
-        DCaconst_null
+        DC
+        aconst_null
         drem
         iconst_2
-        DEaconst_null
+        DE
+        aconst_null
         lshr
         iconst_2
-        DFaconst_null
+        DF
+        aconst_null
         ixor
         iconst_2
-        E0aconst_null
+        E0
+        aconst_null
         l2d
         iconst_2
-        E1aconst_null
+        E1
+        aconst_null
         i2c
         iconst_2
-        E3aconst_null
+        E3
+        aconst_null
         ifeq
         iconst_2
-        E4aconst_null
+        E4
+        aconst_null
         if_icmplt
         iconst_2
-        E5aconst_null
+        E5
+        aconst_null
         if_acmpeq
         iconst_2
-        E6aconst_null
+        E6
+        aconst_null
         goto
         iconst_2
-        E9aconst_null
+        E9
+        aconst_null
         freturn
         iconst_2
-        EAaconst_null
-        CDiconst_2
-        ECaconst_null
-        D8iconst_2
-        EDaconst_null
-        F6iconst_2
-        F2iconst_m1
+        EA
+        aconst_null
+        CD
+        iconst_2
+        EC
+        aconst_null
+        D8
+        iconst_2
+        ED
+        aconst_null
+        F6
+        iconst_2
+        F2
+        iconst_m1
         nop
         iconst_2
-        F3iconst_m1
+        F3
+        iconst_m1
         fconst_1
         iconst_2
-        F4iconst_m1
+        F4
+        iconst_m1
         fload
         iconst_2
-        F5iconst_m1
+        F5
+        iconst_m1
         dload_1
         iconst_2
-        F6iconst_m1
+        F6
+        iconst_m1
         aload_0
         iconst_2
-        F3iconst_m1
+        F3
+        iconst_m1
         faload
         iconst_2
-        F2iconst_m1
+        F2
+        iconst_m1
         istore
         iconst_2
-        FBiconst_m1
+        FB
+        iconst_m1
         astore
         iconst_2
-        FCiconst_m1
+        FC
+        iconst_m1
         astore_3
         iconst_2
-        FDiconst_m1
+        FD
+        iconst_m1
         fadd
         iconst_2
-        FEiconst_m1
+        FE
+        iconst_m1
         dsub
         iconst_2
-        FFiconst_m1
+        FF
+        iconst_m1
         lneg
         iconst_3
         aconst_null
@@ -1894,7 +1953,8 @@ public /* super */ class Calendar$Builder {
         ldc_w
         dload_1
         iconst_2
-        FEnop
+        FE
+        nop
         saload
         nop
         iconst_4
@@ -1910,7 +1970,8 @@ public /* super */ class Calendar$Builder {
         aload_3
         lload
         ldc_w
-        FFnop
+        FF
+        nop
         iload_3
         nop
         iconst_m1
@@ -1927,31 +1988,39 @@ public /* super */ class Calendar$Builder {
         fload_1
         lstore_1
         aconst_null
-        FCnop
+        FC
+        nop
         dload_3
         aconst_null
-        FCnop
+        FC
+        nop
         aconst_null
         aconst_null
-        FCnop
+        FC
+        nop
         lconst_1
         aconst_null
         dload_0
-        FAnop
+        FA
+        nop
         iconst_2
-        FAnop
+        FA
+        nop
         iconst_2
         iload
         lstore_1
         aconst_null
-        FCnop
+        FC
+        nop
         ldc_w
         aconst_null
         fstore_0
         aconst_null
-        FAnop
+        FA
+        nop
         dconst_1
-        FAnop
+        FA
+        nop
         iconst_0
     }
     

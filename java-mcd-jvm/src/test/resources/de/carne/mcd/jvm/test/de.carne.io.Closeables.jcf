@@ -184,7 +184,8 @@ public final /* super */ class Closeables {
         iconst_1
         aconst_null
         goto
-        FF D0aload_1
+        FF D0
+        aload_1
         ifnull
         nop
         iconst_2
@@ -319,7 +320,8 @@ public final /* super */ class Closeables {
         dstore
         nop
         iconst_3
-        FFnop
+        FF
+        nop
         lconst_1
         nop
         iconst_2
@@ -336,7 +338,8 @@ public final /* super */ class Closeables {
         aconst_null
         nop
         nop
-        FFnop
+        FF
+        nop
         iload_0
         nop
         iconst_3
@@ -359,14 +362,17 @@ public final /* super */ class Closeables {
         iconst_4
         nop
         fload_1
-        FCnop
+        FC
+        nop
         fconst_0
         iconst_4
         nop
         fload_1
-        F9nop
+        F9
+        nop
         iconst_2
-        F8nop
+        F8
+        nop
         iconst_2
         iconst_2
     }

@@ -26,8 +26,8 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.file.StandardOpenOption;
 import java.util.Calendar;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -79,7 +79,7 @@ class ClassFileDecoderTest {
 
 	@Test
 	void testDecodeGenericClass() throws IOException {
-		testDecode(HashMap.class);
+		testDecode(Optional.class);
 	}
 
 	@Test

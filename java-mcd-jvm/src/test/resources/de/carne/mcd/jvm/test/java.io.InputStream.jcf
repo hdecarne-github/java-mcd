@@ -163,7 +163,8 @@ public abstract /* super */ class InputStream implements Closeable {
         iconst_2
         aconst_null
         goto
-        FF DFgoto
+        FF DF
+        goto
         nop
         iconst_2
         astore
@@ -283,10 +284,12 @@ public abstract /* super */ class InputStream implements Closeable {
         dconst_1
         iconst_4
         iconst_2
-        FCnop
+        FC
+        nop
         fconst_2
         aconst_null
-        FCnop
+        FC
+        nop
         iconst_5
         aconst_null
         ldc2_w
@@ -363,7 +366,8 @@ public abstract /* super */ class InputStream implements Closeable {
         lsub
         lstore_3
         goto
-        FF DBlload_1
+        FF DB
+        lload_1
         lload_3
         lsub
         lreturn
@@ -382,37 +386,48 @@ public abstract /* super */ class InputStream implements Closeable {
         nop
         nop
         nop
-        D6nop
+        D6
+        nop
         iconst_m1
         nop
-        D9nop
+        D9
+        nop
         iconst_5
         nop
-        DAnop
+        DA
+        nop
         lconst_1
         nop
-        DDnop
+        DD
+        nop
         ldc2_w
         nop
-        DEnop
+        DE
+        nop
         iload_0
         nop
-        DFnop
+        DF
+        nop
         lload_2
         nop
-        E0nop
+        E0
+        nop
         daload
         nop
-        E1nop
+        E1
+        nop
         istore
         nop
-        E2nop
+        E2
+        nop
         dstore
         nop
-        E4nop
+        E4
+        nop
         lstore_3
         nop
-        E7nop
+        E7
+        nop
         lload_0
         nop
         nop
@@ -420,17 +435,20 @@ public abstract /* super */ class InputStream implements Closeable {
         faload
         nop
         iconst_1
-        FCnop
+        FC
+        nop
         lconst_1
         iconst_1
-        FEnop
+        FE
+        nop
         dconst_1
         nop
         aconst_null
         iconst_4
         nop
         fload_0
-        FFnop
+        FF
+        nop
         lload_0
         nop
         iconst_3
@@ -446,7 +464,8 @@ public abstract /* super */ class InputStream implements Closeable {
         fload_0
         nop
         nop
-        FFnop
+        FF
+        nop
         iconst_5
         nop
         iconst_3

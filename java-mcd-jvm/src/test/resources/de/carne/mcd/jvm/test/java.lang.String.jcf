@@ -271,7 +271,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         aload
         nop
-        C4nop
+        C4
+        nop
         fload_0
         nop
         ifnull
@@ -286,16 +287,20 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         aaload
         nop
-        CCnop
+        CC
+        nop
         astore
         nop
-        CDnop
+        CD
+        nop
         fstore_2
         nop
-        CFnop
+        CF
+        nop
         fastore
         nop
-        D0nop
+        D0
+        nop
         dreturn
         nop
         nop
@@ -303,7 +308,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         ldc2_w
         nop
         iconst_1
-        FFnop
+        FF
+        nop
         sipush
         nop
         iconst_1
@@ -458,7 +464,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_3
         aconst_null
         goto
-        FF CAiload
+        FF CA
+        iload
         iconst_2
         newarray
         iconst_2
@@ -521,7 +528,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_5
         aconst_null
         goto
-        FF CEaload_0
+        FF CE
+        aload_0
         aload
         iconst_3
         putfield
@@ -543,37 +551,48 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         nop
-        EEnop
+        EE
+        nop
         iconst_1
         nop
-        EFnop
+        EF
+        nop
         iconst_5
         nop
-        F0nop
+        F0
+        nop
         sipush
         nop
-        F2nop
+        F2
+        nop
         iload
         nop
-        F3nop
+        F3
+        nop
         aload
         nop
-        F4nop
+        F4
+        nop
         fload_0
         nop
-        F6nop
+        F6
+        nop
         dload_2
         nop
-        F7nop
+        F7
+        nop
         daload
         nop
-        F8nop
+        F8
+        nop
         aaload
         nop
-        FCnop
+        FC
+        nop
         astore
         nop
-        FDnop
+        FD
+        nop
         fstore_2
         aconst_null
         nop
@@ -642,10 +661,12 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aconst_null
         bipush
         nop
-        CAaconst_null
+        CA
+        aconst_null
         dload
         nop
-        D0aconst_null
+        D0
+        aconst_null
         aload
         nop
         dreturn
@@ -655,7 +676,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         lstore
         nop
         fconst_2
-        FFnop
+        FF
+        nop
         sipush
         nop
         iconst_1
@@ -672,32 +694,40 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         bipush
         dconst_1
         ldc
-        FEnop
+        FE
+        nop
         lconst_1
         aconst_null
         aconst_null
         aconst_null
-        FCnop
+        FC
+        nop
         fload
         aconst_null
         fconst_2
-        FAnop
+        FA
+        nop
         fconst_1
-        FAnop
+        FA
+        nop
         iconst_2
-        FEnop
+        FE
+        nop
         fconst_0
         iconst_4
         nop
         return
         aconst_null
         aconst_null
-        FCnop
+        FC
+        nop
         lload_1
         aconst_null
-        FAnop
+        FA
+        nop
         fconst_0
-        F9nop
+        F9
+        nop
         iconst_5
     }
     
@@ -732,7 +762,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_3
         iinc
         iconst_3
-        FFifle
+        FF
+        ifle
         nop
         lload
         aload
@@ -747,11 +778,13 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         baload
         sipush
         nop
-        FFiand
+        FF
+        iand
         i2c
         castore
         goto
-        FF E8goto
+        FF E8
+        goto
         nop
         dload_3
         iload_2
@@ -767,7 +800,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_3
         iinc
         iconst_3
-        FFifle
+        FF
+        ifle
         nop
         dload
         aload
@@ -783,12 +817,14 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         baload
         sipush
         nop
-        FFiand
+        FF
+        iand
         ior
         i2c
         castore
         goto
-        FF E6aload_0
+        FF E6
+        aload_0
         aload
         iconst_2
         putfield
@@ -859,7 +895,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         lload_3
         nop
         iconst_2
-        FFnop
+        FF
+        nop
         aload
         nop
         iconst_4
@@ -878,13 +915,16 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aconst_null
         nop
         nop
-        FAnop
+        FA
+        nop
         iload_0
         iconst_m1
-        FCnop
+        FC
+        nop
         iconst_5
         aconst_null
-        FAnop
+        FA
+        nop
         iload_2
     }
     
@@ -1105,7 +1145,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         ldc2_w
         nop
         aconst_null
-        FFnop
+        FF
+        nop
         ldc_w
         nop
         iconst_2
@@ -1178,22 +1219,28 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         aconst_null
-        CBnop
+        CB
+        nop
         iconst_1
         aconst_null
-        CCnop
+        CC
+        nop
         lconst_0
         aconst_null
-        CDnop
+        CD
+        nop
         ldc_w
         aconst_null
-        CEnop
+        CE
+        nop
         aload
         aconst_null
-        CFnop
+        CF
+        nop
         fload_3
         aconst_null
-        D0nop
+        D0
+        nop
         dreturn
         nop
         nop
@@ -1201,7 +1248,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         ldc2_w
         nop
         aconst_null
-        FFnop
+        FF
+        nop
         ldc_w
         nop
         iconst_2
@@ -1246,10 +1294,12 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         aconst_null
-        EBnop
+        EB
+        nop
         lconst_0
         aconst_null
-        EC 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}
+        EC 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    }
     
     public void <init>(byte[], java.nio.charset.Charset) {
         aload_0
@@ -1459,7 +1509,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         dload
         nop
         iconst_m1
-        FFnop
+        FF
+        nop
         iload_2
         nop
         iconst_0
@@ -1477,7 +1528,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_4
         nop
         ifnonnull
-        FAnop
+        FA
+        nop
         iconst_1
     }
     
@@ -1825,16 +1877,20 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         iconst_m1
-        CBnop
+        CB
+        nop
         iconst_1
         iconst_m1
-        CCnop
+        CC
+        nop
         sipush
         iconst_m1
-        CDnop
+        CD
+        nop
         iload_0
         iconst_m1
-        CFnop
+        CF
+        nop
         dreturn
         nop
         nop
@@ -1842,7 +1898,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_4
         nop
         iconst_m1
-        FCnop
+        FC
+        nop
         sipush
         aconst_null
         iconst_5
@@ -1902,13 +1959,16 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         iconst_m1
-        E8nop
+        E8
+        nop
         ldc
         iconst_m1
-        E9nop
+        E9
+        nop
         iload_0
         iconst_m1
-        EBnop
+        EB
+        nop
         dreturn
         nop
         nop
@@ -2247,7 +2307,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         i2b
         bastore
         goto
-        FF E9return
+        FF E9
+        return
         nop
         nop
         nop
@@ -2327,7 +2388,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         fconst_2
         sipush
         dconst_1
-        FFnop
+        FF
+        nop
         ldc2_w
         nop
         lconst_0
@@ -2555,7 +2617,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iload_3
         iinc
         iconst_0
-        FFifeq
+        FF
+        ifeq
         nop
         dload
         aload
@@ -2577,7 +2640,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_3
         aconst_null
         goto
-        FF E7iconst_1
+        FF E7
+        iconst_1
         ireturn
         iconst_0
         ireturn
@@ -2596,49 +2660,64 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         iconst_0
-        D1nop
+        D1
+        nop
         iconst_2
         iconst_0
-        D2nop
+        D2
+        nop
         iconst_4
         iconst_0
-        D4nop
+        D4
+        nop
         dconst_0
         iconst_0
-        D5nop
+        D5
+        nop
         ldc_w
         iconst_0
-        D6nop
+        D6
+        nop
         aload
         iconst_0
-        D7nop
+        D7
+        nop
         fload_0
         iconst_0
-        D8nop
+        D8
+        nop
         dload_2
         iconst_0
-        D9nop
+        D9
+        nop
         iaload
         iconst_0
-        DAnop
+        DA
+        nop
         daload
         iconst_0
-        DBnop
+        DB
+        nop
         fstore
         iconst_0
-        DCnop
+        DC
+        nop
         fstore_2
         iconst_0
-        DDnop
+        DD
+        nop
         dstore_0
         iconst_0
-        DEnop
+        DE
+        nop
         astore_2
         iconst_0
-        E0nop
+        E0
+        nop
         iastore
         iconst_0
-        E3nop
+        E3
+        nop
         dreturn
         nop
         nop
@@ -2647,7 +2726,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         iconst_2
         iconst_4
-        FFnop
+        FF
+        nop
         dload_3
         nop
         iconst_4
@@ -2672,7 +2752,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         iload
         iconst_2
-        FFnop
+        FF
+        nop
         aconst_null
         nop
         iconst_m1
@@ -2708,7 +2789,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         iconst_0
-        F6 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}
+        F6 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    }
     
     private boolean nonSyncContentEquals(AbstractStringBuilder) {
         aload_0
@@ -2763,7 +2845,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_2
         aconst_null
         goto
-        FF E9iconst_1
+        FF E9
+        iconst_1
         ireturn
         nop
         nop
@@ -2780,19 +2863,24 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         iconst_0
-        FAnop
+        FA
+        nop
         iconst_2
         iconst_0
-        FBnop
+        FB
+        nop
         lconst_1
         iconst_0
-        FCnop
+        FC
+        nop
         dconst_0
         iconst_0
-        FDnop
+        FD
+        nop
         fload
         iconst_0
-        FEnop
+        FE
+        nop
         aload
         iconst_1
         nop
@@ -2820,7 +2908,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         ldc2_w
         nop
         iconst_1
-        FEnop
+        FE
+        nop
         aload
         iconst_4
         nop
@@ -2829,11 +2918,13 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         return
         aconst_null
-        FCnop
+        FC
+        nop
         iconst_m1
         aconst_null
         ldc_w
-        FAnop
+        FA
+        nop
         iconst_2
     }
     
@@ -2944,7 +3035,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_1
         aconst_null
         goto
-        FF E6iconst_1
+        FF E6
+        iconst_1
         ireturn
         nop
         iconst_m1
@@ -3050,7 +3142,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         dload_3
         nop
         iconst_5
-        FFnop
+        FF
+        nop
         iload_3
         nop
         iconst_0
@@ -3059,7 +3152,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         areturn
         iconst_4
         nop
-        E5iconst_4
+        E5
+        iconst_4
         nop
         ifnull
         nop
@@ -3067,21 +3161,25 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_4
         nop
         ifnonnull
-        FAnop
+        FA
+        nop
         iconst_1
         iconst_5
         fconst_1
-        FDnop
+        FD
+        nop
         ldc_w
         iconst_4
         nop
         return
         aconst_null
-        FCnop
+        FC
+        nop
         iconst_m1
         aconst_null
         lload
-        FAnop
+        FA
+        nop
         iconst_2
     }
     
@@ -3245,7 +3343,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_4
         aconst_null
         goto
-        FF DBiload_2
+        FF DB
+        iload_2
         iload_3
         isub
         ireturn
@@ -3325,7 +3424,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         lload_3
         nop
         iconst_0
-        FFnop
+        FF
+        nop
         fload_0
         nop
         iconst_5
@@ -3347,11 +3447,13 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aconst_null
         nop
         nop
-        FDnop
+        FD
+        nop
         lload_3
         aconst_null
         aconst_null
-        F9nop
+        F9
+        nop
         iconst_2
     }
     
@@ -3382,7 +3484,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         iconst_1
-        D7 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}
+        D7 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    }
     
     public boolean regionMatches(int, String, int, int) {
         aload_0
@@ -3449,7 +3552,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_1
         iinc
         iconst_1
-        FFifle
+        FF
+        ifle
         nop
         dload
         aload
@@ -3469,7 +3573,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aconst_null
         caload
         if_icmpeq
-        FF E8iconst_0
+        FF E8
+        iconst_0
         ireturn
         iconst_1
         ireturn
@@ -3488,16 +3593,20 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         iconst_1
-        FCnop
+        FC
+        nop
         iconst_3
         iconst_1
-        FDnop
+        FD
+        nop
         lconst_0
         iconst_1
-        FEnop
+        FE
+        nop
         dconst_1
         iconst_1
-        FFnop
+        FF
+        nop
         ldc
         iconst_2
         aconst_null
@@ -3529,7 +3638,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iload_2
         nop
         iconst_0
-        FFnop
+        FF
+        nop
         astore
         nop
         lconst_0
@@ -3624,7 +3734,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_2
         iinc
         iconst_2
-        FFifle
+        FF
+        ifle
         nop
         iastore
         aload
@@ -3655,7 +3766,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         iconst_3
         goto
-        FF DDiload_1
+        FF DD
+        iload_1
         ifeq
         nop
         aload_1
@@ -3681,7 +3793,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         iconst_3
         goto
-        FFinstanceof
+        FF
+        instanceof
         iload
         fconst_1
         invokestatic
@@ -3696,7 +3809,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         iconst_3
         goto
-        FFreturn
+        FF
+        return
         iconst_0
         ireturn
         iconst_1
@@ -3801,7 +3915,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aload_2
         nop
         iconst_3
-        FFnop
+        FF
+        nop
         istore_2
         nop
         lconst_1
@@ -3826,17 +3941,21 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         aconst_null
-        FDnop
+        FD
+        nop
         fload_3
         aconst_null
         aconst_null
-        FDnop
+        FD
+        nop
         iload_1
         aconst_null
         aconst_null
-        F9nop
+        F9
+        nop
         dconst_1
-        F9nop
+        F9
+        nop
         aconst_null
     }
     
@@ -3885,7 +4004,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         ireturn
         iinc
         iconst_4
-        FFiload
+        FF
+        iload
         iconst_4
         iflt
         nop
@@ -3906,7 +4026,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aconst_null
         caload
         if_icmpeq
-        FF E9iconst_0
+        FF E9
+        iconst_0
         ireturn
         iconst_1
         ireturn
@@ -3974,7 +4095,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iload_1
         nop
         iconst_0
-        FFnop
+        FF
+        nop
         dload_2
         nop
         iconst_5
@@ -4109,7 +4231,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_0
         aconst_null
         goto
-        FF EBaload_0
+        FF EB
+        aload_0
         iload_1
         putfield
         nop
@@ -4168,16 +4291,19 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         bipush
         nop
         iconst_0
-        FEnop
+        FE
+        nop
         dload
         aconst_null
         iconst_4
         nop
         return
         aconst_null
-        FAnop
+        FA
+        nop
         fload
-        FAnop
+        FA
+        nop
         iconst_1
     }
     
@@ -4204,7 +4330,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         iconst_2
-        DF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}
+        DF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    }
     
     public int indexOf(int, int) {
         aload_0
@@ -4266,7 +4393,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_2
         aconst_null
         goto
-        FF EBiconst_m1
+        FF EB
+        iconst_m1
         ireturn
         aload_0
         iload_1
@@ -4347,20 +4475,24 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iload
         nop
         iconst_3
-        FCnop
+        FC
+        nop
         dconst_1
         aconst_null
         iconst_3
-        FDnop
+        FD
+        nop
         dconst_0
         iconst_4
         nop
         return
         aconst_null
         sipush
-        FAnop
+        FA
+        nop
         iconst_2
-        FAnop
+        FA
+        nop
         aconst_null
     }
     
@@ -4432,7 +4564,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_4
         aconst_null
         goto
-        FF DFiconst_m1
+        FF DF
+        iconst_m1
         ireturn
         nop
         nop
@@ -4494,7 +4627,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         fload_0
         nop
         iconst_0
-        FFnop
+        FF
+        nop
         lload_3
         nop
         iconst_5
@@ -4513,7 +4647,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         iload_3
-        FFnop
+        FF
+        nop
         iconst_2
         nop
         iconst_0
@@ -4598,8 +4733,10 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         ireturn
         iinc
         iconst_1
-        FFgoto
-        FF EDiconst_m1
+        FF
+        goto
+        FF ED
+        iconst_m1
         ireturn
         aload_0
         iload_1
@@ -4664,7 +4801,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         dconst_0
         nop
         iconst_1
-        FDnop
+        FD
+        nop
         iload
         iconst_4
         nop
@@ -4672,7 +4810,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aconst_null
         dconst_1
         iconst_2
-        F9nop
+        F9
+        nop
         aconst_null
     }
     
@@ -4741,8 +4880,10 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         ireturn
         iinc
         iconst_3
-        FFgoto
-        FF E1iconst_m1
+        FF
+        goto
+        FF E1
+        iconst_m1
         ireturn
         nop
         nop
@@ -4804,7 +4945,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         lload_3
         nop
         iconst_0
-        FFnop
+        FF
+        nop
         fload_0
         nop
         iconst_4
@@ -4822,7 +4964,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         iload_1
-        FFnop
+        FF
+        nop
         iconst_2
         nop
         iconst_0
@@ -5033,7 +5176,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         iconst_3
         goto
-        FF EDiload
+        FF ED
+        iload
         lconst_0
         iload
         iconst_5
@@ -5086,7 +5230,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         fconst_1
         aconst_null
         goto
-        FF E8iload
+        FF E8
+        iload
         lconst_1
         iload
         fconst_0
@@ -5102,7 +5247,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         lconst_0
         aconst_null
         goto
-        FFlcmp
+        FF
+        lcmp
         iconst_m1
         ireturn
         nop
@@ -5120,64 +5266,84 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         iconst_3
-        DCnop
+        DC
+        nop
         iconst_3
         iconst_3
-        DDnop
+        DD
+        nop
         sipush
         iconst_3
-        DFnop
+        DF
+        nop
         lload
         iconst_3
-        E0nop
+        E0
+        nop
         aload
         iconst_3
-        E2nop
+        E2
+        nop
         lload_0
         iconst_3
-        E3nop
+        E3
+        nop
         lload_3
         iconst_3
-        E6nop
+        E6
+        nop
         dload_1
         iconst_3
-        E7nop
+        E7
+        nop
         laload
         iconst_3
-        E9nop
+        E9
+        nop
         istore_1
         iconst_3
-        EBnop
+        EB
+        nop
         fstore_2
         iconst_3
-        ECnop
+        EC
+        nop
         dup_x2
         iconst_3
-        F0nop
+        F0
+        nop
         fadd
         iconst_3
-        F1nop
+        F1
+        nop
         imul
         iconst_3
-        F2nop
+        F2
+        nop
         lrem
         iconst_3
-        F3nop
+        F3
+        nop
         l2f
         iconst_3
-        F4nop
+        F4
+        nop
         i2c
         iconst_3
-        F6nop
+        F6
+        nop
         ifeq
         iconst_3
-        F8nop
+        F8
+        nop
         ifle
         iconst_3
-        E9nop
+        E9
+        nop
         if_icmple
         iconst_3
-        FCnop
+        FC
+        nop
         dreturn
         nop
         nop
@@ -5191,23 +5357,28 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         iconst_4
         iconst_4
-        FEnop
+        FE
+        nop
         ldc_w
         aconst_null
         aconst_null
         aconst_null
         dconst_1
         iload
-        FEnop
+        FE
+        nop
         iload_1
         aconst_null
         aconst_null
         aconst_null
-        FAnop
+        FA
+        nop
         iload_0
-        F9nop
+        F9
+        nop
         fconst_0
-        FAnop
+        FA
+        nop
         iconst_2
     }
     
@@ -5404,8 +5575,10 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         lconst_0
         iinc
         fconst_0
-        FFgoto
-        FF EDiload
+        FF
+        goto
+        FF ED
+        iload
         fconst_0
         iload
         lconst_1
@@ -5447,18 +5620,23 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         fconst_1
         iinc
         fconst_1
-        FFcaload
+        FF
+        caload
         aload_3
         iload
         dconst_0
         iinc
         dconst_0
-        FFcaload
+        FF
+        caload
         if_icmpeq
-        FF EBiinc
+        FF EB
+        iinc
         fconst_0
-        FFgoto
-        FFreturn
+        FF
+        goto
+        FF
+        return
         iload
         fconst_2
         iload_1
@@ -5578,12 +5756,14 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         dload_2
         nop
         iconst_5
-        FCnop
+        FC
+        nop
         fconst_2
         aconst_null
         lconst_1
         iconst_4
-        FFnop
+        FF
+        nop
         iload_3
         nop
         fconst_1
@@ -5607,7 +5787,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         iload
         iconst_5
-        FEnop
+        FE
+        nop
         ldc2_w
         aconst_null
         aconst_null
@@ -5717,7 +5898,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         iconst_1
         fconst_2
-        FCnop
+        FC
+        nop
         ldc2_w
         aconst_null
         iconst_4
@@ -5861,7 +6043,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_2
         fconst_2
         sipush
-        FCnop
+        FC
+        nop
         bipush
         aconst_null
         bipush
@@ -5894,7 +6077,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         iconst_4
-        D3 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}
+        D3 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    }
     
     public String concat(String) {
         aload_1
@@ -5959,25 +6143,32 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         iconst_4
-        EBnop
+        EB
+        nop
         iconst_2
         iconst_4
-        ECnop
+        EC
+        nop
         lconst_0
         iconst_4
-        EDnop
+        ED
+        nop
         fconst_0
         iconst_4
-        EFnop
+        EF
+        nop
         sipush
         iconst_4
-        F0nop
+        F0
+        nop
         iload_3
         iconst_4
-        F1nop
+        F1
+        nop
         fload_2
         iconst_4
-        F2nop
+        F2
+        nop
         dreturn
         nop
         nop
@@ -5985,7 +6176,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_3
         nop
         aconst_null
-        FCnop
+        FC
+        nop
         fconst_0
         aconst_null
     }
@@ -6027,7 +6219,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         caload
         iload_1
         if_icmpne
-        FF F1goto
+        FF F1
+        goto
         nop
         iconst_0
         iload
@@ -6065,7 +6258,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_4
         aconst_null
         goto
-        FF ECiload
+        FF EC
+        iload
         iconst_1
         iload_3
         if_icmpge
@@ -6099,7 +6293,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_1
         aconst_null
         goto
-        FF DFnew
+        FF DF
+        new
         nop
         aload_1
         dup
@@ -6208,7 +6403,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         pop
         nop
         iconst_5
-        FEnop
+        FE
+        nop
         ldc2_w
         aconst_null
         aconst_null
@@ -6216,15 +6412,18 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         return
         ldc2_w
-        FDnop
+        FD
+        nop
         fconst_2
         iconst_4
         nop
         return
         aconst_null
-        FAnop
+        FA
+        nop
         lload
-        FFnop
+        FF
+        nop
         iload_0
         nop
         iconst_5
@@ -6248,7 +6447,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         return
         aconst_null
-        FFnop
+        FF
+        nop
         aconst_null
         nop
         iconst_5
@@ -6273,9 +6473,11 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         return
         aconst_null
         aconst_null
-        FAnop
+        FA
+        nop
         iconst_3
-        FFnop
+        FF
+        nop
         lconst_1
         nop
         iconst_0
@@ -6557,7 +6759,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         ior
         ifge
         nop
-        F4iload_3
+        F4
+        iload_3
         bipush
         lstore_2
         isub
@@ -6568,7 +6771,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         ior
         ifge
         nop
-        E8iload_3
+        E8
+        iload_3
         ldc
         dup_x1
         if_icmplt
@@ -6579,7 +6783,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         dup_x2
         if_icmple
         nop
-        DCiconst_0
+        DC
+        iconst_0
         istore
         iconst_1
         iconst_0
@@ -6656,7 +6861,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         istore
         iconst_1
         goto
-        FF CEaload
+        FF CE
+        aload
         iconst_4
         aload_0
         iload
@@ -6764,8 +6970,10 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         lconst_0
         iinc
         iconst_5
-        FFgoto
-        FF E6iload
+        FF
+        goto
+        FF E6
+        iload
         iconst_5
         anewarray
         nop
@@ -6878,22 +7086,28 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         lconst_0
         istore
         nop
-        CAlconst_0
+        CA
+        lconst_0
         lstore
         nop
-        CDlconst_0
+        CD
+        lconst_0
         istore_0
         nop
-        D2lconst_0
+        D2
+        lconst_0
         istore_1
         nop
-        DBlconst_0
+        DB
+        lconst_0
         lstore_0
         nop
-        E9lconst_0
+        E9
+        lconst_0
         lstore_1
         nop
-        FAlconst_0
+        FA
+        lconst_0
         fstore_0
         aconst_null
         aconst_null
@@ -6927,18 +7141,21 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         faload
         nop
         dconst_1
-        FCnop
+        FC
+        nop
         iload_1
         aconst_null
         istore_0
         fconst_0
-        FDnop
+        FD
+        nop
         fconst_2
         aconst_null
         aconst_null
         lstore_1
         aconst_null
-        FDnop
+        FD
+        nop
         lconst_1
         aconst_null
         iconst_4
@@ -6950,11 +7167,13 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         fconst_2
         fconst_2
         bipush
-        FCnop
+        FC
+        nop
         lconst_1
         aconst_null
         iload_2
-        FFnop
+        FF
+        nop
         aload
         nop
         iconst_1
@@ -7049,7 +7268,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_2
         aconst_null
         goto
-        FF E9aload_2
+        FF E9
+        aload_2
         invokevirtual
         nop
         lmul
@@ -7102,13 +7322,15 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iload_0
         nop
         iconst_m1
-        FFnop
+        FF
+        nop
         iload_2
         nop
         iconst_3
         iconst_4
         nop
-        E5iconst_4
+        E5
+        iconst_4
         aconst_null
         dconst_0
         iconst_4
@@ -7121,7 +7343,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aconst_null
         nop
         nop
-        F8nop
+        F8
+        nop
         aload
     }
     
@@ -7181,7 +7404,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         imul
         pop
         goto
-        FF E5aload_2
+        FF E5
+        aload_2
         invokevirtual
         nop
         lmul
@@ -7201,7 +7425,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         lconst_0
-        C4nop
+        C4
+        nop
         iconst_2
         lconst_0
         multianewarray
@@ -7224,7 +7449,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         fstore
         lconst_0
-        CAnop
+        CA
+        nop
         dreturn
         nop
         nop
@@ -7232,7 +7458,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         dconst_0
         nop
         iconst_m1
-        FDnop
+        FD
+        nop
         iload_0
         iconst_4
         aconst_null
@@ -7240,7 +7467,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_4
         aconst_null
         sipush
-        FAnop
+        FA
+        nop
         iload_3
     }
     
@@ -7340,7 +7568,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_m1
         aconst_null
         goto
-        FFinvokevirtual
+        FF
+        invokevirtual
         aload_0
         areturn
         iload_3
@@ -7632,7 +7861,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         dconst_0
         aconst_null
         goto
-        FF E6iload
+        FF E6
+        iload
         iconst_2
         iload
         fconst_2
@@ -7664,7 +7894,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         istore
         fconst_1
         goto
-        FE F7new
+        FE F7
+        new
         nop
         aload_1
         dup
@@ -7688,7 +7919,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         nop
-        CEnop
+        CE
+        nop
         baload
         nop
         nop
@@ -7795,19 +8027,24 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         lconst_1
         daload
         nop
-        CDlconst_1
+        CD
+        lconst_1
         baload
         nop
-        D0lconst_1
+        D0
+        lconst_1
         saload
         nop
-        E5lconst_1
+        E5
+        lconst_1
         fstore
         nop
-        F1lconst_1
+        F1
+        lconst_1
         astore
         nop
-        F8lconst_1
+        F8
+        lconst_1
         istore_1
         aconst_null
         iconst_2
@@ -7894,25 +8131,31 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         nop
-        F5nop
+        F5
+        nop
         iload_1
         fconst_1
-        FDnop
+        FD
+        nop
         iconst_4
         aconst_null
         aconst_null
-        FDnop
+        FD
+        nop
         iaload
         aconst_null
         aconst_null
-        FAnop
+        FA
+        nop
         lconst_1
         fconst_1
-        FAnop
+        FA
+        nop
         iconst_m1
         iconst_m1
         aconst_null
-        FEnop
+        FE
+        nop
         iaload
         iconst_4
         nop
@@ -7924,7 +8167,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_0
         lstore_1
         aconst_null
-        FFnop
+        FF
+        nop
         iconst_1
         nop
         fconst_2
@@ -7951,7 +8195,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aconst_null
         nop
         nop
-        FFnop
+        FF
+        nop
         faload
         nop
         fconst_2
@@ -7978,7 +8223,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aconst_null
         nop
         nop
-        FFnop
+        FF
+        nop
         iconst_m1
         nop
         fconst_2
@@ -8007,7 +8253,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         ldc2_w
         fconst_0
-        FFnop
+        FF
+        nop
         iconst_3
         nop
         fconst_2
@@ -8037,7 +8284,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         fconst_1
         sipush
         iload_2
-        FFnop
+        FF
+        nop
         iconst_3
         nop
         fconst_2
@@ -8066,15 +8314,19 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aconst_null
         nop
         nop
-        FCnop
+        FC
+        nop
         aload_0
         aconst_null
-        FCnop
+        FC
+        nop
         iconst_m1
         aconst_null
-        FAnop
+        FA
+        nop
         iload_2
-        FFnop
+        FF
+        nop
         fconst_1
         nop
         fconst_2
@@ -8102,7 +8354,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         lconst_1
-        FFnop
+        FF
+        nop
         lconst_0
         nop
         iconst_5
@@ -8250,7 +8503,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iadd
         istore_2
         goto
-        FFputfield
+        FF
+        putfield
         aload_0
         areturn
         iconst_0
@@ -8541,7 +8795,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         dconst_0
         aconst_null
         goto
-        FF E6iload
+        FF E6
+        iload
         iconst_1
         iload
         fconst_2
@@ -8573,7 +8828,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         istore
         fconst_1
         goto
-        FE F8new
+        FE F8
+        new
         nop
         aload_1
         dup
@@ -8597,7 +8853,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         nop
-        D2nop
+        D2
+        nop
         caload
         nop
         nop
@@ -8670,7 +8927,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         idiv
         lconst_1
-        C4nop
+        C4
+        nop
         ishl
         lconst_1
         ifnull
@@ -8681,116 +8939,163 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         ifne
         lconst_1
-        CDnop
+        CD
+        nop
         if_icmpgt
         lconst_1
-        CEnop
+        CE
+        nop
         ireturn
         lconst_1
-        CFnop
+        CF
+        nop
         newarray
         lconst_1
-        D1nop
-        C4lconst_1
-        D2nop
-        CElconst_1
-        D4nop
-        D1lconst_1
-        D6nop
-        D6lconst_1
-        D7nop
-        E2lconst_1
-        D9nop
-        E9lconst_1
-        DBnop
-        F6lconst_1
-        DDnop
-        FClconst_1
-        DEaconst_null
+        D1
+        nop
+        C4
+        lconst_1
+        D2
+        nop
+        CE
+        lconst_1
+        D4
+        nop
+        D1
+        lconst_1
+        D6
+        nop
+        D6
+        lconst_1
+        D7
+        nop
+        E2
+        lconst_1
+        D9
+        nop
+        E9
+        lconst_1
+        DB
+        nop
+        F6
+        lconst_1
+        DD
+        nop
+        FC
+        lconst_1
+        DE
+        aconst_null
         aconst_null
         lconst_1
-        DFaconst_null
+        DF
+        aconst_null
         iconst_2
         lconst_1
-        E0aconst_null
+        E0
+        aconst_null
         fconst_2
         lconst_1
-        E2aconst_null
+        E2
+        aconst_null
         fload
         lconst_1
-        E4aconst_null
+        E4
+        aconst_null
         iload_3
         lconst_1
-        E5aconst_null
+        E5
+        aconst_null
         daload
         lconst_1
-        E6aconst_null
+        E6
+        aconst_null
         caload
         lconst_1
-        E8aconst_null
+        E8
+        aconst_null
         istore_0
         lconst_1
-        ECaconst_null
+        EC
+        aconst_null
         lstore_1
         lconst_1
-        EDaconst_null
+        ED
+        aconst_null
         dstore_0
         lconst_1
-        EEaconst_null
+        EE
+        aconst_null
         bastore
         lconst_1
-        EFaconst_null
+        EF
+        aconst_null
         fadd
         lconst_1
-        F0aconst_null
+        F0
+        aconst_null
         fsub
         lconst_1
-        F2aconst_null
+        F2
+        aconst_null
         irem
         lconst_1
-        F3aconst_null
+        F3
+        aconst_null
         ior
         lconst_1
-        F2aconst_null
+        F2
+        aconst_null
         i2f
         lconst_1
-        F5aconst_null
+        F5
+        aconst_null
         d2f
         lconst_1
-        F6aconst_null
+        F6
+        aconst_null
         i2s
         lconst_1
-        F7aconst_null
+        F7
+        aconst_null
         ifle
         lconst_1
-        CDaconst_null
+        CD
+        aconst_null
         jsr
         lconst_1
-        FAnop
+        FA
+        nop
         dreturn
         nop
         nop
         nop
-        F7nop
+        F7
+        nop
         iload_0
         fconst_1
-        FDnop
+        FD
+        nop
         iconst_4
         aconst_null
         aconst_null
-        FCnop
+        FC
+        nop
         aload_1
         aconst_null
-        FCnop
+        FC
+        nop
         iconst_m1
         aconst_null
-        FCnop
+        FC
+        nop
         lload
         aconst_null
-        F8nop
+        F8
+        nop
         iconst_4
         aconst_null
-        FEnop
+        FE
+        nop
         iaload
         aconst_null
         iconst_4
@@ -8802,7 +9107,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_0
         lstore_1
         aconst_null
-        FFnop
+        FF
+        nop
         iconst_1
         nop
         fconst_2
@@ -8829,7 +9135,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aconst_null
         nop
         nop
-        FFnop
+        FF
+        nop
         faload
         nop
         fconst_2
@@ -8856,7 +9163,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aconst_null
         nop
         nop
-        FFnop
+        FF
+        nop
         iconst_m1
         nop
         fconst_2
@@ -8884,7 +9192,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         bipush
-        FFnop
+        FF
+        nop
         iconst_3
         nop
         fconst_2
@@ -8915,7 +9224,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         lload
         lconst_0
         iload_2
-        FFnop
+        FF
+        nop
         iconst_3
         nop
         fconst_2
@@ -8944,15 +9254,19 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         aconst_null
         nop
         nop
-        FCnop
+        FC
+        nop
         aload_0
         aconst_null
-        FCnop
+        FC
+        nop
         iconst_m1
         aconst_null
-        FAnop
+        FA
+        nop
         iload_2
-        FFnop
+        FF
+        nop
         fconst_1
         nop
         fconst_2
@@ -8980,7 +9294,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         lconst_1
-        FFnop
+        FF
+        nop
         lconst_0
         nop
         iconst_5
@@ -9062,7 +9377,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         iconst_m1
         aconst_null
         goto
-        FF F0iload_2
+        FF F0
+        iload_2
         iload_1
         if_icmpge
         nop
@@ -9079,8 +9395,10 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         lconst_0
         iinc
         aconst_null
-        FFgoto
-        FF EEiload_2
+        FF
+        goto
+        FF EE
+        iload_2
         ifgt
         nop
         fconst_1
@@ -9156,7 +9474,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         ldc
         nop
         iconst_3
-        FEnop
+        FE
+        nop
         fconst_2
         aconst_null
         aconst_null
@@ -9418,7 +9737,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         fconst_0
-        D8 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}
+        D8 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    }
     
     public static String copyValueOf(char[], int, int) {
         new
@@ -9447,7 +9767,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         fconst_0
-        E9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}
+        E9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    }
     
     public static String copyValueOf(char[]) {
         new
@@ -9474,7 +9795,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         nop
         nop
         fconst_0
-        F4 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}
+        F4 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    }
     
     public static String valueOf(boolean) {
         iload_0
