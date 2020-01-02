@@ -60,41 +60,41 @@ public abstract /* super */ class InputStream implements Closeable {
         0029: ireturn
         002a: aload_0
         002b: invokevirtual #7 // InputStream.read ()I
-        002e: istore local_var:4
-        0030: iload local_var:4
+        002e: istore local_4
+        0030: iload local_4
         0032: iconst_m1
         0033: if_icmpne +5 // 0038
         0036: iconst_m1
         0037: ireturn
         0038: aload_1
         0039: iload_2
-        003a: iload local_var:4
+        003a: iload local_4
         003c: i2b
         003d: bastore
         003e: iconst_1
-        003f: istore local_var:5
-        0041: iload local_var:5
+        003f: istore local_5
+        0041: iload local_5
         0043: iload_3
         0044: if_icmpge +33 // 0065
         0047: aload_0
         0048: invokevirtual #7 // InputStream.read ()I
-        004b: istore local_var:4
-        004d: iload local_var:4
+        004b: istore local_4
+        004d: iload local_4
         004f: iconst_m1
         0050: if_icmpne +6 // 0056
         0053: goto +18 // 0065
         0056: aload_1
         0057: iload_2
-        0058: iload local_var:5
+        0058: iload local_5
         005a: iadd
-        005b: iload local_var:4
+        005b: iload local_4
         005d: i2b
         005e: bastore
-        005f: iinc local_var:51
+        005f: iinc local_5, 1
         0062: goto -33 // 0041
         0065: goto +5 // 006a
-        0068: astore local_var:6
-        006a: iload local_var:5
+        0068: astore local_6
+        006a: iload local_5
         006c: ireturn
     }
     
@@ -113,29 +113,29 @@ public abstract /* super */ class InputStream implements Closeable {
         000d: lload_3
         000e: invokestatic #12 // Math.min (JJ)J
         0011: l2i
-        0012: istore local_var:6
-        0014: iload local_var:6
+        0012: istore local_6
+        0014: iload local_6
         0016: newarray 8 // byte[]
-        0018: astore local_var:7
+        0018: astore local_7
         001a: lload_3
         001b: lconst_0
         001c: lcmp
         001d: ifle +37 // 0042
         0020: aload_0
-        0021: aload local_var:7
+        0021: aload local_7
         0023: iconst_0
-        0024: iload local_var:6
+        0024: iload local_6
         0026: i2l
         0027: lload_3
         0028: invokestatic #12 // Math.min (JJ)J
         002b: l2i
         002c: invokevirtual #2 // InputStream.read ([BII)I
-        002f: istore local_var:5
-        0031: iload local_var:5
+        002f: istore local_5
+        0031: iload local_5
         0033: ifge +6 // 0039
         0036: goto +12 // 0042
         0039: lload_3
-        003a: iload local_var:5
+        003a: iload local_5
         003c: i2l
         003d: lsub
         003e: lstore_3

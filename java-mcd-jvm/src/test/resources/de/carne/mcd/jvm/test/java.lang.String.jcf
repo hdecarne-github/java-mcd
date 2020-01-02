@@ -160,68 +160,68 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0045: iload_2
         0046: iload_3
         0047: iadd
-        0048: istore local_var:4
+        0048: istore local_4
         004a: iload_3
-        004b: istore local_var:5
+        004b: istore local_5
         004d: iload_2
-        004e: istore local_var:6
-        0050: iload local_var:6
-        0052: iload local_var:4
+        004e: istore local_6
+        0050: iload local_6
+        0052: iload local_4
         0054: if_icmpge +53 // 0089
         0057: aload_1
-        0058: iload local_var:6
+        0058: iload local_6
         005a: iaload
-        005b: istore local_var:7
-        005d: iload local_var:7
+        005b: istore local_7
+        005d: iload local_7
         005f: invokestatic #9 // Character.isBmpCodePoint (I)Z
         0062: ifeq +6 // 0068
         0065: goto +30 // 0083
-        0068: iload local_var:7
+        0068: iload local_7
         006a: invokestatic #10 // Character.isValidCodePoint (I)Z
         006d: ifeq +9 // 0076
-        0070: iinc local_var:51
+        0070: iinc local_5, 1
         0073: goto +16 // 0083
         0076: new #11 // java/lang/IllegalArgumentException
         0079: dup
-        007a: iload local_var:7
+        007a: iload local_7
         007c: invokestatic #12 // Integer.toString (I)Ljava/lang/String;
         007f: invokespecial #13 // IllegalArgumentException.<init> (Ljava/lang/String;)V
         0082: athrow
-        0083: iinc local_var:61
+        0083: iinc local_6, 1
         0086: goto -54 // 0050
-        0089: iload local_var:5
+        0089: iload local_5
         008b: newarray 5 // char[]
-        008d: astore local_var:6
+        008d: astore local_6
         008f: iload_2
-        0090: istore local_var:7
+        0090: istore local_7
         0092: iconst_0
-        0093: istore local_var:8
-        0095: iload local_var:7
-        0097: iload local_var:4
+        0093: istore local_8
+        0095: iload local_7
+        0097: iload local_4
         0099: if_icmpge +49 // 00ca
         009c: aload_1
-        009d: iload local_var:7
+        009d: iload local_7
         009f: iaload
-        00a0: istore local_var:9
-        00a2: iload local_var:9
+        00a0: istore local_9
+        00a2: iload local_9
         00a4: invokestatic #9 // Character.isBmpCodePoint (I)Z
         00a7: ifeq +14 // 00b5
-        00aa: aload local_var:6
-        00ac: iload local_var:8
-        00ae: iload local_var:9
+        00aa: aload local_6
+        00ac: iload local_8
+        00ae: iload local_9
         00b0: i2c
         00b1: castore
         00b2: goto +15 // 00c1
-        00b5: iload local_var:9
-        00b7: aload local_var:6
-        00b9: iload local_var:8
-        00bb: iinc local_var:81
+        00b5: iload local_9
+        00b7: aload local_6
+        00b9: iload local_8
+        00bb: iinc local_8, 1
         00be: invokestatic #14 // Character.toSurrogates (I[CI)V
-        00c1: iinc local_var:71
-        00c4: iinc local_var:81
+        00c1: iinc local_7, 1
+        00c4: iinc local_8, 1
         00c7: goto -50 // 0095
         00ca: aload_0
-        00cb: aload local_var:6
+        00cb: aload local_6
         00cd: putfield #3 // String.value [C
         00d0: return
     }
@@ -234,22 +234,22 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0001: invokespecial #1 // Object.<init> ()V
         0004: aload_1
         0005: iload_3
-        0006: iload local_var:4
+        0006: iload local_4
         0008: invokestatic #15 // String.checkBounds ([BII)V
-        000b: iload local_var:4
+        000b: iload local_4
         000d: newarray 5 // char[]
-        000f: astore local_var:5
+        000f: astore local_5
         0011: iload_2
         0012: ifne +37 // 0037
-        0015: iload local_var:4
-        0017: istore local_var:6
-        0019: iload local_var:6
-        001b: iinc local_var:6-1
+        0015: iload local_4
+        0017: istore local_6
+        0019: iload local_6
+        001b: iinc local_6, -1
         001e: ifle +22 // 0034
-        0021: aload local_var:5
-        0023: iload local_var:6
+        0021: aload local_5
+        0023: iload local_6
         0025: aload_1
-        0026: iload local_var:6
+        0026: iload local_6
         0028: iload_3
         0029: iadd
         002a: baload
@@ -263,16 +263,16 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0038: bipush 8
         003a: ishl
         003b: istore_2
-        003c: iload local_var:4
-        003e: istore local_var:6
-        0040: iload local_var:6
-        0042: iinc local_var:6-1
+        003c: iload local_4
+        003e: istore local_6
+        0040: iload local_6
+        0042: iinc local_6, -1
         0045: ifle +24 // 005d
-        0048: aload local_var:5
-        004a: iload local_var:6
+        0048: aload local_5
+        004a: iload local_6
         004c: iload_2
         004d: aload_1
-        004e: iload local_var:6
+        004e: iload local_6
         0050: iload_3
         0051: iadd
         0052: baload
@@ -283,7 +283,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0059: castore
         005a: goto -26 // 0040
         005d: aload_0
-        005e: aload local_var:5
+        005e: aload local_5
         0060: putfield #3 // String.value [C
         0063: return
     }
@@ -340,7 +340,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 5
         0000: aload_0
         0001: invokespecial #1 // Object.<init> ()V
-        0004: aload local_var:4
+        0004: aload local_4
         0006: ifnonnull +13 // 0013
         0009: new #17 // java/lang/NullPointerException
         000c: dup
@@ -352,7 +352,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0015: iload_3
         0016: invokestatic #15 // String.checkBounds ([BII)V
         0019: aload_0
-        001a: aload local_var:4
+        001a: aload local_4
         001c: aload_1
         001d: iload_2
         001e: iload_3
@@ -366,7 +366,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 5
         0000: aload_0
         0001: invokespecial #1 // Object.<init> ()V
-        0004: aload local_var:4
+        0004: aload local_4
         0006: ifnonnull +13 // 0013
         0009: new #17 // java/lang/NullPointerException
         000c: dup
@@ -378,7 +378,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0015: iload_3
         0016: invokestatic #15 // String.checkBounds ([BII)V
         0019: aload_0
-        001a: aload local_var:4
+        001a: aload local_4
         001c: aload_1
         001d: iload_2
         001e: iload_3
@@ -694,7 +694,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0030: getfield #3 // String.value [C
         0033: iload_1
         0034: aload_3
-        0035: iload local_var:4
+        0035: iload local_4
         0037: iload_2
         0038: iload_1
         0039: isub
@@ -736,24 +736,24 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         002f: aload_3
         0030: invokestatic #38 // java.util.Objects.requireNonNull (Ljava/lang/Object;)Ljava/lang/Object;
         0033: pop
-        0034: iload local_var:4
-        0036: istore local_var:5
+        0034: iload local_4
+        0036: istore local_5
         0038: iload_2
-        0039: istore local_var:6
+        0039: istore local_6
         003b: iload_1
-        003c: istore local_var:7
+        003c: istore local_7
         003e: aload_0
         003f: getfield #3 // String.value [C
-        0042: astore local_var:8
-        0044: iload local_var:7
-        0046: iload local_var:6
+        0042: astore local_8
+        0044: iload local_7
+        0046: iload local_6
         0048: if_icmpge +22 // 005e
         004b: aload_3
-        004c: iload local_var:5
-        004e: iinc local_var:51
-        0051: aload local_var:8
-        0053: iload local_var:7
-        0055: iinc local_var:71
+        004c: iload local_5
+        004e: iinc local_5, 1
+        0051: aload local_8
+        0053: iload local_7
+        0055: iinc local_7, 1
         0058: caload
         0059: i2b
         005a: bastore
@@ -839,25 +839,25 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         001f: if_icmpne +48 // 004f
         0022: aload_0
         0023: getfield #3 // String.value [C
-        0026: astore local_var:4
+        0026: astore local_4
         0028: aload_2
         0029: getfield #3 // String.value [C
-        002c: astore local_var:5
+        002c: astore local_5
         002e: iconst_0
-        002f: istore local_var:6
+        002f: istore local_6
         0031: iload_3
-        0032: iinc local_var:3-1
+        0032: iinc local_3, -1
         0035: ifeq +24 // 004d
-        0038: aload local_var:4
-        003a: iload local_var:6
+        0038: aload local_4
+        003a: iload local_6
         003c: caload
-        003d: aload local_var:5
-        003f: iload local_var:6
+        003d: aload local_5
+        003f: iload local_6
         0041: caload
         0042: if_icmpeq +5 // 0047
         0045: iconst_0
         0046: ireturn
-        0047: iinc local_var:61
+        0047: iinc local_6, 1
         004a: goto -25 // 0031
         004d: iconst_1
         004e: ireturn
@@ -885,28 +885,28 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0009: astore_3
         000a: aload_2
         000b: arraylength
-        000c: istore local_var:4
-        000e: iload local_var:4
+        000c: istore local_4
+        000e: iload local_4
         0010: aload_1
         0011: invokevirtual #46 // AbstractStringBuilder.length ()I
         0014: if_icmpeq +5 // 0019
         0017: iconst_0
         0018: ireturn
         0019: iconst_0
-        001a: istore local_var:5
-        001c: iload local_var:5
-        001e: iload local_var:4
+        001a: istore local_5
+        001c: iload local_5
+        001e: iload local_4
         0020: if_icmpge +22 // 0036
         0023: aload_2
-        0024: iload local_var:5
+        0024: iload local_5
         0026: caload
         0027: aload_3
-        0028: iload local_var:5
+        0028: iload local_5
         002a: caload
         002b: if_icmpeq +5 // 0030
         002e: iconst_0
         002f: ireturn
-        0030: iinc local_var:51
+        0030: iinc local_5, 1
         0033: goto -23 // 001c
         0036: iconst_1
         0037: ireturn
@@ -962,20 +962,20 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         004a: iconst_0
         004b: ireturn
         004c: iconst_0
-        004d: istore local_var:4
-        004f: iload local_var:4
+        004d: istore local_4
+        004f: iload local_4
         0051: iload_3
         0052: if_icmpge +26 // 006c
         0055: aload_2
-        0056: iload local_var:4
+        0056: iload local_4
         0058: caload
         0059: aload_1
-        005a: iload local_var:4
+        005a: iload local_4
         005c: invokeinterface #52 // CharSequence.charAt (I)C
         0061: if_icmpeq +5 // 0066
         0064: iconst_0
         0065: ireturn
-        0066: iinc local_var:41
+        0066: iinc local_4, 1
         0069: goto -26 // 004f
         006c: iconst_1
         006d: ireturn
@@ -1028,34 +1028,34 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         000c: iload_2
         000d: iload_3
         000e: invokestatic #54 // Math.min (II)I
-        0011: istore local_var:4
+        0011: istore local_4
         0013: aload_0
         0014: getfield #3 // String.value [C
-        0017: astore local_var:5
+        0017: astore local_5
         0019: aload_1
         001a: getfield #3 // String.value [C
-        001d: astore local_var:6
+        001d: astore local_6
         001f: iconst_0
-        0020: istore local_var:7
-        0022: iload local_var:7
-        0024: iload local_var:4
+        0020: istore local_7
+        0022: iload local_7
+        0024: iload local_4
         0026: if_icmpge +36 // 004a
-        0029: aload local_var:5
-        002b: iload local_var:7
+        0029: aload local_5
+        002b: iload local_7
         002d: caload
-        002e: istore local_var:8
-        0030: aload local_var:6
-        0032: iload local_var:7
+        002e: istore local_8
+        0030: aload local_6
+        0032: iload local_7
         0034: caload
-        0035: istore local_var:9
-        0037: iload local_var:8
-        0039: iload local_var:9
+        0035: istore local_9
+        0037: iload local_8
+        0039: iload local_9
         003b: if_icmpeq +9 // 0044
-        003e: iload local_var:8
-        0040: iload local_var:9
+        003e: iload local_8
+        0040: iload local_9
         0042: isub
         0043: ireturn
-        0044: iinc local_var:71
+        0044: iinc local_7, 1
         0047: goto -37 // 0022
         004a: iload_2
         004b: iload_3
@@ -1078,14 +1078,14 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 9
         0000: aload_0
         0001: getfield #3 // String.value [C
-        0004: astore local_var:5
+        0004: astore local_5
         0006: iload_1
-        0007: istore local_var:6
+        0007: istore local_6
         0009: aload_2
         000a: getfield #3 // String.value [C
-        000d: astore local_var:7
+        000d: astore local_7
         000f: iload_3
-        0010: istore local_var:8
+        0010: istore local_8
         0012: iload_3
         0013: iflt +39 // 003a
         0016: iload_1
@@ -1096,7 +1096,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         001d: getfield #3 // String.value [C
         0020: arraylength
         0021: i2l
-        0022: iload local_var:4
+        0022: iload local_4
         0024: i2l
         0025: lsub
         0026: lcmp
@@ -1107,23 +1107,23 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         002d: getfield #3 // String.value [C
         0030: arraylength
         0031: i2l
-        0032: iload local_var:4
+        0032: iload local_4
         0034: i2l
         0035: lsub
         0036: lcmp
         0037: ifle +5 // 003c
         003a: iconst_0
         003b: ireturn
-        003c: iload local_var:4
-        003e: iinc local_var:4-1
+        003c: iload local_4
+        003e: iinc local_4, -1
         0041: ifle +24 // 0059
-        0044: aload local_var:5
-        0046: iload local_var:6
-        0048: iinc local_var:61
+        0044: aload local_5
+        0046: iload local_6
+        0048: iinc local_6, 1
         004b: caload
-        004c: aload local_var:7
-        004e: iload local_var:8
-        0050: iinc local_var:81
+        004c: aload local_7
+        004e: iload local_8
+        0050: iinc local_8, 1
         0053: caload
         0054: if_icmpeq -24 // 003c
         0057: iconst_0
@@ -1137,15 +1137,15 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 14
         0000: aload_0
         0001: getfield #3 // String.value [C
-        0004: astore local_var:6
+        0004: astore local_6
         0006: iload_2
-        0007: istore local_var:7
+        0007: istore local_7
         0009: aload_3
         000a: getfield #3 // String.value [C
-        000d: astore local_var:8
-        000f: iload local_var:4
-        0011: istore local_var:9
-        0013: iload local_var:4
+        000d: astore local_8
+        000f: iload local_4
+        0011: istore local_9
+        0013: iload local_4
         0015: iflt +40 // 003d
         0018: iload_2
         0019: iflt +36 // 003d
@@ -1155,56 +1155,56 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         001f: getfield #3 // String.value [C
         0022: arraylength
         0023: i2l
-        0024: iload local_var:5
+        0024: iload local_5
         0026: i2l
         0027: lsub
         0028: lcmp
         0029: ifgt +20 // 003d
-        002c: iload local_var:4
+        002c: iload local_4
         002e: i2l
         002f: aload_3
         0030: getfield #3 // String.value [C
         0033: arraylength
         0034: i2l
-        0035: iload local_var:5
+        0035: iload local_5
         0037: i2l
         0038: lsub
         0039: lcmp
         003a: ifle +5 // 003f
         003d: iconst_0
         003e: ireturn
-        003f: iload local_var:5
-        0041: iinc local_var:5-1
+        003f: iload local_5
+        0041: iinc local_5, -1
         0044: ifle +79 // 0093
-        0047: aload local_var:6
-        0049: iload local_var:7
-        004b: iinc local_var:71
+        0047: aload local_6
+        0049: iload local_7
+        004b: iinc local_7, 1
         004e: caload
-        004f: istore local_var:10
-        0051: aload local_var:8
-        0053: iload local_var:9
-        0055: iinc local_var:91
+        004f: istore local_10
+        0051: aload local_8
+        0053: iload local_9
+        0055: iinc local_9, 1
         0058: caload
-        0059: istore local_var:11
-        005b: iload local_var:10
-        005d: iload local_var:11
+        0059: istore local_11
+        005b: iload local_10
+        005d: iload local_11
         005f: if_icmpne +6 // 0065
         0062: goto -35 // 003f
         0065: iload_1
         0066: ifeq +43 // 0091
-        0069: iload local_var:10
+        0069: iload local_10
         006b: invokestatic #57 // Character.toUpperCase (C)C
-        006e: istore local_var:12
-        0070: iload local_var:11
+        006e: istore local_12
+        0070: iload local_11
         0072: invokestatic #57 // Character.toUpperCase (C)C
-        0075: istore local_var:13
-        0077: iload local_var:12
-        0079: iload local_var:13
+        0075: istore local_13
+        0077: iload local_12
+        0079: iload local_13
         007b: if_icmpne +6 // 0081
         007e: goto -63 // 003f
-        0081: iload local_var:12
+        0081: iload local_12
         0083: invokestatic #58 // Character.toLowerCase (C)C
-        0086: iload local_var:13
+        0086: iload local_13
         0088: invokestatic #58 // Character.toLowerCase (C)C
         008b: if_icmpne +6 // 0091
         008e: goto -79 // 003f
@@ -1221,37 +1221,37 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0001: getfield #3 // String.value [C
         0004: astore_3
         0005: iload_2
-        0006: istore local_var:4
+        0006: istore local_4
         0008: aload_1
         0009: getfield #3 // String.value [C
-        000c: astore local_var:5
+        000c: astore local_5
         000e: iconst_0
-        000f: istore local_var:6
+        000f: istore local_6
         0011: aload_1
         0012: getfield #3 // String.value [C
         0015: arraylength
-        0016: istore local_var:7
+        0016: istore local_7
         0018: iload_2
         0019: iflt +15 // 0028
         001c: iload_2
         001d: aload_0
         001e: getfield #3 // String.value [C
         0021: arraylength
-        0022: iload local_var:7
+        0022: iload local_7
         0024: isub
         0025: if_icmple +5 // 002a
         0028: iconst_0
         0029: ireturn
-        002a: iinc local_var:7-1
-        002d: iload local_var:7
+        002a: iinc local_7, -1
+        002d: iload local_7
         002f: iflt +23 // 0046
         0032: aload_3
-        0033: iload local_var:4
-        0035: iinc local_var:41
+        0033: iload local_4
+        0035: iinc local_4, 1
         0038: caload
-        0039: aload local_var:5
-        003b: iload local_var:6
-        003d: iinc local_var:61
+        0039: aload local_5
+        003b: iload local_6
+        003d: iinc local_6, 1
         0040: caload
         0041: if_icmpeq -23 // 002a
         0044: iconst_0
@@ -1316,7 +1316,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0027: caload
         0028: iadd
         0029: istore_1
-        002a: iinc local_var:31
+        002a: iinc local_3, 1
         002d: goto -21 // 0018
         0030: aload_0
         0031: iload_1
@@ -1357,20 +1357,20 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0019: if_icmpge +38 // 003f
         001c: aload_0
         001d: getfield #3 // String.value [C
-        0020: astore local_var:4
+        0020: astore local_4
         0022: iload_2
-        0023: istore local_var:5
-        0025: iload local_var:5
+        0023: istore local_5
+        0025: iload local_5
         0027: iload_3
         0028: if_icmpge +21 // 003d
-        002b: aload local_var:4
-        002d: iload local_var:5
+        002b: aload local_4
+        002d: iload local_5
         002f: caload
         0030: iload_1
         0031: if_icmpne +6 // 0037
-        0034: iload local_var:5
+        0034: iload local_5
         0036: ireturn
-        0037: iinc local_var:51
+        0037: iinc local_5, 1
         003a: goto -21 // 0025
         003d: iconst_m1
         003e: ireturn
@@ -1392,35 +1392,35 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         000b: astore_3
         000c: iload_1
         000d: invokestatic #64 // Character.highSurrogate (I)C
-        0010: istore local_var:4
+        0010: istore local_4
         0012: iload_1
         0013: invokestatic #65 // Character.lowSurrogate (I)C
-        0016: istore local_var:5
+        0016: istore local_5
         0018: aload_3
         0019: arraylength
         001a: iconst_1
         001b: isub
-        001c: istore local_var:6
+        001c: istore local_6
         001e: iload_2
-        001f: istore local_var:7
-        0021: iload local_var:7
-        0023: iload local_var:6
+        001f: istore local_7
+        0021: iload local_7
+        0023: iload local_6
         0025: if_icmpge +32 // 0045
         0028: aload_3
-        0029: iload local_var:7
+        0029: iload local_7
         002b: caload
-        002c: iload local_var:4
+        002c: iload local_4
         002e: if_icmpne +17 // 003f
         0031: aload_3
-        0032: iload local_var:7
+        0032: iload local_7
         0034: iconst_1
         0035: iadd
         0036: caload
-        0037: iload local_var:5
+        0037: iload local_5
         0039: if_icmpne +6 // 003f
-        003c: iload local_var:7
+        003c: iload local_7
         003e: ireturn
-        003f: iinc local_var:71
+        003f: iinc local_7, 1
         0042: goto -33 // 0021
         0045: iconst_m1
         0046: ireturn
@@ -1455,17 +1455,17 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         000e: iconst_1
         000f: isub
         0010: invokestatic #54 // Math.min (II)I
-        0013: istore local_var:4
-        0015: iload local_var:4
+        0013: istore local_4
+        0015: iload local_4
         0017: iflt +20 // 002b
         001a: aload_3
-        001b: iload local_var:4
+        001b: iload local_4
         001d: caload
         001e: iload_1
         001f: if_icmpne +6 // 0025
-        0022: iload local_var:4
+        0022: iload local_4
         0024: ireturn
-        0025: iinc local_var:4-1
+        0025: iinc local_4, -1
         0028: goto -19 // 0015
         002b: iconst_m1
         002c: ireturn
@@ -1487,34 +1487,34 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         000b: astore_3
         000c: iload_1
         000d: invokestatic #64 // Character.highSurrogate (I)C
-        0010: istore local_var:4
+        0010: istore local_4
         0012: iload_1
         0013: invokestatic #65 // Character.lowSurrogate (I)C
-        0016: istore local_var:5
+        0016: istore local_5
         0018: iload_2
         0019: aload_3
         001a: arraylength
         001b: iconst_2
         001c: isub
         001d: invokestatic #54 // Math.min (II)I
-        0020: istore local_var:6
-        0022: iload local_var:6
+        0020: istore local_6
+        0022: iload local_6
         0024: iflt +32 // 0044
         0027: aload_3
-        0028: iload local_var:6
+        0028: iload local_6
         002a: caload
-        002b: iload local_var:4
+        002b: iload local_4
         002d: if_icmpne +17 // 003e
         0030: aload_3
-        0031: iload local_var:6
+        0031: iload local_6
         0033: iconst_1
         0034: iadd
         0035: caload
-        0036: iload local_var:5
+        0036: iload local_5
         0038: if_icmpne +6 // 003e
-        003b: iload local_var:6
+        003b: iload local_6
         003d: ireturn
-        003e: iinc local_var:6-1
+        003e: iinc local_6, -1
         0041: goto -31 // 0022
         0044: iconst_m1
         0045: ireturn
@@ -1562,7 +1562,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0008: aload_3
         0009: getfield #3 // String.value [C
         000c: arraylength
-        000d: iload local_var:4
+        000d: iload local_4
         000f: invokestatic #69 // String.indexOf ([CII[CIII)I
         0012: ireturn
     }
@@ -1570,93 +1570,93 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
     static int indexOf(char[], int, int, char[], int, int, int) {
         // max_stack: 3
         // max_locals: 13
-        0000: iload local_var:6
+        0000: iload local_6
         0002: iload_2
         0003: if_icmplt +14 // 0011
-        0006: iload local_var:5
+        0006: iload local_5
         0008: ifne +7 // 000f
         000b: iload_2
         000c: goto +4 // 0010
         000f: iconst_m1
         0010: ireturn
-        0011: iload local_var:6
+        0011: iload local_6
         0013: ifge +6 // 0019
         0016: iconst_0
-        0017: istore local_var:6
-        0019: iload local_var:5
+        0017: istore local_6
+        0019: iload local_5
         001b: ifne +6 // 0021
-        001e: iload local_var:6
+        001e: iload local_6
         0020: ireturn
         0021: aload_3
-        0022: iload local_var:4
+        0022: iload local_4
         0024: caload
-        0025: istore local_var:7
+        0025: istore local_7
         0027: iload_1
         0028: iload_2
-        0029: iload local_var:5
+        0029: iload local_5
         002b: isub
         002c: iadd
-        002d: istore local_var:8
+        002d: istore local_8
         002f: iload_1
-        0030: iload local_var:6
+        0030: iload local_6
         0032: iadd
-        0033: istore local_var:9
-        0035: iload local_var:9
-        0037: iload local_var:8
+        0033: istore local_9
+        0035: iload local_9
+        0037: iload local_8
         0039: if_icmpgt +107 // 00a4
         003c: aload_0
-        003d: iload local_var:9
+        003d: iload local_9
         003f: caload
-        0040: iload local_var:7
+        0040: iload local_7
         0042: if_icmpeq +25 // 005b
-        0045: iinc local_var:91
-        0048: iload local_var:9
-        004a: iload local_var:8
+        0045: iinc local_9, 1
+        0048: iload local_9
+        004a: iload local_8
         004c: if_icmpgt +15 // 005b
         004f: aload_0
-        0050: iload local_var:9
+        0050: iload local_9
         0052: caload
-        0053: iload local_var:7
+        0053: iload local_7
         0055: if_icmpeq +6 // 005b
         0058: goto -19 // 0045
-        005b: iload local_var:9
-        005d: iload local_var:8
+        005b: iload local_9
+        005d: iload local_8
         005f: if_icmpgt +63 // 009e
-        0062: iload local_var:9
+        0062: iload local_9
         0064: iconst_1
         0065: iadd
-        0066: istore local_var:10
-        0068: iload local_var:10
-        006a: iload local_var:5
+        0066: istore local_10
+        0068: iload local_10
+        006a: iload local_5
         006c: iadd
         006d: iconst_1
         006e: isub
-        006f: istore local_var:11
-        0071: iload local_var:4
+        006f: istore local_11
+        0071: iload local_4
         0073: iconst_1
         0074: iadd
-        0075: istore local_var:12
-        0077: iload local_var:10
-        0079: iload local_var:11
+        0075: istore local_12
+        0077: iload local_10
+        0079: iload local_11
         007b: if_icmpge +23 // 0092
         007e: aload_0
-        007f: iload local_var:10
+        007f: iload local_10
         0081: caload
         0082: aload_3
-        0083: iload local_var:12
+        0083: iload local_12
         0085: caload
         0086: if_icmpne +12 // 0092
-        0089: iinc local_var:101
-        008c: iinc local_var:121
+        0089: iinc local_10, 1
+        008c: iinc local_12, 1
         008f: goto -24 // 0077
-        0092: iload local_var:10
-        0094: iload local_var:11
+        0092: iload local_10
+        0094: iload local_11
         0096: if_icmpne +8 // 009e
-        0099: iload local_var:9
+        0099: iload local_9
         009b: iload_1
         009c: isub
         009d: ireturn
-        009e: iinc local_var:91
+        009e: iinc local_9, 1
         00a1: goto -108 // 0035
         00a4: iconst_m1
         00a5: ireturn
@@ -1706,7 +1706,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0008: aload_3
         0009: getfield #3 // String.value [C
         000c: arraylength
-        000d: iload local_var:4
+        000d: iload local_4
         000f: invokestatic #71 // String.lastIndexOf ([CII[CIII)I
         0012: ireturn
     }
@@ -1715,86 +1715,86 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 3
         // max_locals: 15
         0000: iload_2
-        0001: iload local_var:5
+        0001: iload local_5
         0003: isub
-        0004: istore local_var:7
-        0006: iload local_var:6
+        0004: istore local_7
+        0006: iload local_6
         0008: ifge +5 // 000d
         000b: iconst_m1
         000c: ireturn
-        000d: iload local_var:6
-        000f: iload local_var:7
+        000d: iload local_6
+        000f: iload local_7
         0011: if_icmple +7 // 0018
-        0014: iload local_var:7
-        0016: istore local_var:6
-        0018: iload local_var:5
+        0014: iload local_7
+        0016: istore local_6
+        0018: iload local_5
         001a: ifne +6 // 0020
-        001d: iload local_var:6
+        001d: iload local_6
         001f: ireturn
-        0020: iload local_var:4
-        0022: iload local_var:5
+        0020: iload local_4
+        0022: iload local_5
         0024: iadd
         0025: iconst_1
         0026: isub
-        0027: istore local_var:8
+        0027: istore local_8
         0029: aload_3
-        002a: iload local_var:8
+        002a: iload local_8
         002c: caload
-        002d: istore local_var:9
+        002d: istore local_9
         002f: iload_1
-        0030: iload local_var:5
+        0030: iload local_5
         0032: iadd
         0033: iconst_1
         0034: isub
-        0035: istore local_var:10
-        0037: iload local_var:10
-        0039: iload local_var:6
+        0035: istore local_10
+        0037: iload local_10
+        0039: iload local_6
         003b: iadd
-        003c: istore local_var:11
-        003e: iload local_var:11
-        0040: iload local_var:10
+        003c: istore local_11
+        003e: iload local_11
+        0040: iload local_10
         0042: if_icmplt +18 // 0054
         0045: aload_0
-        0046: iload local_var:11
+        0046: iload local_11
         0048: caload
-        0049: iload local_var:9
+        0049: iload local_9
         004b: if_icmpeq +9 // 0054
-        004e: iinc local_var:11-1
+        004e: iinc local_11, -1
         0051: goto -19 // 003e
-        0054: iload local_var:11
-        0056: iload local_var:10
+        0054: iload local_11
+        0056: iload local_10
         0058: if_icmpge +5 // 005d
         005b: iconst_m1
         005c: ireturn
-        005d: iload local_var:11
+        005d: iload local_11
         005f: iconst_1
         0060: isub
-        0061: istore local_var:12
-        0063: iload local_var:12
-        0065: iload local_var:5
+        0061: istore local_12
+        0063: iload local_12
+        0065: iload local_5
         0067: iconst_1
         0068: isub
         0069: isub
-        006a: istore local_var:13
-        006c: iload local_var:8
+        006a: istore local_13
+        006c: iload local_8
         006e: iconst_1
         006f: isub
-        0070: istore local_var:14
-        0072: iload local_var:12
-        0074: iload local_var:13
+        0070: istore local_14
+        0072: iload local_12
+        0074: iload local_13
         0076: if_icmple +26 // 0090
         0079: aload_0
-        007a: iload local_var:12
-        007c: iinc local_var:12-1
+        007a: iload local_12
+        007c: iinc local_12, -1
         007f: caload
         0080: aload_3
-        0081: iload local_var:14
-        0083: iinc local_var:14-1
+        0081: iload local_14
+        0083: iinc local_14, -1
         0086: caload
         0087: if_icmpeq -21 // 0072
-        008a: iinc local_var:11-1
+        008a: iinc local_11, -1
         008d: goto -79 // 003e
-        0090: iload local_var:13
+        0090: iload local_13
         0092: iload_1
         0093: isub
         0094: iconst_1
@@ -1919,14 +1919,14 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0016: iload_2
         0017: iadd
         0018: invokestatic #5 // java.util.Arrays.copyOf ([CI)[C
-        001b: astore local_var:4
+        001b: astore local_4
         001d: aload_1
-        001e: aload local_var:4
+        001e: aload local_4
         0020: iload_3
         0021: invokevirtual #75 // String.getChars ([CI)V
         0024: new #43 // java/lang/String
         0027: dup
-        0028: aload local_var:4
+        0028: aload local_4
         002a: iconst_1
         002b: invokespecial #76 // String.<init> ([CZ)V
         002e: areturn
@@ -1943,60 +1943,60 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0009: arraylength
         000a: istore_3
         000b: iconst_m1
-        000c: istore local_var:4
+        000c: istore local_4
         000e: aload_0
         000f: getfield #3 // String.value [C
-        0012: astore local_var:5
-        0014: iinc local_var:41
-        0017: iload local_var:4
+        0012: astore local_5
+        0014: iinc local_4, 1
+        0017: iload local_4
         0019: iload_3
         001a: if_icmpge +15 // 0029
-        001d: aload local_var:5
-        001f: iload local_var:4
+        001d: aload local_5
+        001f: iload local_4
         0021: caload
         0022: iload_1
         0023: if_icmpne -15 // 0014
         0026: goto +3 // 0029
-        0029: iload local_var:4
+        0029: iload local_4
         002b: iload_3
         002c: if_icmpge +81 // 007d
         002f: iload_3
         0030: newarray 5 // char[]
-        0032: astore local_var:6
+        0032: astore local_6
         0034: iconst_0
-        0035: istore local_var:7
-        0037: iload local_var:7
-        0039: iload local_var:4
+        0035: istore local_7
+        0037: iload local_7
+        0039: iload local_4
         003b: if_icmpge +19 // 004e
-        003e: aload local_var:6
-        0040: iload local_var:7
-        0042: aload local_var:5
-        0044: iload local_var:7
+        003e: aload local_6
+        0040: iload local_7
+        0042: aload local_5
+        0044: iload local_7
         0046: caload
         0047: castore
-        0048: iinc local_var:71
+        0048: iinc local_7, 1
         004b: goto -20 // 0037
-        004e: iload local_var:4
+        004e: iload local_4
         0050: iload_3
         0051: if_icmpge +33 // 0072
-        0054: aload local_var:5
-        0056: iload local_var:4
+        0054: aload local_5
+        0056: iload local_4
         0058: caload
-        0059: istore local_var:7
-        005b: aload local_var:6
-        005d: iload local_var:4
-        005f: iload local_var:7
+        0059: istore local_7
+        005b: aload local_6
+        005d: iload local_4
+        005f: iload local_7
         0061: iload_1
         0062: if_icmpne +7 // 0069
         0065: iload_2
         0066: goto +5 // 006b
-        0069: iload local_var:7
+        0069: iload local_7
         006b: castore
-        006c: iinc local_var:41
+        006c: iinc local_4, 1
         006f: goto -33 // 004e
         0072: new #43 // java/lang/String
         0075: dup
-        0076: aload local_var:6
+        0076: aload local_6
         0078: iconst_1
         0079: invokespecial #76 // String.<init> ([CZ)V
         007c: areturn
@@ -2131,50 +2131,50 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         005e: ldc #91 // IntegerConstant:57343
         0060: if_icmple +220 // 013c
         0063: iconst_0
-        0064: istore local_var:4
+        0064: istore local_4
         0066: iconst_0
-        0067: istore local_var:5
+        0067: istore local_5
         0069: iload_2
         006a: ifle +7 // 0071
         006d: iconst_1
         006e: goto +4 // 0072
         0071: iconst_0
-        0072: istore local_var:6
+        0072: istore local_6
         0074: new #92 // java/util/ArrayList
         0077: dup
         0078: invokespecial #93 // java.util.ArrayList.<init> ()V
-        007b: astore local_var:7
+        007b: astore local_7
         007d: aload_0
         007e: iload_3
-        007f: iload local_var:4
+        007f: iload local_4
         0081: invokevirtual #60 // String.indexOf (II)I
         0084: dup
-        0085: istore local_var:5
+        0085: istore local_5
         0087: iconst_m1
         0088: if_icmpeq +69 // 00cd
-        008b: iload local_var:6
+        008b: iload local_6
         008d: ifeq +14 // 009b
-        0090: aload local_var:7
+        0090: aload local_7
         0092: invokevirtual #94 // java.util.ArrayList.size ()I
         0095: iload_2
         0096: iconst_1
         0097: isub
         0098: if_icmpge +26 // 00b2
-        009b: aload local_var:7
+        009b: aload local_7
         009d: aload_0
-        009e: iload local_var:4
-        00a0: iload local_var:5
+        009e: iload local_4
+        00a0: iload local_5
         00a2: invokevirtual #73 // String.substring (II)Ljava/lang/String;
         00a5: invokevirtual #95 // java.util.ArrayList.add (Ljava/lang/Object;)Z
         00a8: pop
-        00a9: iload local_var:5
+        00a9: iload local_5
         00ab: iconst_1
         00ac: iadd
-        00ad: istore local_var:4
+        00ad: istore local_4
         00af: goto -50 // 007d
-        00b2: aload local_var:7
+        00b2: aload local_7
         00b4: aload_0
-        00b5: iload local_var:4
+        00b5: iload local_4
         00b7: aload_0
         00b8: getfield #3 // String.value [C
         00bb: arraylength
@@ -2184,9 +2184,9 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         00c3: aload_0
         00c4: getfield #3 // String.value [C
         00c7: arraylength
-        00c8: istore local_var:4
+        00c8: istore local_4
         00ca: goto +3 // 00cd
-        00cd: iload local_var:4
+        00cd: iload local_4
         00cf: ifne +12 // 00db
         00d2: iconst_1
         00d3: anewarray #43 // java/lang/String
@@ -2195,46 +2195,46 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         00d8: aload_0
         00d9: aastore
         00da: areturn
-        00db: iload local_var:6
+        00db: iload local_6
         00dd: ifeq +12 // 00e9
-        00e0: aload local_var:7
+        00e0: aload local_7
         00e2: invokevirtual #94 // java.util.ArrayList.size ()I
         00e5: iload_2
         00e6: if_icmpge +20 // 00fa
-        00e9: aload local_var:7
+        00e9: aload local_7
         00eb: aload_0
-        00ec: iload local_var:4
+        00ec: iload local_4
         00ee: aload_0
         00ef: getfield #3 // String.value [C
         00f2: arraylength
         00f3: invokevirtual #73 // String.substring (II)Ljava/lang/String;
         00f6: invokevirtual #95 // java.util.ArrayList.add (Ljava/lang/Object;)Z
         00f9: pop
-        00fa: aload local_var:7
+        00fa: aload local_7
         00fc: invokevirtual #94 // java.util.ArrayList.size ()I
-        00ff: istore local_var:8
+        00ff: istore local_8
         0101: iload_2
         0102: ifne +32 // 0122
-        0105: iload local_var:8
+        0105: iload local_8
         0107: ifle +27 // 0122
-        010a: aload local_var:7
-        010c: iload local_var:8
+        010a: aload local_7
+        010c: iload local_8
         010e: iconst_1
         010f: isub
         0110: invokevirtual #96 // java.util.ArrayList.get (I)Ljava/lang/Object;
         0113: checkcast #43 // java/lang/String
         0116: invokevirtual #74 // String.length ()I
         0119: ifne +9 // 0122
-        011c: iinc local_var:8-1
+        011c: iinc local_8, -1
         011f: goto -26 // 0105
-        0122: iload local_var:8
+        0122: iload local_8
         0124: anewarray #43 // java/lang/String
-        0127: astore local_var:9
-        0129: aload local_var:7
+        0127: astore local_9
+        0129: aload local_7
         012b: iconst_0
-        012c: iload local_var:8
+        012c: iload local_8
         012e: invokevirtual #97 // java.util.ArrayList.subList (II)Ljava/util/List;
-        0131: aload local_var:9
+        0131: aload local_9
         0133: invokeinterface #98 // java.util.List.toArray ([Ljava/lang/Object;)[Ljava/lang/Object;
         0138: checkcast #99 // [Ljava/lang/String;
         013b: areturn
@@ -2274,21 +2274,21 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0014: astore_3
         0015: aload_3
         0016: arraylength
-        0017: istore local_var:4
+        0017: istore local_4
         0019: iconst_0
-        001a: istore local_var:5
-        001c: iload local_var:5
-        001e: iload local_var:4
+        001a: istore local_5
+        001c: iload local_5
+        001e: iload local_4
         0020: if_icmpge +22 // 0036
         0023: aload_3
-        0024: iload local_var:5
+        0024: iload local_5
         0026: aaload
-        0027: astore local_var:6
+        0027: astore local_6
         0029: aload_2
-        002a: aload local_var:6
+        002a: aload local_6
         002c: invokevirtual #104 // java.util.StringJoiner.add (Ljava/lang/CharSequence;)Ljava/util/StringJoiner;
         002f: pop
-        0030: iinc local_var:51
+        0030: iinc local_5, 1
         0033: goto -23 // 001c
         0036: aload_2
         0037: invokevirtual #105 // java.util.StringJoiner.toString ()Ljava/lang/String;
@@ -2319,9 +2319,9 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0023: aload_3
         0024: invokeinterface #108 // java.util.Iterator.next ()Ljava/lang/Object;
         0029: checkcast #109 // java/lang/CharSequence
-        002c: astore local_var:4
+        002c: astore local_4
         002e: aload_2
-        002f: aload local_var:4
+        002f: aload local_4
         0031: invokevirtual #104 // java.util.StringJoiner.add (Ljava/lang/CharSequence;)Ljava/util/StringJoiner;
         0034: pop
         0035: goto -27 // 001a
@@ -2352,209 +2352,209 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         001a: getfield #3 // String.value [C
         001d: iload_2
         001e: caload
-        001f: istore local_var:4
-        0021: iload local_var:4
+        001f: istore local_4
+        0021: iload local_4
         0023: ldc #90 // IntegerConstant:55296
         0025: if_icmplt +41 // 004e
-        0028: iload local_var:4
+        0028: iload local_4
         002a: ldc #110 // IntegerConstant:56319
         002c: if_icmpgt +34 // 004e
         002f: aload_0
         0030: iload_2
         0031: invokevirtual #111 // String.codePointAt (I)I
-        0034: istore local_var:5
-        0036: iload local_var:5
-        0038: iload local_var:5
+        0034: istore local_5
+        0036: iload local_5
+        0038: iload local_5
         003a: invokestatic #112 // Character.toLowerCase (I)I
         003d: if_icmpeq +6 // 0043
         0040: goto +35 // 0063
         0043: iload_2
-        0044: iload local_var:5
+        0044: iload local_5
         0046: invokestatic #113 // Character.charCount (I)I
         0049: iadd
         004a: istore_2
         004b: goto +19 // 005e
-        004e: iload local_var:4
-        0050: iload local_var:4
+        004e: iload local_4
+        0050: iload local_4
         0052: invokestatic #58 // Character.toLowerCase (C)C
         0055: if_icmpeq +6 // 005b
         0058: goto +11 // 0063
-        005b: iinc local_var:21
+        005b: iinc local_2, 1
         005e: goto -74 // 0014
         0061: aload_0
         0062: areturn
         0063: iload_3
         0064: newarray 5 // char[]
-        0066: astore local_var:4
+        0066: astore local_4
         0068: iconst_0
-        0069: istore local_var:5
+        0069: istore local_5
         006b: aload_0
         006c: getfield #3 // String.value [C
         006f: iconst_0
-        0070: aload local_var:4
+        0070: aload local_4
         0072: iconst_0
         0073: iload_2
         0074: invokestatic #37 // System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V
         0077: aload_1
         0078: invokevirtual #114 // java.util.Locale.getLanguage ()Ljava/lang/String;
-        007b: astore local_var:6
-        007d: aload local_var:6
+        007b: astore local_6
+        007d: aload local_6
         007f: ldc #115 // "tr"
         0081: if_acmpeq +17 // 0092
-        0084: aload local_var:6
+        0084: aload local_6
         0086: ldc #116 // "az"
         0088: if_acmpeq +10 // 0092
-        008b: aload local_var:6
+        008b: aload local_6
         008d: ldc #117 // "lt"
         008f: if_acmpne +7 // 0096
         0092: iconst_1
         0093: goto +4 // 0097
         0096: iconst_0
-        0097: istore local_var:7
+        0097: istore local_7
         0099: iload_2
-        009a: istore local_var:12
-        009c: iload local_var:12
+        009a: istore local_12
+        009c: iload local_12
         009e: iload_3
         009f: if_icmpge +265 // 01a8
         00a2: aload_0
         00a3: getfield #3 // String.value [C
-        00a6: iload local_var:12
+        00a6: iload local_12
         00a8: caload
-        00a9: istore local_var:10
-        00ab: iload local_var:10
+        00a9: istore local_10
+        00ab: iload local_10
         00ad: i2c
         00ae: ldc #90 // IntegerConstant:55296
         00b0: if_icmplt +29 // 00cd
-        00b3: iload local_var:10
+        00b3: iload local_10
         00b5: i2c
         00b6: ldc #110 // IntegerConstant:56319
         00b8: if_icmpgt +21 // 00cd
         00bb: aload_0
-        00bc: iload local_var:12
+        00bc: iload local_12
         00be: invokevirtual #111 // String.codePointAt (I)I
-        00c1: istore local_var:10
-        00c3: iload local_var:10
+        00c1: istore local_10
+        00c3: iload local_10
         00c5: invokestatic #113 // Character.charCount (I)I
-        00c8: istore local_var:11
+        00c8: istore local_11
         00ca: goto +6 // 00d0
         00cd: iconst_1
-        00ce: istore local_var:11
-        00d0: iload local_var:7
+        00ce: istore local_11
+        00d0: iload local_7
         00d2: ifne +19 // 00e5
-        00d5: iload local_var:10
+        00d5: iload local_10
         00d7: sipush 931
         00da: if_icmpeq +11 // 00e5
-        00dd: iload local_var:10
+        00dd: iload local_10
         00df: sipush 304
         00e2: if_icmpne +15 // 00f1
         00e5: aload_0
-        00e6: iload local_var:12
+        00e6: iload local_12
         00e8: aload_1
         00e9: invokestatic #118 // ConditionalSpecialCasing.toLowerCaseEx (Ljava/lang/String;ILjava/util/Locale;)I
-        00ec: istore local_var:9
+        00ec: istore local_9
         00ee: goto +10 // 00f8
-        00f1: iload local_var:10
+        00f1: iload local_10
         00f3: invokestatic #112 // Character.toLowerCase (I)I
-        00f6: istore local_var:9
-        00f8: iload local_var:9
+        00f6: istore local_9
+        00f8: iload local_9
         00fa: iconst_m1
         00fb: if_icmpeq +10 // 0105
-        00fe: iload local_var:9
+        00fe: iload local_9
         0100: ldc #62 // IntegerConstant:65536
         0102: if_icmplt +145 // 0193
-        0105: iload local_var:9
+        0105: iload local_9
         0107: iconst_m1
         0108: if_icmpne +15 // 0117
         010b: aload_0
-        010c: iload local_var:12
+        010c: iload local_12
         010e: aload_1
         010f: invokestatic #119 // ConditionalSpecialCasing.toLowerCaseCharArray (Ljava/lang/String;ILjava/util/Locale;)[C
-        0112: astore local_var:8
+        0112: astore local_8
         0114: goto +39 // 013b
-        0117: iload local_var:11
+        0117: iload local_11
         0119: iconst_2
         011a: if_icmpne +26 // 0134
-        011d: iload local_var:5
-        011f: iload local_var:9
-        0121: aload local_var:4
-        0123: iload local_var:12
-        0125: iload local_var:5
+        011d: iload local_5
+        011f: iload local_9
+        0121: aload local_4
+        0123: iload local_12
+        0125: iload local_5
         0127: iadd
         0128: invokestatic #120 // Character.toChars (I[CI)I
-        012b: iload local_var:11
+        012b: iload local_11
         012d: isub
         012e: iadd
-        012f: istore local_var:5
+        012f: istore local_5
         0131: goto +109 // 019e
-        0134: iload local_var:9
+        0134: iload local_9
         0136: invokestatic #121 // Character.toChars (I)[C
-        0139: astore local_var:8
-        013b: aload local_var:8
+        0139: astore local_8
+        013b: aload local_8
         013d: arraylength
-        013e: istore local_var:13
-        0140: iload local_var:13
-        0142: iload local_var:11
+        013e: istore local_13
+        0140: iload local_13
+        0142: iload local_11
         0144: if_icmple +34 // 0166
-        0147: aload local_var:4
+        0147: aload local_4
         0149: arraylength
-        014a: iload local_var:13
+        014a: iload local_13
         014c: iadd
-        014d: iload local_var:11
+        014d: iload local_11
         014f: isub
         0150: newarray 5 // char[]
-        0152: astore local_var:14
-        0154: aload local_var:4
+        0152: astore local_14
+        0154: aload local_4
         0156: iconst_0
-        0157: aload local_var:14
+        0157: aload local_14
         0159: iconst_0
-        015a: iload local_var:12
-        015c: iload local_var:5
+        015a: iload local_12
+        015c: iload local_5
         015e: iadd
         015f: invokestatic #37 // System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V
-        0162: aload local_var:14
-        0164: astore local_var:4
+        0162: aload local_14
+        0164: astore local_4
         0166: iconst_0
-        0167: istore local_var:14
-        0169: iload local_var:14
-        016b: iload local_var:13
+        0167: istore local_14
+        0169: iload local_14
+        016b: iload local_13
         016d: if_icmpge +25 // 0186
-        0170: aload local_var:4
-        0172: iload local_var:12
-        0174: iload local_var:5
+        0170: aload local_4
+        0172: iload local_12
+        0174: iload local_5
         0176: iadd
-        0177: iload local_var:14
+        0177: iload local_14
         0179: iadd
-        017a: aload local_var:8
-        017c: iload local_var:14
+        017a: aload local_8
+        017c: iload local_14
         017e: caload
         017f: castore
-        0180: iinc local_var:141
+        0180: iinc local_14, 1
         0183: goto -26 // 0169
-        0186: iload local_var:5
-        0188: iload local_var:13
-        018a: iload local_var:11
+        0186: iload local_5
+        0188: iload local_13
+        018a: iload local_11
         018c: isub
         018d: iadd
-        018e: istore local_var:5
+        018e: istore local_5
         0190: goto +14 // 019e
-        0193: aload local_var:4
-        0195: iload local_var:12
-        0197: iload local_var:5
+        0193: aload local_4
+        0195: iload local_12
+        0197: iload local_5
         0199: iadd
-        019a: iload local_var:9
+        019a: iload local_9
         019c: i2c
         019d: castore
-        019e: iload local_var:12
-        01a0: iload local_var:11
+        019e: iload local_12
+        01a0: iload local_11
         01a2: iadd
-        01a3: istore local_var:12
+        01a3: istore local_12
         01a5: goto -265 // 009c
         01a8: new #43 // java/lang/String
         01ab: dup
-        01ac: aload local_var:4
+        01ac: aload local_4
         01ae: iconst_0
         01af: iload_3
-        01b0: iload local_var:5
+        01b0: iload local_5
         01b2: iadd
         01b3: invokespecial #72 // String.<init> ([CII)V
         01b6: areturn
@@ -2591,212 +2591,212 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         001a: getfield #3 // String.value [C
         001d: iload_2
         001e: caload
-        001f: istore local_var:4
-        0021: iload local_var:4
+        001f: istore local_4
+        0021: iload local_4
         0023: ldc #90 // IntegerConstant:55296
         0025: if_icmplt +27 // 0040
-        0028: iload local_var:4
+        0028: iload local_4
         002a: ldc #110 // IntegerConstant:56319
         002c: if_icmpgt +20 // 0040
         002f: aload_0
         0030: iload_2
         0031: invokevirtual #111 // String.codePointAt (I)I
-        0034: istore local_var:4
-        0036: iload local_var:4
+        0034: istore local_4
+        0036: iload local_4
         0038: invokestatic #113 // Character.charCount (I)I
-        003b: istore local_var:5
+        003b: istore local_5
         003d: goto +6 // 0043
         0040: iconst_1
-        0041: istore local_var:5
-        0043: iload local_var:4
+        0041: istore local_5
+        0043: iload local_4
         0045: invokestatic #124 // Character.toUpperCaseEx (I)I
-        0048: istore local_var:6
-        004a: iload local_var:6
+        0048: istore local_6
+        004a: iload local_6
         004c: iconst_m1
         004d: if_icmpeq +23 // 0064
-        0050: iload local_var:4
-        0052: iload local_var:6
+        0050: iload local_4
+        0052: iload local_6
         0054: if_icmpeq +6 // 005a
         0057: goto +13 // 0064
         005a: iload_2
-        005b: iload local_var:5
+        005b: iload local_5
         005d: iadd
         005e: istore_2
         005f: goto -75 // 0014
         0062: aload_0
         0063: areturn
         0064: iconst_0
-        0065: istore local_var:4
+        0065: istore local_4
         0067: iload_3
         0068: newarray 5 // char[]
-        006a: astore local_var:5
+        006a: astore local_5
         006c: aload_0
         006d: getfield #3 // String.value [C
         0070: iconst_0
-        0071: aload local_var:5
+        0071: aload local_5
         0073: iconst_0
         0074: iload_2
         0075: invokestatic #37 // System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V
         0078: aload_1
         0079: invokevirtual #114 // java.util.Locale.getLanguage ()Ljava/lang/String;
-        007c: astore local_var:6
-        007e: aload local_var:6
+        007c: astore local_6
+        007e: aload local_6
         0080: ldc #115 // "tr"
         0082: if_acmpeq +17 // 0093
-        0085: aload local_var:6
+        0085: aload local_6
         0087: ldc #116 // "az"
         0089: if_acmpeq +10 // 0093
-        008c: aload local_var:6
+        008c: aload local_6
         008e: ldc #117 // "lt"
         0090: if_acmpne +7 // 0097
         0093: iconst_1
         0094: goto +4 // 0098
         0097: iconst_0
-        0098: istore local_var:7
+        0098: istore local_7
         009a: iload_2
-        009b: istore local_var:12
-        009d: iload local_var:12
+        009b: istore local_12
+        009d: iload local_12
         009f: iload_3
         00a0: if_icmpge +264 // 01a8
         00a3: aload_0
         00a4: getfield #3 // String.value [C
-        00a7: iload local_var:12
+        00a7: iload local_12
         00a9: caload
-        00aa: istore local_var:10
-        00ac: iload local_var:10
+        00aa: istore local_10
+        00ac: iload local_10
         00ae: i2c
         00af: ldc #90 // IntegerConstant:55296
         00b1: if_icmplt +29 // 00ce
-        00b4: iload local_var:10
+        00b4: iload local_10
         00b6: i2c
         00b7: ldc #110 // IntegerConstant:56319
         00b9: if_icmpgt +21 // 00ce
         00bc: aload_0
-        00bd: iload local_var:12
+        00bd: iload local_12
         00bf: invokevirtual #111 // String.codePointAt (I)I
-        00c2: istore local_var:10
-        00c4: iload local_var:10
+        00c2: istore local_10
+        00c4: iload local_10
         00c6: invokestatic #113 // Character.charCount (I)I
-        00c9: istore local_var:11
+        00c9: istore local_11
         00cb: goto +6 // 00d1
         00ce: iconst_1
-        00cf: istore local_var:11
-        00d1: iload local_var:7
+        00cf: istore local_11
+        00d1: iload local_7
         00d3: ifeq +15 // 00e2
         00d6: aload_0
-        00d7: iload local_var:12
+        00d7: iload local_12
         00d9: aload_1
         00da: invokestatic #125 // ConditionalSpecialCasing.toUpperCaseEx (Ljava/lang/String;ILjava/util/Locale;)I
-        00dd: istore local_var:9
+        00dd: istore local_9
         00df: goto +10 // 00e9
-        00e2: iload local_var:10
+        00e2: iload local_10
         00e4: invokestatic #124 // Character.toUpperCaseEx (I)I
-        00e7: istore local_var:9
-        00e9: iload local_var:9
+        00e7: istore local_9
+        00e9: iload local_9
         00eb: iconst_m1
         00ec: if_icmpeq +10 // 00f6
-        00ef: iload local_var:9
+        00ef: iload local_9
         00f1: ldc #62 // IntegerConstant:65536
         00f3: if_icmplt +160 // 0193
-        00f6: iload local_var:9
+        00f6: iload local_9
         00f8: iconst_m1
         00f9: if_icmpne +30 // 0117
-        00fc: iload local_var:7
+        00fc: iload local_7
         00fe: ifeq +15 // 010d
         0101: aload_0
-        0102: iload local_var:12
+        0102: iload local_12
         0104: aload_1
         0105: invokestatic #126 // ConditionalSpecialCasing.toUpperCaseCharArray (Ljava/lang/String;ILjava/util/Locale;)[C
-        0108: astore local_var:8
+        0108: astore local_8
         010a: goto +49 // 013b
-        010d: iload local_var:10
+        010d: iload local_10
         010f: invokestatic #127 // Character.toUpperCaseCharArray (I)[C
-        0112: astore local_var:8
+        0112: astore local_8
         0114: goto +39 // 013b
-        0117: iload local_var:11
+        0117: iload local_11
         0119: iconst_2
         011a: if_icmpne +26 // 0134
-        011d: iload local_var:4
-        011f: iload local_var:9
-        0121: aload local_var:5
-        0123: iload local_var:12
-        0125: iload local_var:4
+        011d: iload local_4
+        011f: iload local_9
+        0121: aload local_5
+        0123: iload local_12
+        0125: iload local_4
         0127: iadd
         0128: invokestatic #120 // Character.toChars (I[CI)I
-        012b: iload local_var:11
+        012b: iload local_11
         012d: isub
         012e: iadd
-        012f: istore local_var:4
+        012f: istore local_4
         0131: goto +109 // 019e
-        0134: iload local_var:9
+        0134: iload local_9
         0136: invokestatic #121 // Character.toChars (I)[C
-        0139: astore local_var:8
-        013b: aload local_var:8
+        0139: astore local_8
+        013b: aload local_8
         013d: arraylength
-        013e: istore local_var:13
-        0140: iload local_var:13
-        0142: iload local_var:11
+        013e: istore local_13
+        0140: iload local_13
+        0142: iload local_11
         0144: if_icmple +34 // 0166
-        0147: aload local_var:5
+        0147: aload local_5
         0149: arraylength
-        014a: iload local_var:13
+        014a: iload local_13
         014c: iadd
-        014d: iload local_var:11
+        014d: iload local_11
         014f: isub
         0150: newarray 5 // char[]
-        0152: astore local_var:14
-        0154: aload local_var:5
+        0152: astore local_14
+        0154: aload local_5
         0156: iconst_0
-        0157: aload local_var:14
+        0157: aload local_14
         0159: iconst_0
-        015a: iload local_var:12
-        015c: iload local_var:4
+        015a: iload local_12
+        015c: iload local_4
         015e: iadd
         015f: invokestatic #37 // System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V
-        0162: aload local_var:14
-        0164: astore local_var:5
+        0162: aload local_14
+        0164: astore local_5
         0166: iconst_0
-        0167: istore local_var:14
-        0169: iload local_var:14
-        016b: iload local_var:13
+        0167: istore local_14
+        0169: iload local_14
+        016b: iload local_13
         016d: if_icmpge +25 // 0186
-        0170: aload local_var:5
-        0172: iload local_var:12
-        0174: iload local_var:4
+        0170: aload local_5
+        0172: iload local_12
+        0174: iload local_4
         0176: iadd
-        0177: iload local_var:14
+        0177: iload local_14
         0179: iadd
-        017a: aload local_var:8
-        017c: iload local_var:14
+        017a: aload local_8
+        017c: iload local_14
         017e: caload
         017f: castore
-        0180: iinc local_var:141
+        0180: iinc local_14, 1
         0183: goto -26 // 0169
-        0186: iload local_var:4
-        0188: iload local_var:13
-        018a: iload local_var:11
+        0186: iload local_4
+        0188: iload local_13
+        018a: iload local_11
         018c: isub
         018d: iadd
-        018e: istore local_var:4
+        018e: istore local_4
         0190: goto +14 // 019e
-        0193: aload local_var:5
-        0195: iload local_var:12
-        0197: iload local_var:4
+        0193: aload local_5
+        0195: iload local_12
+        0197: iload local_4
         0199: iadd
-        019a: iload local_var:9
+        019a: iload local_9
         019c: i2c
         019d: castore
-        019e: iload local_var:12
-        01a0: iload local_var:11
+        019e: iload local_12
+        01a0: iload local_11
         01a2: iadd
-        01a3: istore local_var:12
+        01a3: istore local_12
         01a5: goto -264 // 009d
         01a8: new #43 // java/lang/String
         01ab: dup
-        01ac: aload local_var:5
+        01ac: aload local_5
         01ae: iconst_0
         01af: iload_3
-        01b0: iload local_var:4
+        01b0: iload local_4
         01b2: iadd
         01b3: invokespecial #72 // String.<init> ([CII)V
         01b6: areturn
@@ -2831,7 +2831,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0014: caload
         0015: bipush 32
         0017: if_icmpgt +9 // 0020
-        001a: iinc local_var:21
+        001a: iinc local_2, 1
         001d: goto -16 // 000d
         0020: iload_2
         0021: iload_1
@@ -2843,7 +2843,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0029: caload
         002a: bipush 32
         002c: if_icmpgt +9 // 0035
-        002f: iinc local_var:1-1
+        002f: iinc local_1, -1
         0032: goto -18 // 0020
         0035: iload_2
         0036: ifgt +12 // 0042

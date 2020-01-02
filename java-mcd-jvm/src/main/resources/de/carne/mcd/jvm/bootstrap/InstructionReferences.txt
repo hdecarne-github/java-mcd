@@ -118,7 +118,7 @@ iflt;9B;branchbyte1,branchbyte2;value;-;S:BRANCH
 ifne;9A;branchbyte1,branchbyte2;value;-;S:BRANCH
 ifnonnull;C7;branchbyte1,branchbyte2;value;-;S:BRANCH
 ifnull;C6;branchbyte1,branchbyte2;value;-;S:BRANCH
-iinc;84;index,const;-;-;B:LOCAL_VARIABLE_INDEX;B:IMMEDIATE_VALUE
+iinc;84;index,const;-;-;B:LOCAL_VARIABLE_INDEX;B:INC_CONST
 iload;15;index;-;value;B:LOCAL_VARIABLE_INDEX
 iload_0;1A;-;-;value
 iload_1;1B;-;-;value
@@ -168,7 +168,7 @@ lload_2;20;-;-;value
 lload_3;21;-;-;value
 lmul;69;-;value1, value2;result
 lneg;75;-;value;result
-lookupswitch;AB;<0-3 byte pad>,defaultbyte1,defaultbyte2,defaultbyte3,defaultbyte4,npairs1,npairs2,npairs3,npairs4,match-offset pairs...;key;-
+lookupswitch;AB;<0-3 byte pad>,defaultbyte1,defaultbyte2,defaultbyte3,defaultbyte4,npairs1,npairs2,npairs3,npairs4,match-offset pairs...;key;-;l
 lor;81;-;value1, value2;result
 lrem;71;-;value1, value2;result
 lreturn;AD;-;value;-
@@ -184,7 +184,7 @@ lushr;7D;-;value1, value2;result
 lxor;83;-;value1, value2;result
 monitorenter;C2;-;objectref;-
 monitorexit;C3;-;objectref;-
-multianewarray;C5;indexbyte1,indexbyte2,dimensions;count1, [count2, ...];arrayref
+multianewarray;C5;indexbyte1,indexbyte2,dimensions;count1, [count2, ...];arrayref;S:RUNTIME_CONSTANT_INDEX;B:DIMENSION
 new;BB;indexbyte1,indexbyte2;-;objectref;S:RUNTIME_CONSTANT_INDEX
 newarray;BC;atype;count;arrayref;B:ARRAY_TYPE
 nop;00;-;-;-
@@ -198,4 +198,16 @@ saload;35;-;arrayref, index;value
 sastore;56;-;arrayref, index, value;-
 sipush;11;byte1,byte2;-;value;S:IMMEDIATE_VALUE
 swap;5F;-;value2, value1;value1, value2
-tableswitch;AA;<0-3 byte pad>,defaultbyte1,defaultbyte2,defaultbyte3,defaultbyte4,lowbyte1,lowbyte2,lowbyte3,lowbyte4,highbyte1,highbyte2,highbyte3,highbyte4,jump offsets...;index;-
+tableswitch;AA;<0-3 byte pad>,defaultbyte1,defaultbyte2,defaultbyte3,defaultbyte4,lowbyte1,lowbyte2,lowbyte3,lowbyte4,highbyte1,highbyte2,highbyte3,highbyte4,jump offsets...;index;-;t
+wide aload;C4 19;indexbyte1,indexbyte2;-;objectref;S:LOCAL_VARIABLE_INDEX
+wide astore;C4 3A;indexbyte1,indexbyte2;objectref;-;S:LOCAL_VARIABLE_INDEX
+wide dload;C4 18;indexbyte1,indexbyte2;-;value;S:LOCAL_VARIABLE_INDEX
+wide dstore;C4 39;indexbyte1,indexbyte2;value;-;S:LOCAL_VARIABLE_INDEX
+wide fload;C4 17;indexbyte1,indexbyte2;-;value;S:LOCAL_VARIABLE_INDEX
+wide fstore;C4 38;indexbyte1,indexbyte2;value;-;S:LOCAL_VARIABLE_INDEX
+wide iinc;C4 84;indexbyte1,indexbyte2,constbyte1,constbyte2;-;-;S:LOCAL_VARIABLE_INDEX;S:INC_CONST
+wide iload;C4 15;indexbyte1,indexbyte2;-;value;S:LOCAL_VARIABLE_INDEX
+wide istore;C4 36;indexbyte1,indexbyte2;value;-;S:LOCAL_VARIABLE_INDEX
+wide lload;C4 16;indexbyte1,indexbyte2;-;value;S:LOCAL_VARIABLE_INDEX
+wide lstore;C4 37;indexbyte1,indexbyte2;value;-;S:LOCAL_VARIABLE_INDEX
+wide ret;C4 A9;indexbyte1,indexbyte2;-;-;S:LOCAL_VARIABLE_INDEX

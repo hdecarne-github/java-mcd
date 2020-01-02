@@ -35,8 +35,10 @@ import de.carne.mcd.common.Opcode;
 import de.carne.mcd.jvm.bytecode.ByteOperandType;
 import de.carne.mcd.jvm.bytecode.BytecodeInstruction;
 import de.carne.mcd.jvm.bytecode.IntOperandType;
+import de.carne.mcd.jvm.bytecode.LookupswitchOperandDecoder;
 import de.carne.mcd.jvm.bytecode.OperandDecoder;
 import de.carne.mcd.jvm.bytecode.ShortOperandType;
+import de.carne.mcd.jvm.bytecode.TableswitchOperandDecoder;
 import de.carne.util.Strings;
 
 /**
@@ -131,7 +133,11 @@ public class BootstrapInstructionIndex {
 		List<OperandDecoder> operands = new ArrayList<>();
 
 		for (String operand : reference.operands()) {
-			if (operand.startsWith("B:")) {
+			if (operand.equals("t")) {
+				operands.add(new TableswitchOperandDecoder());
+			} else if (operand.equals("l")) {
+				operands.add(new LookupswitchOperandDecoder());
+			} else if (operand.startsWith("B:")) {
 				operands.add(ByteOperandType.valueOf(operand.substring(2)));
 			} else if (operand.startsWith("S:")) {
 				operands.add(ShortOperandType.valueOf(operand.substring(2)));

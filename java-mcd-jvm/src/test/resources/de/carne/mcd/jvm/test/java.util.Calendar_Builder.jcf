@@ -146,12 +146,12 @@ public /* super */ class Calendar$Builder {
         003f: if_icmpge +48 // 006f
         0042: aload_1
         0043: iload_3
-        0044: iinc local_var:31
+        0044: iinc local_3, 1
         0047: iaload
-        0048: istore local_var:4
-        004a: iload local_var:4
+        0048: istore local_4
+        004a: iload local_4
         004c: iflt +10 // 0056
-        004f: iload local_var:4
+        004f: iload local_4
         0051: bipush 17
         0053: if_icmplt +13 // 0060
         0056: new #11 // java/lang/IllegalArgumentException
@@ -160,10 +160,10 @@ public /* super */ class Calendar$Builder {
         005c: invokespecial #13 // IllegalArgumentException.<init> (Ljava/lang/String;)V
         005f: athrow
         0060: aload_0
-        0061: iload local_var:4
+        0061: iload local_4
         0063: aload_1
         0064: iload_3
-        0065: iinc local_var:31
+        0065: iinc local_3, 1
         0068: iaload
         0069: invokespecial #18 // Calendar$Builder.internalSet (II)V
         006c: goto -47 // 003d
@@ -253,7 +253,7 @@ public /* super */ class Calendar$Builder {
         0025: iastore
         0026: dup
         0027: bipush 7
-        0029: iload local_var:4
+        0029: iload local_4
         002b: iastore
         002c: invokevirtual #21 // Calendar$Builder.setFields ([I)Ljava/util/Calendar$Builder;
         002f: areturn
@@ -448,41 +448,8 @@ public /* super */ class Calendar$Builder {
         0064: istore_3
         0065: aload_2
         0066: invokevirtual #53 // String.hashCode ()I
-        0069: lookupswitch
-        006a: nop
-        006b: nop
-        006c: nop
-        006d: nop
-        006e: nop
-        006f: iadd
-        0070: nop
-        0071: nop
-        0072: nop
-        0073: iconst_1
-        0074: if_icmplt -15635 // c361
-        0077: putfield #0 // <run-time constant>
-        007a: nop
-        007b: dstore_0
-        007c: D3
-        007d: fload_0
-        007e: lstore_0
-        007f: return
-        0080: nop
-        0081: nop
-        0082: nop
-        0083: castore
-        0084: bipush -22
-        0086: iload local_var:9
-        0088: nop
-        0089: nop
-        008a: nop
-        008b: aload_1
-        008c: iushr
-        008d: E2
-        008e: ldc_w
-        008f: iinc local_var:00
-        0092: nop
-        0093: dstore local_var:44
+        0069: lookupswitch // -1581060683:00b0 -752730191:00be 283776265:0094 2095190916:00a2 default:00c9
+        0094: aload_2
         0095: ldc #29 // "gregory"
         0097: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
         009a: ifeq +47 // 00c9
@@ -510,36 +477,7 @@ public /* super */ class Calendar$Builder {
         00c7: iconst_3
         00c8: istore_3
         00c9: iload_3
-        00ca: tableswitch
-        00cb: nop
-        00cc: nop
-        00cd: nop
-        00ce: nop
-        00cf: f2i
-        00d0: nop
-        00d1: nop
-        00d2: nop
-        00d3: nop
-        00d4: nop
-        00d5: nop
-        00d6: nop
-        00d7: iconst_0
-        00d8: nop
-        00d9: nop
-        00da: nop
-        00db: lload_0
-        00dc: nop
-        00dd: nop
-        00de: nop
-        00df: aaload
-        00e0: nop
-        00e1: nop
-        00e2: nop
-        00e3: iadd
-        00e4: nop
-        00e5: nop
-        00e6: nop
-        00e7: dneg
+        00ca: tableswitch // 0:00e8 1:00fc 2:012a 3:0141 default:0155
         00e8: new #55 // java/util/GregorianCalendar
         00eb: dup
         00ec: aload_0
@@ -558,8 +496,8 @@ public /* super */ class Calendar$Builder {
         0105: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
         0108: iconst_1
         0109: invokespecial #56 // GregorianCalendar.<init> (Ljava/util/TimeZone;Ljava/util/Locale;Z)V
-        010c: astore local_var:4
-        010e: aload local_var:4
+        010c: astore local_4
+        010e: aload local_4
         0110: new #57 // java/util/Date
         0113: dup
         0114: ldc2_w #59 // LongConstant:-9223372036854775808l
@@ -570,7 +508,7 @@ public /* super */ class Calendar$Builder {
         011f: iconst_4
         0120: invokevirtual #63 // Calendar$Builder.setWeekDefinition (II)Ljava/util/Calendar$Builder;
         0123: pop
-        0124: aload local_var:4
+        0124: aload local_4
         0126: astore_1
         0127: goto +76 // 0173
         012a: new #64 // sun/util/BuddhistCalendar
@@ -678,30 +616,30 @@ public /* super */ class Calendar$Builder {
         01fa: getfield #8 // Calendar$Builder.nextStamp I
         01fd: if_icmpge +57 // 0236
         0200: iconst_0
-        0201: istore local_var:4
-        0203: iload local_var:4
+        0201: istore local_4
+        0203: iload local_4
         0205: aload_0
         0206: getfield #77 // Calendar$Builder.maxFieldIndex I
         0209: if_icmpgt +39 // 0230
         020c: aload_0
         020d: getfield #4 // Calendar$Builder.fields [I
-        0210: iload local_var:4
+        0210: iload local_4
         0212: iaload
         0213: iload_3
         0214: if_icmpne +22 // 022a
         0217: aload_1
-        0218: iload local_var:4
+        0218: iload local_4
         021a: aload_0
         021b: getfield #4 // Calendar$Builder.fields [I
         021e: bipush 18
-        0220: iload local_var:4
+        0220: iload local_4
         0222: iadd
         0223: iaload
         0224: invokevirtual #78 // Calendar.set (II)V
         0227: goto +9 // 0230
-        022a: iinc local_var:41
+        022a: iinc local_4, 1
         022d: goto -42 // 0203
-        0230: iinc local_var:31
+        0230: iinc local_3, 1
         0233: goto -59 // 01f8
         0236: iload_2
         0237: ifeq +62 // 0275
@@ -727,14 +665,14 @@ public /* super */ class Calendar$Builder {
         025e: goto +7 // 0265
         0261: aload_1
         0262: invokevirtual #79 // Calendar.getFirstDayOfWeek ()I
-        0265: istore local_var:4
+        0265: istore local_4
         0267: aload_1
         0268: aload_0
         0269: getfield #4 // Calendar$Builder.fields [I
         026c: bipush 35
         026e: iaload
         026f: iload_3
-        0270: iload local_var:4
+        0270: iload local_4
         0272: invokevirtual #80 // Calendar.setWeekDate (III)V
         0275: aload_1
         0276: invokevirtual #73 // Calendar.complete ()V

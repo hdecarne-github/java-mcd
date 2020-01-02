@@ -36,21 +36,31 @@ public enum ByteOperandType implements OperandDecoder {
 	IMMEDIATE_VALUE((pc, operand, out) -> out.printValue(Byte.toString(operand))),
 
 	/**
+	 * Array type value.
+	 */
+	ARRAY_TYPE((pc, operand, out) -> out.printValue(Byte.toString(operand)).print(" ").printComment("// ")
+			.printComment(arrayTypeComment(operand))),
+
+	/**
+	 * Increment byte value (for iinc).
+	 */
+	INC_CONST((pc, operand, out) -> out.print(", ").printValue(Byte.toString(operand))),
+
+	/**
+	 * Dimension byte value (for multianewarray).
+	 */
+	DIMENSION((pc, operand, out) -> out.print(", ").printValue(Byte.toString(operand))),
+
+	/**
 	 * Index into the local variable table.
 	 */
-	LOCAL_VARIABLE_INDEX((pc, operand, out) -> out.printValue("local_var:" + Byte.toUnsignedInt(operand))),
+	LOCAL_VARIABLE_INDEX((pc, operand, out) -> out.printValue("local_" + Byte.toUnsignedInt(operand))),
 
 	/**
 	 * Index into the run-time constant pool.
 	 */
 	RUNTIME_CONSTANT_INDEX((pc, operand, out) -> out.printValue("#" + Byte.toUnsignedInt(operand)).print(" ")
-			.printComment("// ").printComment(runtimeConstantComment(operand))),
-
-	/**
-	 * Array type value.
-	 */
-	ARRAY_TYPE((pc, operand, out) -> out.printValue(Byte.toString(operand)).print(" ").printComment("// ")
-			.printComment(arrayTypeComment(operand)));
+			.printComment("// ").printComment(runtimeConstantComment(operand)));
 
 	private static final Log LOG = new Log();
 

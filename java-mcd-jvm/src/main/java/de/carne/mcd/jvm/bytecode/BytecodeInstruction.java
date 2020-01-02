@@ -62,21 +62,30 @@ public class BytecodeInstruction implements Instruction {
 
 		do {
 			operandType = in.readChar();
+
+			String operandName = in.readUTF();
+
 			switch (operandType) {
+			case 't':
+				operands.add(new TableswitchOperandDecoder());
+				break;
+			case 'l':
+				operands.add(new LookupswitchOperandDecoder());
+				break;
 			case 'B':
-				operands.add(ByteOperandType.valueOf(in.readUTF()));
+				operands.add(ByteOperandType.valueOf(operandName));
 				break;
 			case 'S':
-				operands.add(ShortOperandType.valueOf(in.readUTF()));
+				operands.add(ShortOperandType.valueOf(operandName));
 				break;
 			case 'I':
-				operands.add(IntOperandType.valueOf(in.readUTF()));
+				operands.add(IntOperandType.valueOf(operandName));
 				break;
 			case '\0':
 				// instruction complete
 				break;
 			default:
-				throw new IOException("Unrecognized operand type: " + operandType);
+				throw new IOException("Unrecognized operand type: " + operandType + ":" + operandName);
 			}
 		} while (operandType != '\0');
 		return new BytecodeInstruction(mnomic, operands.toArray(new OperandDecoder[operands.size()]));
@@ -90,6 +99,7 @@ public class BytecodeInstruction implements Instruction {
 			out.writeUTF(operand.name());
 		}
 		out.writeChar('\0');
+		out.writeUTF("");
 	}
 
 	@Override

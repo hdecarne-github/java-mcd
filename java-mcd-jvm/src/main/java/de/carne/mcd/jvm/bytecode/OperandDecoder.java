@@ -28,21 +28,21 @@ public interface OperandDecoder {
 
 	/**
 	 * Gets the operand's type (B:byte, S:short, I:int).
-	 * 
+	 *
 	 * @return the operand's type (B:byte, S:short, I:int).
 	 */
 	char type();
 
 	/**
 	 * Gets the operand type's name.
-	 * 
+	 *
 	 * @return the operand type's name.
 	 */
 	String name();
 
 	/**
 	 * Decodes the operand.
-	 * 
+	 *
 	 * @param pc the program counter of the corresponding opcode.
 	 * @param buffer the {@linkplain MCDDecodeBuffer} to decode from.
 	 * @param out the {@linkplain MCDOutput} to decode to.

@@ -41,6 +41,16 @@ public enum ShortOperandType implements OperandDecoder {
 	}),
 
 	/**
+	 * Increment byte value (for wide iinc).
+	 */
+	INC_CONST((pc, operand, out) -> out.print(", ").printValue(Short.toString(operand))),
+
+	/**
+	 * Index into the local variable table.
+	 */
+	LOCAL_VARIABLE_INDEX((pc, operand, out) -> out.printValue("local_" + Short.toUnsignedInt(operand))),
+
+	/**
 	 * Index into the run-time constant pool.
 	 */
 	RUNTIME_CONSTANT_INDEX((pc, operand, out) -> out.printValue("#" + Short.toUnsignedInt(operand)).print(" ")
