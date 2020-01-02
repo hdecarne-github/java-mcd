@@ -13,10 +13,8 @@ public abstract /* super */ class InputStream implements Closeable {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: return
     }
     
     public abstract int read() throws IOException;
@@ -25,208 +23,134 @@ public abstract /* super */ class InputStream implements Closeable {
         // max_stack: 4
         // max_locals: 2
         0000: aload_0
-        0000: aload_1
-        0000: iconst_0
-        0000: aload_1
-        0000: arraylength
-        0000: invokevirtual
-        0000: nop
-        0000: iconst_m1
-        0000: ireturn
+        0001: aload_1
+        0002: iconst_0
+        0003: aload_1
+        0004: arraylength
+        0005: invokevirtual #2 // InputStream.read ([BII)I
+        0008: ireturn
     }
     
     public int read(byte[], int, int) throws IOException {
         // max_stack: 3
         // max_locals: 7
         0000: aload_1
-        0000: ifnonnull
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: iconst_0
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: iconst_1
-        0000: athrow
-        0000: iload_2
-        0000: iflt
-        0000: nop
-        0000: dconst_1
-        0000: iload_3
-        0000: iflt
-        0000: nop
-        0000: fconst_0
-        0000: iload_3
-        0000: aload_1
-        0000: arraylength
-        0000: iload_2
-        0000: isub
-        0000: if_icmple
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: iconst_2
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: iconst_3
-        0000: athrow
-        0000: iload_3
-        0000: ifne
-        0000: nop
-        0000: iconst_2
-        0000: iconst_0
-        0000: ireturn
-        0000: aload_0
-        0000: invokevirtual
-        0000: nop
-        0000: iconst_4
-        0000: istore
-        0000: iconst_1
-        0000: iload
-        0000: iconst_1
-        0000: iconst_m1
-        0000: if_icmpne
-        0000: nop
-        0000: iconst_2
-        0000: iconst_m1
-        0000: ireturn
-        0000: aload_1
-        0000: iload_2
-        0000: iload
-        0000: iconst_1
-        0000: i2b
-        0000: bastore
-        0000: iconst_1
-        0000: istore
-        0000: iconst_2
-        0000: iload
-        0000: iconst_2
-        0000: iload_3
-        0000: if_icmpge
-        0000: nop
-        0000: lload_3
-        0000: aload_0
-        0000: invokevirtual
-        0000: nop
-        0000: iconst_4
-        0000: istore
-        0000: iconst_1
-        0000: iload
-        0000: iconst_1
-        0000: iconst_m1
-        0000: if_icmpne
-        0000: nop
-        0000: iconst_3
-        0000: goto
-        0000: nop
-        0000: ldc
-        0000: aload_1
-        0000: iload_2
-        0000: iload
-        0000: iconst_2
-        0000: iadd
-        0000: iload
-        0000: iconst_1
-        0000: i2b
-        0000: bastore
-        0000: iinc
-        0000: iconst_2
-        0000: aconst_null
-        0000: goto
-        0000: FF DF
-        0000: goto
-        0000: nop
-        0000: iconst_2
-        0000: astore
-        0000: iconst_3
-        0000: iload
-        0000: iconst_2
-        0000: ireturn
+        0001: ifnonnull +11 // 000c
+        0004: new #3 // java/lang/NullPointerException
+        0007: dup
+        0008: invokespecial #4 // NullPointerException.<init> ()V
+        000b: athrow
+        000c: iload_2
+        000d: iflt +15 // 001c
+        0010: iload_3
+        0011: iflt +11 // 001c
+        0014: iload_3
+        0015: aload_1
+        0016: arraylength
+        0017: iload_2
+        0018: isub
+        0019: if_icmple +11 // 0024
+        001c: new #5 // java/lang/IndexOutOfBoundsException
+        001f: dup
+        0020: invokespecial #6 // IndexOutOfBoundsException.<init> ()V
+        0023: athrow
+        0024: iload_3
+        0025: ifne +5 // 002a
+        0028: iconst_0
+        0029: ireturn
+        002a: aload_0
+        002b: invokevirtual #7 // InputStream.read ()I
+        002e: istore local_var:4
+        0030: iload local_var:4
+        0032: iconst_m1
+        0033: if_icmpne +5 // 0038
+        0036: iconst_m1
+        0037: ireturn
+        0038: aload_1
+        0039: iload_2
+        003a: iload local_var:4
+        003c: i2b
+        003d: bastore
+        003e: iconst_1
+        003f: istore local_var:5
+        0041: iload local_var:5
+        0043: iload_3
+        0044: if_icmpge +33 // 0065
+        0047: aload_0
+        0048: invokevirtual #7 // InputStream.read ()I
+        004b: istore local_var:4
+        004d: iload local_var:4
+        004f: iconst_m1
+        0050: if_icmpne +6 // 0056
+        0053: goto +18 // 0065
+        0056: aload_1
+        0057: iload_2
+        0058: iload local_var:5
+        005a: iadd
+        005b: iload local_var:4
+        005d: i2b
+        005e: bastore
+        005f: iinc local_var:51
+        0062: goto -33 // 0041
+        0065: goto +5 // 006a
+        0068: astore local_var:6
+        006a: iload local_var:5
+        006c: ireturn
     }
     
     public long skip(long) throws IOException {
         // max_stack: 7
         // max_locals: 8
         0000: lload_1
-        0000: lstore_3
-        0000: lload_1
-        0000: lconst_0
-        0000: lcmp
-        0000: ifgt
-        0000: nop
-        0000: iconst_2
-        0000: lconst_0
-        0000: lreturn
-        0000: ldc2_w
-        0000: nop
-        0000: lconst_1
-        0000: lload_3
-        0000: invokestatic
-        0000: nop
-        0000: fconst_1
-        0000: l2i
-        0000: istore
-        0000: iconst_3
-        0000: iload
-        0000: iconst_3
-        0000: newarray
-        0000: iconst_5
-        0000: astore
-        0000: iconst_4
-        0000: lload_3
-        0000: lconst_0
-        0000: lcmp
-        0000: ifle
-        0000: nop
-        0000: fload_3
-        0000: aload_0
-        0000: aload
-        0000: iconst_4
-        0000: iconst_0
-        0000: iload
-        0000: iconst_3
-        0000: i2l
-        0000: lload_3
-        0000: invokestatic
-        0000: nop
-        0000: fconst_1
-        0000: l2i
-        0000: invokevirtual
-        0000: nop
-        0000: iconst_m1
-        0000: istore
-        0000: iconst_2
-        0000: iload
-        0000: iconst_2
-        0000: ifge
-        0000: nop
-        0000: iconst_3
-        0000: goto
-        0000: nop
-        0000: fconst_1
-        0000: lload_3
-        0000: iload
-        0000: iconst_2
-        0000: i2l
-        0000: lsub
-        0000: lstore_3
-        0000: goto
-        0000: FF DB
-        0000: lload_1
-        0000: lload_3
-        0000: lsub
-        0000: lreturn
+        0001: lstore_3
+        0002: lload_1
+        0003: lconst_0
+        0004: lcmp
+        0005: ifgt +5 // 000a
+        0008: lconst_0
+        0009: lreturn
+        000a: ldc2_w #10 // LongConstant:2048l
+        000d: lload_3
+        000e: invokestatic #12 // Math.min (JJ)J
+        0011: l2i
+        0012: istore local_var:6
+        0014: iload local_var:6
+        0016: newarray 8 // byte[]
+        0018: astore local_var:7
+        001a: lload_3
+        001b: lconst_0
+        001c: lcmp
+        001d: ifle +37 // 0042
+        0020: aload_0
+        0021: aload local_var:7
+        0023: iconst_0
+        0024: iload local_var:6
+        0026: i2l
+        0027: lload_3
+        0028: invokestatic #12 // Math.min (JJ)J
+        002b: l2i
+        002c: invokevirtual #2 // InputStream.read ([BII)I
+        002f: istore local_var:5
+        0031: iload local_var:5
+        0033: ifge +6 // 0039
+        0036: goto +12 // 0042
+        0039: lload_3
+        003a: iload local_var:5
+        003c: i2l
+        003d: lsub
+        003e: lstore_3
+        003f: goto -37 // 001a
+        0042: lload_1
+        0043: lload_3
+        0044: lsub
+        0045: lreturn
     }
     
     public int available() throws IOException {
         // max_stack: 1
         // max_locals: 1
         0000: iconst_0
-        0000: ireturn
+        0001: ireturn
     }
     
     public void close() throws IOException {
@@ -244,23 +168,18 @@ public abstract /* super */ class InputStream implements Closeable {
     public synchronized void reset() throws IOException {
         // max_stack: 3
         // max_locals: 1
-        0000: new
-        0000: nop
-        0000: iconst_5
-        0000: dup
-        0000: ldc
-        0000: fconst_2
-        0000: invokespecial
-        0000: nop
-        0000: dconst_0
-        0000: athrow
+        0000: new #8 // java/io/IOException
+        0003: dup
+        0004: ldc #13 // "mark/reset not supported"
+        0006: invokespecial #14 // IOException.<init> (Ljava/lang/String;)V
+        0009: athrow
     }
     
     public boolean markSupported() {
         // max_stack: 1
         // max_locals: 1
         0000: iconst_0
-        0000: ireturn
+        0001: ireturn
     }
 
 }

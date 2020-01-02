@@ -56,7 +56,7 @@ public final class MCDDecodeBuffer {
 
 	/**
 	 * Gets the total number of bytes ready via this {@linkplain MCDDecodeBuffer} instance.
-	 * 
+	 *
 	 * @return the total number of bytes ready via this {@linkplain MCDDecodeBuffer} instance.
 	 */
 	public long getTotalRead() {
@@ -87,6 +87,7 @@ public final class MCDDecodeBuffer {
 
 			slice = new SlicedChannel(channel, position, length);
 			channel.position(position + length);
+			this.totalRead += length;
 		} else {
 			ByteBuffer buffer = ByteBuffer.allocate((int) Math.min(length, Defaults.MAX_BUFFER_SIZE))
 					.order(this.decodeBuffer.order());
@@ -103,7 +104,6 @@ public final class MCDDecodeBuffer {
 			}
 			slice = new SlicedBuffer(buffer);
 		}
-		this.totalRead += length;
 		return slice;
 	}
 
@@ -120,6 +120,7 @@ public final class MCDDecodeBuffer {
 			SeekableByteChannel channel = (SeekableByteChannel) this.in;
 
 			channel.position(channel.position() + length);
+			this.totalRead += length;
 		} else {
 			long remaining = length;
 
@@ -131,7 +132,6 @@ public final class MCDDecodeBuffer {
 				remaining -= readLimit;
 			}
 		}
-		this.totalRead += length;
 	}
 
 	/**

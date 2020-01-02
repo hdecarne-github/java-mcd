@@ -20,9 +20,6 @@ import java.io.IOException;
 import java.nio.channels.SeekableByteChannel;
 
 import de.carne.mcd.jvm.BytecodeDecoder;
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassPrinter;
 
 /**
  * Code attribute: "Code"

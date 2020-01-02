@@ -18,10 +18,6 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassPrinter;
-
 class MethodTypeConstant extends Constant {
 
 	public static final int TAG = 16;

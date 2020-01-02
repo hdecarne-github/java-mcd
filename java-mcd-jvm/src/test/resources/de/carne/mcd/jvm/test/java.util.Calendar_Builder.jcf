@@ -35,1378 +35,816 @@ public /* super */ class Calendar$Builder {
         // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: iconst_m1
-        0000: aload_0
-        0000: iconst_1
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: return
+        0001: invokespecial #2 // Object.<init> ()V
+        0004: aload_0
+        0005: iconst_1
+        0006: putfield #3 // Calendar$Builder.lenient Z
+        0009: return
     }
     
     public Calendar$Builder setInstant(long) {
         // max_stack: 3
         // max_locals: 3
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: ifnull
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: iconst_2
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: iconst_3
-        0000: athrow
-        0000: aload_0
-        0000: lload_1
-        0000: putfield
-        0000: nop
-        0000: iconst_4
-        0000: aload_0
-        0000: iconst_1
-        0000: putfield
-        0000: nop
-        0000: iconst_5
-        0000: aload_0
-        0000: areturn
+        0001: getfield #4 // Calendar$Builder.fields [I
+        0004: ifnull +11 // 000f
+        0007: new #5 // java/lang/IllegalStateException
+        000a: dup
+        000b: invokespecial #6 // IllegalStateException.<init> ()V
+        000e: athrow
+        000f: aload_0
+        0010: lload_1
+        0011: putfield #7 // Calendar$Builder.instant J
+        0014: aload_0
+        0015: iconst_1
+        0016: putfield #8 // Calendar$Builder.nextStamp I
+        0019: aload_0
+        001a: areturn
     }
     
     public Calendar$Builder setInstant(Date) {
         // max_stack: 3
         // max_locals: 2
         0000: aload_0
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: lconst_0
-        0000: invokevirtual
-        0000: nop
-        0000: lconst_1
-        0000: areturn
+        0001: aload_1
+        0002: invokevirtual #9 // Date.getTime ()J
+        0005: invokevirtual #10 // Calendar$Builder.setInstant (J)Ljava/util/Calendar$Builder;
+        0008: areturn
     }
     
     public Calendar$Builder set(int, int) {
         // max_stack: 3
         // max_locals: 3
         0000: iload_1
-        0000: iflt
-        0000: nop
-        0000: lconst_0
-        0000: iload_1
-        0000: bipush
-        0000: sipush
-        0000: if_icmplt
-        0000: nop
-        0000: fconst_2
-        0000: new
-        0000: nop
-        0000: fconst_0
-        0000: dup
-        0000: ldc
-        0000: fconst_1
-        0000: invokespecial
-        0000: nop
-        0000: fconst_2
-        0000: athrow
-        0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: dconst_0
-        0000: ifeq
-        0000: nop
-        0000: fconst_2
-        0000: new
-        0000: nop
-        0000: iconst_2
-        0000: dup
-        0000: ldc
-        0000: dconst_1
-        0000: invokespecial
-        0000: nop
-        0000: bipush
-        0000: athrow
-        0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: sipush
-        0000: aload_0
-        0000: iload_1
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: ldc
-        0000: aload_0
-        0000: areturn
+        0001: iflt +9 // 000a
+        0004: iload_1
+        0005: bipush 17
+        0007: if_icmplt +13 // 0014
+        000a: new #11 // java/lang/IllegalArgumentException
+        000d: dup
+        000e: ldc #12 // "field is invalid"
+        0010: invokespecial #13 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        0013: athrow
+        0014: aload_0
+        0015: invokespecial #14 // Calendar$Builder.isInstantSet ()Z
+        0018: ifeq +13 // 0025
+        001b: new #5 // java/lang/IllegalStateException
+        001e: dup
+        001f: ldc #15 // "instant has been set"
+        0021: invokespecial #16 // IllegalStateException.<init> (Ljava/lang/String;)V
+        0024: athrow
+        0025: aload_0
+        0026: invokespecial #17 // Calendar$Builder.allocateFields ()V
+        0029: aload_0
+        002a: iload_1
+        002b: iload_2
+        002c: invokespecial #18 // Calendar$Builder.internalSet (II)V
+        002f: aload_0
+        0030: areturn
     }
     
     public /* varargs */ Calendar$Builder setFields(int[]) {
         // max_stack: 4
         // max_locals: 5
         0000: aload_1
-        0000: arraylength
-        0000: istore_2
-        0000: iload_2
-        0000: iconst_2
-        0000: irem
-        0000: ifeq
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: fconst_0
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: ldc_w
-        0000: athrow
-        0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: dconst_0
-        0000: ifeq
-        0000: nop
-        0000: fconst_2
-        0000: new
-        0000: nop
-        0000: iconst_2
-        0000: dup
-        0000: ldc
-        0000: dconst_1
-        0000: invokespecial
-        0000: nop
-        0000: bipush
-        0000: athrow
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_5
-        0000: iload_2
-        0000: iconst_2
-        0000: idiv
-        0000: iadd
-        0000: ifge
-        0000: nop
-        0000: fconst_2
-        0000: new
-        0000: nop
-        0000: iconst_2
-        0000: dup
-        0000: ldc
-        0000: ldc2_w
-        0000: invokespecial
-        0000: nop
-        0000: bipush
-        0000: athrow
-        0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: sipush
-        0000: iconst_0
-        0000: istore_3
-        0000: iload_3
-        0000: iload_2
-        0000: if_icmpge
-        0000: nop
-        0000: faload
-        0000: aload_1
-        0000: iload_3
-        0000: iinc
-        0000: iconst_0
-        0000: aconst_null
-        0000: iaload
-        0000: istore
-        0000: iconst_1
-        0000: iload
-        0000: iconst_1
-        0000: iflt
-        0000: nop
-        0000: lconst_1
-        0000: iload
-        0000: iconst_1
-        0000: bipush
-        0000: sipush
-        0000: if_icmplt
-        0000: nop
-        0000: fconst_2
-        0000: new
-        0000: nop
-        0000: fconst_0
-        0000: dup
-        0000: ldc
-        0000: fconst_1
-        0000: invokespecial
-        0000: nop
-        0000: fconst_2
-        0000: athrow
-        0000: aload_0
-        0000: iload
-        0000: iconst_1
-        0000: aload_1
-        0000: iload_3
-        0000: iinc
-        0000: iconst_0
-        0000: aconst_null
-        0000: iaload
-        0000: invokespecial
-        0000: nop
-        0000: ldc
-        0000: goto
-        0000: FF D1
-        0000: aload_0
-        0000: areturn
+        0001: arraylength
+        0002: istore_2
+        0003: iload_2
+        0004: iconst_2
+        0005: irem
+        0006: ifeq +11 // 0011
+        0009: new #11 // java/lang/IllegalArgumentException
+        000c: dup
+        000d: invokespecial #19 // IllegalArgumentException.<init> ()V
+        0010: athrow
+        0011: aload_0
+        0012: invokespecial #14 // Calendar$Builder.isInstantSet ()Z
+        0015: ifeq +13 // 0022
+        0018: new #5 // java/lang/IllegalStateException
+        001b: dup
+        001c: ldc #15 // "instant has been set"
+        001e: invokespecial #16 // IllegalStateException.<init> (Ljava/lang/String;)V
+        0021: athrow
+        0022: aload_0
+        0023: getfield #8 // Calendar$Builder.nextStamp I
+        0026: iload_2
+        0027: iconst_2
+        0028: idiv
+        0029: iadd
+        002a: ifge +13 // 0037
+        002d: new #5 // java/lang/IllegalStateException
+        0030: dup
+        0031: ldc #20 // "stamp counter overflow"
+        0033: invokespecial #16 // IllegalStateException.<init> (Ljava/lang/String;)V
+        0036: athrow
+        0037: aload_0
+        0038: invokespecial #17 // Calendar$Builder.allocateFields ()V
+        003b: iconst_0
+        003c: istore_3
+        003d: iload_3
+        003e: iload_2
+        003f: if_icmpge +48 // 006f
+        0042: aload_1
+        0043: iload_3
+        0044: iinc local_var:31
+        0047: iaload
+        0048: istore local_var:4
+        004a: iload local_var:4
+        004c: iflt +10 // 0056
+        004f: iload local_var:4
+        0051: bipush 17
+        0053: if_icmplt +13 // 0060
+        0056: new #11 // java/lang/IllegalArgumentException
+        0059: dup
+        005a: ldc #12 // "field is invalid"
+        005c: invokespecial #13 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        005f: athrow
+        0060: aload_0
+        0061: iload local_var:4
+        0063: aload_1
+        0064: iload_3
+        0065: iinc local_var:31
+        0068: iaload
+        0069: invokespecial #18 // Calendar$Builder.internalSet (II)V
+        006c: goto -47 // 003d
+        006f: aload_0
+        0070: areturn
     }
     
     public Calendar$Builder setDate(int, int, int) {
         // max_stack: 5
         // max_locals: 4
         0000: aload_0
-        0000: bipush
-        0000: iconst_3
-        0000: newarray
-        0000: lconst_1
-        0000: dup
-        0000: iconst_0
-        0000: iconst_1
-        0000: iastore
-        0000: dup
-        0000: iconst_1
-        0000: iload_1
-        0000: iastore
-        0000: dup
-        0000: iconst_2
-        0000: iconst_2
-        0000: iastore
-        0000: dup
-        0000: iconst_3
-        0000: iload_2
-        0000: iastore
-        0000: dup
-        0000: iconst_4
-        0000: iconst_5
-        0000: iastore
-        0000: dup
-        0000: iconst_5
-        0000: iload_3
-        0000: iastore
-        0000: invokevirtual
-        0000: nop
-        0000: iload
-        0000: areturn
+        0001: bipush 6
+        0003: newarray 10 // int[]
+        0005: dup
+        0006: iconst_0
+        0007: iconst_1
+        0008: iastore
+        0009: dup
+        000a: iconst_1
+        000b: iload_1
+        000c: iastore
+        000d: dup
+        000e: iconst_2
+        000f: iconst_2
+        0010: iastore
+        0011: dup
+        0012: iconst_3
+        0013: iload_2
+        0014: iastore
+        0015: dup
+        0016: iconst_4
+        0017: iconst_5
+        0018: iastore
+        0019: dup
+        001a: iconst_5
+        001b: iload_3
+        001c: iastore
+        001d: invokevirtual #21 // Calendar$Builder.setFields ([I)Ljava/util/Calendar$Builder;
+        0020: areturn
     }
     
     public Calendar$Builder setTimeOfDay(int, int, int) {
         // max_stack: 5
         // max_locals: 4
         0000: aload_0
-        0000: iload_1
-        0000: iload_2
-        0000: iload_3
-        0000: iconst_0
-        0000: invokevirtual
-        0000: nop
-        0000: lload
-        0000: areturn
+        0001: iload_1
+        0002: iload_2
+        0003: iload_3
+        0004: iconst_0
+        0005: invokevirtual #22 // Calendar$Builder.setTimeOfDay (IIII)Ljava/util/Calendar$Builder;
+        0008: areturn
     }
     
     public Calendar$Builder setTimeOfDay(int, int, int, int) {
         // max_stack: 5
         // max_locals: 5
         0000: aload_0
-        0000: bipush
-        0000: iconst_5
-        0000: newarray
-        0000: lconst_1
-        0000: dup
-        0000: iconst_0
-        0000: bipush
-        0000: fconst_0
-        0000: iastore
-        0000: dup
-        0000: iconst_1
-        0000: iload_1
-        0000: iastore
-        0000: dup
-        0000: iconst_2
-        0000: bipush
-        0000: fconst_1
-        0000: iastore
-        0000: dup
-        0000: iconst_3
-        0000: iload_2
-        0000: iastore
-        0000: dup
-        0000: iconst_4
-        0000: bipush
-        0000: fconst_2
-        0000: iastore
-        0000: dup
-        0000: iconst_5
-        0000: iload_3
-        0000: iastore
-        0000: dup
-        0000: bipush
-        0000: iconst_3
-        0000: bipush
-        0000: dconst_0
-        0000: iastore
-        0000: dup
-        0000: bipush
-        0000: iconst_4
-        0000: iload
-        0000: iconst_1
-        0000: iastore
-        0000: invokevirtual
-        0000: nop
-        0000: iload
-        0000: areturn
+        0001: bipush 8
+        0003: newarray 10 // int[]
+        0005: dup
+        0006: iconst_0
+        0007: bipush 11
+        0009: iastore
+        000a: dup
+        000b: iconst_1
+        000c: iload_1
+        000d: iastore
+        000e: dup
+        000f: iconst_2
+        0010: bipush 12
+        0012: iastore
+        0013: dup
+        0014: iconst_3
+        0015: iload_2
+        0016: iastore
+        0017: dup
+        0018: iconst_4
+        0019: bipush 13
+        001b: iastore
+        001c: dup
+        001d: iconst_5
+        001e: iload_3
+        001f: iastore
+        0020: dup
+        0021: bipush 6
+        0023: bipush 14
+        0025: iastore
+        0026: dup
+        0027: bipush 7
+        0029: iload local_var:4
+        002b: iastore
+        002c: invokevirtual #21 // Calendar$Builder.setFields ([I)Ljava/util/Calendar$Builder;
+        002f: areturn
     }
     
     public Calendar$Builder setWeekDate(int, int, int) {
         // max_stack: 3
         // max_locals: 4
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: sipush
-        0000: aload_0
-        0000: bipush
-        0000: sipush
-        0000: iload_1
-        0000: invokespecial
-        0000: nop
-        0000: ldc
-        0000: aload_0
-        0000: iconst_3
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: ldc
-        0000: aload_0
-        0000: bipush
-        0000: iconst_4
-        0000: iload_3
-        0000: invokespecial
-        0000: nop
-        0000: ldc
-        0000: aload_0
-        0000: areturn
+        0001: invokespecial #17 // Calendar$Builder.allocateFields ()V
+        0004: aload_0
+        0005: bipush 17
+        0007: iload_1
+        0008: invokespecial #18 // Calendar$Builder.internalSet (II)V
+        000b: aload_0
+        000c: iconst_3
+        000d: iload_2
+        000e: invokespecial #18 // Calendar$Builder.internalSet (II)V
+        0011: aload_0
+        0012: bipush 7
+        0014: iload_3
+        0015: invokespecial #18 // Calendar$Builder.internalSet (II)V
+        0018: aload_0
+        0019: areturn
     }
     
     public Calendar$Builder setTimeZone(TimeZone) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_1
-        0000: ifnonnull
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: dload
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: aload
-        0000: athrow
-        0000: aload_0
-        0000: aload_1
-        0000: putfield
-        0000: nop
-        0000: iload_0
-        0000: aload_0
-        0000: areturn
+        0001: ifnonnull +11 // 000c
+        0004: new #24 // java/lang/NullPointerException
+        0007: dup
+        0008: invokespecial #25 // NullPointerException.<init> ()V
+        000b: athrow
+        000c: aload_0
+        000d: aload_1
+        000e: putfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        0011: aload_0
+        0012: areturn
     }
     
     public Calendar$Builder setLenient(boolean) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_0
-        0000: iload_1
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: aload_0
-        0000: areturn
+        0001: iload_1
+        0002: putfield #3 // Calendar$Builder.lenient Z
+        0005: aload_0
+        0006: areturn
     }
     
     public Calendar$Builder setCalendarType(String) {
         // max_stack: 4
         // max_locals: 2
         0000: aload_1
-        0000: ldc
-        0000: iload_1
-        0000: invokevirtual
-        0000: nop
-        0000: iload_2
-        0000: ifeq
-        0000: nop
-        0000: iconst_3
-        0000: ldc
-        0000: iload_3
-        0000: astore_1
-        0000: invokestatic
-        0000: nop
-        0000: lload_0
-        0000: aload_1
-        0000: invokeinterface
-        0000: nop
-        0000: lload_1
-        0000: iconst_m1
-        0000: nop
-        0000: ifne
-        0000: nop
-        0000: dload_1
-        0000: aload_1
-        0000: ldc
-        0000: lload_2
-        0000: invokevirtual
-        0000: nop
-        0000: iload_2
-        0000: ifne
-        0000: nop
-        0000: lload_0
-        0000: new
-        0000: nop
-        0000: fconst_0
-        0000: dup
-        0000: new
-        0000: nop
-        0000: lload_3
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: fload_0
-        0000: ldc
-        0000: fload_1
-        0000: invokevirtual
-        0000: nop
-        0000: fload_2
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: fload_2
-        0000: invokevirtual
-        0000: nop
-        0000: fload_3
-        0000: invokespecial
-        0000: nop
-        0000: fconst_2
-        0000: athrow
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_0
-        0000: ifnonnull
-        0000: nop
-        0000: fconst_0
-        0000: aload_0
-        0000: aload_1
-        0000: putfield
-        0000: nop
-        0000: dload_0
-        0000: goto
-        0000: nop
-        0000: dload
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_0
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: iload_2
-        0000: ifne
-        0000: nop
-        0000: fconst_2
-        0000: new
-        0000: nop
-        0000: iconst_2
-        0000: dup
-        0000: ldc
-        0000: dload_1
-        0000: invokespecial
-        0000: nop
-        0000: bipush
-        0000: athrow
-        0000: aload_0
-        0000: areturn
+        0001: ldc #27 // "gregorian"
+        0003: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        0006: ifeq +6 // 000c
+        0009: ldc #29 // "gregory"
+        000b: astore_1
+        000c: invokestatic #30 // Calendar.getAvailableCalendarTypes ()Ljava/util/Set;
+        000f: aload_1
+        0010: invokeinterface #31 // Set.contains (Ljava/lang/Object;)Z
+        0015: ifne +39 // 003c
+        0018: aload_1
+        0019: ldc #32 // "iso8601"
+        001b: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        001e: ifne +30 // 003c
+        0021: new #11 // java/lang/IllegalArgumentException
+        0024: dup
+        0025: new #33 // java/lang/StringBuilder
+        0028: dup
+        0029: invokespecial #34 // StringBuilder.<init> ()V
+        002c: ldc #35 // "unknown calendar type: "
+        002e: invokevirtual #36 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        0031: aload_1
+        0032: invokevirtual #36 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        0035: invokevirtual #37 // StringBuilder.toString ()Ljava/lang/String;
+        0038: invokespecial #13 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        003b: athrow
+        003c: aload_0
+        003d: getfield #38 // Calendar$Builder.type Ljava/lang/String;
+        0040: ifnonnull +11 // 004b
+        0043: aload_0
+        0044: aload_1
+        0045: putfield #38 // Calendar$Builder.type Ljava/lang/String;
+        0048: goto +24 // 0060
+        004b: aload_0
+        004c: getfield #38 // Calendar$Builder.type Ljava/lang/String;
+        004f: aload_1
+        0050: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        0053: ifne +13 // 0060
+        0056: new #5 // java/lang/IllegalStateException
+        0059: dup
+        005a: ldc #39 // "calendar type override"
+        005c: invokespecial #16 // IllegalStateException.<init> (Ljava/lang/String;)V
+        005f: athrow
+        0060: aload_0
+        0061: areturn
     }
     
     public Calendar$Builder setLocale(Locale) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_1
-        0000: ifnonnull
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: dload
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: aload
-        0000: athrow
-        0000: aload_0
-        0000: aload_1
-        0000: putfield
-        0000: nop
-        0000: dload_2
-        0000: aload_0
-        0000: areturn
+        0001: ifnonnull +11 // 000c
+        0004: new #24 // java/lang/NullPointerException
+        0007: dup
+        0008: invokespecial #25 // NullPointerException.<init> ()V
+        000b: athrow
+        000c: aload_0
+        000d: aload_1
+        000e: putfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        0011: aload_0
+        0012: areturn
     }
     
     public Calendar$Builder setWeekDefinition(int, int) {
         // max_stack: 2
         // max_locals: 3
         0000: aload_0
-        0000: iload_1
-        0000: invokespecial
-        0000: nop
-        0000: dload_3
-        0000: ifeq
-        0000: nop
-        0000: fconst_0
-        0000: aload_0
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: dload_3
-        0000: ifne
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: fconst_0
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: ldc_w
-        0000: athrow
-        0000: aload_0
-        0000: iload_1
-        0000: putfield
-        0000: nop
-        0000: aload_0
-        0000: aload_0
-        0000: iload_2
-        0000: putfield
-        0000: nop
-        0000: aload_1
-        0000: aload_0
-        0000: areturn
+        0001: iload_1
+        0002: invokespecial #41 // Calendar$Builder.isValidWeekParameter (I)Z
+        0005: ifeq +11 // 0010
+        0008: aload_0
+        0009: iload_2
+        000a: invokespecial #41 // Calendar$Builder.isValidWeekParameter (I)Z
+        000d: ifne +11 // 0018
+        0010: new #11 // java/lang/IllegalArgumentException
+        0013: dup
+        0014: invokespecial #19 // IllegalArgumentException.<init> ()V
+        0017: athrow
+        0018: aload_0
+        0019: iload_1
+        001a: putfield #42 // Calendar$Builder.firstDayOfWeek I
+        001d: aload_0
+        001e: iload_2
+        001f: putfield #43 // Calendar$Builder.minimalDaysInFirstWeek I
+        0022: aload_0
+        0023: areturn
     }
     
     public Calendar build() {
         // max_stack: 5
         // max_locals: 5
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_2
-        0000: ifnonnull
-        0000: nop
-        0000: lconst_1
-        0000: aload_0
-        0000: invokestatic
-        0000: nop
-        0000: aload_2
-        0000: putfield
-        0000: nop
-        0000: dload_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iload_0
-        0000: ifnonnull
-        0000: nop
-        0000: lconst_1
-        0000: aload_0
-        0000: invokestatic
-        0000: nop
-        0000: aload_3
-        0000: putfield
-        0000: nop
-        0000: iload_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_0
-        0000: ifnonnull
-        0000: nop
-        0000: bipush
-        0000: aload_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_2
-        0000: ldc
-        0000: iaload
-        0000: invokevirtual
-        0000: nop
-        0000: laload
-        0000: putfield
-        0000: nop
-        0000: dload_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_0
-        0000: ifnonnull
-        0000: nop
-        0000: aload_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_2
-        0000: invokevirtual
-        0000: nop
-        0000: faload
-        0000: ldc
-        0000: daload
-        0000: if_acmpne
-        0000: nop
-        0000: dload
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_2
-        0000: invokevirtual
-        0000: nop
-        0000: aaload
-        0000: ldc
-        0000: baload
-        0000: if_acmpne
-        0000: nop
-        0000: fconst_1
-        0000: aload_0
-        0000: ldc
-        0000: caload
-        0000: putfield
-        0000: nop
-        0000: dload_0
-        0000: goto
-        0000: nop
-        0000: lconst_0
-        0000: aload_0
-        0000: ldc
-        0000: iload_3
-        0000: putfield
-        0000: nop
-        0000: dload_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_0
-        0000: astore_2
-        0000: iconst_m1
-        0000: istore_3
-        0000: aload_2
-        0000: invokevirtual
-        0000: nop
-        0000: saload
-        0000: lookupswitch
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: iadd
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: iconst_1
-        0000: if_icmplt
-        0000: monitorenter
-        0000: ED
-        0000: putfield
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: dstore_0
-        0000: D3
-        0000: fload_0
-        0000: lstore_0
-        0000: return
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: castore
-        0000: bipush
-        0000: EA
-        0000: iload
-        0000: lconst_0
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: aload_1
-        0000: iushr
-        0000: E2
-        0000: ldc_w
-        0000: iinc
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: dstore
-        0000: aload_2
-        0000: ldc
-        0000: iload_3
-        0000: invokevirtual
-        0000: nop
-        0000: iload_2
-        0000: ifeq
-        0000: nop
-        0000: laload
-        0000: iconst_0
-        0000: istore_3
-        0000: goto
-        0000: nop
-        0000: aload_0
-        0000: aload_2
-        0000: ldc
-        0000: lload_2
-        0000: invokevirtual
-        0000: nop
-        0000: iload_2
-        0000: ifeq
-        0000: nop
-        0000: lload_3
-        0000: iconst_1
-        0000: istore_3
-        0000: goto
-        0000: nop
-        0000: iload_2
-        0000: aload_2
-        0000: ldc
-        0000: caload
-        0000: invokevirtual
-        0000: nop
-        0000: iload_2
-        0000: ifeq
-        0000: nop
-        0000: ldc_w
-        0000: iconst_2
-        0000: istore_3
-        0000: goto
-        0000: nop
-        0000: dconst_0
-        0000: aload_2
-        0000: ldc
-        0000: istore
-        0000: invokevirtual
-        0000: nop
-        0000: iload_2
-        0000: ifeq
-        0000: nop
-        0000: iconst_2
-        0000: iconst_3
-        0000: istore_3
-        0000: iload_3
-        0000: tableswitch
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: f2i
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: iconst_0
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: lload_0
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: aaload
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: iadd
-        0000: nop
-        0000: nop
-        0000: nop
-        0000: dneg
-        0000: new
-        0000: nop
-        0000: lstore
-        0000: dup
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iload_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_2
-        0000: iconst_1
-        0000: invokespecial
-        0000: nop
-        0000: fstore
-        0000: astore_1
-        0000: goto
-        0000: nop
-        0000: ishr
-        0000: new
-        0000: nop
-        0000: lstore
-        0000: dup
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iload_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_2
-        0000: iconst_1
-        0000: invokespecial
-        0000: nop
-        0000: fstore
-        0000: astore
-        0000: iconst_1
-        0000: aload
-        0000: iconst_1
-        0000: new
-        0000: nop
-        0000: dstore
-        0000: dup
-        0000: ldc2_w
-        0000: nop
-        0000: istore_0
-        0000: invokespecial
-        0000: nop
-        0000: istore_2
-        0000: invokevirtual
-        0000: nop
-        0000: istore_3
-        0000: aload_0
-        0000: iconst_2
-        0000: iconst_4
-        0000: invokevirtual
-        0000: nop
-        0000: lstore_0
-        0000: pop
-        0000: aload
-        0000: iconst_1
-        0000: astore_1
-        0000: goto
-        0000: nop
-        0000: astore_1
-        0000: new
-        0000: nop
-        0000: lstore_1
-        0000: dup
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iload_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_2
-        0000: invokespecial
-        0000: nop
-        0000: lstore_2
-        0000: astore_1
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: lstore_3
-        0000: goto
-        0000: nop
-        0000: saload
-        0000: new
-        0000: nop
-        0000: fstore_0
-        0000: dup
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iload_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_2
-        0000: iconst_1
-        0000: invokespecial
-        0000: nop
-        0000: fstore_1
-        0000: astore_1
-        0000: goto
-        0000: nop
-        0000: lload_3
-        0000: new
-        0000: nop
-        0000: fconst_0
-        0000: dup
-        0000: new
-        0000: nop
-        0000: lload_3
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: fload_0
-        0000: ldc
-        0000: fload_1
-        0000: invokevirtual
-        0000: nop
-        0000: fload_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_0
-        0000: invokevirtual
-        0000: nop
-        0000: fload_2
-        0000: invokevirtual
-        0000: nop
-        0000: fload_3
-        0000: invokespecial
-        0000: nop
-        0000: fconst_2
-        0000: athrow
-        0000: aload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: invokevirtual
-        0000: nop
-        0000: fstore_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: aload_0
-        0000: ifeq
-        0000: nop
-        0000: ldc_w
-        0000: aload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: aload_0
-        0000: invokevirtual
-        0000: nop
-        0000: fstore_3
-        0000: aload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: dstore_0
-        0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: dconst_0
-        0000: ifeq
-        0000: nop
-        0000: sipush
-        0000: aload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_4
-        0000: invokevirtual
-        0000: nop
-        0000: dstore_1
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: dstore_2
-        0000: aload_1
-        0000: areturn
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: ifnull
-        0000: nop
-        0000: CE
-        0000: aload_0
-        0000: bipush
-        0000: sipush
-        0000: invokespecial
-        0000: nop
-        0000: dstore_3
-        0000: ifeq
-        0000: nop
-        0000: fload
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: bipush
-        0000: sipush
-        0000: iaload
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: iconst_1
-        0000: iaload
-        0000: if_icmple
-        0000: nop
-        0000: iconst_4
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: iconst_0
-        0000: istore_2
-        0000: iload_2
-        0000: ifeq
-        0000: nop
-        0000: dload_2
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: astore_0
-        0000: ifne
-        0000: nop
-        0000: lload_3
-        0000: new
-        0000: nop
-        0000: fconst_0
-        0000: dup
-        0000: new
-        0000: nop
-        0000: lload_3
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: fload_0
-        0000: ldc
-        0000: astore_1
-        0000: invokevirtual
-        0000: nop
-        0000: fload_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: dload_0
-        0000: invokevirtual
-        0000: nop
-        0000: fload_2
-        0000: invokevirtual
-        0000: nop
-        0000: fload_3
-        0000: invokespecial
-        0000: nop
-        0000: fconst_2
-        0000: athrow
-        0000: iconst_2
-        0000: istore_3
-        0000: iload_3
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_5
-        0000: if_icmpge
-        0000: nop
-        0000: dstore
-        0000: iconst_0
-        0000: istore
-        0000: iconst_1
-        0000: iload
-        0000: iconst_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: astore_2
-        0000: if_icmpgt
-        0000: nop
-        0000: dload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: iload
-        0000: iconst_1
-        0000: iaload
-        0000: iload_3
-        0000: if_icmpne
-        0000: nop
-        0000: lload
-        0000: aload_1
-        0000: iload
-        0000: iconst_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: bipush
-        0000: ldc
-        0000: iload
-        0000: iconst_1
-        0000: iadd
-        0000: iaload
-        0000: invokevirtual
-        0000: nop
-        0000: astore_3
-        0000: goto
-        0000: nop
-        0000: lconst_0
-        0000: iinc
-        0000: iconst_1
-        0000: aconst_null
-        0000: goto
-        0000: FF D6
-        0000: iinc
-        0000: iconst_0
-        0000: aconst_null
-        0000: goto
-        0000: FF
-        0000: multianewarray
-        0000: iload_2
-        0000: ifeq
-        0000: nop
-        0000: istore_3
-        0000: aload_0
-        0000: iconst_3
-        0000: invokespecial
-        0000: nop
-        0000: dstore_3
-        0000: ifeq
-        0000: nop
-        0000: fconst_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: bipush
-        0000: iload
-        0000: iaload
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: iconst_1
-        0000: istore_3
-        0000: aload_0
-        0000: bipush
-        0000: iconst_4
-        0000: invokespecial
-        0000: nop
-        0000: dstore_3
-        0000: ifeq
-        0000: nop
-        0000: fconst_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: bipush
-        0000: aload
-        0000: iaload
-        0000: goto
-        0000: nop
-        0000: iconst_4
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: iastore
-        0000: istore
-        0000: iconst_1
-        0000: aload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: bipush
-        0000: fload_1
-        0000: iaload
-        0000: iload_3
-        0000: iload
-        0000: iconst_1
-        0000: invokevirtual
-        0000: nop
-        0000: lastore
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: dstore_2
-        0000: aload_1
-        0000: areturn
+        0001: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        0004: ifnonnull +10 // 000e
+        0007: aload_0
+        0008: invokestatic #44 // Locale.getDefault ()Ljava/util/Locale;
+        000b: putfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        000e: aload_0
+        000f: getfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        0012: ifnonnull +10 // 001c
+        0015: aload_0
+        0016: invokestatic #45 // TimeZone.getDefault ()Ljava/util/TimeZone;
+        0019: putfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        001c: aload_0
+        001d: getfield #38 // Calendar$Builder.type Ljava/lang/String;
+        0020: ifnonnull +16 // 0030
+        0023: aload_0
+        0024: aload_0
+        0025: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        0028: ldc #46 // "ca"
+        002a: invokevirtual #47 // Locale.getUnicodeLocaleType (Ljava/lang/String;)Ljava/lang/String;
+        002d: putfield #38 // Calendar$Builder.type Ljava/lang/String;
+        0030: aload_0
+        0031: getfield #38 // Calendar$Builder.type Ljava/lang/String;
+        0034: ifnonnull +42 // 005e
+        0037: aload_0
+        0038: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        003b: invokevirtual #48 // Locale.getCountry ()Ljava/lang/String;
+        003e: ldc #49 // "TH"
+        0040: if_acmpne +24 // 0058
+        0043: aload_0
+        0044: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        0047: invokevirtual #50 // Locale.getLanguage ()Ljava/lang/String;
+        004a: ldc #51 // "th"
+        004c: if_acmpne +12 // 0058
+        004f: aload_0
+        0050: ldc #52 // "buddhist"
+        0052: putfield #38 // Calendar$Builder.type Ljava/lang/String;
+        0055: goto +9 // 005e
+        0058: aload_0
+        0059: ldc #29 // "gregory"
+        005b: putfield #38 // Calendar$Builder.type Ljava/lang/String;
+        005e: aload_0
+        005f: getfield #38 // Calendar$Builder.type Ljava/lang/String;
+        0062: astore_2
+        0063: iconst_m1
+        0064: istore_3
+        0065: aload_2
+        0066: invokevirtual #53 // String.hashCode ()I
+        0069: lookupswitch
+        006a: nop
+        006b: nop
+        006c: nop
+        006d: nop
+        006e: nop
+        006f: iadd
+        0070: nop
+        0071: nop
+        0072: nop
+        0073: iconst_1
+        0074: if_icmplt -15635 // c361
+        0077: putfield #0 // <run-time constant>
+        007a: nop
+        007b: dstore_0
+        007c: D3
+        007d: fload_0
+        007e: lstore_0
+        007f: return
+        0080: nop
+        0081: nop
+        0082: nop
+        0083: castore
+        0084: bipush -22
+        0086: iload local_var:9
+        0088: nop
+        0089: nop
+        008a: nop
+        008b: aload_1
+        008c: iushr
+        008d: E2
+        008e: ldc_w
+        008f: iinc local_var:00
+        0092: nop
+        0093: dstore local_var:44
+        0095: ldc #29 // "gregory"
+        0097: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        009a: ifeq +47 // 00c9
+        009d: iconst_0
+        009e: istore_3
+        009f: goto +42 // 00c9
+        00a2: aload_2
+        00a3: ldc #32 // "iso8601"
+        00a5: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        00a8: ifeq +33 // 00c9
+        00ab: iconst_1
+        00ac: istore_3
+        00ad: goto +28 // 00c9
+        00b0: aload_2
+        00b1: ldc #52 // "buddhist"
+        00b3: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        00b6: ifeq +19 // 00c9
+        00b9: iconst_2
+        00ba: istore_3
+        00bb: goto +14 // 00c9
+        00be: aload_2
+        00bf: ldc #54 // "japanese"
+        00c1: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        00c4: ifeq +5 // 00c9
+        00c7: iconst_3
+        00c8: istore_3
+        00c9: iload_3
+        00ca: tableswitch
+        00cb: nop
+        00cc: nop
+        00cd: nop
+        00ce: nop
+        00cf: f2i
+        00d0: nop
+        00d1: nop
+        00d2: nop
+        00d3: nop
+        00d4: nop
+        00d5: nop
+        00d6: nop
+        00d7: iconst_0
+        00d8: nop
+        00d9: nop
+        00da: nop
+        00db: lload_0
+        00dc: nop
+        00dd: nop
+        00de: nop
+        00df: aaload
+        00e0: nop
+        00e1: nop
+        00e2: nop
+        00e3: iadd
+        00e4: nop
+        00e5: nop
+        00e6: nop
+        00e7: dneg
+        00e8: new #55 // java/util/GregorianCalendar
+        00eb: dup
+        00ec: aload_0
+        00ed: getfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        00f0: aload_0
+        00f1: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        00f4: iconst_1
+        00f5: invokespecial #56 // GregorianCalendar.<init> (Ljava/util/TimeZone;Ljava/util/Locale;Z)V
+        00f8: astore_1
+        00f9: goto +122 // 0173
+        00fc: new #55 // java/util/GregorianCalendar
+        00ff: dup
+        0100: aload_0
+        0101: getfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        0104: aload_0
+        0105: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        0108: iconst_1
+        0109: invokespecial #56 // GregorianCalendar.<init> (Ljava/util/TimeZone;Ljava/util/Locale;Z)V
+        010c: astore local_var:4
+        010e: aload local_var:4
+        0110: new #57 // java/util/Date
+        0113: dup
+        0114: ldc2_w #59 // LongConstant:-9223372036854775808l
+        0117: invokespecial #61 // Date.<init> (J)V
+        011a: invokevirtual #62 // GregorianCalendar.setGregorianChange (Ljava/util/Date;)V
+        011d: aload_0
+        011e: iconst_2
+        011f: iconst_4
+        0120: invokevirtual #63 // Calendar$Builder.setWeekDefinition (II)Ljava/util/Calendar$Builder;
+        0123: pop
+        0124: aload local_var:4
+        0126: astore_1
+        0127: goto +76 // 0173
+        012a: new #64 // sun/util/BuddhistCalendar
+        012d: dup
+        012e: aload_0
+        012f: getfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        0132: aload_0
+        0133: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        0136: invokespecial #65 // sun.util.BuddhistCalendar.<init> (Ljava/util/TimeZone;Ljava/util/Locale;)V
+        0139: astore_1
+        013a: aload_1
+        013b: invokevirtual #66 // Calendar.clear ()V
+        013e: goto +53 // 0173
+        0141: new #67 // java/util/JapaneseImperialCalendar
+        0144: dup
+        0145: aload_0
+        0146: getfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        0149: aload_0
+        014a: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        014d: iconst_1
+        014e: invokespecial #68 // JapaneseImperialCalendar.<init> (Ljava/util/TimeZone;Ljava/util/Locale;Z)V
+        0151: astore_1
+        0152: goto +33 // 0173
+        0155: new #11 // java/lang/IllegalArgumentException
+        0158: dup
+        0159: new #33 // java/lang/StringBuilder
+        015c: dup
+        015d: invokespecial #34 // StringBuilder.<init> ()V
+        0160: ldc #35 // "unknown calendar type: "
+        0162: invokevirtual #36 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        0165: aload_0
+        0166: getfield #38 // Calendar$Builder.type Ljava/lang/String;
+        0169: invokevirtual #36 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        016c: invokevirtual #37 // StringBuilder.toString ()Ljava/lang/String;
+        016f: invokespecial #13 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        0172: athrow
+        0173: aload_1
+        0174: aload_0
+        0175: getfield #3 // Calendar$Builder.lenient Z
+        0178: invokevirtual #69 // Calendar.setLenient (Z)V
+        017b: aload_0
+        017c: getfield #42 // Calendar$Builder.firstDayOfWeek I
+        017f: ifeq +19 // 0192
+        0182: aload_1
+        0183: aload_0
+        0184: getfield #42 // Calendar$Builder.firstDayOfWeek I
+        0187: invokevirtual #70 // Calendar.setFirstDayOfWeek (I)V
+        018a: aload_1
+        018b: aload_0
+        018c: getfield #43 // Calendar$Builder.minimalDaysInFirstWeek I
+        018f: invokevirtual #71 // Calendar.setMinimalDaysInFirstWeek (I)V
+        0192: aload_0
+        0193: invokespecial #14 // Calendar$Builder.isInstantSet ()Z
+        0196: ifeq +17 // 01a7
+        0199: aload_1
+        019a: aload_0
+        019b: getfield #7 // Calendar$Builder.instant J
+        019e: invokevirtual #72 // Calendar.setTimeInMillis (J)V
+        01a1: aload_1
+        01a2: invokevirtual #73 // Calendar.complete ()V
+        01a5: aload_1
+        01a6: areturn
+        01a7: aload_0
+        01a8: getfield #4 // Calendar$Builder.fields [I
+        01ab: ifnull +206 // 0279
+        01ae: aload_0
+        01af: bipush 17
+        01b1: invokespecial #74 // Calendar$Builder.isSet (I)Z
+        01b4: ifeq +23 // 01cb
+        01b7: aload_0
+        01b8: getfield #4 // Calendar$Builder.fields [I
+        01bb: bipush 17
+        01bd: iaload
+        01be: aload_0
+        01bf: getfield #4 // Calendar$Builder.fields [I
+        01c2: iconst_1
+        01c3: iaload
+        01c4: if_icmple +7 // 01cb
+        01c7: iconst_1
+        01c8: goto +4 // 01cc
+        01cb: iconst_0
+        01cc: istore_2
+        01cd: iload_2
+        01ce: ifeq +40 // 01f6
+        01d1: aload_1
+        01d2: invokevirtual #75 // Calendar.isWeekDateSupported ()Z
+        01d5: ifne +33 // 01f6
+        01d8: new #11 // java/lang/IllegalArgumentException
+        01db: dup
+        01dc: new #33 // java/lang/StringBuilder
+        01df: dup
+        01e0: invokespecial #34 // StringBuilder.<init> ()V
+        01e3: ldc #76 // "week date is unsupported by "
+        01e5: invokevirtual #36 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        01e8: aload_0
+        01e9: getfield #38 // Calendar$Builder.type Ljava/lang/String;
+        01ec: invokevirtual #36 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        01ef: invokevirtual #37 // StringBuilder.toString ()Ljava/lang/String;
+        01f2: invokespecial #13 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        01f5: athrow
+        01f6: iconst_2
+        01f7: istore_3
+        01f8: iload_3
+        01f9: aload_0
+        01fa: getfield #8 // Calendar$Builder.nextStamp I
+        01fd: if_icmpge +57 // 0236
+        0200: iconst_0
+        0201: istore local_var:4
+        0203: iload local_var:4
+        0205: aload_0
+        0206: getfield #77 // Calendar$Builder.maxFieldIndex I
+        0209: if_icmpgt +39 // 0230
+        020c: aload_0
+        020d: getfield #4 // Calendar$Builder.fields [I
+        0210: iload local_var:4
+        0212: iaload
+        0213: iload_3
+        0214: if_icmpne +22 // 022a
+        0217: aload_1
+        0218: iload local_var:4
+        021a: aload_0
+        021b: getfield #4 // Calendar$Builder.fields [I
+        021e: bipush 18
+        0220: iload local_var:4
+        0222: iadd
+        0223: iaload
+        0224: invokevirtual #78 // Calendar.set (II)V
+        0227: goto +9 // 0230
+        022a: iinc local_var:41
+        022d: goto -42 // 0203
+        0230: iinc local_var:31
+        0233: goto -59 // 01f8
+        0236: iload_2
+        0237: ifeq +62 // 0275
+        023a: aload_0
+        023b: iconst_3
+        023c: invokespecial #74 // Calendar$Builder.isSet (I)Z
+        023f: ifeq +13 // 024c
+        0242: aload_0
+        0243: getfield #4 // Calendar$Builder.fields [I
+        0246: bipush 21
+        0248: iaload
+        0249: goto +4 // 024d
+        024c: iconst_1
+        024d: istore_3
+        024e: aload_0
+        024f: bipush 7
+        0251: invokespecial #74 // Calendar$Builder.isSet (I)Z
+        0254: ifeq +13 // 0261
+        0257: aload_0
+        0258: getfield #4 // Calendar$Builder.fields [I
+        025b: bipush 25
+        025d: iaload
+        025e: goto +7 // 0265
+        0261: aload_1
+        0262: invokevirtual #79 // Calendar.getFirstDayOfWeek ()I
+        0265: istore local_var:4
+        0267: aload_1
+        0268: aload_0
+        0269: getfield #4 // Calendar$Builder.fields [I
+        026c: bipush 35
+        026e: iaload
+        026f: iload_3
+        0270: iload local_var:4
+        0272: invokevirtual #80 // Calendar.setWeekDate (III)V
+        0275: aload_1
+        0276: invokevirtual #73 // Calendar.complete ()V
+        0279: aload_1
+        027a: areturn
     }
     
     private void allocateFields() {
         // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: ifnonnull
-        0000: nop
-        0000: iload
-        0000: aload_0
-        0000: bipush
-        0000: fload_2
-        0000: newarray
-        0000: lconst_1
-        0000: putfield
-        0000: nop
-        0000: iconst_1
-        0000: aload_0
-        0000: iconst_2
-        0000: putfield
-        0000: nop
-        0000: iconst_5
-        0000: aload_0
-        0000: iconst_m1
-        0000: putfield
-        0000: nop
-        0000: astore_2
-        0000: return
+        0001: getfield #4 // Calendar$Builder.fields [I
+        0004: ifnonnull +21 // 0019
+        0007: aload_0
+        0008: bipush 36
+        000a: newarray 10 // int[]
+        000c: putfield #4 // Calendar$Builder.fields [I
+        000f: aload_0
+        0010: iconst_2
+        0011: putfield #8 // Calendar$Builder.nextStamp I
+        0014: aload_0
+        0015: iconst_m1
+        0016: putfield #77 // Calendar$Builder.maxFieldIndex I
+        0019: return
     }
     
     private void internalSet(int, int) {
         // max_stack: 6
         // max_locals: 3
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: iload_1
-        0000: aload_0
-        0000: dup
-        0000: getfield
-        0000: nop
-        0000: iconst_5
-        0000: dup_x1
-        0000: iconst_1
-        0000: iadd
-        0000: putfield
-        0000: nop
-        0000: iconst_5
-        0000: iastore
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_5
-        0000: ifge
-        0000: nop
-        0000: fconst_2
-        0000: new
-        0000: nop
-        0000: iconst_2
-        0000: dup
-        0000: ldc
-        0000: ldc2_w
-        0000: invokespecial
-        0000: nop
-        0000: bipush
-        0000: athrow
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: bipush
-        0000: ldc
-        0000: iload_1
-        0000: iadd
-        0000: iload_2
-        0000: iastore
-        0000: iload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: astore_2
-        0000: if_icmple
-        0000: nop
-        0000: dconst_0
-        0000: iload_1
-        0000: bipush
-        0000: sipush
-        0000: if_icmpge
-        0000: nop
-        0000: iconst_5
-        0000: aload_0
-        0000: iload_1
-        0000: putfield
-        0000: nop
-        0000: astore_2
-        0000: return
+        0001: getfield #4 // Calendar$Builder.fields [I
+        0004: iload_1
+        0005: aload_0
+        0006: dup
+        0007: getfield #8 // Calendar$Builder.nextStamp I
+        000a: dup_x1
+        000b: iconst_1
+        000c: iadd
+        000d: putfield #8 // Calendar$Builder.nextStamp I
+        0010: iastore
+        0011: aload_0
+        0012: getfield #8 // Calendar$Builder.nextStamp I
+        0015: ifge +13 // 0022
+        0018: new #5 // java/lang/IllegalStateException
+        001b: dup
+        001c: ldc #20 // "stamp counter overflow"
+        001e: invokespecial #16 // IllegalStateException.<init> (Ljava/lang/String;)V
+        0021: athrow
+        0022: aload_0
+        0023: getfield #4 // Calendar$Builder.fields [I
+        0026: bipush 18
+        0028: iload_1
+        0029: iadd
+        002a: iload_2
+        002b: iastore
+        002c: iload_1
+        002d: aload_0
+        002e: getfield #77 // Calendar$Builder.maxFieldIndex I
+        0031: if_icmple +14 // 003f
+        0034: iload_1
+        0035: bipush 17
+        0037: if_icmpge +8 // 003f
+        003a: aload_0
+        003b: iload_1
+        003c: putfield #77 // Calendar$Builder.maxFieldIndex I
+        003f: return
     }
     
     private boolean isInstantSet() {
         // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_5
-        0000: iconst_1
-        0000: if_icmpne
-        0000: nop
-        0000: iconst_4
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: iconst_0
-        0000: ireturn
+        0001: getfield #8 // Calendar$Builder.nextStamp I
+        0004: iconst_1
+        0005: if_icmpne +7 // 000c
+        0008: iconst_1
+        0009: goto +4 // 000d
+        000c: iconst_0
+        000d: ireturn
     }
     
     private boolean isSet(int) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: ifnull
-        0000: nop
-        0000: bipush
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: iload_1
-        0000: iaload
-        0000: ifle
-        0000: nop
-        0000: iconst_4
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: iconst_0
-        0000: ireturn
+        0001: getfield #4 // Calendar$Builder.fields [I
+        0004: ifnull +16 // 0014
+        0007: aload_0
+        0008: getfield #4 // Calendar$Builder.fields [I
+        000b: iload_1
+        000c: iaload
+        000d: ifle +7 // 0014
+        0010: iconst_1
+        0011: goto +4 // 0015
+        0014: iconst_0
+        0015: ireturn
     }
     
     private boolean isValidWeekParameter(int) {
         // max_stack: 2
         // max_locals: 2
         0000: iload_1
-        0000: ifle
-        0000: nop
-        0000: fconst_2
-        0000: iload_1
-        0000: bipush
-        0000: iconst_4
-        0000: if_icmpgt
-        0000: nop
-        0000: iconst_4
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: iconst_0
-        0000: ireturn
+        0001: ifle +13 // 000e
+        0004: iload_1
+        0005: bipush 7
+        0007: if_icmpgt +7 // 000e
+        000a: iconst_1
+        000b: goto +4 // 000f
+        000e: iconst_0
+        000f: ireturn
     }
 
 }

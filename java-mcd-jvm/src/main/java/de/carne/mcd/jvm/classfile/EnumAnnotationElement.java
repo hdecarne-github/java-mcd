@@ -18,9 +18,6 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassPrinter;
 import de.carne.mcd.jvm.classfile.descriptor.Descriptor;
 import de.carne.mcd.jvm.classfile.descriptor.FieldDescriptor;
 

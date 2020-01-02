@@ -19,9 +19,6 @@ package de.carne.mcd.jvm.classfile;
 import java.io.IOException;
 
 import de.carne.boot.check.Check;
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassPrinter;
 
 /**
  * Source file attribute: "SourceFile"

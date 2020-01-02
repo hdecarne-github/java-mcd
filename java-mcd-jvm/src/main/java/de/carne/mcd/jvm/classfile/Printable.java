@@ -14,17 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm;
+package de.carne.mcd.jvm.classfile;
+
+import java.io.IOException;
 
 /**
- * Base class for all kind of decoded class elements.
+ * Interface for all kind of printable elements.
  */
-public abstract class ClassElement implements Printable {
+@FunctionalInterface
+public interface Printable {
 
-	protected final ClassInfo classInfo;
-
-	protected ClassElement(ClassInfo classInfo) {
-		this.classInfo = classInfo;
-	}
+	/**
+	 * Prints this instance.
+	 *
+	 * @param out the {@linkplain ClassPrinter} instance to print to.
+	 * @param context the context of this print invocation.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	void print(ClassPrinter out, ClassContext context) throws IOException;
 
 }

@@ -24,16 +24,12 @@ public /* super */ class Object {
         // max_stack: 2
         // max_locals: 2
         0000: aload_0
-        0000: aload_1
-        0000: if_acmpne
-        0000: nop
-        0000: iconst_4
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: iconst_0
-        0000: ireturn
+        0001: aload_1
+        0002: if_acmpne +7 // 0009
+        0005: iconst_1
+        0006: goto +4 // 000a
+        0009: iconst_0
+        000a: ireturn
     }
     
     protected native Object clone() throws CloneNotSupportedException;
@@ -41,42 +37,21 @@ public /* super */ class Object {
     public String toString() {
         // max_stack: 2
         // max_locals: 1
-        0000: new
-        0000: nop
-        0000: aconst_null
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: iconst_m1
-        0000: aload_0
-        0000: invokevirtual
-        0000: nop
-        0000: iconst_0
-        0000: invokevirtual
-        0000: nop
-        0000: iconst_1
-        0000: invokevirtual
-        0000: nop
-        0000: iconst_2
-        0000: ldc
-        0000: iconst_3
-        0000: invokevirtual
-        0000: nop
-        0000: iconst_2
-        0000: aload_0
-        0000: invokevirtual
-        0000: nop
-        0000: iconst_4
-        0000: invokestatic
-        0000: nop
-        0000: iconst_5
-        0000: invokevirtual
-        0000: nop
-        0000: iconst_2
-        0000: invokevirtual
-        0000: nop
-        0000: lconst_0
-        0000: areturn
+        0000: new #1 // java/lang/StringBuilder
+        0003: dup
+        0004: invokespecial #2 // StringBuilder.<init> ()V
+        0007: aload_0
+        0008: invokevirtual #3 // Object.getClass ()Ljava/lang/Class;
+        000b: invokevirtual #4 // Class.getName ()Ljava/lang/String;
+        000e: invokevirtual #5 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        0011: ldc #6 // "@"
+        0013: invokevirtual #5 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        0016: aload_0
+        0017: invokevirtual #7 // Object.hashCode ()I
+        001a: invokestatic #8 // Integer.toHexString (I)Ljava/lang/String;
+        001d: invokevirtual #5 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        0020: invokevirtual #9 // StringBuilder.toString ()Ljava/lang/String;
+        0023: areturn
     }
     
     public final native void notify();
@@ -89,66 +64,43 @@ public /* super */ class Object {
         // max_stack: 4
         // max_locals: 4
         0000: lload_1
-        0000: lconst_0
-        0000: lcmp
-        0000: ifge
-        0000: nop
-        0000: fconst_2
-        0000: new
-        0000: nop
-        0000: lconst_1
-        0000: dup
-        0000: ldc
-        0000: fconst_0
-        0000: invokespecial
-        0000: nop
-        0000: fconst_1
-        0000: athrow
-        0000: iload_3
-        0000: iflt
-        0000: nop
-        0000: lconst_0
-        0000: iload_3
-        0000: ldc
-        0000: fconst_2
-        0000: if_icmple
-        0000: nop
-        0000: fconst_2
-        0000: new
-        0000: nop
-        0000: lconst_1
-        0000: dup
-        0000: ldc
-        0000: dconst_0
-        0000: invokespecial
-        0000: nop
-        0000: fconst_1
-        0000: athrow
-        0000: iload_3
-        0000: ifle
-        0000: nop
-        0000: iconst_4
-        0000: lload_1
-        0000: lconst_1
-        0000: ladd
-        0000: lstore_1
-        0000: aload_0
-        0000: lload_1
-        0000: invokevirtual
-        0000: nop
-        0000: dconst_1
-        0000: return
+        0001: lconst_0
+        0002: lcmp
+        0003: ifge +13 // 0010
+        0006: new #10 // java/lang/IllegalArgumentException
+        0009: dup
+        000a: ldc #11 // "timeout value is negative"
+        000c: invokespecial #12 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        000f: athrow
+        0010: iload_3
+        0011: iflt +9 // 001a
+        0014: iload_3
+        0015: ldc #13 // IntegerConstant:999999
+        0017: if_icmple +13 // 0024
+        001a: new #10 // java/lang/IllegalArgumentException
+        001d: dup
+        001e: ldc #14 // "nanosecond timeout value out of range"
+        0020: invokespecial #12 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        0023: athrow
+        0024: iload_3
+        0025: ifle +7 // 002c
+        0028: lload_1
+        0029: lconst_1
+        002a: ladd
+        002b: lstore_1
+        002c: aload_0
+        002d: lload_1
+        002e: invokevirtual #15 // Object.wait (J)V
+        0031: return
     }
     
     public final void wait() throws InterruptedException {
         // max_stack: 3
         // max_locals: 1
         0000: aload_0
-        0000: lconst_0
-        0000: invokevirtual
-        0000: nop
-        0000: dconst_1
-        0000: return
+        0001: lconst_0
+        0002: invokevirtual #15 // Object.wait (J)V
+        0005: return
     }
     
     protected void finalize() throws Throwable {
@@ -160,10 +112,8 @@ public /* super */ class Object {
     static void <clinit>() {
         // max_stack: 0
         // max_locals: 0
-        0000: invokestatic
-        0000: nop
-        0000: bipush
-        0000: return
+        0000: invokestatic #16 // Object.registerNatives ()V
+        0003: return
     }
 
 }

@@ -14,23 +14,48 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm;
+package de.carne.mcd.jvm.classfile;
 
-import java.io.IOException;
+import java.util.Arrays;
 
 /**
- * Interface for all kind of printable elements.
+ * Enum for context depending class element processing.
  */
-@FunctionalInterface
-public interface Printable {
+public enum ClassContext {
 
 	/**
-	 * Prints this instance.
-	 *
-	 * @param out the {@linkplain ClassPrinter} instance to print to.
-	 * @param context the context of this print invocation.
-	 * @throws IOException if an I/O error occurs.
+	 * Class (global) context.
 	 */
-	void print(ClassPrinter out, ClassContext context) throws IOException;
+	CLASS,
+
+	/**
+	 * Annotation context.
+	 */
+	ANNOTATION,
+
+	/**
+	 * Field context.
+	 */
+	FIELD,
+
+	/**
+	 * Method context.
+	 */
+	METHOD,
+
+	/**
+	 * (Method) parameter context.
+	 */
+	PARAMETER;
+
+	/**
+	 * Checks whether this context is one of the listed ones.
+	 *
+	 * @param contexts the contexts to consider.
+	 * @return {@code true} if this context is one of the listed ones.
+	 */
+	public boolean isOneOf(ClassContext... contexts) {
+		return Arrays.asList(contexts).indexOf(this) >= 0;
+	}
 
 }

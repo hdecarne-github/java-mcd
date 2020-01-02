@@ -14,30 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm.classfile;
+package de.carne.mcd.jvm.bytecode;
 
 import java.io.IOException;
 
-/**
- * Constant value attribute: "ConstantValue"
- */
-public class ConstantValueAttribute extends Attribute {
+import de.carne.mcd.common.MCDOutput;
 
-	/**
-	 * Attribute name: "ConstantValue"
-	 */
-	public static final String NAME = "ConstantValue";
+@FunctionalInterface
+interface ByteOperandDecoder {
 
-	private final int constantValueIndex;
-
-	ConstantValueAttribute(ClassInfo classInfo, int constantValueIndex) {
-		super(classInfo);
-		this.constantValueIndex = constantValueIndex;
-	}
-
-	@Override
-	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		this.classInfo.resolveConstant(this.constantValueIndex, Constant.class).print(out, context);
-	}
+	void decode(int pc, byte operand, MCDOutput out) throws IOException;
 
 }

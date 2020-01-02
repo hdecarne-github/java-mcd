@@ -16,8 +16,6 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-import de.carne.mcd.jvm.ClassInfo;
-
 abstract class AbstractDynamicConstant extends Constant {
 
 	private final int bootstrapMethodAttrIndex;

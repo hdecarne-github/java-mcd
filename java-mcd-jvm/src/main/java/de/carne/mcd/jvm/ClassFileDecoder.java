@@ -22,6 +22,7 @@ import java.nio.channels.ReadableByteChannel;
 
 import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.MachineCodeDecoder;
+import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.DecodedClassInfo;
 
 /**

@@ -25,7 +25,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
 
-import de.carne.mcd.jvm.ClassPrinter;
+import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.descriptor.grammar.DescriptorGrammarLexer;
 import de.carne.mcd.jvm.classfile.descriptor.grammar.DescriptorGrammarParser;
 

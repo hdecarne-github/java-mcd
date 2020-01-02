@@ -18,8 +18,6 @@ package de.carne.mcd.jvm.classfile;
 
 import java.util.List;
 
-import de.carne.mcd.jvm.ClassInfo;
-
 class RuntimeInvisibleAnnotationsAttribute extends RuntimeAnnotationsAttribute {
 
 	public static final String NAME = "RuntimeInvisibleAnnotations";

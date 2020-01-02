@@ -21,11 +21,6 @@ import java.util.Collections;
 import java.util.List;
 
 import de.carne.boot.check.Check;
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassElement;
-import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassPrinter;
-import de.carne.mcd.jvm.MethodInfo;
 
 class Method extends ClassElement implements MethodInfo {
 

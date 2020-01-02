@@ -14,13 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm;
+package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 import java.util.List;
-
-import de.carne.mcd.jvm.classfile.Attribute;
-import de.carne.mcd.jvm.classfile.Constant;
 
 /**
  * Class information interface (see <a href="https://docs.oracle.com/javase/specs/jvms/se13/html/jvms-4.html">Class File
@@ -46,12 +43,20 @@ public interface ClassInfo {
 	 * Resolves a constant from the class file's constant pool.
 	 *
 	 * @param <T> the actual type of the constant to resolve.
-	 * @param index the index of the constant to resolve.
+	 * @param index the constant pool index to resolve.
 	 * @param type the type of the constant to resolve.
 	 * @return the resolved constant.
 	 * @throws IOException if the constant cannot be resolved.
 	 */
 	<T extends Constant> T resolveConstant(int index, Class<T> type) throws IOException;
+
+	/**
+	 * Resolves a run-time constant pool index to it's corresponding symbol.
+	 * 
+	 * @param index the run-time constant pool index to resolve.
+	 * @return the resolved symbol.
+	 */
+	String resolveRuntimeSymbol(int index);
 
 	/**
 	 * Gets the class' access flags.

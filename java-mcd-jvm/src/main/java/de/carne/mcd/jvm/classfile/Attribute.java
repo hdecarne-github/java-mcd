@@ -16,9 +16,6 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-import de.carne.mcd.jvm.ClassElement;
-import de.carne.mcd.jvm.ClassInfo;
-
 /**
  * Base class for all kinds of attributes.
  */

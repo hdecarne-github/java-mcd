@@ -16,28 +16,15 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-import java.io.IOException;
-
 /**
- * Constant value attribute: "ConstantValue"
+ * Base class for all kind of decoded class elements.
  */
-public class ConstantValueAttribute extends Attribute {
+public abstract class ClassElement implements Printable {
 
-	/**
-	 * Attribute name: "ConstantValue"
-	 */
-	public static final String NAME = "ConstantValue";
+	protected final ClassInfo classInfo;
 
-	private final int constantValueIndex;
-
-	ConstantValueAttribute(ClassInfo classInfo, int constantValueIndex) {
-		super(classInfo);
-		this.constantValueIndex = constantValueIndex;
-	}
-
-	@Override
-	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		this.classInfo.resolveConstant(this.constantValueIndex, Constant.class).print(out, context);
+	protected ClassElement(ClassInfo classInfo) {
+		this.classInfo = classInfo;
 	}
 
 }

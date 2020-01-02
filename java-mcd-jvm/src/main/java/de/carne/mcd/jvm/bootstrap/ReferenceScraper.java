@@ -146,8 +146,8 @@ final class ReferenceScraper implements Closeable {
 				LOG.info(" forms: {0}", Strings.join(forms, "|"));
 
 				for (InstructionForm form : forms) {
-					this.references.add(new Reference(form.mnomic(), form.opcode(), format.arguments(),
-							operandStackIn, operandStackOut));
+					this.references.add(new Reference(form.mnomic(), form.opcode(), format.arguments(), operandStackIn,
+							operandStackOut));
 				}
 			}
 		}
@@ -196,7 +196,8 @@ final class ReferenceScraper implements Closeable {
 	}
 
 	private static final String[][] DECODE_OPERAND_STACK_TABLE = { { "<span class=\"emphasis\"><em>", "" },
-			{ "</em></span>", "" }, { "&lt;", "<" }, { "&gt;", ">" }, { "[empty]", "" } };
+			{ "</em></span>", "" }, { "<code class=\"literal\">", "" }, { "</code>", "" }, { "&lt;", "<" },
+			{ "&gt;", ">" }, { "[empty]", "" } };
 
 	private String scrapeOperandStackIn() throws IOException {
 		LOG.debug("Scraping operand stack in...");

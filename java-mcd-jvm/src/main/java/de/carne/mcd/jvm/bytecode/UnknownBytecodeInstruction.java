@@ -40,7 +40,7 @@ class UnknownBytecodeInstruction implements Instruction {
 	}
 
 	@Override
-	public void decode(MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
+	public void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
 		out.printlnError(this.opcodeString);
 	}
 

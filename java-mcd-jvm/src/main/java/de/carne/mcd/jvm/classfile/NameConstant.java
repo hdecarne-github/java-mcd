@@ -18,8 +18,6 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
-import de.carne.mcd.jvm.ClassInfo;
-
 /**
  * Base class for all kinds of name constants.
  */
@@ -50,6 +48,11 @@ public abstract class NameConstant extends Constant {
 	 */
 	public Utf8Constant getName() throws IOException {
 		return this.classInfo.resolveConstant(this.nameIndex, Utf8Constant.class);
+	}
+
+	@Override
+	public String resolveSymbol() throws IOException {
+		return getNameValue();
 	}
 
 	@Override

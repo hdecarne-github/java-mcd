@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm;
+package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -23,13 +23,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import de.carne.mcd.common.MCDOutput;
-import de.carne.mcd.jvm.classfile.Attribute;
-import de.carne.mcd.jvm.classfile.CodeAttribute;
-import de.carne.mcd.jvm.classfile.ConstantValueAttribute;
-import de.carne.mcd.jvm.classfile.ExceptionsAttribute;
-import de.carne.mcd.jvm.classfile.RuntimeAnnotationsAttribute;
-import de.carne.mcd.jvm.classfile.SignatureAttribute;
-import de.carne.mcd.jvm.classfile.SourceFileAttribute;
 import de.carne.mcd.jvm.classfile.descriptor.Descriptor;
 import de.carne.mcd.jvm.classfile.descriptor.FieldDescriptor;
 import de.carne.mcd.jvm.classfile.descriptor.FieldTypeDescriptor;

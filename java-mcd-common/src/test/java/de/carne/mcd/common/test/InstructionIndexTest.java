@@ -181,10 +181,8 @@ class InstructionIndexTest {
 		}
 
 		@Override
-		public void decode(MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
-			HexFormatter formatter = new HexFormatter();
-
-			out.printlnValue(formatter.format(this.opcode, this.offset, this.length));
+		public void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
+			out.printlnValue(HexFormatter.UPPER_CASE.format(this.opcode, this.offset, this.length));
 		}
 
 	}

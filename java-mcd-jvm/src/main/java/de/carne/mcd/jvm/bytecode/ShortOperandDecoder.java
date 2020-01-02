@@ -14,23 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm;
+package de.carne.mcd.jvm.bytecode;
 
 import java.io.IOException;
 
-/**
- * Printer function interface.
- */
-@FunctionalInterface
-public interface Printer {
+import de.carne.mcd.common.MCDOutput;
 
-	/**
-	 * Prints the submitted text.
-	 * 
-	 * @param out the {@linkplain ClassPrinter} instance to print to.
-	 * @param text the text to print.
-	 * @throws IOException if an I/O error occurs.
-	 */
-	void print(ClassPrinter out, String text) throws IOException;
+@FunctionalInterface
+interface ShortOperandDecoder {
+
+	void decode(int pc, short operand, MCDOutput out) throws IOException;
 
 }

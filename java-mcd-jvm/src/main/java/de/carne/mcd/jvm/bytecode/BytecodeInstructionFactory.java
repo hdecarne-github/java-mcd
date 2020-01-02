@@ -26,17 +26,7 @@ class BytecodeInstructionFactory implements InstructionFactory {
 
 	@Override
 	public Instruction loadInstruction(DataInput in) throws IOException {
-		int tag = in.readByte();
-		Instruction instruction;
-
-		switch (tag) {
-		case BytecodeInstructionV.TAG:
-			instruction = BytecodeInstructionV.load(in);
-			break;
-		default:
-			throw new IOException("Unrecognized instruction tag: " + tag);
-		}
-		return instruction;
+		return BytecodeInstruction.load(in);
 	}
 
 	@Override

@@ -31,28 +31,27 @@ final class Reference {
 	private static final String SEPARATOR1 = ";";
 	private static final String SEPARATOR2 = ",";
 
-	private static final String NO_VALUE = "-";
+	public static final String NO_VALUE = "-";
 
 	private final String mnomic;
 	private Opcode opcode;
 	private List<String> arguments;
 	private String operandStackIn;
 	private String operandStackOut;
-	private List<String> extraFields;
+	private List<String> operands;
 
-	Reference(String mnomic, Opcode opcode, List<String> arguments, String operandStackIn,
-			String operandStackOut) {
+	Reference(String mnomic, Opcode opcode, List<String> arguments, String operandStackIn, String operandStackOut) {
 		this(mnomic, opcode, arguments, operandStackIn, operandStackOut, Collections.emptyList());
 	}
 
 	private Reference(String mnomic, Opcode opcode, List<String> arguments, String operandStackIn,
-			String operandStackOut, List<String> extraFields) {
+			String operandStackOut, List<String> operands) {
 		this.mnomic = mnomic;
 		this.opcode = opcode;
 		this.arguments = Collections.unmodifiableList(arguments);
 		this.operandStackIn = operandStackIn;
 		this.operandStackOut = operandStackOut;
-		this.extraFields = Collections.unmodifiableList(extraFields);
+		this.operands = Collections.unmodifiableList(operands);
 	}
 
 	public void update(Reference reference) {
@@ -68,6 +67,10 @@ final class Reference {
 
 	public Opcode opcode() {
 		return this.opcode;
+	}
+
+	public List<String> operands() {
+		return this.operands;
 	}
 
 	public static Reference fromLine(String line) throws IOException {
@@ -106,8 +109,8 @@ final class Reference {
 		line.append(encode(Strings.join(this.arguments, SEPARATOR2))).append(SEPARATOR1);
 		line.append(encode(this.operandStackIn)).append(SEPARATOR1);
 		line.append(encode(this.operandStackOut));
-		for (String extraField : this.extraFields) {
-			line.append(SEPARATOR1).append(encode(extraField));
+		for (String operand : this.operands) {
+			line.append(SEPARATOR1).append(encode(operand));
 		}
 		return line.toString();
 	}

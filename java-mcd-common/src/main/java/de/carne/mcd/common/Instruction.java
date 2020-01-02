@@ -40,6 +40,6 @@ public interface Instruction {
 	 * @param out the {@linkplain MCDOutput} to decode to.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	void decode(MCDDecodeBuffer buffer, MCDOutput out) throws IOException;
+	void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException;
 
 }

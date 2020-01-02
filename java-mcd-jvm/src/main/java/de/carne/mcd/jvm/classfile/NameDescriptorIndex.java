@@ -16,10 +16,6 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-import java.util.Objects;
-
-import org.eclipse.jdt.annotation.Nullable;
-
 final class NameDescriptorIndex {
 
 	private final int nameIndex;
@@ -36,20 +32,6 @@ final class NameDescriptorIndex {
 
 	public int descriptorIndex() {
 		return this.descriptorIndex;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(this.nameIndex, this.descriptorIndex);
-	}
-
-	@Override
-	public boolean equals(@Nullable Object obj) {
-		return this == obj || (obj instanceof NameDescriptorIndex && equalsHelper((NameDescriptorIndex) obj));
-	}
-
-	private boolean equalsHelper(NameDescriptorIndex o) {
-		return this.nameIndex == o.nameIndex && this.descriptorIndex == o.descriptorIndex;
 	}
 
 	@Override

@@ -14,48 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm;
+package de.carne.mcd.jvm.bytecode;
 
-import java.util.Arrays;
+import java.io.IOException;
 
-/**
- * Enum for context depending class element processing.
- */
-public enum ClassContext {
+import de.carne.mcd.common.MCDOutput;
 
-	/**
-	 * Class (global) context.
-	 */
-	CLASS,
+@FunctionalInterface
+interface IntOperandDecoder {
 
-	/**
-	 * Annotation context.
-	 */
-	ANNOTATION,
-
-	/**
-	 * Field context.
-	 */
-	FIELD,
-
-	/**
-	 * Method context.
-	 */
-	METHOD,
-
-	/**
-	 * (Method) parameter context.
-	 */
-	PARAMETER;
-
-	/**
-	 * Checks whether this context is one of the listed ones.
-	 *
-	 * @param contexts the contexts to consider.
-	 * @return {@code true} if this context is one of the listed ones.
-	 */
-	public boolean isOneOf(ClassContext... contexts) {
-		return Arrays.asList(contexts).indexOf(this) >= 0;
-	}
+	void decode(long pc, int operand, MCDOutput out) throws IOException;
 
 }

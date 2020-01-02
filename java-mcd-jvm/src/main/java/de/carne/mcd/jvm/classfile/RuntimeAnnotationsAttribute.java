@@ -20,10 +20,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassPrinter;
-
 /**
  * Base class for all kinds of runtime visible annotations attributes.
  */

@@ -16,8 +16,8 @@
  */
 package de.carne.mcd.jvm.util;
 
-import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassName;
+import de.carne.mcd.jvm.classfile.ClassInfo;
+import de.carne.mcd.jvm.classfile.ClassName;
 
 /**
  * Utility class providing class information related functions.

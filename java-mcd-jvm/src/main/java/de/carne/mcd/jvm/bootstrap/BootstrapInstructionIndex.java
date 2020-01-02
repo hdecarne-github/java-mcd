@@ -24,13 +24,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import de.carne.boot.check.Check;
 import de.carne.boot.logging.Log;
 import de.carne.mcd.common.InstructionIndexBuilder;
 import de.carne.mcd.common.Opcode;
-import de.carne.mcd.jvm.bytecode.BytecodeInstructionV;
+import de.carne.mcd.jvm.bytecode.ByteOperandType;
+import de.carne.mcd.jvm.bytecode.BytecodeInstruction;
+import de.carne.mcd.jvm.bytecode.IntOperandType;
+import de.carne.mcd.jvm.bytecode.OperandDecoder;
+import de.carne.mcd.jvm.bytecode.ShortOperandType;
 import de.carne.util.Strings;
 
 /**
@@ -99,8 +105,9 @@ public class BootstrapInstructionIndex {
 
 			Opcode opcode = reference.opcode();
 			String mnomic = reference.mnomic();
+			OperandDecoder[] operands = getOperands(reference);
 
-			builder.add(opcode, new BytecodeInstructionV(mnomic));
+			builder.add(opcode, new BytecodeInstruction(mnomic, operands));
 		}
 
 		Path instructionIndexPath = Paths.get(INSTRUCTION_INDEX_PATH);
@@ -118,6 +125,23 @@ public class BootstrapInstructionIndex {
 		LOG.notice("Index opcode bytes  : {0}", builder.opcodeBytes());
 		LOG.notice("Index position bytes: {0}", builder.positionBytes());
 		LOG.notice("Index size          : {0}", totalIndexSize);
+	}
+
+	private static OperandDecoder[] getOperands(Reference reference) throws IOException {
+		List<OperandDecoder> operands = new ArrayList<>();
+
+		for (String operand : reference.operands()) {
+			if (operand.startsWith("B:")) {
+				operands.add(ByteOperandType.valueOf(operand.substring(2)));
+			} else if (operand.startsWith("S:")) {
+				operands.add(ShortOperandType.valueOf(operand.substring(2)));
+			} else if (operand.startsWith("I:")) {
+				operands.add(IntOperandType.valueOf(operand.substring(2)));
+			} else {
+				throw new IOException("Unrecognized operand: " + operand);
+			}
+		}
+		return operands.toArray(new OperandDecoder[operands.size()]);
 	}
 
 	private static ReferenceScraper openReference(String source) throws IOException {

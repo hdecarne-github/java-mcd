@@ -33,31 +33,20 @@ public final /* super */ enum StandardOpenOption extends Enum implements OpenOpt
     public static StandardOpenOption[] values() {
         // max_stack: 1
         // max_locals: 0
-        0000: getstatic
-        0000: nop
-        0000: aconst_null
-        0000: invokevirtual
-        0000: nop
-        0000: iconst_m1
-        0000: checkcast
-        0000: nop
-        0000: iconst_0
-        0000: areturn
+        0000: getstatic #1 // StandardOpenOption.$VALUES [Ljava/nio/file/StandardOpenOption;
+        0003: invokevirtual #2 // [Ljava.nio.file.StandardOpenOption;.clone ()Ljava/lang/Object;
+        0006: checkcast #3 // [Ljava/nio/file/StandardOpenOption;
+        0009: areturn
     }
     
     public static StandardOpenOption valueOf(String) {
         // max_stack: 2
         // max_locals: 1
-        0000: ldc
-        0000: iconst_1
-        0000: aload_0
-        0000: invokestatic
-        0000: nop
-        0000: iconst_2
-        0000: checkcast
-        0000: nop
-        0000: iconst_1
-        0000: areturn
+        0000: ldc #4 // java/nio/file/StandardOpenOption
+        0002: aload_0
+        0003: invokestatic #5 // Enum.valueOf (Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+        0006: checkcast #4 // java/nio/file/StandardOpenOption
+        0009: areturn
     }
     
     // Signature: ()V
@@ -65,224 +54,119 @@ public final /* super */ enum StandardOpenOption extends Enum implements OpenOpt
         // max_stack: 3
         // max_locals: 3
         0000: aload_0
-        0000: aload_1
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: iconst_3
-        0000: return
+        0001: aload_1
+        0002: iload_2
+        0003: invokespecial #6 // Enum.<init> (Ljava/lang/String;I)V
+        0006: return
     }
     
     static void <clinit>() {
         // max_stack: 4
         // max_locals: 0
-        0000: new
-        0000: nop
-        0000: iconst_1
-        0000: dup
-        0000: ldc
-        0000: iconst_4
-        0000: iconst_0
-        0000: invokespecial
-        0000: nop
-        0000: iconst_5
-        0000: putstatic
-        0000: nop
-        0000: lconst_0
-        0000: new
-        0000: nop
-        0000: iconst_1
-        0000: dup
-        0000: ldc
-        0000: lconst_1
-        0000: iconst_1
-        0000: invokespecial
-        0000: nop
-        0000: iconst_5
-        0000: putstatic
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: iconst_1
-        0000: dup
-        0000: ldc
-        0000: fconst_1
-        0000: iconst_2
-        0000: invokespecial
-        0000: nop
-        0000: iconst_5
-        0000: putstatic
-        0000: nop
-        0000: fconst_2
-        0000: new
-        0000: nop
-        0000: iconst_1
-        0000: dup
-        0000: ldc
-        0000: dconst_0
-        0000: iconst_3
-        0000: invokespecial
-        0000: nop
-        0000: iconst_5
-        0000: putstatic
-        0000: nop
-        0000: dconst_1
-        0000: new
-        0000: nop
-        0000: iconst_1
-        0000: dup
-        0000: ldc
-        0000: bipush
-        0000: iconst_4
-        0000: invokespecial
-        0000: nop
-        0000: iconst_5
-        0000: putstatic
-        0000: nop
-        0000: sipush
-        0000: new
-        0000: nop
-        0000: iconst_1
-        0000: dup
-        0000: ldc
-        0000: ldc
-        0000: iconst_5
-        0000: invokespecial
-        0000: nop
-        0000: iconst_5
-        0000: putstatic
-        0000: nop
-        0000: ldc_w
-        0000: new
-        0000: nop
-        0000: iconst_1
-        0000: dup
-        0000: ldc
-        0000: ldc2_w
-        0000: bipush
-        0000: iconst_3
-        0000: invokespecial
-        0000: nop
-        0000: iconst_5
-        0000: putstatic
-        0000: nop
-        0000: iload
-        0000: new
-        0000: nop
-        0000: iconst_1
-        0000: dup
-        0000: ldc
-        0000: lload
-        0000: bipush
-        0000: iconst_4
-        0000: invokespecial
-        0000: nop
-        0000: iconst_5
-        0000: putstatic
-        0000: nop
-        0000: fload
-        0000: new
-        0000: nop
-        0000: iconst_1
-        0000: dup
-        0000: ldc
-        0000: dload
-        0000: bipush
-        0000: iconst_5
-        0000: invokespecial
-        0000: nop
-        0000: iconst_5
-        0000: putstatic
-        0000: nop
-        0000: aload
-        0000: new
-        0000: nop
-        0000: iconst_1
-        0000: dup
-        0000: ldc
-        0000: iload_0
-        0000: bipush
-        0000: lconst_0
-        0000: invokespecial
-        0000: nop
-        0000: iconst_5
-        0000: putstatic
-        0000: nop
-        0000: iload_1
-        0000: bipush
-        0000: lconst_1
-        0000: anewarray
-        0000: nop
-        0000: iconst_1
-        0000: dup
-        0000: iconst_0
-        0000: getstatic
-        0000: nop
-        0000: lconst_0
-        0000: aastore
-        0000: dup
-        0000: iconst_1
-        0000: getstatic
-        0000: nop
-        0000: fconst_0
-        0000: aastore
-        0000: dup
-        0000: iconst_2
-        0000: getstatic
-        0000: nop
-        0000: fconst_2
-        0000: aastore
-        0000: dup
-        0000: iconst_3
-        0000: getstatic
-        0000: nop
-        0000: dconst_1
-        0000: aastore
-        0000: dup
-        0000: iconst_4
-        0000: getstatic
-        0000: nop
-        0000: sipush
-        0000: aastore
-        0000: dup
-        0000: iconst_5
-        0000: getstatic
-        0000: nop
-        0000: ldc_w
-        0000: aastore
-        0000: dup
-        0000: bipush
-        0000: iconst_3
-        0000: getstatic
-        0000: nop
-        0000: iload
-        0000: aastore
-        0000: dup
-        0000: bipush
-        0000: iconst_4
-        0000: getstatic
-        0000: nop
-        0000: fload
-        0000: aastore
-        0000: dup
-        0000: bipush
-        0000: iconst_5
-        0000: getstatic
-        0000: nop
-        0000: aload
-        0000: aastore
-        0000: dup
-        0000: bipush
-        0000: lconst_0
-        0000: getstatic
-        0000: nop
-        0000: iload_1
-        0000: aastore
-        0000: putstatic
-        0000: nop
-        0000: aconst_null
-        0000: return
+        0000: new #4 // java/nio/file/StandardOpenOption
+        0003: dup
+        0004: ldc #7 // "READ"
+        0006: iconst_0
+        0007: invokespecial #8 // StandardOpenOption.<init> (Ljava/lang/String;I)V
+        000a: putstatic #9 // StandardOpenOption.READ Ljava/nio/file/StandardOpenOption;
+        000d: new #4 // java/nio/file/StandardOpenOption
+        0010: dup
+        0011: ldc #10 // "WRITE"
+        0013: iconst_1
+        0014: invokespecial #8 // StandardOpenOption.<init> (Ljava/lang/String;I)V
+        0017: putstatic #11 // StandardOpenOption.WRITE Ljava/nio/file/StandardOpenOption;
+        001a: new #4 // java/nio/file/StandardOpenOption
+        001d: dup
+        001e: ldc #12 // "APPEND"
+        0020: iconst_2
+        0021: invokespecial #8 // StandardOpenOption.<init> (Ljava/lang/String;I)V
+        0024: putstatic #13 // StandardOpenOption.APPEND Ljava/nio/file/StandardOpenOption;
+        0027: new #4 // java/nio/file/StandardOpenOption
+        002a: dup
+        002b: ldc #14 // "TRUNCATE_EXISTING"
+        002d: iconst_3
+        002e: invokespecial #8 // StandardOpenOption.<init> (Ljava/lang/String;I)V
+        0031: putstatic #15 // StandardOpenOption.TRUNCATE_EXISTING Ljava/nio/file/StandardOpenOption;
+        0034: new #4 // java/nio/file/StandardOpenOption
+        0037: dup
+        0038: ldc #16 // "CREATE"
+        003a: iconst_4
+        003b: invokespecial #8 // StandardOpenOption.<init> (Ljava/lang/String;I)V
+        003e: putstatic #17 // StandardOpenOption.CREATE Ljava/nio/file/StandardOpenOption;
+        0041: new #4 // java/nio/file/StandardOpenOption
+        0044: dup
+        0045: ldc #18 // "CREATE_NEW"
+        0047: iconst_5
+        0048: invokespecial #8 // StandardOpenOption.<init> (Ljava/lang/String;I)V
+        004b: putstatic #19 // StandardOpenOption.CREATE_NEW Ljava/nio/file/StandardOpenOption;
+        004e: new #4 // java/nio/file/StandardOpenOption
+        0051: dup
+        0052: ldc #20 // "DELETE_ON_CLOSE"
+        0054: bipush 6
+        0056: invokespecial #8 // StandardOpenOption.<init> (Ljava/lang/String;I)V
+        0059: putstatic #21 // StandardOpenOption.DELETE_ON_CLOSE Ljava/nio/file/StandardOpenOption;
+        005c: new #4 // java/nio/file/StandardOpenOption
+        005f: dup
+        0060: ldc #22 // "SPARSE"
+        0062: bipush 7
+        0064: invokespecial #8 // StandardOpenOption.<init> (Ljava/lang/String;I)V
+        0067: putstatic #23 // StandardOpenOption.SPARSE Ljava/nio/file/StandardOpenOption;
+        006a: new #4 // java/nio/file/StandardOpenOption
+        006d: dup
+        006e: ldc #24 // "SYNC"
+        0070: bipush 8
+        0072: invokespecial #8 // StandardOpenOption.<init> (Ljava/lang/String;I)V
+        0075: putstatic #25 // StandardOpenOption.SYNC Ljava/nio/file/StandardOpenOption;
+        0078: new #4 // java/nio/file/StandardOpenOption
+        007b: dup
+        007c: ldc #26 // "DSYNC"
+        007e: bipush 9
+        0080: invokespecial #8 // StandardOpenOption.<init> (Ljava/lang/String;I)V
+        0083: putstatic #27 // StandardOpenOption.DSYNC Ljava/nio/file/StandardOpenOption;
+        0086: bipush 10
+        0088: anewarray #4 // java/nio/file/StandardOpenOption
+        008b: dup
+        008c: iconst_0
+        008d: getstatic #9 // StandardOpenOption.READ Ljava/nio/file/StandardOpenOption;
+        0090: aastore
+        0091: dup
+        0092: iconst_1
+        0093: getstatic #11 // StandardOpenOption.WRITE Ljava/nio/file/StandardOpenOption;
+        0096: aastore
+        0097: dup
+        0098: iconst_2
+        0099: getstatic #13 // StandardOpenOption.APPEND Ljava/nio/file/StandardOpenOption;
+        009c: aastore
+        009d: dup
+        009e: iconst_3
+        009f: getstatic #15 // StandardOpenOption.TRUNCATE_EXISTING Ljava/nio/file/StandardOpenOption;
+        00a2: aastore
+        00a3: dup
+        00a4: iconst_4
+        00a5: getstatic #17 // StandardOpenOption.CREATE Ljava/nio/file/StandardOpenOption;
+        00a8: aastore
+        00a9: dup
+        00aa: iconst_5
+        00ab: getstatic #19 // StandardOpenOption.CREATE_NEW Ljava/nio/file/StandardOpenOption;
+        00ae: aastore
+        00af: dup
+        00b0: bipush 6
+        00b2: getstatic #21 // StandardOpenOption.DELETE_ON_CLOSE Ljava/nio/file/StandardOpenOption;
+        00b5: aastore
+        00b6: dup
+        00b7: bipush 7
+        00b9: getstatic #23 // StandardOpenOption.SPARSE Ljava/nio/file/StandardOpenOption;
+        00bc: aastore
+        00bd: dup
+        00be: bipush 8
+        00c0: getstatic #25 // StandardOpenOption.SYNC Ljava/nio/file/StandardOpenOption;
+        00c3: aastore
+        00c4: dup
+        00c5: bipush 9
+        00c7: getstatic #27 // StandardOpenOption.DSYNC Ljava/nio/file/StandardOpenOption;
+        00ca: aastore
+        00cb: putstatic #1 // StandardOpenOption.$VALUES [Ljava/nio/file/StandardOpenOption;
+        00ce: return
     }
 
 }

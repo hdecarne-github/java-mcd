@@ -14,12 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm;
+package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 import java.util.List;
-
-import de.carne.mcd.jvm.classfile.Attribute;
 
 /**
  * Class field information interface (see

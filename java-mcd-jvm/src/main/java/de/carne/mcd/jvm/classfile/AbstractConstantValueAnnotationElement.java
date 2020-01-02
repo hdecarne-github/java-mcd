@@ -16,8 +16,6 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-import de.carne.mcd.jvm.ClassInfo;
-
 /**
  * Base class for all kind of constant based annotation element.
  */

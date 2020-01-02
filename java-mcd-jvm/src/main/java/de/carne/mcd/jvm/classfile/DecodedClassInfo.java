@@ -28,10 +28,6 @@ import java.util.Map;
 
 import de.carne.boot.logging.Log;
 import de.carne.mcd.common.MCDDecodeBuffer;
-import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassName;
-import de.carne.mcd.jvm.FieldInfo;
-import de.carne.mcd.jvm.MethodInfo;
 import de.carne.util.Late;
 
 /**
@@ -734,9 +730,28 @@ public class DecodedClassInfo implements ClassInfo {
 			throw new IOException("Invalid constant index: " + index);
 		}
 		if (!type.isAssignableFrom(constant.getClass())) {
-			throw new IOException("Constant type mismatch: " + type);
+			throw new IOException("Constant type mismatch: " + constant.getClass());
 		}
 		return type.cast(constant);
+	}
+
+	@Override
+	public String resolveRuntimeSymbol(int index) {
+		Constant constant = this.constantPool.get(index);
+		String symbol;
+
+		if (constant != null) {
+			try {
+				symbol = constant.resolveSymbol();
+			} catch (IOException e) {
+				LOG.error(e, "Failed to resolve symbol of {0} constant", constant.getClass().getName());
+
+				symbol = "<could not be resolved>";
+			}
+		} else {
+			symbol = "<run-time constant>";
+		}
+		return symbol;
 	}
 
 	@Override

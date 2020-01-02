@@ -16,7 +16,9 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-import de.carne.mcd.jvm.ClassInfo;
+import java.io.IOException;
+
+import de.carne.boot.check.Check;
 
 abstract class AbstractRefConstant extends Constant {
 
@@ -27,6 +29,32 @@ abstract class AbstractRefConstant extends Constant {
 		super(classInfo);
 		this.classIndex = classIndex;
 		this.nameAndTypeIndex = nameAndTypeIndex;
+	}
+
+	@Override
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
+		// Should never be called
+		Check.fail();
+	}
+
+	@Override
+	public String resolveSymbol() throws IOException {
+		String classPackage = this.classInfo.thisClass().getPackageName();
+		String className = getEffectiveClassName(classPackage);
+		NameAndTypeConstant nameAndTypeValue = getNameAndTypeValue();
+		String name = nameAndTypeValue.getNameValue();
+		String descriptor = nameAndTypeValue.getDescriptorValue();
+
+		return className + "." + name + " " + descriptor;
+	}
+
+	private String getEffectiveClassName(String classPackage) throws IOException {
+		return ClassName.fromConstant(this.classInfo.resolveConstant(this.classIndex, ClassConstant.class))
+				.getEffectiveName(classPackage);
+	}
+
+	private NameAndTypeConstant getNameAndTypeValue() throws IOException {
+		return this.classInfo.resolveConstant(this.nameAndTypeIndex, NameAndTypeConstant.class);
 	}
 
 	@Override

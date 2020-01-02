@@ -11,165 +11,95 @@ public final /* super */ class Closeables {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: return
     }
     
     public static void close(Object) throws java.io.IOException {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0000: instanceof
-        0000: nop
-        0000: iconst_m1
-        0000: ifeq
-        0000: nop
-        0000: fconst_1
-        0000: aload_0
-        0000: checkcast
-        0000: nop
-        0000: iconst_m1
-        0000: invokeinterface
-        0000: nop
-        0000: iconst_0
-        0000: aconst_null
-        0000: nop
-        0000: return
+        0001: instanceof #2 // java/io/Closeable
+        0004: ifeq +12 // 0010
+        0007: aload_0
+        0008: checkcast #2 // java/io/Closeable
+        000b: invokeinterface #3 // java.io.Closeable.close ()V
+        0010: return
     }
     
     public static /* varargs */ void closeAll(java.io.Closeable[]) throws java.io.IOException {
         // max_stack: 2
         // max_locals: 7
         0000: aconst_null
-        0000: astore_1
-        0000: aload_0
-        0000: astore_2
-        0000: aload_2
-        0000: arraylength
-        0000: istore_3
-        0000: iconst_0
-        0000: istore
-        0000: iconst_1
-        0000: iload
-        0000: iconst_1
-        0000: iload_3
-        0000: if_icmpge
-        0000: nop
-        0000: faload
-        0000: aload_2
-        0000: iload
-        0000: iconst_1
-        0000: aaload
-        0000: astore
-        0000: iconst_2
-        0000: aload
-        0000: iconst_2
-        0000: ifnull
-        0000: nop
-        0000: lload_1
-        0000: aload
-        0000: iconst_2
-        0000: invokeinterface
-        0000: nop
-        0000: iconst_0
-        0000: aconst_null
-        0000: nop
-        0000: goto
-        0000: nop
-        0000: iload
-        0000: astore
-        0000: iconst_3
-        0000: aload_1
-        0000: ifnonnull
-        0000: nop
-        0000: lconst_0
-        0000: aload
-        0000: iconst_3
-        0000: astore_1
-        0000: goto
-        0000: nop
-        0000: lconst_0
-        0000: aload_1
-        0000: aload
-        0000: iconst_3
-        0000: invokevirtual
-        0000: nop
-        0000: iconst_2
-        0000: iinc
-        0000: iconst_1
-        0000: aconst_null
-        0000: goto
-        0000: FF D0
-        0000: aload_1
-        0000: ifnull
-        0000: nop
-        0000: iconst_2
-        0000: aload_1
-        0000: athrow
-        0000: return
+        0001: astore_1
+        0002: aload_0
+        0003: astore_2
+        0004: aload_2
+        0005: arraylength
+        0006: istore_3
+        0007: iconst_0
+        0008: istore local_var:4
+        000a: iload local_var:4
+        000c: iload_3
+        000d: if_icmpge +48 // 003d
+        0010: aload_2
+        0011: iload local_var:4
+        0013: aaload
+        0014: astore local_var:5
+        0016: aload local_var:5
+        0018: ifnull +31 // 0037
+        001b: aload local_var:5
+        001d: invokeinterface #3 // java.io.Closeable.close ()V
+        0022: goto +21 // 0037
+        0025: astore local_var:6
+        0027: aload_1
+        0028: ifnonnull +9 // 0031
+        002b: aload local_var:6
+        002d: astore_1
+        002e: goto +9 // 0037
+        0031: aload_1
+        0032: aload local_var:6
+        0034: invokevirtual #5 // java.io.IOException.addSuppressed (Ljava/lang/Throwable;)V
+        0037: iinc local_var:41
+        003a: goto -48 // 000a
+        003d: aload_1
+        003e: ifnull +5 // 0043
+        0041: aload_1
+        0042: athrow
+        0043: return
     }
     
     public static void safeClose(Object) {
         // max_stack: 1
         // max_locals: 2
         0000: aload_0
-        0000: instanceof
-        0000: nop
-        0000: iconst_m1
-        0000: ifeq
-        0000: nop
-        0000: ldc2_w
-        0000: aload_0
-        0000: checkcast
-        0000: nop
-        0000: iconst_m1
-        0000: invokeinterface
-        0000: nop
-        0000: iconst_0
-        0000: aconst_null
-        0000: nop
-        0000: goto
-        0000: nop
-        0000: iconst_5
-        0000: astore_1
-        0000: aload_1
-        0000: invokestatic
-        0000: nop
-        0000: iconst_3
-        0000: return
+        0001: instanceof #2 // java/io/Closeable
+        0004: ifeq +20 // 0018
+        0007: aload_0
+        0008: checkcast #2 // java/io/Closeable
+        000b: invokeinterface #3 // java.io.Closeable.close ()V
+        0010: goto +8 // 0018
+        0013: astore_1
+        0014: aload_1
+        0015: invokestatic #6 // de.carne.boot.Exceptions.ignore (Ljava/lang/Throwable;)V
+        0018: return
     }
     
     public static void safeClose(Throwable, Object) {
         // max_stack: 2
         // max_locals: 3
         0000: aload_1
-        0000: instanceof
-        0000: nop
-        0000: iconst_m1
-        0000: ifeq
-        0000: nop
-        0000: iload
-        0000: aload_1
-        0000: checkcast
-        0000: nop
-        0000: iconst_m1
-        0000: invokeinterface
-        0000: nop
-        0000: iconst_0
-        0000: aconst_null
-        0000: nop
-        0000: goto
-        0000: nop
-        0000: lconst_0
-        0000: astore_2
-        0000: aload_0
-        0000: aload_2
-        0000: invokevirtual
-        0000: nop
-        0000: iconst_4
-        0000: return
+        0001: instanceof #2 // java/io/Closeable
+        0004: ifeq +21 // 0019
+        0007: aload_1
+        0008: checkcast #2 // java/io/Closeable
+        000b: invokeinterface #3 // java.io.Closeable.close ()V
+        0010: goto +9 // 0019
+        0013: astore_2
+        0014: aload_0
+        0015: aload_2
+        0016: invokevirtual #7 // Throwable.addSuppressed (Ljava/lang/Throwable;)V
+        0019: return
     }
 
 }

@@ -172,9 +172,7 @@ public class Opcode implements Comparable<Opcode> {
 	 * @return the string representation of the given byte range.
 	 */
 	public static String toString(byte[] bytes, int offset, int length) {
-		HexFormatter formatter = new HexFormatter(true);
-
-		return formatter.format(bytes, offset, length);
+		return HexFormatter.UPPER_CASE.format(bytes, offset, length);
 	}
 
 	/**

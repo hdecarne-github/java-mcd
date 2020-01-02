@@ -19,6 +19,7 @@ package de.carne.mcd.jvm;
 import java.io.IOException;
 import java.nio.ByteOrder;
 import java.nio.channels.ReadableByteChannel;
+import java.util.Objects;
 import java.util.Optional;
 
 import de.carne.mcd.common.Instruction;
@@ -27,6 +28,7 @@ import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.MachineCodeDecoder;
 import de.carne.mcd.jvm.bytecode.BytecodeInstructionIndex;
+import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.text.HexFormatter;
 import de.carne.util.Late;
 
@@ -39,7 +41,7 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 
 	private static final Late<InstructionIndex> BYTECODE_INSTRUCTION_INDEX_HOLDER = new Late<>();
 
-	private static final HexFormatter PC_FORMATTER = new HexFormatter(false);
+	private static final ThreadLocal<BytecodeDecoder> DECODE_CONTEXT = new ThreadLocal<>();
 
 	private final ClassInfo classInfo;
 
@@ -53,6 +55,27 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 		this.classInfo = classInfo;
 	}
 
+	/**
+	 * Gets the {@linkplain BytecodeDecoder} executing the current decode call.
+	 * <p>
+	 * This function will fail with a NPE if called outside a decode call.
+	 * </p>
+	 *
+	 * @return the {@linkplain BytecodeDecoder} executing the current decode steps.
+	 */
+	public static BytecodeDecoder getDecodeContext() {
+		return Objects.requireNonNull(DECODE_CONTEXT.get());
+	}
+
+	/**
+	 * Gets the {@linkplain ClassInfo} associated with this {@linkplain BytecodeDecoder} instance.
+	 *
+	 * @return the {@linkplain ClassInfo} associated with this {@linkplain BytecodeDecoder} instance.
+	 */
+	public ClassInfo getClassInfo() {
+		return this.classInfo;
+	}
+
 	@Override
 	public void decode(ReadableByteChannel in, MCDOutput out) throws IOException {
 		MCDDecodeBuffer buffer = newDecodeBuffer(in);
@@ -64,11 +87,17 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 		MCDDecodeBuffer codeBuffer = newDecodeBuffer(buffer.slice(codeLength));
 		InstructionIndex instructionIndex = getBytecodeInstructionIndex();
 		Instruction instruction;
-		long instructionPc = 0;
+		int pc = 0;
 
-		while ((instruction = instructionIndex.lookupNextInstruction(codeBuffer)) != null) {
-			out.printLabel(PC_FORMATTER.format((short) instructionPc)).printLabel(":").print(" ");
-			instruction.decode(buffer, out);
+		try {
+			DECODE_CONTEXT.set(this);
+			while ((instruction = instructionIndex.lookupNextInstruction(codeBuffer)) != null) {
+				out.printLabel(HexFormatter.LOWER_CASE.format((short) pc)).printLabel(":").print(" ");
+				instruction.decode(pc, codeBuffer, out);
+				pc = (int) codeBuffer.getTotalRead();
+			}
+		} finally {
+			DECODE_CONTEXT.remove();
 		}
 	}
 

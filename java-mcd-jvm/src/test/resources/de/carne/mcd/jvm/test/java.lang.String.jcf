@@ -22,364 +22,208 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: aload_0
-        0000: ldc
-        0000: iconst_m1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: aload_0
+        0005: ldc #2 // ""
+        0007: getfield #3 // String.value [C
+        000a: putfield #3 // String.value [C
+        000d: return
     }
     
     public void <init>(String) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: aload_0
-        0000: aload_1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: aload_0
-        0000: aload_1
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: putfield
-        0000: nop
-        0000: iconst_1
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: aload_0
+        0005: aload_1
+        0006: getfield #3 // String.value [C
+        0009: putfield #3 // String.value [C
+        000c: aload_0
+        000d: aload_1
+        000e: getfield #4 // String.hash I
+        0011: putfield #4 // String.hash I
+        0014: return
     }
     
     public void <init>(char[]) {
         // max_stack: 3
         // max_locals: 2
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: aload_0
-        0000: aload_1
-        0000: aload_1
-        0000: arraylength
-        0000: invokestatic
-        0000: nop
-        0000: iconst_2
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: aload_0
+        0005: aload_1
+        0006: aload_1
+        0007: arraylength
+        0008: invokestatic #5 // java.util.Arrays.copyOf ([CI)[C
+        000b: putfield #3 // String.value [C
+        000e: return
     }
     
     public void <init>(char[], int, int) {
         // max_stack: 5
         // max_locals: 4
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: iload_2
-        0000: ifge
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_3
-        0000: ifgt
-        0000: nop
-        0000: lload_2
-        0000: iload_3
-        0000: ifge
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_3
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_2
-        0000: aload_1
-        0000: arraylength
-        0000: if_icmpgt
-        0000: nop
-        0000: fconst_2
-        0000: aload_0
-        0000: ldc
-        0000: iconst_m1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: return
-        0000: iload_2
-        0000: aload_1
-        0000: arraylength
-        0000: iload_3
-        0000: isub
-        0000: if_icmple
-        0000: nop
-        0000: dconst_0
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_2
-        0000: iload_3
-        0000: iadd
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: aload_0
-        0000: aload_1
-        0000: iload_2
-        0000: iload_2
-        0000: iload_3
-        0000: iadd
-        0000: invokestatic
-        0000: nop
-        0000: iconst_5
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: iload_2
+        0005: ifge +12 // 0011
+        0008: new #6 // java/lang/StringIndexOutOfBoundsException
+        000b: dup
+        000c: iload_2
+        000d: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        0010: athrow
+        0011: iload_3
+        0012: ifgt +32 // 0032
+        0015: iload_3
+        0016: ifge +12 // 0022
+        0019: new #6 // java/lang/StringIndexOutOfBoundsException
+        001c: dup
+        001d: iload_3
+        001e: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        0021: athrow
+        0022: iload_2
+        0023: aload_1
+        0024: arraylength
+        0025: if_icmpgt +13 // 0032
+        0028: aload_0
+        0029: ldc #2 // ""
+        002b: getfield #3 // String.value [C
+        002e: putfield #3 // String.value [C
+        0031: return
+        0032: iload_2
+        0033: aload_1
+        0034: arraylength
+        0035: iload_3
+        0036: isub
+        0037: if_icmple +14 // 0045
+        003a: new #6 // java/lang/StringIndexOutOfBoundsException
+        003d: dup
+        003e: iload_2
+        003f: iload_3
+        0040: iadd
+        0041: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        0044: athrow
+        0045: aload_0
+        0046: aload_1
+        0047: iload_2
+        0048: iload_2
+        0049: iload_3
+        004a: iadd
+        004b: invokestatic #8 // java.util.Arrays.copyOfRange ([CII)[C
+        004e: putfield #3 // String.value [C
+        0051: return
     }
     
     public void <init>(int[], int, int) {
         // max_stack: 4
         // max_locals: 10
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: iload_2
-        0000: ifge
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_3
-        0000: ifgt
-        0000: nop
-        0000: lload_2
-        0000: iload_3
-        0000: ifge
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_3
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_2
-        0000: aload_1
-        0000: arraylength
-        0000: if_icmpgt
-        0000: nop
-        0000: fconst_2
-        0000: aload_0
-        0000: ldc
-        0000: iconst_m1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: return
-        0000: iload_2
-        0000: aload_1
-        0000: arraylength
-        0000: iload_3
-        0000: isub
-        0000: if_icmple
-        0000: nop
-        0000: dconst_0
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_2
-        0000: iload_3
-        0000: iadd
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_2
-        0000: iload_3
-        0000: iadd
-        0000: istore
-        0000: iconst_1
-        0000: iload_3
-        0000: istore
-        0000: iconst_2
-        0000: iload_2
-        0000: istore
-        0000: iconst_3
-        0000: iload
-        0000: iconst_3
-        0000: iload
-        0000: iconst_1
-        0000: if_icmpge
-        0000: nop
-        0000: saload
-        0000: aload_1
-        0000: iload
-        0000: iconst_3
-        0000: iaload
-        0000: istore
-        0000: iconst_4
-        0000: iload
-        0000: iconst_4
-        0000: invokestatic
-        0000: nop
-        0000: lconst_0
-        0000: ifeq
-        0000: nop
-        0000: iconst_3
-        0000: goto
-        0000: nop
-        0000: lload_0
-        0000: iload
-        0000: iconst_4
-        0000: invokestatic
-        0000: nop
-        0000: lconst_1
-        0000: ifeq
-        0000: nop
-        0000: lconst_0
-        0000: iinc
-        0000: iconst_2
-        0000: aconst_null
-        0000: goto
-        0000: nop
-        0000: bipush
-        0000: new
-        0000: nop
-        0000: fconst_0
-        0000: dup
-        0000: iload
-        0000: iconst_4
-        0000: invokestatic
-        0000: nop
-        0000: fconst_1
-        0000: invokespecial
-        0000: nop
-        0000: fconst_2
-        0000: athrow
-        0000: iinc
-        0000: iconst_3
-        0000: aconst_null
-        0000: goto
-        0000: FF CA
-        0000: iload
-        0000: iconst_2
-        0000: newarray
-        0000: iconst_2
-        0000: astore
-        0000: iconst_3
-        0000: iload_2
-        0000: istore
-        0000: iconst_4
-        0000: iconst_0
-        0000: istore
-        0000: iconst_5
-        0000: iload
-        0000: iconst_4
-        0000: iload
-        0000: iconst_1
-        0000: if_icmpge
-        0000: nop
-        0000: daload
-        0000: aload_1
-        0000: iload
-        0000: iconst_4
-        0000: iaload
-        0000: istore
-        0000: lconst_0
-        0000: iload
-        0000: lconst_0
-        0000: invokestatic
-        0000: nop
-        0000: lconst_0
-        0000: ifeq
-        0000: nop
-        0000: dconst_0
-        0000: aload
-        0000: iconst_3
-        0000: iload
-        0000: iconst_5
-        0000: iload
-        0000: lconst_0
-        0000: i2c
-        0000: castore
-        0000: goto
-        0000: nop
-        0000: dconst_1
-        0000: iload
-        0000: lconst_0
-        0000: aload
-        0000: iconst_3
-        0000: iload
-        0000: iconst_5
-        0000: iinc
-        0000: iconst_5
-        0000: aconst_null
-        0000: invokestatic
-        0000: nop
-        0000: dconst_0
-        0000: iinc
-        0000: iconst_4
-        0000: aconst_null
-        0000: iinc
-        0000: iconst_5
-        0000: aconst_null
-        0000: goto
-        0000: FF CE
-        0000: aload_0
-        0000: aload
-        0000: iconst_3
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: iload_2
+        0005: ifge +12 // 0011
+        0008: new #6 // java/lang/StringIndexOutOfBoundsException
+        000b: dup
+        000c: iload_2
+        000d: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        0010: athrow
+        0011: iload_3
+        0012: ifgt +32 // 0032
+        0015: iload_3
+        0016: ifge +12 // 0022
+        0019: new #6 // java/lang/StringIndexOutOfBoundsException
+        001c: dup
+        001d: iload_3
+        001e: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        0021: athrow
+        0022: iload_2
+        0023: aload_1
+        0024: arraylength
+        0025: if_icmpgt +13 // 0032
+        0028: aload_0
+        0029: ldc #2 // ""
+        002b: getfield #3 // String.value [C
+        002e: putfield #3 // String.value [C
+        0031: return
+        0032: iload_2
+        0033: aload_1
+        0034: arraylength
+        0035: iload_3
+        0036: isub
+        0037: if_icmple +14 // 0045
+        003a: new #6 // java/lang/StringIndexOutOfBoundsException
+        003d: dup
+        003e: iload_2
+        003f: iload_3
+        0040: iadd
+        0041: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        0044: athrow
+        0045: iload_2
+        0046: iload_3
+        0047: iadd
+        0048: istore local_var:4
+        004a: iload_3
+        004b: istore local_var:5
+        004d: iload_2
+        004e: istore local_var:6
+        0050: iload local_var:6
+        0052: iload local_var:4
+        0054: if_icmpge +53 // 0089
+        0057: aload_1
+        0058: iload local_var:6
+        005a: iaload
+        005b: istore local_var:7
+        005d: iload local_var:7
+        005f: invokestatic #9 // Character.isBmpCodePoint (I)Z
+        0062: ifeq +6 // 0068
+        0065: goto +30 // 0083
+        0068: iload local_var:7
+        006a: invokestatic #10 // Character.isValidCodePoint (I)Z
+        006d: ifeq +9 // 0076
+        0070: iinc local_var:51
+        0073: goto +16 // 0083
+        0076: new #11 // java/lang/IllegalArgumentException
+        0079: dup
+        007a: iload local_var:7
+        007c: invokestatic #12 // Integer.toString (I)Ljava/lang/String;
+        007f: invokespecial #13 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        0082: athrow
+        0083: iinc local_var:61
+        0086: goto -54 // 0050
+        0089: iload local_var:5
+        008b: newarray 5 // char[]
+        008d: astore local_var:6
+        008f: iload_2
+        0090: istore local_var:7
+        0092: iconst_0
+        0093: istore local_var:8
+        0095: iload local_var:7
+        0097: iload local_var:4
+        0099: if_icmpge +49 // 00ca
+        009c: aload_1
+        009d: iload local_var:7
+        009f: iaload
+        00a0: istore local_var:9
+        00a2: iload local_var:9
+        00a4: invokestatic #9 // Character.isBmpCodePoint (I)Z
+        00a7: ifeq +14 // 00b5
+        00aa: aload local_var:6
+        00ac: iload local_var:8
+        00ae: iload local_var:9
+        00b0: i2c
+        00b1: castore
+        00b2: goto +15 // 00c1
+        00b5: iload local_var:9
+        00b7: aload local_var:6
+        00b9: iload local_var:8
+        00bb: iinc local_var:81
+        00be: invokestatic #14 // Character.toSurrogates (I[CI)V
+        00c1: iinc local_var:71
+        00c4: iinc local_var:81
+        00c7: goto -50 // 0095
+        00ca: aload_0
+        00cb: aload local_var:6
+        00cd: putfield #3 // String.value [C
+        00d0: return
     }
     
     @Deprecated
@@ -387,103 +231,61 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 6
         // max_locals: 7
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: aload_1
-        0000: iload_3
-        0000: iload
-        0000: iconst_1
-        0000: invokestatic
-        0000: nop
-        0000: dconst_1
-        0000: iload
-        0000: iconst_1
-        0000: newarray
-        0000: iconst_2
-        0000: astore
-        0000: iconst_2
-        0000: iload_2
-        0000: ifne
-        0000: nop
-        0000: fload_3
-        0000: iload
-        0000: iconst_1
-        0000: istore
-        0000: iconst_3
-        0000: iload
-        0000: iconst_3
-        0000: iinc
-        0000: iconst_3
-        0000: FF
-        0000: ifle
-        0000: nop
-        0000: lload
-        0000: aload
-        0000: iconst_2
-        0000: iload
-        0000: iconst_3
-        0000: aload_1
-        0000: iload
-        0000: iconst_3
-        0000: iload_3
-        0000: iadd
-        0000: baload
-        0000: sipush
-        0000: nop
-        0000: FF
-        0000: iand
-        0000: i2c
-        0000: castore
-        0000: goto
-        0000: FF E8
-        0000: goto
-        0000: nop
-        0000: dload_3
-        0000: iload_2
-        0000: bipush
-        0000: iconst_5
-        0000: ishl
-        0000: istore_2
-        0000: iload
-        0000: iconst_1
-        0000: istore
-        0000: iconst_3
-        0000: iload
-        0000: iconst_3
-        0000: iinc
-        0000: iconst_3
-        0000: FF
-        0000: ifle
-        0000: nop
-        0000: dload
-        0000: aload
-        0000: iconst_2
-        0000: iload
-        0000: iconst_3
-        0000: iload_2
-        0000: aload_1
-        0000: iload
-        0000: iconst_3
-        0000: iload_3
-        0000: iadd
-        0000: baload
-        0000: sipush
-        0000: nop
-        0000: FF
-        0000: iand
-        0000: ior
-        0000: i2c
-        0000: castore
-        0000: goto
-        0000: FF E6
-        0000: aload_0
-        0000: aload
-        0000: iconst_2
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: aload_1
+        0005: iload_3
+        0006: iload local_var:4
+        0008: invokestatic #15 // String.checkBounds ([BII)V
+        000b: iload local_var:4
+        000d: newarray 5 // char[]
+        000f: astore local_var:5
+        0011: iload_2
+        0012: ifne +37 // 0037
+        0015: iload local_var:4
+        0017: istore local_var:6
+        0019: iload local_var:6
+        001b: iinc local_var:6-1
+        001e: ifle +22 // 0034
+        0021: aload local_var:5
+        0023: iload local_var:6
+        0025: aload_1
+        0026: iload local_var:6
+        0028: iload_3
+        0029: iadd
+        002a: baload
+        002b: sipush 255
+        002e: iand
+        002f: i2c
+        0030: castore
+        0031: goto -24 // 0019
+        0034: goto +41 // 005d
+        0037: iload_2
+        0038: bipush 8
+        003a: ishl
+        003b: istore_2
+        003c: iload local_var:4
+        003e: istore local_var:6
+        0040: iload local_var:6
+        0042: iinc local_var:6-1
+        0045: ifle +24 // 005d
+        0048: aload local_var:5
+        004a: iload local_var:6
+        004c: iload_2
+        004d: aload_1
+        004e: iload local_var:6
+        0050: iload_3
+        0051: iadd
+        0052: baload
+        0053: sipush 255
+        0056: iand
+        0057: ior
+        0058: i2c
+        0059: castore
+        005a: goto -26 // 0040
+        005d: aload_0
+        005e: aload local_var:5
+        0060: putfield #3 // String.value [C
+        0063: return
     }
     
     @Deprecated
@@ -491,620 +293,413 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 5
         // max_locals: 3
         0000: aload_0
-        0000: aload_1
-        0000: iload_2
-        0000: iconst_0
-        0000: aload_1
-        0000: arraylength
-        0000: invokespecial
-        0000: nop
-        0000: bipush
-        0000: return
+        0001: aload_1
+        0002: iload_2
+        0003: iconst_0
+        0004: aload_1
+        0005: arraylength
+        0006: invokespecial #16 // String.<init> ([BIII)V
+        0009: return
     }
     
     private static void checkBounds(byte[], int, int) {
         // max_stack: 4
         // max_locals: 3
         0000: iload_2
-        0000: ifge
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_1
-        0000: ifge
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_1
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_1
-        0000: aload_0
-        0000: arraylength
-        0000: iload_2
-        0000: isub
-        0000: if_icmple
-        0000: nop
-        0000: dconst_0
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_1
-        0000: iload_2
-        0000: iadd
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: return
+        0001: ifge +12 // 000d
+        0004: new #6 // java/lang/StringIndexOutOfBoundsException
+        0007: dup
+        0008: iload_2
+        0009: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        000c: athrow
+        000d: iload_1
+        000e: ifge +12 // 001a
+        0011: new #6 // java/lang/StringIndexOutOfBoundsException
+        0014: dup
+        0015: iload_1
+        0016: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        0019: athrow
+        001a: iload_1
+        001b: aload_0
+        001c: arraylength
+        001d: iload_2
+        001e: isub
+        001f: if_icmple +14 // 002d
+        0022: new #6 // java/lang/StringIndexOutOfBoundsException
+        0025: dup
+        0026: iload_1
+        0027: iload_2
+        0028: iadd
+        0029: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        002c: athrow
+        002d: return
     }
     
     public void <init>(byte[], int, int, String) throws java.io.UnsupportedEncodingException {
         // max_stack: 5
         // max_locals: 5
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: aload
-        0000: iconst_1
-        0000: ifnonnull
-        0000: nop
-        0000: fconst_2
-        0000: new
-        0000: nop
-        0000: sipush
-        0000: dup
-        0000: ldc
-        0000: ldc
-        0000: invokespecial
-        0000: nop
-        0000: ldc_w
-        0000: athrow
-        0000: aload_1
-        0000: iload_2
-        0000: iload_3
-        0000: invokestatic
-        0000: nop
-        0000: dconst_1
-        0000: aload_0
-        0000: aload
-        0000: iconst_1
-        0000: aload_1
-        0000: iload_2
-        0000: iload_3
-        0000: invokestatic
-        0000: nop
-        0000: ldc2_w
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: aload local_var:4
+        0006: ifnonnull +13 // 0013
+        0009: new #17 // java/lang/NullPointerException
+        000c: dup
+        000d: ldc #18 // "charsetName"
+        000f: invokespecial #19 // NullPointerException.<init> (Ljava/lang/String;)V
+        0012: athrow
+        0013: aload_1
+        0014: iload_2
+        0015: iload_3
+        0016: invokestatic #15 // String.checkBounds ([BII)V
+        0019: aload_0
+        001a: aload local_var:4
+        001c: aload_1
+        001d: iload_2
+        001e: iload_3
+        001f: invokestatic #20 // StringCoding.decode (Ljava/lang/String;[BII)[C
+        0022: putfield #3 // String.value [C
+        0025: return
     }
     
     public void <init>(byte[], int, int, java.nio.charset.Charset) {
         // max_stack: 5
         // max_locals: 5
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: aload
-        0000: iconst_1
-        0000: ifnonnull
-        0000: nop
-        0000: fconst_2
-        0000: new
-        0000: nop
-        0000: sipush
-        0000: dup
-        0000: ldc
-        0000: iload
-        0000: invokespecial
-        0000: nop
-        0000: ldc_w
-        0000: athrow
-        0000: aload_1
-        0000: iload_2
-        0000: iload_3
-        0000: invokestatic
-        0000: nop
-        0000: dconst_1
-        0000: aload_0
-        0000: aload
-        0000: iconst_1
-        0000: aload_1
-        0000: iload_2
-        0000: iload_3
-        0000: invokestatic
-        0000: nop
-        0000: lload
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: aload local_var:4
+        0006: ifnonnull +13 // 0013
+        0009: new #17 // java/lang/NullPointerException
+        000c: dup
+        000d: ldc #21 // "charset"
+        000f: invokespecial #19 // NullPointerException.<init> (Ljava/lang/String;)V
+        0012: athrow
+        0013: aload_1
+        0014: iload_2
+        0015: iload_3
+        0016: invokestatic #15 // String.checkBounds ([BII)V
+        0019: aload_0
+        001a: aload local_var:4
+        001c: aload_1
+        001d: iload_2
+        001e: iload_3
+        001f: invokestatic #22 // StringCoding.decode (Ljava/nio/charset/Charset;[BII)[C
+        0022: putfield #3 // String.value [C
+        0025: return
     }
     
     public void <init>(byte[], String) throws java.io.UnsupportedEncodingException {
         // max_stack: 5
         // max_locals: 3
         0000: aload_0
-        0000: aload_1
-        0000: iconst_0
-        0000: aload_1
-        0000: arraylength
-        0000: aload_2
-        0000: invokespecial
-        0000: nop
-        0000: fload
-        0000: return
+        0001: aload_1
+        0002: iconst_0
+        0003: aload_1
+        0004: arraylength
+        0005: aload_2
+        0006: invokespecial #23 // String.<init> ([BIILjava/lang/String;)V
+        0009: return
     }
     
     public void <init>(byte[], java.nio.charset.Charset) {
         // max_stack: 5
         // max_locals: 3
         0000: aload_0
-        0000: aload_1
-        0000: iconst_0
-        0000: aload_1
-        0000: arraylength
-        0000: aload_2
-        0000: invokespecial
-        0000: nop
-        0000: dload
-        0000: return
+        0001: aload_1
+        0002: iconst_0
+        0003: aload_1
+        0004: arraylength
+        0005: aload_2
+        0006: invokespecial #24 // String.<init> ([BIILjava/nio/charset/Charset;)V
+        0009: return
     }
     
     public void <init>(byte[], int, int) {
         // max_stack: 4
         // max_locals: 4
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: aload_1
-        0000: iload_2
-        0000: iload_3
-        0000: invokestatic
-        0000: nop
-        0000: dconst_1
-        0000: aload_0
-        0000: aload_1
-        0000: iload_2
-        0000: iload_3
-        0000: invokestatic
-        0000: nop
-        0000: aload
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: aload_1
+        0005: iload_2
+        0006: iload_3
+        0007: invokestatic #15 // String.checkBounds ([BII)V
+        000a: aload_0
+        000b: aload_1
+        000c: iload_2
+        000d: iload_3
+        000e: invokestatic #25 // StringCoding.decode ([BII)[C
+        0011: putfield #3 // String.value [C
+        0014: return
     }
     
     public void <init>(byte[]) {
         // max_stack: 4
         // max_locals: 2
         0000: aload_0
-        0000: aload_1
-        0000: iconst_0
-        0000: aload_1
-        0000: arraylength
-        0000: invokespecial
-        0000: nop
-        0000: iload_0
-        0000: return
+        0001: aload_1
+        0002: iconst_0
+        0003: aload_1
+        0004: arraylength
+        0005: invokespecial #26 // String.<init> ([BII)V
+        0008: return
     }
     
     public void <init>(StringBuffer) {
         // max_stack: 3
         // max_locals: 4
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: aload_1
-        0000: dup
-        0000: astore_2
-        0000: monitorenter
-        0000: aload_0
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: iload_1
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: iload_2
-        0000: invokestatic
-        0000: nop
-        0000: iconst_2
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: aload_2
-        0000: monitorexit
-        0000: goto
-        0000: nop
-        0000: iconst_5
-        0000: astore_3
-        0000: aload_2
-        0000: monitorexit
-        0000: aload_3
-        0000: athrow
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: aload_1
+        0005: dup
+        0006: astore_2
+        0007: monitorenter
+        0008: aload_0
+        0009: aload_1
+        000a: invokevirtual #27 // StringBuffer.getValue ()[C
+        000d: aload_1
+        000e: invokevirtual #28 // StringBuffer.length ()I
+        0011: invokestatic #5 // java.util.Arrays.copyOf ([CI)[C
+        0014: putfield #3 // String.value [C
+        0017: aload_2
+        0018: monitorexit
+        0019: goto +8 // 0021
+        001c: astore_3
+        001d: aload_2
+        001e: monitorexit
+        001f: aload_3
+        0020: athrow
+        0021: return
     }
     
     public void <init>(StringBuilder) {
         // max_stack: 3
         // max_locals: 2
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: aload_0
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: iload_3
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: lload_0
-        0000: invokestatic
-        0000: nop
-        0000: iconst_2
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: aload_0
+        0005: aload_1
+        0006: invokevirtual #29 // StringBuilder.getValue ()[C
+        0009: aload_1
+        000a: invokevirtual #30 // StringBuilder.length ()I
+        000d: invokestatic #5 // java.util.Arrays.copyOf ([CI)[C
+        0010: putfield #3 // String.value [C
+        0013: return
     }
     
     void <init>(char[], boolean) {
         // max_stack: 2
         // max_locals: 3
         0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: aconst_null
-        0000: aload_0
-        0000: aload_1
-        0000: putfield
-        0000: nop
-        0000: iconst_0
-        0000: return
+        0001: invokespecial #1 // Object.<init> ()V
+        0004: aload_0
+        0005: aload_1
+        0006: putfield #3 // String.value [C
+        0009: return
     }
     
     public int length() {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: ireturn
+        0001: getfield #3 // String.value [C
+        0004: arraylength
+        0005: ireturn
     }
     
     public boolean isEmpty() {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: ifne
-        0000: nop
-        0000: iconst_4
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: iconst_0
-        0000: ireturn
+        0001: getfield #3 // String.value [C
+        0004: arraylength
+        0005: ifne +7 // 000c
+        0008: iconst_1
+        0009: goto +4 // 000d
+        000c: iconst_0
+        000d: ireturn
     }
     
     public char charAt(int) {
         // max_stack: 3
         // max_locals: 2
         0000: iload_1
-        0000: iflt
-        0000: nop
-        0000: fconst_1
-        0000: iload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: if_icmplt
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_1
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iload_1
-        0000: caload
-        0000: ireturn
+        0001: iflt +12 // 000d
+        0004: iload_1
+        0005: aload_0
+        0006: getfield #3 // String.value [C
+        0009: arraylength
+        000a: if_icmplt +12 // 0016
+        000d: new #6 // java/lang/StringIndexOutOfBoundsException
+        0010: dup
+        0011: iload_1
+        0012: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        0015: athrow
+        0016: aload_0
+        0017: getfield #3 // String.value [C
+        001a: iload_1
+        001b: caload
+        001c: ireturn
     }
     
     public int codePointAt(int) {
         // max_stack: 3
         // max_locals: 2
         0000: iload_1
-        0000: iflt
-        0000: nop
-        0000: fconst_1
-        0000: iload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: if_icmplt
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_1
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: invokestatic
-        0000: nop
-        0000: lload_1
-        0000: ireturn
+        0001: iflt +12 // 000d
+        0004: iload_1
+        0005: aload_0
+        0006: getfield #3 // String.value [C
+        0009: arraylength
+        000a: if_icmplt +12 // 0016
+        000d: new #6 // java/lang/StringIndexOutOfBoundsException
+        0010: dup
+        0011: iload_1
+        0012: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        0015: athrow
+        0016: aload_0
+        0017: getfield #3 // String.value [C
+        001a: iload_1
+        001b: aload_0
+        001c: getfield #3 // String.value [C
+        001f: arraylength
+        0020: invokestatic #31 // Character.codePointAtImpl ([CII)I
+        0023: ireturn
     }
     
     public int codePointBefore(int) {
         // max_stack: 3
         // max_locals: 3
         0000: iload_1
-        0000: iconst_1
-        0000: isub
-        0000: istore_2
-        0000: iload_2
-        0000: iflt
-        0000: nop
-        0000: fconst_1
-        0000: iload_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: if_icmplt
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_1
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iload_1
-        0000: iconst_0
-        0000: invokestatic
-        0000: nop
-        0000: lload_2
-        0000: ireturn
+        0001: iconst_1
+        0002: isub
+        0003: istore_2
+        0004: iload_2
+        0005: iflt +12 // 0011
+        0008: iload_2
+        0009: aload_0
+        000a: getfield #3 // String.value [C
+        000d: arraylength
+        000e: if_icmplt +12 // 001a
+        0011: new #6 // java/lang/StringIndexOutOfBoundsException
+        0014: dup
+        0015: iload_1
+        0016: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        0019: athrow
+        001a: aload_0
+        001b: getfield #3 // String.value [C
+        001e: iload_1
+        001f: iconst_0
+        0020: invokestatic #32 // Character.codePointBeforeImpl ([CII)I
+        0023: ireturn
     }
     
     public int codePointCount(int, int) {
         // max_stack: 4
         // max_locals: 3
         0000: iload_1
-        0000: iflt
-        0000: nop
-        0000: sipush
-        0000: iload_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: if_icmpgt
-        0000: nop
-        0000: iconst_5
-        0000: iload_1
-        0000: iload_2
-        0000: if_icmple
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: lload_3
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: fload_0
-        0000: athrow
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iload_1
-        0000: iload_2
-        0000: iload_1
-        0000: isub
-        0000: invokestatic
-        0000: nop
-        0000: fload_1
-        0000: ireturn
+        0001: iflt +17 // 0012
+        0004: iload_2
+        0005: aload_0
+        0006: getfield #3 // String.value [C
+        0009: arraylength
+        000a: if_icmpgt +8 // 0012
+        000d: iload_1
+        000e: iload_2
+        000f: if_icmple +11 // 001a
+        0012: new #33 // java/lang/IndexOutOfBoundsException
+        0015: dup
+        0016: invokespecial #34 // IndexOutOfBoundsException.<init> ()V
+        0019: athrow
+        001a: aload_0
+        001b: getfield #3 // String.value [C
+        001e: iload_1
+        001f: iload_2
+        0020: iload_1
+        0021: isub
+        0022: invokestatic #35 // Character.codePointCountImpl ([CII)I
+        0025: ireturn
     }
     
     public int offsetByCodePoints(int, int) {
         // max_stack: 5
         // max_locals: 3
         0000: iload_1
-        0000: iflt
-        0000: nop
-        0000: fconst_1
-        0000: iload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: if_icmple
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: lload_3
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: fload_0
-        0000: athrow
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: iload_1
-        0000: iload_2
-        0000: invokestatic
-        0000: nop
-        0000: fload_2
-        0000: ireturn
+        0001: iflt +12 // 000d
+        0004: iload_1
+        0005: aload_0
+        0006: getfield #3 // String.value [C
+        0009: arraylength
+        000a: if_icmple +11 // 0015
+        000d: new #33 // java/lang/IndexOutOfBoundsException
+        0010: dup
+        0011: invokespecial #34 // IndexOutOfBoundsException.<init> ()V
+        0014: athrow
+        0015: aload_0
+        0016: getfield #3 // String.value [C
+        0019: iconst_0
+        001a: aload_0
+        001b: getfield #3 // String.value [C
+        001e: arraylength
+        001f: iload_1
+        0020: iload_2
+        0021: invokestatic #36 // Character.offsetByCodePointsImpl ([CIIII)I
+        0024: ireturn
     }
     
     void getChars(char[], int) {
         // max_stack: 5
         // max_locals: 3
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload_1
-        0000: iload_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: invokestatic
-        0000: nop
-        0000: fload_3
-        0000: return
+        0001: getfield #3 // String.value [C
+        0004: iconst_0
+        0005: aload_1
+        0006: iload_2
+        0007: aload_0
+        0008: getfield #3 // String.value [C
+        000b: arraylength
+        000c: invokestatic #37 // System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V
+        000f: return
     }
     
     public void getChars(int, int, char[], int) {
         // max_stack: 6
         // max_locals: 5
         0000: iload_1
-        0000: ifge
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_1
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: if_icmple
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_1
-        0000: iload_2
-        0000: if_icmple
-        0000: nop
-        0000: dconst_0
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_2
-        0000: iload_1
-        0000: isub
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iload_1
-        0000: aload_3
-        0000: iload
-        0000: iconst_1
-        0000: iload_2
-        0000: iload_1
-        0000: isub
-        0000: invokestatic
-        0000: nop
-        0000: fload_3
-        0000: return
+        0001: ifge +12 // 000d
+        0004: new #6 // java/lang/StringIndexOutOfBoundsException
+        0007: dup
+        0008: iload_1
+        0009: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        000c: athrow
+        000d: iload_2
+        000e: aload_0
+        000f: getfield #3 // String.value [C
+        0012: arraylength
+        0013: if_icmple +12 // 001f
+        0016: new #6 // java/lang/StringIndexOutOfBoundsException
+        0019: dup
+        001a: iload_2
+        001b: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        001e: athrow
+        001f: iload_1
+        0020: iload_2
+        0021: if_icmple +14 // 002f
+        0024: new #6 // java/lang/StringIndexOutOfBoundsException
+        0027: dup
+        0028: iload_2
+        0029: iload_1
+        002a: isub
+        002b: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        002e: athrow
+        002f: aload_0
+        0030: getfield #3 // String.value [C
+        0033: iload_1
+        0034: aload_3
+        0035: iload local_var:4
+        0037: iload_2
+        0038: iload_1
+        0039: isub
+        003a: invokestatic #37 // System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V
+        003d: return
     }
     
     @Deprecated
@@ -1112,2635 +707,1592 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 4
         // max_locals: 9
         0000: iload_1
-        0000: ifge
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_1
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: if_icmple
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_1
-        0000: iload_2
-        0000: if_icmple
-        0000: nop
-        0000: dconst_0
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_2
-        0000: iload_1
-        0000: isub
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: aload_3
-        0000: invokestatic
-        0000: nop
-        0000: dload_0
-        0000: pop
-        0000: iload
-        0000: iconst_1
-        0000: istore
-        0000: iconst_2
-        0000: iload_2
-        0000: istore
-        0000: iconst_3
-        0000: iload_1
-        0000: istore
-        0000: iconst_4
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore
-        0000: iconst_5
-        0000: iload
-        0000: iconst_4
-        0000: iload
-        0000: iconst_3
-        0000: if_icmpge
-        0000: nop
-        0000: lload
-        0000: aload_3
-        0000: iload
-        0000: iconst_2
-        0000: iinc
-        0000: iconst_2
-        0000: aconst_null
-        0000: aload
-        0000: iconst_5
-        0000: iload
-        0000: iconst_4
-        0000: iinc
-        0000: iconst_4
-        0000: aconst_null
-        0000: caload
-        0000: i2b
-        0000: bastore
-        0000: goto
-        0000: FF E9
-        0000: return
+        0001: ifge +12 // 000d
+        0004: new #6 // java/lang/StringIndexOutOfBoundsException
+        0007: dup
+        0008: iload_1
+        0009: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        000c: athrow
+        000d: iload_2
+        000e: aload_0
+        000f: getfield #3 // String.value [C
+        0012: arraylength
+        0013: if_icmple +12 // 001f
+        0016: new #6 // java/lang/StringIndexOutOfBoundsException
+        0019: dup
+        001a: iload_2
+        001b: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        001e: athrow
+        001f: iload_1
+        0020: iload_2
+        0021: if_icmple +14 // 002f
+        0024: new #6 // java/lang/StringIndexOutOfBoundsException
+        0027: dup
+        0028: iload_2
+        0029: iload_1
+        002a: isub
+        002b: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        002e: athrow
+        002f: aload_3
+        0030: invokestatic #38 // java.util.Objects.requireNonNull (Ljava/lang/Object;)Ljava/lang/Object;
+        0033: pop
+        0034: iload local_var:4
+        0036: istore local_var:5
+        0038: iload_2
+        0039: istore local_var:6
+        003b: iload_1
+        003c: istore local_var:7
+        003e: aload_0
+        003f: getfield #3 // String.value [C
+        0042: astore local_var:8
+        0044: iload local_var:7
+        0046: iload local_var:6
+        0048: if_icmpge +22 // 005e
+        004b: aload_3
+        004c: iload local_var:5
+        004e: iinc local_var:51
+        0051: aload local_var:8
+        0053: iload local_var:7
+        0055: iinc local_var:71
+        0058: caload
+        0059: i2b
+        005a: bastore
+        005b: goto -23 // 0044
+        005e: return
     }
     
     public byte[] getBytes(String) throws java.io.UnsupportedEncodingException {
         // max_stack: 4
         // max_locals: 2
         0000: aload_1
-        0000: ifnonnull
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: sipush
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: dload_1
-        0000: athrow
-        0000: aload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: invokestatic
-        0000: nop
-        0000: dload_2
-        0000: areturn
+        0001: ifnonnull +11 // 000c
+        0004: new #17 // java/lang/NullPointerException
+        0007: dup
+        0008: invokespecial #39 // NullPointerException.<init> ()V
+        000b: athrow
+        000c: aload_1
+        000d: aload_0
+        000e: getfield #3 // String.value [C
+        0011: iconst_0
+        0012: aload_0
+        0013: getfield #3 // String.value [C
+        0016: arraylength
+        0017: invokestatic #40 // StringCoding.encode (Ljava/lang/String;[CII)[B
+        001a: areturn
     }
     
     public byte[] getBytes(java.nio.charset.Charset) {
         // max_stack: 4
         // max_locals: 2
         0000: aload_1
-        0000: ifnonnull
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: sipush
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: dload_1
-        0000: athrow
-        0000: aload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: invokestatic
-        0000: nop
-        0000: dload_3
-        0000: areturn
+        0001: ifnonnull +11 // 000c
+        0004: new #17 // java/lang/NullPointerException
+        0007: dup
+        0008: invokespecial #39 // NullPointerException.<init> ()V
+        000b: athrow
+        000c: aload_1
+        000d: aload_0
+        000e: getfield #3 // String.value [C
+        0011: iconst_0
+        0012: aload_0
+        0013: getfield #3 // String.value [C
+        0016: arraylength
+        0017: invokestatic #41 // StringCoding.encode (Ljava/nio/charset/Charset;[CII)[B
+        001a: areturn
     }
     
     public byte[] getBytes() {
         // max_stack: 3
         // max_locals: 1
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: invokestatic
-        0000: nop
-        0000: aload_0
-        0000: areturn
+        0001: getfield #3 // String.value [C
+        0004: iconst_0
+        0005: aload_0
+        0006: getfield #3 // String.value [C
+        0009: arraylength
+        000a: invokestatic #42 // StringCoding.encode ([CII)[B
+        000d: areturn
     }
     
     public boolean equals(Object) {
         // max_stack: 3
         // max_locals: 7
         0000: aload_0
-        0000: aload_1
-        0000: if_acmpne
-        0000: nop
-        0000: iconst_2
-        0000: iconst_1
-        0000: ireturn
-        0000: aload_1
-        0000: instanceof
-        0000: nop
-        0000: aload_1
-        0000: ifeq
-        0000: nop
-        0000: fstore_1
-        0000: aload_1
-        0000: checkcast
-        0000: nop
-        0000: aload_1
-        0000: astore_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: istore_3
-        0000: iload_3
-        0000: aload_2
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: if_icmpne
-        0000: nop
-        0000: faload
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore
-        0000: iconst_1
-        0000: aload_2
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore
-        0000: iconst_2
-        0000: iconst_0
-        0000: istore
-        0000: iconst_3
-        0000: iload_3
-        0000: iinc
-        0000: iconst_0
-        0000: FF
-        0000: ifeq
-        0000: nop
-        0000: dload
-        0000: aload
-        0000: iconst_1
-        0000: iload
-        0000: iconst_3
-        0000: caload
-        0000: aload
-        0000: iconst_2
-        0000: iload
-        0000: iconst_3
-        0000: caload
-        0000: if_icmpeq
-        0000: nop
-        0000: iconst_2
-        0000: iconst_0
-        0000: ireturn
-        0000: iinc
-        0000: iconst_3
-        0000: aconst_null
-        0000: goto
-        0000: FF E7
-        0000: iconst_1
-        0000: ireturn
-        0000: iconst_0
-        0000: ireturn
+        0001: aload_1
+        0002: if_acmpne +5 // 0007
+        0005: iconst_1
+        0006: ireturn
+        0007: aload_1
+        0008: instanceof #43 // java/lang/String
+        000b: ifeq +68 // 004f
+        000e: aload_1
+        000f: checkcast #43 // java/lang/String
+        0012: astore_2
+        0013: aload_0
+        0014: getfield #3 // String.value [C
+        0017: arraylength
+        0018: istore_3
+        0019: iload_3
+        001a: aload_2
+        001b: getfield #3 // String.value [C
+        001e: arraylength
+        001f: if_icmpne +48 // 004f
+        0022: aload_0
+        0023: getfield #3 // String.value [C
+        0026: astore local_var:4
+        0028: aload_2
+        0029: getfield #3 // String.value [C
+        002c: astore local_var:5
+        002e: iconst_0
+        002f: istore local_var:6
+        0031: iload_3
+        0032: iinc local_var:3-1
+        0035: ifeq +24 // 004d
+        0038: aload local_var:4
+        003a: iload local_var:6
+        003c: caload
+        003d: aload local_var:5
+        003f: iload local_var:6
+        0041: caload
+        0042: if_icmpeq +5 // 0047
+        0045: iconst_0
+        0046: ireturn
+        0047: iinc local_var:61
+        004a: goto -25 // 0031
+        004d: iconst_1
+        004e: ireturn
+        004f: iconst_0
+        0050: ireturn
     }
     
     public boolean contentEquals(StringBuffer) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_0
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: aload_2
-        0000: ireturn
+        0001: aload_1
+        0002: invokevirtual #44 // String.contentEquals (Ljava/lang/CharSequence;)Z
+        0005: ireturn
     }
     
     private boolean nonSyncContentEquals(AbstractStringBuilder) {
         // max_stack: 3
         // max_locals: 6
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore_2
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: aload_3
-        0000: astore_3
-        0000: aload_2
-        0000: arraylength
-        0000: istore
-        0000: iconst_1
-        0000: iload
-        0000: iconst_1
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: iaload
-        0000: if_icmpeq
-        0000: nop
-        0000: iconst_2
-        0000: iconst_0
-        0000: ireturn
-        0000: iconst_0
-        0000: istore
-        0000: iconst_2
-        0000: iload
-        0000: iconst_2
-        0000: iload
-        0000: iconst_1
-        0000: if_icmpge
-        0000: nop
-        0000: lload
-        0000: aload_2
-        0000: iload
-        0000: iconst_2
-        0000: caload
-        0000: aload_3
-        0000: iload
-        0000: iconst_2
-        0000: caload
-        0000: if_icmpeq
-        0000: nop
-        0000: iconst_2
-        0000: iconst_0
-        0000: ireturn
-        0000: iinc
-        0000: iconst_2
-        0000: aconst_null
-        0000: goto
-        0000: FF E9
-        0000: iconst_1
-        0000: ireturn
+        0001: getfield #3 // String.value [C
+        0004: astore_2
+        0005: aload_1
+        0006: invokevirtual #45 // AbstractStringBuilder.getValue ()[C
+        0009: astore_3
+        000a: aload_2
+        000b: arraylength
+        000c: istore local_var:4
+        000e: iload local_var:4
+        0010: aload_1
+        0011: invokevirtual #46 // AbstractStringBuilder.length ()I
+        0014: if_icmpeq +5 // 0019
+        0017: iconst_0
+        0018: ireturn
+        0019: iconst_0
+        001a: istore local_var:5
+        001c: iload local_var:5
+        001e: iload local_var:4
+        0020: if_icmpge +22 // 0036
+        0023: aload_2
+        0024: iload local_var:5
+        0026: caload
+        0027: aload_3
+        0028: iload local_var:5
+        002a: caload
+        002b: if_icmpeq +5 // 0030
+        002e: iconst_0
+        002f: ireturn
+        0030: iinc local_var:51
+        0033: goto -23 // 001c
+        0036: iconst_1
+        0037: ireturn
     }
     
     public boolean contentEquals(CharSequence) {
         // max_stack: 3
         // max_locals: 5
         0000: aload_1
-        0000: instanceof
-        0000: nop
-        0000: laload
-        0000: ifeq
-        0000: nop
-        0000: dload_1
-        0000: aload_1
-        0000: instanceof
-        0000: nop
-        0000: faload
-        0000: ifeq
-        0000: nop
-        0000: fload
-        0000: aload_1
-        0000: dup
-        0000: astore_2
-        0000: monitorenter
-        0000: aload_0
-        0000: aload_1
-        0000: checkcast
-        0000: nop
-        0000: laload
-        0000: invokespecial
-        0000: nop
-        0000: daload
-        0000: aload_2
-        0000: monitorexit
-        0000: ireturn
-        0000: astore_3
-        0000: aload_2
-        0000: monitorexit
-        0000: aload_3
-        0000: athrow
-        0000: aload_0
-        0000: aload_1
-        0000: checkcast
-        0000: nop
-        0000: laload
-        0000: invokespecial
-        0000: nop
-        0000: daload
-        0000: ireturn
-        0000: aload_1
-        0000: instanceof
-        0000: nop
-        0000: aload_1
-        0000: ifeq
-        0000: nop
-        0000: lconst_0
-        0000: aload_0
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: aaload
-        0000: ireturn
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore_2
-        0000: aload_2
-        0000: arraylength
-        0000: istore_3
-        0000: iload_3
-        0000: aload_1
-        0000: invokeinterface
-        0000: nop
-        0000: baload
-        0000: aconst_null
-        0000: nop
-        0000: if_icmpeq
-        0000: nop
-        0000: iconst_2
-        0000: iconst_0
-        0000: ireturn
-        0000: iconst_0
-        0000: istore
-        0000: iconst_1
-        0000: iload
-        0000: iconst_1
-        0000: iload_3
-        0000: if_icmpge
-        0000: nop
-        0000: iload_0
-        0000: aload_2
-        0000: iload
-        0000: iconst_1
-        0000: caload
-        0000: aload_1
-        0000: iload
-        0000: iconst_1
-        0000: invokeinterface
-        0000: nop
-        0000: caload
-        0000: iconst_m1
-        0000: nop
-        0000: if_icmpeq
-        0000: nop
-        0000: iconst_2
-        0000: iconst_0
-        0000: ireturn
-        0000: iinc
-        0000: iconst_1
-        0000: aconst_null
-        0000: goto
-        0000: FF E6
-        0000: iconst_1
-        0000: ireturn
+        0001: instanceof #47 // java/lang/AbstractStringBuilder
+        0004: ifeq +39 // 002b
+        0007: aload_1
+        0008: instanceof #48 // java/lang/StringBuffer
+        000b: ifeq +23 // 0022
+        000e: aload_1
+        000f: dup
+        0010: astore_2
+        0011: monitorenter
+        0012: aload_0
+        0013: aload_1
+        0014: checkcast #47 // java/lang/AbstractStringBuilder
+        0017: invokespecial #49 // String.nonSyncContentEquals (Ljava/lang/AbstractStringBuilder;)Z
+        001a: aload_2
+        001b: monitorexit
+        001c: ireturn
+        001d: astore_3
+        001e: aload_2
+        001f: monitorexit
+        0020: aload_3
+        0021: athrow
+        0022: aload_0
+        0023: aload_1
+        0024: checkcast #47 // java/lang/AbstractStringBuilder
+        0027: invokespecial #49 // String.nonSyncContentEquals (Ljava/lang/AbstractStringBuilder;)Z
+        002a: ireturn
+        002b: aload_1
+        002c: instanceof #43 // java/lang/String
+        002f: ifeq +9 // 0038
+        0032: aload_0
+        0033: aload_1
+        0034: invokevirtual #50 // String.equals (Ljava/lang/Object;)Z
+        0037: ireturn
+        0038: aload_0
+        0039: getfield #3 // String.value [C
+        003c: astore_2
+        003d: aload_2
+        003e: arraylength
+        003f: istore_3
+        0040: iload_3
+        0041: aload_1
+        0042: invokeinterface #51 // CharSequence.length ()I
+        0047: if_icmpeq +5 // 004c
+        004a: iconst_0
+        004b: ireturn
+        004c: iconst_0
+        004d: istore local_var:4
+        004f: iload local_var:4
+        0051: iload_3
+        0052: if_icmpge +26 // 006c
+        0055: aload_2
+        0056: iload local_var:4
+        0058: caload
+        0059: aload_1
+        005a: iload local_var:4
+        005c: invokeinterface #52 // CharSequence.charAt (I)C
+        0061: if_icmpeq +5 // 0066
+        0064: iconst_0
+        0065: ireturn
+        0066: iinc local_var:41
+        0069: goto -26 // 004f
+        006c: iconst_1
+        006d: ireturn
     }
     
     public boolean equalsIgnoreCase(String) {
         // max_stack: 6
         // max_locals: 2
         0000: aload_0
-        0000: aload_1
-        0000: if_acmpne
-        0000: nop
-        0000: iconst_4
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: dload_3
-        0000: aload_1
-        0000: ifnull
-        0000: nop
-        0000: fload_2
-        0000: aload_1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: if_icmpne
-        0000: nop
-        0000: fload
-        0000: aload_0
-        0000: iconst_1
-        0000: iconst_0
-        0000: aload_1
-        0000: iconst_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: invokevirtual
-        0000: nop
-        0000: saload
-        0000: ifeq
-        0000: nop
-        0000: iconst_4
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: iconst_0
-        0000: ireturn
+        0001: aload_1
+        0002: if_acmpne +7 // 0009
+        0005: iconst_1
+        0006: goto +41 // 002f
+        0009: aload_1
+        000a: ifnull +36 // 002e
+        000d: aload_1
+        000e: getfield #3 // String.value [C
+        0011: arraylength
+        0012: aload_0
+        0013: getfield #3 // String.value [C
+        0016: arraylength
+        0017: if_icmpne +23 // 002e
+        001a: aload_0
+        001b: iconst_1
+        001c: iconst_0
+        001d: aload_1
+        001e: iconst_0
+        001f: aload_0
+        0020: getfield #3 // String.value [C
+        0023: arraylength
+        0024: invokevirtual #53 // String.regionMatches (ZILjava/lang/String;II)Z
+        0027: ifeq +7 // 002e
+        002a: iconst_1
+        002b: goto +4 // 002f
+        002e: iconst_0
+        002f: ireturn
     }
     
     public int compareTo(String) {
         // max_stack: 2
         // max_locals: 10
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: istore_2
-        0000: aload_1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: istore_3
-        0000: iload_2
-        0000: iload_3
-        0000: invokestatic
-        0000: nop
-        0000: istore
-        0000: istore
-        0000: iconst_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore
-        0000: iconst_2
-        0000: aload_1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore
-        0000: iconst_3
-        0000: iconst_0
-        0000: istore
-        0000: iconst_4
-        0000: iload
-        0000: iconst_4
-        0000: iload
-        0000: iconst_1
-        0000: if_icmpge
-        0000: nop
-        0000: fload_2
-        0000: aload
-        0000: iconst_2
-        0000: iload
-        0000: iconst_4
-        0000: caload
-        0000: istore
-        0000: iconst_5
-        0000: aload
-        0000: iconst_3
-        0000: iload
-        0000: iconst_4
-        0000: caload
-        0000: istore
-        0000: lconst_0
-        0000: iload
-        0000: iconst_5
-        0000: iload
-        0000: lconst_0
-        0000: if_icmpeq
-        0000: nop
-        0000: lconst_0
-        0000: iload
-        0000: iconst_5
-        0000: iload
-        0000: lconst_0
-        0000: isub
-        0000: ireturn
-        0000: iinc
-        0000: iconst_4
-        0000: aconst_null
-        0000: goto
-        0000: FF DB
-        0000: iload_2
-        0000: iload_3
-        0000: isub
-        0000: ireturn
+        0001: getfield #3 // String.value [C
+        0004: arraylength
+        0005: istore_2
+        0006: aload_1
+        0007: getfield #3 // String.value [C
+        000a: arraylength
+        000b: istore_3
+        000c: iload_2
+        000d: iload_3
+        000e: invokestatic #54 // Math.min (II)I
+        0011: istore local_var:4
+        0013: aload_0
+        0014: getfield #3 // String.value [C
+        0017: astore local_var:5
+        0019: aload_1
+        001a: getfield #3 // String.value [C
+        001d: astore local_var:6
+        001f: iconst_0
+        0020: istore local_var:7
+        0022: iload local_var:7
+        0024: iload local_var:4
+        0026: if_icmpge +36 // 004a
+        0029: aload local_var:5
+        002b: iload local_var:7
+        002d: caload
+        002e: istore local_var:8
+        0030: aload local_var:6
+        0032: iload local_var:7
+        0034: caload
+        0035: istore local_var:9
+        0037: iload local_var:8
+        0039: iload local_var:9
+        003b: if_icmpeq +9 // 0044
+        003e: iload local_var:8
+        0040: iload local_var:9
+        0042: isub
+        0043: ireturn
+        0044: iinc local_var:71
+        0047: goto -37 // 0022
+        004a: iload_2
+        004b: iload_3
+        004c: isub
+        004d: ireturn
     }
     
     public int compareToIgnoreCase(String) {
         // max_stack: 3
         // max_locals: 2
-        0000: getstatic
-        0000: nop
-        0000: lstore
-        0000: aload_0
-        0000: aload_1
-        0000: invokeinterface
-        0000: nop
-        0000: fstore
-        0000: iconst_0
-        0000: nop
-        0000: ireturn
+        0000: getstatic #55 // String.CASE_INSENSITIVE_ORDER Ljava/util/Comparator;
+        0003: aload_0
+        0004: aload_1
+        0005: invokeinterface #56 // java.util.Comparator.compare (Ljava/lang/Object;Ljava/lang/Object;)I
+        000a: ireturn
     }
     
     public boolean regionMatches(int, String, int, int) {
         // max_stack: 6
         // max_locals: 9
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore
-        0000: iconst_2
-        0000: iload_1
-        0000: istore
-        0000: iconst_3
-        0000: aload_2
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore
-        0000: iconst_4
-        0000: iload_3
-        0000: istore
-        0000: iconst_5
-        0000: iload_3
-        0000: iflt
-        0000: nop
-        0000: dload_1
-        0000: iload_1
-        0000: iflt
-        0000: nop
-        0000: fload_1
-        0000: iload_1
-        0000: i2l
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: i2l
-        0000: iload
-        0000: iconst_1
-        0000: i2l
-        0000: lsub
-        0000: lcmp
-        0000: ifgt
-        0000: nop
-        0000: ldc_w
-        0000: iload_3
-        0000: i2l
-        0000: aload_2
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: i2l
-        0000: iload
-        0000: iconst_1
-        0000: i2l
-        0000: lsub
-        0000: lcmp
-        0000: ifle
-        0000: nop
-        0000: iconst_2
-        0000: iconst_0
-        0000: ireturn
-        0000: iload
-        0000: iconst_1
-        0000: iinc
-        0000: iconst_1
-        0000: FF
-        0000: ifle
-        0000: nop
-        0000: dload
-        0000: aload
-        0000: iconst_2
-        0000: iload
-        0000: iconst_3
-        0000: iinc
-        0000: iconst_3
-        0000: aconst_null
-        0000: caload
-        0000: aload
-        0000: iconst_4
-        0000: iload
-        0000: iconst_5
-        0000: iinc
-        0000: iconst_5
-        0000: aconst_null
-        0000: caload
-        0000: if_icmpeq
-        0000: FF E8
-        0000: iconst_0
-        0000: ireturn
-        0000: iconst_1
-        0000: ireturn
+        0001: getfield #3 // String.value [C
+        0004: astore local_var:5
+        0006: iload_1
+        0007: istore local_var:6
+        0009: aload_2
+        000a: getfield #3 // String.value [C
+        000d: astore local_var:7
+        000f: iload_3
+        0010: istore local_var:8
+        0012: iload_3
+        0013: iflt +39 // 003a
+        0016: iload_1
+        0017: iflt +35 // 003a
+        001a: iload_1
+        001b: i2l
+        001c: aload_0
+        001d: getfield #3 // String.value [C
+        0020: arraylength
+        0021: i2l
+        0022: iload local_var:4
+        0024: i2l
+        0025: lsub
+        0026: lcmp
+        0027: ifgt +19 // 003a
+        002a: iload_3
+        002b: i2l
+        002c: aload_2
+        002d: getfield #3 // String.value [C
+        0030: arraylength
+        0031: i2l
+        0032: iload local_var:4
+        0034: i2l
+        0035: lsub
+        0036: lcmp
+        0037: ifle +5 // 003c
+        003a: iconst_0
+        003b: ireturn
+        003c: iload local_var:4
+        003e: iinc local_var:4-1
+        0041: ifle +24 // 0059
+        0044: aload local_var:5
+        0046: iload local_var:6
+        0048: iinc local_var:61
+        004b: caload
+        004c: aload local_var:7
+        004e: iload local_var:8
+        0050: iinc local_var:81
+        0053: caload
+        0054: if_icmpeq -24 // 003c
+        0057: iconst_0
+        0058: ireturn
+        0059: iconst_1
+        005a: ireturn
     }
     
     public boolean regionMatches(boolean, int, String, int, int) {
         // max_stack: 6
         // max_locals: 14
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore
-        0000: iconst_3
-        0000: iload_2
-        0000: istore
-        0000: iconst_4
-        0000: aload_3
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore
-        0000: iconst_5
-        0000: iload
-        0000: iconst_1
-        0000: istore
-        0000: lconst_0
-        0000: iload
-        0000: iconst_1
-        0000: iflt
-        0000: nop
-        0000: dload_2
-        0000: iload_2
-        0000: iflt
-        0000: nop
-        0000: fload_2
-        0000: iload_2
-        0000: i2l
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: i2l
-        0000: iload
-        0000: iconst_2
-        0000: i2l
-        0000: lsub
-        0000: lcmp
-        0000: ifgt
-        0000: nop
-        0000: ldc2_w
-        0000: iload
-        0000: iconst_1
-        0000: i2l
-        0000: aload_3
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: i2l
-        0000: iload
-        0000: iconst_2
-        0000: i2l
-        0000: lsub
-        0000: lcmp
-        0000: ifle
-        0000: nop
-        0000: iconst_2
-        0000: iconst_0
-        0000: ireturn
-        0000: iload
-        0000: iconst_2
-        0000: iinc
-        0000: iconst_2
-        0000: FF
-        0000: ifle
-        0000: nop
-        0000: iastore
-        0000: aload
-        0000: iconst_3
-        0000: iload
-        0000: iconst_4
-        0000: iinc
-        0000: iconst_4
-        0000: aconst_null
-        0000: caload
-        0000: istore
-        0000: lconst_1
-        0000: aload
-        0000: iconst_5
-        0000: iload
-        0000: lconst_0
-        0000: iinc
-        0000: lconst_0
-        0000: aconst_null
-        0000: caload
-        0000: istore
-        0000: fconst_0
-        0000: iload
-        0000: lconst_1
-        0000: iload
-        0000: fconst_0
-        0000: if_icmpne
-        0000: nop
-        0000: iconst_3
-        0000: goto
-        0000: FF DD
-        0000: iload_1
-        0000: ifeq
-        0000: nop
-        0000: aload_1
-        0000: iload
-        0000: lconst_1
-        0000: invokestatic
-        0000: nop
-        0000: dstore
-        0000: istore
-        0000: fconst_1
-        0000: iload
-        0000: fconst_0
-        0000: invokestatic
-        0000: nop
-        0000: dstore
-        0000: istore
-        0000: fconst_2
-        0000: iload
-        0000: fconst_1
-        0000: iload
-        0000: fconst_2
-        0000: if_icmpne
-        0000: nop
-        0000: iconst_3
-        0000: goto
-        0000: FF
-        0000: instanceof
-        0000: iload
-        0000: fconst_1
-        0000: invokestatic
-        0000: nop
-        0000: astore
-        0000: iload
-        0000: fconst_2
-        0000: invokestatic
-        0000: nop
-        0000: astore
-        0000: if_icmpne
-        0000: nop
-        0000: iconst_3
-        0000: goto
-        0000: FF
-        0000: return
-        0000: iconst_0
-        0000: ireturn
-        0000: iconst_1
-        0000: ireturn
+        0001: getfield #3 // String.value [C
+        0004: astore local_var:6
+        0006: iload_2
+        0007: istore local_var:7
+        0009: aload_3
+        000a: getfield #3 // String.value [C
+        000d: astore local_var:8
+        000f: iload local_var:4
+        0011: istore local_var:9
+        0013: iload local_var:4
+        0015: iflt +40 // 003d
+        0018: iload_2
+        0019: iflt +36 // 003d
+        001c: iload_2
+        001d: i2l
+        001e: aload_0
+        001f: getfield #3 // String.value [C
+        0022: arraylength
+        0023: i2l
+        0024: iload local_var:5
+        0026: i2l
+        0027: lsub
+        0028: lcmp
+        0029: ifgt +20 // 003d
+        002c: iload local_var:4
+        002e: i2l
+        002f: aload_3
+        0030: getfield #3 // String.value [C
+        0033: arraylength
+        0034: i2l
+        0035: iload local_var:5
+        0037: i2l
+        0038: lsub
+        0039: lcmp
+        003a: ifle +5 // 003f
+        003d: iconst_0
+        003e: ireturn
+        003f: iload local_var:5
+        0041: iinc local_var:5-1
+        0044: ifle +79 // 0093
+        0047: aload local_var:6
+        0049: iload local_var:7
+        004b: iinc local_var:71
+        004e: caload
+        004f: istore local_var:10
+        0051: aload local_var:8
+        0053: iload local_var:9
+        0055: iinc local_var:91
+        0058: caload
+        0059: istore local_var:11
+        005b: iload local_var:10
+        005d: iload local_var:11
+        005f: if_icmpne +6 // 0065
+        0062: goto -35 // 003f
+        0065: iload_1
+        0066: ifeq +43 // 0091
+        0069: iload local_var:10
+        006b: invokestatic #57 // Character.toUpperCase (C)C
+        006e: istore local_var:12
+        0070: iload local_var:11
+        0072: invokestatic #57 // Character.toUpperCase (C)C
+        0075: istore local_var:13
+        0077: iload local_var:12
+        0079: iload local_var:13
+        007b: if_icmpne +6 // 0081
+        007e: goto -63 // 003f
+        0081: iload local_var:12
+        0083: invokestatic #58 // Character.toLowerCase (C)C
+        0086: iload local_var:13
+        0088: invokestatic #58 // Character.toLowerCase (C)C
+        008b: if_icmpne +6 // 0091
+        008e: goto -79 // 003f
+        0091: iconst_0
+        0092: ireturn
+        0093: iconst_1
+        0094: ireturn
     }
     
     public boolean startsWith(String, int) {
         // max_stack: 3
         // max_locals: 8
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore_3
-        0000: iload_2
-        0000: istore
-        0000: iconst_1
-        0000: aload_1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore
-        0000: iconst_2
-        0000: iconst_0
-        0000: istore
-        0000: iconst_3
-        0000: aload_1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: istore
-        0000: iconst_4
-        0000: iload_2
-        0000: iflt
-        0000: nop
-        0000: dconst_1
-        0000: iload_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: iload
-        0000: iconst_4
-        0000: isub
-        0000: if_icmple
-        0000: nop
-        0000: iconst_2
-        0000: iconst_0
-        0000: ireturn
-        0000: iinc
-        0000: iconst_4
-        0000: FF
-        0000: iload
-        0000: iconst_4
-        0000: iflt
-        0000: nop
-        0000: fload
-        0000: aload_3
-        0000: iload
-        0000: iconst_1
-        0000: iinc
-        0000: iconst_1
-        0000: aconst_null
-        0000: caload
-        0000: aload
-        0000: iconst_2
-        0000: iload
-        0000: iconst_3
-        0000: iinc
-        0000: iconst_3
-        0000: aconst_null
-        0000: caload
-        0000: if_icmpeq
-        0000: FF E9
-        0000: iconst_0
-        0000: ireturn
-        0000: iconst_1
-        0000: ireturn
+        0001: getfield #3 // String.value [C
+        0004: astore_3
+        0005: iload_2
+        0006: istore local_var:4
+        0008: aload_1
+        0009: getfield #3 // String.value [C
+        000c: astore local_var:5
+        000e: iconst_0
+        000f: istore local_var:6
+        0011: aload_1
+        0012: getfield #3 // String.value [C
+        0015: arraylength
+        0016: istore local_var:7
+        0018: iload_2
+        0019: iflt +15 // 0028
+        001c: iload_2
+        001d: aload_0
+        001e: getfield #3 // String.value [C
+        0021: arraylength
+        0022: iload local_var:7
+        0024: isub
+        0025: if_icmple +5 // 002a
+        0028: iconst_0
+        0029: ireturn
+        002a: iinc local_var:7-1
+        002d: iload local_var:7
+        002f: iflt +23 // 0046
+        0032: aload_3
+        0033: iload local_var:4
+        0035: iinc local_var:41
+        0038: caload
+        0039: aload local_var:5
+        003b: iload local_var:6
+        003d: iinc local_var:61
+        0040: caload
+        0041: if_icmpeq -23 // 002a
+        0044: iconst_0
+        0045: ireturn
+        0046: iconst_1
+        0047: ireturn
     }
     
     public boolean startsWith(String) {
         // max_stack: 3
         // max_locals: 2
         0000: aload_0
-        0000: aload_1
-        0000: iconst_0
-        0000: invokevirtual
-        0000: nop
-        0000: istore_0
-        0000: ireturn
+        0001: aload_1
+        0002: iconst_0
+        0003: invokevirtual #59 // String.startsWith (Ljava/lang/String;I)Z
+        0006: ireturn
     }
     
     public boolean endsWith(String) {
         // max_stack: 4
         // max_locals: 2
         0000: aload_0
-        0000: aload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: aload_1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: isub
-        0000: invokevirtual
-        0000: nop
-        0000: istore_0
-        0000: ireturn
+        0001: aload_1
+        0002: aload_0
+        0003: getfield #3 // String.value [C
+        0006: arraylength
+        0007: aload_1
+        0008: getfield #3 // String.value [C
+        000b: arraylength
+        000c: isub
+        000d: invokevirtual #59 // String.startsWith (Ljava/lang/String;I)Z
+        0010: ireturn
     }
     
     public int hashCode() {
         // max_stack: 3
         // max_locals: 4
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_1
-        0000: istore_1
-        0000: iload_1
-        0000: ifne
-        0000: nop
-        0000: laload
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: ifle
-        0000: nop
-        0000: dload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore_2
-        0000: iconst_0
-        0000: istore_3
-        0000: iload_3
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: if_icmpge
-        0000: nop
-        0000: ldc
-        0000: bipush
-        0000: lload_1
-        0000: iload_1
-        0000: imul
-        0000: aload_2
-        0000: iload_3
-        0000: caload
-        0000: iadd
-        0000: istore_1
-        0000: iinc
-        0000: iconst_0
-        0000: aconst_null
-        0000: goto
-        0000: FF EB
-        0000: aload_0
-        0000: iload_1
-        0000: putfield
-        0000: nop
-        0000: iconst_1
-        0000: iload_1
-        0000: ireturn
+        0001: getfield #4 // String.hash I
+        0004: istore_1
+        0005: iload_1
+        0006: ifne +47 // 0035
+        0009: aload_0
+        000a: getfield #3 // String.value [C
+        000d: arraylength
+        000e: ifle +39 // 0035
+        0011: aload_0
+        0012: getfield #3 // String.value [C
+        0015: astore_2
+        0016: iconst_0
+        0017: istore_3
+        0018: iload_3
+        0019: aload_0
+        001a: getfield #3 // String.value [C
+        001d: arraylength
+        001e: if_icmpge +18 // 0030
+        0021: bipush 31
+        0023: iload_1
+        0024: imul
+        0025: aload_2
+        0026: iload_3
+        0027: caload
+        0028: iadd
+        0029: istore_1
+        002a: iinc local_var:31
+        002d: goto -21 // 0018
+        0030: aload_0
+        0031: iload_1
+        0032: putfield #4 // String.hash I
+        0035: iload_1
+        0036: ireturn
     }
     
     public int indexOf(int) {
         // max_stack: 3
         // max_locals: 2
         0000: aload_0
-        0000: iload_1
-        0000: iconst_0
-        0000: invokevirtual
-        0000: nop
-        0000: istore_1
-        0000: ireturn
+        0001: iload_1
+        0002: iconst_0
+        0003: invokevirtual #60 // String.indexOf (II)I
+        0006: ireturn
     }
     
     public int indexOf(int, int) {
         // max_stack: 3
         // max_locals: 6
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: istore_3
-        0000: iload_2
-        0000: ifge
-        0000: nop
-        0000: iconst_5
-        0000: iconst_0
-        0000: istore_2
-        0000: goto
-        0000: nop
-        0000: lconst_1
-        0000: iload_2
-        0000: iload_3
-        0000: if_icmplt
-        0000: nop
-        0000: iconst_2
-        0000: iconst_m1
-        0000: ireturn
-        0000: iload_1
-        0000: ldc
-        0000: istore_3
-        0000: if_icmpge
-        0000: nop
-        0000: dload_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore
-        0000: iconst_1
-        0000: iload_2
-        0000: istore
-        0000: iconst_2
-        0000: iload
-        0000: iconst_2
-        0000: iload_3
-        0000: if_icmpge
-        0000: nop
-        0000: iload
-        0000: aload
-        0000: iconst_1
-        0000: iload
-        0000: iconst_2
-        0000: caload
-        0000: iload_1
-        0000: if_icmpne
-        0000: nop
-        0000: iconst_3
-        0000: iload
-        0000: iconst_2
-        0000: ireturn
-        0000: iinc
-        0000: iconst_2
-        0000: aconst_null
-        0000: goto
-        0000: FF EB
-        0000: iconst_m1
-        0000: ireturn
-        0000: aload_0
-        0000: iload_1
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: lstore_0
-        0000: ireturn
+        0001: getfield #3 // String.value [C
+        0004: arraylength
+        0005: istore_3
+        0006: iload_2
+        0007: ifge +8 // 000f
+        000a: iconst_0
+        000b: istore_2
+        000c: goto +10 // 0016
+        000f: iload_2
+        0010: iload_3
+        0011: if_icmplt +5 // 0016
+        0014: iconst_m1
+        0015: ireturn
+        0016: iload_1
+        0017: ldc #62 // IntegerConstant:65536
+        0019: if_icmpge +38 // 003f
+        001c: aload_0
+        001d: getfield #3 // String.value [C
+        0020: astore local_var:4
+        0022: iload_2
+        0023: istore local_var:5
+        0025: iload local_var:5
+        0027: iload_3
+        0028: if_icmpge +21 // 003d
+        002b: aload local_var:4
+        002d: iload local_var:5
+        002f: caload
+        0030: iload_1
+        0031: if_icmpne +6 // 0037
+        0034: iload local_var:5
+        0036: ireturn
+        0037: iinc local_var:51
+        003a: goto -21 // 0025
+        003d: iconst_m1
+        003e: ireturn
+        003f: aload_0
+        0040: iload_1
+        0041: iload_2
+        0042: invokespecial #63 // String.indexOfSupplementary (II)I
+        0045: ireturn
     }
     
     private int indexOfSupplementary(int, int) {
         // max_stack: 3
         // max_locals: 8
         0000: iload_1
-        0000: invokestatic
-        0000: nop
-        0000: lconst_1
-        0000: ifeq
-        0000: nop
-        0000: lstore_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore_3
-        0000: iload_1
-        0000: invokestatic
-        0000: nop
-        0000: lstore_1
-        0000: istore
-        0000: iconst_1
-        0000: iload_1
-        0000: invokestatic
-        0000: nop
-        0000: lstore_2
-        0000: istore
-        0000: iconst_2
-        0000: aload_3
-        0000: arraylength
-        0000: iconst_1
-        0000: isub
-        0000: istore
-        0000: iconst_3
-        0000: iload_2
-        0000: istore
-        0000: iconst_4
-        0000: iload
-        0000: iconst_4
-        0000: iload
-        0000: iconst_3
-        0000: if_icmpge
-        0000: nop
-        0000: lload_2
-        0000: aload_3
-        0000: iload
-        0000: iconst_4
-        0000: caload
-        0000: iload
-        0000: iconst_1
-        0000: if_icmpne
-        0000: nop
-        0000: sipush
-        0000: aload_3
-        0000: iload
-        0000: iconst_4
-        0000: iconst_1
-        0000: iadd
-        0000: caload
-        0000: iload
-        0000: iconst_2
-        0000: if_icmpne
-        0000: nop
-        0000: iconst_3
-        0000: iload
-        0000: iconst_4
-        0000: ireturn
-        0000: iinc
-        0000: iconst_4
-        0000: aconst_null
-        0000: goto
-        0000: FF DF
-        0000: iconst_m1
-        0000: ireturn
+        0001: invokestatic #10 // Character.isValidCodePoint (I)Z
+        0004: ifeq +65 // 0045
+        0007: aload_0
+        0008: getfield #3 // String.value [C
+        000b: astore_3
+        000c: iload_1
+        000d: invokestatic #64 // Character.highSurrogate (I)C
+        0010: istore local_var:4
+        0012: iload_1
+        0013: invokestatic #65 // Character.lowSurrogate (I)C
+        0016: istore local_var:5
+        0018: aload_3
+        0019: arraylength
+        001a: iconst_1
+        001b: isub
+        001c: istore local_var:6
+        001e: iload_2
+        001f: istore local_var:7
+        0021: iload local_var:7
+        0023: iload local_var:6
+        0025: if_icmpge +32 // 0045
+        0028: aload_3
+        0029: iload local_var:7
+        002b: caload
+        002c: iload local_var:4
+        002e: if_icmpne +17 // 003f
+        0031: aload_3
+        0032: iload local_var:7
+        0034: iconst_1
+        0035: iadd
+        0036: caload
+        0037: iload local_var:5
+        0039: if_icmpne +6 // 003f
+        003c: iload local_var:7
+        003e: ireturn
+        003f: iinc local_var:71
+        0042: goto -33 // 0021
+        0045: iconst_m1
+        0046: ireturn
     }
     
     public int lastIndexOf(int) {
         // max_stack: 4
         // max_locals: 2
         0000: aload_0
-        0000: iload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: iconst_1
-        0000: isub
-        0000: invokevirtual
-        0000: nop
-        0000: lstore_3
-        0000: ireturn
+        0001: iload_1
+        0002: aload_0
+        0003: getfield #3 // String.value [C
+        0006: arraylength
+        0007: iconst_1
+        0008: isub
+        0009: invokevirtual #66 // String.lastIndexOf (II)I
+        000c: ireturn
     }
     
     public int lastIndexOf(int, int) {
         // max_stack: 3
         // max_locals: 5
         0000: iload_1
-        0000: ldc
-        0000: istore_3
-        0000: if_icmpge
-        0000: nop
-        0000: aload_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore_3
-        0000: iload_2
-        0000: aload_3
-        0000: arraylength
-        0000: iconst_1
-        0000: isub
-        0000: invokestatic
-        0000: nop
-        0000: istore
-        0000: istore
-        0000: iconst_1
-        0000: iload
-        0000: iconst_1
-        0000: iflt
-        0000: nop
-        0000: ldc2_w
-        0000: aload_3
-        0000: iload
-        0000: iconst_1
-        0000: caload
-        0000: iload_1
-        0000: if_icmpne
-        0000: nop
-        0000: iconst_3
-        0000: iload
-        0000: iconst_1
-        0000: ireturn
-        0000: iinc
-        0000: iconst_1
-        0000: FF
-        0000: goto
-        0000: FF ED
-        0000: iconst_m1
-        0000: ireturn
-        0000: aload_0
-        0000: iload_1
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: fstore_0
-        0000: ireturn
+        0001: ldc #62 // IntegerConstant:65536
+        0003: if_icmpge +42 // 002d
+        0006: aload_0
+        0007: getfield #3 // String.value [C
+        000a: astore_3
+        000b: iload_2
+        000c: aload_3
+        000d: arraylength
+        000e: iconst_1
+        000f: isub
+        0010: invokestatic #54 // Math.min (II)I
+        0013: istore local_var:4
+        0015: iload local_var:4
+        0017: iflt +20 // 002b
+        001a: aload_3
+        001b: iload local_var:4
+        001d: caload
+        001e: iload_1
+        001f: if_icmpne +6 // 0025
+        0022: iload local_var:4
+        0024: ireturn
+        0025: iinc local_var:4-1
+        0028: goto -19 // 0015
+        002b: iconst_m1
+        002c: ireturn
+        002d: aload_0
+        002e: iload_1
+        002f: iload_2
+        0030: invokespecial #67 // String.lastIndexOfSupplementary (II)I
+        0033: ireturn
     }
     
     private int lastIndexOfSupplementary(int, int) {
         // max_stack: 3
         // max_locals: 7
         0000: iload_1
-        0000: invokestatic
-        0000: nop
-        0000: lconst_1
-        0000: ifeq
-        0000: nop
-        0000: lstore_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore_3
-        0000: iload_1
-        0000: invokestatic
-        0000: nop
-        0000: lstore_1
-        0000: istore
-        0000: iconst_1
-        0000: iload_1
-        0000: invokestatic
-        0000: nop
-        0000: lstore_2
-        0000: istore
-        0000: iconst_2
-        0000: iload_2
-        0000: aload_3
-        0000: arraylength
-        0000: iconst_2
-        0000: isub
-        0000: invokestatic
-        0000: nop
-        0000: istore
-        0000: istore
-        0000: iconst_3
-        0000: iload
-        0000: iconst_3
-        0000: iflt
-        0000: nop
-        0000: lload_2
-        0000: aload_3
-        0000: iload
-        0000: iconst_3
-        0000: caload
-        0000: iload
-        0000: iconst_1
-        0000: if_icmpne
-        0000: nop
-        0000: sipush
-        0000: aload_3
-        0000: iload
-        0000: iconst_3
-        0000: iconst_1
-        0000: iadd
-        0000: caload
-        0000: iload
-        0000: iconst_2
-        0000: if_icmpne
-        0000: nop
-        0000: iconst_3
-        0000: iload
-        0000: iconst_3
-        0000: ireturn
-        0000: iinc
-        0000: iconst_3
-        0000: FF
-        0000: goto
-        0000: FF E1
-        0000: iconst_m1
-        0000: ireturn
+        0001: invokestatic #10 // Character.isValidCodePoint (I)Z
+        0004: ifeq +64 // 0044
+        0007: aload_0
+        0008: getfield #3 // String.value [C
+        000b: astore_3
+        000c: iload_1
+        000d: invokestatic #64 // Character.highSurrogate (I)C
+        0010: istore local_var:4
+        0012: iload_1
+        0013: invokestatic #65 // Character.lowSurrogate (I)C
+        0016: istore local_var:5
+        0018: iload_2
+        0019: aload_3
+        001a: arraylength
+        001b: iconst_2
+        001c: isub
+        001d: invokestatic #54 // Math.min (II)I
+        0020: istore local_var:6
+        0022: iload local_var:6
+        0024: iflt +32 // 0044
+        0027: aload_3
+        0028: iload local_var:6
+        002a: caload
+        002b: iload local_var:4
+        002d: if_icmpne +17 // 003e
+        0030: aload_3
+        0031: iload local_var:6
+        0033: iconst_1
+        0034: iadd
+        0035: caload
+        0036: iload local_var:5
+        0038: if_icmpne +6 // 003e
+        003b: iload local_var:6
+        003d: ireturn
+        003e: iinc local_var:6-1
+        0041: goto -31 // 0022
+        0044: iconst_m1
+        0045: ireturn
     }
     
     public int indexOf(String) {
         // max_stack: 3
         // max_locals: 2
         0000: aload_0
-        0000: aload_1
-        0000: iconst_0
-        0000: invokevirtual
-        0000: nop
-        0000: fstore_1
-        0000: ireturn
+        0001: aload_1
+        0002: iconst_0
+        0003: invokevirtual #68 // String.indexOf (Ljava/lang/String;I)I
+        0006: ireturn
     }
     
     public int indexOf(String, int) {
         // max_stack: 7
         // max_locals: 3
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: aload_1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload_1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: iload_2
-        0000: invokestatic
-        0000: nop
-        0000: fstore_2
-        0000: ireturn
+        0001: getfield #3 // String.value [C
+        0004: iconst_0
+        0005: aload_0
+        0006: getfield #3 // String.value [C
+        0009: arraylength
+        000a: aload_1
+        000b: getfield #3 // String.value [C
+        000e: iconst_0
+        000f: aload_1
+        0010: getfield #3 // String.value [C
+        0013: arraylength
+        0014: iload_2
+        0015: invokestatic #69 // String.indexOf ([CII[CIII)I
+        0018: ireturn
     }
     
     static int indexOf(char[], int, int, String, int) {
         // max_stack: 7
         // max_locals: 5
         0000: aload_0
-        0000: iload_1
-        0000: iload_2
-        0000: aload_3
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload_3
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: iload
-        0000: iconst_1
-        0000: invokestatic
-        0000: nop
-        0000: fstore_2
-        0000: ireturn
+        0001: iload_1
+        0002: iload_2
+        0003: aload_3
+        0004: getfield #3 // String.value [C
+        0007: iconst_0
+        0008: aload_3
+        0009: getfield #3 // String.value [C
+        000c: arraylength
+        000d: iload local_var:4
+        000f: invokestatic #69 // String.indexOf ([CII[CIII)I
+        0012: ireturn
     }
     
     static int indexOf(char[], int, int, char[], int, int, int) {
         // max_stack: 3
         // max_locals: 13
-        0000: iload
-        0000: iconst_3
-        0000: iload_2
-        0000: if_icmplt
-        0000: nop
-        0000: dconst_0
-        0000: iload
-        0000: iconst_2
-        0000: ifne
-        0000: nop
-        0000: iconst_4
-        0000: iload_2
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: iconst_m1
-        0000: ireturn
-        0000: iload
-        0000: iconst_3
-        0000: ifge
-        0000: nop
-        0000: iconst_3
-        0000: iconst_0
-        0000: istore
-        0000: iconst_3
-        0000: iload
-        0000: iconst_2
-        0000: ifne
-        0000: nop
-        0000: iconst_3
-        0000: iload
-        0000: iconst_3
-        0000: ireturn
-        0000: aload_3
-        0000: iload
-        0000: iconst_1
-        0000: caload
-        0000: istore
-        0000: iconst_4
-        0000: iload_1
-        0000: iload_2
-        0000: iload
-        0000: iconst_2
-        0000: isub
-        0000: iadd
-        0000: istore
-        0000: iconst_5
-        0000: iload_1
-        0000: iload
-        0000: iconst_3
-        0000: iadd
-        0000: istore
-        0000: lconst_0
-        0000: iload
-        0000: lconst_0
-        0000: iload
-        0000: iconst_5
-        0000: if_icmpgt
-        0000: nop
-        0000: dmul
-        0000: aload_0
-        0000: iload
-        0000: lconst_0
-        0000: caload
-        0000: iload
-        0000: iconst_4
-        0000: if_icmpeq
-        0000: nop
-        0000: aload
-        0000: iinc
-        0000: lconst_0
-        0000: aconst_null
-        0000: iload
-        0000: lconst_0
-        0000: iload
-        0000: iconst_5
-        0000: if_icmpgt
-        0000: nop
-        0000: dconst_1
-        0000: aload_0
-        0000: iload
-        0000: lconst_0
-        0000: caload
-        0000: iload
-        0000: iconst_4
-        0000: if_icmpeq
-        0000: nop
-        0000: iconst_3
-        0000: goto
-        0000: FF ED
-        0000: iload
-        0000: lconst_0
-        0000: iload
-        0000: iconst_5
-        0000: if_icmpgt
-        0000: nop
-        0000: lstore_0
-        0000: iload
-        0000: lconst_0
-        0000: iconst_1
-        0000: iadd
-        0000: istore
-        0000: lconst_1
-        0000: iload
-        0000: lconst_1
-        0000: iload
-        0000: iconst_2
-        0000: iadd
-        0000: iconst_1
-        0000: isub
-        0000: istore
-        0000: fconst_0
-        0000: iload
-        0000: iconst_1
-        0000: iconst_1
-        0000: iadd
-        0000: istore
-        0000: fconst_1
-        0000: iload
-        0000: lconst_1
-        0000: iload
-        0000: fconst_0
-        0000: if_icmpge
-        0000: nop
-        0000: fload
-        0000: aload_0
-        0000: iload
-        0000: lconst_1
-        0000: caload
-        0000: aload_3
-        0000: iload
-        0000: fconst_1
-        0000: caload
-        0000: if_icmpne
-        0000: nop
-        0000: fconst_1
-        0000: iinc
-        0000: lconst_1
-        0000: aconst_null
-        0000: iinc
-        0000: fconst_1
-        0000: aconst_null
-        0000: goto
-        0000: FF E8
-        0000: iload
-        0000: lconst_1
-        0000: iload
-        0000: fconst_0
-        0000: if_icmpne
-        0000: nop
-        0000: iconst_5
-        0000: iload
-        0000: lconst_0
-        0000: iload_1
-        0000: isub
-        0000: ireturn
-        0000: iinc
-        0000: lconst_0
-        0000: aconst_null
-        0000: goto
-        0000: FF
-        0000: lcmp
-        0000: iconst_m1
-        0000: ireturn
+        0000: iload local_var:6
+        0002: iload_2
+        0003: if_icmplt +14 // 0011
+        0006: iload local_var:5
+        0008: ifne +7 // 000f
+        000b: iload_2
+        000c: goto +4 // 0010
+        000f: iconst_m1
+        0010: ireturn
+        0011: iload local_var:6
+        0013: ifge +6 // 0019
+        0016: iconst_0
+        0017: istore local_var:6
+        0019: iload local_var:5
+        001b: ifne +6 // 0021
+        001e: iload local_var:6
+        0020: ireturn
+        0021: aload_3
+        0022: iload local_var:4
+        0024: caload
+        0025: istore local_var:7
+        0027: iload_1
+        0028: iload_2
+        0029: iload local_var:5
+        002b: isub
+        002c: iadd
+        002d: istore local_var:8
+        002f: iload_1
+        0030: iload local_var:6
+        0032: iadd
+        0033: istore local_var:9
+        0035: iload local_var:9
+        0037: iload local_var:8
+        0039: if_icmpgt +107 // 00a4
+        003c: aload_0
+        003d: iload local_var:9
+        003f: caload
+        0040: iload local_var:7
+        0042: if_icmpeq +25 // 005b
+        0045: iinc local_var:91
+        0048: iload local_var:9
+        004a: iload local_var:8
+        004c: if_icmpgt +15 // 005b
+        004f: aload_0
+        0050: iload local_var:9
+        0052: caload
+        0053: iload local_var:7
+        0055: if_icmpeq +6 // 005b
+        0058: goto -19 // 0045
+        005b: iload local_var:9
+        005d: iload local_var:8
+        005f: if_icmpgt +63 // 009e
+        0062: iload local_var:9
+        0064: iconst_1
+        0065: iadd
+        0066: istore local_var:10
+        0068: iload local_var:10
+        006a: iload local_var:5
+        006c: iadd
+        006d: iconst_1
+        006e: isub
+        006f: istore local_var:11
+        0071: iload local_var:4
+        0073: iconst_1
+        0074: iadd
+        0075: istore local_var:12
+        0077: iload local_var:10
+        0079: iload local_var:11
+        007b: if_icmpge +23 // 0092
+        007e: aload_0
+        007f: iload local_var:10
+        0081: caload
+        0082: aload_3
+        0083: iload local_var:12
+        0085: caload
+        0086: if_icmpne +12 // 0092
+        0089: iinc local_var:101
+        008c: iinc local_var:121
+        008f: goto -24 // 0077
+        0092: iload local_var:10
+        0094: iload local_var:11
+        0096: if_icmpne +8 // 009e
+        0099: iload local_var:9
+        009b: iload_1
+        009c: isub
+        009d: ireturn
+        009e: iinc local_var:91
+        00a1: goto -108 // 0035
+        00a4: iconst_m1
+        00a5: ireturn
     }
     
     public int lastIndexOf(String) {
         // max_stack: 3
         // max_locals: 2
         0000: aload_0
-        0000: aload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: invokevirtual
-        0000: nop
-        0000: fstore_3
-        0000: ireturn
+        0001: aload_1
+        0002: aload_0
+        0003: getfield #3 // String.value [C
+        0006: arraylength
+        0007: invokevirtual #70 // String.lastIndexOf (Ljava/lang/String;I)I
+        000a: ireturn
     }
     
     public int lastIndexOf(String, int) {
         // max_stack: 7
         // max_locals: 3
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: aload_1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload_1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: iload_2
-        0000: invokestatic
-        0000: nop
-        0000: dstore_0
-        0000: ireturn
+        0001: getfield #3 // String.value [C
+        0004: iconst_0
+        0005: aload_0
+        0006: getfield #3 // String.value [C
+        0009: arraylength
+        000a: aload_1
+        000b: getfield #3 // String.value [C
+        000e: iconst_0
+        000f: aload_1
+        0010: getfield #3 // String.value [C
+        0013: arraylength
+        0014: iload_2
+        0015: invokestatic #71 // String.lastIndexOf ([CII[CIII)I
+        0018: ireturn
     }
     
     static int lastIndexOf(char[], int, int, String, int) {
         // max_stack: 7
         // max_locals: 5
         0000: aload_0
-        0000: iload_1
-        0000: iload_2
-        0000: aload_3
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload_3
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: iload
-        0000: iconst_1
-        0000: invokestatic
-        0000: nop
-        0000: dstore_0
-        0000: ireturn
+        0001: iload_1
+        0002: iload_2
+        0003: aload_3
+        0004: getfield #3 // String.value [C
+        0007: iconst_0
+        0008: aload_3
+        0009: getfield #3 // String.value [C
+        000c: arraylength
+        000d: iload local_var:4
+        000f: invokestatic #71 // String.lastIndexOf ([CII[CIII)I
+        0012: ireturn
     }
     
     static int lastIndexOf(char[], int, int, char[], int, int, int) {
         // max_stack: 3
         // max_locals: 15
         0000: iload_2
-        0000: iload
-        0000: iconst_2
-        0000: isub
-        0000: istore
-        0000: iconst_4
-        0000: iload
-        0000: iconst_3
-        0000: ifge
-        0000: nop
-        0000: iconst_2
-        0000: iconst_m1
-        0000: ireturn
-        0000: iload
-        0000: iconst_3
-        0000: iload
-        0000: iconst_4
-        0000: if_icmple
-        0000: nop
-        0000: iconst_4
-        0000: iload
-        0000: iconst_4
-        0000: istore
-        0000: iconst_3
-        0000: iload
-        0000: iconst_2
-        0000: ifne
-        0000: nop
-        0000: iconst_3
-        0000: iload
-        0000: iconst_3
-        0000: ireturn
-        0000: iload
-        0000: iconst_1
-        0000: iload
-        0000: iconst_2
-        0000: iadd
-        0000: iconst_1
-        0000: isub
-        0000: istore
-        0000: iconst_5
-        0000: aload_3
-        0000: iload
-        0000: iconst_5
-        0000: caload
-        0000: istore
-        0000: lconst_0
-        0000: iload_1
-        0000: iload
-        0000: iconst_2
-        0000: iadd
-        0000: iconst_1
-        0000: isub
-        0000: istore
-        0000: lconst_1
-        0000: iload
-        0000: lconst_1
-        0000: iload
-        0000: iconst_3
-        0000: iadd
-        0000: istore
-        0000: fconst_0
-        0000: iload
-        0000: fconst_0
-        0000: iload
-        0000: lconst_1
-        0000: if_icmplt
-        0000: nop
-        0000: ldc
-        0000: aload_0
-        0000: iload
-        0000: fconst_0
-        0000: caload
-        0000: iload
-        0000: lconst_0
-        0000: if_icmpeq
-        0000: nop
-        0000: lconst_0
-        0000: iinc
-        0000: fconst_0
-        0000: FF
-        0000: goto
-        0000: FF ED
-        0000: iload
-        0000: fconst_0
-        0000: iload
-        0000: lconst_1
-        0000: if_icmpge
-        0000: nop
-        0000: iconst_2
-        0000: iconst_m1
-        0000: ireturn
-        0000: iload
-        0000: fconst_0
-        0000: iconst_1
-        0000: isub
-        0000: istore
-        0000: fconst_1
-        0000: iload
-        0000: fconst_1
-        0000: iload
-        0000: iconst_2
-        0000: iconst_1
-        0000: isub
-        0000: isub
-        0000: istore
-        0000: fconst_2
-        0000: iload
-        0000: iconst_5
-        0000: iconst_1
-        0000: isub
-        0000: istore
-        0000: dconst_0
-        0000: iload
-        0000: fconst_1
-        0000: iload
-        0000: fconst_2
-        0000: if_icmple
-        0000: nop
-        0000: iload_0
-        0000: aload_0
-        0000: iload
-        0000: fconst_1
-        0000: iinc
-        0000: fconst_1
-        0000: FF
-        0000: caload
-        0000: aload_3
-        0000: iload
-        0000: dconst_0
-        0000: iinc
-        0000: dconst_0
-        0000: FF
-        0000: caload
-        0000: if_icmpeq
-        0000: FF EB
-        0000: iinc
-        0000: fconst_0
-        0000: FF
-        0000: goto
-        0000: FF
-        0000: return
-        0000: iload
-        0000: fconst_2
-        0000: iload_1
-        0000: isub
-        0000: iconst_1
-        0000: iadd
-        0000: ireturn
+        0001: iload local_var:5
+        0003: isub
+        0004: istore local_var:7
+        0006: iload local_var:6
+        0008: ifge +5 // 000d
+        000b: iconst_m1
+        000c: ireturn
+        000d: iload local_var:6
+        000f: iload local_var:7
+        0011: if_icmple +7 // 0018
+        0014: iload local_var:7
+        0016: istore local_var:6
+        0018: iload local_var:5
+        001a: ifne +6 // 0020
+        001d: iload local_var:6
+        001f: ireturn
+        0020: iload local_var:4
+        0022: iload local_var:5
+        0024: iadd
+        0025: iconst_1
+        0026: isub
+        0027: istore local_var:8
+        0029: aload_3
+        002a: iload local_var:8
+        002c: caload
+        002d: istore local_var:9
+        002f: iload_1
+        0030: iload local_var:5
+        0032: iadd
+        0033: iconst_1
+        0034: isub
+        0035: istore local_var:10
+        0037: iload local_var:10
+        0039: iload local_var:6
+        003b: iadd
+        003c: istore local_var:11
+        003e: iload local_var:11
+        0040: iload local_var:10
+        0042: if_icmplt +18 // 0054
+        0045: aload_0
+        0046: iload local_var:11
+        0048: caload
+        0049: iload local_var:9
+        004b: if_icmpeq +9 // 0054
+        004e: iinc local_var:11-1
+        0051: goto -19 // 003e
+        0054: iload local_var:11
+        0056: iload local_var:10
+        0058: if_icmpge +5 // 005d
+        005b: iconst_m1
+        005c: ireturn
+        005d: iload local_var:11
+        005f: iconst_1
+        0060: isub
+        0061: istore local_var:12
+        0063: iload local_var:12
+        0065: iload local_var:5
+        0067: iconst_1
+        0068: isub
+        0069: isub
+        006a: istore local_var:13
+        006c: iload local_var:8
+        006e: iconst_1
+        006f: isub
+        0070: istore local_var:14
+        0072: iload local_var:12
+        0074: iload local_var:13
+        0076: if_icmple +26 // 0090
+        0079: aload_0
+        007a: iload local_var:12
+        007c: iinc local_var:12-1
+        007f: caload
+        0080: aload_3
+        0081: iload local_var:14
+        0083: iinc local_var:14-1
+        0086: caload
+        0087: if_icmpeq -21 // 0072
+        008a: iinc local_var:11-1
+        008d: goto -79 // 003e
+        0090: iload local_var:13
+        0092: iload_1
+        0093: isub
+        0094: iconst_1
+        0095: iadd
+        0096: ireturn
     }
     
     public String substring(int) {
         // max_stack: 5
         // max_locals: 3
         0000: iload_1
-        0000: ifge
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_1
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: iload_1
-        0000: isub
-        0000: istore_2
-        0000: iload_2
-        0000: ifge
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_1
-        0000: ifne
-        0000: nop
-        0000: iconst_4
-        0000: aload_0
-        0000: goto
-        0000: nop
-        0000: bipush
-        0000: new
-        0000: nop
-        0000: aload_1
-        0000: dup
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iload_1
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: dstore_1
-        0000: areturn
+        0001: ifge +12 // 000d
+        0004: new #6 // java/lang/StringIndexOutOfBoundsException
+        0007: dup
+        0008: iload_1
+        0009: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        000c: athrow
+        000d: aload_0
+        000e: getfield #3 // String.value [C
+        0011: arraylength
+        0012: iload_1
+        0013: isub
+        0014: istore_2
+        0015: iload_2
+        0016: ifge +12 // 0022
+        0019: new #6 // java/lang/StringIndexOutOfBoundsException
+        001c: dup
+        001d: iload_2
+        001e: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        0021: athrow
+        0022: iload_1
+        0023: ifne +7 // 002a
+        0026: aload_0
+        0027: goto +16 // 0037
+        002a: new #43 // java/lang/String
+        002d: dup
+        002e: aload_0
+        002f: getfield #3 // String.value [C
+        0032: iload_1
+        0033: iload_2
+        0034: invokespecial #72 // String.<init> ([CII)V
+        0037: areturn
     }
     
     public String substring(int, int) {
         // max_stack: 5
         // max_locals: 4
         0000: iload_1
-        0000: ifge
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_1
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: if_icmple
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_2
-        0000: iload_1
-        0000: isub
-        0000: istore_3
-        0000: iload_3
-        0000: ifge
-        0000: nop
-        0000: fconst_1
-        0000: new
-        0000: nop
-        0000: iconst_3
-        0000: dup
-        0000: iload_3
-        0000: invokespecial
-        0000: nop
-        0000: iconst_4
-        0000: athrow
-        0000: iload_1
-        0000: ifne
-        0000: nop
-        0000: bipush
-        0000: iload_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: if_icmpne
-        0000: nop
-        0000: iconst_4
-        0000: aload_0
-        0000: goto
-        0000: nop
-        0000: bipush
-        0000: new
-        0000: nop
-        0000: aload_1
-        0000: dup
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iload_1
-        0000: iload_3
-        0000: invokespecial
-        0000: nop
-        0000: dstore_1
-        0000: areturn
+        0001: ifge +12 // 000d
+        0004: new #6 // java/lang/StringIndexOutOfBoundsException
+        0007: dup
+        0008: iload_1
+        0009: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        000c: athrow
+        000d: iload_2
+        000e: aload_0
+        000f: getfield #3 // String.value [C
+        0012: arraylength
+        0013: if_icmple +12 // 001f
+        0016: new #6 // java/lang/StringIndexOutOfBoundsException
+        0019: dup
+        001a: iload_2
+        001b: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        001e: athrow
+        001f: iload_2
+        0020: iload_1
+        0021: isub
+        0022: istore_3
+        0023: iload_3
+        0024: ifge +12 // 0030
+        0027: new #6 // java/lang/StringIndexOutOfBoundsException
+        002a: dup
+        002b: iload_3
+        002c: invokespecial #7 // StringIndexOutOfBoundsException.<init> (I)V
+        002f: athrow
+        0030: iload_1
+        0031: ifne +16 // 0041
+        0034: iload_2
+        0035: aload_0
+        0036: getfield #3 // String.value [C
+        0039: arraylength
+        003a: if_icmpne +7 // 0041
+        003d: aload_0
+        003e: goto +16 // 004e
+        0041: new #43 // java/lang/String
+        0044: dup
+        0045: aload_0
+        0046: getfield #3 // String.value [C
+        0049: iload_1
+        004a: iload_3
+        004b: invokespecial #72 // String.<init> ([CII)V
+        004e: areturn
     }
     
     public CharSequence subSequence(int, int) {
         // max_stack: 3
         // max_locals: 3
         0000: aload_0
-        0000: iload_1
-        0000: iload_2
-        0000: invokevirtual
-        0000: nop
-        0000: dstore_2
-        0000: areturn
+        0001: iload_1
+        0002: iload_2
+        0003: invokevirtual #73 // String.substring (II)Ljava/lang/String;
+        0006: areturn
     }
     
     public String concat(String) {
         // max_stack: 4
         // max_locals: 5
         0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: dstore_3
-        0000: istore_2
-        0000: iload_2
-        0000: ifne
-        0000: nop
-        0000: iconst_2
-        0000: aload_0
-        0000: areturn
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: istore_3
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iload_3
-        0000: iload_2
-        0000: iadd
-        0000: invokestatic
-        0000: nop
-        0000: iconst_2
-        0000: astore
-        0000: iconst_1
-        0000: aload_1
-        0000: aload
-        0000: iconst_1
-        0000: iload_3
-        0000: invokevirtual
-        0000: nop
-        0000: astore_0
-        0000: new
-        0000: nop
-        0000: aload_1
-        0000: dup
-        0000: aload
-        0000: iconst_1
-        0000: iconst_1
-        0000: invokespecial
-        0000: nop
-        0000: astore_1
-        0000: areturn
+        0001: invokevirtual #74 // String.length ()I
+        0004: istore_2
+        0005: iload_2
+        0006: ifne +5 // 000b
+        0009: aload_0
+        000a: areturn
+        000b: aload_0
+        000c: getfield #3 // String.value [C
+        000f: arraylength
+        0010: istore_3
+        0011: aload_0
+        0012: getfield #3 // String.value [C
+        0015: iload_3
+        0016: iload_2
+        0017: iadd
+        0018: invokestatic #5 // java.util.Arrays.copyOf ([CI)[C
+        001b: astore local_var:4
+        001d: aload_1
+        001e: aload local_var:4
+        0020: iload_3
+        0021: invokevirtual #75 // String.getChars ([CI)V
+        0024: new #43 // java/lang/String
+        0027: dup
+        0028: aload local_var:4
+        002a: iconst_1
+        002b: invokespecial #76 // String.<init> ([CZ)V
+        002e: areturn
     }
     
     public String replace(char, char) {
         // max_stack: 4
         // max_locals: 8
         0000: iload_1
-        0000: iload_2
-        0000: if_icmpeq
-        0000: nop
-        0000: lshr
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: istore_3
-        0000: iconst_m1
-        0000: istore
-        0000: iconst_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore
-        0000: iconst_2
-        0000: iinc
-        0000: iconst_1
-        0000: aconst_null
-        0000: iload
-        0000: iconst_1
-        0000: iload_3
-        0000: if_icmpge
-        0000: nop
-        0000: dconst_1
-        0000: aload
-        0000: iconst_2
-        0000: iload
-        0000: iconst_1
-        0000: caload
-        0000: iload_1
-        0000: if_icmpne
-        0000: FF F1
-        0000: goto
-        0000: nop
-        0000: iconst_0
-        0000: iload
-        0000: iconst_1
-        0000: iload_3
-        0000: if_icmpge
-        0000: nop
-        0000: fastore
-        0000: iload_3
-        0000: newarray
-        0000: iconst_2
-        0000: astore
-        0000: iconst_3
-        0000: iconst_0
-        0000: istore
-        0000: iconst_4
-        0000: iload
-        0000: iconst_4
-        0000: iload
-        0000: iconst_1
-        0000: if_icmpge
-        0000: nop
-        0000: ldc_w
-        0000: aload
-        0000: iconst_3
-        0000: iload
-        0000: iconst_4
-        0000: aload
-        0000: iconst_2
-        0000: iload
-        0000: iconst_4
-        0000: caload
-        0000: castore
-        0000: iinc
-        0000: iconst_4
-        0000: aconst_null
-        0000: goto
-        0000: FF EC
-        0000: iload
-        0000: iconst_1
-        0000: iload_3
-        0000: if_icmpge
-        0000: nop
-        0000: lload_3
-        0000: aload
-        0000: iconst_2
-        0000: iload
-        0000: iconst_1
-        0000: caload
-        0000: istore
-        0000: iconst_4
-        0000: aload
-        0000: iconst_3
-        0000: iload
-        0000: iconst_1
-        0000: iload
-        0000: iconst_4
-        0000: iload_1
-        0000: if_icmpne
-        0000: nop
-        0000: iconst_4
-        0000: iload_2
-        0000: goto
-        0000: nop
-        0000: iconst_2
-        0000: iload
-        0000: iconst_4
-        0000: castore
-        0000: iinc
-        0000: iconst_1
-        0000: aconst_null
-        0000: goto
-        0000: FF DF
-        0000: new
-        0000: nop
-        0000: aload_1
-        0000: dup
-        0000: aload
-        0000: iconst_3
-        0000: iconst_1
-        0000: invokespecial
-        0000: nop
-        0000: astore_1
-        0000: areturn
-        0000: aload_0
-        0000: areturn
+        0001: iload_2
+        0002: if_icmpeq +123 // 007d
+        0005: aload_0
+        0006: getfield #3 // String.value [C
+        0009: arraylength
+        000a: istore_3
+        000b: iconst_m1
+        000c: istore local_var:4
+        000e: aload_0
+        000f: getfield #3 // String.value [C
+        0012: astore local_var:5
+        0014: iinc local_var:41
+        0017: iload local_var:4
+        0019: iload_3
+        001a: if_icmpge +15 // 0029
+        001d: aload local_var:5
+        001f: iload local_var:4
+        0021: caload
+        0022: iload_1
+        0023: if_icmpne -15 // 0014
+        0026: goto +3 // 0029
+        0029: iload local_var:4
+        002b: iload_3
+        002c: if_icmpge +81 // 007d
+        002f: iload_3
+        0030: newarray 5 // char[]
+        0032: astore local_var:6
+        0034: iconst_0
+        0035: istore local_var:7
+        0037: iload local_var:7
+        0039: iload local_var:4
+        003b: if_icmpge +19 // 004e
+        003e: aload local_var:6
+        0040: iload local_var:7
+        0042: aload local_var:5
+        0044: iload local_var:7
+        0046: caload
+        0047: castore
+        0048: iinc local_var:71
+        004b: goto -20 // 0037
+        004e: iload local_var:4
+        0050: iload_3
+        0051: if_icmpge +33 // 0072
+        0054: aload local_var:5
+        0056: iload local_var:4
+        0058: caload
+        0059: istore local_var:7
+        005b: aload local_var:6
+        005d: iload local_var:4
+        005f: iload local_var:7
+        0061: iload_1
+        0062: if_icmpne +7 // 0069
+        0065: iload_2
+        0066: goto +5 // 006b
+        0069: iload local_var:7
+        006b: castore
+        006c: iinc local_var:41
+        006f: goto -33 // 004e
+        0072: new #43 // java/lang/String
+        0075: dup
+        0076: aload local_var:6
+        0078: iconst_1
+        0079: invokespecial #76 // String.<init> ([CZ)V
+        007c: areturn
+        007d: aload_0
+        007e: areturn
     }
     
     public boolean matches(String) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_1
-        0000: aload_0
-        0000: invokestatic
-        0000: nop
-        0000: astore_2
-        0000: ireturn
+        0001: aload_0
+        0002: invokestatic #77 // java.util.regex.Pattern.matches (Ljava/lang/String;Ljava/lang/CharSequence;)Z
+        0005: ireturn
     }
     
     public boolean contains(CharSequence) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_0
-        0000: aload_1
-        0000: invokeinterface
-        0000: nop
-        0000: astore_3
-        0000: aconst_null
-        0000: nop
-        0000: invokevirtual
-        0000: nop
-        0000: iastore
-        0000: iconst_m1
-        0000: if_icmple
-        0000: nop
-        0000: iconst_4
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: iconst_0
-        0000: ireturn
+        0001: aload_1
+        0002: invokeinterface #78 // CharSequence.toString ()Ljava/lang/String;
+        0007: invokevirtual #79 // String.indexOf (Ljava/lang/String;)I
+        000a: iconst_m1
+        000b: if_icmple +7 // 0012
+        000e: iconst_1
+        000f: goto +4 // 0013
+        0012: iconst_0
+        0013: ireturn
     }
     
     public String replaceFirst(String, String) {
         // max_stack: 2
         // max_locals: 3
         0000: aload_1
-        0000: invokestatic
-        0000: nop
-        0000: lastore
-        0000: aload_0
-        0000: invokevirtual
-        0000: nop
-        0000: fastore
-        0000: aload_2
-        0000: invokevirtual
-        0000: nop
-        0000: dastore
-        0000: areturn
+        0001: invokestatic #80 // java.util.regex.Pattern.compile (Ljava/lang/String;)Ljava/util/regex/Pattern;
+        0004: aload_0
+        0005: invokevirtual #81 // java.util.regex.Pattern.matcher (Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+        0008: aload_2
+        0009: invokevirtual #82 // java.util.regex.Matcher.replaceFirst (Ljava/lang/String;)Ljava/lang/String;
+        000c: areturn
     }
     
     public String replaceAll(String, String) {
         // max_stack: 2
         // max_locals: 3
         0000: aload_1
-        0000: invokestatic
-        0000: nop
-        0000: lastore
-        0000: aload_0
-        0000: invokevirtual
-        0000: nop
-        0000: fastore
-        0000: aload_2
-        0000: invokevirtual
-        0000: nop
-        0000: aastore
-        0000: areturn
+        0001: invokestatic #80 // java.util.regex.Pattern.compile (Ljava/lang/String;)Ljava/util/regex/Pattern;
+        0004: aload_0
+        0005: invokevirtual #81 // java.util.regex.Pattern.matcher (Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+        0008: aload_2
+        0009: invokevirtual #83 // java.util.regex.Matcher.replaceAll (Ljava/lang/String;)Ljava/lang/String;
+        000c: areturn
     }
     
     public String replace(CharSequence, CharSequence) {
         // max_stack: 2
         // max_locals: 3
         0000: aload_1
-        0000: invokeinterface
-        0000: nop
-        0000: astore_3
-        0000: aconst_null
-        0000: nop
-        0000: bipush
-        0000: bipush
-        0000: invokestatic
-        0000: nop
-        0000: castore
-        0000: aload_0
-        0000: invokevirtual
-        0000: nop
-        0000: fastore
-        0000: aload_2
-        0000: invokeinterface
-        0000: nop
-        0000: astore_3
-        0000: aconst_null
-        0000: nop
-        0000: invokestatic
-        0000: nop
-        0000: sastore
-        0000: invokevirtual
-        0000: nop
-        0000: aastore
-        0000: areturn
+        0001: invokeinterface #78 // CharSequence.toString ()Ljava/lang/String;
+        0006: bipush 16
+        0008: invokestatic #85 // java.util.regex.Pattern.compile (Ljava/lang/String;I)Ljava/util/regex/Pattern;
+        000b: aload_0
+        000c: invokevirtual #81 // java.util.regex.Pattern.matcher (Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+        000f: aload_2
+        0010: invokeinterface #78 // CharSequence.toString ()Ljava/lang/String;
+        0015: invokestatic #86 // java.util.regex.Matcher.quoteReplacement (Ljava/lang/String;)Ljava/lang/String;
+        0018: invokevirtual #83 // java.util.regex.Matcher.replaceAll (Ljava/lang/String;)Ljava/lang/String;
+        001b: areturn
     }
     
     public String[] split(String, int) {
         // max_stack: 4
         // max_locals: 10
         0000: iconst_0
-        0000: istore_3
-        0000: aload_1
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: iconst_1
-        0000: if_icmpne
-        0000: nop
-        0000: ldc_w
-        0000: ldc
-        0000: pop
-        0000: aload_1
-        0000: iconst_0
-        0000: invokevirtual
-        0000: nop
-        0000: pop2
-        0000: dup
-        0000: istore_3
-        0000: invokevirtual
-        0000: nop
-        0000: dup
-        0000: iconst_m1
-        0000: if_icmpeq
-        0000: nop
-        0000: lstore_0
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: dstore_3
-        0000: iconst_2
-        0000: if_icmpne
-        0000: aconst_null
-        0000: iload_2
-        0000: aload_1
-        0000: iconst_0
-        0000: invokevirtual
-        0000: nop
-        0000: pop2
-        0000: bipush
-        0000: dup2
-        0000: if_icmpne
-        0000: aconst_null
-        0000: ldc
-        0000: aload_1
-        0000: iconst_1
-        0000: invokevirtual
-        0000: nop
-        0000: pop2
-        0000: dup
-        0000: istore_3
-        0000: bipush
-        0000: faload
-        0000: isub
-        0000: bipush
-        0000: dstore
-        0000: iload_3
-        0000: isub
-        0000: ior
-        0000: ifge
-        0000: aconst_null
-        0000: nop
-        0000: iload_3
-        0000: bipush
-        0000: ladd
-        0000: isub
-        0000: bipush
-        0000: ishr
-        0000: iload_3
-        0000: isub
-        0000: ior
-        0000: ifge
-        0000: nop
-        0000: F4
-        0000: iload_3
-        0000: bipush
-        0000: lstore_2
-        0000: isub
-        0000: bipush
-        0000: dup_x1
-        0000: iload_3
-        0000: isub
-        0000: ior
-        0000: ifge
-        0000: nop
-        0000: E8
-        0000: iload_3
-        0000: ldc
-        0000: dup_x1
-        0000: if_icmplt
-        0000: nop
-        0000: lconst_0
-        0000: iload_3
-        0000: ldc
-        0000: dup_x2
-        0000: if_icmple
-        0000: nop
-        0000: DC
-        0000: iconst_0
-        0000: istore
-        0000: iconst_1
-        0000: iconst_0
-        0000: istore
-        0000: iconst_2
-        0000: iload_2
-        0000: ifle
-        0000: nop
-        0000: iconst_4
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: iconst_0
-        0000: istore
-        0000: iconst_3
-        0000: new
-        0000: nop
-        0000: dup2
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: dup2_x1
-        0000: astore
-        0000: iconst_4
-        0000: aload_0
-        0000: iload_3
-        0000: iload
-        0000: iconst_1
-        0000: invokevirtual
-        0000: nop
-        0000: istore_1
-        0000: dup
-        0000: istore
-        0000: iconst_2
-        0000: iconst_m1
-        0000: if_icmpeq
-        0000: nop
-        0000: fstore_2
-        0000: iload
-        0000: iconst_3
-        0000: ifeq
-        0000: nop
-        0000: dconst_0
-        0000: aload
-        0000: iconst_4
-        0000: invokevirtual
-        0000: nop
-        0000: dup2_x2
-        0000: iload_2
-        0000: iconst_1
-        0000: isub
-        0000: if_icmpge
-        0000: nop
-        0000: iload_0
-        0000: aload
-        0000: iconst_4
-        0000: aload_0
-        0000: iload
-        0000: iconst_1
-        0000: iload
-        0000: iconst_2
-        0000: invokevirtual
-        0000: nop
-        0000: dstore_2
-        0000: invokevirtual
-        0000: nop
-        0000: swap
-        0000: pop
-        0000: iload
-        0000: iconst_2
-        0000: iconst_1
-        0000: iadd
-        0000: istore
-        0000: iconst_1
-        0000: goto
-        0000: FF CE
-        0000: aload
-        0000: iconst_4
-        0000: aload_0
-        0000: iload
-        0000: iconst_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: invokevirtual
-        0000: nop
-        0000: dstore_2
-        0000: invokevirtual
-        0000: nop
-        0000: swap
-        0000: pop
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: istore
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: iconst_0
-        0000: iload
-        0000: iconst_1
-        0000: ifne
-        0000: nop
-        0000: fconst_1
-        0000: iconst_1
-        0000: anewarray
-        0000: nop
-        0000: aload_1
-        0000: dup
-        0000: iconst_0
-        0000: aload_0
-        0000: aastore
-        0000: areturn
-        0000: iload
-        0000: iconst_3
-        0000: ifeq
-        0000: nop
-        0000: fconst_1
-        0000: aload
-        0000: iconst_4
-        0000: invokevirtual
-        0000: nop
-        0000: dup2_x2
-        0000: iload_2
-        0000: if_icmpge
-        0000: nop
-        0000: ldc2_w
-        0000: aload
-        0000: iconst_4
-        0000: aload_0
-        0000: iload
-        0000: iconst_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: invokevirtual
-        0000: nop
-        0000: dstore_2
-        0000: invokevirtual
-        0000: nop
-        0000: swap
-        0000: pop
-        0000: aload
-        0000: iconst_4
-        0000: invokevirtual
-        0000: nop
-        0000: dup2_x2
-        0000: istore
-        0000: iconst_5
-        0000: iload_2
-        0000: ifne
-        0000: nop
-        0000: lload_2
-        0000: iload
-        0000: iconst_5
-        0000: ifle
-        0000: nop
-        0000: iload_1
-        0000: aload
-        0000: iconst_4
-        0000: iload
-        0000: iconst_5
-        0000: iconst_1
-        0000: isub
-        0000: invokevirtual
-        0000: nop
-        0000: iadd
-        0000: checkcast
-        0000: nop
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: dstore_3
-        0000: ifne
-        0000: nop
-        0000: lconst_0
-        0000: iinc
-        0000: iconst_5
-        0000: FF
-        0000: goto
-        0000: FF E6
-        0000: iload
-        0000: iconst_5
-        0000: anewarray
-        0000: nop
-        0000: aload_1
-        0000: astore
-        0000: lconst_0
-        0000: aload
-        0000: iconst_4
-        0000: iconst_0
-        0000: iload
-        0000: iconst_5
-        0000: invokevirtual
-        0000: nop
-        0000: ladd
-        0000: aload
-        0000: lconst_0
-        0000: invokeinterface
-        0000: nop
-        0000: fadd
-        0000: iconst_m1
-        0000: nop
-        0000: checkcast
-        0000: nop
-        0000: dadd
-        0000: areturn
-        0000: aload_1
-        0000: invokestatic
-        0000: nop
-        0000: lastore
-        0000: aload_0
-        0000: iload_2
-        0000: invokevirtual
-        0000: nop
-        0000: isub
-        0000: areturn
+        0001: istore_3
+        0002: aload_1
+        0003: getfield #3 // String.value [C
+        0006: arraylength
+        0007: iconst_1
+        0008: if_icmpne +19 // 001b
+        000b: ldc #87 // ".$|()[{^?*+\\"
+        000d: aload_1
+        000e: iconst_0
+        000f: invokevirtual #88 // String.charAt (I)C
+        0012: dup
+        0013: istore_3
+        0014: invokevirtual #89 // String.indexOf (I)I
+        0017: iconst_m1
+        0018: if_icmpeq +63 // 0057
+        001b: aload_1
+        001c: invokevirtual #74 // String.length ()I
+        001f: iconst_2
+        0020: if_icmpne +284 // 013c
+        0023: aload_1
+        0024: iconst_0
+        0025: invokevirtual #88 // String.charAt (I)C
+        0028: bipush 92
+        002a: if_icmpne +274 // 013c
+        002d: aload_1
+        002e: iconst_1
+        002f: invokevirtual #88 // String.charAt (I)C
+        0032: dup
+        0033: istore_3
+        0034: bipush 48
+        0036: isub
+        0037: bipush 57
+        0039: iload_3
+        003a: isub
+        003b: ior
+        003c: ifge +256 // 013c
+        003f: iload_3
+        0040: bipush 97
+        0042: isub
+        0043: bipush 122
+        0045: iload_3
+        0046: isub
+        0047: ior
+        0048: ifge +244 // 013c
+        004b: iload_3
+        004c: bipush 65
+        004e: isub
+        004f: bipush 90
+        0051: iload_3
+        0052: isub
+        0053: ior
+        0054: ifge +232 // 013c
+        0057: iload_3
+        0058: ldc #90 // IntegerConstant:55296
+        005a: if_icmplt +9 // 0063
+        005d: iload_3
+        005e: ldc #91 // IntegerConstant:57343
+        0060: if_icmple +220 // 013c
+        0063: iconst_0
+        0064: istore local_var:4
+        0066: iconst_0
+        0067: istore local_var:5
+        0069: iload_2
+        006a: ifle +7 // 0071
+        006d: iconst_1
+        006e: goto +4 // 0072
+        0071: iconst_0
+        0072: istore local_var:6
+        0074: new #92 // java/util/ArrayList
+        0077: dup
+        0078: invokespecial #93 // java.util.ArrayList.<init> ()V
+        007b: astore local_var:7
+        007d: aload_0
+        007e: iload_3
+        007f: iload local_var:4
+        0081: invokevirtual #60 // String.indexOf (II)I
+        0084: dup
+        0085: istore local_var:5
+        0087: iconst_m1
+        0088: if_icmpeq +69 // 00cd
+        008b: iload local_var:6
+        008d: ifeq +14 // 009b
+        0090: aload local_var:7
+        0092: invokevirtual #94 // java.util.ArrayList.size ()I
+        0095: iload_2
+        0096: iconst_1
+        0097: isub
+        0098: if_icmpge +26 // 00b2
+        009b: aload local_var:7
+        009d: aload_0
+        009e: iload local_var:4
+        00a0: iload local_var:5
+        00a2: invokevirtual #73 // String.substring (II)Ljava/lang/String;
+        00a5: invokevirtual #95 // java.util.ArrayList.add (Ljava/lang/Object;)Z
+        00a8: pop
+        00a9: iload local_var:5
+        00ab: iconst_1
+        00ac: iadd
+        00ad: istore local_var:4
+        00af: goto -50 // 007d
+        00b2: aload local_var:7
+        00b4: aload_0
+        00b5: iload local_var:4
+        00b7: aload_0
+        00b8: getfield #3 // String.value [C
+        00bb: arraylength
+        00bc: invokevirtual #73 // String.substring (II)Ljava/lang/String;
+        00bf: invokevirtual #95 // java.util.ArrayList.add (Ljava/lang/Object;)Z
+        00c2: pop
+        00c3: aload_0
+        00c4: getfield #3 // String.value [C
+        00c7: arraylength
+        00c8: istore local_var:4
+        00ca: goto +3 // 00cd
+        00cd: iload local_var:4
+        00cf: ifne +12 // 00db
+        00d2: iconst_1
+        00d3: anewarray #43 // java/lang/String
+        00d6: dup
+        00d7: iconst_0
+        00d8: aload_0
+        00d9: aastore
+        00da: areturn
+        00db: iload local_var:6
+        00dd: ifeq +12 // 00e9
+        00e0: aload local_var:7
+        00e2: invokevirtual #94 // java.util.ArrayList.size ()I
+        00e5: iload_2
+        00e6: if_icmpge +20 // 00fa
+        00e9: aload local_var:7
+        00eb: aload_0
+        00ec: iload local_var:4
+        00ee: aload_0
+        00ef: getfield #3 // String.value [C
+        00f2: arraylength
+        00f3: invokevirtual #73 // String.substring (II)Ljava/lang/String;
+        00f6: invokevirtual #95 // java.util.ArrayList.add (Ljava/lang/Object;)Z
+        00f9: pop
+        00fa: aload local_var:7
+        00fc: invokevirtual #94 // java.util.ArrayList.size ()I
+        00ff: istore local_var:8
+        0101: iload_2
+        0102: ifne +32 // 0122
+        0105: iload local_var:8
+        0107: ifle +27 // 0122
+        010a: aload local_var:7
+        010c: iload local_var:8
+        010e: iconst_1
+        010f: isub
+        0110: invokevirtual #96 // java.util.ArrayList.get (I)Ljava/lang/Object;
+        0113: checkcast #43 // java/lang/String
+        0116: invokevirtual #74 // String.length ()I
+        0119: ifne +9 // 0122
+        011c: iinc local_var:8-1
+        011f: goto -26 // 0105
+        0122: iload local_var:8
+        0124: anewarray #43 // java/lang/String
+        0127: astore local_var:9
+        0129: aload local_var:7
+        012b: iconst_0
+        012c: iload local_var:8
+        012e: invokevirtual #97 // java.util.ArrayList.subList (II)Ljava/util/List;
+        0131: aload local_var:9
+        0133: invokeinterface #98 // java.util.List.toArray ([Ljava/lang/Object;)[Ljava/lang/Object;
+        0138: checkcast #99 // [Ljava/lang/String;
+        013b: areturn
+        013c: aload_1
+        013d: invokestatic #80 // java.util.regex.Pattern.compile (Ljava/lang/String;)Ljava/util/regex/Pattern;
+        0140: aload_0
+        0141: iload_2
+        0142: invokevirtual #100 // java.util.regex.Pattern.split (Ljava/lang/CharSequence;I)[Ljava/lang/String;
+        0145: areturn
     }
     
     public String[] split(String) {
         // max_stack: 3
         // max_locals: 2
         0000: aload_0
-        0000: aload_1
-        0000: iconst_0
-        0000: invokevirtual
-        0000: nop
-        0000: lsub
-        0000: areturn
+        0001: aload_1
+        0002: iconst_0
+        0003: invokevirtual #101 // String.split (Ljava/lang/String;I)[Ljava/lang/String;
+        0006: areturn
     }
     
     public static /* varargs */ String join(CharSequence, CharSequence[]) {
         // max_stack: 3
         // max_locals: 7
         0000: aload_0
-        0000: invokestatic
-        0000: nop
-        0000: dload_0
-        0000: pop
-        0000: aload_1
-        0000: invokestatic
-        0000: nop
-        0000: dload_0
-        0000: pop
-        0000: new
-        0000: nop
-        0000: fsub
-        0000: dup
-        0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: dsub
-        0000: astore_2
-        0000: aload_1
-        0000: astore_3
-        0000: aload_3
-        0000: arraylength
-        0000: istore
-        0000: iconst_1
-        0000: iconst_0
-        0000: istore
-        0000: iconst_2
-        0000: iload
-        0000: iconst_2
-        0000: iload
-        0000: iconst_1
-        0000: if_icmpge
-        0000: nop
-        0000: lload
-        0000: aload_3
-        0000: iload
-        0000: iconst_2
-        0000: aaload
-        0000: astore
-        0000: iconst_3
-        0000: aload_2
-        0000: aload
-        0000: iconst_3
-        0000: invokevirtual
-        0000: nop
-        0000: imul
-        0000: pop
-        0000: iinc
-        0000: iconst_2
-        0000: aconst_null
-        0000: goto
-        0000: FF E9
-        0000: aload_2
-        0000: invokevirtual
-        0000: nop
-        0000: lmul
-        0000: areturn
+        0001: invokestatic #38 // java.util.Objects.requireNonNull (Ljava/lang/Object;)Ljava/lang/Object;
+        0004: pop
+        0005: aload_1
+        0006: invokestatic #38 // java.util.Objects.requireNonNull (Ljava/lang/Object;)Ljava/lang/Object;
+        0009: pop
+        000a: new #102 // java/util/StringJoiner
+        000d: dup
+        000e: aload_0
+        000f: invokespecial #103 // java.util.StringJoiner.<init> (Ljava/lang/CharSequence;)V
+        0012: astore_2
+        0013: aload_1
+        0014: astore_3
+        0015: aload_3
+        0016: arraylength
+        0017: istore local_var:4
+        0019: iconst_0
+        001a: istore local_var:5
+        001c: iload local_var:5
+        001e: iload local_var:4
+        0020: if_icmpge +22 // 0036
+        0023: aload_3
+        0024: iload local_var:5
+        0026: aaload
+        0027: astore local_var:6
+        0029: aload_2
+        002a: aload local_var:6
+        002c: invokevirtual #104 // java.util.StringJoiner.add (Ljava/lang/CharSequence;)Ljava/util/StringJoiner;
+        002f: pop
+        0030: iinc local_var:51
+        0033: goto -23 // 001c
+        0036: aload_2
+        0037: invokevirtual #105 // java.util.StringJoiner.toString ()Ljava/lang/String;
+        003a: areturn
     }
     
     // Signature: (Ljava/lang/CharSequence;Ljava/lang/Iterable<+Ljava/lang/CharSequence;>;)Ljava/lang/String;
@@ -3748,1294 +2300,737 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 3
         // max_locals: 5
         0000: aload_0
-        0000: invokestatic
-        0000: nop
-        0000: dload_0
-        0000: pop
-        0000: aload_1
-        0000: invokestatic
-        0000: nop
-        0000: dload_0
-        0000: pop
-        0000: new
-        0000: nop
-        0000: fsub
-        0000: dup
-        0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: dsub
-        0000: astore_2
-        0000: aload_1
-        0000: invokeinterface
-        0000: nop
-        0000: fmul
-        0000: aconst_null
-        0000: nop
-        0000: astore_3
-        0000: aload_3
-        0000: invokeinterface
-        0000: nop
-        0000: dmul
-        0000: aconst_null
-        0000: nop
-        0000: ifeq
-        0000: nop
-        0000: dload
-        0000: aload_3
-        0000: invokeinterface
-        0000: nop
-        0000: idiv
-        0000: aconst_null
-        0000: nop
-        0000: checkcast
-        0000: nop
-        0000: ldiv
-        0000: astore
-        0000: iconst_1
-        0000: aload_2
-        0000: aload
-        0000: iconst_1
-        0000: invokevirtual
-        0000: nop
-        0000: imul
-        0000: pop
-        0000: goto
-        0000: FF E5
-        0000: aload_2
-        0000: invokevirtual
-        0000: nop
-        0000: lmul
-        0000: areturn
+        0001: invokestatic #38 // java.util.Objects.requireNonNull (Ljava/lang/Object;)Ljava/lang/Object;
+        0004: pop
+        0005: aload_1
+        0006: invokestatic #38 // java.util.Objects.requireNonNull (Ljava/lang/Object;)Ljava/lang/Object;
+        0009: pop
+        000a: new #102 // java/util/StringJoiner
+        000d: dup
+        000e: aload_0
+        000f: invokespecial #103 // java.util.StringJoiner.<init> (Ljava/lang/CharSequence;)V
+        0012: astore_2
+        0013: aload_1
+        0014: invokeinterface #106 // Iterable.iterator ()Ljava/util/Iterator;
+        0019: astore_3
+        001a: aload_3
+        001b: invokeinterface #107 // java.util.Iterator.hasNext ()Z
+        0020: ifeq +24 // 0038
+        0023: aload_3
+        0024: invokeinterface #108 // java.util.Iterator.next ()Ljava/lang/Object;
+        0029: checkcast #109 // java/lang/CharSequence
+        002c: astore local_var:4
+        002e: aload_2
+        002f: aload local_var:4
+        0031: invokevirtual #104 // java.util.StringJoiner.add (Ljava/lang/CharSequence;)Ljava/util/StringJoiner;
+        0034: pop
+        0035: goto -27 // 001a
+        0038: aload_2
+        0039: invokevirtual #105 // java.util.StringJoiner.toString ()Ljava/lang/String;
+        003c: areturn
     }
     
     public String toLowerCase(java.util.Locale) {
         // max_stack: 6
         // max_locals: 15
         0000: aload_1
-        0000: ifnonnull
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: sipush
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: dload_1
-        0000: athrow
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: istore_3
-        0000: iconst_0
-        0000: istore_2
-        0000: iload_2
-        0000: iload_3
-        0000: if_icmpge
-        0000: nop
-        0000: astore_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iload_2
-        0000: caload
-        0000: istore
-        0000: iconst_1
-        0000: iload
-        0000: iconst_1
-        0000: ldc
-        0000: dup_x1
-        0000: if_icmplt
-        0000: nop
-        0000: dload_3
-        0000: iload
-        0000: iconst_1
-        0000: ldc
-        0000: fdiv
-        0000: if_icmpgt
-        0000: nop
-        0000: fload_0
-        0000: aload_0
-        0000: iload_2
-        0000: invokevirtual
-        0000: nop
-        0000: ddiv
-        0000: istore
-        0000: iconst_2
-        0000: iload
-        0000: iconst_2
-        0000: iload
-        0000: iconst_2
-        0000: invokestatic
-        0000: nop
-        0000: irem
-        0000: if_icmpeq
-        0000: nop
-        0000: iconst_3
-        0000: goto
-        0000: nop
-        0000: fload_1
-        0000: iload_2
-        0000: iload
-        0000: iconst_2
-        0000: invokestatic
-        0000: nop
-        0000: lrem
-        0000: iadd
-        0000: istore_2
-        0000: goto
-        0000: nop
-        0000: ldc_w
-        0000: iload
-        0000: iconst_1
-        0000: iload
-        0000: iconst_1
-        0000: invokestatic
-        0000: nop
-        0000: astore
-        0000: if_icmpeq
-        0000: nop
-        0000: iconst_3
-        0000: goto
-        0000: nop
-        0000: fconst_0
-        0000: iinc
-        0000: iconst_m1
-        0000: aconst_null
-        0000: goto
-        0000: FF
-        0000: invokevirtual
-        0000: aload_0
-        0000: areturn
-        0000: iload_3
-        0000: newarray
-        0000: iconst_2
-        0000: astore
-        0000: iconst_1
-        0000: iconst_0
-        0000: istore
-        0000: iconst_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload
-        0000: iconst_1
-        0000: iconst_0
-        0000: iload_2
-        0000: invokestatic
-        0000: nop
-        0000: fload_3
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: frem
-        0000: astore
-        0000: iconst_3
-        0000: aload
-        0000: iconst_3
-        0000: ldc
-        0000: drem
-        0000: if_acmpeq
-        0000: nop
-        0000: sipush
-        0000: aload
-        0000: iconst_3
-        0000: ldc
-        0000: ineg
-        0000: if_acmpeq
-        0000: nop
-        0000: lconst_1
-        0000: aload
-        0000: iconst_3
-        0000: ldc
-        0000: lneg
-        0000: if_acmpne
-        0000: nop
-        0000: iconst_4
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: iconst_0
-        0000: istore
-        0000: iconst_4
-        0000: iload_2
-        0000: istore
-        0000: fconst_1
-        0000: iload
-        0000: fconst_1
-        0000: iload_3
-        0000: if_icmpge
-        0000: aconst_null
-        0000: lconst_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iload
-        0000: fconst_1
-        0000: caload
-        0000: istore
-        0000: lconst_1
-        0000: iload
-        0000: lconst_1
-        0000: i2c
-        0000: ldc
-        0000: dup_x1
-        0000: if_icmplt
-        0000: nop
-        0000: iload_3
-        0000: iload
-        0000: lconst_1
-        0000: i2c
-        0000: ldc
-        0000: fdiv
-        0000: if_icmpgt
-        0000: nop
-        0000: iload
-        0000: aload_0
-        0000: iload
-        0000: fconst_1
-        0000: invokevirtual
-        0000: nop
-        0000: ddiv
-        0000: istore
-        0000: lconst_1
-        0000: iload
-        0000: lconst_1
-        0000: invokestatic
-        0000: nop
-        0000: lrem
-        0000: istore
-        0000: fconst_0
-        0000: goto
-        0000: nop
-        0000: iconst_3
-        0000: iconst_1
-        0000: istore
-        0000: fconst_0
-        0000: iload
-        0000: iconst_4
-        0000: ifne
-        0000: nop
-        0000: ldc_w
-        0000: iload
-        0000: lconst_1
-        0000: sipush
-        0000: iconst_0
-        0000: if_icmpgt
-        0000: if_icmpeq
-        0000: nop
-        0000: fconst_0
-        0000: iload
-        0000: lconst_1
-        0000: sipush
-        0000: aconst_null
-        0000: faload
-        0000: if_icmpne
-        0000: nop
-        0000: dconst_1
-        0000: aload_0
-        0000: iload
-        0000: fconst_1
-        0000: aload_1
-        0000: invokestatic
-        0000: nop
-        0000: fneg
-        0000: istore
-        0000: lconst_0
-        0000: goto
-        0000: nop
-        0000: lconst_1
-        0000: iload
-        0000: lconst_1
-        0000: invokestatic
-        0000: nop
-        0000: irem
-        0000: istore
-        0000: lconst_0
-        0000: iload
-        0000: lconst_0
-        0000: iconst_m1
-        0000: if_icmpeq
-        0000: nop
-        0000: lconst_1
-        0000: iload
-        0000: lconst_0
-        0000: ldc
-        0000: istore_3
-        0000: if_icmplt
-        0000: nop
-        0000: i2b
-        0000: iload
-        0000: lconst_0
-        0000: iconst_m1
-        0000: if_icmpne
-        0000: nop
-        0000: dconst_1
-        0000: aload_0
-        0000: iload
-        0000: fconst_1
-        0000: aload_1
-        0000: invokestatic
-        0000: nop
-        0000: dneg
-        0000: astore
-        0000: iconst_5
-        0000: goto
-        0000: nop
-        0000: dload_1
-        0000: iload
-        0000: fconst_0
-        0000: iconst_2
-        0000: if_icmpne
-        0000: nop
-        0000: iload_0
-        0000: iload
-        0000: iconst_2
-        0000: iload
-        0000: lconst_0
-        0000: aload
-        0000: iconst_1
-        0000: iload
-        0000: fconst_1
-        0000: iload
-        0000: iconst_2
-        0000: iadd
-        0000: invokestatic
-        0000: nop
-        0000: ishl
-        0000: iload
-        0000: fconst_0
-        0000: isub
-        0000: iadd
-        0000: istore
-        0000: iconst_2
-        0000: goto
-        0000: nop
-        0000: ldiv
-        0000: iload
-        0000: lconst_0
-        0000: invokestatic
-        0000: nop
-        0000: lshl
-        0000: astore
-        0000: iconst_5
-        0000: aload
-        0000: iconst_5
-        0000: arraylength
-        0000: istore
-        0000: fconst_2
-        0000: iload
-        0000: fconst_2
-        0000: iload
-        0000: fconst_0
-        0000: if_icmple
-        0000: nop
-        0000: fload_0
-        0000: aload
-        0000: iconst_1
-        0000: arraylength
-        0000: iload
-        0000: fconst_2
-        0000: iadd
-        0000: iload
-        0000: fconst_0
-        0000: isub
-        0000: newarray
-        0000: iconst_2
-        0000: astore
-        0000: dconst_0
-        0000: aload
-        0000: iconst_1
-        0000: iconst_0
-        0000: aload
-        0000: dconst_0
-        0000: iconst_0
-        0000: iload
-        0000: fconst_1
-        0000: iload
-        0000: iconst_2
-        0000: iadd
-        0000: invokestatic
-        0000: nop
-        0000: fload_3
-        0000: aload
-        0000: dconst_0
-        0000: astore
-        0000: iconst_1
-        0000: iconst_0
-        0000: istore
-        0000: dconst_0
-        0000: iload
-        0000: dconst_0
-        0000: iload
-        0000: fconst_2
-        0000: if_icmpge
-        0000: nop
-        0000: aload
-        0000: aload
-        0000: iconst_1
-        0000: iload
-        0000: fconst_1
-        0000: iload
-        0000: iconst_2
-        0000: iadd
-        0000: iload
-        0000: dconst_0
-        0000: iadd
-        0000: aload
-        0000: iconst_5
-        0000: iload
-        0000: dconst_0
-        0000: caload
-        0000: castore
-        0000: iinc
-        0000: dconst_0
-        0000: aconst_null
-        0000: goto
-        0000: FF E6
-        0000: iload
-        0000: iconst_2
-        0000: iload
-        0000: fconst_2
-        0000: iload
-        0000: fconst_0
-        0000: isub
-        0000: iadd
-        0000: istore
-        0000: iconst_2
-        0000: goto
-        0000: nop
-        0000: dconst_0
-        0000: aload
-        0000: iconst_1
-        0000: iload
-        0000: fconst_1
-        0000: iload
-        0000: iconst_2
-        0000: iadd
-        0000: iload
-        0000: lconst_0
-        0000: i2c
-        0000: castore
-        0000: iload
-        0000: fconst_1
-        0000: iload
-        0000: fconst_0
-        0000: iadd
-        0000: istore
-        0000: fconst_1
-        0000: goto
-        0000: FE F7
-        0000: new
-        0000: nop
-        0000: aload_1
-        0000: dup
-        0000: aload
-        0000: iconst_1
-        0000: iconst_0
-        0000: iload_3
-        0000: iload
-        0000: iconst_2
-        0000: iadd
-        0000: invokespecial
-        0000: nop
-        0000: dstore_1
-        0000: areturn
+        0001: ifnonnull +11 // 000c
+        0004: new #17 // java/lang/NullPointerException
+        0007: dup
+        0008: invokespecial #39 // NullPointerException.<init> ()V
+        000b: athrow
+        000c: aload_0
+        000d: getfield #3 // String.value [C
+        0010: arraylength
+        0011: istore_3
+        0012: iconst_0
+        0013: istore_2
+        0014: iload_2
+        0015: iload_3
+        0016: if_icmpge +75 // 0061
+        0019: aload_0
+        001a: getfield #3 // String.value [C
+        001d: iload_2
+        001e: caload
+        001f: istore local_var:4
+        0021: iload local_var:4
+        0023: ldc #90 // IntegerConstant:55296
+        0025: if_icmplt +41 // 004e
+        0028: iload local_var:4
+        002a: ldc #110 // IntegerConstant:56319
+        002c: if_icmpgt +34 // 004e
+        002f: aload_0
+        0030: iload_2
+        0031: invokevirtual #111 // String.codePointAt (I)I
+        0034: istore local_var:5
+        0036: iload local_var:5
+        0038: iload local_var:5
+        003a: invokestatic #112 // Character.toLowerCase (I)I
+        003d: if_icmpeq +6 // 0043
+        0040: goto +35 // 0063
+        0043: iload_2
+        0044: iload local_var:5
+        0046: invokestatic #113 // Character.charCount (I)I
+        0049: iadd
+        004a: istore_2
+        004b: goto +19 // 005e
+        004e: iload local_var:4
+        0050: iload local_var:4
+        0052: invokestatic #58 // Character.toLowerCase (C)C
+        0055: if_icmpeq +6 // 005b
+        0058: goto +11 // 0063
+        005b: iinc local_var:21
+        005e: goto -74 // 0014
+        0061: aload_0
+        0062: areturn
+        0063: iload_3
+        0064: newarray 5 // char[]
+        0066: astore local_var:4
+        0068: iconst_0
+        0069: istore local_var:5
+        006b: aload_0
+        006c: getfield #3 // String.value [C
+        006f: iconst_0
+        0070: aload local_var:4
+        0072: iconst_0
+        0073: iload_2
+        0074: invokestatic #37 // System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V
+        0077: aload_1
+        0078: invokevirtual #114 // java.util.Locale.getLanguage ()Ljava/lang/String;
+        007b: astore local_var:6
+        007d: aload local_var:6
+        007f: ldc #115 // "tr"
+        0081: if_acmpeq +17 // 0092
+        0084: aload local_var:6
+        0086: ldc #116 // "az"
+        0088: if_acmpeq +10 // 0092
+        008b: aload local_var:6
+        008d: ldc #117 // "lt"
+        008f: if_acmpne +7 // 0096
+        0092: iconst_1
+        0093: goto +4 // 0097
+        0096: iconst_0
+        0097: istore local_var:7
+        0099: iload_2
+        009a: istore local_var:12
+        009c: iload local_var:12
+        009e: iload_3
+        009f: if_icmpge +265 // 01a8
+        00a2: aload_0
+        00a3: getfield #3 // String.value [C
+        00a6: iload local_var:12
+        00a8: caload
+        00a9: istore local_var:10
+        00ab: iload local_var:10
+        00ad: i2c
+        00ae: ldc #90 // IntegerConstant:55296
+        00b0: if_icmplt +29 // 00cd
+        00b3: iload local_var:10
+        00b5: i2c
+        00b6: ldc #110 // IntegerConstant:56319
+        00b8: if_icmpgt +21 // 00cd
+        00bb: aload_0
+        00bc: iload local_var:12
+        00be: invokevirtual #111 // String.codePointAt (I)I
+        00c1: istore local_var:10
+        00c3: iload local_var:10
+        00c5: invokestatic #113 // Character.charCount (I)I
+        00c8: istore local_var:11
+        00ca: goto +6 // 00d0
+        00cd: iconst_1
+        00ce: istore local_var:11
+        00d0: iload local_var:7
+        00d2: ifne +19 // 00e5
+        00d5: iload local_var:10
+        00d7: sipush 931
+        00da: if_icmpeq +11 // 00e5
+        00dd: iload local_var:10
+        00df: sipush 304
+        00e2: if_icmpne +15 // 00f1
+        00e5: aload_0
+        00e6: iload local_var:12
+        00e8: aload_1
+        00e9: invokestatic #118 // ConditionalSpecialCasing.toLowerCaseEx (Ljava/lang/String;ILjava/util/Locale;)I
+        00ec: istore local_var:9
+        00ee: goto +10 // 00f8
+        00f1: iload local_var:10
+        00f3: invokestatic #112 // Character.toLowerCase (I)I
+        00f6: istore local_var:9
+        00f8: iload local_var:9
+        00fa: iconst_m1
+        00fb: if_icmpeq +10 // 0105
+        00fe: iload local_var:9
+        0100: ldc #62 // IntegerConstant:65536
+        0102: if_icmplt +145 // 0193
+        0105: iload local_var:9
+        0107: iconst_m1
+        0108: if_icmpne +15 // 0117
+        010b: aload_0
+        010c: iload local_var:12
+        010e: aload_1
+        010f: invokestatic #119 // ConditionalSpecialCasing.toLowerCaseCharArray (Ljava/lang/String;ILjava/util/Locale;)[C
+        0112: astore local_var:8
+        0114: goto +39 // 013b
+        0117: iload local_var:11
+        0119: iconst_2
+        011a: if_icmpne +26 // 0134
+        011d: iload local_var:5
+        011f: iload local_var:9
+        0121: aload local_var:4
+        0123: iload local_var:12
+        0125: iload local_var:5
+        0127: iadd
+        0128: invokestatic #120 // Character.toChars (I[CI)I
+        012b: iload local_var:11
+        012d: isub
+        012e: iadd
+        012f: istore local_var:5
+        0131: goto +109 // 019e
+        0134: iload local_var:9
+        0136: invokestatic #121 // Character.toChars (I)[C
+        0139: astore local_var:8
+        013b: aload local_var:8
+        013d: arraylength
+        013e: istore local_var:13
+        0140: iload local_var:13
+        0142: iload local_var:11
+        0144: if_icmple +34 // 0166
+        0147: aload local_var:4
+        0149: arraylength
+        014a: iload local_var:13
+        014c: iadd
+        014d: iload local_var:11
+        014f: isub
+        0150: newarray 5 // char[]
+        0152: astore local_var:14
+        0154: aload local_var:4
+        0156: iconst_0
+        0157: aload local_var:14
+        0159: iconst_0
+        015a: iload local_var:12
+        015c: iload local_var:5
+        015e: iadd
+        015f: invokestatic #37 // System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V
+        0162: aload local_var:14
+        0164: astore local_var:4
+        0166: iconst_0
+        0167: istore local_var:14
+        0169: iload local_var:14
+        016b: iload local_var:13
+        016d: if_icmpge +25 // 0186
+        0170: aload local_var:4
+        0172: iload local_var:12
+        0174: iload local_var:5
+        0176: iadd
+        0177: iload local_var:14
+        0179: iadd
+        017a: aload local_var:8
+        017c: iload local_var:14
+        017e: caload
+        017f: castore
+        0180: iinc local_var:141
+        0183: goto -26 // 0169
+        0186: iload local_var:5
+        0188: iload local_var:13
+        018a: iload local_var:11
+        018c: isub
+        018d: iadd
+        018e: istore local_var:5
+        0190: goto +14 // 019e
+        0193: aload local_var:4
+        0195: iload local_var:12
+        0197: iload local_var:5
+        0199: iadd
+        019a: iload local_var:9
+        019c: i2c
+        019d: castore
+        019e: iload local_var:12
+        01a0: iload local_var:11
+        01a2: iadd
+        01a3: istore local_var:12
+        01a5: goto -265 // 009c
+        01a8: new #43 // java/lang/String
+        01ab: dup
+        01ac: aload local_var:4
+        01ae: iconst_0
+        01af: iload_3
+        01b0: iload local_var:5
+        01b2: iadd
+        01b3: invokespecial #72 // String.<init> ([CII)V
+        01b6: areturn
     }
     
     public String toLowerCase() {
         // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0000: invokestatic
-        0000: nop
-        0000: ishr
-        0000: invokevirtual
-        0000: nop
-        0000: lshr
-        0000: areturn
+        0001: invokestatic #122 // java.util.Locale.getDefault ()Ljava/util/Locale;
+        0004: invokevirtual #123 // String.toLowerCase (Ljava/util/Locale;)Ljava/lang/String;
+        0007: areturn
     }
     
     public String toUpperCase(java.util.Locale) {
         // max_stack: 6
         // max_locals: 15
         0000: aload_1
-        0000: ifnonnull
-        0000: nop
-        0000: fconst_0
-        0000: new
-        0000: nop
-        0000: sipush
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: dload_1
-        0000: athrow
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: istore_3
-        0000: iconst_0
-        0000: istore_2
-        0000: iload_2
-        0000: iload_3
-        0000: if_icmpge
-        0000: nop
-        0000: astore_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iload_2
-        0000: caload
-        0000: istore
-        0000: iconst_1
-        0000: iload
-        0000: iconst_1
-        0000: ldc
-        0000: dup_x1
-        0000: if_icmplt
-        0000: nop
-        0000: iload_1
-        0000: iload
-        0000: iconst_1
-        0000: ldc
-        0000: fdiv
-        0000: if_icmpgt
-        0000: nop
-        0000: ldc2_w
-        0000: aload_0
-        0000: iload_2
-        0000: invokevirtual
-        0000: nop
-        0000: ddiv
-        0000: istore
-        0000: iconst_1
-        0000: iload
-        0000: iconst_1
-        0000: invokestatic
-        0000: nop
-        0000: lrem
-        0000: istore
-        0000: iconst_2
-        0000: goto
-        0000: nop
-        0000: iconst_3
-        0000: iconst_1
-        0000: istore
-        0000: iconst_2
-        0000: iload
-        0000: iconst_1
-        0000: invokestatic
-        0000: nop
-        0000: iushr
-        0000: istore
-        0000: iconst_3
-        0000: iload
-        0000: iconst_3
-        0000: iconst_m1
-        0000: if_icmpeq
-        0000: nop
-        0000: fload
-        0000: iload
-        0000: iconst_1
-        0000: iload
-        0000: iconst_3
-        0000: if_icmpeq
-        0000: nop
-        0000: iconst_3
-        0000: goto
-        0000: nop
-        0000: fconst_2
-        0000: iload_2
-        0000: iload
-        0000: iconst_2
-        0000: iadd
-        0000: istore_2
-        0000: goto
-        0000: FF
-        0000: putfield
-        0000: aload_0
-        0000: areturn
-        0000: iconst_0
-        0000: istore
-        0000: iconst_1
-        0000: iload_3
-        0000: newarray
-        0000: iconst_2
-        0000: astore
-        0000: iconst_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload
-        0000: iconst_2
-        0000: iconst_0
-        0000: iload_2
-        0000: invokestatic
-        0000: nop
-        0000: fload_3
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: frem
-        0000: astore
-        0000: iconst_3
-        0000: aload
-        0000: iconst_3
-        0000: ldc
-        0000: drem
-        0000: if_acmpeq
-        0000: nop
-        0000: sipush
-        0000: aload
-        0000: iconst_3
-        0000: ldc
-        0000: ineg
-        0000: if_acmpeq
-        0000: nop
-        0000: lconst_1
-        0000: aload
-        0000: iconst_3
-        0000: ldc
-        0000: lneg
-        0000: if_acmpne
-        0000: nop
-        0000: iconst_4
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: iconst_0
-        0000: istore
-        0000: iconst_4
-        0000: iload_2
-        0000: istore
-        0000: fconst_1
-        0000: iload
-        0000: fconst_1
-        0000: iload_3
-        0000: if_icmpge
-        0000: aconst_null
-        0000: iconst_5
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iload
-        0000: fconst_1
-        0000: caload
-        0000: istore
-        0000: lconst_1
-        0000: iload
-        0000: lconst_1
-        0000: i2c
-        0000: ldc
-        0000: dup_x1
-        0000: if_icmplt
-        0000: nop
-        0000: iload_3
-        0000: iload
-        0000: lconst_1
-        0000: i2c
-        0000: ldc
-        0000: fdiv
-        0000: if_icmpgt
-        0000: nop
-        0000: iload
-        0000: aload_0
-        0000: iload
-        0000: fconst_1
-        0000: invokevirtual
-        0000: nop
-        0000: ddiv
-        0000: istore
-        0000: lconst_1
-        0000: iload
-        0000: lconst_1
-        0000: invokestatic
-        0000: nop
-        0000: lrem
-        0000: istore
-        0000: fconst_0
-        0000: goto
-        0000: nop
-        0000: iconst_3
-        0000: iconst_1
-        0000: istore
-        0000: fconst_0
-        0000: iload
-        0000: iconst_4
-        0000: ifeq
-        0000: nop
-        0000: dconst_1
-        0000: aload_0
-        0000: iload
-        0000: fconst_1
-        0000: aload_1
-        0000: invokestatic
-        0000: nop
-        0000: lushr
-        0000: istore
-        0000: lconst_0
-        0000: goto
-        0000: nop
-        0000: lconst_1
-        0000: iload
-        0000: lconst_1
-        0000: invokestatic
-        0000: nop
-        0000: iushr
-        0000: istore
-        0000: lconst_0
-        0000: iload
-        0000: lconst_0
-        0000: iconst_m1
-        0000: if_icmpeq
-        0000: nop
-        0000: lconst_1
-        0000: iload
-        0000: lconst_0
-        0000: ldc
-        0000: istore_3
-        0000: if_icmplt
-        0000: nop
-        0000: if_icmpne
-        0000: iload
-        0000: lconst_0
-        0000: iconst_m1
-        0000: if_icmpne
-        0000: nop
-        0000: lload_0
-        0000: iload
-        0000: iconst_4
-        0000: ifeq
-        0000: nop
-        0000: dconst_1
-        0000: aload_0
-        0000: iload
-        0000: fconst_1
-        0000: aload_1
-        0000: invokestatic
-        0000: nop
-        0000: iand
-        0000: astore
-        0000: iconst_5
-        0000: goto
-        0000: nop
-        0000: daload
-        0000: iload
-        0000: lconst_1
-        0000: invokestatic
-        0000: nop
-        0000: land
-        0000: astore
-        0000: iconst_5
-        0000: goto
-        0000: nop
-        0000: dload_1
-        0000: iload
-        0000: fconst_0
-        0000: iconst_2
-        0000: if_icmpne
-        0000: nop
-        0000: iload_0
-        0000: iload
-        0000: iconst_1
-        0000: iload
-        0000: lconst_0
-        0000: aload
-        0000: iconst_2
-        0000: iload
-        0000: fconst_1
-        0000: iload
-        0000: iconst_1
-        0000: iadd
-        0000: invokestatic
-        0000: nop
-        0000: ishl
-        0000: iload
-        0000: fconst_0
-        0000: isub
-        0000: iadd
-        0000: istore
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: ldiv
-        0000: iload
-        0000: lconst_0
-        0000: invokestatic
-        0000: nop
-        0000: lshl
-        0000: astore
-        0000: iconst_5
-        0000: aload
-        0000: iconst_5
-        0000: arraylength
-        0000: istore
-        0000: fconst_2
-        0000: iload
-        0000: fconst_2
-        0000: iload
-        0000: fconst_0
-        0000: if_icmple
-        0000: nop
-        0000: fload_0
-        0000: aload
-        0000: iconst_2
-        0000: arraylength
-        0000: iload
-        0000: fconst_2
-        0000: iadd
-        0000: iload
-        0000: fconst_0
-        0000: isub
-        0000: newarray
-        0000: iconst_2
-        0000: astore
-        0000: dconst_0
-        0000: aload
-        0000: iconst_2
-        0000: iconst_0
-        0000: aload
-        0000: dconst_0
-        0000: iconst_0
-        0000: iload
-        0000: fconst_1
-        0000: iload
-        0000: iconst_1
-        0000: iadd
-        0000: invokestatic
-        0000: nop
-        0000: fload_3
-        0000: aload
-        0000: dconst_0
-        0000: astore
-        0000: iconst_2
-        0000: iconst_0
-        0000: istore
-        0000: dconst_0
-        0000: iload
-        0000: dconst_0
-        0000: iload
-        0000: fconst_2
-        0000: if_icmpge
-        0000: nop
-        0000: aload
-        0000: aload
-        0000: iconst_2
-        0000: iload
-        0000: fconst_1
-        0000: iload
-        0000: iconst_1
-        0000: iadd
-        0000: iload
-        0000: dconst_0
-        0000: iadd
-        0000: aload
-        0000: iconst_5
-        0000: iload
-        0000: dconst_0
-        0000: caload
-        0000: castore
-        0000: iinc
-        0000: dconst_0
-        0000: aconst_null
-        0000: goto
-        0000: FF E6
-        0000: iload
-        0000: iconst_1
-        0000: iload
-        0000: fconst_2
-        0000: iload
-        0000: fconst_0
-        0000: isub
-        0000: iadd
-        0000: istore
-        0000: iconst_1
-        0000: goto
-        0000: nop
-        0000: dconst_0
-        0000: aload
-        0000: iconst_2
-        0000: iload
-        0000: fconst_1
-        0000: iload
-        0000: iconst_1
-        0000: iadd
-        0000: iload
-        0000: lconst_0
-        0000: i2c
-        0000: castore
-        0000: iload
-        0000: fconst_1
-        0000: iload
-        0000: fconst_0
-        0000: iadd
-        0000: istore
-        0000: fconst_1
-        0000: goto
-        0000: FE F8
-        0000: new
-        0000: nop
-        0000: aload_1
-        0000: dup
-        0000: aload
-        0000: iconst_2
-        0000: iconst_0
-        0000: iload_3
-        0000: iload
-        0000: iconst_1
-        0000: iadd
-        0000: invokespecial
-        0000: nop
-        0000: dstore_1
-        0000: areturn
+        0001: ifnonnull +11 // 000c
+        0004: new #17 // java/lang/NullPointerException
+        0007: dup
+        0008: invokespecial #39 // NullPointerException.<init> ()V
+        000b: athrow
+        000c: aload_0
+        000d: getfield #3 // String.value [C
+        0010: arraylength
+        0011: istore_3
+        0012: iconst_0
+        0013: istore_2
+        0014: iload_2
+        0015: iload_3
+        0016: if_icmpge +76 // 0062
+        0019: aload_0
+        001a: getfield #3 // String.value [C
+        001d: iload_2
+        001e: caload
+        001f: istore local_var:4
+        0021: iload local_var:4
+        0023: ldc #90 // IntegerConstant:55296
+        0025: if_icmplt +27 // 0040
+        0028: iload local_var:4
+        002a: ldc #110 // IntegerConstant:56319
+        002c: if_icmpgt +20 // 0040
+        002f: aload_0
+        0030: iload_2
+        0031: invokevirtual #111 // String.codePointAt (I)I
+        0034: istore local_var:4
+        0036: iload local_var:4
+        0038: invokestatic #113 // Character.charCount (I)I
+        003b: istore local_var:5
+        003d: goto +6 // 0043
+        0040: iconst_1
+        0041: istore local_var:5
+        0043: iload local_var:4
+        0045: invokestatic #124 // Character.toUpperCaseEx (I)I
+        0048: istore local_var:6
+        004a: iload local_var:6
+        004c: iconst_m1
+        004d: if_icmpeq +23 // 0064
+        0050: iload local_var:4
+        0052: iload local_var:6
+        0054: if_icmpeq +6 // 005a
+        0057: goto +13 // 0064
+        005a: iload_2
+        005b: iload local_var:5
+        005d: iadd
+        005e: istore_2
+        005f: goto -75 // 0014
+        0062: aload_0
+        0063: areturn
+        0064: iconst_0
+        0065: istore local_var:4
+        0067: iload_3
+        0068: newarray 5 // char[]
+        006a: astore local_var:5
+        006c: aload_0
+        006d: getfield #3 // String.value [C
+        0070: iconst_0
+        0071: aload local_var:5
+        0073: iconst_0
+        0074: iload_2
+        0075: invokestatic #37 // System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V
+        0078: aload_1
+        0079: invokevirtual #114 // java.util.Locale.getLanguage ()Ljava/lang/String;
+        007c: astore local_var:6
+        007e: aload local_var:6
+        0080: ldc #115 // "tr"
+        0082: if_acmpeq +17 // 0093
+        0085: aload local_var:6
+        0087: ldc #116 // "az"
+        0089: if_acmpeq +10 // 0093
+        008c: aload local_var:6
+        008e: ldc #117 // "lt"
+        0090: if_acmpne +7 // 0097
+        0093: iconst_1
+        0094: goto +4 // 0098
+        0097: iconst_0
+        0098: istore local_var:7
+        009a: iload_2
+        009b: istore local_var:12
+        009d: iload local_var:12
+        009f: iload_3
+        00a0: if_icmpge +264 // 01a8
+        00a3: aload_0
+        00a4: getfield #3 // String.value [C
+        00a7: iload local_var:12
+        00a9: caload
+        00aa: istore local_var:10
+        00ac: iload local_var:10
+        00ae: i2c
+        00af: ldc #90 // IntegerConstant:55296
+        00b1: if_icmplt +29 // 00ce
+        00b4: iload local_var:10
+        00b6: i2c
+        00b7: ldc #110 // IntegerConstant:56319
+        00b9: if_icmpgt +21 // 00ce
+        00bc: aload_0
+        00bd: iload local_var:12
+        00bf: invokevirtual #111 // String.codePointAt (I)I
+        00c2: istore local_var:10
+        00c4: iload local_var:10
+        00c6: invokestatic #113 // Character.charCount (I)I
+        00c9: istore local_var:11
+        00cb: goto +6 // 00d1
+        00ce: iconst_1
+        00cf: istore local_var:11
+        00d1: iload local_var:7
+        00d3: ifeq +15 // 00e2
+        00d6: aload_0
+        00d7: iload local_var:12
+        00d9: aload_1
+        00da: invokestatic #125 // ConditionalSpecialCasing.toUpperCaseEx (Ljava/lang/String;ILjava/util/Locale;)I
+        00dd: istore local_var:9
+        00df: goto +10 // 00e9
+        00e2: iload local_var:10
+        00e4: invokestatic #124 // Character.toUpperCaseEx (I)I
+        00e7: istore local_var:9
+        00e9: iload local_var:9
+        00eb: iconst_m1
+        00ec: if_icmpeq +10 // 00f6
+        00ef: iload local_var:9
+        00f1: ldc #62 // IntegerConstant:65536
+        00f3: if_icmplt +160 // 0193
+        00f6: iload local_var:9
+        00f8: iconst_m1
+        00f9: if_icmpne +30 // 0117
+        00fc: iload local_var:7
+        00fe: ifeq +15 // 010d
+        0101: aload_0
+        0102: iload local_var:12
+        0104: aload_1
+        0105: invokestatic #126 // ConditionalSpecialCasing.toUpperCaseCharArray (Ljava/lang/String;ILjava/util/Locale;)[C
+        0108: astore local_var:8
+        010a: goto +49 // 013b
+        010d: iload local_var:10
+        010f: invokestatic #127 // Character.toUpperCaseCharArray (I)[C
+        0112: astore local_var:8
+        0114: goto +39 // 013b
+        0117: iload local_var:11
+        0119: iconst_2
+        011a: if_icmpne +26 // 0134
+        011d: iload local_var:4
+        011f: iload local_var:9
+        0121: aload local_var:5
+        0123: iload local_var:12
+        0125: iload local_var:4
+        0127: iadd
+        0128: invokestatic #120 // Character.toChars (I[CI)I
+        012b: iload local_var:11
+        012d: isub
+        012e: iadd
+        012f: istore local_var:4
+        0131: goto +109 // 019e
+        0134: iload local_var:9
+        0136: invokestatic #121 // Character.toChars (I)[C
+        0139: astore local_var:8
+        013b: aload local_var:8
+        013d: arraylength
+        013e: istore local_var:13
+        0140: iload local_var:13
+        0142: iload local_var:11
+        0144: if_icmple +34 // 0166
+        0147: aload local_var:5
+        0149: arraylength
+        014a: iload local_var:13
+        014c: iadd
+        014d: iload local_var:11
+        014f: isub
+        0150: newarray 5 // char[]
+        0152: astore local_var:14
+        0154: aload local_var:5
+        0156: iconst_0
+        0157: aload local_var:14
+        0159: iconst_0
+        015a: iload local_var:12
+        015c: iload local_var:4
+        015e: iadd
+        015f: invokestatic #37 // System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V
+        0162: aload local_var:14
+        0164: astore local_var:5
+        0166: iconst_0
+        0167: istore local_var:14
+        0169: iload local_var:14
+        016b: iload local_var:13
+        016d: if_icmpge +25 // 0186
+        0170: aload local_var:5
+        0172: iload local_var:12
+        0174: iload local_var:4
+        0176: iadd
+        0177: iload local_var:14
+        0179: iadd
+        017a: aload local_var:8
+        017c: iload local_var:14
+        017e: caload
+        017f: castore
+        0180: iinc local_var:141
+        0183: goto -26 // 0169
+        0186: iload local_var:4
+        0188: iload local_var:13
+        018a: iload local_var:11
+        018c: isub
+        018d: iadd
+        018e: istore local_var:4
+        0190: goto +14 // 019e
+        0193: aload local_var:5
+        0195: iload local_var:12
+        0197: iload local_var:4
+        0199: iadd
+        019a: iload local_var:9
+        019c: i2c
+        019d: castore
+        019e: iload local_var:12
+        01a0: iload local_var:11
+        01a2: iadd
+        01a3: istore local_var:12
+        01a5: goto -264 // 009d
+        01a8: new #43 // java/lang/String
+        01ab: dup
+        01ac: aload local_var:5
+        01ae: iconst_0
+        01af: iload_3
+        01b0: iload local_var:4
+        01b2: iadd
+        01b3: invokespecial #72 // String.<init> ([CII)V
+        01b6: areturn
     }
     
     public String toUpperCase() {
         // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0000: invokestatic
-        0000: nop
-        0000: ishr
-        0000: invokevirtual
-        0000: nop
-        0000: ior
-        0000: areturn
+        0001: invokestatic #122 // java.util.Locale.getDefault ()Ljava/util/Locale;
+        0004: invokevirtual #128 // String.toUpperCase (Ljava/util/Locale;)Ljava/lang/String;
+        0007: areturn
     }
     
     public String trim() {
         // max_stack: 3
         // max_locals: 4
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: istore_1
-        0000: iconst_0
-        0000: istore_2
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: astore_3
-        0000: iload_2
-        0000: iload_1
-        0000: if_icmpge
-        0000: nop
-        0000: sipush
-        0000: aload_3
-        0000: iload_2
-        0000: caload
-        0000: bipush
-        0000: lload_2
-        0000: if_icmpgt
-        0000: nop
-        0000: lconst_0
-        0000: iinc
-        0000: iconst_m1
-        0000: aconst_null
-        0000: goto
-        0000: FF F0
-        0000: iload_2
-        0000: iload_1
-        0000: if_icmpge
-        0000: nop
-        0000: ldc_w
-        0000: aload_3
-        0000: iload_1
-        0000: iconst_1
-        0000: isub
-        0000: caload
-        0000: bipush
-        0000: lload_2
-        0000: if_icmpgt
-        0000: nop
-        0000: lconst_0
-        0000: iinc
-        0000: aconst_null
-        0000: FF
-        0000: goto
-        0000: FF EE
-        0000: iload_2
-        0000: ifgt
-        0000: nop
-        0000: fconst_1
-        0000: iload_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: if_icmpge
-        0000: nop
-        0000: fconst_1
-        0000: aload_0
-        0000: iload_2
-        0000: iload_1
-        0000: invokevirtual
-        0000: nop
-        0000: dstore_2
-        0000: goto
-        0000: nop
-        0000: iconst_1
-        0000: aload_0
-        0000: areturn
+        0001: getfield #3 // String.value [C
+        0004: arraylength
+        0005: istore_1
+        0006: iconst_0
+        0007: istore_2
+        0008: aload_0
+        0009: getfield #3 // String.value [C
+        000c: astore_3
+        000d: iload_2
+        000e: iload_1
+        000f: if_icmpge +17 // 0020
+        0012: aload_3
+        0013: iload_2
+        0014: caload
+        0015: bipush 32
+        0017: if_icmpgt +9 // 0020
+        001a: iinc local_var:21
+        001d: goto -16 // 000d
+        0020: iload_2
+        0021: iload_1
+        0022: if_icmpge +19 // 0035
+        0025: aload_3
+        0026: iload_1
+        0027: iconst_1
+        0028: isub
+        0029: caload
+        002a: bipush 32
+        002c: if_icmpgt +9 // 0035
+        002f: iinc local_var:1-1
+        0032: goto -18 // 0020
+        0035: iload_2
+        0036: ifgt +12 // 0042
+        0039: iload_1
+        003a: aload_0
+        003b: getfield #3 // String.value [C
+        003e: arraylength
+        003f: if_icmpge +12 // 004b
+        0042: aload_0
+        0043: iload_2
+        0044: iload_1
+        0045: invokevirtual #73 // String.substring (II)Ljava/lang/String;
+        0048: goto +4 // 004c
+        004b: aload_0
+        004c: areturn
     }
     
     public String toString() {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0000: areturn
+        0001: areturn
     }
     
     public char[] toCharArray() {
         // max_stack: 5
         // max_locals: 2
         0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: newarray
-        0000: iconst_2
-        0000: astore_1
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: iconst_0
-        0000: aload_1
-        0000: iconst_0
-        0000: aload_0
-        0000: getfield
-        0000: nop
-        0000: iconst_0
-        0000: arraylength
-        0000: invokestatic
-        0000: nop
-        0000: fload_3
-        0000: aload_1
-        0000: areturn
+        0001: getfield #3 // String.value [C
+        0004: arraylength
+        0005: newarray 5 // char[]
+        0007: astore_1
+        0008: aload_0
+        0009: getfield #3 // String.value [C
+        000c: iconst_0
+        000d: aload_1
+        000e: iconst_0
+        000f: aload_0
+        0010: getfield #3 // String.value [C
+        0013: arraylength
+        0014: invokestatic #37 // System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V
+        0017: aload_1
+        0018: areturn
     }
     
     public static /* varargs */ String format(String, Object[]) {
         // max_stack: 3
         // max_locals: 2
-        0000: new
-        0000: nop
-        0000: lor
-        0000: dup
-        0000: invokespecial
-        0000: nop
-        0000: ixor
-        0000: aload_0
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: lxor
-        0000: invokevirtual
-        0000: nop
-        0000: iinc
-        0000: areturn
+        0000: new #129 // java/util/Formatter
+        0003: dup
+        0004: invokespecial #130 // java.util.Formatter.<init> ()V
+        0007: aload_0
+        0008: aload_1
+        0009: invokevirtual #131 // java.util.Formatter.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/Formatter;
+        000c: invokevirtual #132 // java.util.Formatter.toString ()Ljava/lang/String;
+        000f: areturn
     }
     
     public static /* varargs */ String format(java.util.Locale, String, Object[]) {
         // max_stack: 3
         // max_locals: 3
-        0000: new
-        0000: nop
-        0000: lor
-        0000: dup
-        0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: i2l
-        0000: aload_1
-        0000: aload_2
-        0000: invokevirtual
-        0000: nop
-        0000: lxor
-        0000: invokevirtual
-        0000: nop
-        0000: iinc
-        0000: areturn
+        0000: new #129 // java/util/Formatter
+        0003: dup
+        0004: aload_0
+        0005: invokespecial #133 // java.util.Formatter.<init> (Ljava/util/Locale;)V
+        0008: aload_1
+        0009: aload_2
+        000a: invokevirtual #131 // java.util.Formatter.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/util/Formatter;
+        000d: invokevirtual #132 // java.util.Formatter.toString ()Ljava/lang/String;
+        0010: areturn
     }
     
     public static String valueOf(Object) {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0000: ifnonnull
-        0000: nop
-        0000: iconst_5
-        0000: ldc
-        0000: i2f
-        0000: goto
-        0000: nop
-        0000: iconst_4
-        0000: aload_0
-        0000: invokevirtual
-        0000: nop
-        0000: i2d
-        0000: areturn
+        0001: ifnonnull +8 // 0009
+        0004: ldc #134 // "null"
+        0006: goto +7 // 000d
+        0009: aload_0
+        000a: invokevirtual #135 // Object.toString ()Ljava/lang/String;
+        000d: areturn
     }
     
     public static String valueOf(char[]) {
         // max_stack: 3
         // max_locals: 1
-        0000: new
-        0000: nop
-        0000: aload_1
-        0000: dup
-        0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: l2i
-        0000: areturn
+        0000: new #43 // java/lang/String
+        0003: dup
+        0004: aload_0
+        0005: invokespecial #136 // String.<init> ([C)V
+        0008: areturn
     }
     
     public static String valueOf(char[], int, int) {
         // max_stack: 5
         // max_locals: 3
-        0000: new
-        0000: nop
-        0000: aload_1
-        0000: dup
-        0000: aload_0
-        0000: iload_1
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: dstore_1
-        0000: areturn
+        0000: new #43 // java/lang/String
+        0003: dup
+        0004: aload_0
+        0005: iload_1
+        0006: iload_2
+        0007: invokespecial #72 // String.<init> ([CII)V
+        000a: areturn
     }
     
     public static String copyValueOf(char[], int, int) {
         // max_stack: 5
         // max_locals: 3
-        0000: new
-        0000: nop
-        0000: aload_1
-        0000: dup
-        0000: aload_0
-        0000: iload_1
-        0000: iload_2
-        0000: invokespecial
-        0000: nop
-        0000: dstore_1
-        0000: areturn
+        0000: new #43 // java/lang/String
+        0003: dup
+        0004: aload_0
+        0005: iload_1
+        0006: iload_2
+        0007: invokespecial #72 // String.<init> ([CII)V
+        000a: areturn
     }
     
     public static String copyValueOf(char[]) {
         // max_stack: 3
         // max_locals: 1
-        0000: new
-        0000: nop
-        0000: aload_1
-        0000: dup
-        0000: aload_0
-        0000: invokespecial
-        0000: nop
-        0000: l2i
-        0000: areturn
+        0000: new #43 // java/lang/String
+        0003: dup
+        0004: aload_0
+        0005: invokespecial #136 // String.<init> ([C)V
+        0008: areturn
     }
     
     public static String valueOf(boolean) {
         // max_stack: 1
         // max_locals: 1
         0000: iload_0
-        0000: ifeq
-        0000: nop
-        0000: iconst_5
-        0000: ldc
-        0000: l2f
-        0000: goto
-        0000: nop
-        0000: iconst_2
-        0000: ldc
-        0000: l2d
-        0000: areturn
+        0001: ifeq +8 // 0009
+        0004: ldc #137 // "true"
+        0006: goto +5 // 000b
+        0009: ldc #138 // "false"
+        000b: areturn
     }
     
     public static String valueOf(char) {
         // max_stack: 4
         // max_locals: 2
         0000: iconst_1
-        0000: newarray
-        0000: iconst_2
-        0000: dup
-        0000: iconst_0
-        0000: iload_0
-        0000: castore
-        0000: astore_1
-        0000: new
-        0000: nop
-        0000: aload_1
-        0000: dup
-        0000: aload_1
-        0000: iconst_1
-        0000: invokespecial
-        0000: nop
-        0000: astore_1
-        0000: areturn
+        0001: newarray 5 // char[]
+        0003: dup
+        0004: iconst_0
+        0005: iload_0
+        0006: castore
+        0007: astore_1
+        0008: new #43 // java/lang/String
+        000b: dup
+        000c: aload_1
+        000d: iconst_1
+        000e: invokespecial #76 // String.<init> ([CZ)V
+        0011: areturn
     }
     
     public static String valueOf(int) {
         // max_stack: 1
         // max_locals: 1
         0000: iload_0
-        0000: invokestatic
-        0000: nop
-        0000: fconst_1
-        0000: areturn
+        0001: invokestatic #12 // Integer.toString (I)Ljava/lang/String;
+        0004: areturn
     }
     
     public static String valueOf(long) {
         // max_stack: 2
         // max_locals: 2
         0000: lload_0
-        0000: invokestatic
-        0000: nop
-        0000: f2i
-        0000: areturn
+        0001: invokestatic #139 // Long.toString (J)Ljava/lang/String;
+        0004: areturn
     }
     
     public static String valueOf(float) {
         // max_stack: 1
         // max_locals: 1
         0000: fload_0
-        0000: invokestatic
-        0000: nop
-        0000: f2l
-        0000: areturn
+        0001: invokestatic #140 // Float.toString (F)Ljava/lang/String;
+        0004: areturn
     }
     
     public static String valueOf(double) {
         // max_stack: 2
         // max_locals: 2
         0000: dload_0
-        0000: invokestatic
-        0000: nop
-        0000: f2d
-        0000: areturn
+        0001: invokestatic #141 // Double.toString (D)Ljava/lang/String;
+        0004: areturn
     }
     
     public native String intern();
@@ -5044,38 +3039,24 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 2
         // max_locals: 2
         0000: aload_0
-        0000: aload_1
-        0000: checkcast
-        0000: nop
-        0000: aload_1
-        0000: invokevirtual
-        0000: nop
-        0000: d2i
-        0000: ireturn
+        0001: aload_1
+        0002: checkcast #43 // java/lang/String
+        0005: invokevirtual #142 // String.compareTo (Ljava/lang/String;)I
+        0008: ireturn
     }
     
     static void <clinit>() {
         // max_stack: 3
         // max_locals: 0
         0000: iconst_0
-        0000: anewarray
-        0000: nop
-        0000: d2l
-        0000: putstatic
-        0000: nop
-        0000: d2f
-        0000: new
-        0000: nop
-        0000: i2b
-        0000: dup
-        0000: aconst_null
-        0000: invokespecial
-        0000: nop
-        0000: i2c
-        0000: putstatic
-        0000: nop
-        0000: lstore
-        0000: return
+        0001: anewarray #143 // java/io/ObjectStreamField
+        0004: putstatic #144 // String.serialPersistentFields [Ljava/io/ObjectStreamField;
+        0007: new #145 // java/lang/String$CaseInsensitiveComparator
+        000a: dup
+        000b: aconst_null
+        000c: invokespecial #146 // String$CaseInsensitiveComparator.<init> (Ljava/lang/String$1;)V
+        000f: putstatic #55 // String.CASE_INSENSITIVE_ORDER Ljava/util/Comparator;
+        0012: return
     }
 
 }

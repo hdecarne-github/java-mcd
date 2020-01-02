@@ -21,9 +21,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassPrinter;
 import de.carne.mcd.jvm.classfile.Attribute;
+import de.carne.mcd.jvm.classfile.ClassContext;
+import de.carne.mcd.jvm.classfile.ClassPrinter;
 
 /**
  * Utility class providing {@linkplain Attribute} related functions.

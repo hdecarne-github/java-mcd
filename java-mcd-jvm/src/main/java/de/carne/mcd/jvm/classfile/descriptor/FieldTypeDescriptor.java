@@ -22,10 +22,10 @@ import java.util.List;
 import java.util.Objects;
 
 import de.carne.boot.check.Check;
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassName;
-import de.carne.mcd.jvm.ClassPrinter;
-import de.carne.mcd.jvm.Printable;
+import de.carne.mcd.jvm.classfile.ClassContext;
+import de.carne.mcd.jvm.classfile.ClassName;
+import de.carne.mcd.jvm.classfile.ClassPrinter;
+import de.carne.mcd.jvm.classfile.Printable;
 import de.carne.mcd.jvm.classfile.descriptor.grammar.DescriptorGrammarParser.ArrayTypeContext;
 import de.carne.mcd.jvm.classfile.descriptor.grammar.DescriptorGrammarParser.FieldTypeContext;
 import de.carne.mcd.jvm.classfile.descriptor.grammar.DescriptorGrammarParser.IntegralTypeContext;

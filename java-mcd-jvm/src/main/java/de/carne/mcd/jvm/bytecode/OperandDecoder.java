@@ -14,30 +14,40 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm.classfile;
+package de.carne.mcd.jvm.bytecode;
 
 import java.io.IOException;
 
+import de.carne.mcd.common.MCDDecodeBuffer;
+import de.carne.mcd.common.MCDOutput;
+
 /**
- * Constant value attribute: "ConstantValue"
+ * Base interface for all kinds of operand types.
  */
-public class ConstantValueAttribute extends Attribute {
+public interface OperandDecoder {
 
 	/**
-	 * Attribute name: "ConstantValue"
+	 * Gets the operand's type (B:byte, S:short, I:int).
+	 * 
+	 * @return the operand's type (B:byte, S:short, I:int).
 	 */
-	public static final String NAME = "ConstantValue";
+	char type();
 
-	private final int constantValueIndex;
+	/**
+	 * Gets the operand type's name.
+	 * 
+	 * @return the operand type's name.
+	 */
+	String name();
 
-	ConstantValueAttribute(ClassInfo classInfo, int constantValueIndex) {
-		super(classInfo);
-		this.constantValueIndex = constantValueIndex;
-	}
-
-	@Override
-	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		this.classInfo.resolveConstant(this.constantValueIndex, Constant.class).print(out, context);
-	}
+	/**
+	 * Decodes the operand.
+	 * 
+	 * @param pc the program counter of the corresponding opcode.
+	 * @param buffer the {@linkplain MCDDecodeBuffer} to decode from.
+	 * @param out the {@linkplain MCDOutput} to decode to.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException;
 
 }

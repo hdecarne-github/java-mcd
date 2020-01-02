@@ -16,8 +16,7 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-import de.carne.mcd.jvm.ClassElement;
-import de.carne.mcd.jvm.ClassInfo;
+import java.io.IOException;
 
 /**
  * Base class for all kind of constants.
@@ -26,6 +25,16 @@ public abstract class Constant extends ClassElement {
 
 	Constant(ClassInfo classInfo) {
 		super(classInfo);
+	}
+
+	/**
+	 * Resolves the symbol of this {@linkplain Constant} instance.
+	 *
+	 * @return the symbol of this {@linkplain Constant} instance.
+	 * @throws IOException if the constant cannot be resolved.
+	 */
+	public String resolveSymbol() throws IOException {
+		return getClass().getSimpleName() + ":" + toString();
 	}
 
 }

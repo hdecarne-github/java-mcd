@@ -18,10 +18,6 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassPrinter;
-
 class FloatAnnotationElement extends AbstractConstantValueAnnotationElement {
 
 	public static final int TAG = 'F';

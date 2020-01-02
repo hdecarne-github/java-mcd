@@ -19,9 +19,9 @@ package de.carne.mcd.jvm.classfile.descriptor;
 import java.io.IOException;
 import java.util.Objects;
 
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassPrinter;
-import de.carne.mcd.jvm.Printable;
+import de.carne.mcd.jvm.classfile.ClassContext;
+import de.carne.mcd.jvm.classfile.ClassPrinter;
+import de.carne.mcd.jvm.classfile.Printable;
 import de.carne.mcd.jvm.classfile.descriptor.grammar.DescriptorGrammarParser.FieldDescriptorContext;
 
 /**

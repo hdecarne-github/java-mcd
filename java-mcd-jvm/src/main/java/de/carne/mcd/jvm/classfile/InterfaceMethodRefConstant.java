@@ -16,23 +16,12 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-import java.io.IOException;
-
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassPrinter;
-
 class InterfaceMethodRefConstant extends AbstractRefConstant {
 
 	public static final int TAG = 11;
 
 	InterfaceMethodRefConstant(ClassInfo classInfo, int classIndex, int nameAndTypeIndex) {
 		super(classInfo, classIndex, nameAndTypeIndex);
-	}
-
-	@Override
-	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

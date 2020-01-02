@@ -16,9 +16,6 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-import de.carne.mcd.jvm.ClassElement;
-import de.carne.mcd.jvm.ClassInfo;
-
 abstract class AnnotationElementValue extends ClassElement {
 
 	AnnotationElementValue(ClassInfo classInfo) {

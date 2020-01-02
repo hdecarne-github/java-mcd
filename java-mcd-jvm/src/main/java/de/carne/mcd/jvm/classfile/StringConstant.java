@@ -18,9 +18,9 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassPrinter;
+import org.eclipse.jdt.annotation.NonNull;
+
+import de.carne.util.Strings;
 
 class StringConstant extends Constant {
 
@@ -40,6 +40,11 @@ class StringConstant extends Constant {
 	@Override
 	public void print(ClassPrinter out, ClassContext context) throws IOException {
 		this.classInfo.resolveConstant(this.stringIndex, Utf8Constant.class).print(out, context);
+	}
+
+	@Override
+	public @NonNull String resolveSymbol() throws IOException {
+		return "\"" + Strings.encode(getValue()) + "\"";
 	}
 
 	@Override

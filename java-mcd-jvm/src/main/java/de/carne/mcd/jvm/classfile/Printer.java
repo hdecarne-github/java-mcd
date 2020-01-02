@@ -19,25 +19,18 @@ package de.carne.mcd.jvm.classfile;
 import java.io.IOException;
 
 /**
- * Constant value attribute: "ConstantValue"
+ * Printer function interface.
  */
-public class ConstantValueAttribute extends Attribute {
+@FunctionalInterface
+public interface Printer {
 
 	/**
-	 * Attribute name: "ConstantValue"
+	 * Prints the submitted text.
+	 * 
+	 * @param out the {@linkplain ClassPrinter} instance to print to.
+	 * @param text the text to print.
+	 * @throws IOException if an I/O error occurs.
 	 */
-	public static final String NAME = "ConstantValue";
-
-	private final int constantValueIndex;
-
-	ConstantValueAttribute(ClassInfo classInfo, int constantValueIndex) {
-		super(classInfo);
-		this.constantValueIndex = constantValueIndex;
-	}
-
-	@Override
-	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		this.classInfo.resolveConstant(this.constantValueIndex, Constant.class).print(out, context);
-	}
+	void print(ClassPrinter out, String text) throws IOException;
 
 }

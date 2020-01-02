@@ -14,13 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm;
+package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
 import org.eclipse.jdt.annotation.Nullable;
-
-import de.carne.mcd.jvm.classfile.NameConstant;
 
 /**
  * A class name.

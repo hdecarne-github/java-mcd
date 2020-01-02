@@ -18,9 +18,7 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
-import de.carne.mcd.jvm.ClassContext;
-import de.carne.mcd.jvm.ClassInfo;
-import de.carne.mcd.jvm.ClassPrinter;
+import de.carne.boot.check.Check;
 
 class NameAndTypeConstant extends Constant {
 
@@ -33,9 +31,19 @@ class NameAndTypeConstant extends Constant {
 		this.nameDescriptorIndex = new NameDescriptorIndex(nameIndex, descriptorIndex);
 	}
 
+	public String getNameValue() throws IOException {
+		return this.classInfo.resolveConstant(this.nameDescriptorIndex.nameIndex(), Utf8Constant.class).getValue();
+	}
+
+	public String getDescriptorValue() throws IOException {
+		return this.classInfo.resolveConstant(this.nameDescriptorIndex.descriptorIndex(), Utf8Constant.class)
+				.getValue();
+	}
+
 	@Override
 	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		// TODO Auto-generated method stub
+		// Sould never be called
+		Check.fail();
 	}
 
 	@Override
