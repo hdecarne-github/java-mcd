@@ -500,7 +500,7 @@ public /* super */ class Calendar$Builder {
         010e: aload local_4
         0110: new #57 // java/util/Date
         0113: dup
-        0114: ldc2_w #59 // LongConstant:-9223372036854775808l
+        0114: ldc2_w #59 // -9223372036854775808l
         0117: invokespecial #61 // Date.<init> (J)V
         011a: invokevirtual #62 // GregorianCalendar.setGregorianChange (Ljava/util/Date;)V
         011d: aload_0

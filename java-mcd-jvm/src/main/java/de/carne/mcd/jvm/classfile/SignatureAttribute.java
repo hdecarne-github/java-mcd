@@ -18,14 +18,8 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
-/**
- * Signature attribute: "Signature"
- */
-public class SignatureAttribute extends Attribute {
+class SignatureAttribute extends Attribute {
 
-	/**
-	 * Attribute name: "Signature"
-	 */
 	public static final String NAME = "Signature";
 
 	private final int signatureIndex;
@@ -35,12 +29,6 @@ public class SignatureAttribute extends Attribute {
 		this.signatureIndex = signatureIndex;
 	}
 
-	/**
-	 * Gets the signature stored via this attribute.
-	 *
-	 * @return the signature stored via this attribute.
-	 * @throws IOException if the attribute cannot be resolved.
-	 */
 	public String getValue() throws IOException {
 		return this.classInfo.resolveConstant(this.signatureIndex, Utf8Constant.class).getValue();
 	}

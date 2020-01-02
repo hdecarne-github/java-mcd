@@ -20,14 +20,8 @@ import java.io.IOException;
 
 import de.carne.boot.check.Check;
 
-/**
- * Source file attribute: "SourceFile"
- */
-public class SourceFileAttribute extends Attribute {
+class SourceFileAttribute extends Attribute {
 
-	/**
-	 * Attribute name: "SourceFile"
-	 */
 	public static final String NAME = "SourceFile";
 
 	private final int sourceFileIndex;

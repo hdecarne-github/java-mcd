@@ -18,16 +18,8 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
-import de.carne.mcd.jvm.util.PrintSeparator;
+class ExceptionsAttribute extends Attribute {
 
-/**
- * Exceptions attribute: "Exceptions"
- */
-public class ExceptionsAttribute extends Attribute {
-
-	/**
-	 * Attribute name: "Exceptions"
-	 */
 	public static final String NAME = "Exceptions";
 
 	private final int[] exceptions;

@@ -20,10 +20,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Base class for all kinds of runtime visible annotations attributes.
- */
-public abstract class RuntimeAnnotationsAttribute extends Attribute {
+abstract class RuntimeAnnotationsAttribute extends Attribute {
 
 	private final List<Annotation> annotations;
 

@@ -27,9 +27,6 @@ import de.carne.mcd.jvm.classfile.descriptor.Descriptor;
 import de.carne.mcd.jvm.classfile.descriptor.FieldDescriptor;
 import de.carne.mcd.jvm.classfile.descriptor.FieldTypeDescriptor;
 import de.carne.mcd.jvm.classfile.descriptor.MethodDescriptor;
-import de.carne.mcd.jvm.util.Attributes;
-import de.carne.mcd.jvm.util.ClassUtil;
-import de.carne.mcd.jvm.util.PrintSeparator;
 import de.carne.util.Strings;
 
 /**

@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import de.carne.mcd.jvm.util.PrintSeparator;
-
 class ArrayAnnotationElement extends AnnotationElementValue {
 
 	public static final int TAG = '[';

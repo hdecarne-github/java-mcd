@@ -16,6 +16,8 @@
  */
 package de.carne.mcd.jvm.classfile;
 
+import java.io.IOException;
+
 abstract class AbstractDynamicConstant extends Constant {
 
 	private final int bootstrapMethodAttrIndex;
@@ -25,6 +27,24 @@ abstract class AbstractDynamicConstant extends Constant {
 		super(classInfo);
 		this.bootstrapMethodAttrIndex = bootstrapMethodAttrIndex;
 		this.nameAndTypeIndex = nameAndTypeIndex;
+	}
+
+	@Override
+	public void print(ClassPrinter out, ClassContext context) throws IOException {
+		// Should never be called
+	}
+
+	@Override
+	public String resolveSymbol() throws IOException {
+		NameAndTypeConstant nameAndTypeValue = getNameAndTypeValue();
+		String name = nameAndTypeValue.getNameValue();
+		String descriptor = nameAndTypeValue.getDescriptorValue();
+
+		return "#" + this.bootstrapMethodAttrIndex + "." + name + " " + descriptor;
+	}
+
+	private NameAndTypeConstant getNameAndTypeValue() throws IOException {
+		return this.classInfo.resolveConstant(this.nameAndTypeIndex, NameAndTypeConstant.class);
 	}
 
 	@Override

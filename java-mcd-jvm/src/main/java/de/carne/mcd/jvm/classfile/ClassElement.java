@@ -16,10 +16,7 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-/**
- * Base class for all kind of decoded class elements.
- */
-public abstract class ClassElement implements Printable {
+abstract class ClassElement implements Printable {
 
 	protected final ClassInfo classInfo;
 

@@ -18,10 +18,7 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
-/**
- * Annotation element
- */
-public class AnnotationElement extends ClassElement {
+class AnnotationElement extends ClassElement {
 
 	private final int nameIndex;
 	private final AnnotationElementValue value;

@@ -18,14 +18,8 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
-/**
- * Constant value attribute: "ConstantValue"
- */
-public class ConstantValueAttribute extends Attribute {
+class ConstantValueAttribute extends Attribute {
 
-	/**
-	 * Attribute name: "ConstantValue"
-	 */
 	public static final String NAME = "ConstantValue";
 
 	private final int constantValueIndex;

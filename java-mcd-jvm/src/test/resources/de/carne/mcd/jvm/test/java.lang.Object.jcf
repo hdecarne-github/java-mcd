@@ -75,7 +75,7 @@ public /* super */ class Object {
         0010: iload_3
         0011: iflt +9 // 001a
         0014: iload_3
-        0015: ldc #13 // IntegerConstant:999999
+        0015: ldc #13 // 999999
         0017: if_icmple +13 // 0024
         001a: new #10 // java/lang/IllegalArgumentException
         001d: dup

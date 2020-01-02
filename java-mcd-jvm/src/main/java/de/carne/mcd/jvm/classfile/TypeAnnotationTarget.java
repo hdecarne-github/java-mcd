@@ -18,10 +18,7 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
-/**
- *
- */
-public abstract class TypeAnnotationTarget {
+abstract class TypeAnnotationTarget {
 
 	private final int targetType;
 

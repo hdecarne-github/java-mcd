@@ -28,13 +28,13 @@ public abstract class Constant extends ClassElement {
 	}
 
 	/**
-	 * Resolves the symbol of this {@linkplain Constant} instance.
+	 * Resolves the symbol representing this {@linkplain Constant} instance.
 	 *
-	 * @return the symbol of this {@linkplain Constant} instance.
+	 * @return the symbol representing this {@linkplain Constant} instance.
 	 * @throws IOException if the constant cannot be resolved.
 	 */
 	public String resolveSymbol() throws IOException {
-		return getClass().getSimpleName() + ":" + toString();
+		return toString();
 	}
 
 }

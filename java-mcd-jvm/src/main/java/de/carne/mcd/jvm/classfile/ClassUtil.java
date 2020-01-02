@@ -14,10 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm.util;
-
-import de.carne.mcd.jvm.classfile.ClassInfo;
-import de.carne.mcd.jvm.classfile.ClassName;
+package de.carne.mcd.jvm.classfile;
 
 /**
  * Utility class providing class information related functions.

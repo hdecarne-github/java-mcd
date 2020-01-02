@@ -36,6 +36,7 @@ public interface Instruction {
 	/**
 	 * Decodes this instruction.
 	 *
+	 * @param pc the current program counter.
 	 * @param buffer the {@linkplain MCDDecodeBuffer} to read any additional instruction data from.
 	 * @param out the {@linkplain MCDOutput} to decode to.
 	 * @throws IOException if an I/O error occurs.

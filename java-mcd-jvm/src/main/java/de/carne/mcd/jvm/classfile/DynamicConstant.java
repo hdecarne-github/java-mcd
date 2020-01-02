@@ -16,19 +16,12 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-import java.io.IOException;
-
 class DynamicConstant extends AbstractDynamicConstant {
 
 	public static final int TAG = 17;
 
 	DynamicConstant(ClassInfo classInfo, int bootstrapMethodAttrIndex, int nameAndTypeIndex) {
 		super(classInfo, bootstrapMethodAttrIndex, nameAndTypeIndex);
-	}
-
-	@Override
-	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

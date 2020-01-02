@@ -1353,7 +1353,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0014: iconst_m1
         0015: ireturn
         0016: iload_1
-        0017: ldc #62 // IntegerConstant:65536
+        0017: ldc #62 // 65536
         0019: if_icmpge +38 // 003f
         001c: aload_0
         001d: getfield #3 // String.value [C
@@ -1444,7 +1444,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 3
         // max_locals: 5
         0000: iload_1
-        0001: ldc #62 // IntegerConstant:65536
+        0001: ldc #62 // 65536
         0003: if_icmpge +42 // 002d
         0006: aload_0
         0007: getfield #3 // String.value [C
@@ -2125,10 +2125,10 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0053: ior
         0054: ifge +232 // 013c
         0057: iload_3
-        0058: ldc #90 // IntegerConstant:55296
+        0058: ldc #90 // 55296
         005a: if_icmplt +9 // 0063
         005d: iload_3
-        005e: ldc #91 // IntegerConstant:57343
+        005e: ldc #91 // 57343
         0060: if_icmple +220 // 013c
         0063: iconst_0
         0064: istore local_4
@@ -2354,10 +2354,10 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         001e: caload
         001f: istore local_4
         0021: iload local_4
-        0023: ldc #90 // IntegerConstant:55296
+        0023: ldc #90 // 55296
         0025: if_icmplt +41 // 004e
         0028: iload local_4
-        002a: ldc #110 // IntegerConstant:56319
+        002a: ldc #110 // 56319
         002c: if_icmpgt +34 // 004e
         002f: aload_0
         0030: iload_2
@@ -2423,11 +2423,11 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         00a9: istore local_10
         00ab: iload local_10
         00ad: i2c
-        00ae: ldc #90 // IntegerConstant:55296
+        00ae: ldc #90 // 55296
         00b0: if_icmplt +29 // 00cd
         00b3: iload local_10
         00b5: i2c
-        00b6: ldc #110 // IntegerConstant:56319
+        00b6: ldc #110 // 56319
         00b8: if_icmpgt +21 // 00cd
         00bb: aload_0
         00bc: iload local_12
@@ -2460,7 +2460,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         00fa: iconst_m1
         00fb: if_icmpeq +10 // 0105
         00fe: iload local_9
-        0100: ldc #62 // IntegerConstant:65536
+        0100: ldc #62 // 65536
         0102: if_icmplt +145 // 0193
         0105: iload local_9
         0107: iconst_m1
@@ -2593,10 +2593,10 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         001e: caload
         001f: istore local_4
         0021: iload local_4
-        0023: ldc #90 // IntegerConstant:55296
+        0023: ldc #90 // 55296
         0025: if_icmplt +27 // 0040
         0028: iload local_4
-        002a: ldc #110 // IntegerConstant:56319
+        002a: ldc #110 // 56319
         002c: if_icmpgt +20 // 0040
         002f: aload_0
         0030: iload_2
@@ -2665,11 +2665,11 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         00aa: istore local_10
         00ac: iload local_10
         00ae: i2c
-        00af: ldc #90 // IntegerConstant:55296
+        00af: ldc #90 // 55296
         00b1: if_icmplt +29 // 00ce
         00b4: iload local_10
         00b6: i2c
-        00b7: ldc #110 // IntegerConstant:56319
+        00b7: ldc #110 // 56319
         00b9: if_icmpgt +21 // 00ce
         00bc: aload_0
         00bd: iload local_12
@@ -2696,7 +2696,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         00eb: iconst_m1
         00ec: if_icmpeq +10 // 00f6
         00ef: iload local_9
-        00f1: ldc #62 // IntegerConstant:65536
+        00f1: ldc #62 // 65536
         00f3: if_icmplt +160 // 0193
         00f6: iload local_9
         00f8: iconst_m1

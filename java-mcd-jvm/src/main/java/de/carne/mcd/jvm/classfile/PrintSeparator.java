@@ -14,37 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm.util;
+package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
-import de.carne.mcd.jvm.classfile.ClassContext;
-import de.carne.mcd.jvm.classfile.ClassPrinter;
-import de.carne.mcd.jvm.classfile.Printable;
-import de.carne.mcd.jvm.classfile.Printer;
-
-/**
- * Utility class used print a list of elements by adding a given separator beginning with the 2nd element.
- */
-public final class PrintSeparator implements Printable {
+final class PrintSeparator implements Printable {
 
 	private boolean first = true;
 	private final Printer printer;
 	private final String separator;
 
-	/**
-	 * Constructs a new {@linkplain PrintSeparator} instance.
-	 */
 	public PrintSeparator() {
 		this(ClassPrinter::print, ", ");
 	}
 
-	/**
-	 * Constructs a new {@linkplain PrintSeparator} instance.
-	 * 
-	 * @param printer the printer function to use for separator printing.
-	 * @param separator the separator to print.
-	 */
 	public PrintSeparator(Printer printer, String separator) {
 		this.printer = printer;
 		this.separator = separator;

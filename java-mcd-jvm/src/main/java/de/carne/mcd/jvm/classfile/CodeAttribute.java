@@ -21,14 +21,8 @@ import java.nio.channels.SeekableByteChannel;
 
 import de.carne.mcd.jvm.BytecodeDecoder;
 
-/**
- * Code attribute: "Code"
- */
-public class CodeAttribute extends Attribute {
+class CodeAttribute extends Attribute {
 
-	/**
-	 * Attribute name: "Code"
-	 */
 	public static final String NAME = "Code";
 
 	private final SeekableByteChannel code;

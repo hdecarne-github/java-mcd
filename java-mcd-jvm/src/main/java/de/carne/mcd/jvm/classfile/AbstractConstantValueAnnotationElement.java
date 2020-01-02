@@ -16,9 +16,6 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-/**
- * Base class for all kind of constant based annotation element.
- */
 abstract class AbstractConstantValueAnnotationElement extends AnnotationElementValue {
 
 	protected final int valueIndex;

@@ -16,10 +16,7 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-/**
- *
- */
-public class TypeAnnotationPath {
+class TypeAnnotationPath {
 
 	private final byte[] path;
 

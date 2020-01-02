@@ -109,7 +109,7 @@ public abstract /* super */ class InputStream implements Closeable {
         0005: ifgt +5 // 000a
         0008: lconst_0
         0009: lreturn
-        000a: ldc2_w #10 // LongConstant:2048l
+        000a: ldc2_w #10 // 2048l
         000d: lload_3
         000e: invokestatic #12 // Math.min (JJ)J
         0011: l2i

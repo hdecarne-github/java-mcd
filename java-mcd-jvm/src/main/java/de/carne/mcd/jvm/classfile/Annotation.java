@@ -22,12 +22,8 @@ import java.util.List;
 
 import de.carne.mcd.jvm.classfile.descriptor.Descriptor;
 import de.carne.mcd.jvm.classfile.descriptor.FieldDescriptor;
-import de.carne.mcd.jvm.util.PrintSeparator;
 
-/**
- * Annotation
- */
-public class Annotation extends ClassElement {
+class Annotation extends ClassElement {
 
 	private final int typeIndex;
 	private final List<AnnotationElement> elements;
