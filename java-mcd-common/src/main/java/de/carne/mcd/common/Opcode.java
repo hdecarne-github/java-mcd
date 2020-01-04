@@ -24,7 +24,7 @@ import java.util.StringTokenizer;
 import org.eclipse.jdt.annotation.Nullable;
 
 import de.carne.boot.check.Check;
-import de.carne.text.HexFormatter;
+import de.carne.text.HexFormat;
 
 /**
  * Immutable byte sequence representing an opcode.
@@ -172,7 +172,7 @@ public class Opcode implements Comparable<Opcode> {
 	 * @return the string representation of the given byte range.
 	 */
 	public static String toString(byte[] bytes, int offset, int length) {
-		return HexFormatter.UPPER_CASE.format(bytes, offset, length);
+		return HexFormat.UPPER_CASE.format(bytes, offset, length);
 	}
 
 	/**

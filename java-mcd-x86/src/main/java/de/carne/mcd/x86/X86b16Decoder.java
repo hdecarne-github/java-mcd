@@ -26,7 +26,7 @@ import de.carne.mcd.common.InstructionIndex;
 import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.MachineCodeDecoder;
-import de.carne.text.HexFormatter;
+import de.carne.text.HexFormat;
 import de.carne.util.Late;
 
 /**
@@ -53,7 +53,7 @@ public class X86b16Decoder extends MachineCodeDecoder {
 		int ip = 0;
 
 		while ((instruction = instructionIndex.lookupNextInstruction(buffer)) != null) {
-			out.printLabel(HexFormatter.LOWER_CASE.format((short) ip)).printLabel(":").print(" ");
+			out.printLabel(HexFormat.LOWER_CASE.format((short) ip)).printLabel(":").print(" ");
 			instruction.decode(ip, buffer, out);
 			ip = (int) buffer.getTotalRead();
 		}

@@ -39,7 +39,7 @@ import de.carne.mcd.common.Opcode;
 import de.carne.mcd.common.bootstrap.InstructionIndexBuilder;
 import de.carne.test.api.io.TempFile;
 import de.carne.test.extension.TempPathExtension;
-import de.carne.text.HexFormatter;
+import de.carne.text.HexFormat;
 
 /**
  * Test {@linkplain InstructionIndex} class.
@@ -172,7 +172,7 @@ class InstructionIndexTest {
 
 		@Override
 		public void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
-			out.printlnValue(HexFormatter.UPPER_CASE.format(this.opcode, this.offset, this.length));
+			out.printlnValue(HexFormat.UPPER_CASE.format(this.opcode, this.offset, this.length));
 		}
 
 	}

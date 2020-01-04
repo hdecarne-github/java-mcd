@@ -29,7 +29,7 @@ import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.MachineCodeDecoder;
 import de.carne.mcd.jvm.bytecode.BytecodeInstructionIndex;
 import de.carne.mcd.jvm.classfile.ClassInfo;
-import de.carne.text.HexFormatter;
+import de.carne.text.HexFormat;
 import de.carne.util.Late;
 
 /**
@@ -92,7 +92,7 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 		try {
 			DECODE_CONTEXT.set(this);
 			while ((instruction = instructionIndex.lookupNextInstruction(codeBuffer)) != null) {
-				out.printLabel(HexFormatter.LOWER_CASE.format((short) pc)).printLabel(":").print(" ");
+				out.printLabel(HexFormat.LOWER_CASE.format((short) pc)).printLabel(":").print(" ");
 				instruction.decode(pc, codeBuffer, out);
 				pc = (int) codeBuffer.getTotalRead();
 			}

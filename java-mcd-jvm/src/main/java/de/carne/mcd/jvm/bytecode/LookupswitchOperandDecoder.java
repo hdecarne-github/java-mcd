@@ -21,7 +21,7 @@ import java.nio.ByteBuffer;
 
 import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
-import de.carne.text.HexFormatter;
+import de.carne.text.HexFormat;
 
 /**
  *
@@ -54,9 +54,9 @@ public class LookupswitchOperandDecoder implements OperandDecoder {
 			int offset = pairs.getInt();
 
 			out.printComment(" ").printComment(Integer.toString(match)).printComment(":")
-					.printComment(HexFormatter.LOWER_CASE.format((short) (pc + offset)));
+					.printComment(HexFormat.LOWER_CASE.format((short) (pc + offset)));
 		}
-		out.printComment(" default:").printComment(HexFormatter.LOWER_CASE.format((short) (pc + lsDefault)));
+		out.printComment(" default:").printComment(HexFormat.LOWER_CASE.format((short) (pc + lsDefault)));
 	}
 
 }

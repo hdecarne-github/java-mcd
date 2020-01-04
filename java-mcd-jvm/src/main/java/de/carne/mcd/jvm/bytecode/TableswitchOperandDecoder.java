@@ -21,7 +21,7 @@ import java.nio.ByteBuffer;
 
 import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
-import de.carne.text.HexFormatter;
+import de.carne.text.HexFormat;
 
 /**
  *
@@ -57,10 +57,10 @@ public class TableswitchOperandDecoder implements OperandDecoder {
 			int offset = offsets.getInt();
 
 			out.printComment(" ").printComment(Integer.toString(index)).printComment(":")
-					.printComment(HexFormatter.LOWER_CASE.format((short) (pc + offset)));
+					.printComment(HexFormat.LOWER_CASE.format((short) (pc + offset)));
 			index++;
 		}
-		out.printComment(" default:").printComment(HexFormatter.LOWER_CASE.format((short) (pc + tsDefault)));
+		out.printComment(" default:").printComment(HexFormat.LOWER_CASE.format((short) (pc + tsDefault)));
 	}
 
 }

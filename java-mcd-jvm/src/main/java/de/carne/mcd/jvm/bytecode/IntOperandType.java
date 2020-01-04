@@ -21,7 +21,7 @@ import java.io.IOException;
 import de.carne.boot.logging.Log;
 import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
-import de.carne.text.HexFormatter;
+import de.carne.text.HexFormat;
 
 /**
  * Possible int operand types.
@@ -37,7 +37,7 @@ public enum IntOperandType implements OperandDecoder {
 	 * Branch target.
 	 */
 	BRANCH((pc, operand, out) -> out.printValue(operand >= 0 ? "+" : "").printValue(Integer.toString(operand))
-			.print(" ").printComment("// ").printComment(HexFormatter.LOWER_CASE.format(pc + operand)));
+			.print(" ").printComment("// ").printComment(HexFormat.LOWER_CASE.format(pc + operand)));
 
 	private static final Log LOG = new Log();
 

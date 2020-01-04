@@ -22,7 +22,7 @@ import de.carne.boot.logging.Log;
 import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.jvm.BytecodeDecoder;
-import de.carne.text.HexFormatter;
+import de.carne.text.HexFormat;
 
 /**
  * Possible short operand types.
@@ -60,7 +60,7 @@ public enum ShortOperandType implements OperandDecoder {
 	 * Branch target.
 	 */
 	BRANCH((pc, operand, out) -> out.printValue(operand >= 0 ? "+" : "").printValue(Short.toString(operand)).print(" ")
-			.printComment("// ").printComment(HexFormatter.LOWER_CASE.format((short) (pc + operand))));
+			.printComment("// ").printComment(HexFormat.LOWER_CASE.format((short) (pc + operand))));
 
 	private static final Log LOG = new Log();
 
