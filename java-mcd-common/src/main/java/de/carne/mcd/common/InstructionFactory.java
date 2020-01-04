@@ -27,7 +27,7 @@ public interface InstructionFactory {
 
 	/**
 	 * Loads and setups an {@linkplain Instruction} instance from a data stream previously written via
-	 * {@linkplain Instruction#store(java.io.DataOutput)}.
+	 * {@linkplain Instruction#save(java.io.DataOutput)}.
 	 *
 	 * @param in the {@linkplain DataInputStream} to load from.
 	 * @return the loaded {@linkplain Instruction} instance.

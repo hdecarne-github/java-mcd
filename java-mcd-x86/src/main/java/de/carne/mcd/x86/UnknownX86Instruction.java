@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm.bytecode;
+package de.carne.mcd.x86;
 
 import java.io.DataOutput;
 import java.io.IOException;
@@ -25,11 +25,11 @@ import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.Opcode;
 
-class UnknownBytecodeInstruction implements Instruction {
+class UnknownX86Instruction implements Instruction {
 
 	private final String opcodeString;
 
-	UnknownBytecodeInstruction(byte[] opcode, int offset, int length) {
+	UnknownX86Instruction(byte[] opcode, int offset, int length) {
 		this.opcodeString = Opcode.toString(opcode, offset, length);
 	}
 
@@ -41,7 +41,7 @@ class UnknownBytecodeInstruction implements Instruction {
 
 	@Override
 	public void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
-		out.printlnError(this.opcodeString);
+		out.printKeyword("db").print(" ").printValue(this.opcodeString).println(";");
 	}
 
 }

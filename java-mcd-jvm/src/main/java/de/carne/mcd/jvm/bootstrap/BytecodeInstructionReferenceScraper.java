@@ -37,20 +37,20 @@ import org.eclipse.jdt.annotation.Nullable;
 import de.carne.boot.logging.Log;
 import de.carne.util.Strings;
 
-final class ReferenceScraper implements Closeable {
+final class BytecodeInstructionReferenceScraper implements Closeable {
 
 	private static final Log LOG = new Log();
 
 	private final BufferedReader in;
-	private final Deque<Reference> references = new LinkedList<>();
+	private final Deque<BytecodeInstructionReferenceEntry> entries = new LinkedList<>();
 
-	ReferenceScraper(InputStream referenceStream, Charset cs) {
+	BytecodeInstructionReferenceScraper(InputStream referenceStream, Charset cs) {
 		this.in = new BufferedReader(new InputStreamReader(referenceStream, cs));
 	}
 
 	@Nullable
-	public Reference scrapeNext() throws IOException {
-		return (!this.references.isEmpty() || scrapNextReference() ? this.references.pop() : null);
+	public BytecodeInstructionReferenceEntry scrapeNext() throws IOException {
+		return (!this.entries.isEmpty() || scrapNextReference() ? this.entries.pop() : null);
 	}
 
 	@Override
@@ -93,7 +93,7 @@ final class ReferenceScraper implements Closeable {
 
 		LOG.debug("Scraping next reference...");
 
-		while (this.references.isEmpty() && (line = readLine()) != null) {
+		while (this.entries.isEmpty() && (line = readLine()) != null) {
 			Matcher instructionEntryMatcher = INSTRUCTION_ENTRY_PATTERN.matcher(line);
 
 			if (instructionEntryMatcher.matches()) {
@@ -146,12 +146,11 @@ final class ReferenceScraper implements Closeable {
 				LOG.info(" forms: {0}", Strings.join(forms, "|"));
 
 				for (InstructionForm form : forms) {
-					this.references.add(new Reference(form.mnomic(), form.opcode(), format.arguments(), operandStackIn,
-							operandStackOut));
+					this.entries.add(new BytecodeInstructionReferenceEntry(form.opcode(), form.mnemonic()));
 				}
 			}
 		}
-		return !this.references.isEmpty();
+		return !this.entries.isEmpty();
 	}
 
 	private InstructionFormat scrapeFormat() throws IOException {
@@ -185,10 +184,10 @@ final class ReferenceScraper implements Closeable {
 		} while (!formMatcher.matches());
 		do {
 			if (formMatcher.groupCount() != 0) {
-				String mnomic = formMatcher.group(1);
+				String mnemonic = formMatcher.group(1);
 				byte[] opcodes = new byte[] { decodeByte(formMatcher.group(2)) };
 
-				forms.add(new InstructionForm(mnomic, opcodes));
+				forms.add(new InstructionForm(mnemonic, opcodes));
 			}
 			formMatcher = anyMatcher(safeReadLine(), FORM1_PATTERN, FORM2_PATTERN, PENDING_END_PARAGRAPH_PATTERN);
 		} while (formMatcher.matches());
@@ -251,7 +250,7 @@ final class ReferenceScraper implements Closeable {
 		String line = this.in.readLine();
 
 		if (line != null) {
-			LOG.debug("Processing line: {0}", line);
+			LOG.trace("Processing line: {0}", line);
 		}
 		return line;
 	}

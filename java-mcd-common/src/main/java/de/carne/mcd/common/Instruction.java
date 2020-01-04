@@ -25,13 +25,13 @@ import java.io.IOException;
 public interface Instruction {
 
 	/**
-	 * Stores these instruction's parameters to the given {@linkplain DataOutput} for later loading via
+	 * Saves these instruction's parameters to the given {@linkplain DataOutput} for later loading via
 	 * {@linkplain InstructionFactory#loadInstruction(java.io.DataInput)}.
 	 *
 	 * @param out the {@linkplain DataOutput} to store to.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	void store(DataOutput out) throws IOException;
+	void save(DataOutput out) throws IOException;
 
 	/**
 	 * Decodes this instruction.

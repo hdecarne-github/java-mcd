@@ -14,17 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.common;
+package de.carne.mcd.common.bootstrap;
 
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutput;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 import de.carne.boot.logging.Log;
+import de.carne.mcd.common.Instruction;
+import de.carne.mcd.common.InstructionFactory;
+import de.carne.mcd.common.InstructionIndex;
+import de.carne.mcd.common.InstructionIndexParameters;
+import de.carne.mcd.common.Opcode;
 
 /**
  * Helper class used to create an {@linkplain InstructionIndex} resource file.
@@ -69,7 +76,7 @@ public final class InstructionIndexBuilder implements InstructionIndexParameters
 
 		try (ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 				DataOutputStream out = new DataOutputStream(bytes)) {
-			instruction.store(out);
+			instruction.save(out);
 			out.flush();
 			instructionSize = bytes.size();
 		}
@@ -79,47 +86,51 @@ public final class InstructionIndexBuilder implements InstructionIndexParameters
 	}
 
 	/**
-	 * Stores the current state of this instance to a {@linkplain DataOutput}.
+	 * Saves the current state of this instance to a file.
 	 * <p>
 	 * The resulting output can accessed via {@linkplain InstructionIndex#open(InstructionFactory, java.net.URL)}.
 	 * </p>
 	 *
-	 * @param out the {@linkplain DataOutput} write to.
+	 * @param file the file write to.
 	 * @return the size of the stored index.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	public long store(DataOutput out) throws IOException {
-		LOG.info("Storing instruction index...");
-
+	public long save(File file) throws IOException {
 		long totalIndexSize = 0;
 
-		out.writeInt(parameters());
-		totalIndexSize += 4;
+		LOG.info("Saving instruction index to file ''{0}''...", file);
 
-		int entryCount = this.instructionTable.size();
-		int opcodeBytes = opcodeBytes();
-		int positionBytes = positionBytes();
+		try (DataOutputStream out = new DataOutputStream(Files.newOutputStream(file.toPath(), StandardOpenOption.CREATE,
+				StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE))) {
 
-		LOG.debug(" Index parameters: {0}/{1}/{2}", entryCount, opcodeBytes, positionBytes);
+			out.writeInt(parameters());
+			totalIndexSize += 4;
 
-		long nextInstructionPosition = 0;
+			int entryCount = this.instructionTable.size();
+			int opcodeBytes = opcodeBytes();
+			int positionBytes = positionBytes();
 
-		for (Map.Entry<Opcode, InstructionEntry> entry : this.instructionTable.entrySet()) {
-			Opcode opcode = entry.getKey();
+			LOG.debug(" Index parameters: {0}/{1}/{2}", entryCount, opcodeBytes, positionBytes);
 
-			LOG.debug(" {0} -> {1}", opcode, nextInstructionPosition);
+			long nextInstructionPosition = 0;
 
-			InstructionEntry instructionEntry = entry.getValue();
+			for (Map.Entry<Opcode, InstructionEntry> entry : this.instructionTable.entrySet()) {
+				Opcode opcode = entry.getKey();
 
-			out.write(opcode.encode(opcodeBytes));
-			totalIndexSize += opcodeBytes;
-			out.write(getEncodedPosition(nextInstructionPosition, positionBytes));
-			totalIndexSize += positionBytes;
-			nextInstructionPosition += instructionEntry.instructionSize();
-		}
-		for (InstructionEntry instructionEntry : this.instructionTable.values()) {
-			instructionEntry.instruction().store(out);
-			totalIndexSize += instructionEntry.instructionSize();
+				LOG.trace(" {0} -> position:{1}", opcode, nextInstructionPosition);
+
+				InstructionEntry instructionEntry = entry.getValue();
+
+				out.write(opcode.encode(opcodeBytes));
+				totalIndexSize += opcodeBytes;
+				out.write(getEncodedPosition(nextInstructionPosition, positionBytes));
+				totalIndexSize += positionBytes;
+				nextInstructionPosition += instructionEntry.instructionSize();
+			}
+			for (InstructionEntry instructionEntry : this.instructionTable.values()) {
+				instructionEntry.instruction().save(out);
+				totalIndexSize += instructionEntry.instructionSize();
+			}
 		}
 		return totalIndexSize;
 	}

@@ -14,34 +14,45 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm.bytecode;
+package de.carne.mcd.x86.bootstrap;
 
-import java.io.DataOutput;
 import java.io.IOException;
+import java.util.List;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.common.Instruction;
-import de.carne.mcd.common.MCDDecodeBuffer;
-import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.Opcode;
+import de.carne.mcd.common.bootstrap.InstructionReferenceEntry;
+import de.carne.mcd.x86.X86Instruction;
 
-class UnknownBytecodeInstruction implements Instruction {
+class X86InstructionReferenceEntry extends InstructionReferenceEntry {
 
-	private final String opcodeString;
+	X86InstructionReferenceEntry(Opcode opcode, String mnemonic, List<String> extraFields) {
+		super(opcode, mnemonic, extraFields);
+	}
 
-	UnknownBytecodeInstruction(byte[] opcode, int offset, int length) {
-		this.opcodeString = Opcode.toString(opcode, offset, length);
+	X86InstructionReferenceEntry(InstructionReferenceEntry entryData) {
+		super(entryData);
 	}
 
 	@Override
-	public void save(DataOutput out) throws IOException {
-		// Should never be called
-		Check.fail();
+	public Instruction toInstruction() throws IOException {
+		return new X86Instruction(mnemonic());
 	}
 
-	@Override
-	public void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
-		out.printlnError(this.opcodeString);
+	public boolean isX86b16() {
+		return isChecked(0);
+	}
+
+	public boolean isX86b32() {
+		return isChecked(1);
+	}
+
+	public boolean isX86b64() {
+		return isChecked(2);
+	}
+
+	private boolean isChecked(int extraFieldIndex) {
+		return "x".equals(extraFields().get(extraFieldIndex));
 	}
 
 }

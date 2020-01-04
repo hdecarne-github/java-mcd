@@ -23,7 +23,7 @@ import java.util.Objects;
 import de.carne.mcd.common.InstructionIndex;
 
 /**
- * Utility class providing access to the bytecode instruction index.
+ * Helper class providing access to the bytecode instruction index.
  */
 public final class BytecodeInstructionIndex {
 
@@ -39,7 +39,7 @@ public final class BytecodeInstructionIndex {
 	 */
 	public static InstructionIndex open() throws IOException {
 		URL instructionIndexUrl = Objects.requireNonNull(
-				BytecodeInstructionIndex.class.getResource(BytecodeInstructionIndex.class.getSimpleName() + ".index"));
+				BytecodeInstructionIndex.class.getResource(BytecodeInstructionIndex.class.getSimpleName() + ".bin"));
 
 		return InstructionIndex.open(new BytecodeInstructionFactory(), instructionIndexUrl);
 	}

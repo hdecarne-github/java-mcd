@@ -19,14 +19,11 @@ package de.carne.mcd.common.test;
 import java.io.ByteArrayInputStream;
 import java.io.DataInput;
 import java.io.DataOutput;
-import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.nio.ByteOrder;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 
 import org.eclipse.jdt.annotation.Nullable;
 import org.junit.jupiter.api.Assertions;
@@ -36,10 +33,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import de.carne.mcd.common.Instruction;
 import de.carne.mcd.common.InstructionFactory;
 import de.carne.mcd.common.InstructionIndex;
-import de.carne.mcd.common.InstructionIndexBuilder;
 import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.Opcode;
+import de.carne.mcd.common.bootstrap.InstructionIndexBuilder;
 import de.carne.test.api.io.TempFile;
 import de.carne.test.extension.TempPathExtension;
 import de.carne.text.HexFormatter;
@@ -94,13 +91,13 @@ class InstructionIndexTest {
 	}
 
 	@Test
-	void testStoreAndOpen(@TempFile Path indexFile) throws IOException {
+	void testStoreAndOpen(@TempFile File indexFile) throws IOException {
 		InstructionIndexBuilder builder = new InstructionIndexBuilder();
 
 		bootstrapInstructionIndex(builder);
-		storeIndex(indexFile, builder);
+		builder.save(indexFile);
 
-		try (InstructionIndex index = InstructionIndex.open(INSTRUCTION_FACTORY, indexFile.toUri().toURL())) {
+		try (InstructionIndex index = InstructionIndex.open(INSTRUCTION_FACTORY, indexFile.toPath().toUri().toURL())) {
 			Assertions.assertEquals(builder.parameters(), index.parameters());
 			Assertions.assertEquals(builder.entryCount(), index.entryCount());
 			Assertions.assertEquals(builder.opcodeBytes(), index.opcodeBytes());
@@ -109,13 +106,13 @@ class InstructionIndexTest {
 	}
 
 	@Test
-	void testLookup(@TempFile Path indexFile) throws IOException {
+	void testLookup(@TempFile File indexFile) throws IOException {
 		InstructionIndexBuilder builder = new InstructionIndexBuilder();
 
 		bootstrapInstructionIndex(builder);
-		storeIndex(indexFile, builder);
+		builder.save(indexFile);
 
-		try (InstructionIndex index = InstructionIndex.open(INSTRUCTION_FACTORY, indexFile.toUri().toURL());
+		try (InstructionIndex index = InstructionIndex.open(INSTRUCTION_FACTORY, indexFile.toPath().toUri().toURL());
 				ReadableByteChannel testCodeChannel = Channels.newChannel(new ByteArrayInputStream(TEST_CODE))) {
 			MCDDecodeBuffer buffer = new MCDDecodeBuffer(testCodeChannel, ByteOrder.nativeOrder());
 
@@ -144,13 +141,6 @@ class InstructionIndexTest {
 		builder.add(Opcode.wrap(OPCODE_0202), new TestInstruction(OPCODE_0202));
 	}
 
-	private void storeIndex(Path indexFile, InstructionIndexBuilder builder) throws IOException {
-		try (DataOutputStream indexOut = new DataOutputStream(
-				Files.newOutputStream(indexFile, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE))) {
-			builder.store(indexOut);
-		}
-	}
-
 	private static class TestInstruction implements Instruction {
 
 		private final byte[] opcode;
@@ -175,7 +165,7 @@ class InstructionIndexTest {
 		}
 
 		@Override
-		public void store(DataOutput out) throws IOException {
+		public void save(DataOutput out) throws IOException {
 			out.writeInt(this.length);
 			out.write(this.opcode, this.offset, this.length);
 		}

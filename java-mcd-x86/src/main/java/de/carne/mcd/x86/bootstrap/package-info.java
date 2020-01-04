@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Holger de Carne and contributors, All Rights Reserved.
+ * Copyright (c) 2018-2019-2020 Holger de Carne and contributors, All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,31 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm.bootstrap;
+@NonNullByDefault
+package de.carne.mcd.x86.bootstrap;
 
-import de.carne.mcd.common.Opcode;
-
-final class InstructionForm {
-
-	private final String mnemonic;
-	private final Opcode opcode;
-
-	InstructionForm(String mnemonic, byte[] opcodeBytes) {
-		this.mnemonic = mnemonic;
-		this.opcode = Opcode.wrap(opcodeBytes);
-	}
-
-	public String mnemonic() {
-		return this.mnemonic;
-	}
-
-	public Opcode opcode() {
-		return this.opcode;
-	}
-
-	@Override
-	public String toString() {
-		return this.opcode + " " + this.mnemonic;
-	}
-
-}
+import org.eclipse.jdt.annotation.NonNullByDefault;

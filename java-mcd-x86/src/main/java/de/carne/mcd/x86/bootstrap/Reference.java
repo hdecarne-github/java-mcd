@@ -14,20 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.x86.test;
+package de.carne.mcd.x86.bootstrap;
 
-import org.junit.jupiter.api.Test;
+final class Reference {
 
-import de.carne.mcd.x86.X86MachineCodeDecoder;
-
-/**
- * Test {@linkplain X86MachineCodeDecoder} class.
- */
-class X86MachineCodeDecoderTest {
-
-	@Test
-	void testX86MachineCodeDecoder() {
-		// TODO Auto-generated method stub
+	public Reference() {
+		// TODO Auto-generated constructor stub
 	}
 
 }

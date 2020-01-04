@@ -14,34 +14,45 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm.bytecode;
+package de.carne.mcd.x86;
 
+import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.common.Instruction;
 import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
-import de.carne.mcd.common.Opcode;
 
-class UnknownBytecodeInstruction implements Instruction {
+/**
+ *
+ */
+public class X86Instruction implements Instruction {
 
-	private final String opcodeString;
+	private final String mnemonic;
 
-	UnknownBytecodeInstruction(byte[] opcode, int offset, int length) {
-		this.opcodeString = Opcode.toString(opcode, offset, length);
+	/**
+	 * @param mnemonic
+	 */
+	public X86Instruction(String mnemonic) {
+		this.mnemonic = mnemonic;
+	}
+
+	static X86Instruction load(DataInput in) throws IOException {
+		String mnemonic = in.readUTF();
+
+		return new X86Instruction(mnemonic);
 	}
 
 	@Override
 	public void save(DataOutput out) throws IOException {
-		// Should never be called
-		Check.fail();
+		out.writeUTF(this.mnemonic);
 	}
 
 	@Override
 	public void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
-		out.printlnError(this.opcodeString);
+		out.printKeyword(this.mnemonic);
+		out.println();
 	}
 
 }

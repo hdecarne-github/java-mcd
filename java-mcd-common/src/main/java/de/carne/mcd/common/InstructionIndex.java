@@ -33,6 +33,7 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import de.carne.boot.logging.Log;
 import de.carne.io.IOUtil;
+import de.carne.mcd.common.bootstrap.InstructionIndexBuilder;
 
 /**
  * Loads and searches a persistent index for mapping opcode bytes to {@linkplain Instruction} instances.

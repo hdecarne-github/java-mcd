@@ -126,10 +126,10 @@ public class Opcode implements Comparable<Opcode> {
 
 		if (comparison == 0) {
 			for (int compareIndex = 0; compareIndex < length1; compareIndex++) {
-				byte byte1 = bytes1[offset1 + compareIndex];
-				byte byte2 = bytes2[offset2 + compareIndex];
+				int byte1 = Byte.toUnsignedInt(bytes1[offset1 + compareIndex]);
+				int byte2 = Byte.toUnsignedInt(bytes2[offset2 + compareIndex]);
 
-				comparison = Byte.compare(byte1, byte2);
+				comparison = Integer.compare(byte1, byte2);
 				if (comparison != 0) {
 					break;
 				}
