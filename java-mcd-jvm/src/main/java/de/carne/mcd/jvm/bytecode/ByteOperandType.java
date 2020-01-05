@@ -23,6 +23,7 @@ import java.util.Map;
 import de.carne.boot.logging.Log;
 import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
+import de.carne.mcd.common.MachineCodeDecoder;
 import de.carne.mcd.jvm.BytecodeDecoder;
 
 /**
@@ -112,7 +113,8 @@ public enum ByteOperandType implements OperandDecoder {
 	}
 
 	private static String runtimeConstantComment(byte index) {
-		return BytecodeDecoder.getDecodeContext().getClassInfo().resolveRuntimeSymbol(Byte.toUnsignedInt(index));
+		return MachineCodeDecoder.getDecodeContext().getDecoder(BytecodeDecoder.class).getClassInfo()
+				.resolveRuntimeSymbol(Byte.toUnsignedInt(index));
 	}
 
 }

@@ -21,6 +21,7 @@ import java.io.IOException;
 import de.carne.boot.logging.Log;
 import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
+import de.carne.mcd.common.MachineCodeDecoder;
 import de.carne.mcd.jvm.BytecodeDecoder;
 import de.carne.text.HexFormat;
 
@@ -95,7 +96,8 @@ public enum ShortOperandType implements OperandDecoder {
 	}
 
 	private static String runtimeConstantComment(short index) {
-		return BytecodeDecoder.getDecodeContext().getClassInfo().resolveRuntimeSymbol(Short.toUnsignedInt(index));
+		return MachineCodeDecoder.getDecodeContext().getDecoder(BytecodeDecoder.class).getClassInfo()
+				.resolveRuntimeSymbol(Short.toUnsignedInt(index));
 	}
 
 }

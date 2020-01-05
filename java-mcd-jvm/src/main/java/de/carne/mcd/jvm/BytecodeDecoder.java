@@ -19,7 +19,6 @@ package de.carne.mcd.jvm;
 import java.io.IOException;
 import java.nio.ByteOrder;
 import java.nio.channels.ReadableByteChannel;
-import java.util.Objects;
 import java.util.Optional;
 
 import de.carne.mcd.common.Instruction;
@@ -41,8 +40,6 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 
 	private static final Late<InstructionIndex> BYTECODE_INSTRUCTION_INDEX_HOLDER = new Late<>();
 
-	private static final ThreadLocal<BytecodeDecoder> DECODE_CONTEXT = new ThreadLocal<>();
-
 	private final ClassInfo classInfo;
 
 	/**
@@ -56,18 +53,6 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 	}
 
 	/**
-	 * Gets the {@linkplain BytecodeDecoder} executing the current decode call.
-	 * <p>
-	 * This function will fail with a NPE if called outside a decode call.
-	 * </p>
-	 *
-	 * @return the {@linkplain BytecodeDecoder} executing the current decode steps.
-	 */
-	public static BytecodeDecoder getDecodeContext() {
-		return Objects.requireNonNull(DECODE_CONTEXT.get());
-	}
-
-	/**
 	 * Gets the {@linkplain ClassInfo} associated with this {@linkplain BytecodeDecoder} instance.
 	 *
 	 * @return the {@linkplain ClassInfo} associated with this {@linkplain BytecodeDecoder} instance.
@@ -77,7 +62,7 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 	}
 
 	@Override
-	public void decode(ReadableByteChannel in, MCDOutput out) throws IOException {
+	protected void doDecode(ReadableByteChannel in, MCDOutput out) throws IOException {
 		MCDDecodeBuffer buffer = newDecodeBuffer(in);
 
 		out.printComment("// max_stack: ").printlnComment(Integer.toString(Short.toUnsignedInt(buffer.decodeI16())));
@@ -89,15 +74,10 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 		Instruction instruction;
 		int pc = 0;
 
-		try {
-			DECODE_CONTEXT.set(this);
-			while ((instruction = instructionIndex.lookupNextInstruction(codeBuffer)) != null) {
-				out.printLabel(HexFormat.LOWER_CASE.format((short) pc)).printLabel(":").print(" ");
-				instruction.decode(pc, codeBuffer, out);
-				pc = (int) codeBuffer.getTotalRead();
-			}
-		} finally {
-			DECODE_CONTEXT.remove();
+		while ((instruction = instructionIndex.lookupNextInstruction(codeBuffer)) != null) {
+			out.printLabel(HexFormat.LOWER_CASE.format((short) pc)).printLabel(":").print(" ");
+			instruction.decode(pc, codeBuffer, out);
+			pc = (int) codeBuffer.getTotalRead();
 		}
 	}
 

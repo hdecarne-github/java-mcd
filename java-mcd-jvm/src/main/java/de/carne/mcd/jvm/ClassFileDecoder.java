@@ -40,7 +40,7 @@ public class ClassFileDecoder extends MachineCodeDecoder {
 	}
 
 	@Override
-	public void decode(ReadableByteChannel in, MCDOutput out) throws IOException {
+	public void doDecode(ReadableByteChannel in, MCDOutput out) throws IOException {
 		DecodedClassInfo decoded = DecodedClassInfo.decode(newDecodeBuffer(in));
 
 		ClassPrinter.getInstance(out, decoded).print();

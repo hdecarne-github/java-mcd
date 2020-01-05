@@ -44,7 +44,7 @@ class MachineCodeDecoderTest {
 		}
 
 		@Override
-		public void decode(ReadableByteChannel in, MCDOutput out) throws IOException {
+		public void doDecode(ReadableByteChannel in, MCDOutput out) throws IOException {
 			MCDDecodeBuffer buffer = newDecodeBuffer(in);
 
 			out.print(Integer.toHexString(buffer.decodeI32()));

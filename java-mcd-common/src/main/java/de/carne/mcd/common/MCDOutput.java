@@ -22,7 +22,7 @@ import java.io.IOException;
 
 /**
  * Output channel receiving the decoded data during a
- * {@linkplain MachineCodeDecoder#decode(java.nio.channels.ReadableByteChannel, MCDOutput)} call..
+ * {@linkplain MachineCodeDecoder#doDecode(java.nio.channels.ReadableByteChannel, MCDOutput)} call..
  */
 public interface MCDOutput extends Closeable, Flushable {
 

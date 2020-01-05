@@ -55,8 +55,10 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 	private int secOpcode = -1;
 	private String mnomic = InstructionReferenceEntry.NO_VALUE;
 	private String mode = InstructionReferenceEntry.NO_VALUE;
-	private String procStart = InstructionReferenceEntry.NO_VALUE;
 	private String procEnd = InstructionReferenceEntry.NO_VALUE;
+	private int dstSrcMode = 0;
+	private String dstSrcA = "";
+	private String dstSrcT = "";
 	private final StringBuilder characterBuffer = new StringBuilder();
 	private boolean characterBufferEnabled;
 
@@ -82,7 +84,6 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 
 	private void resetPriOpcode(byte opcode) {
 		this.priOpcode = Byte.toUnsignedInt(opcode);
-		this.procStart = "00";
 		this.procEnd = InstructionReferenceEntry.NO_VALUE;
 		resetEntry();
 	}
@@ -122,12 +123,18 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 			startEntryElement(attributes);
 		} else if ("mnem".equals(qName)) {
 			startMnemElement();
-		} else if ("proc_start".equals(qName)) {
-			startProcStartElement();
 		} else if ("proc_end".equals(qName)) {
 			startProcEndElement();
 		} else if ("pref".equals(qName)) {
 			startPrefElement();
+		} else if ("dst".equals(qName)) {
+			startDstElement();
+		} else if ("src".equals(qName)) {
+			startSrcElement();
+		} else if ("a".equals(qName)) {
+			startAElement();
+		} else if ("t".equals(qName)) {
+			startTElement();
 		}
 	}
 
@@ -157,15 +164,31 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 		enableCharacterBuffer();
 	}
 
-	private void startProcStartElement() {
-		enableCharacterBuffer();
-	}
-
 	private void startProcEndElement() {
 		enableCharacterBuffer();
 	}
 
 	private void startPrefElement() {
+		enableCharacterBuffer();
+	}
+
+	private void startDstElement() {
+		Check.assertTrue(this.dstSrcMode == 0);
+
+		this.dstSrcMode = 1;
+	}
+
+	private void startSrcElement() {
+		Check.assertTrue(this.dstSrcMode == 0);
+
+		this.dstSrcMode = -1;
+	}
+
+	private void startAElement() {
+		enableCharacterBuffer();
+	}
+
+	private void startTElement() {
 		enableCharacterBuffer();
 	}
 
@@ -184,12 +207,18 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 			endSecOpcdElement();
 		} else if ("mnem".equals(qName)) {
 			endMnemElement();
-		} else if ("proc_start".equals(qName)) {
-			endProcStartElement();
 		} else if ("proc_end".equals(qName)) {
 			endProcEndElement();
 		} else if ("pref".equals(qName)) {
 			endPrefElement();
+		} else if ("dst".equals(qName)) {
+			endDstSrcElement();
+		} else if ("src".equals(qName)) {
+			endDstSrcElement();
+		} else if ("a".equals(qName)) {
+			endAElement();
+		} else if ("t".equals(qName)) {
+			endTElement();
 		}
 	}
 
@@ -201,11 +230,11 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 
 			List<String> extraFields = new ArrayList<>();
 
-			if ("r".equals(this.mode)) {
+			if ("r".equals(this.mode) && InstructionReferenceEntry.NO_VALUE.equals(this.procEnd)) {
 				extraFields.add(X86InstructionReferenceEntry.CHECKED);
 				extraFields.add(X86InstructionReferenceEntry.CHECKED);
 				extraFields.add(X86InstructionReferenceEntry.CHECKED);
-			} else if ("p".equals(this.mode)) {
+			} else if ("p".equals(this.mode) && InstructionReferenceEntry.NO_VALUE.equals(this.procEnd)) {
 				extraFields.add(InstructionReferenceEntry.NO_VALUE);
 				extraFields.add(X86InstructionReferenceEntry.CHECKED);
 				extraFields.add(X86InstructionReferenceEntry.CHECKED);
@@ -238,10 +267,6 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 		this.mnomic = disableCharacterBuffer();
 	}
 
-	private void endProcStartElement() {
-		this.procStart = disableCharacterBuffer();
-	}
-
 	private void endProcEndElement() {
 		this.procEnd = disableCharacterBuffer();
 	}
@@ -250,6 +275,20 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 		String prefixString = disableCharacterBuffer();
 
 		this.prefixByte = Byte.toUnsignedInt(parseOpcode(prefixString));
+	}
+
+	private void endDstSrcElement() {
+		this.dstSrcMode = 0;
+		this.dstSrcA = "";
+		this.dstSrcT = "";
+	}
+
+	private void endAElement() {
+		this.dstSrcA = disableCharacterBuffer();
+	}
+
+	private void endTElement() {
+		this.dstSrcT = disableCharacterBuffer();
 	}
 
 	@Override

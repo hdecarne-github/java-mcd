@@ -137,7 +137,7 @@ class ClassFileDecoderTest {
 					try (InputStream jarEntryStream = jarFile.getInputStream(jarEntry);
 							ReadableByteChannel jarEntryChannel = Channels.newChannel(jarEntryStream);
 							PlainMCDOutput out = new PlainMCDOutput(decodeBuffer, false)) {
-						decoder.decode(jarEntryChannel, out);
+						decoder.doDecode(jarEntryChannel, out);
 					}
 				}
 			}
@@ -159,7 +159,7 @@ class ClassFileDecoderTest {
 		StringWriter decodeBuffer = new StringWriter();
 
 		try (ReadableByteChannel in = getByteCode(resource); MCDOutput out = new PlainMCDOutput(decodeBuffer, false)) {
-			decoder.decode(in, out);
+			decoder.doDecode(in, out);
 		}
 
 		String decodeOutput = decodeBuffer.toString();

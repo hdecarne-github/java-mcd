@@ -44,7 +44,7 @@ public class X86b32Decoder extends X86Decoder {
 	}
 
 	@Override
-	public void decode(ReadableByteChannel in, MCDOutput out) throws IOException {
+	protected void doDecode(ReadableByteChannel in, MCDOutput out) throws IOException {
 		MCDDecodeBuffer buffer = newDecodeBuffer(in);
 		InstructionIndex instructionIndex = getInstructionIndex();
 		Instruction instruction;

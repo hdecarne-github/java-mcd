@@ -44,7 +44,7 @@
 2B;SUB;y;y;y
 2C;SUB;y;y;y
 2D;SUB;y;y;y
-2E;NTAKEN;y;y;-
+2E;CS;y;y;y
 2F;DAS;y;y;-
 30;XOR;y;y;y
 31;XOR;y;y;y
@@ -60,7 +60,7 @@
 3B;CMP;y;y;y
 3C;CMP;y;y;y
 3D;CMP;y;y;y
-3E;TAKEN;y;y;-
+3E;DS;y;y;y
 3F;AAS;y;y;-
 40;INC;y;y;y
 48;DEC;y;y;y
@@ -70,7 +70,7 @@
 61;POPAD;y;y;-
 62;BOUND;y;y;-
 63;ARPL;y;y;y
-64;ALTER;y;y;y
+64;FS;y;y;y
 65;GS;y;y;y
 68;PUSH;y;y;y
 69;IMUL;y;y;y
@@ -164,13 +164,13 @@ D5;ADX;y;y;-
 D6;SETALC;y;y;-
 D7;XLATB;y;y;y
 D8;FDIVR;y;y;y
-D9;FNSTCW;y;y;y
+D9;FSTP;y;y;y
 DA;FIDIVR;y;y;y
-DB;FSTP;y;y;y
-DC;FDIV;y;y;y
-DD;FNSTSW;y;y;y
-DE;FDIVP;y;y;y
-DF;FISTP;y;y;y
+DB;FCMOVNU;y;y;y
+DC;FCOM;y;y;y
+DD;FISTTP;y;y;y
+DE;FICOM;y;y;y
+DF;FISTTP;y;y;y
 E0;LOOPNE;y;y;y
 E1;LOOPE;y;y;y
 E2;LOOP;y;y;y
