@@ -17,29 +17,60 @@
 package de.carne.mcd.x86;
 
 import java.io.IOException;
-import java.nio.ByteOrder;
 import java.nio.channels.ReadableByteChannel;
+import java.util.Optional;
 
+import de.carne.mcd.common.Instruction;
+import de.carne.mcd.common.InstructionIndex;
+import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
-import de.carne.mcd.common.MachineCodeDecoder;
+import de.carne.text.HexFormat;
+import de.carne.util.Late;
 
 /**
- * x86/amd64 machine code decoder.
+ * x86-64 machine code decoder.
  */
-public class X86b64Decoder extends MachineCodeDecoder {
+public class X86b64Decoder extends X86Decoder {
 
-	private static final String NAME = "X86 instructions";
+	private static final String NAME = "x86-64 instructions";
+
+	private static final Late<InstructionIndex> X86B64_INSTRUCTION_INDEX_HOLDER = new Late<>();
 
 	/**
 	 * Constructs a new {@linkplain X86b64Decoder} instance.
 	 */
 	public X86b64Decoder() {
-		super(NAME, ByteOrder.LITTLE_ENDIAN);
+		super(NAME);
 	}
 
 	@Override
 	public void decode(ReadableByteChannel in, MCDOutput out) throws IOException {
-		// TODO Auto-generated method stub
+		MCDDecodeBuffer buffer = newDecodeBuffer(in);
+		InstructionIndex instructionIndex = getInstructionIndex();
+		Instruction instruction;
+		int ip = 0;
+
+		while ((instruction = instructionIndex.lookupNextInstruction(buffer)) != null) {
+			out.printLabel(HexFormat.LOWER_CASE.format((long) ip)).printLabel(":").print(" ");
+			instruction.decode(ip, buffer, out);
+			ip = (int) buffer.getTotalRead();
+		}
+	}
+
+	@SuppressWarnings("resource")
+	private static InstructionIndex getInstructionIndex() throws IOException {
+		InstructionIndex instructionIndex;
+
+		synchronized (X86B64_INSTRUCTION_INDEX_HOLDER) {
+			Optional<InstructionIndex> instructionIndexHolder = X86B64_INSTRUCTION_INDEX_HOLDER.getOptional();
+
+			if (instructionIndexHolder.isPresent()) {
+				instructionIndex = instructionIndexHolder.get();
+			} else {
+				instructionIndex = X86B64_INSTRUCTION_INDEX_HOLDER.set(X86b16InstructionIndex.open());
+			}
+		}
+		return instructionIndex;
 	}
 
 }

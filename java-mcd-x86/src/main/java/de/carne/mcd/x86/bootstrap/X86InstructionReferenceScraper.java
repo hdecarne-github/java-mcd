@@ -201,9 +201,19 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 
 			List<String> extraFields = new ArrayList<>();
 
-			extraFields.add("x");
-			extraFields.add("x");
-			extraFields.add("x");
+			if ("r".equals(this.mode)) {
+				extraFields.add(X86InstructionReferenceEntry.CHECKED);
+				extraFields.add(X86InstructionReferenceEntry.CHECKED);
+				extraFields.add(X86InstructionReferenceEntry.CHECKED);
+			} else if ("p".equals(this.mode)) {
+				extraFields.add(InstructionReferenceEntry.NO_VALUE);
+				extraFields.add(X86InstructionReferenceEntry.CHECKED);
+				extraFields.add(X86InstructionReferenceEntry.CHECKED);
+			} else {
+				extraFields.add(InstructionReferenceEntry.NO_VALUE);
+				extraFields.add(InstructionReferenceEntry.NO_VALUE);
+				extraFields.add(InstructionReferenceEntry.NO_VALUE);
+			}
 
 			X86InstructionReferenceEntry entry = new X86InstructionReferenceEntry(opcode, this.mnomic, extraFields);
 
@@ -211,6 +221,9 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 		} else {
 			X86InstructionReferenceEntry entry = this.entries.getLast();
 
+			if ("e".equals(this.mode)) {
+				entry.disableX86b64();
+			}
 		}
 		resetEntry();
 	}

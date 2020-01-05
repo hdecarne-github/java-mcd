@@ -34,7 +34,10 @@ import de.carne.boot.logging.Log;
 import de.carne.io.IOUtil;
 import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.PlainMCDOutput;
+import de.carne.mcd.x86.X86Decoder;
 import de.carne.mcd.x86.X86b16Decoder;
+import de.carne.mcd.x86.X86b32Decoder;
+import de.carne.mcd.x86.X86b64Decoder;
 
 /**
  * Test {@linkplain X86b16Decoder} class.
@@ -45,10 +48,23 @@ class X86DecoderTest {
 
 	@Test
 	void testX86b16Decoder() throws IOException {
-		X86b16Decoder decoder = new X86b16Decoder();
+		testX86Decoder(new X86b16Decoder(), TestFiles.WINDOWS_EXE.getPath(), 0x40, 184);
+	}
+
+	@Test
+	void testX86b32Decoder() throws IOException {
+		testX86Decoder(new X86b32Decoder(), TestFiles.WINDOWS_EXE.getPath(), 0x400, 4096);
+	}
+
+	@Test
+	void testX86b64Decoder() throws IOException {
+		testX86Decoder(new X86b64Decoder(), TestFiles.WINDOWS64_EXE.getPath(), 0x400, 4096);
+	}
+
+	private void testX86Decoder(X86Decoder decoder, Path file, long offset, int length) throws IOException {
 		StringWriter decodeBuffer = new StringWriter();
 
-		try (ReadableByteChannel code = getCode(TestFiles.WINDOWS_EXE.getPath(), 0x40, 184);
+		try (ReadableByteChannel code = getCode(file, offset, length);
 				MCDOutput out = new PlainMCDOutput(decodeBuffer, false)) {
 			decoder.decode(code, out);
 		}

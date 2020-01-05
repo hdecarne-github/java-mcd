@@ -23,23 +23,23 @@ import java.util.Objects;
 import de.carne.mcd.common.InstructionIndex;
 
 /**
- * Helper class providing access to the x86-16 instruction index.
+ * Helper class providing access to the x86-64 instruction index.
  */
-public final class X86b16InstructionIndex {
+public final class X86b64InstructionIndex {
 
-	private X86b16InstructionIndex() {
+	private X86b64InstructionIndex() {
 		// Prevent instantiation
 	}
 
 	/**
-	 * Opens the x86-16 instruction index.
+	 * Opens the x86-64 instruction index.
 	 *
-	 * @return the x86-16 instruction index.
+	 * @return the x86-64 instruction index.
 	 * @throws IOException if an I/O error occurs while opening the index.
 	 */
 	public static InstructionIndex open() throws IOException {
 		URL instructionIndexUrl = Objects.requireNonNull(
-				X86b16InstructionIndex.class.getResource(X86b16InstructionIndex.class.getSimpleName() + ".bin"));
+				X86b64InstructionIndex.class.getResource(X86b64InstructionIndex.class.getSimpleName() + ".bin"));
 
 		return InstructionIndex.open(new X86InstructionFactory(), instructionIndexUrl);
 	}

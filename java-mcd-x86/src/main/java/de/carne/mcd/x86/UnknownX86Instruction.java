@@ -23,14 +23,15 @@ import de.carne.boot.check.Check;
 import de.carne.mcd.common.Instruction;
 import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
-import de.carne.mcd.common.Opcode;
+import de.carne.text.HexFormat;
 
 class UnknownX86Instruction implements Instruction {
 
-	private final String opcodeString;
+	private final byte[] opcode;
 
 	UnknownX86Instruction(byte[] opcode, int offset, int length) {
-		this.opcodeString = Opcode.toString(opcode, offset, length);
+		this.opcode = new byte[length];
+		System.arraycopy(opcode, offset, this.opcode, 0, length);
 	}
 
 	@Override
@@ -41,7 +42,12 @@ class UnknownX86Instruction implements Instruction {
 
 	@Override
 	public void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
-		out.printKeyword("db").print(" ").printValue(this.opcodeString).println(";");
+		out.printKeyword("db");
+		for (int opcodeByteIndex = 0; opcodeByteIndex < this.opcode.length; opcodeByteIndex++) {
+			out.print(opcodeByteIndex > 0 ? ", " : " ").printValue("0x")
+					.printValue(HexFormat.LOWER_CASE.format(this.opcode[opcodeByteIndex]));
+		}
+		out.println(";");
 	}
 
 }

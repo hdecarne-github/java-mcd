@@ -54,7 +54,7 @@ public class InstructionReferenceEntry {
 		for (String extraField : extraFields) {
 			normalizedExtraFields.add(Strings.isEmpty(extraField) ? NO_VALUE : extraField);
 		}
-		this.extraFields = Collections.unmodifiableList(normalizedExtraFields);
+		this.extraFields = normalizedExtraFields;
 	}
 
 	protected InstructionReferenceEntry(InstructionReferenceEntry entryData) {
@@ -85,7 +85,27 @@ public class InstructionReferenceEntry {
 	 * @return the mnemonic associated with this entry's opcode.
 	 */
 	public List<String> extraFields() {
-		return this.extraFields;
+		return Collections.unmodifiableList(this.extraFields);
+	}
+
+	/**
+	 * Gets the value of a specific extra field.
+	 *
+	 * @param index the index of the extra field to get.
+	 * @return the extra field value.
+	 */
+	public String getExtraField(int index) {
+		return this.extraFields.get(index);
+	}
+
+	/**
+	 * Sets the value of a specific extra field.
+	 *
+	 * @param index the index of the extra field to set.
+	 * @param value the value to set.
+	 */
+	public void setExtraField(int index, String value) {
+		this.extraFields.set(index, value);
 	}
 
 	/**

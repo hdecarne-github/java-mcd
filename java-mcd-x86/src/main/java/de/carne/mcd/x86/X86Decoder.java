@@ -16,32 +16,17 @@
  */
 package de.carne.mcd.x86;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Objects;
+import java.nio.ByteOrder;
 
-import de.carne.mcd.common.InstructionIndex;
+import de.carne.mcd.common.MachineCodeDecoder;
 
 /**
- * Helper class providing access to the x86-16 instruction index.
+ * Common base class for all x86 machine code decoders.
  */
-public final class X86b16InstructionIndex {
+public abstract class X86Decoder extends MachineCodeDecoder {
 
-	private X86b16InstructionIndex() {
-		// Prevent instantiation
-	}
-
-	/**
-	 * Opens the x86-16 instruction index.
-	 *
-	 * @return the x86-16 instruction index.
-	 * @throws IOException if an I/O error occurs while opening the index.
-	 */
-	public static InstructionIndex open() throws IOException {
-		URL instructionIndexUrl = Objects.requireNonNull(
-				X86b16InstructionIndex.class.getResource(X86b16InstructionIndex.class.getSimpleName() + ".bin"));
-
-		return InstructionIndex.open(new X86InstructionFactory(), instructionIndexUrl);
+	protected X86Decoder(String name) {
+		super(name, ByteOrder.LITTLE_ENDIAN);
 	}
 
 }

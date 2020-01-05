@@ -25,14 +25,16 @@ import de.carne.mcd.common.MCDDecodeBuffer;
 import de.carne.mcd.common.MCDOutput;
 
 /**
- *
+ * A single x86 instruction.
  */
 public class X86Instruction implements Instruction {
 
 	private final String mnemonic;
 
 	/**
-	 * @param mnemonic
+	 * Constructs a new {@linkplain X86Instruction} instance.
+	 *
+	 * @param mnemonic the instruction mnemonic to use.
 	 */
 	public X86Instruction(String mnemonic) {
 		this.mnemonic = mnemonic;

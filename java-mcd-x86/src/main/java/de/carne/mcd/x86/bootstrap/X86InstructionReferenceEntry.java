@@ -26,6 +26,8 @@ import de.carne.mcd.x86.X86Instruction;
 
 class X86InstructionReferenceEntry extends InstructionReferenceEntry {
 
+	public static final String CHECKED = "y";
+
 	X86InstructionReferenceEntry(Opcode opcode, String mnemonic, List<String> extraFields) {
 		super(opcode, mnemonic, extraFields);
 	}
@@ -37,6 +39,10 @@ class X86InstructionReferenceEntry extends InstructionReferenceEntry {
 	@Override
 	public Instruction toInstruction() throws IOException {
 		return new X86Instruction(mnemonic());
+	}
+
+	public void disableX86b64() {
+		setExtraField(2, NO_VALUE);
 	}
 
 	public boolean isX86b16() {
@@ -51,8 +57,8 @@ class X86InstructionReferenceEntry extends InstructionReferenceEntry {
 		return isChecked(2);
 	}
 
-	private boolean isChecked(int extraFieldIndex) {
-		return "x".equals(extraFields().get(extraFieldIndex));
+	private boolean isChecked(int index) {
+		return CHECKED.equals(getExtraField(index));
 	}
 
 }

@@ -1,0 +1,717 @@
+00;ADD;y;y;y
+01;ADD;y;y;y
+02;ADD;y;y;y
+03;ADD;y;y;y
+04;ADD;y;y;y
+05;ADD;y;y;y
+08;OR;y;y;y
+09;OR;y;y;y
+0A;OR;y;y;y
+0B;OR;y;y;y
+0C;OR;y;y;y
+0D;OR;y;y;y
+0F;POP;y;y;y
+10;ADC;y;y;y
+11;ADC;y;y;y
+12;ADC;y;y;y
+13;ADC;y;y;y
+14;ADC;y;y;y
+15;ADC;y;y;y
+18;SBB;y;y;y
+19;SBB;y;y;y
+1A;SBB;y;y;y
+1B;SBB;y;y;y
+1C;SBB;y;y;y
+1D;SBB;y;y;y
+20;AND;y;y;y
+21;AND;y;y;y
+22;AND;y;y;y
+23;AND;y;y;y
+24;AND;y;y;y
+25;AND;y;y;y
+28;SUB;y;y;y
+29;SUB;y;y;y
+2A;SUB;y;y;y
+2B;SUB;y;y;y
+2C;SUB;y;y;y
+2D;SUB;y;y;y
+2E;CS;y;y;y
+30;XOR;y;y;y
+31;XOR;y;y;y
+32;XOR;y;y;y
+33;XOR;y;y;y
+34;XOR;y;y;y
+35;XOR;y;y;y
+38;CMP;y;y;y
+39;CMP;y;y;y
+3A;CMP;y;y;y
+3B;CMP;y;y;y
+3C;CMP;y;y;y
+3D;CMP;y;y;y
+3E;DS;y;y;y
+40;INC;y;y;y
+48;DEC;y;y;y
+50;PUSH;y;y;y
+58;POP;y;y;y
+60;PUSHA;y;y;y
+61;POPA;y;y;y
+63;ARPL;y;y;y
+64;ALTER;y;y;y
+65;GS;y;y;y
+68;PUSH;y;y;y
+69;IMUL;y;y;y
+6A;PUSH;y;y;y
+6B;IMUL;y;y;y
+6C;INSB;y;y;y
+6D;INSD;y;y;y
+6E;OUTSB;y;y;y
+6F;OUTSD;y;y;y
+70;JO;y;y;y
+71;JNO;y;y;y
+72;JC;y;y;y
+73;JNC;y;y;y
+74;JE;y;y;y
+75;JNE;y;y;y
+76;JNA;y;y;y
+77;JA;y;y;y
+78;JS;y;y;y
+79;JNS;y;y;y
+7A;JPE;y;y;y
+7B;JPO;y;y;y
+7C;JNGE;y;y;y
+7D;JGE;y;y;y
+7E;JNG;y;y;y
+7F;JG;y;y;y
+80;CMP;y;y;y
+81;CMP;y;y;y
+82;XOR;y;y;y
+83;CMP;y;y;y
+84;TEST;y;y;y
+85;TEST;y;y;y
+86;XCHG;y;y;y
+87;XCHG;y;y;y
+88;MOV;y;y;y
+89;MOV;y;y;y
+8A;MOV;y;y;y
+8B;MOV;y;y;y
+8C;MOV;y;y;y
+8D;LEA;y;y;y
+8E;MOV;y;y;y
+8F;POP;y;y;y
+90;NOP;y;y;y
+98;CWDE;y;y;y
+99;CDQ;y;y;y
+9B;WAIT;y;y;y
+9C;PUSHFD;y;y;y
+9D;POPFD;y;y;y
+9E;SAHF;y;y;y
+9F;LAHF;y;y;y
+A0;MOV;y;y;y
+A1;MOV;y;y;y
+A2;MOV;y;y;y
+A3;MOV;y;y;y
+A4;MOVSB;y;y;y
+A5;MOVSD;y;y;y
+A6;CMPSB;y;y;y
+A7;CMPSD;y;y;y
+A8;TEST;y;y;y
+A9;TEST;y;y;y
+AA;STOSB;y;y;y
+AB;STOSD;y;y;y
+AC;LODSB;y;y;y
+AD;LODSD;y;y;y
+AE;SCASB;y;y;y
+AF;SCASD;y;y;y
+B0;MOV;y;y;y
+B8;MOV;y;y;y
+C0;SAR;y;y;y
+C1;SAR;y;y;y
+C2;RETN;y;y;y
+C3;RETN;y;y;y
+C6;MOV;y;y;y
+C7;MOV;y;y;y
+C8;ENTER;y;y;y
+C9;LEAVE;y;y;y
+CA;RETF;y;y;y
+CB;RETF;y;y;y
+CC;INT;y;y;y
+CD;INT;y;y;y
+CE;INTO;y;y;y
+CF;IRETD;y;y;y
+D0;SAR;y;y;y
+D1;SAR;y;y;y
+D2;SAR;y;y;y
+D3;SAR;y;y;y
+D7;XLATB;y;y;y
+D8;FDIVR;y;y;y
+D9;FNSTCW;y;y;y
+DA;FIDIVR;y;y;y
+DB;FSTP;y;y;y
+DC;FDIV;y;y;y
+DD;FNSTSW;y;y;y
+DE;FDIVP;y;y;y
+DF;FISTP;y;y;y
+E0;LOOPNE;y;y;y
+E1;LOOPE;y;y;y
+E2;LOOP;y;y;y
+E3;JECXZ;y;y;y
+E4;IN;y;y;y
+E5;IN;y;y;y
+E6;OUT;y;y;y
+E7;OUT;y;y;y
+E8;CALL;y;y;y
+E9;JMP;y;y;y
+EB;JMP;y;y;y
+EC;IN;y;y;y
+ED;IN;y;y;y
+EE;OUT;y;y;y
+EF;OUT;y;y;y
+F0;LOCK;y;y;y
+F1;ICEBP;y;y;y
+F2;REP;y;y;y
+F3;REP;y;y;y
+F4;HLT;y;y;y
+F5;CMC;y;y;y
+F6;IDIV;y;y;y
+F7;IDIV;y;y;y
+F8;CLC;y;y;y
+F9;STC;y;y;y
+FA;CLI;y;y;y
+FB;STI;y;y;y
+FC;CLD;y;y;y
+FD;STD;y;y;y
+FE;DEC;y;y;y
+FF;PUSH;y;y;y
+0F 00;JMPE;y;y;y
+0F 01;INVLPG;y;y;y
+0F 02;LAR;-;y;y
+0F 03;LSL;-;y;y
+0F 05;LOADALL;-;y;y
+0F 06;CLTS;y;y;y
+0F 07;LOADALL;-;y;y
+0F 08;INVD;y;y;y
+0F 09;WBINVD;y;y;y
+0F 0B;UD2;y;y;y
+0F 0D;NOP;y;y;y
+0F 10;MOVUPS;y;y;y
+0F 11;MOVUPS;y;y;y
+0F 12;MOVLPS;y;y;y
+0F 13;MOVLPS;y;y;y
+0F 14;UNPCKLPS;y;y;y
+0F 15;UNPCKHPS;y;y;y
+0F 16;MOVHPS;y;y;y
+0F 17;MOVHPS;y;y;y
+0F 18;HINT_NOP;y;y;y
+0F 19;HINT_NOP;y;y;y
+0F 1A;HINT_NOP;y;y;y
+0F 1B;HINT_NOP;y;y;y
+0F 1C;HINT_NOP;y;y;y
+0F 1D;HINT_NOP;y;y;y
+0F 1E;HINT_NOP;y;y;y
+0F 1F;HINT_NOP;y;y;y
+0F 20;MOV;y;y;y
+0F 21;MOV;y;y;y
+0F 22;MOV;y;y;y
+0F 23;MOV;y;y;y
+0F 24;MOV;y;y;y
+0F 26;MOV;y;y;y
+0F 28;MOVAPS;y;y;y
+0F 29;MOVAPS;y;y;y
+0F 2A;CVTPI2PS;y;y;y
+0F 2B;MOVNTPS;y;y;y
+0F 2C;CVTTPS2PI;y;y;y
+0F 2D;CVTPS2PI;y;y;y
+0F 2E;UCOMISS;y;y;y
+0F 2F;COMISS;y;y;y
+0F 30;WRMSR;y;y;y
+0F 31;RDTSC;y;y;y
+0F 32;RDMSR;y;y;y
+0F 33;RDPMC;y;y;y
+0F 34;SYSENTER;-;y;y
+0F 35;SYSEXIT;-;y;y
+0F 37;GETSEC;y;y;y
+0F 40;CMOVO;y;y;y
+0F 41;CMOVNO;y;y;y
+0F 42;CMOVC;y;y;y
+0F 43;CMOVNC;y;y;y
+0F 44;CMOVE;y;y;y
+0F 45;CMOVNE;y;y;y
+0F 46;CMOVNA;y;y;y
+0F 47;CMOVA;y;y;y
+0F 48;CMOVS;y;y;y
+0F 49;CMOVNS;y;y;y
+0F 4A;CMOVPE;y;y;y
+0F 4B;CMOVPO;y;y;y
+0F 4C;CMOVNGE;y;y;y
+0F 4D;CMOVGE;y;y;y
+0F 4E;CMOVNG;y;y;y
+0F 4F;CMOVG;y;y;y
+0F 50;MOVMSKPS;y;y;y
+0F 51;SQRTPS;y;y;y
+0F 52;RSQRTPS;y;y;y
+0F 53;RCPPS;y;y;y
+0F 54;ANDPS;y;y;y
+0F 55;ANDNPS;y;y;y
+0F 56;ORPS;y;y;y
+0F 57;XORPS;y;y;y
+0F 58;ADDPS;y;y;y
+0F 59;MULPS;y;y;y
+0F 5A;CVTPS2PD;y;y;y
+0F 5B;CVTDQ2PS;y;y;y
+0F 5C;SUBPS;y;y;y
+0F 5D;MINPS;y;y;y
+0F 5E;DIVPS;y;y;y
+0F 5F;MAXPS;y;y;y
+0F 60;PUNPCKLBW;y;y;y
+0F 61;PUNPCKLWD;y;y;y
+0F 62;PUNPCKLDQ;y;y;y
+0F 63;PACKSSWB;y;y;y
+0F 64;PCMPGTB;y;y;y
+0F 65;PCMPGTW;y;y;y
+0F 66;PCMPGTD;y;y;y
+0F 67;PACKUSWB;y;y;y
+0F 68;PUNPCKHBW;y;y;y
+0F 69;PUNPCKHWD;y;y;y
+0F 6A;PUNPCKHDQ;y;y;y
+0F 6B;PACKSSDW;y;y;y
+0F 6E;MOVD;y;y;y
+0F 6F;MOVQ;y;y;y
+0F 70;PSHUFW;y;y;y
+0F 71;PSLLW;y;y;y
+0F 72;PSLLD;y;y;y
+0F 73;PSLLQ;y;y;y
+0F 74;PCMPEQB;y;y;y
+0F 75;PCMPEQW;y;y;y
+0F 76;PCMPEQD;y;y;y
+0F 77;EMMS;y;y;y
+0F 78;VMREAD;-;y;y
+0F 79;VMWRITE;-;y;y
+0F 7E;MOVD;y;y;y
+0F 7F;MOVQ;y;y;y
+0F 80;JO;y;y;y
+0F 81;JNO;y;y;y
+0F 82;JC;y;y;y
+0F 83;JNC;y;y;y
+0F 84;JE;y;y;y
+0F 85;JNE;y;y;y
+0F 86;JNA;y;y;y
+0F 87;JA;y;y;y
+0F 88;JS;y;y;y
+0F 89;JNS;y;y;y
+0F 8A;JPE;y;y;y
+0F 8B;JPO;y;y;y
+0F 8C;JNGE;y;y;y
+0F 8D;JGE;y;y;y
+0F 8E;JNG;y;y;y
+0F 8F;JG;y;y;y
+0F 90;SETO;y;y;y
+0F 91;SETNO;y;y;y
+0F 92;SETC;y;y;y
+0F 93;SETNC;y;y;y
+0F 94;SETE;y;y;y
+0F 95;SETNE;y;y;y
+0F 96;SETNA;y;y;y
+0F 97;SETA;y;y;y
+0F 98;SETS;y;y;y
+0F 99;SETNS;y;y;y
+0F 9A;SETPE;y;y;y
+0F 9B;SETPO;y;y;y
+0F 9C;SETNGE;y;y;y
+0F 9D;SETGE;y;y;y
+0F 9E;SETNG;y;y;y
+0F 9F;SETG;y;y;y
+0F A0;PUSH;y;y;y
+0F A1;POP;y;y;y
+0F A2;CPUID;y;y;y
+0F A3;BT;y;y;y
+0F A4;SHLD;y;y;y
+0F A5;SHLD;y;y;y
+0F A8;PUSH;y;y;y
+0F A9;POP;y;y;y
+0F AB;BTS;y;y;y
+0F AC;SHRD;y;y;y
+0F AD;SHRD;y;y;y
+0F AE;CLFLUSH;y;y;y
+0F AF;IMUL;y;y;y
+0F B0;CMPXCHG;y;y;y
+0F B1;CMPXCHG;y;y;y
+0F B2;LSS;y;y;y
+0F B3;BTR;y;y;y
+0F B4;LFS;y;y;y
+0F B5;LGS;y;y;y
+0F B6;MOVZX;y;y;y
+0F B7;MOVZX;y;y;y
+0F B8;JMPE;y;y;y
+0F B9;UD;y;y;y
+0F BA;BTC;y;y;y
+0F BB;BTC;y;y;y
+0F BC;BSF;y;y;y
+0F BD;BSR;y;y;y
+0F BE;MOVSX;y;y;y
+0F BF;MOVSX;y;y;y
+0F C0;XADD;y;y;y
+0F C1;XADD;y;y;y
+0F C2;CMPPS;y;y;y
+0F C3;MOVNTI;y;y;y
+0F C4;PINSRW;y;y;y
+0F C5;PEXTRW;y;y;y
+0F C6;SHUFPS;y;y;y
+0F C7;VMPTRST;-;y;y
+0F C8;BSWAP;y;y;y
+0F D1;PSRLW;y;y;y
+0F D2;PSRLD;y;y;y
+0F D3;PSRLQ;y;y;y
+0F D4;PADDQ;y;y;y
+0F D5;PMULLW;y;y;y
+0F D7;PMOVMSKB;y;y;y
+0F D8;PSUBUSB;y;y;y
+0F D9;PSUBUSW;y;y;y
+0F DA;PMINUB;y;y;y
+0F DB;PAND;y;y;y
+0F DC;PADDUSB;y;y;y
+0F DD;PADDUSW;y;y;y
+0F DE;PMAXUB;y;y;y
+0F DF;PANDN;y;y;y
+0F E0;PAVGB;y;y;y
+0F E1;PSRAW;y;y;y
+0F E2;PSRAD;y;y;y
+0F E3;PAVGW;y;y;y
+0F E4;PMULHUW;y;y;y
+0F E5;PMULHW;y;y;y
+0F E7;MOVNTQ;y;y;y
+0F E8;PSUBSB;y;y;y
+0F E9;PSUBSW;y;y;y
+0F EA;PMINSW;y;y;y
+0F EB;POR;y;y;y
+0F EC;PADDSB;y;y;y
+0F ED;PADDSW;y;y;y
+0F EE;PMAXSW;y;y;y
+0F EF;PXOR;y;y;y
+0F F1;PSLLW;y;y;y
+0F F2;PSLLD;y;y;y
+0F F3;PSLLQ;y;y;y
+0F F4;PMULUDQ;y;y;y
+0F F5;PMADDWD;y;y;y
+0F F6;PSADBW;y;y;y
+0F F7;MASKMOVQ;y;y;y
+0F F8;PSUBB;y;y;y
+0F F9;PSUBW;y;y;y
+0F FA;PSUBD;y;y;y
+0F FB;PSUBQ;y;y;y
+0F FC;PADDB;y;y;y
+0F FD;PADDW;y;y;y
+0F FE;PADDD;y;y;y
+9B D9;FSTCW;y;y;y
+9B DD;FSTSW;y;y;y
+D4 0A;AAM;y;y;y
+D5 0A;AAD;y;y;y
+D8 D1;FCOM;y;y;y
+D8 D9;FCOMP;y;y;y
+D9 C9;FXCH;y;y;y
+D9 D0;FNOP;y;y;y
+D9 E0;FCHS;y;y;y
+D9 E1;FABS;y;y;y
+D9 E4;FTST;y;y;y
+D9 E5;FXAM;y;y;y
+D9 E8;FLD1;y;y;y
+D9 E9;FLDL2T;y;y;y
+D9 EA;FLDL2E;y;y;y
+D9 EB;FLDPI;y;y;y
+D9 EC;FLDLG2;y;y;y
+D9 ED;FLDLN2;y;y;y
+D9 EE;FLDZ;y;y;y
+D9 F0;F2XM1;y;y;y
+D9 F1;FYL2X;y;y;y
+D9 F2;FPTAN;y;y;y
+D9 F3;FPATAN;y;y;y
+D9 F4;FXTRACT;y;y;y
+D9 F5;FPREM1;y;y;y
+D9 F6;FDECSTP;y;y;y
+D9 F7;FINCSTP;y;y;y
+D9 F8;FPREM;y;y;y
+D9 F9;FYL2XP1;y;y;y
+D9 FA;FSQRT;y;y;y
+D9 FB;FSINCOS;y;y;y
+D9 FC;FRNDINT;y;y;y
+D9 FD;FSCALE;y;y;y
+D9 FE;FSIN;y;y;y
+D9 FF;FCOS;y;y;y
+DA E9;FUCOMPP;y;y;y
+DB E0;FNENI;y;y;y
+DB E1;FNDISI;y;y;y
+DB E2;FNCLEX;y;y;y
+DB E3;FNINIT;y;y;y
+DB E4;FNSETPM;y;y;y
+DD E1;FUCOM;y;y;y
+DD E9;FUCOMP;y;y;y
+DE C1;FADDP;y;y;y
+DE C9;FMULP;y;y;y
+DE D9;FCOMPP;y;y;y
+DE E1;FSUBRP;y;y;y
+DE E9;FSUBP;y;y;y
+DE F1;FDIVRP;y;y;y
+DE F9;FDIVP;y;y;y
+DF E0;FNSTSW;y;y;y
+F3 90;PAUSE;y;y;y
+0F 01 C1;VMCALL;-;y;y
+0F 01 C2;VMLAUNCH;-;y;y
+0F 01 C3;VMRESUME;-;y;y
+0F 01 C4;VMXOFF;-;y;y
+0F 01 C8;MONITOR;y;y;y
+0F 01 C9;MWAIT;y;y;y
+0F 01 D0;XGETBV;y;y;y
+0F 01 D1;XSETBV;y;y;y
+0F 01 F9;RDTSCP;y;y;y
+0F 38 00;PSHUFB;y;y;y
+0F 38 01;PHADDW;y;y;y
+0F 38 02;PHADDD;y;y;y
+0F 38 03;PHADDSW;y;y;y
+0F 38 04;PMADDUBSW;y;y;y
+0F 38 05;PHSUBW;y;y;y
+0F 38 06;PHSUBD;y;y;y
+0F 38 07;PHSUBSW;y;y;y
+0F 38 08;PSIGNB;y;y;y
+0F 38 09;PSIGNW;y;y;y
+0F 38 0A;PSIGND;y;y;y
+0F 38 0B;PMULHRSW;y;y;y
+0F 38 1C;PABSB;y;y;y
+0F 38 1D;PABSW;y;y;y
+0F 38 1E;PABSD;y;y;y
+0F 38 F0;MOVBE;y;y;y
+0F 38 F1;MOVBE;y;y;y
+0F 3A 0F;PALIGNR;y;y;y
+66 0F 10;MOVUPD;y;y;y
+66 0F 11;MOVUPD;y;y;y
+66 0F 12;MOVLPD;y;y;y
+66 0F 13;MOVLPD;y;y;y
+66 0F 14;UNPCKLPD;y;y;y
+66 0F 15;UNPCKHPD;y;y;y
+66 0F 16;MOVHPD;y;y;y
+66 0F 17;MOVHPD;y;y;y
+66 0F 28;MOVAPD;y;y;y
+66 0F 29;MOVAPD;y;y;y
+66 0F 2A;CVTPI2PD;y;y;y
+66 0F 2B;MOVNTPD;y;y;y
+66 0F 2C;CVTTPD2PI;y;y;y
+66 0F 2D;CVTPD2PI;y;y;y
+66 0F 2E;UCOMISD;y;y;y
+66 0F 2F;COMISD;y;y;y
+66 0F 50;MOVMSKPD;y;y;y
+66 0F 51;SQRTPD;y;y;y
+66 0F 54;ANDPD;y;y;y
+66 0F 55;ANDNPD;y;y;y
+66 0F 56;ORPD;y;y;y
+66 0F 57;XORPD;y;y;y
+66 0F 58;ADDPD;y;y;y
+66 0F 59;MULPD;y;y;y
+66 0F 5A;CVTPD2PS;y;y;y
+66 0F 5B;CVTPS2DQ;y;y;y
+66 0F 5C;SUBPD;y;y;y
+66 0F 5D;MINPD;y;y;y
+66 0F 5E;DIVPD;y;y;y
+66 0F 5F;MAXPD;y;y;y
+66 0F 60;PUNPCKLBW;y;y;y
+66 0F 61;PUNPCKLWD;y;y;y
+66 0F 62;PUNPCKLDQ;y;y;y
+66 0F 63;PACKSSWB;y;y;y
+66 0F 64;PCMPGTB;y;y;y
+66 0F 65;PCMPGTW;y;y;y
+66 0F 66;PCMPGTD;y;y;y
+66 0F 67;PACKUSWB;y;y;y
+66 0F 68;PUNPCKHBW;y;y;y
+66 0F 69;PUNPCKHWD;y;y;y
+66 0F 6A;PUNPCKHDQ;y;y;y
+66 0F 6B;PACKSSDW;y;y;y
+66 0F 6C;PUNPCKLQDQ;y;y;y
+66 0F 6D;PUNPCKHQDQ;y;y;y
+66 0F 6E;MOVD;y;y;y
+66 0F 6F;MOVDQA;y;y;y
+66 0F 70;PSHUFD;y;y;y
+66 0F 71;PSLLW;y;y;y
+66 0F 72;PSLLD;y;y;y
+66 0F 73;PSLLDQ;y;y;y
+66 0F 74;PCMPEQB;y;y;y
+66 0F 75;PCMPEQW;y;y;y
+66 0F 76;PCMPEQD;y;y;y
+66 0F 7C;HADDPD;y;y;y
+66 0F 7D;HSUBPD;y;y;y
+66 0F 7E;MOVD;y;y;y
+66 0F 7F;MOVDQA;y;y;y
+66 0F C2;CMPPD;y;y;y
+66 0F C4;PINSRW;y;y;y
+66 0F C5;PEXTRW;y;y;y
+66 0F C6;SHUFPD;y;y;y
+66 0F C7;VMCLEAR;-;y;y
+66 0F D0;ADDSUBPD;y;y;y
+66 0F D1;PSRLW;y;y;y
+66 0F D2;PSRLD;y;y;y
+66 0F D3;PSRLQ;y;y;y
+66 0F D4;PADDQ;y;y;y
+66 0F D5;PMULLW;y;y;y
+66 0F D6;MOVQ;y;y;y
+66 0F D7;PMOVMSKB;y;y;y
+66 0F D8;PSUBUSB;y;y;y
+66 0F D9;PSUBUSW;y;y;y
+66 0F DA;PMINUB;y;y;y
+66 0F DB;PAND;y;y;y
+66 0F DC;PADDUSB;y;y;y
+66 0F DD;PADDUSW;y;y;y
+66 0F DE;PMAXUB;y;y;y
+66 0F DF;PANDN;y;y;y
+66 0F E0;PAVGB;y;y;y
+66 0F E1;PSRAW;y;y;y
+66 0F E2;PSRAD;y;y;y
+66 0F E3;PAVGW;y;y;y
+66 0F E4;PMULHUW;y;y;y
+66 0F E5;PMULHW;y;y;y
+66 0F E6;CVTTPD2DQ;y;y;y
+66 0F E7;MOVNTDQ;y;y;y
+66 0F E8;PSUBSB;y;y;y
+66 0F E9;PSUBSW;y;y;y
+66 0F EA;PMINSW;y;y;y
+66 0F EB;POR;y;y;y
+66 0F EC;PADDSB;y;y;y
+66 0F ED;PADDSW;y;y;y
+66 0F EE;PMAXSW;y;y;y
+66 0F EF;PXOR;y;y;y
+66 0F F1;PSLLW;y;y;y
+66 0F F2;PSLLD;y;y;y
+66 0F F3;PSLLQ;y;y;y
+66 0F F4;PMULUDQ;y;y;y
+66 0F F5;PMADDWD;y;y;y
+66 0F F6;PSADBW;y;y;y
+66 0F F7;MASKMOVDQU;y;y;y
+66 0F F8;PSUBB;y;y;y
+66 0F F9;PSUBW;y;y;y
+66 0F FA;PSUBD;y;y;y
+66 0F FB;PSUBQ;y;y;y
+66 0F FC;PADDB;y;y;y
+66 0F FD;PADDW;y;y;y
+66 0F FE;PADDD;y;y;y
+9B DB E0;FENI;y;y;y
+9B DB E1;FDISI;y;y;y
+9B DB E2;FCLEX;y;y;y
+9B DB E3;FINIT;y;y;y
+9B DB E4;FSETPM;y;y;y
+9B DF E0;FSTSW;y;y;y
+F2 0F 10;MOVSD;y;y;y
+F2 0F 11;MOVSD;y;y;y
+F2 0F 12;MOVDDUP;y;y;y
+F2 0F 2A;CVTSI2SD;y;y;y
+F2 0F 2C;CVTTSD2SI;y;y;y
+F2 0F 2D;CVTSD2SI;y;y;y
+F2 0F 51;SQRTSD;y;y;y
+F2 0F 58;ADDSD;y;y;y
+F2 0F 59;MULSD;y;y;y
+F2 0F 5A;CVTSD2SS;y;y;y
+F2 0F 5C;SUBSD;y;y;y
+F2 0F 5D;MINSD;y;y;y
+F2 0F 5E;DIVSD;y;y;y
+F2 0F 5F;MAXSD;y;y;y
+F2 0F 70;PSHUFLW;y;y;y
+F2 0F 7C;HADDPS;y;y;y
+F2 0F 7D;HSUBPS;y;y;y
+F2 0F C2;CMPSD;y;y;y
+F2 0F D0;ADDSUBPS;y;y;y
+F2 0F D6;MOVDQ2Q;y;y;y
+F2 0F E6;CVTPD2DQ;y;y;y
+F2 0F F0;LDDQU;y;y;y
+F3 0F 10;MOVSS;y;y;y
+F3 0F 11;MOVSS;y;y;y
+F3 0F 12;MOVSLDUP;y;y;y
+F3 0F 16;MOVSHDUP;y;y;y
+F3 0F 2A;CVTSI2SS;y;y;y
+F3 0F 2C;CVTTSS2SI;y;y;y
+F3 0F 2D;CVTSS2SI;y;y;y
+F3 0F 51;SQRTSS;y;y;y
+F3 0F 52;RSQRTSS;y;y;y
+F3 0F 53;RCPSS;y;y;y
+F3 0F 58;ADDSS;y;y;y
+F3 0F 59;MULSS;y;y;y
+F3 0F 5A;CVTSS2SD;y;y;y
+F3 0F 5B;CVTTPS2DQ;y;y;y
+F3 0F 5C;SUBSS;y;y;y
+F3 0F 5D;MINSS;y;y;y
+F3 0F 5E;DIVSS;y;y;y
+F3 0F 5F;MAXSS;y;y;y
+F3 0F 6F;MOVDQU;y;y;y
+F3 0F 70;PSHUFHW;y;y;y
+F3 0F 7E;MOVQ;y;y;y
+F3 0F 7F;MOVDQU;y;y;y
+F3 0F B8;POPCNT;y;y;y
+F3 0F C2;CMPSS;y;y;y
+F3 0F C7;VMXON;-;y;y
+F3 0F D6;MOVQ2DQ;y;y;y
+F3 0F E6;CVTDQ2PD;y;y;y
+66 0F 38 00;PSHUFB;y;y;y
+66 0F 38 01;PHADDW;y;y;y
+66 0F 38 02;PHADDD;y;y;y
+66 0F 38 03;PHADDSW;y;y;y
+66 0F 38 04;PMADDUBSW;y;y;y
+66 0F 38 05;PHSUBW;y;y;y
+66 0F 38 06;PHSUBD;y;y;y
+66 0F 38 07;PHSUBSW;y;y;y
+66 0F 38 08;PSIGNB;y;y;y
+66 0F 38 09;PSIGNW;y;y;y
+66 0F 38 0A;PSIGND;y;y;y
+66 0F 38 0B;PMULHRSW;y;y;y
+66 0F 38 10;PBLENDVB;y;y;y
+66 0F 38 14;BLENDVPS;y;y;y
+66 0F 38 15;BLENDVPD;y;y;y
+66 0F 38 17;PTEST;y;y;y
+66 0F 38 1C;PABSB;y;y;y
+66 0F 38 1D;PABSW;y;y;y
+66 0F 38 1E;PABSD;y;y;y
+66 0F 38 20;PMOVSXBW;y;y;y
+66 0F 38 21;PMOVSXBD;y;y;y
+66 0F 38 22;PMOVSXBQ;y;y;y
+66 0F 38 23;PMOVSXWD;y;y;y
+66 0F 38 24;PMOVSXWQ;y;y;y
+66 0F 38 25;PMOVSXDQ;y;y;y
+66 0F 38 28;PMULDQ;y;y;y
+66 0F 38 29;PCMPEQQ;y;y;y
+66 0F 38 2A;MOVNTDQA;y;y;y
+66 0F 38 2B;PACKUSDW;y;y;y
+66 0F 38 30;PMOVZXBW;y;y;y
+66 0F 38 31;PMOVZXBD;y;y;y
+66 0F 38 32;PMOVZXBQ;y;y;y
+66 0F 38 33;PMOVZXWD;y;y;y
+66 0F 38 34;PMOVZXWQ;y;y;y
+66 0F 38 35;PMOVZXDQ;y;y;y
+66 0F 38 37;PCMPGTQ;y;y;y
+66 0F 38 38;PMINSB;y;y;y
+66 0F 38 39;PMINSD;y;y;y
+66 0F 38 3A;PMINUW;y;y;y
+66 0F 38 3B;PMINUD;y;y;y
+66 0F 38 3C;PMAXSB;y;y;y
+66 0F 38 3D;PMAXSD;y;y;y
+66 0F 38 3E;PMAXUW;y;y;y
+66 0F 38 3F;PMAXUD;y;y;y
+66 0F 38 40;PMULLD;y;y;y
+66 0F 38 41;PHMINPOSUW;y;y;y
+66 0F 38 80;INVEPT;-;y;y
+66 0F 38 81;INVVPID;-;y;y
+66 0F 3A 08;ROUNDPS;y;y;y
+66 0F 3A 09;ROUNDPD;y;y;y
+66 0F 3A 0A;ROUNDSS;y;y;y
+66 0F 3A 0B;ROUNDSD;y;y;y
+66 0F 3A 0C;BLENDPS;y;y;y
+66 0F 3A 0D;BLENDPD;y;y;y
+66 0F 3A 0E;PBLENDW;y;y;y
+66 0F 3A 0F;PALIGNR;y;y;y
+66 0F 3A 14;PEXTRB;y;y;y
+66 0F 3A 15;PEXTRW;y;y;y
+66 0F 3A 16;PEXTRQ;y;y;y
+66 0F 3A 17;EXTRACTPS;y;y;y
+66 0F 3A 20;PINSRB;y;y;y
+66 0F 3A 21;INSERTPS;y;y;y
+66 0F 3A 22;PINSRQ;y;y;y
+66 0F 3A 40;DPPS;y;y;y
+66 0F 3A 41;DPPD;y;y;y
+66 0F 3A 42;MPSADBW;y;y;y
+66 0F 3A 60;PCMPESTRM;y;y;y
+66 0F 3A 61;PCMPESTRI;y;y;y
+66 0F 3A 62;PCMPISTRM;y;y;y
+66 0F 3A 63;PCMPISTRI;y;y;y
+F2 0F 38 F0;CRC32;y;y;y
+F2 0F 38 F1;CRC32;y;y;y
