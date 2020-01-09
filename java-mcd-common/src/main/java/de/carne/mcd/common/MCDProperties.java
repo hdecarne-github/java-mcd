@@ -25,8 +25,8 @@ public interface MCDProperties {
 
 	/**
 	 * Gets a property.
-	 * 
-	 * @param key the key of the property to retrieve.
+	 *
+	 * @param key the key of the property to get.
 	 * @return the property value or {@code null} if the property is not set.
 	 */
 	@Nullable
@@ -34,11 +34,19 @@ public interface MCDProperties {
 
 	/**
 	 * Gets a property.
-	 * 
-	 * @param key the key of the property to retrieve.
+	 *
+	 * @param key the key of the property to get.
 	 * @param defaultValue the default value to return in case the property is not set.
 	 * @return the property value or the given default value if the property is not set.
 	 */
 	String getProperty(String key, String defaultValue);
+
+	/**
+	 * Sets a property.
+	 * 
+	 * @param key the key of the property to set.
+	 * @param value the value to set.
+	 */
+	void setProperty(String key, String value);
 
 }

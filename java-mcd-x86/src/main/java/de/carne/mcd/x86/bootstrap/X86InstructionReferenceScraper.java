@@ -19,14 +19,11 @@ package de.carne.mcd.x86.bootstrap;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.function.Predicate;
+import java.util.Map;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
@@ -42,28 +39,69 @@ import de.carne.boot.check.Check;
 import de.carne.boot.logging.Log;
 import de.carne.mcd.common.Opcode;
 import de.carne.mcd.common.bootstrap.InstructionReferenceEntry;
+import de.carne.util.Strings;
 
 final class X86InstructionReferenceScraper extends DefaultHandler implements Iterable<X86InstructionReferenceEntry> {
 
 	private static final Log LOG = new Log();
 
+	private static final String PATH_ONE_BYTE_PRI_OPCD = "x86reference/one-byte/pri_opcd";
+	private static final String PATH_TWO_BYTE_PRI_OPCD = "x86reference/two-byte/pri_opcd";
+	private static final String PATH_ONE_BYTE_ENTRY = "x86reference/one-byte/pri_opcd/entry";
+	private static final String PATH_TWO_BYTE_ENTRY = "x86reference/two-byte/pri_opcd/entry";
+	private static final String PATH_ONE_BYTE_ENTRY_PREF = "x86reference/one-byte/pri_opcd/entry/pref";
+	private static final String PATH_TWO_BYTE_ENTRY_PREF = "x86reference/two-byte/pri_opcd/entry/pref";
+	private static final String PATH_ONE_BYTE_ENTRY_SEC_OPCD = "x86reference/one-byte/pri_opcd/entry/sec_opcd";
+	private static final String PATH_TWO_BYTE_ENTRY_SEC_OPCD = "x86reference/two-byte/pri_opcd/entry/sec_opcd";
+	private static final String PATH_ONE_BYTE_ENTRY_OPCD_EXT = "x86reference/one-byte/pri_opcd/entry/opcd_ext";
+	private static final String PATH_TWO_BYTE_ENTRY_OPCD_EXT = "x86reference/two-byte/pri_opcd/entry/opcd_ext";
+	private static final String PATH_ONE_BYTE_ENTRY_PROC_END = "x86reference/one-byte/pri_opcd/entry/proc_end";
+	private static final String PATH_TWO_BYTE_ENTRY_PROC_END = "x86reference/two-byte/pri_opcd/entry/proc_end";
+	private static final String PATH_ONE_BYTE_ENTRY_SYNTAX = "x86reference/one-byte/pri_opcd/entry/syntax";
+	private static final String PATH_TWO_BYTE_ENTRY_SYNTAX = "x86reference/two-byte/pri_opcd/entry/syntax";
+	private static final String PATH_ONE_BYTE_ENTRY_SYNTAX_MNEM = "x86reference/one-byte/pri_opcd/entry/syntax/mnem";
+	private static final String PATH_TWO_BYTE_ENTRY_SYNTAX_MNEM = "x86reference/two-byte/pri_opcd/entry/syntax/mnem";
+	private static final String PATH_ONE_BYTE_ENTRY_SYNTAX_DST = "x86reference/one-byte/pri_opcd/entry/syntax/dst";
+	private static final String PATH_TWO_BYTE_ENTRY_SYNTAX_DST = "x86reference/two-byte/pri_opcd/entry/syntax/dst";
+	private static final String PATH_ONE_BYTE_ENTRY_SYNTAX_SRC = "x86reference/one-byte/pri_opcd/entry/syntax/src";
+	private static final String PATH_TWO_BYTE_ENTRY_SYNTAX_SRC = "x86reference/two-byte/pri_opcd/entry/syntax/src";
+
 	private Deque<X86InstructionReferenceEntry> entries = new LinkedList<>();
-	Predicate<X86InstructionReferenceEntry> filter;
-	private int prefixByte = -1;
+	private final X86Mode scrapeMode;
+
+	private final Deque<String> xmlPathStack = new LinkedList<>();
+
+	// x86reference/two-byte/pri_opcd
 	private int twoBytePrefixByte = -1;
+	// x86reference/*/pri_opcd
 	private int priOpcode = -1;
-	private int secOpcode = -1;
-	private String mnomic = InstructionReferenceEntry.NO_VALUE;
+	// x86reference/*/pri_opcd/entry
 	private String mode = InstructionReferenceEntry.NO_VALUE;
+	private String sFlag = InstructionReferenceEntry.NO_VALUE;
+	private String dFlag = InstructionReferenceEntry.NO_VALUE;
+	private String rFlag = InstructionReferenceEntry.NO_VALUE;
+	// x86reference/*/pri_opcd/entry/pref
+	private int prefixByte = -1;
+	// x86reference/*/pri_opcd/entry/sec_opcd
+	private int secOpcode = -1;
+	// x86reference/*/pri_opcd/entry/opcd_ext
+	private String signature = "";
+	// x86reference/*/pri_opcd/entry/proc_end
 	private String procEnd = InstructionReferenceEntry.NO_VALUE;
-	private int dstSrcMode = 0;
-	private String dstSrcA = "";
-	private String dstSrcT = "";
+	// x86reference/*/pri_opcd/entry/syntax
+	private int syntaxCount = 0;
+	// x86reference/*/pri_opcd/entry/syntax/mnem
+	private String mnemonic = InstructionReferenceEntry.NO_VALUE;
+	// x86reference/*/pri_opcd/entry/syntax/*
+	private String opDisplayed = InstructionReferenceEntry.NO_VALUE;
+	private String opNr = InstructionReferenceEntry.NO_VALUE;
+	private String opAddress = InstructionReferenceEntry.NO_VALUE;
+
 	private final StringBuilder characterBuffer = new StringBuilder();
 	private boolean characterBufferEnabled;
 
-	X86InstructionReferenceScraper(Predicate<X86InstructionReferenceEntry> filter) {
-		this.filter = filter;
+	X86InstructionReferenceScraper(X86Mode scrapMode) {
+		this.scrapeMode = scrapMode;
 	}
 
 	public void scrape(String source) throws IOException {
@@ -82,17 +120,34 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 		}
 	}
 
-	private void resetPriOpcode(byte opcode) {
+	private void resetPriOpcode(int prefix, byte opcode) {
+		this.twoBytePrefixByte = prefix;
 		this.priOpcode = Byte.toUnsignedInt(opcode);
-		this.procEnd = InstructionReferenceEntry.NO_VALUE;
 		resetEntry();
 	}
 
 	private void resetEntry() {
+		this.mode = "r";
+		this.sFlag = InstructionReferenceEntry.NO_VALUE;
+		this.dFlag = InstructionReferenceEntry.NO_VALUE;
+		this.rFlag = InstructionReferenceEntry.NO_VALUE;
 		this.prefixByte = -1;
 		this.secOpcode = -1;
-		this.mnomic = InstructionReferenceEntry.NO_VALUE;
-		this.mode = "r";
+		this.signature = "";
+		this.procEnd = InstructionReferenceEntry.NO_VALUE;
+		this.syntaxCount = 0;
+		resetSyntax();
+	}
+
+	private void resetSyntax() {
+		this.mnemonic = InstructionReferenceEntry.NO_VALUE;
+		resetOperand();
+	}
+
+	private void resetOperand() {
+		this.opDisplayed = InstructionReferenceEntry.NO_VALUE;
+		this.opNr = InstructionReferenceEntry.NO_VALUE;
+		this.opAddress = InstructionReferenceEntry.NO_VALUE;
 	}
 
 	private void enableCharacterBuffer() {
@@ -113,83 +168,98 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-		if ("two-byte".equals(qName)) {
-			this.twoBytePrefixByte = (byte) 0x0f;
-		} else if ("pri_opcd".equals(qName)) {
-			startPriOpcdElement(attributes);
-		} else if ("sec_opcd".equals(qName)) {
-			startSecOpcdElement();
-		} else if ("entry".equals(qName)) {
+		String xmlPath = (this.xmlPathStack.isEmpty() ? "" : this.xmlPathStack.peek() + "/") + qName;
+
+		this.xmlPathStack.push(xmlPath);
+
+		switch (xmlPath) {
+		case PATH_ONE_BYTE_PRI_OPCD:
+			startPriOpcdElement(-1, attributes);
+			break;
+		case PATH_TWO_BYTE_PRI_OPCD:
+			startPriOpcdElement(0x0f, attributes);
+			break;
+		case PATH_ONE_BYTE_ENTRY:
+		case PATH_TWO_BYTE_ENTRY:
 			startEntryElement(attributes);
-		} else if ("mnem".equals(qName)) {
-			startMnemElement();
-		} else if ("proc_end".equals(qName)) {
-			startProcEndElement();
-		} else if ("pref".equals(qName)) {
+			break;
+		case PATH_ONE_BYTE_ENTRY_PREF:
+		case PATH_TWO_BYTE_ENTRY_PREF:
 			startPrefElement();
-		} else if ("dst".equals(qName)) {
-			startDstElement();
-		} else if ("src".equals(qName)) {
-			startSrcElement();
-		} else if ("a".equals(qName)) {
-			startAElement();
-		} else if ("t".equals(qName)) {
-			startTElement();
+			break;
+		case PATH_ONE_BYTE_ENTRY_SEC_OPCD:
+		case PATH_TWO_BYTE_ENTRY_SEC_OPCD:
+			startSecOpcdElement();
+			break;
+		case PATH_ONE_BYTE_ENTRY_OPCD_EXT:
+		case PATH_TWO_BYTE_ENTRY_OPCD_EXT:
+			startOpcdExtElement();
+			break;
+		case PATH_ONE_BYTE_ENTRY_PROC_END:
+		case PATH_TWO_BYTE_ENTRY_PROC_END:
+			startProcEndElement();
+			break;
+		case PATH_ONE_BYTE_ENTRY_SYNTAX:
+		case PATH_TWO_BYTE_ENTRY_SYNTAX:
+			startSyntaxElement();
+			break;
+		case PATH_ONE_BYTE_ENTRY_SYNTAX_MNEM:
+		case PATH_TWO_BYTE_ENTRY_SYNTAX_MNEM:
+			startMnemElement();
+			break;
+		case PATH_ONE_BYTE_ENTRY_SYNTAX_DST:
+		case PATH_TWO_BYTE_ENTRY_SYNTAX_DST:
+		case PATH_ONE_BYTE_ENTRY_SYNTAX_SRC:
+		case PATH_TWO_BYTE_ENTRY_SYNTAX_SRC:
+			startDstSrcElement(attributes);
+			break;
+		default:
+			// do nothing
 		}
 	}
 
-	private void startPriOpcdElement(Attributes attributes) throws SAXException {
-		String opcodeString = safeGetAttribute(attributes, "value");
+	@Override
+	public void endElement(String uri, String localName, String qName) throws SAXException {
+		String xmlPath = this.xmlPathStack.pop();
 
-		LOG.debug("Processing primary opcode ''{0}''...", opcodeString);
-
-		byte opcode = parseOpcode(opcodeString);
-
-		resetPriOpcode(opcode);
-	}
-
-	private void startSecOpcdElement() {
-		enableCharacterBuffer();
-	}
-
-	private void startEntryElement(Attributes attributes) {
-		String modeAttribute = attributes.getValue("mode");
-
-		if (modeAttribute != null) {
-			this.mode = modeAttribute;
+		switch (xmlPath) {
+		case PATH_ONE_BYTE_ENTRY:
+		case PATH_TWO_BYTE_ENTRY:
+			endEntryElement();
+			break;
+		case PATH_ONE_BYTE_ENTRY_PREF:
+		case PATH_TWO_BYTE_ENTRY_PREF:
+			endPrefElement();
+			break;
+		case PATH_ONE_BYTE_ENTRY_SEC_OPCD:
+		case PATH_TWO_BYTE_ENTRY_SEC_OPCD:
+			endSecOpcdElement();
+			break;
+		case PATH_ONE_BYTE_ENTRY_OPCD_EXT:
+		case PATH_TWO_BYTE_ENTRY_OPCD_EXT:
+			endOpcdExtElement();
+			break;
+		case PATH_ONE_BYTE_ENTRY_PROC_END:
+		case PATH_TWO_BYTE_ENTRY_PROC_END:
+			endProcEndElement();
+			break;
+		case PATH_ONE_BYTE_ENTRY_SYNTAX:
+		case PATH_TWO_BYTE_ENTRY_SYNTAX:
+			endSyntaxElement();
+			break;
+		case PATH_ONE_BYTE_ENTRY_SYNTAX_MNEM:
+		case PATH_TWO_BYTE_ENTRY_SYNTAX_MNEM:
+			endMnemElement();
+			break;
+		case PATH_ONE_BYTE_ENTRY_SYNTAX_DST:
+		case PATH_TWO_BYTE_ENTRY_SYNTAX_DST:
+		case PATH_ONE_BYTE_ENTRY_SYNTAX_SRC:
+		case PATH_TWO_BYTE_ENTRY_SYNTAX_SRC:
+			endDstSrcElement();
+			break;
+		default:
+			// do nothing
 		}
-	}
-
-	private void startMnemElement() {
-		enableCharacterBuffer();
-	}
-
-	private void startProcEndElement() {
-		enableCharacterBuffer();
-	}
-
-	private void startPrefElement() {
-		enableCharacterBuffer();
-	}
-
-	private void startDstElement() {
-		Check.assertTrue(this.dstSrcMode == 0);
-
-		this.dstSrcMode = 1;
-	}
-
-	private void startSrcElement() {
-		Check.assertTrue(this.dstSrcMode == 0);
-
-		this.dstSrcMode = -1;
-	}
-
-	private void startAElement() {
-		enableCharacterBuffer();
-	}
-
-	private void startTElement() {
-		enableCharacterBuffer();
 	}
 
 	@Override
@@ -199,55 +269,25 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 		}
 	}
 
-	@Override
-	public void endElement(String uri, String localName, String qName) throws SAXException {
-		if ("entry".equals(qName)) {
-			endEntryElement();
-		} else if ("sec_opcd".equals(qName)) {
-			endSecOpcdElement();
-		} else if ("mnem".equals(qName)) {
-			endMnemElement();
-		} else if ("proc_end".equals(qName)) {
-			endProcEndElement();
-		} else if ("pref".equals(qName)) {
-			endPrefElement();
-		} else if ("dst".equals(qName)) {
-			endDstSrcElement();
-		} else if ("src".equals(qName)) {
-			endDstSrcElement();
-		} else if ("a".equals(qName)) {
-			endAElement();
-		} else if ("t".equals(qName)) {
-			endTElement();
-		}
+	private void startPriOpcdElement(int prefix, Attributes attributes) throws SAXException {
+		String opcodeString = safeGetAttribute(attributes, "value");
+
+		LOG.debug("Processing primary opcode ''{0}''...", opcodeString);
+
+		byte opcode = parseOpcode(opcodeString);
+
+		resetPriOpcode(prefix, opcode);
+	}
+
+	private void startEntryElement(Attributes attributes) {
+		this.mode = getOptionalAttribute(attributes, "mode", this.mode);
+		this.dFlag = getOptionalAttribute(attributes, "direction", this.dFlag);
+		this.sFlag = getOptionalAttribute(attributes, "op_size", this.sFlag);
+		this.rFlag = getOptionalAttribute(attributes, "r", this.rFlag);
 	}
 
 	private void endEntryElement() {
-		if (!this.mnomic.equals(InstructionReferenceEntry.NO_VALUE)) {
-			Opcode opcode = getOpcode();
-
-			LOG.info("Considering opcode {0} {1}", opcode, this.mnomic);
-
-			List<String> extraFields = new ArrayList<>();
-
-			if ("r".equals(this.mode) && InstructionReferenceEntry.NO_VALUE.equals(this.procEnd)) {
-				extraFields.add(X86InstructionReferenceEntry.CHECKED);
-				extraFields.add(X86InstructionReferenceEntry.CHECKED);
-				extraFields.add(X86InstructionReferenceEntry.CHECKED);
-			} else if ("p".equals(this.mode) && InstructionReferenceEntry.NO_VALUE.equals(this.procEnd)) {
-				extraFields.add(InstructionReferenceEntry.NO_VALUE);
-				extraFields.add(X86InstructionReferenceEntry.CHECKED);
-				extraFields.add(X86InstructionReferenceEntry.CHECKED);
-			} else {
-				extraFields.add(InstructionReferenceEntry.NO_VALUE);
-				extraFields.add(InstructionReferenceEntry.NO_VALUE);
-				extraFields.add(InstructionReferenceEntry.NO_VALUE);
-			}
-
-			X86InstructionReferenceEntry entry = new X86InstructionReferenceEntry(opcode, this.mnomic, extraFields);
-
-			this.entries.add(entry);
-		} else {
+		if (this.mnemonic.equals(InstructionReferenceEntry.NO_VALUE)) {
 			X86InstructionReferenceEntry entry = this.entries.getLast();
 
 			if ("e".equals(this.mode)) {
@@ -257,18 +297,8 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 		resetEntry();
 	}
 
-	private void endSecOpcdElement() throws SAXException {
-		String opcodeString = disableCharacterBuffer();
-
-		this.secOpcode = Byte.toUnsignedInt(parseOpcode(opcodeString));
-	}
-
-	private void endMnemElement() {
-		this.mnomic = disableCharacterBuffer();
-	}
-
-	private void endProcEndElement() {
-		this.procEnd = disableCharacterBuffer();
+	private void startPrefElement() {
+		enableCharacterBuffer();
 	}
 
 	private void endPrefElement() throws SAXException {
@@ -277,31 +307,109 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 		this.prefixByte = Byte.toUnsignedInt(parseOpcode(prefixString));
 	}
 
+	private void startSecOpcdElement() {
+		enableCharacterBuffer();
+	}
+
+	private void endSecOpcdElement() throws SAXException {
+		String opcodeString = disableCharacterBuffer();
+
+		this.secOpcode = Byte.toUnsignedInt(parseOpcode(opcodeString));
+	}
+
+	private void startOpcdExtElement() {
+		enableCharacterBuffer();
+	}
+
+	private void endOpcdExtElement() {
+		this.signature = "/" + disableCharacterBuffer() + ":";
+	}
+
+	private void startProcEndElement() {
+		enableCharacterBuffer();
+	}
+
+	private void endProcEndElement() {
+		this.procEnd = disableCharacterBuffer();
+	}
+
+	private void startSyntaxElement() {
+		this.syntaxCount++;
+	}
+
+	private void endSyntaxElement() {
+		if (!this.mnemonic.equals(InstructionReferenceEntry.NO_VALUE) && this.syntaxCount == 1) {
+			Opcode opcode = getOpcode();
+
+			LOG.info("Considering new opcode {0} {1}", opcode, this.mnemonic);
+
+			X86InstructionReferenceEntry entry = new X86InstructionReferenceEntry(opcode, this.mnemonic,
+					this.signature);
+
+			if ("p".equals(this.mode) && InstructionReferenceEntry.NO_VALUE.equals(this.procEnd)) {
+				entry.disableX86b16();
+			} else if ("e".equals(this.mode) && InstructionReferenceEntry.NO_VALUE.equals(this.procEnd)) {
+				entry.disableX86b16();
+				entry.disableX86b32();
+			} else if (!"r".equals(this.mode)) {
+				entry.disableX86b16();
+				entry.disableX86b32();
+				entry.disableX86b64();
+			}
+			this.entries.add(entry);
+		}
+		resetSyntax();
+	}
+
+	private void startMnemElement() {
+		enableCharacterBuffer();
+	}
+
+	private void endMnemElement() {
+		this.mnemonic = disableCharacterBuffer();
+		if (Strings.notEmpty(this.signature)) {
+			this.signature += this.mnemonic;
+		}
+	}
+
+	private void startDstSrcElement(Attributes attributes) {
+		enableCharacterBuffer();
+		this.opDisplayed = getOptionalAttribute(attributes, "displayed", this.opDisplayed);
+		this.opNr = getOptionalAttribute(attributes, "nr", this.opNr);
+		this.opAddress = getOptionalAttribute(attributes, "address", this.opAddress);
+	}
+
 	private void endDstSrcElement() {
-		this.dstSrcMode = 0;
-		this.dstSrcA = "";
-		this.dstSrcT = "";
-	}
+		String operandString = disableCharacterBuffer();
 
-	private void endAElement() {
-		this.dstSrcA = disableCharacterBuffer();
-	}
+		if (!"no".equals(this.opDisplayed)) {
+			String operand = this.scrapeMode.decodeOperandString(operandString);
 
-	private void endTElement() {
-		this.dstSrcT = disableCharacterBuffer();
+			if (Strings.notEmpty(this.signature)) {
+				this.signature += ",";
+			}
+			this.signature += operand;
+		}
+		resetOperand();
 	}
 
 	@Override
 	public void endDocument() throws SAXException {
 		Iterator<X86InstructionReferenceEntry> entryIterator = this.entries.iterator();
-		Set<Opcode> entriesOpcodes = new HashSet<>();
+		Map<Opcode, X86InstructionReferenceEntry> packedEntries = new HashMap<>();
 
 		while (entryIterator.hasNext()) {
 			X86InstructionReferenceEntry entry = entryIterator.next();
 
-			if (this.filter.test(entry)) {
-				if (!entriesOpcodes.add(entry.opcode())) {
-					LOG.warning("Duplicate opcode entry: {0}", entry);
+			if (this.scrapeMode.isAvailable(entry)) {
+				Opcode entryOpcode = entry.opcode();
+				X86InstructionReferenceEntry packedEntry = packedEntries.get(entryOpcode);
+
+				if (packedEntry != null && packedEntry.opcode().equals(entryOpcode)) {
+					packedEntry.addExtraFields(entry.extraFields());
+					entryIterator.remove();
+				} else {
+					packedEntries.put(entryOpcode, entry);
 				}
 			} else {
 				entryIterator.remove();
@@ -342,13 +450,19 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 		return (byte) opcode;
 	}
 
-	private static String safeGetAttribute(Attributes attributes, String qName) throws SAXException {
-		String attribute = attributes.getValue(qName);
+	private static String getOptionalAttribute(Attributes attributes, String qName, String defaultValue) {
+		String value = attributes.getValue(qName);
 
-		if (attribute == null) {
+		return (value != null ? value : defaultValue);
+	}
+
+	private static String safeGetAttribute(Attributes attributes, String qName) throws SAXException {
+		String value = attributes.getValue(qName);
+
+		if (value == null) {
 			throw new SAXParseException("Missing attribute: " + qName, null);
 		}
-		return attribute;
+		return value;
 	}
 
 	@Override

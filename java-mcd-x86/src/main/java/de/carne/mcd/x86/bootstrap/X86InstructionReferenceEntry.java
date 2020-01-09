@@ -17,19 +17,24 @@
 package de.carne.mcd.x86.bootstrap;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
 
 import de.carne.mcd.common.Instruction;
 import de.carne.mcd.common.Opcode;
 import de.carne.mcd.common.bootstrap.InstructionReferenceEntry;
 import de.carne.mcd.x86.X86Instruction;
+import de.carne.util.Strings;
 
+@SuppressWarnings("squid:S2160")
 class X86InstructionReferenceEntry extends InstructionReferenceEntry {
 
-	public static final String CHECKED = "y";
+	private boolean x86b16 = true;
+	private boolean x86b32 = true;
+	private boolean x86b64 = true;
 
-	X86InstructionReferenceEntry(Opcode opcode, String mnemonic, List<String> extraFields) {
-		super(opcode, mnemonic, extraFields);
+	X86InstructionReferenceEntry(Opcode opcode, String mnemonic, String signature) {
+		super(opcode, mnemonic, (Strings.notEmpty(signature) ? Arrays.asList(signature) : Collections.emptyList()));
 	}
 
 	X86InstructionReferenceEntry(InstructionReferenceEntry entryData) {
@@ -41,24 +46,28 @@ class X86InstructionReferenceEntry extends InstructionReferenceEntry {
 		return new X86Instruction(mnemonic());
 	}
 
-	public void disableX86b64() {
-		setExtraField(2, NO_VALUE);
+	public boolean isX86b16() {
+		return this.x86b16;
 	}
 
-	public boolean isX86b16() {
-		return isChecked(0);
+	public void disableX86b16() {
+		this.x86b16 = false;
 	}
 
 	public boolean isX86b32() {
-		return isChecked(1);
+		return this.x86b32;
+	}
+
+	public void disableX86b32() {
+		this.x86b32 = false;
 	}
 
 	public boolean isX86b64() {
-		return isChecked(2);
+		return this.x86b64;
 	}
 
-	private boolean isChecked(int index) {
-		return CHECKED.equals(getExtraField(index));
+	public void disableX86b64() {
+		this.x86b64 = false;
 	}
 
 }

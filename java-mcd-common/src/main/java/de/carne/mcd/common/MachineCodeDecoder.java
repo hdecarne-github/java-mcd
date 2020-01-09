@@ -150,4 +150,9 @@ public abstract class MachineCodeDecoder implements MCDProperties {
 		return this.properties.getOrDefault(key, defaultValue);
 	}
 
+	@Override
+	public void setProperty(String key, String value) {
+		this.properties.put(key, value);
+	}
+
 }

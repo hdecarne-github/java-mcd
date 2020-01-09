@@ -109,6 +109,15 @@ public class InstructionReferenceEntry {
 	}
 
 	/**
+	 * Adds an additional number of extra fields to this entry.
+	 * 
+	 * @param additionalExtraFields the additional extra fields to add.
+	 */
+	public void addExtraFields(List<String> additionalExtraFields) {
+		this.extraFields.addAll(additionalExtraFields);
+	}
+
+	/**
 	 * Converts this entry to the corresponding {@linkplain Instruction} instance.
 	 *
 	 * @return the {@linkplain Instruction} instance represented by this entry.

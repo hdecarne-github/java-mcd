@@ -162,13 +162,21 @@ public abstract class InstructionReference<T extends InstructionReferenceEntry> 
 
 	@SuppressWarnings("null")
 	protected T mergeEntries(T left, T right) throws IOException {
-		List<String> mergedExtraFields = new ArrayList<>(left.extraFields());
+		List<String> leftExtraFields = left.extraFields();
+		List<String> rightExtraFields = right.extraFields();
+		List<String> mergedExtraFields;
 
-		int extraFieldIndex = 0;
+		if (leftExtraFields.size() > rightExtraFields.size()) {
+			mergedExtraFields = new ArrayList<>(leftExtraFields);
 
-		for (String rightExtraField : right.extraFields()) {
-			mergedExtraFields.set(extraFieldIndex, rightExtraField);
-			extraFieldIndex++;
+			int extraFieldIndex = 0;
+
+			for (String rightExtraField : right.extraFields()) {
+				mergedExtraFields.set(extraFieldIndex, rightExtraField);
+				extraFieldIndex++;
+			}
+		} else {
+			mergedExtraFields = new ArrayList<>(rightExtraFields);
 		}
 		return newEntry(left.opcode(), right.mnemonic(), mergedExtraFields);
 	}

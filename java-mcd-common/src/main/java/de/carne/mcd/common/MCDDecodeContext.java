@@ -78,4 +78,9 @@ public class MCDDecodeContext implements MCDProperties {
 		return (value != null ? value : this.decoder.getProperty(key, defaultValue));
 	}
 
+	@Override
+	public void setProperty(String key, String value) {
+		this.properties.put(key, value);
+	}
+
 }

@@ -65,14 +65,12 @@ public class BootstrapX86b32InstructionIndex {
 	}
 
 	private static void updateInstructionReference(String source) throws IOException {
-		X86InstructionReferenceScraper scraper = new X86InstructionReferenceScraper(
-				X86InstructionReferenceEntry::isX86b32);
+		X86InstructionReferenceScraper scraper = new X86InstructionReferenceScraper(new X86b32Mode());
 
 		scraper.scrape(source);
 
 		X86InstructionReference reference = new X86InstructionReference();
 
-		reference.load(INSTRUCTION_REFERENCE_FILE);
 		reference.addOrUpdateEntries(scraper);
 		reference.save(INSTRUCTION_REFERENCE_FILE);
 	}

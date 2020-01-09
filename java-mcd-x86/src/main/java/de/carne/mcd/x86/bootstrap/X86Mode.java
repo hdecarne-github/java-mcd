@@ -16,10 +16,20 @@
  */
 package de.carne.mcd.x86.bootstrap;
 
-final class Reference {
+import java.util.Map;
 
-	public Reference() {
-		// TODO Auto-generated constructor stub
+abstract class X86Mode {
+
+	private final Map<String, String> operandMap;
+
+	protected X86Mode(Map<String, String> operandMap) {
+		this.operandMap = operandMap;
 	}
+
+	public String decodeOperandString(String operandString) {
+		return this.operandMap.getOrDefault(operandString, operandString);
+	}
+
+	public abstract boolean isAvailable(X86InstructionReferenceEntry entry);
 
 }

@@ -18,7 +18,6 @@ package de.carne.mcd.common;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.StringTokenizer;
 
 import org.eclipse.jdt.annotation.Nullable;
@@ -140,7 +139,12 @@ public class Opcode implements Comparable<Opcode> {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.bytes, this.offset, this.length);
+		int hashCode = this.length;
+
+		for (int byteIndex = this.offset + Math.min(this.length - 1, 3); byteIndex >= this.offset; byteIndex--) {
+			hashCode |= Byte.toUnsignedInt(this.bytes[byteIndex]);
+		}
+		return hashCode;
 	}
 
 	@Override
