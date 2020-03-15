@@ -38,8 +38,8 @@ import java.util.TreeMap;
 import org.eclipse.jdt.annotation.Nullable;
 
 import de.carne.boot.logging.Log;
-import de.carne.mcd.common.InstructionIndex;
-import de.carne.mcd.common.Opcode;
+import de.carne.mcd.common.instruction.InstructionIndex;
+import de.carne.mcd.common.instruction.InstructionOpcode;
 import de.carne.util.Strings;
 
 /**
@@ -54,11 +54,11 @@ public abstract class InstructionReference<T extends InstructionReferenceEntry> 
 
 	private static final String FIELD_SEPARATOR = ";";
 
-	private final Map<Opcode, T> referenceMap = new TreeMap<>();
-	private final Set<Opcode> untouchedEntries = new HashSet<>();
-	private final Set<Opcode> uptodateEntries = new HashSet<>();
-	private final Set<Opcode> updatedEntries = new HashSet<>();
-	private final Set<Opcode> addedEntries = new HashSet<>();
+	private final Map<InstructionOpcode, T> referenceMap = new TreeMap<>();
+	private final Set<InstructionOpcode> untouchedEntries = new HashSet<>();
+	private final Set<InstructionOpcode> uptodateEntries = new HashSet<>();
+	private final Set<InstructionOpcode> updatedEntries = new HashSet<>();
+	private final Set<InstructionOpcode> addedEntries = new HashSet<>();
 
 	/**
 	 * Loads instruction reference entries from a file.
@@ -101,12 +101,12 @@ public abstract class InstructionReference<T extends InstructionReferenceEntry> 
 
 	private InstructionReferenceEntry decodeEntryData(String line) throws IOException {
 		StringTokenizer tokens = new StringTokenizer(line, FIELD_SEPARATOR);
-		Opcode opcode;
+		InstructionOpcode opcode;
 		String mnemonic;
 		List<String> extraFields = new ArrayList<>();
 
 		try {
-			opcode = Opcode.wrap(Opcode.parse(tokens.nextToken().trim()));
+			opcode = InstructionOpcode.wrap(InstructionOpcode.parse(tokens.nextToken().trim()));
 			mnemonic = tokens.nextToken().trim();
 		} catch (Exception e) {
 			throw new IOException("Failed to decode reference line: \"" + Strings.encode(line) + "\"", e);
@@ -117,7 +117,7 @@ public abstract class InstructionReference<T extends InstructionReferenceEntry> 
 		return new InstructionReferenceEntry(opcode, mnemonic, extraFields);
 	}
 
-	private T newEntry(Opcode opcode, String mnemonic, List<String> extraFields) throws IOException {
+	private T newEntry(InstructionOpcode opcode, String mnemonic, List<String> extraFields) throws IOException {
 		return newEntry(new InstructionReferenceEntry(opcode, mnemonic, extraFields));
 	}
 

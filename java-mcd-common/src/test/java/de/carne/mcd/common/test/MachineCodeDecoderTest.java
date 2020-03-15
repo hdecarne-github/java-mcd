@@ -27,10 +27,10 @@ import java.nio.channels.ReadableByteChannel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import de.carne.mcd.common.MCDDecodeBuffer;
-import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.MachineCodeDecoder;
-import de.carne.mcd.common.PlainMCDOutput;
+import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.common.io.MCDOutputBuffer;
+import de.carne.mcd.common.io.PlainMCDOutput;
 
 /**
  * Test {@linkplain MachineCodeDecoder} class.
@@ -44,10 +44,8 @@ class MachineCodeDecoderTest {
 		}
 
 		@Override
-		public void doDecode(ReadableByteChannel in, MCDOutput out) throws IOException {
-			MCDDecodeBuffer buffer = newDecodeBuffer(in);
-
-			out.print(Integer.toHexString(buffer.decodeI32()));
+		public void decode0(MCDInputBuffer in, MCDOutputBuffer out) throws IOException {
+			out.print(Integer.toHexString(in.decodeI32()));
 		}
 
 	}

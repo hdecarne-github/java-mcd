@@ -19,22 +19,22 @@ package de.carne.mcd.common;
 import java.io.IOException;
 import java.nio.ByteOrder;
 import java.nio.channels.ReadableByteChannel;
-import java.nio.channels.WritableByteChannel;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.eclipse.jdt.annotation.Nullable;
+
+import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.common.io.MCDOutput;
+import de.carne.mcd.common.io.MCDOutputBuffer;
 
 /**
  * Base class for all kinds of machine code decoders.
  */
-public abstract class MachineCodeDecoder implements MCDProperties {
+public abstract class MachineCodeDecoder {
 
-	private static final ThreadLocal<@Nullable MCDDecodeContext> DECODE_CONTEXT_HOLDER = new ThreadLocal<>();
+	private static final ThreadLocal<@Nullable MachineCodeDecoder> ACTIVE_DECODER_HOLDER = new ThreadLocal<>();
 
 	private final String name;
 	private ByteOrder byteOrder;
-	private Map<String, String> properties = new HashMap<>();
 
 	protected MachineCodeDecoder(String name, ByteOrder byteOrder) {
 		this.name = name;
@@ -42,42 +42,42 @@ public abstract class MachineCodeDecoder implements MCDProperties {
 	}
 
 	/**
-	 * Gets the {@linkplain MCDDecodeContext} associated with the current decode call.
+	 * Gets the active {@linkplain MachineCodeDecoder}.
 	 *
-	 * @return the {@linkplain MCDDecodeContext} associated with the current decode call.
-	 * @throws IllegalStateException if no context is currently set.
+	 * @return the {@linkplain MachineCodeDecoder} instance associated with the current decode call.
+	 * @throws IllegalStateException if called outside a decode call.
 	 */
-	public static MCDDecodeContext getDecodeContext() {
-		MCDDecodeContext decodeContext = DECODE_CONTEXT_HOLDER.get();
+	public static MachineCodeDecoder getDecoder() {
+		MachineCodeDecoder activeDecoder = ACTIVE_DECODER_HOLDER.get();
 
-		if (decodeContext == null) {
-			throw new IllegalStateException("Decode context only accessible during decode");
+		if (activeDecoder == null) {
+			throw new IllegalStateException("Decoder only accessible during decode call");
 		}
-		return decodeContext;
+		return activeDecoder;
 	}
 
 	/**
-	 * Gets the {@linkplain MCDDecodeContext} associated with the current decode call.
+	 * Gets the active {@linkplain MachineCodeDecoder}.
 	 *
-	 * @param <T> the actual decode context type.
-	 * @param decodeContextType the decode context type to return.
-	 * @return the {@linkplain MCDDecodeContext} associated with the current decode call.
-	 * @throws IllegalStateException if no context is currently set or if the set context type does not match.
+	 * @param <T> the actual decoder type.
+	 * @param decoderType the decoder type to get.
+	 * @return the {@linkplain MachineCodeDecoder} instance associated with the current decode call.
+	 * @throws IllegalStateException if called outside a decode call.
 	 */
-	public static <T extends MCDDecodeContext> T getDecodeContext(Class<T> decodeContextType) {
-		MCDDecodeContext decodeContext = getDecodeContext();
-		Class<?> actualDecodeContextType = decodeContext.getClass();
+	public static <T extends MachineCodeDecoder> T getDecoder(Class<T> decoderType) {
+		MachineCodeDecoder activeDecoder = getDecoder();
+		Class<?> activeDecoderType = activeDecoder.getClass();
 
-		if (!decodeContextType.isAssignableFrom(actualDecodeContextType)) {
-			throw new IllegalStateException("Decode context type mismatch: " + actualDecodeContextType.getName());
+		if (!decoderType.isAssignableFrom(activeDecoderType)) {
+			throw new IllegalStateException("Decoder type mismatch: " + activeDecoderType.getName());
 		}
-		return decodeContextType.cast(decodeContext);
+		return decoderType.cast(activeDecoder);
 	}
 
 	/**
-	 * Gets this decoder's name.
+	 * Gets this {@linkplain MachineCodeDecoder} instance's name.
 	 *
-	 * @return this decoder's name.
+	 * @return this {@linkplain MachineCodeDecoder} instance's name.
 	 */
 	public String name() {
 		return this.name;
@@ -96,63 +96,24 @@ public abstract class MachineCodeDecoder implements MCDProperties {
 	 * Decodes the given byte channel's data.
 	 *
 	 * @param in the {@linkplain ReadableByteChannel} to decode from.
-	 * @param out the {@linkplain WritableByteChannel} to decode to.
-	 * @throws IOException if an I/O error occurs.
-	 */
-	public void decode(ReadableByteChannel in, WritableByteChannel out) throws IOException {
-		try (MCDOutput out0 = new PlainMCDOutput(out, false)) {
-			doDecode(in, out0);
-		}
-	}
-
-	/**
-	 * Decodes the given byte channel's data.
-	 *
-	 * @param in the {@linkplain ReadableByteChannel} to decode from.
 	 * @param out the {@linkplain MCDOutput} to decode to.
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public void decode(ReadableByteChannel in, MCDOutput out) throws IOException {
-		synchronized (DECODE_CONTEXT_HOLDER) {
-			@Nullable MCDDecodeContext savedDecodeContext = DECODE_CONTEXT_HOLDER.get();
-			MCDDecodeContext decodeContext = prepareDecode();
+		@Nullable MachineCodeDecoder savedDecoder = ACTIVE_DECODER_HOLDER.get();
 
-			DECODE_CONTEXT_HOLDER.set(decodeContext);
-			try {
-				doDecode(in, out);
-			} finally {
-				if (savedDecodeContext != null) {
-					DECODE_CONTEXT_HOLDER.set(savedDecodeContext);
-				} else {
-					DECODE_CONTEXT_HOLDER.remove();
-				}
+		ACTIVE_DECODER_HOLDER.set(this);
+		try {
+			decode0(new MCDInputBuffer(in, this.byteOrder), new MCDOutputBuffer(out));
+		} finally {
+			if (savedDecoder != null) {
+				ACTIVE_DECODER_HOLDER.set(savedDecoder);
+			} else {
+				ACTIVE_DECODER_HOLDER.remove();
 			}
 		}
 	}
 
-	protected MCDDecodeContext prepareDecode() {
-		return new MCDDecodeContext(this);
-	}
-
-	protected abstract void doDecode(ReadableByteChannel in, MCDOutput out) throws IOException;
-
-	protected MCDDecodeBuffer newDecodeBuffer(ReadableByteChannel in) {
-		return new MCDDecodeBuffer(in, this.byteOrder);
-	}
-
-	@Override
-	public @Nullable String getProperty(String key) {
-		return this.properties.get(key);
-	}
-
-	@Override
-	public String getProperty(String key, String defaultValue) {
-		return this.properties.getOrDefault(key, defaultValue);
-	}
-
-	@Override
-	public void setProperty(String key, String value) {
-		this.properties.put(key, value);
-	}
+	protected abstract void decode0(MCDInputBuffer in, MCDOutputBuffer out) throws IOException;
 
 }

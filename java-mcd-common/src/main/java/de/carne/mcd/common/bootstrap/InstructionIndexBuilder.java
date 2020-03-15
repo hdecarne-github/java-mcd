@@ -27,11 +27,11 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import de.carne.boot.logging.Log;
-import de.carne.mcd.common.Instruction;
-import de.carne.mcd.common.InstructionFactory;
-import de.carne.mcd.common.InstructionIndex;
-import de.carne.mcd.common.InstructionIndexParameters;
-import de.carne.mcd.common.Opcode;
+import de.carne.mcd.common.instruction.Instruction;
+import de.carne.mcd.common.instruction.InstructionFactory;
+import de.carne.mcd.common.instruction.InstructionIndex;
+import de.carne.mcd.common.instruction.InstructionIndexParameters;
+import de.carne.mcd.common.instruction.InstructionOpcode;
 
 /**
  * Helper class used to create an {@linkplain InstructionIndex} resource file.
@@ -60,18 +60,18 @@ public final class InstructionIndexBuilder implements InstructionIndexParameters
 
 	}
 
-	private final SortedMap<Opcode, InstructionEntry> instructionTable = new TreeMap<>();
+	private final SortedMap<InstructionOpcode, InstructionEntry> instructionTable = new TreeMap<>();
 	private int maxOpcodeLength = 0;
 	private long totalInstructionSize = 0;
 
 	/**
-	 * Adds an {@linkplain Opcode} to {@linkplain Instruction} mapping to the index.
+	 * Adds an {@linkplain InstructionOpcode} to {@linkplain Instruction} mapping to the index.
 	 *
-	 * @param opcode the {@linkplain Opcode} to map from.
+	 * @param opcode the {@linkplain InstructionOpcode} to map from.
 	 * @param instruction the {@linkplain Instruction} to map to.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	public void add(Opcode opcode, Instruction instruction) throws IOException {
+	public void add(InstructionOpcode opcode, Instruction instruction) throws IOException {
 		int instructionSize;
 
 		try (ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -114,8 +114,8 @@ public final class InstructionIndexBuilder implements InstructionIndexParameters
 
 			long nextInstructionPosition = 0;
 
-			for (Map.Entry<Opcode, InstructionEntry> entry : this.instructionTable.entrySet()) {
-				Opcode opcode = entry.getKey();
+			for (Map.Entry<InstructionOpcode, InstructionEntry> entry : this.instructionTable.entrySet()) {
+				InstructionOpcode opcode = entry.getKey();
 
 				LOG.trace(" {0} -> position:{1}", opcode, nextInstructionPosition);
 

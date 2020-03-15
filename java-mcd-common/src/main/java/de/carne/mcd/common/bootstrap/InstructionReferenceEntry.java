@@ -25,8 +25,8 @@ import java.util.Objects;
 import org.eclipse.jdt.annotation.Nullable;
 
 import de.carne.boot.check.Check;
-import de.carne.mcd.common.Instruction;
-import de.carne.mcd.common.Opcode;
+import de.carne.mcd.common.instruction.Instruction;
+import de.carne.mcd.common.instruction.InstructionOpcode;
 import de.carne.util.Strings;
 
 /**
@@ -41,11 +41,11 @@ public class InstructionReferenceEntry {
 	 */
 	public static final String NO_VALUE = "-";
 
-	private final Opcode opcode;
+	private final InstructionOpcode opcode;
 	private final String mnemonic;
 	private final List<String> extraFields;
 
-	protected InstructionReferenceEntry(Opcode opcode, String mnemonic, List<String> extraFields) {
+	protected InstructionReferenceEntry(InstructionOpcode opcode, String mnemonic, List<String> extraFields) {
 		this.opcode = opcode;
 		this.mnemonic = mnemonic;
 
@@ -62,11 +62,11 @@ public class InstructionReferenceEntry {
 	}
 
 	/**
-	 * Gets the {@linkplain Opcode} this entry defines.
+	 * Gets the {@linkplain InstructionOpcode} this entry defines.
 	 *
-	 * @return the {@linkplain Opcode} this entry defines.
+	 * @return the {@linkplain InstructionOpcode} this entry defines.
 	 */
-	public Opcode opcode() {
+	public InstructionOpcode opcode() {
 		return this.opcode;
 	}
 
