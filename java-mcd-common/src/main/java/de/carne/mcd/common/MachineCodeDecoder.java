@@ -84,6 +84,15 @@ public abstract class MachineCodeDecoder {
 	}
 
 	/**
+	 * gets this {@linkplain MachineCodeDecoder} instance's byte order.
+	 *
+	 * @return this {@linkplain MachineCodeDecoder} instance's byte order.
+	 */
+	public ByteOrder byteOrder() {
+		return this.byteOrder;
+	}
+
+	/**
 	 * Sets this {@linkplain MachineCodeDecoder} instance's byte order.
 	 *
 	 * @param byteOrder the {@linkplain ByteOrder} to set.
