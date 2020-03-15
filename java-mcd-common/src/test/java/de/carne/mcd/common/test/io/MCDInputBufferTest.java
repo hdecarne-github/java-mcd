@@ -108,82 +108,43 @@ class MCDInputBufferTest {
 			MCDInputBuffer buffer = new MCDInputBuffer(channel, ByteOrder.BIG_ENDIAN);
 
 			buffer.setAutoCommit(false);
-			Assertions.assertEquals((byte) 0x00, buffer.decodeI8());
-			Assertions.assertEquals((short) 0x0102, buffer.decodeI16());
-			Assertions.assertEquals(0x03040506, buffer.decodeI32());
-			Assertions.assertEquals(0x0708090a0b0c0d0el, buffer.decodeI64());
-			Assertions.assertEquals(Float.intBitsToFloat(0x0f101112), buffer.decodeF32());
-			Assertions.assertEquals(Double.longBitsToDouble(0x131415161718191al), buffer.decodeF64());
-			Assertions.assertArrayEquals(new byte[] { (byte) 0x1b, (byte) 0x1c },
-					bufferToBytes(buffer.decodeI8Array(2)));
-			Assertions.assertArrayEquals(new short[] { (short) 0x1d1e, (short) 0x1f20 },
-					bufferToShorts(buffer.decodeI16Array(2)));
-			Assertions.assertArrayEquals(new int[] { 0x21222324, 0x25262728 }, bufferToInts(buffer.decodeI32Array(2)));
-			Assertions.assertArrayEquals(new long[] { 0x292a2b2c2d2e2f30l, 0x3132333435363738l },
-					bufferToLongs(buffer.decodeI64Array(2)));
+			decodeValues(buffer);
 			buffer.discard(16);
+			Assertions.assertEquals(41, buffer.getTotalRead());
 			Assertions.assertArrayEquals(new long[] { 0x292a2b2c2d2e2f30l, 0x3132333435363738l },
-					bufferToLongs(buffer.decodeI64Array(2)));
+					MCDInputBuffer.toI64Array(buffer.decodeI64Array(2)));
+			Assertions.assertEquals(57, buffer.getTotalRead());
 			buffer.discard();
 			buffer.setAutoCommit(true);
-			Assertions.assertEquals((byte) 0x00, buffer.decodeI8());
-			Assertions.assertEquals((short) 0x0102, buffer.decodeI16());
-			Assertions.assertEquals(0x03040506, buffer.decodeI32());
-			Assertions.assertEquals(0x0708090a0b0c0d0el, buffer.decodeI64());
-			Assertions.assertEquals(Float.intBitsToFloat(0x0f101112), buffer.decodeF32());
-			Assertions.assertEquals(Double.longBitsToDouble(0x131415161718191al), buffer.decodeF64());
-			Assertions.assertArrayEquals(new byte[] { (byte) 0x1b, (byte) 0x1c },
-					bufferToBytes(buffer.decodeI8Array(2)));
-			Assertions.assertArrayEquals(new short[] { (short) 0x1d1e, (short) 0x1f20 },
-					bufferToShorts(buffer.decodeI16Array(2)));
-			Assertions.assertArrayEquals(new int[] { 0x21222324, 0x25262728 }, bufferToInts(buffer.decodeI32Array(2)));
-			Assertions.assertArrayEquals(new long[] { 0x292a2b2c2d2e2f30l, 0x3132333435363738l },
-					bufferToLongs(buffer.decodeI64Array(2)));
+			decodeValues(buffer);
 		}
 	}
 
-	private byte[] bufferToBytes(ByteBuffer buffer) {
-		byte[] bytes = new byte[buffer.remaining()];
-		int byteIndex = 0;
-
-		while (buffer.remaining() > 0) {
-			bytes[byteIndex] = buffer.get();
-			byteIndex++;
-		}
-		return bytes;
-	}
-
-	private short[] bufferToShorts(ByteBuffer buffer) {
-		short[] shorts = new short[buffer.remaining() / Short.BYTES];
-		int shortIndex = 0;
-
-		while (buffer.remaining() > 0) {
-			shorts[shortIndex] = buffer.getShort();
-			shortIndex++;
-		}
-		return shorts;
-	}
-
-	private int[] bufferToInts(ByteBuffer buffer) {
-		int[] ints = new int[buffer.remaining() / Integer.BYTES];
-		int intIndex = 0;
-
-		while (buffer.remaining() > 0) {
-			ints[intIndex] = buffer.getInt();
-			intIndex++;
-		}
-		return ints;
-	}
-
-	private long[] bufferToLongs(ByteBuffer buffer) {
-		long[] longs = new long[buffer.remaining() / Long.BYTES];
-		int longIndex = 0;
-
-		while (buffer.remaining() > 0) {
-			longs[longIndex] = buffer.getLong();
-			longIndex++;
-		}
-		return longs;
+	private void decodeValues(MCDInputBuffer buffer) throws IOException {
+		Assertions.assertEquals((byte) 0x00, buffer.decodeI8());
+		Assertions.assertEquals(1, buffer.getTotalRead());
+		Assertions.assertEquals((short) 0x0102, buffer.decodeI16());
+		Assertions.assertEquals(3, buffer.getTotalRead());
+		Assertions.assertEquals(0x03040506, buffer.decodeI32());
+		Assertions.assertEquals(7, buffer.getTotalRead());
+		Assertions.assertEquals(0x0708090a0b0c0d0el, buffer.decodeI64());
+		Assertions.assertEquals(15, buffer.getTotalRead());
+		Assertions.assertEquals(Float.intBitsToFloat(0x0f101112), buffer.decodeF32());
+		Assertions.assertEquals(19, buffer.getTotalRead());
+		Assertions.assertEquals(Double.longBitsToDouble(0x131415161718191al), buffer.decodeF64());
+		Assertions.assertEquals(27, buffer.getTotalRead());
+		Assertions.assertArrayEquals(new byte[] { (byte) 0x1b, (byte) 0x1c },
+				MCDInputBuffer.toI8Array(buffer.decodeI8Array(2)));
+		Assertions.assertEquals(29, buffer.getTotalRead());
+		Assertions.assertArrayEquals(new short[] { (short) 0x1d1e, (short) 0x1f20 },
+				MCDInputBuffer.toI16Array(buffer.decodeI16Array(2)));
+		Assertions.assertEquals(33, buffer.getTotalRead());
+		Assertions.assertArrayEquals(new int[] { 0x21222324, 0x25262728 },
+				MCDInputBuffer.toI32Array(buffer.decodeI32Array(2)));
+		Assertions.assertEquals(41, buffer.getTotalRead());
+		Assertions.assertArrayEquals(new long[] { 0x292a2b2c2d2e2f30l, 0x3132333435363738l },
+				MCDInputBuffer.toI64Array(buffer.decodeI64Array(2)));
+		Assertions.assertEquals(57, buffer.getTotalRead());
 	}
 
 	@Test

@@ -25,12 +25,13 @@ import java.nio.channels.Channels;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import de.carne.mcd.common.io.MCDOutputBuffer;
 import de.carne.mcd.common.io.PlainMCDOutput;
 
 /**
- * Test {@linkplain PlainMCDOutput} class.
+ * Test {@linkplain PlainMCDOutput} and {@linkplain MCDOutputBuffer} class.
  */
-class PlainMCDOutputTest {
+class MCDOutputTest {
 
 	private static final String OUTPUT_BEGIN = ">>> begin";
 	private static final String OUTPUT_END = "<<< end";
@@ -41,6 +42,7 @@ class PlainMCDOutputTest {
 	private static final String OUTPUT_OPERATOR = "operator";
 	private static final String OUTPUT_LABEL = "label";
 
+	private static final String OUTPUT_EMPTY = "";
 	private static final String OUTPUT_TOTAL = ">>> begin\n" + "normal\n" + "normal\n" + "value\n" + "value\n"
 			+ "comment\n" + "comment\n" + "keyword\n" + "keyword\n" + "operator\n" + "operator\n" + "label\n"
 			+ "label\n" + "    normal\n" + "    normal\n" + "    value\n" + "    value\n" + "    comment\n"
@@ -72,17 +74,25 @@ class PlainMCDOutputTest {
 	}
 
 	private void testOutput(ByteArrayOutputStream buffer, PlainMCDOutput out) throws IOException {
-		out.println(OUTPUT_BEGIN);
-		printOutput(out);
-		out.increaseIndent();
-		printOutput(out);
-		out.decreaseIndent();
-		out.println(OUTPUT_END);
+		printOutput(new MCDOutputBuffer(out), false);
+		out.flush();
+		Assertions.assertEquals(OUTPUT_EMPTY, new String(buffer.toByteArray()));
+		printOutput(new MCDOutputBuffer(out), true);
 		out.flush();
 		Assertions.assertEquals(OUTPUT_TOTAL, new String(buffer.toByteArray()));
 	}
 
-	private void printOutput(PlainMCDOutput out) throws IOException {
+	private void printOutput(MCDOutputBuffer out, boolean autoCommit) throws IOException {
+		out.setAutoCommit(autoCommit);
+		out.println(OUTPUT_BEGIN);
+		printOutputLines(out);
+		out.increaseIndent();
+		printOutputLines(out);
+		out.decreaseIndent();
+		out.println(OUTPUT_END);
+	}
+
+	private void printOutputLines(MCDOutputBuffer out) throws IOException {
 		out.print(OUTPUT_NORMAL).println();
 		out.println(OUTPUT_NORMAL);
 		out.printValue(OUTPUT_VALUE).println();

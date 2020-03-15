@@ -207,7 +207,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 	}
 
 	/**
-	 * Decodes a byte value.
+	 * Decodes a {@code byte} value.
 	 *
 	 * @return the decoded value.
 	 * @throws IOException if an I/O error occurs.
@@ -226,7 +226,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 	}
 
 	/**
-	 * Decodes an array of byte values.
+	 * Decodes an array of {@code byte} values.
 	 *
 	 * @param arrayLength the array length to decode.
 	 * @return the decoded value.
@@ -252,10 +252,10 @@ public final class MCDInputBuffer implements MCDBuffer {
 	}
 
 	/**
-	 * Decodes a byte array from a buffer returned from {@linkplain #decodeI8Array(int)}.
+	 * Decodes a {@code byte} array from a buffer returned from {@linkplain #decodeI8Array(int)}.
 	 *
 	 * @param buffer the buffer to decode.
-	 * @return the decoded byte array.
+	 * @return the decoded array.
 	 */
 	public static byte[] toI8Array(ByteBuffer buffer) {
 		int length = buffer.remaining();
@@ -280,7 +280,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 	}
 
 	/**
-	 * Decodes a short value.
+	 * Decodes a {@code short} value.
 	 *
 	 * @return the decoded value.
 	 * @throws IOException if an I/O error occurs.
@@ -299,7 +299,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 	}
 
 	/**
-	 * Decodes an array of short values.
+	 * Decodes an array of {@code short} values.
 	 *
 	 * @param arrayLength the array length to decode.
 	 * @return the decoded value.
@@ -325,10 +325,10 @@ public final class MCDInputBuffer implements MCDBuffer {
 	}
 
 	/**
-	 * Decodes a short array from a buffer returned from {@linkplain #decodeI16Array(int)}.
+	 * Decodes a {@code short} array from a buffer returned from {@linkplain #decodeI16Array(int)}.
 	 *
 	 * @param buffer the buffer to decode.
-	 * @return the decoded byte array.
+	 * @return the decoded array.
 	 */
 	public static short[] toI16Array(ByteBuffer buffer) {
 		int length = buffer.remaining() / Short.BYTES;
@@ -355,7 +355,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 	}
 
 	/**
-	 * Decodes an int value.
+	 * Decodes an {@code int} value.
 	 *
 	 * @return the decoded value.
 	 * @throws IOException if an I/O error occurs.
@@ -374,7 +374,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 	}
 
 	/**
-	 * Decodes an array of int values.
+	 * Decodes an array of {@code int} values.
 	 *
 	 * @param arrayLength the array length to decode.
 	 * @return the decoded value.
@@ -400,6 +400,22 @@ public final class MCDInputBuffer implements MCDBuffer {
 	}
 
 	/**
+	 * Decodes an {@code int} array from a buffer returned from {@linkplain #decodeI32Array(int)}.
+	 *
+	 * @param buffer the buffer to decode.
+	 * @return the decoded array.
+	 */
+	public static int[] toI32Array(ByteBuffer buffer) {
+		int length = buffer.remaining() / Integer.BYTES;
+		int[] array = new int[length];
+
+		for (int index = 0; index < length; index++) {
+			array[index] = buffer.getInt();
+		}
+		return array;
+	}
+
+	/**
 	 * Decodes the given magic dword.
 	 *
 	 * @param expectedMagic the expected magic dword.
@@ -414,7 +430,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 	}
 
 	/**
-	 * Decodes a long value.
+	 * Decodes a {@code long} value.
 	 *
 	 * @return the decoded value.
 	 * @throws IOException if an I/O error occurs.
@@ -433,7 +449,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 	}
 
 	/**
-	 * Decodes an array of long values.
+	 * Decodes an array of {@code long} values.
 	 *
 	 * @param arrayLength the array length to decode.
 	 * @return the decoded value.
@@ -456,6 +472,22 @@ public final class MCDInputBuffer implements MCDBuffer {
 			commit();
 		}
 		return decoded;
+	}
+
+	/**
+	 * Decodes a {@code long} array from a buffer returned from {@linkplain #decodeI64Array(int)}.
+	 *
+	 * @param buffer the buffer to decode.
+	 * @return the decoded array.
+	 */
+	public static long[] toI64Array(ByteBuffer buffer) {
+		int length = buffer.remaining() / Long.BYTES;
+		long[] array = new long[length];
+
+		for (int index = 0; index < length; index++) {
+			array[index] = buffer.getLong();
+		}
+		return array;
 	}
 
 	/**
