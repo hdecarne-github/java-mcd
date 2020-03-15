@@ -19,41 +19,116 @@ package de.carne.mcd.x86;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import de.carne.mcd.common.Instruction;
-import de.carne.mcd.common.MCDDecodeBuffer;
-import de.carne.mcd.common.MCDOutput;
+import de.carne.mcd.common.instruction.Instruction;
+import de.carne.mcd.common.instruction.InstructionOpcode;
+import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.common.io.MCDOutputBuffer;
 
 /**
  * A single x86 instruction.
  */
 public class X86Instruction implements Instruction {
 
-	private final String mnemonic;
+	private final Map<Byte, X86InstructionSignature> signatures;
 
 	/**
 	 * Constructs a new {@linkplain X86Instruction} instance.
 	 *
-	 * @param mnemonic the instruction mnemonic to use.
+	 * @param signatures the instruction signatures to use.
 	 */
-	public X86Instruction(String mnemonic) {
-		this.mnemonic = mnemonic;
+	public X86Instruction(Map<Byte, X86InstructionSignature> signatures) {
+		this.signatures = signatures;
 	}
 
 	static X86Instruction load(DataInput in) throws IOException {
-		String mnemonic = in.readUTF();
+		Map<Byte, X86InstructionSignature> signatures = new HashMap<>();
+		int signatureCount = in.readInt();
 
-		return new X86Instruction(mnemonic);
+		for (int signatureIndex = 0; signatureIndex < signatureCount; signatureIndex++) {
+			Byte opcodeExtension = Byte.valueOf(in.readByte());
+			String mnemonic = in.readUTF();
+			boolean hasModRM = false;
+			List<OperandType> operands = new ArrayList<>();
+			char operandType;
+
+			do {
+				operandType = in.readChar();
+
+				String operandName = in.readUTF();
+
+				switch (operandType) {
+				case 'i':
+					operands.add(ImmediateOperandType.valueOf(operandName));
+					break;
+				case 'm':
+					hasModRM = true;
+					operands.add(ModRMOperandType.valueOf(operandName));
+					break;
+				case '*':
+					operands.add(ImplicitOperandDecoder.fromName(operandName));
+					break;
+				case '\0':
+					// instruction complete
+					break;
+				default:
+					throw new IOException("Unrecognized operand type: " + operandType + ":" + operandName);
+				}
+			} while (operandType != '\0');
+			signatures.put(opcodeExtension, new X86InstructionSignature(mnemonic, hasModRM, operands));
+		}
+		return new X86Instruction(signatures);
 	}
 
 	@Override
 	public void save(DataOutput out) throws IOException {
-		out.writeUTF(this.mnemonic);
+		out.writeInt(this.signatures.size());
+		for (Map.Entry<Byte, X86InstructionSignature> entry : this.signatures.entrySet()) {
+			out.write(entry.getKey().byteValue());
+
+			X86InstructionSignature signature = entry.getValue();
+
+			out.writeUTF(signature.mnemonic());
+
+			for (OperandType operand : signature.operands()) {
+				out.writeChar(operand.type());
+				out.writeUTF(operand.name());
+			}
+			out.writeChar('\0');
+			out.writeUTF("");
+		}
 	}
 
 	@Override
-	public void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
-		out.printKeyword(this.mnemonic);
+	public void decode(long ip, InstructionOpcode opcode, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
+		X86InstructionSignature signature = this.signatures.get(X86InstructionSignature.NO_OPCODE_EXTENSION);
+		byte modrmByte = 0;
+
+		if (signature == null) {
+			modrmByte = buffer.decodeI8();
+
+			Byte opcodeExtension = Byte.valueOf((byte) ((modrmByte >> 3) & 0x7));
+
+			signature = this.signatures.get(opcodeExtension);
+			if (signature == null) {
+				throw new IOException("Failed to decode extended opcode: " + opcode + " /" + opcodeExtension);
+			}
+		} else if (signature.hasModRM()) {
+			modrmByte = buffer.decodeI8();
+		}
+		out.printKeyword(signature.mnemonic());
+
+		int operandIndex = 0;
+
+		for (OperandType operand : signature.operands()) {
+			out.print(operandIndex == 0 ? " " : ", ");
+			operand.decode(ip, modrmByte, buffer, out);
+			operandIndex++;
+		}
 		out.println();
 	}
 

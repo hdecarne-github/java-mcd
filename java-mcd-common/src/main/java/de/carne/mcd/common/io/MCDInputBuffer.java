@@ -145,7 +145,6 @@ public final class MCDInputBuffer implements MCDBuffer {
 
 			slice = new SlicedChannel(channel, position, length);
 			channel.position(position + length);
-			this.totalRead += length;
 		} else {
 			SeekableByteChannel channel = allocateSliceChannel();
 			long position = channel.size();
@@ -154,6 +153,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 			passThrough(length, channel::write);
 			slice = new SlicedChannel(channel, position, length, this::releaseSliceChannel);
 		}
+		this.totalRead += length;
 		return slice;
 	}
 
@@ -175,10 +175,10 @@ public final class MCDInputBuffer implements MCDBuffer {
 			SeekableByteChannel channel = (SeekableByteChannel) this.in;
 
 			channel.position(channel.position() + length);
-			this.totalRead += length;
 		} else {
 			passThrough(length, b -> b.position(b.position() + b.remaining()));
 		}
+		this.totalRead += length;
 	}
 
 	/**
@@ -198,6 +198,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 		if (this.uncommittedPosition < this.inputBuffer.position()) {
 			value = Byte.toUnsignedInt(this.inputBuffer.get(this.uncommittedPosition));
 			this.uncommittedPosition += Byte.BYTES;
+			this.totalRead += Byte.BYTES;
 			if (this.autoCommit) {
 				commit();
 			}
@@ -217,6 +218,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 		byte decoded = this.inputBuffer.get(this.uncommittedPosition);
 
 		this.uncommittedPosition += Byte.BYTES;
+		this.totalRead += Byte.BYTES;
 		if (this.autoCommit) {
 			commit();
 		}
@@ -242,6 +244,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 
 		decoded.position(this.uncommittedPosition).limit(uncommittedPositionAfterDecode);
 		this.uncommittedPosition = uncommittedPositionAfterDecode;
+		this.totalRead += length;
 		if (this.autoCommit) {
 			commit();
 		}
@@ -288,6 +291,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 		short decoded = this.inputBuffer.getShort(this.uncommittedPosition);
 
 		this.uncommittedPosition += Short.BYTES;
+		this.totalRead += Short.BYTES;
 		if (this.autoCommit) {
 			commit();
 		}
@@ -313,6 +317,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 
 		decoded.position(this.uncommittedPosition).limit(uncommittedPositionAfterDecode);
 		this.uncommittedPosition = uncommittedPositionAfterDecode;
+		this.totalRead += length;
 		if (this.autoCommit) {
 			commit();
 		}
@@ -361,6 +366,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 		int decoded = this.inputBuffer.getInt(this.uncommittedPosition);
 
 		this.uncommittedPosition += Integer.BYTES;
+		this.totalRead += Integer.BYTES;
 		if (this.autoCommit) {
 			commit();
 		}
@@ -386,6 +392,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 
 		decoded.position(this.uncommittedPosition).limit(uncommittedPositionAfterDecode);
 		this.uncommittedPosition = uncommittedPositionAfterDecode;
+		this.totalRead += length;
 		if (this.autoCommit) {
 			commit();
 		}
@@ -418,6 +425,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 		long decoded = this.inputBuffer.getLong(this.uncommittedPosition);
 
 		this.uncommittedPosition += Long.BYTES;
+		this.totalRead += Long.BYTES;
 		if (this.autoCommit) {
 			commit();
 		}
@@ -443,6 +451,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 
 		decoded.position(this.uncommittedPosition).limit(uncommittedPositionAfterDecode);
 		this.uncommittedPosition = uncommittedPositionAfterDecode;
+		this.totalRead += length;
 		if (this.autoCommit) {
 			commit();
 		}
@@ -475,6 +484,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 		float decoded = this.inputBuffer.getFloat(this.uncommittedPosition);
 
 		this.uncommittedPosition += Float.BYTES;
+		this.totalRead += Float.BYTES;
 		if (this.autoCommit) {
 			commit();
 		}
@@ -493,6 +503,7 @@ public final class MCDInputBuffer implements MCDBuffer {
 		double decoded = this.inputBuffer.getDouble(this.uncommittedPosition);
 
 		this.uncommittedPosition += Double.BYTES;
+		this.totalRead += Double.BYTES;
 		if (this.autoCommit) {
 			commit();
 		}
@@ -540,7 +551,6 @@ public final class MCDInputBuffer implements MCDBuffer {
 				throw new EOFException();
 			}
 			read += read0;
-			this.totalRead += read0;
 		}
 		return read;
 	}
@@ -555,7 +565,6 @@ public final class MCDInputBuffer implements MCDBuffer {
 				break;
 			}
 			read += read0;
-			this.totalRead += read0;
 		}
 		return read;
 	}
@@ -574,7 +583,6 @@ public final class MCDInputBuffer implements MCDBuffer {
 			if (read < 0) {
 				throw new EOFException();
 			}
-			this.totalRead += read;
 			readBuffer.flip();
 			while (readBuffer.hasRemaining()) {
 				handler.accept(readBuffer);

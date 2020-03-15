@@ -32,8 +32,7 @@ import org.junit.jupiter.api.Test;
 
 import de.carne.boot.logging.Log;
 import de.carne.io.IOUtil;
-import de.carne.mcd.common.MCDOutput;
-import de.carne.mcd.common.PlainMCDOutput;
+import de.carne.mcd.common.io.PlainMCDOutput;
 import de.carne.mcd.x86.X86Decoder;
 import de.carne.mcd.x86.X86b16Decoder;
 import de.carne.mcd.x86.X86b32Decoder;
@@ -65,12 +64,12 @@ class X86DecoderTest {
 		StringWriter decodeBuffer = new StringWriter();
 
 		try (ReadableByteChannel code = getCode(file, offset, length);
-				MCDOutput out = new PlainMCDOutput(decodeBuffer, false)) {
+				PlainMCDOutput out = new PlainMCDOutput(decodeBuffer, false)) {
 			decoder.decode(code, out);
 		}
 
 		String decodeOutput = decodeBuffer.toString();
-		String referenceOutput = getReferenceOutput(decoder.getClass().getSimpleName() + ".asm");
+		String referenceOutput = getReferenceOutput(decoder.getClass().getSimpleName() + ".txt");
 
 		Assertions.assertEquals(referenceOutput, decodeOutput);
 	}

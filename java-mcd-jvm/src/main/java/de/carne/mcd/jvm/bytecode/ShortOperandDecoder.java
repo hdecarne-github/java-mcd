@@ -18,11 +18,11 @@ package de.carne.mcd.jvm.bytecode;
 
 import java.io.IOException;
 
-import de.carne.mcd.common.MCDOutput;
+import de.carne.mcd.common.io.MCDOutputBuffer;
 
 @FunctionalInterface
 interface ShortOperandDecoder {
 
-	void decode(int pc, short operand, MCDOutput out) throws IOException;
+	void decode(int pc, short operand, MCDOutputBuffer out) throws IOException;
 
 }

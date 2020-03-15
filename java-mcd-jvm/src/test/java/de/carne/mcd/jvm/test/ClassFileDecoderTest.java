@@ -40,8 +40,7 @@ import org.junit.jupiter.api.condition.DisabledOnOs;
 import de.carne.boot.logging.Log;
 import de.carne.io.Closeables;
 import de.carne.io.IOUtil;
-import de.carne.mcd.common.MCDOutput;
-import de.carne.mcd.common.PlainMCDOutput;
+import de.carne.mcd.common.io.PlainMCDOutput;
 import de.carne.mcd.jvm.ClassFileDecoder;
 import de.carne.util.Debug;
 
@@ -137,7 +136,7 @@ class ClassFileDecoderTest {
 					try (InputStream jarEntryStream = jarFile.getInputStream(jarEntry);
 							ReadableByteChannel jarEntryChannel = Channels.newChannel(jarEntryStream);
 							PlainMCDOutput out = new PlainMCDOutput(decodeBuffer, false)) {
-						decoder.doDecode(jarEntryChannel, out);
+						decoder.decode(jarEntryChannel, out);
 					}
 				}
 			}
@@ -158,8 +157,9 @@ class ClassFileDecoderTest {
 		ClassFileDecoder decoder = new ClassFileDecoder();
 		StringWriter decodeBuffer = new StringWriter();
 
-		try (ReadableByteChannel in = getByteCode(resource); MCDOutput out = new PlainMCDOutput(decodeBuffer, false)) {
-			decoder.doDecode(in, out);
+		try (ReadableByteChannel in = getByteCode(resource);
+				PlainMCDOutput out = new PlainMCDOutput(decodeBuffer, false)) {
+			decoder.decode(in, out);
 		}
 
 		String decodeOutput = decodeBuffer.toString();
@@ -174,7 +174,7 @@ class ClassFileDecoderTest {
 
 	private String getReferenceOutput(String resource) throws IOException {
 		String referenceResource = resource.replace('/', '.').replaceAll("^\\.", "").replaceAll("\\$", "_")
-				.replaceAll("\\.class$", ".jcf");
+				.replaceAll("\\.class$", ".txt");
 		String output;
 
 		try (InputStream referenceStream = getClass().getResourceAsStream(referenceResource)) {

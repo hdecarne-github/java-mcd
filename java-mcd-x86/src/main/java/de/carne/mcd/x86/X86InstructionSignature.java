@@ -14,31 +14,48 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm.bootstrap;
+package de.carne.mcd.x86;
 
-import de.carne.mcd.common.instruction.InstructionOpcode;
+import java.util.Collections;
+import java.util.List;
 
-final class InstructionForm {
+/**
+ *
+ */
+public final class X86InstructionSignature {
+
+	public static final Byte NO_OPCODE_EXTENSION = Byte.valueOf((byte) 0xff);
 
 	private final String mnemonic;
-	private final InstructionOpcode opcode;
+	private final boolean hasModRM;
+	private final List<OperandType> operands;
 
-	InstructionForm(String mnemonic, byte[] opcodeBytes) {
+	/**
+	 *
+	 */
+	public X86InstructionSignature(String mnemonic, boolean hasModRM) {
+		this(mnemonic, hasModRM, Collections.emptyList());
+	}
+
+	/**
+	 *
+	 */
+	public X86InstructionSignature(String mnemonic, boolean hasModRM, List<OperandType> operands) {
 		this.mnemonic = mnemonic;
-		this.opcode = InstructionOpcode.wrap(opcodeBytes);
+		this.hasModRM = hasModRM;
+		this.operands = Collections.unmodifiableList(operands);
 	}
 
 	public String mnemonic() {
 		return this.mnemonic;
 	}
 
-	public InstructionOpcode opcode() {
-		return this.opcode;
+	public boolean hasModRM() {
+		return this.hasModRM;
 	}
 
-	@Override
-	public String toString() {
-		return this.opcode + " " + this.mnemonic;
+	public List<OperandType> operands() {
+		return this.operands;
 	}
 
 }

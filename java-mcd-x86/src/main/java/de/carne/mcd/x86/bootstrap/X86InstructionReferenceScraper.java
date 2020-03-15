@@ -19,10 +19,12 @@ package de.carne.mcd.x86.bootstrap;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.XMLConstants;
@@ -37,8 +39,8 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import de.carne.boot.check.Check;
 import de.carne.boot.logging.Log;
-import de.carne.mcd.common.Opcode;
 import de.carne.mcd.common.bootstrap.InstructionReferenceEntry;
+import de.carne.mcd.common.instruction.InstructionOpcode;
 import de.carne.util.Strings;
 
 final class X86InstructionReferenceScraper extends DefaultHandler implements Iterable<X86InstructionReferenceEntry> {
@@ -339,26 +341,71 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 
 	private void endSyntaxElement() {
 		if (!this.mnemonic.equals(InstructionReferenceEntry.NO_VALUE) && this.syntaxCount == 1) {
-			Opcode opcode = getOpcode();
+			InstructionOpcode opcode = getOpcode();
 
-			LOG.info("Considering new opcode {0} {1}", opcode, this.mnemonic);
+			for (String expandedSignature : expandSignature()) {
+				LOG.info("Considering new opcode {0} {1}", opcode, this.mnemonic);
 
-			X86InstructionReferenceEntry entry = new X86InstructionReferenceEntry(opcode, this.mnemonic,
-					this.signature);
+				X86InstructionReferenceEntry entry = new X86InstructionReferenceEntry(opcode, this.mnemonic,
+						expandedSignature);
 
-			if ("p".equals(this.mode) && InstructionReferenceEntry.NO_VALUE.equals(this.procEnd)) {
-				entry.disableX86b16();
-			} else if ("e".equals(this.mode) && InstructionReferenceEntry.NO_VALUE.equals(this.procEnd)) {
-				entry.disableX86b16();
-				entry.disableX86b32();
-			} else if (!"r".equals(this.mode)) {
-				entry.disableX86b16();
-				entry.disableX86b32();
-				entry.disableX86b64();
+				if ("p".equals(this.mode) && InstructionReferenceEntry.NO_VALUE.equals(this.procEnd)) {
+					entry.disableX86b16();
+				} else if ("e".equals(this.mode) && InstructionReferenceEntry.NO_VALUE.equals(this.procEnd)) {
+					entry.disableX86b16();
+					entry.disableX86b32();
+				} else if (!"r".equals(this.mode)) {
+					entry.disableX86b16();
+					entry.disableX86b32();
+					entry.disableX86b64();
+				}
+				this.entries.add(entry);
+				opcode = nextOpcode(opcode);
 			}
-			this.entries.add(entry);
 		}
 		resetSyntax();
+	}
+
+	private List<String> expandSignature() {
+		List<String> signatures = new ArrayList<>(8);
+		if (this.signature.contains(X86Symbol.OPCD_R8.symbol())) {
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R8.symbol(), X86Symbol.AL.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R8.symbol(), X86Symbol.CL.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R8.symbol(), X86Symbol.DL.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R8.symbol(), X86Symbol.BL.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R8.symbol(), X86Symbol.AH.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R8.symbol(), X86Symbol.CH.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R8.symbol(), X86Symbol.DH.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R8.symbol(), X86Symbol.BH.symbol()));
+		} else if (this.signature.contains(X86Symbol.OPCD_R16.symbol())) {
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R16.symbol(), X86Symbol.AX.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R16.symbol(), X86Symbol.CX.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R16.symbol(), X86Symbol.DX.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R16.symbol(), X86Symbol.BX.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R16.symbol(), X86Symbol.SP.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R16.symbol(), X86Symbol.BP.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R16.symbol(), X86Symbol.SI.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R16.symbol(), X86Symbol.DI.symbol()));
+		} else if (this.signature.contains(X86Symbol.OPCD_R32.symbol())) {
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R32.symbol(), X86Symbol.EAX.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R32.symbol(), X86Symbol.ECX.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R32.symbol(), X86Symbol.EDX.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R32.symbol(), X86Symbol.EBX.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R32.symbol(), X86Symbol.ESP.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R32.symbol(), X86Symbol.EBP.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R32.symbol(), X86Symbol.ESI.symbol()));
+			signatures.add(this.signature.replace(X86Symbol.OPCD_R32.symbol(), X86Symbol.EDI.symbol()));
+		} else {
+			signatures.add(this.signature);
+		}
+		return signatures;
+	}
+
+	private InstructionOpcode nextOpcode(InstructionOpcode opcode) {
+		byte[] opcodeBytes = opcode.bytes();
+
+		opcodeBytes[opcodeBytes.length - 1]++;
+		return InstructionOpcode.wrap(opcodeBytes);
 	}
 
 	private void startMnemElement() {
@@ -366,7 +413,7 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 	}
 
 	private void endMnemElement() {
-		this.mnemonic = disableCharacterBuffer();
+		this.mnemonic = disableCharacterBuffer().toLowerCase();
 		if (Strings.notEmpty(this.signature)) {
 			this.signature += this.mnemonic;
 		}
@@ -396,17 +443,19 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 	@Override
 	public void endDocument() throws SAXException {
 		Iterator<X86InstructionReferenceEntry> entryIterator = this.entries.iterator();
-		Map<Opcode, X86InstructionReferenceEntry> packedEntries = new HashMap<>();
+		Map<InstructionOpcode, X86InstructionReferenceEntry> packedEntries = new HashMap<>();
 
 		while (entryIterator.hasNext()) {
 			X86InstructionReferenceEntry entry = entryIterator.next();
 
 			if (this.scrapeMode.isAvailable(entry)) {
-				Opcode entryOpcode = entry.opcode();
+				InstructionOpcode entryOpcode = entry.opcode();
 				X86InstructionReferenceEntry packedEntry = packedEntries.get(entryOpcode);
 
-				if (packedEntry != null && packedEntry.opcode().equals(entryOpcode)) {
-					packedEntry.addExtraFields(entry.extraFields());
+				if (packedEntry != null) {
+					if (packedEntry.isOpcdExt()) {
+						packedEntry.addExtraFields(entry.extraFields());
+					}
 					entryIterator.remove();
 				} else {
 					packedEntries.put(entryOpcode, entry);
@@ -417,7 +466,7 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 		}
 	}
 
-	private Opcode getOpcode() {
+	private InstructionOpcode getOpcode() {
 		Check.assertTrue(this.priOpcode >= 0);
 
 		byte[] opcode = new byte[4];
@@ -433,7 +482,7 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 		if (this.secOpcode >= 0) {
 			opcode[opcodeLength++] = (byte) this.secOpcode;
 		}
-		return Opcode.wrap(opcode, 0, opcodeLength);
+		return InstructionOpcode.wrap(opcode, 0, opcodeLength);
 	}
 
 	private static byte parseOpcode(String s) throws SAXException {

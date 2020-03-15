@@ -1,0 +1,85 @@
+0000: push cs
+0001: pop ds
+0002: mov dx, 0x000e
+0005: mov ah, 0x09
+0007: int 0x21
+0009: mov ax, 0x4c01
+000c: int 0x21
+000e: push sp
+000f: push 0x7369
+0012: and [bx+si]+72, dh
+0015: outs dx, ?
+0016: db 0x67;
+0017: jb +97 // 78
+0019: ins ?, dx
+001a: and [bp+di]+61, ah
+001d: outs dx, ?
+001e: outs dx, ?
+001f: outs dx, ?
+0020: jz +32 // 40
+0022: bound sp, ?
+0024: and [bp+si]+75, dh
+0027: outs dx, ?
+0028: and [bx+di]+6e, ch
+002b: and [si]+4f, al
+002e: push bx
+002f: and [di]+6f, ch
+0032: fs
+0033: gs
+0034: cs
+0035: or ax, 0x0a0d
+0038: and al, 0x00
+003a: add [bx+si], al
+003c: add [bx+si], al
+003e: add [bx+si], al
+0040: jle -6 // 3a
+0042: add dl, al
+0044: cmp bl, [bp+di]+836c
+0048: cmp bl, [bp+di]+836c
+004c: cmp bl, [bp+di]+836c
+0050: xchg dx, sp
+0052: cli
+0053: xor 6c9b, 0x83
+0058: xor sp, bx
+005a: stc
+005b: and [bx], 0x9b
+005e: ins ?, dx
+005f: sbb [di], 0x5d
+0062: add [bp+di]+9b39, ax
+0066: ins ?, dx
+0067: sbb [di], 0x5d
+006a: add al, [bp+di]+9b3b
+006e: ins ?, dx
+006f: sbb [di], 0x5d
+0072: pop ss
+0073: xor [bx+di], 0x9b
+0076: ins ?, dx
+0077: cmp [bp+si], 0x9b
+007a: ins ?, dx
+007b: cmp [bp+di], 0x9a
+007e: ins ?, dx
+007f: xor [bp+di], 0xe3
+0082: out dx, eax
+0083: xor di, 0x9b
+0086: ins ?, dx
+0087: xor [bp+di], 0xe3
+008a: call jvds
+008b: sbb [si]+9b, 0x6c
+008f: xor [bp+di], 0xe3
+0092: inc [bp+di]+9b3b
+0096: ins ?, dx
+0097: xor [bp+di], 0xe3
+009a: clc
+009b: cmp [bp+di], 0x9b
+009e: ins ?, dx
+009f: xor [bp+di], 0xe3
+00a2: std
+00a3: cmp [bp+di], 0x9b
+00a6: ins ?, dx
+00a7: adc [bp+si]+69, 0x63
+00ab: push 0x9b3a
+00ae: ins ?, dx
+00af: add [bx+si], 0x00
+00b2: add [bx+si], al
+00b4: add [bx+si], al
+00b6: add [bx+si], al

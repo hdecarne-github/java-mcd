@@ -18,10 +18,10 @@ package de.carne.mcd.jvm;
 
 import java.io.IOException;
 import java.nio.ByteOrder;
-import java.nio.channels.ReadableByteChannel;
 
-import de.carne.mcd.common.MCDOutput;
 import de.carne.mcd.common.MachineCodeDecoder;
+import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.common.io.MCDOutputBuffer;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.DecodedClassInfo;
 
@@ -30,7 +30,11 @@ import de.carne.mcd.jvm.classfile.DecodedClassInfo;
  */
 public class ClassFileDecoder extends MachineCodeDecoder {
 
-	private static final String NAME = "Java class file";
+	/**
+	 * Decoder name.
+	 */
+	@SuppressWarnings("squid:S1845")
+	public static final String NAME = "Java class file";
 
 	/**
 	 * Constructs a new {@linkplain ClassFileDecoder} instance.
@@ -40,8 +44,8 @@ public class ClassFileDecoder extends MachineCodeDecoder {
 	}
 
 	@Override
-	public void doDecode(ReadableByteChannel in, MCDOutput out) throws IOException {
-		DecodedClassInfo decoded = DecodedClassInfo.decode(newDecodeBuffer(in));
+	protected void decode0(MCDInputBuffer in, MCDOutputBuffer out) throws IOException {
+		DecodedClassInfo decoded = DecodedClassInfo.decode(in);
 
 		ClassPrinter.getInstance(out, decoded).print();
 	}

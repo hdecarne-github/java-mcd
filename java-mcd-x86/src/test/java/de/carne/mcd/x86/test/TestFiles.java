@@ -39,13 +39,13 @@ public final class TestFiles {
 	 */
 	public static final TestFile WINDOWS_EXE = new RemoteTestFile(TEST_FILE_DIR,
 			"https://github.com/hdecarne/certmgr/releases/download/v1.1.1/certmgr_windows_1_1_1.exe",
-			"certmgr_windows_1_1_1.exe");
+			"certmgr_windows_1_1_1.exe", "a68a83bd49cd58d3f6dd83f60bbbbcc24bba9110b8f75abae49097040f63d435");
 
 	/**
 	 * https://github.com/hdecarne/certmgr/releases/download/v1.1.1/certmgr_windows-x64_1_1_1.exe
 	 */
 	public static final TestFile WINDOWS64_EXE = new RemoteTestFile(TEST_FILE_DIR,
 			"https://github.com/hdecarne/certmgr/releases/download/v1.1.1/certmgr_windows-x64_1_1_1.exe",
-			"certmgr_windows-x64_1_1_1.exe");
+			"certmgr_windows-x64_1_1_1.exe", "05807f11f31cf1825bc478c02d56c99f512656342284add7fa8a1f70145b6107");
 
 }

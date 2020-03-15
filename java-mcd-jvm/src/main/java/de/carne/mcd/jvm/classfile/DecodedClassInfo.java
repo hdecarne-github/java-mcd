@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.carne.boot.logging.Log;
-import de.carne.mcd.common.MCDDecodeBuffer;
+import de.carne.mcd.common.io.MCDInputBuffer;
 import de.carne.util.Late;
 
 /**
@@ -59,11 +59,11 @@ public class DecodedClassInfo implements ClassInfo {
 	 * @return the decoded class info.
 	 * @throws IOException if a decoding failure occurs.
 	 */
-	public static DecodedClassInfo decode(MCDDecodeBuffer buffer) throws IOException {
+	public static DecodedClassInfo decode(MCDInputBuffer buffer) throws IOException {
 		return new DecodedClassInfo().decode0(buffer);
 	}
 
-	private DecodedClassInfo decode0(MCDDecodeBuffer buffer) throws IOException {
+	private DecodedClassInfo decode0(MCDInputBuffer buffer) throws IOException {
 		buffer.decodeMagic(0xcafebabe);
 		decodeClass(buffer);
 		decodeFields(buffer);
@@ -72,7 +72,7 @@ public class DecodedClassInfo implements ClassInfo {
 		return this;
 	}
 
-	private void decodeClass(MCDDecodeBuffer buffer) throws IOException {
+	private void decodeClass(MCDInputBuffer buffer) throws IOException {
 		this.minorVersion = Short.toUnsignedInt(buffer.decodeI16());
 		this.majorVersion = Short.toUnsignedInt(buffer.decodeI16());
 		decodeConstantPool(buffer);
@@ -90,7 +90,7 @@ public class DecodedClassInfo implements ClassInfo {
 		decodeInterfaces(buffer);
 	}
 
-	private void decodeConstantPool(MCDDecodeBuffer buffer) throws IOException {
+	private void decodeConstantPool(MCDInputBuffer buffer) throws IOException {
 		int count = Short.toUnsignedInt(buffer.decodeI16());
 
 		if (count == 0) {
@@ -183,78 +183,78 @@ public class DecodedClassInfo implements ClassInfo {
 		}
 	}
 
-	private Utf8Constant decodeUtf8Constant(MCDDecodeBuffer buffer) throws IOException {
+	private Utf8Constant decodeUtf8Constant(MCDInputBuffer buffer) throws IOException {
 		int length = Short.toUnsignedInt(buffer.decodeI16());
 		String string = StandardCharsets.UTF_8.decode(buffer.decodeI8Array(length)).toString();
 
 		return new Utf8Constant(this, string);
 	}
 
-	private IntegerConstant decodeIntegerConstant(MCDDecodeBuffer buffer) throws IOException {
+	private IntegerConstant decodeIntegerConstant(MCDInputBuffer buffer) throws IOException {
 		int value = buffer.decodeI32();
 
 		return new IntegerConstant(this, value);
 	}
 
-	private FloatConstant decodeFloatConstant(MCDDecodeBuffer buffer) throws IOException {
+	private FloatConstant decodeFloatConstant(MCDInputBuffer buffer) throws IOException {
 		float value = buffer.decodeF32();
 
 		return new FloatConstant(this, value);
 	}
 
-	private LongConstant decodeLongConstant(MCDDecodeBuffer buffer) throws IOException {
+	private LongConstant decodeLongConstant(MCDInputBuffer buffer) throws IOException {
 		long value = buffer.decodeI64();
 
 		return new LongConstant(this, value);
 	}
 
-	private DoubleConstant decodeDoubleConstant(MCDDecodeBuffer buffer) throws IOException {
+	private DoubleConstant decodeDoubleConstant(MCDInputBuffer buffer) throws IOException {
 		double value = buffer.decodeF64();
 
 		return new DoubleConstant(this, value);
 	}
 
-	private ClassConstant decodeClassConstant(MCDDecodeBuffer buffer) throws IOException {
+	private ClassConstant decodeClassConstant(MCDInputBuffer buffer) throws IOException {
 		int nameIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new ClassConstant(this, nameIndex);
 	}
 
-	private StringConstant decodeStringConstant(MCDDecodeBuffer buffer) throws IOException {
+	private StringConstant decodeStringConstant(MCDInputBuffer buffer) throws IOException {
 		int stringIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new StringConstant(this, stringIndex);
 	}
 
-	private FieldRefConstant decodeFieldRefConstant(MCDDecodeBuffer buffer) throws IOException {
+	private FieldRefConstant decodeFieldRefConstant(MCDInputBuffer buffer) throws IOException {
 		int classIndex = Short.toUnsignedInt(buffer.decodeI16());
 		int nameAndTypeIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new FieldRefConstant(this, classIndex, nameAndTypeIndex);
 	}
 
-	private MethodRefConstant decodeMethodRefConstant(MCDDecodeBuffer buffer) throws IOException {
+	private MethodRefConstant decodeMethodRefConstant(MCDInputBuffer buffer) throws IOException {
 		int classIndex = Short.toUnsignedInt(buffer.decodeI16());
 		int nameAndTypeIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new MethodRefConstant(this, classIndex, nameAndTypeIndex);
 	}
 
-	private InterfaceMethodRefConstant decodeInterfaceMethodRefConstant(MCDDecodeBuffer buffer) throws IOException {
+	private InterfaceMethodRefConstant decodeInterfaceMethodRefConstant(MCDInputBuffer buffer) throws IOException {
 		int classIndex = Short.toUnsignedInt(buffer.decodeI16());
 		int nameAndTypeIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new InterfaceMethodRefConstant(this, classIndex, nameAndTypeIndex);
 	}
 
-	private NameAndTypeConstant decodeNameAndTypeConstant(MCDDecodeBuffer buffer) throws IOException {
+	private NameAndTypeConstant decodeNameAndTypeConstant(MCDInputBuffer buffer) throws IOException {
 		int nameIndex = Short.toUnsignedInt(buffer.decodeI16());
 		int descriptorIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new NameAndTypeConstant(this, nameIndex, descriptorIndex);
 	}
 
-	private MethodHandleConstant decodeMethodHandleConstant(MCDDecodeBuffer buffer) throws IOException {
+	private MethodHandleConstant decodeMethodHandleConstant(MCDInputBuffer buffer) throws IOException {
 		int referenceKindValue = Byte.toUnsignedInt(buffer.decodeI8());
 		int referenceIndex = Short.toUnsignedInt(buffer.decodeI16());
 		ReferenceKind referenceKind;
@@ -293,39 +293,39 @@ public class DecodedClassInfo implements ClassInfo {
 		return new MethodHandleConstant(this, referenceKind, referenceIndex);
 	}
 
-	private MethodTypeConstant decodeMethodTypeConstant(MCDDecodeBuffer buffer) throws IOException {
+	private MethodTypeConstant decodeMethodTypeConstant(MCDInputBuffer buffer) throws IOException {
 		int descriptorIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new MethodTypeConstant(this, descriptorIndex);
 	}
 
-	private DynamicConstant decodeDynamicConstant(MCDDecodeBuffer buffer) throws IOException {
+	private DynamicConstant decodeDynamicConstant(MCDInputBuffer buffer) throws IOException {
 		int bootstrapMethodAttrIndex = Short.toUnsignedInt(buffer.decodeI16());
 		int nameAndTypeIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new DynamicConstant(this, bootstrapMethodAttrIndex, nameAndTypeIndex);
 	}
 
-	private InvokeDynamicConstant decodeInvokeDynamicConstant(MCDDecodeBuffer buffer) throws IOException {
+	private InvokeDynamicConstant decodeInvokeDynamicConstant(MCDInputBuffer buffer) throws IOException {
 		int bootstrapMethodAttrIndex = Short.toUnsignedInt(buffer.decodeI16());
 		int nameAndTypeIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new InvokeDynamicConstant(this, bootstrapMethodAttrIndex, nameAndTypeIndex);
 	}
 
-	private ModuleConstant decodeModuleConstant(MCDDecodeBuffer buffer) throws IOException {
+	private ModuleConstant decodeModuleConstant(MCDInputBuffer buffer) throws IOException {
 		int nameIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new ModuleConstant(this, nameIndex);
 	}
 
-	private PackageConstant decodePackageConstant(MCDDecodeBuffer buffer) throws IOException {
+	private PackageConstant decodePackageConstant(MCDInputBuffer buffer) throws IOException {
 		int nameIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new PackageConstant(this, nameIndex);
 	}
 
-	private void decodeInterfaces(MCDDecodeBuffer buffer) throws IOException {
+	private void decodeInterfaces(MCDInputBuffer buffer) throws IOException {
 		int interfacesCount = Short.toUnsignedInt(buffer.decodeI16());
 		ByteBuffer interfacesIndices = buffer.decodeI16Array(interfacesCount);
 		List<ClassName> interfaces = new ArrayList<>(interfacesCount);
@@ -338,7 +338,7 @@ public class DecodedClassInfo implements ClassInfo {
 		this.interfacesHolder.set(Collections.unmodifiableList(interfaces));
 	}
 
-	private void decodeFields(MCDDecodeBuffer buffer) throws IOException {
+	private void decodeFields(MCDInputBuffer buffer) throws IOException {
 		int fieldsCount = Short.toUnsignedInt(buffer.decodeI16());
 		List<FieldInfo> fields = new ArrayList<>(fieldsCount);
 
@@ -353,7 +353,7 @@ public class DecodedClassInfo implements ClassInfo {
 		this.fieldsHolder.set(Collections.unmodifiableList(fields));
 	}
 
-	private void decodeMethods(MCDDecodeBuffer buffer) throws IOException {
+	private void decodeMethods(MCDInputBuffer buffer) throws IOException {
 		int methodsCount = Short.toUnsignedInt(buffer.decodeI16());
 		List<MethodInfo> methods = new ArrayList<>(methodsCount);
 
@@ -368,11 +368,11 @@ public class DecodedClassInfo implements ClassInfo {
 		this.methodsHolder.set(Collections.unmodifiableList(methods));
 	}
 
-	private void decodeClassAttributes(MCDDecodeBuffer buffer) throws IOException {
+	private void decodeClassAttributes(MCDInputBuffer buffer) throws IOException {
 		this.attributesHolder.set(Collections.unmodifiableList(decodeAttributes(buffer)));
 	}
 
-	private List<Attribute> decodeAttributes(MCDDecodeBuffer buffer) throws IOException {
+	private List<Attribute> decodeAttributes(MCDInputBuffer buffer) throws IOException {
 		int attributesCount = Short.toUnsignedInt(buffer.decodeI16());
 		List<Attribute> attributes = new ArrayList<>(attributesCount);
 
@@ -382,7 +382,7 @@ public class DecodedClassInfo implements ClassInfo {
 		return attributes;
 	}
 
-	private void decodeAttribute(List<Attribute> attributes, MCDDecodeBuffer buffer) throws IOException {
+	private void decodeAttribute(List<Attribute> attributes, MCDInputBuffer buffer) throws IOException {
 		int nameIndex = Short.toUnsignedInt(buffer.decodeI16());
 		int length = buffer.decodeI32();
 		String attributeName = resolveConstant(nameIndex, Utf8Constant.class).getValue();
@@ -422,33 +422,33 @@ public class DecodedClassInfo implements ClassInfo {
 		}
 	}
 
-	private SourceFileAttribute decodeSourceFileAttribute(MCDDecodeBuffer buffer) throws IOException {
+	private SourceFileAttribute decodeSourceFileAttribute(MCDInputBuffer buffer) throws IOException {
 		int sourceFileIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new SourceFileAttribute(this, sourceFileIndex);
 	}
 
-	private ConstantValueAttribute decodeConstantValueAttribute(MCDDecodeBuffer buffer) throws IOException {
+	private ConstantValueAttribute decodeConstantValueAttribute(MCDInputBuffer buffer) throws IOException {
 		int constantValueIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new ConstantValueAttribute(this, constantValueIndex);
 	}
 
-	private RuntimeVisibleAnnotationsAttribute decodeRuntimeVisibleAnnotationsAttribute(MCDDecodeBuffer buffer)
+	private RuntimeVisibleAnnotationsAttribute decodeRuntimeVisibleAnnotationsAttribute(MCDInputBuffer buffer)
 			throws IOException {
 		List<Annotation> annotations = decodeAnnotations(buffer);
 
 		return new RuntimeVisibleAnnotationsAttribute(this, annotations);
 	}
 
-	private RuntimeInvisibleAnnotationsAttribute decodeRuntimeInvisibleAnnotationsAttribute(MCDDecodeBuffer buffer)
+	private RuntimeInvisibleAnnotationsAttribute decodeRuntimeInvisibleAnnotationsAttribute(MCDInputBuffer buffer)
 			throws IOException {
 		List<Annotation> annotations = decodeAnnotations(buffer);
 
 		return new RuntimeInvisibleAnnotationsAttribute(this, annotations);
 	}
 
-	private RuntimeVisibleTypeAnnotationsAttribute decodeRuntimeVisibleTypeAnnotationsAttribute(MCDDecodeBuffer buffer)
+	private RuntimeVisibleTypeAnnotationsAttribute decodeRuntimeVisibleTypeAnnotationsAttribute(MCDInputBuffer buffer)
 			throws IOException {
 		List<TypeAnnotation> annotations = decodeTypeAnnotations(buffer);
 
@@ -456,13 +456,13 @@ public class DecodedClassInfo implements ClassInfo {
 	}
 
 	private RuntimeInvisibleTypeAnnotationsAttribute decodeRuntimeInvisibleTypeAnnotationsAttribute(
-			MCDDecodeBuffer buffer) throws IOException {
+			MCDInputBuffer buffer) throws IOException {
 		List<TypeAnnotation> annotations = decodeTypeAnnotations(buffer);
 
 		return new RuntimeInvisibleTypeAnnotationsAttribute(this, annotations);
 	}
 
-	private List<Annotation> decodeAnnotations(MCDDecodeBuffer buffer) throws IOException {
+	private List<Annotation> decodeAnnotations(MCDInputBuffer buffer) throws IOException {
 		int count = Short.toUnsignedInt(buffer.decodeI16());
 		List<Annotation> annotations = new LinkedList<>();
 
@@ -474,14 +474,14 @@ public class DecodedClassInfo implements ClassInfo {
 		return annotations;
 	}
 
-	private Annotation decodeAnnotation(MCDDecodeBuffer buffer) throws IOException {
+	private Annotation decodeAnnotation(MCDInputBuffer buffer) throws IOException {
 		int typeIndex = Short.toUnsignedInt(buffer.decodeI16());
 		List<AnnotationElement> elements = decodeAnnotationElements(buffer);
 
 		return new Annotation(this, typeIndex, elements);
 	}
 
-	private List<TypeAnnotation> decodeTypeAnnotations(MCDDecodeBuffer buffer) throws IOException {
+	private List<TypeAnnotation> decodeTypeAnnotations(MCDInputBuffer buffer) throws IOException {
 		int count = Short.toUnsignedInt(buffer.decodeI16());
 		List<TypeAnnotation> annotations = new LinkedList<>();
 
@@ -493,7 +493,7 @@ public class DecodedClassInfo implements ClassInfo {
 		return annotations;
 	}
 
-	private TypeAnnotation decodeTypeAnnotation(MCDDecodeBuffer buffer) throws IOException {
+	private TypeAnnotation decodeTypeAnnotation(MCDInputBuffer buffer) throws IOException {
 		TypeAnnotationTarget target = decodeTypeAnnotationTarget(buffer);
 		TypeAnnotationPath path = decodeTypeAnnotationPath(buffer);
 		int typeIndex = Short.toUnsignedInt(buffer.decodeI16());
@@ -502,7 +502,7 @@ public class DecodedClassInfo implements ClassInfo {
 		return new TypeAnnotation(this, typeIndex, target, path, elements);
 	}
 
-	private TypeAnnotationTarget decodeTypeAnnotationTarget(MCDDecodeBuffer buffer) throws IOException {
+	private TypeAnnotationTarget decodeTypeAnnotationTarget(MCDInputBuffer buffer) throws IOException {
 		int targetType = Byte.toUnsignedInt(buffer.decodeI8());
 		TypeAnnotationTarget target;
 
@@ -555,19 +555,19 @@ public class DecodedClassInfo implements ClassInfo {
 		return target;
 	}
 
-	private TypeAnnotationTarget decodeTypeParameterTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+	private TypeAnnotationTarget decodeTypeParameterTarget(int targetType, MCDInputBuffer buffer) throws IOException {
 		int parameterIndex = Byte.toUnsignedInt(buffer.decodeI8());
 
 		return new TypeAnnotationTarget.TypeParameter(targetType, parameterIndex);
 	}
 
-	private TypeAnnotationTarget decodeSupertypeTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+	private TypeAnnotationTarget decodeSupertypeTarget(int targetType, MCDInputBuffer buffer) throws IOException {
 		int supertypeIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new TypeAnnotationTarget.Supertype(targetType, supertypeIndex);
 	}
 
-	private TypeAnnotationTarget decodeTypeParameterBoundTarget(int targetType, MCDDecodeBuffer buffer)
+	private TypeAnnotationTarget decodeTypeParameterBoundTarget(int targetType, MCDInputBuffer buffer)
 			throws IOException {
 		int parameterIndex = Byte.toUnsignedInt(buffer.decodeI8());
 		int boundIndex = Byte.toUnsignedInt(buffer.decodeI8());
@@ -575,53 +575,53 @@ public class DecodedClassInfo implements ClassInfo {
 		return new TypeAnnotationTarget.TypeParameterBound(targetType, parameterIndex, boundIndex);
 	}
 
-	private TypeAnnotationTarget decodeFormalParameterTarget(int targetType, MCDDecodeBuffer buffer)
+	private TypeAnnotationTarget decodeFormalParameterTarget(int targetType, MCDInputBuffer buffer)
 			throws IOException {
 		int parameterIndex = Byte.toUnsignedInt(buffer.decodeI8());
 
 		return new TypeAnnotationTarget.FormalParameter(targetType, parameterIndex);
 	}
 
-	private TypeAnnotationTarget decodeThrowsTypeTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+	private TypeAnnotationTarget decodeThrowsTypeTarget(int targetType, MCDInputBuffer buffer) throws IOException {
 		int throwsIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new TypeAnnotationTarget.ThrowsType(targetType, throwsIndex);
 	}
 
-	private TypeAnnotationTarget decodeLocalvarTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+	private TypeAnnotationTarget decodeLocalvarTarget(int targetType, MCDInputBuffer buffer) throws IOException {
 		int tableLength = Short.toUnsignedInt(buffer.decodeI16());
-		short[] table = MCDDecodeBuffer.toI16Array(buffer.decodeI16Array(tableLength));
+		short[] table = MCDInputBuffer.toI16Array(buffer.decodeI16Array(tableLength));
 
 		return new TypeAnnotationTarget.Localvar(targetType, table);
 	}
 
-	private TypeAnnotationTarget decodeCatchTypeTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+	private TypeAnnotationTarget decodeCatchTypeTarget(int targetType, MCDInputBuffer buffer) throws IOException {
 		int exceptionIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new TypeAnnotationTarget.CatchType(targetType, exceptionIndex);
 	}
 
-	private TypeAnnotationTarget decodeOffsetTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+	private TypeAnnotationTarget decodeOffsetTarget(int targetType, MCDInputBuffer buffer) throws IOException {
 		int offset = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new TypeAnnotationTarget.Offset(targetType, offset);
 	}
 
-	private TypeAnnotationTarget decodeTypeArgumentTarget(int targetType, MCDDecodeBuffer buffer) throws IOException {
+	private TypeAnnotationTarget decodeTypeArgumentTarget(int targetType, MCDInputBuffer buffer) throws IOException {
 		int offset = Short.toUnsignedInt(buffer.decodeI16());
 		int argumentIndex = Byte.toUnsignedInt(buffer.decodeI8());
 
 		return new TypeAnnotationTarget.TypeArgument(targetType, offset, argumentIndex);
 	}
 
-	private TypeAnnotationPath decodeTypeAnnotationPath(MCDDecodeBuffer buffer) throws IOException {
+	private TypeAnnotationPath decodeTypeAnnotationPath(MCDInputBuffer buffer) throws IOException {
 		int pathLength = Byte.toUnsignedInt(buffer.decodeI8()) * 2;
-		byte[] path = MCDDecodeBuffer.toI8Array(buffer.decodeI8Array(pathLength));
+		byte[] path = MCDInputBuffer.toI8Array(buffer.decodeI8Array(pathLength));
 
 		return new TypeAnnotationPath(path);
 	}
 
-	private List<AnnotationElement> decodeAnnotationElements(MCDDecodeBuffer buffer) throws IOException {
+	private List<AnnotationElement> decodeAnnotationElements(MCDInputBuffer buffer) throws IOException {
 		int elementsCount = Short.toUnsignedInt(buffer.decodeI16());
 		List<AnnotationElement> elements = new ArrayList<>(elementsCount);
 
@@ -634,7 +634,7 @@ public class DecodedClassInfo implements ClassInfo {
 		return elements;
 	}
 
-	private AnnotationElementValue decodeAnnotationElementValue(MCDDecodeBuffer buffer) throws IOException {
+	private AnnotationElementValue decodeAnnotationElementValue(MCDInputBuffer buffer) throws IOException {
 		int elementTag = Byte.toUnsignedInt(buffer.decodeI8());
 		AnnotationElementValue elementValue;
 
@@ -685,7 +685,7 @@ public class DecodedClassInfo implements ClassInfo {
 		return elementValue;
 	}
 
-	private List<AnnotationElementValue> decodeAnnotationElementValues(MCDDecodeBuffer buffer) throws IOException {
+	private List<AnnotationElementValue> decodeAnnotationElementValues(MCDInputBuffer buffer) throws IOException {
 		int elementValuesCount = Short.toUnsignedInt(buffer.decodeI16());
 		List<AnnotationElementValue> elementValues = new ArrayList<>();
 
@@ -695,13 +695,13 @@ public class DecodedClassInfo implements ClassInfo {
 		return elementValues;
 	}
 
-	private SignatureAttribute decodeSignatureAttribute(MCDDecodeBuffer buffer) throws IOException {
+	private SignatureAttribute decodeSignatureAttribute(MCDInputBuffer buffer) throws IOException {
 		int signatureIndex = Short.toUnsignedInt(buffer.decodeI16());
 
 		return new SignatureAttribute(this, signatureIndex);
 	}
 
-	private ExceptionsAttribute decodeExceptionsAttribute(MCDDecodeBuffer buffer) throws IOException {
+	private ExceptionsAttribute decodeExceptionsAttribute(MCDInputBuffer buffer) throws IOException {
 		int exceptionsCount = Short.toUnsignedInt(buffer.decodeI16());
 		ByteBuffer exceptionsBuffer = buffer.decodeI16Array(exceptionsCount);
 		int[] exceptions = new int[exceptionsCount];

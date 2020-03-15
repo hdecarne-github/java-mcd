@@ -19,8 +19,8 @@ package de.carne.mcd.jvm.bytecode;
 import java.io.DataInput;
 import java.io.IOException;
 
-import de.carne.mcd.common.Instruction;
-import de.carne.mcd.common.InstructionFactory;
+import de.carne.mcd.common.instruction.Instruction;
+import de.carne.mcd.common.instruction.InstructionFactory;
 
 class BytecodeInstructionFactory implements InstructionFactory {
 

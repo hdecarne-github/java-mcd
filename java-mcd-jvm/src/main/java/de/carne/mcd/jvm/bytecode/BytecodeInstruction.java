@@ -22,9 +22,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.carne.mcd.common.Instruction;
-import de.carne.mcd.common.MCDDecodeBuffer;
-import de.carne.mcd.common.MCDOutput;
+import de.carne.mcd.common.instruction.Instruction;
+import de.carne.mcd.common.instruction.InstructionOpcode;
+import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.common.io.MCDOutputBuffer;
 
 /**
  * A single bytecode instruction with a variable number of operands.
@@ -32,7 +33,7 @@ import de.carne.mcd.common.MCDOutput;
 public class BytecodeInstruction implements Instruction {
 
 	private final String mnemonic;
-	private final OperandDecoder[] operands;
+	private final OperandType[] operands;
 
 	/**
 	 * Constructs a new {@linkplain BytecodeInstruction} instance.
@@ -40,14 +41,14 @@ public class BytecodeInstruction implements Instruction {
 	 * @param mnemonic the instruction mnemonic to use.
 	 * @param operands the instruction operands.
 	 */
-	public BytecodeInstruction(String mnemonic, OperandDecoder[] operands) {
+	public BytecodeInstruction(String mnemonic, OperandType[] operands) {
 		this.mnemonic = mnemonic;
 		this.operands = operands;
 	}
 
 	static BytecodeInstruction load(DataInput in) throws IOException {
 		String mnemonic = in.readUTF();
-		List<OperandDecoder> operands = new ArrayList<>();
+		List<OperandType> operands = new ArrayList<>();
 		char operandType;
 
 		do {
@@ -78,13 +79,13 @@ public class BytecodeInstruction implements Instruction {
 				throw new IOException("Unrecognized operand type: " + operandType + ":" + operandName);
 			}
 		} while (operandType != '\0');
-		return new BytecodeInstruction(mnemonic, operands.toArray(new OperandDecoder[operands.size()]));
+		return new BytecodeInstruction(mnemonic, operands.toArray(new OperandType[operands.size()]));
 	}
 
 	@Override
 	public void save(DataOutput out) throws IOException {
 		out.writeUTF(this.mnemonic);
-		for (OperandDecoder operand : this.operands) {
+		for (OperandType operand : this.operands) {
 			out.writeChar(operand.type());
 			out.writeUTF(operand.name());
 		}
@@ -93,11 +94,12 @@ public class BytecodeInstruction implements Instruction {
 	}
 
 	@Override
-	public void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
+	public void decode(long ip, InstructionOpcode opcode, MCDInputBuffer buffer, MCDOutputBuffer out)
+			throws IOException {
 		if (this.operands.length > 0) {
 			out.printKeyword(this.mnemonic).print(" ");
-			for (OperandDecoder operand : this.operands) {
-				operand.decode(pc, buffer, out);
+			for (OperandType operand : this.operands) {
+				operand.decode((int) ip, buffer, out);
 			}
 			out.println();
 		} else {

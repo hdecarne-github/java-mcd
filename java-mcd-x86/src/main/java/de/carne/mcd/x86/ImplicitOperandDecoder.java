@@ -14,22 +14,43 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.x86.bootstrap;
+package de.carne.mcd.x86;
 
-import java.util.Map;
+import java.io.IOException;
 
-abstract class X86Mode {
+import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.common.io.MCDOutputBuffer;
 
-	private final Map<String, String> operandMap;
+/**
+ *
+ */
+public class ImplicitOperandDecoder implements OperandType {
 
-	protected X86Mode(Map<String, String> operandMap) {
-		this.operandMap = operandMap;
+	public static final char TAG = '*';
+
+	private final String name;
+
+	private ImplicitOperandDecoder(String name) {
+		this.name = name;
 	}
 
-	public String decodeOperandString(String operandString) {
-		return this.operandMap.getOrDefault(operandString, operandString.toLowerCase());
+	public static ImplicitOperandDecoder fromName(String name) {
+		return new ImplicitOperandDecoder(name);
 	}
 
-	public abstract boolean isAvailable(X86InstructionReferenceEntry entry);
+	@Override
+	public char type() {
+		return TAG;
+	}
+
+	@Override
+	public String name() {
+		return this.name;
+	}
+
+	@Override
+	public void decode(long ip, byte modrmByte, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
+		out.print(this.name);
+	}
 
 }

@@ -17,13 +17,9 @@
 package de.carne.mcd.x86;
 
 import java.io.IOException;
-import java.nio.channels.ReadableByteChannel;
 import java.util.Optional;
 
-import de.carne.mcd.common.Instruction;
-import de.carne.mcd.common.InstructionIndex;
-import de.carne.mcd.common.MCDDecodeBuffer;
-import de.carne.mcd.common.MCDOutput;
+import de.carne.mcd.common.instruction.InstructionIndex;
 import de.carne.text.HexFormat;
 import de.carne.util.Late;
 
@@ -32,7 +28,11 @@ import de.carne.util.Late;
  */
 public class X86b64Decoder extends X86Decoder {
 
-	private static final String NAME = "x86-64 instructions";
+	/**
+	 * Decoder name.
+	 */
+	@SuppressWarnings("squid:S1845")
+	public static final String NAME = "x86-64 instructions";
 
 	private static final Late<InstructionIndex> X86B64_INSTRUCTION_INDEX_HOLDER = new Late<>();
 
@@ -44,21 +44,8 @@ public class X86b64Decoder extends X86Decoder {
 	}
 
 	@Override
-	protected void doDecode(ReadableByteChannel in, MCDOutput out) throws IOException {
-		MCDDecodeBuffer buffer = newDecodeBuffer(in);
-		InstructionIndex instructionIndex = getInstructionIndex();
-		Instruction instruction;
-		int ip = 0;
-
-		while ((instruction = instructionIndex.lookupNextInstruction(buffer)) != null) {
-			out.printLabel(HexFormat.LOWER_CASE.format((long) ip)).printLabel(":").print(" ");
-			instruction.decode(ip, buffer, out);
-			ip = (int) buffer.getTotalRead();
-		}
-	}
-
 	@SuppressWarnings("resource")
-	private static InstructionIndex getInstructionIndex() throws IOException {
+	protected InstructionIndex getInstructionIndex() throws IOException {
 		InstructionIndex instructionIndex;
 
 		synchronized (X86B64_INSTRUCTION_INDEX_HOLDER) {
@@ -67,10 +54,15 @@ public class X86b64Decoder extends X86Decoder {
 			if (instructionIndexHolder.isPresent()) {
 				instructionIndex = instructionIndexHolder.get();
 			} else {
-				instructionIndex = X86B64_INSTRUCTION_INDEX_HOLDER.set(X86b16InstructionIndex.open());
+				instructionIndex = X86B64_INSTRUCTION_INDEX_HOLDER.set(X86b64InstructionIndex.open());
 			}
 		}
 		return instructionIndex;
+	}
+
+	@Override
+	protected String formatInstructionPointer(long ip) {
+		return HexFormat.LOWER_CASE.format(ip);
 	}
 
 }

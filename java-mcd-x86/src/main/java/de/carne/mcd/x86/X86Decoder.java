@@ -16,17 +16,55 @@
  */
 package de.carne.mcd.x86;
 
+import java.io.IOException;
 import java.nio.ByteOrder;
 
+import de.carne.boot.logging.Log;
 import de.carne.mcd.common.MachineCodeDecoder;
+import de.carne.mcd.common.instruction.InstructionIndex;
+import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.common.io.MCDOutputBuffer;
 
 /**
  * Common base class for all x86 machine code decoders.
  */
 public abstract class X86Decoder extends MachineCodeDecoder {
 
+	private static final Log LOG = new Log();
+
 	protected X86Decoder(String name) {
 		super(name, ByteOrder.LITTLE_ENDIAN);
 	}
+
+	@Override
+	protected void decode0(MCDInputBuffer in, MCDOutputBuffer out) throws IOException {
+		InstructionIndex instructionIndex = getInstructionIndex();
+		InstructionIndex.LookupResult lookupResult;
+		long ip = 0;
+
+		in.setAutoCommit(false);
+		out.setAutoCommit(false);
+		while ((lookupResult = instructionIndex.lookupNextInstruction(in, true)) != null) {
+			String ipString = formatInstructionPointer(ip) + ":";
+
+			out.printLabel(ipString).print(" ");
+			try {
+				lookupResult.decode(ip, in, out);
+			} catch (IOException e) {
+				String opcodeString = lookupResult.opcode().toString();
+
+				LOG.warning(e, "Decode failure at {0} for opcode: {1}", ipString, opcodeString);
+
+				out.printlnError(opcodeString);
+			}
+			in.commit();
+			out.commit();
+			ip = in.getTotalRead();
+		}
+	}
+
+	protected abstract InstructionIndex getInstructionIndex() throws IOException;
+
+	protected abstract String formatInstructionPointer(long ip);
 
 }

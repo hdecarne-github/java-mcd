@@ -14,22 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.x86.bootstrap;
+package de.carne.mcd.x86;
 
-import java.util.Map;
+/**
+ *
+ */
+public interface OperandType extends OperandDecoder {
 
-abstract class X86Mode {
+	char type();
 
-	private final Map<String, String> operandMap;
-
-	protected X86Mode(Map<String, String> operandMap) {
-		this.operandMap = operandMap;
-	}
-
-	public String decodeOperandString(String operandString) {
-		return this.operandMap.getOrDefault(operandString, operandString.toLowerCase());
-	}
-
-	public abstract boolean isAvailable(X86InstructionReferenceEntry entry);
+	String name();
 
 }

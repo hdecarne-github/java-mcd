@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
-import de.carne.mcd.common.InstructionIndex;
+import de.carne.mcd.common.instruction.InstructionIndex;
 
 /**
  * Helper class providing access to the x86-16 instruction index.

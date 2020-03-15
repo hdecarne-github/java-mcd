@@ -215,7 +215,6 @@ public final class InstructionIndex implements InstructionIndexParameters, Close
 				}
 			}
 		}
-		buffer.commit();
 		return lookupResult;
 	}
 

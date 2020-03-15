@@ -14,15 +14,48 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.jvm.bytecode;
+package de.carne.mcd.x86;
 
 import java.io.IOException;
 
+import de.carne.mcd.common.io.MCDInputBuffer;
 import de.carne.mcd.common.io.MCDOutputBuffer;
 
-@FunctionalInterface
-interface IntOperandDecoder {
+/**
+ *
+ */
+public enum ModRMOperandType implements OperandType {
 
-	void decode(int pc, int operand, MCDOutputBuffer out) throws IOException;
+	R8(OperandDecoders::r8),
+
+	R16(OperandDecoders::r16),
+
+	R32(OperandDecoders::r32),
+
+	R64(OperandDecoders::r64),
+
+	RM8(OperandDecoders::rm8b16),
+
+	RM16(OperandDecoders::rm16b16),
+
+	RM32(OperandDecoders::rm32b16),
+
+	RM64(OperandDecoders::rm64b16);
+
+	private final OperandDecoder decoder;
+
+	private ModRMOperandType(OperandDecoder decoder) {
+		this.decoder = decoder;
+	}
+
+	@Override
+	public char type() {
+		return 'm';
+	}
+
+	@Override
+	public void decode(long ip, byte modrmByte, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
+		this.decoder.decode(ip, modrmByte, buffer, out);
+	}
 
 }

@@ -18,14 +18,13 @@ package de.carne.mcd.jvm;
 
 import java.io.IOException;
 import java.nio.ByteOrder;
-import java.nio.channels.ReadableByteChannel;
 import java.util.Optional;
 
-import de.carne.mcd.common.Instruction;
-import de.carne.mcd.common.InstructionIndex;
-import de.carne.mcd.common.MCDDecodeBuffer;
-import de.carne.mcd.common.MCDOutput;
+import de.carne.boot.logging.Log;
 import de.carne.mcd.common.MachineCodeDecoder;
+import de.carne.mcd.common.instruction.InstructionIndex;
+import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.common.io.MCDOutputBuffer;
 import de.carne.mcd.jvm.bytecode.BytecodeInstructionIndex;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.text.HexFormat;
@@ -36,7 +35,13 @@ import de.carne.util.Late;
  */
 public class BytecodeDecoder extends MachineCodeDecoder {
 
-	private static final String NAME = "Java bytecode";
+	private static final Log LOG = new Log();
+
+	/**
+	 * Decoder name.
+	 */
+	@SuppressWarnings("squid:S1845")
+	public static final String NAME = "Java bytecode";
 
 	private static final Late<InstructionIndex> BYTECODE_INSTRUCTION_INDEX_HOLDER = new Late<>();
 
@@ -62,22 +67,30 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 	}
 
 	@Override
-	protected void doDecode(ReadableByteChannel in, MCDOutput out) throws IOException {
-		MCDDecodeBuffer buffer = newDecodeBuffer(in);
+	protected void decode0(MCDInputBuffer in, MCDOutputBuffer out) throws IOException {
+		out.printComment("// max_stack: ").printlnComment(Integer.toString(Short.toUnsignedInt(in.decodeI16())));
+		out.printComment("// max_locals: ").printlnComment(Integer.toString(Short.toUnsignedInt(in.decodeI16())));
 
-		out.printComment("// max_stack: ").printlnComment(Integer.toString(Short.toUnsignedInt(buffer.decodeI16())));
-		out.printComment("// max_locals: ").printlnComment(Integer.toString(Short.toUnsignedInt(buffer.decodeI16())));
-
-		long codeLength = Integer.toUnsignedLong(buffer.decodeI32());
-		MCDDecodeBuffer codeBuffer = newDecodeBuffer(buffer.slice(codeLength));
+		long codeLength = Integer.toUnsignedLong(in.decodeI32());
+		MCDInputBuffer codeBuffer = new MCDInputBuffer(in.slice(codeLength), byteOrder());
 		InstructionIndex instructionIndex = getBytecodeInstructionIndex();
-		Instruction instruction;
-		int pc = 0;
+		InstructionIndex.LookupResult lookupResult;
+		long pc = 0;
 
-		while ((instruction = instructionIndex.lookupNextInstruction(codeBuffer)) != null) {
-			out.printLabel(HexFormat.LOWER_CASE.format((short) pc)).printLabel(":").print(" ");
-			instruction.decode(pc, codeBuffer, out);
-			pc = (int) codeBuffer.getTotalRead();
+		while ((lookupResult = instructionIndex.lookupNextInstruction(codeBuffer, false)) != null) {
+			String pcString = HexFormat.LOWER_CASE.format((short) pc) + ":";
+
+			out.printLabel(pcString).print(" ");
+			try {
+				lookupResult.decode(pc, codeBuffer, out);
+				pc = (int) codeBuffer.getTotalRead();
+			} catch (IOException e) {
+				String opcodeString = lookupResult.opcode().toString();
+
+				LOG.warning(e, "Decode failure at {0} for opcode: {1}", pcString, opcodeString);
+
+				out.printlnError(opcodeString);
+			}
 		}
 	}
 

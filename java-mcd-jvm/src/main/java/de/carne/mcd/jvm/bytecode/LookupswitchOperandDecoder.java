@@ -19,14 +19,14 @@ package de.carne.mcd.jvm.bytecode;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-import de.carne.mcd.common.MCDDecodeBuffer;
-import de.carne.mcd.common.MCDOutput;
+import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.common.io.MCDOutputBuffer;
 import de.carne.text.HexFormat;
 
 /**
  *
  */
-public class LookupswitchOperandDecoder implements OperandDecoder {
+public class LookupswitchOperandDecoder implements OperandType {
 
 	@Override
 	public char type() {
@@ -39,7 +39,7 @@ public class LookupswitchOperandDecoder implements OperandDecoder {
 	}
 
 	@Override
-	public void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
+	public void decode(int pc, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
 		int basePc = pc + 1;
 
 		buffer.skip(((basePc + 0x3) & ~0x3) - Integer.toUnsignedLong(basePc));

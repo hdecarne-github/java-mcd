@@ -20,9 +20,10 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 import de.carne.boot.check.Check;
-import de.carne.mcd.common.Instruction;
-import de.carne.mcd.common.MCDDecodeBuffer;
-import de.carne.mcd.common.MCDOutput;
+import de.carne.mcd.common.instruction.Instruction;
+import de.carne.mcd.common.instruction.InstructionOpcode;
+import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.common.io.MCDOutputBuffer;
 import de.carne.text.HexFormat;
 
 class UnknownX86Instruction implements Instruction {
@@ -41,7 +42,7 @@ class UnknownX86Instruction implements Instruction {
 	}
 
 	@Override
-	public void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
+	public void decode(long ip, InstructionOpcode opcode, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
 		out.printKeyword("db");
 		for (int opcodeByteIndex = 0; opcodeByteIndex < this.opcode.length; opcodeByteIndex++) {
 			out.print(opcodeByteIndex > 0 ? ", " : " ").printValue("0x")

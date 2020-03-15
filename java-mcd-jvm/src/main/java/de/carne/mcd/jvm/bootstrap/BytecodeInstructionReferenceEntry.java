@@ -23,14 +23,14 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import de.carne.mcd.common.Instruction;
-import de.carne.mcd.common.Opcode;
 import de.carne.mcd.common.bootstrap.InstructionReferenceEntry;
+import de.carne.mcd.common.instruction.Instruction;
+import de.carne.mcd.common.instruction.InstructionOpcode;
 import de.carne.mcd.jvm.bytecode.ByteOperandType;
 import de.carne.mcd.jvm.bytecode.BytecodeInstruction;
 import de.carne.mcd.jvm.bytecode.IntOperandType;
 import de.carne.mcd.jvm.bytecode.LookupswitchOperandDecoder;
-import de.carne.mcd.jvm.bytecode.OperandDecoder;
+import de.carne.mcd.jvm.bytecode.OperandType;
 import de.carne.mcd.jvm.bytecode.ShortOperandType;
 import de.carne.mcd.jvm.bytecode.TableswitchOperandDecoder;
 
@@ -40,13 +40,13 @@ class BytecodeInstructionReferenceEntry extends InstructionReferenceEntry {
 		super(entryData);
 	}
 
-	BytecodeInstructionReferenceEntry(Opcode opcode, String mnemonic, @NonNull String... extraFields) {
+	BytecodeInstructionReferenceEntry(InstructionOpcode opcode, String mnemonic, @NonNull String... extraFields) {
 		super(opcode, mnemonic, Arrays.asList(extraFields));
 	}
 
 	@Override
 	public Instruction toInstruction() throws IOException {
-		List<OperandDecoder> operands = new ArrayList<>();
+		List<OperandType> operands = new ArrayList<>();
 
 		for (String extraField : extraFields()) {
 			if (extraField.equals("t")) {
@@ -63,7 +63,7 @@ class BytecodeInstructionReferenceEntry extends InstructionReferenceEntry {
 				throw new IOException("Unrecognized operand: " + extraField);
 			}
 		}
-		return new BytecodeInstruction(mnemonic(), operands.toArray(new OperandDecoder[operands.size()]));
+		return new BytecodeInstruction(mnemonic(), operands.toArray(new OperandType[operands.size()]));
 	}
 
 }

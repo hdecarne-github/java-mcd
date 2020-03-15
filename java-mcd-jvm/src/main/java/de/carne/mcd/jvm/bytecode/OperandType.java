@@ -14,33 +14,40 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.mcd.common;
+package de.carne.mcd.jvm.bytecode;
 
-import java.io.DataOutput;
 import java.io.IOException;
 
+import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.common.io.MCDOutputBuffer;
+
 /**
- * Interface for all kind of instructions.
+ * Base interface for all kinds of operand types.
  */
-public interface Instruction {
+public interface OperandType {
 
 	/**
-	 * Saves these instruction's parameters to the given {@linkplain DataOutput} for later loading via
-	 * {@linkplain InstructionFactory#loadInstruction(java.io.DataInput)}.
+	 * Gets the operand's type (B:byte, S:short, I:int).
 	 *
-	 * @param out the {@linkplain DataOutput} to store to.
-	 * @throws IOException if an I/O error occurs.
+	 * @return the operand's type (B:byte, S:short, I:int).
 	 */
-	void save(DataOutput out) throws IOException;
+	char type();
 
 	/**
-	 * Decodes this instruction.
+	 * Gets the operand type's name.
 	 *
-	 * @param pc the current program counter.
-	 * @param buffer the {@linkplain MCDDecodeBuffer} to read any additional instruction data from.
-	 * @param out the {@linkplain MCDOutput} to decode to.
+	 * @return the operand type's name.
+	 */
+	String name();
+
+	/**
+	 * Decodes the operand.
+	 *
+	 * @param pc the program counter of the corresponding opcode.
+	 * @param buffer the {@linkplain MCDInputBuffer} to decode from.
+	 * @param out the {@linkplain MCDOutputBuffer} to decode to.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException;
+	void decode(int pc, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException;
 
 }

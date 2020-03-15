@@ -16,77 +16,17 @@
  */
 package de.carne.mcd.x86;
 
+import java.io.IOException;
+
+import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.common.io.MCDOutputBuffer;
+
 /**
  *
  */
-public enum X86Symbol {
+@FunctionalInterface
+public interface OperandDecoder {
 
-	RM8("r/m8"),
-
-	RM16("r/m16"),
-
-	RM32("r/m32"),
-
-	RM64("r/m64"),
-
-	R8("r8"),
-
-	R16("r16"),
-
-	R32("r32"),
-
-	R64("r64"),
-
-	IMM8("imm8"),
-
-	IMM16("imm16"),
-
-	IMM32("imm32"),
-
-	IMM64("imm64"),
-
-	REL8("rel8"),
-
-	REL16("rel16"),
-
-	REL32("rel32"),
-
-	M("m"),
-
-	M16("m16"),
-
-	M32("m32"),
-
-	M64("m64"),
-
-	MOFFS8("moffs8"),
-
-	MOFFS16("moffs16"),
-
-	MOFFS32("moffs32"),
-
-	MOFFS64("moffs64"),
-
-	PTR16("ptr16:16"),
-
-	PTR32("ptr16:32"),
-
-	SREG("Sreg"),
-
-	AX("AX"),
-
-	EAX("EAX"),
-
-	RAX("RAX");
-
-	private final String symbol;
-
-	private X86Symbol(String symbol) {
-		this.symbol = symbol;
-	}
-
-	public String symbol() {
-		return this.symbol;
-	}
+	void decode(long ip, byte modrmByte, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException;
 
 }

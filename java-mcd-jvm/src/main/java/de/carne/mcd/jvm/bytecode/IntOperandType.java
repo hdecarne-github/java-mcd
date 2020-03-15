@@ -18,15 +18,14 @@ package de.carne.mcd.jvm.bytecode;
 
 import java.io.IOException;
 
-import de.carne.boot.logging.Log;
-import de.carne.mcd.common.MCDDecodeBuffer;
-import de.carne.mcd.common.MCDOutput;
+import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.common.io.MCDOutputBuffer;
 import de.carne.text.HexFormat;
 
 /**
  * Possible int operand types.
  */
-public enum IntOperandType implements OperandDecoder {
+public enum IntOperandType implements OperandType {
 
 	/**
 	 * Immediate int value.
@@ -38,8 +37,6 @@ public enum IntOperandType implements OperandDecoder {
 	 */
 	BRANCH((pc, operand, out) -> out.printValue(operand >= 0 ? "+" : "").printValue(Integer.toString(operand))
 			.print(" ").printComment("// ").printComment(HexFormat.LOWER_CASE.format(pc + operand)));
-
-	private static final Log LOG = new Log();
 
 	private final IntOperandDecoder decoder;
 
@@ -53,22 +50,8 @@ public enum IntOperandType implements OperandDecoder {
 	}
 
 	@Override
-	public void decode(int pc, MCDDecodeBuffer buffer, MCDOutput out) throws IOException {
-		boolean decodeFailure = false;
-		int operand = 0;
-
-		try {
-			operand = buffer.decodeI32();
-		} catch (IOException e) {
-			LOG.error(e, "Failed to decode int operand");
-
-			decodeFailure = true;
-		}
-		if (!decodeFailure) {
-			this.decoder.decode(pc, operand, out);
-		} else {
-			out.printError("?");
-		}
+	public void decode(int pc, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
+		this.decoder.decode(pc, buffer.decodeI32(), out);
 	}
 
 }

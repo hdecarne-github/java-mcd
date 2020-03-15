@@ -17,13 +17,22 @@
 package de.carne.mcd.x86.bootstrap;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
-import de.carne.mcd.common.Instruction;
-import de.carne.mcd.common.Opcode;
 import de.carne.mcd.common.bootstrap.InstructionReferenceEntry;
+import de.carne.mcd.common.instruction.Instruction;
+import de.carne.mcd.common.instruction.InstructionOpcode;
+import de.carne.mcd.x86.ImplicitOperandDecoder;
+import de.carne.mcd.x86.ModRMOperandType;
+import de.carne.mcd.x86.OperandType;
 import de.carne.mcd.x86.X86Instruction;
+import de.carne.mcd.x86.X86InstructionSignature;
 import de.carne.util.Strings;
 
 @SuppressWarnings("squid:S2160")
@@ -33,7 +42,7 @@ class X86InstructionReferenceEntry extends InstructionReferenceEntry {
 	private boolean x86b32 = true;
 	private boolean x86b64 = true;
 
-	X86InstructionReferenceEntry(Opcode opcode, String mnemonic, String signature) {
+	X86InstructionReferenceEntry(InstructionOpcode opcode, String mnemonic, String signature) {
 		super(opcode, mnemonic, (Strings.notEmpty(signature) ? Arrays.asList(signature) : Collections.emptyList()));
 	}
 
@@ -43,7 +52,64 @@ class X86InstructionReferenceEntry extends InstructionReferenceEntry {
 
 	@Override
 	public Instruction toInstruction() throws IOException {
-		return new X86Instruction(mnemonic());
+		Map<Byte, X86InstructionSignature> signatures = new HashMap<>();
+		List<String> signatureStrings = extraFields();
+
+		if (!signatureStrings.isEmpty()) {
+			for (String signatureString : signatureStrings) {
+				StringTokenizer signatureTokens = new StringTokenizer(signatureString, ",");
+				Byte opcodeExtension = X86InstructionSignature.NO_OPCODE_EXTENSION;
+				String mnemonic = mnemonic();
+				boolean hasModRM = false;
+				List<OperandType> operands = new ArrayList<>();
+
+				while (signatureTokens.hasMoreElements()) {
+					String signatureToken = signatureTokens.nextToken().trim();
+
+					if (signatureToken.startsWith("/")) {
+						opcodeExtension = decodeOpcodeExtension(signatureToken);
+						mnemonic = decodeMnemonic(signatureToken);
+					} else {
+						OperandType operand = getOperandDecoder(signatureToken);
+
+						hasModRM = operand instanceof ModRMOperandType;
+						operands.add(operand);
+					}
+				}
+				signatures.put(opcodeExtension, new X86InstructionSignature(mnemonic, hasModRM, operands));
+			}
+		} else {
+			signatures.put(X86InstructionSignature.NO_OPCODE_EXTENSION, new X86InstructionSignature(mnemonic(), false));
+		}
+		return new X86Instruction(signatures);
+	}
+
+	private Byte decodeOpcodeExtension(String signatureToken) throws IOException {
+		int opcodeExtension = signatureToken.charAt(1) - '0';
+
+		if (opcodeExtension < 0 || 7 < opcodeExtension) {
+			throw new IOException("Invalid signature token: " + signatureToken);
+		}
+		return Byte.valueOf((byte) opcodeExtension);
+	}
+
+	private String decodeMnemonic(String signatureToken) {
+		return signatureToken.substring(3);
+	}
+
+	private OperandType getOperandDecoder(String signatureToken) {
+		OperandType decoder = null;
+
+		for (X86Symbol symbol : X86Symbol.values()) {
+			if (symbol.symbol().equals(signatureToken)) {
+				decoder = symbol.decoder();
+				break;
+			}
+		}
+		if (decoder == null) {
+			decoder = ImplicitOperandDecoder.fromName(signatureToken);
+		}
+		return decoder;
 	}
 
 	public boolean isX86b16() {
@@ -68,6 +134,12 @@ class X86InstructionReferenceEntry extends InstructionReferenceEntry {
 
 	public void disableX86b64() {
 		this.x86b64 = false;
+	}
+
+	public boolean isOpcdExt() {
+		List<String> extraFields = extraFields();
+
+		return !extraFields.isEmpty() && extraFields.get(0).startsWith("/");
 	}
 
 }

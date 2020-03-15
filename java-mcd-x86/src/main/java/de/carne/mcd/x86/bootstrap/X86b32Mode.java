@@ -19,8 +19,6 @@ package de.carne.mcd.x86.bootstrap;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.carne.mcd.x86.X86Symbol;
-
 class X86b32Mode extends X86Mode {
 
 	private static final Map<String, String> OPERAND_MAP = new HashMap<>();
@@ -29,9 +27,43 @@ class X86b32Mode extends X86Mode {
 		OPERAND_MAP.put("Eb", X86Symbol.RM8.symbol());
 		OPERAND_MAP.put("Gb", X86Symbol.R8.symbol());
 		OPERAND_MAP.put("Ib", X86Symbol.IMM8.symbol());
+		OPERAND_MAP.put("Ob", X86Symbol.MOFFS8.symbol());
+		OPERAND_MAP.put("Zb", X86Symbol.OPCD_R8.symbol());
+
+		OPERAND_MAP.put("Ibs", X86Symbol.IMM8.symbol());
+		OPERAND_MAP.put("Jbs", X86Symbol.REL8.symbol());
+
+		OPERAND_MAP.put("Ibss", X86Symbol.IMM8.symbol());
+
+		OPERAND_MAP.put("Ew", X86Symbol.RM16.symbol());
+		OPERAND_MAP.put("Gw", X86Symbol.R16.symbol());
+		OPERAND_MAP.put("Iw", X86Symbol.IMM16.symbol());
+		OPERAND_MAP.put("Mw", X86Symbol.RM16.symbol());
+		OPERAND_MAP.put("Sw", X86Symbol.SREG.symbol());
+
+		OPERAND_MAP.put("Ev", X86Symbol.RM32.symbol());
+		OPERAND_MAP.put("Gv", X86Symbol.R32.symbol());
+		OPERAND_MAP.put("Zv", X86Symbol.OPCD_R32.symbol());
+
+		OPERAND_MAP.put("Ivs", X86Symbol.IMM32.symbol());
+
+		OPERAND_MAP.put("Ivds", X86Symbol.IMM32.symbol());
 
 		OPERAND_MAP.put("Evqp", X86Symbol.RM32.symbol());
 		OPERAND_MAP.put("Gvqp", X86Symbol.R32.symbol());
+		OPERAND_MAP.put("Ivqp", X86Symbol.IMM32.symbol());
+		OPERAND_MAP.put("Ovqp", X86Symbol.MOFFS32.symbol());
+		OPERAND_MAP.put("Zvqp", X86Symbol.OPCD_R32.symbol());
+
+		OPERAND_MAP.put("Ma", X86Symbol.M32.symbol());
+
+		OPERAND_MAP.put("Ap", X86Symbol.PTR16_32.symbol());
+		OPERAND_MAP.put("Mp", X86Symbol.M32.symbol());
+
+		OPERAND_MAP.put("rAX", X86Symbol.EAX.symbol());
+		OPERAND_MAP.put("(ES:)[rDI]", X86Symbol.MEDI.symbol());
+		OPERAND_MAP.put("(DS:)[rSI]", X86Symbol.MESI.symbol());
+		OPERAND_MAP.put("(DS):[rSI]", X86Symbol.MESI.symbol());
 	}
 
 	X86b32Mode() {

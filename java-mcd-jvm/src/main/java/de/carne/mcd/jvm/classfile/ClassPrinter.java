@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import de.carne.mcd.common.MCDOutput;
+import de.carne.mcd.common.io.MCDOutputBuffer;
 import de.carne.mcd.jvm.classfile.descriptor.Descriptor;
 import de.carne.mcd.jvm.classfile.descriptor.FieldDescriptor;
 import de.carne.mcd.jvm.classfile.descriptor.FieldTypeDescriptor;
@@ -163,11 +163,11 @@ public abstract class ClassPrinter {
 	 */
 	public static final String S_DEPRECATED = "@Deprecated";
 
-	protected final MCDOutput out;
+	protected final MCDOutputBuffer out;
 	protected final ClassInfo classInfo;
 	protected final String classPackage;
 
-	protected ClassPrinter(MCDOutput out, ClassInfo classInfo) {
+	protected ClassPrinter(MCDOutputBuffer out, ClassInfo classInfo) {
 		this.out = out;
 		this.classInfo = classInfo;
 		this.classPackage = this.classInfo.thisClass().getPackageName();
@@ -176,11 +176,11 @@ public abstract class ClassPrinter {
 	/**
 	 * Gets a {@linkplain ClassPrinter} instance suitable for printing the submitted class information.
 	 *
-	 * @param out the {@linkplain MCDOutput} to print to.
+	 * @param out the {@linkplain MCDOutputBuffer} to print to.
 	 * @param classInfo the {@linkplain ClassInfo} to print.
 	 * @return a {@linkplain ClassPrinter} instance suitable for the submitted class information.
 	 */
-	public static ClassPrinter getInstance(MCDOutput out, ClassInfo classInfo) {
+	public static ClassPrinter getInstance(MCDOutputBuffer out, ClassInfo classInfo) {
 		ClassPrinter classPrinter;
 
 		if (ClassUtil.isPackageInfo(classInfo)) {
@@ -200,11 +200,11 @@ public abstract class ClassPrinter {
 	}
 
 	/**
-	 * Gets the underlying {@linkplain MCDOutput} instance.
+	 * Gets the underlying {@linkplain MCDOutputBuffer} instance.
 	 *
-	 * @return the underlying {@linkplain MCDOutput} instance.
+	 * @return the underlying {@linkplain MCDOutputBuffer} instance.
 	 */
-	public MCDOutput output() {
+	public MCDOutputBuffer output() {
 		return this.out;
 	}
 
@@ -667,7 +667,7 @@ public abstract class ClassPrinter {
 
 	private static class PackageInfoClassPrinter extends ClassPrinter {
 
-		PackageInfoClassPrinter(MCDOutput out, ClassInfo classInfo) {
+		PackageInfoClassPrinter(MCDOutputBuffer out, ClassInfo classInfo) {
 			super(out, classInfo);
 		}
 
@@ -682,7 +682,7 @@ public abstract class ClassPrinter {
 
 	private static class ModuleInfoClassPrinter extends ClassPrinter {
 
-		ModuleInfoClassPrinter(MCDOutput out, ClassInfo classInfo) {
+		ModuleInfoClassPrinter(MCDOutputBuffer out, ClassInfo classInfo) {
 			super(out, classInfo);
 		}
 
@@ -697,7 +697,7 @@ public abstract class ClassPrinter {
 
 	private static class InterfaceClassPrinter extends ClassPrinter {
 
-		InterfaceClassPrinter(MCDOutput out, ClassInfo classInfo) {
+		InterfaceClassPrinter(MCDOutputBuffer out, ClassInfo classInfo) {
 			super(out, classInfo);
 		}
 
@@ -718,7 +718,7 @@ public abstract class ClassPrinter {
 
 	private static class AnnotationClassPrinter extends ClassPrinter {
 
-		AnnotationClassPrinter(MCDOutput out, ClassInfo classInfo) {
+		AnnotationClassPrinter(MCDOutputBuffer out, ClassInfo classInfo) {
 			super(out, classInfo);
 		}
 
@@ -739,7 +739,7 @@ public abstract class ClassPrinter {
 
 	private static class EnumClassPrinter extends ClassPrinter {
 
-		EnumClassPrinter(MCDOutput out, ClassInfo classInfo) {
+		EnumClassPrinter(MCDOutputBuffer out, ClassInfo classInfo) {
 			super(out, classInfo);
 		}
 
@@ -760,7 +760,7 @@ public abstract class ClassPrinter {
 
 	private static class DefaultClassPrinter extends ClassPrinter {
 
-		DefaultClassPrinter(MCDOutput out, ClassInfo classInfo) {
+		DefaultClassPrinter(MCDOutputBuffer out, ClassInfo classInfo) {
 			super(out, classInfo);
 		}
 
