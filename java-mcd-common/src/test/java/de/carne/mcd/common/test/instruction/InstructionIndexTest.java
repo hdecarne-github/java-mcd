@@ -117,6 +117,7 @@ class InstructionIndexTest {
 				ReadableByteChannel testCodeChannel = Channels.newChannel(new ByteArrayInputStream(TEST_CODE))) {
 			MCDInputBuffer buffer = new MCDInputBuffer(testCodeChannel, ByteOrder.nativeOrder());
 
+			buffer.setAutoCommit(false);
 			Assertions.assertEquals(OPCODE_00,
 					Objects.requireNonNull(index.lookupNextInstruction(buffer, false)).opcode());
 			Assertions.assertEquals(OPCODE_01,
@@ -157,6 +158,7 @@ class InstructionIndexTest {
 				ReadableByteChannel testCodeChannel = Channels.newChannel(new ByteArrayInputStream(TEST_CODE))) {
 			MCDInputBuffer buffer = new MCDInputBuffer(testCodeChannel, ByteOrder.nativeOrder());
 
+			buffer.setAutoCommit(false);
 			Assertions.assertEquals(OPCODE_00,
 					Objects.requireNonNull(index.lookupNextInstruction(buffer, true)).opcode());
 			Assertions.assertEquals(OPCODE_0101,
