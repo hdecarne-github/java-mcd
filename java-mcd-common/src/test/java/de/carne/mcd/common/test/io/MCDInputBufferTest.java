@@ -109,7 +109,7 @@ class MCDInputBufferTest {
 
 			buffer.setAutoCommit(false);
 			decodeValues(buffer);
-			buffer.discard(16);
+			buffer.discard(-16);
 			Assertions.assertEquals(41, buffer.getTotalRead());
 			Assertions.assertArrayEquals(new long[] { 0x292a2b2c2d2e2f30l, 0x3132333435363738l },
 					MCDInputBuffer.toI64Array(buffer.decodeI64Array(2)));

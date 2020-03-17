@@ -67,7 +67,7 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 	}
 
 	@Override
-	protected void decode0(MCDInputBuffer in, MCDOutputBuffer out) throws IOException {
+	protected long decode0(MCDInputBuffer in, MCDOutputBuffer out, long offset, long limit) throws IOException {
 		out.printComment("// max_stack: ").printlnComment(Integer.toString(Short.toUnsignedInt(in.decodeI16())));
 		out.printComment("// max_locals: ").printlnComment(Integer.toString(Short.toUnsignedInt(in.decodeI16())));
 
@@ -75,7 +75,7 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 		MCDInputBuffer codeBuffer = new MCDInputBuffer(in.slice(codeLength), byteOrder());
 		InstructionIndex instructionIndex = getBytecodeInstructionIndex();
 		InstructionIndex.LookupResult lookupResult;
-		long pc = 0;
+		long pc = offset;
 
 		while ((lookupResult = instructionIndex.lookupNextInstruction(codeBuffer, false)) != null) {
 			String pcString = HexFormat.LOWER_CASE.format((short) pc) + ":";
@@ -83,7 +83,7 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 			out.printLabel(pcString).print(" ");
 			try {
 				lookupResult.decode(pc, codeBuffer, out);
-				pc = (int) codeBuffer.getTotalRead();
+				pc = offset + codeBuffer.getTotalRead();
 			} catch (IOException e) {
 				String opcodeString = lookupResult.opcode().toString();
 
@@ -92,6 +92,7 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 				out.printlnError(opcodeString);
 			}
 		}
+		return in.getTotalRead();
 	}
 
 	@SuppressWarnings("resource")

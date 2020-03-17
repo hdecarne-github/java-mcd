@@ -106,14 +106,43 @@ public abstract class MachineCodeDecoder {
 	 *
 	 * @param in the {@linkplain ReadableByteChannel} to decode from.
 	 * @param out the {@linkplain MCDOutput} to decode to.
+	 * @return the number of decoded bytes.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	public void decode(ReadableByteChannel in, MCDOutput out) throws IOException {
+	public long decode(ReadableByteChannel in, MCDOutput out) throws IOException {
+		return decode(in, out, 0, Long.MAX_VALUE);
+	}
+
+	/**
+	 * Decodes the given byte channel's data.
+	 *
+	 * @param in the {@linkplain ReadableByteChannel} to decode from.
+	 * @param out the {@linkplain MCDOutput} to decode to.
+	 * @param offset the current decode offset.
+	 * @return the number of decoded bytes.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public long decode(ReadableByteChannel in, MCDOutput out, long offset) throws IOException {
+		return decode(in, out, offset, Long.MAX_VALUE);
+	}
+
+	/**
+	 * Decodes the given byte channel's data.
+	 *
+	 * @param in the {@linkplain ReadableByteChannel} to decode from.
+	 * @param out the {@linkplain MCDOutput} to decode to.
+	 * @param offset the current decode offset.
+	 * @param limit the number of bytes after which decoding should stop.
+	 * @return the number of decoded bytes.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public long decode(ReadableByteChannel in, MCDOutput out, long offset, long limit) throws IOException {
 		@Nullable MachineCodeDecoder savedDecoder = ACTIVE_DECODER_HOLDER.get();
+		long decoded;
 
 		ACTIVE_DECODER_HOLDER.set(this);
 		try {
-			decode0(new MCDInputBuffer(in, this.byteOrder), new MCDOutputBuffer(out));
+			decoded = decode0(new MCDInputBuffer(in, this.byteOrder), new MCDOutputBuffer(out), offset, limit);
 		} finally {
 			if (savedDecoder != null) {
 				ACTIVE_DECODER_HOLDER.set(savedDecoder);
@@ -121,8 +150,9 @@ public abstract class MachineCodeDecoder {
 				ACTIVE_DECODER_HOLDER.remove();
 			}
 		}
+		return decoded;
 	}
 
-	protected abstract void decode0(MCDInputBuffer in, MCDOutputBuffer out) throws IOException;
+	protected abstract long decode0(MCDInputBuffer in, MCDOutputBuffer out, long offset, long limit) throws IOException;
 
 }

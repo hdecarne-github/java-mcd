@@ -186,7 +186,7 @@ public final class InstructionIndex implements InstructionIndexParameters, Close
 					} else {
 						lookupResult = new LookupResult(opcode, 0, opcodeOffset,
 								this.instructionFactory.getDefaultInstruction(opcode, 0, opcodeOffset));
-						buffer.discard(opcodeLength);
+						buffer.discard(-opcodeLength);
 					}
 				} else if (previousMatch >= 0) {
 					if (opcodeByte >= 0) {
@@ -194,7 +194,7 @@ public final class InstructionIndex implements InstructionIndexParameters, Close
 
 						lookupResult = new LookupResult(opcode, 0, previousOpcodeLength,
 								loadInstruction(previousMatch));
-						buffer.discard(1);
+						buffer.discard(-1);
 					} else {
 						lookupResult = new LookupResult(opcode, 0, opcodeLength, loadInstruction(previousMatch));
 					}
@@ -202,13 +202,13 @@ public final class InstructionIndex implements InstructionIndexParameters, Close
 					opcodeByte = buffer.read();
 				} else if (opcodeOffset < maxDefaultOpcodeBytes) {
 					opcodeOffset++;
-					buffer.discard(Math.max(0, opcodeLength - 1));
+					buffer.discard(-Math.max(0, opcodeLength - 1));
 					opcodeLength = 0;
 					opcodeByte = buffer.read();
 				} else if (opcodeLength > 0) {
 					lookupResult = new LookupResult(opcode, 0, opcodeOffset,
 							this.instructionFactory.getDefaultInstruction(opcode, 0, opcodeOffset));
-					buffer.discard(opcodeLength);
+					buffer.discard(-opcodeLength);
 				} else {
 					lookupResult = new LookupResult(opcode, 0, opcodeOffset + opcodeLength,
 							this.instructionFactory.getDefaultInstruction(opcode, 0, opcodeOffset + opcodeLength));

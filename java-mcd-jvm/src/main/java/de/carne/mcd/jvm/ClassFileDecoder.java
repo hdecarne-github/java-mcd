@@ -44,10 +44,11 @@ public class ClassFileDecoder extends MachineCodeDecoder {
 	}
 
 	@Override
-	protected void decode0(MCDInputBuffer in, MCDOutputBuffer out) throws IOException {
+	protected long decode0(MCDInputBuffer in, MCDOutputBuffer out, long offset, long limit) throws IOException {
 		DecodedClassInfo decoded = DecodedClassInfo.decode(in);
 
 		ClassPrinter.getInstance(out, decoded).print();
+		return in.getTotalRead();
 	}
 
 }

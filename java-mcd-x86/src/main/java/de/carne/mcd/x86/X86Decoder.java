@@ -37,14 +37,15 @@ public abstract class X86Decoder extends MachineCodeDecoder {
 	}
 
 	@Override
-	protected void decode0(MCDInputBuffer in, MCDOutputBuffer out) throws IOException {
+	protected long decode0(MCDInputBuffer in, MCDOutputBuffer out, long offset, long limit) throws IOException {
 		InstructionIndex instructionIndex = getInstructionIndex();
 		InstructionIndex.LookupResult lookupResult;
-		long ip = 0;
+		long ip = offset;
+		long ipLimit = offset + limit;
 
 		in.setAutoCommit(false);
 		out.setAutoCommit(false);
-		while ((lookupResult = instructionIndex.lookupNextInstruction(in, true)) != null) {
+		while (ip <= ipLimit && (lookupResult = instructionIndex.lookupNextInstruction(in, true)) != null) {
 			String ipString = formatInstructionPointer(ip) + ":";
 
 			out.printLabel(ipString).print(" ");
@@ -59,8 +60,9 @@ public abstract class X86Decoder extends MachineCodeDecoder {
 			}
 			in.commit();
 			out.commit();
-			ip = in.getTotalRead();
+			ip = offset + in.getTotalRead();
 		}
+		return in.getTotalRead();
 	}
 
 	protected abstract InstructionIndex getInstructionIndex() throws IOException;

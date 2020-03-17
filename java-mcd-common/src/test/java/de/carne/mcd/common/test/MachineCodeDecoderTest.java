@@ -44,8 +44,9 @@ class MachineCodeDecoderTest {
 		}
 
 		@Override
-		public void decode0(MCDInputBuffer in, MCDOutputBuffer out) throws IOException {
+		public long decode0(MCDInputBuffer in, MCDOutputBuffer out, long offset, long limit) throws IOException {
 			out.print(Integer.toHexString(in.decodeI32()));
+			return in.getTotalRead();
 		}
 
 	}

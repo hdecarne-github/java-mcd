@@ -40,6 +40,8 @@ import de.carne.nio.file.attribute.FileAttributes;
  */
 public final class MCDInputBuffer implements MCDBuffer {
 
+	private static final String MESSAGE_ILLEGAL_DISCARD_LENGTH = "Illegal discard length {0}";
+
 	private static final String MESSAGE_UNEXPECTED_MAGIC_VALUE = "Unexpected magic value: ";
 
 	private final ReadableByteChannel in;
@@ -107,17 +109,32 @@ public final class MCDInputBuffer implements MCDBuffer {
 	}
 
 	/**
-	 * Discards the given number of uncommitted bytes.
+	 * Discards a specific number of uncommitted bytes.
+	 * <p>
+	 * If {@code length} is positive the corresponding number of bytes are kept as uncommitted and any following byte is
+	 * discarded. If {@code length} is negative the last {@code -length} bytes are discarded and any other byte is kept
+	 * as uncommitted.
+	 * </p>
 	 *
-	 * @param length the number of bytes to discard.
+	 * @param length the amount of bytes to discard.
 	 */
 	public void discard(int length) {
-		int uncomittedPositionAfterDiscard = this.uncommittedPosition - length;
+		int uncomittedPositionAfterDiscard;
 
-		Check.isTrue(length >= 0 && this.commitPosition <= uncomittedPositionAfterDiscard, "Illegal discard length {0}",
-				length);
+		if (length > 0) {
+			uncomittedPositionAfterDiscard = this.commitPosition + length;
 
-		this.totalRead -= length;
+			Check.isTrue(uncomittedPositionAfterDiscard <= this.uncommittedPosition, MESSAGE_ILLEGAL_DISCARD_LENGTH,
+					length);
+
+			this.totalRead -= (this.uncommittedPosition - uncomittedPositionAfterDiscard);
+		} else {
+			uncomittedPositionAfterDiscard = this.uncommittedPosition + length;
+
+			Check.isTrue(this.commitPosition <= uncomittedPositionAfterDiscard, MESSAGE_ILLEGAL_DISCARD_LENGTH, length);
+
+			this.totalRead += length;
+		}
 		this.uncommittedPosition = uncomittedPositionAfterDiscard;
 	}
 
