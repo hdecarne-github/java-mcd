@@ -33,7 +33,7 @@ public abstract class X86Decoder extends MachineCodeDecoder {
 	private static final Log LOG = new Log();
 
 	protected X86Decoder(String name) {
-		super(name, ByteOrder.LITTLE_ENDIAN);
+		super(name, ByteOrder.LITTLE_ENDIAN, 0x8000);
 	}
 
 	@Override

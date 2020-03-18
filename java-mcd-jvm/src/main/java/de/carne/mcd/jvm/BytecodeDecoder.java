@@ -53,7 +53,7 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 	 * @param classInfo the {@linkplain ClassInfo} of the surrounding class.
 	 */
 	public BytecodeDecoder(ClassInfo classInfo) {
-		super(NAME, ByteOrder.BIG_ENDIAN);
+		super(NAME, ByteOrder.BIG_ENDIAN, Long.MAX_VALUE);
 		this.classInfo = classInfo;
 	}
 

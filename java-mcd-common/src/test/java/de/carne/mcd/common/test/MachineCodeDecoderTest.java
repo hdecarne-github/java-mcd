@@ -40,7 +40,7 @@ class MachineCodeDecoderTest {
 	private static class TestMachineCodeDecoder extends MachineCodeDecoder {
 
 		public TestMachineCodeDecoder(ByteOrder byteOrder) {
-			super(TestMachineCodeDecoder.class.getSimpleName(), byteOrder);
+			super(TestMachineCodeDecoder.class.getSimpleName(), byteOrder, Long.MAX_VALUE);
 		}
 
 		@Override

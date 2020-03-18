@@ -40,7 +40,7 @@ public class ClassFileDecoder extends MachineCodeDecoder {
 	 * Constructs a new {@linkplain ClassFileDecoder} instance.
 	 */
 	public ClassFileDecoder() {
-		super(NAME, ByteOrder.BIG_ENDIAN);
+		super(NAME, ByteOrder.BIG_ENDIAN, Long.MAX_VALUE);
 	}
 
 	@Override

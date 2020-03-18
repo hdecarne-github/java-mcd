@@ -35,10 +35,12 @@ public abstract class MachineCodeDecoder {
 
 	private final String name;
 	private ByteOrder byteOrder;
+	private long defaultLimit;
 
-	protected MachineCodeDecoder(String name, ByteOrder byteOrder) {
+	protected MachineCodeDecoder(String name, ByteOrder byteOrder, long defaultLimit) {
 		this.name = name;
 		this.byteOrder = byteOrder;
+		this.defaultLimit = defaultLimit;
 	}
 
 	/**
@@ -84,7 +86,7 @@ public abstract class MachineCodeDecoder {
 	}
 
 	/**
-	 * gets this {@linkplain MachineCodeDecoder} instance's byte order.
+	 * Gets this {@linkplain MachineCodeDecoder} instance's byte order.
 	 *
 	 * @return this {@linkplain MachineCodeDecoder} instance's byte order.
 	 */
@@ -99,6 +101,24 @@ public abstract class MachineCodeDecoder {
 	 */
 	public void setByteOrder(ByteOrder byteOrder) {
 		this.byteOrder = byteOrder;
+	}
+
+	/**
+	 * Gets this {@linkplain MachineCodeDecoder} instance's default decode limit.
+	 *
+	 * @return this {@linkplain MachineCodeDecoder} instance's default decode limit.
+	 */
+	public long defaultLimit() {
+		return this.defaultLimit;
+	}
+
+	/**
+	 * Sets this {@linkplain MachineCodeDecoder} instance's default decode limit.
+	 *
+	 * @param defaultLimit the default decode limit to use.
+	 */
+	public void setDefaultLimit(long defaultLimit) {
+		this.defaultLimit = defaultLimit;
 	}
 
 	/**
@@ -123,7 +143,7 @@ public abstract class MachineCodeDecoder {
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public long decode(ReadableByteChannel in, MCDOutput out, long offset) throws IOException {
-		return decode(in, out, offset, Long.MAX_VALUE);
+		return decode(in, out, offset, this.defaultLimit);
 	}
 
 	/**
