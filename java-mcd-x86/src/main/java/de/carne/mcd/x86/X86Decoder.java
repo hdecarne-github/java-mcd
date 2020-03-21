@@ -32,8 +32,10 @@ public abstract class X86Decoder extends MachineCodeDecoder {
 
 	private static final Log LOG = new Log();
 
+	private static final long DECODE_LIMIT = 0x1000;
+
 	protected X86Decoder(String name) {
-		super(name, ByteOrder.LITTLE_ENDIAN, 0x8000);
+		super(name, ByteOrder.LITTLE_ENDIAN, DECODE_LIMIT);
 	}
 
 	@Override
@@ -45,7 +47,7 @@ public abstract class X86Decoder extends MachineCodeDecoder {
 
 		in.setAutoCommit(false);
 		out.setAutoCommit(false);
-		while (ip <= ipLimit && (lookupResult = instructionIndex.lookupNextInstruction(in, true)) != null) {
+		while (ip < ipLimit && (lookupResult = instructionIndex.lookupNextInstruction(in, true)) != null) {
 			String ipString = formatInstructionPointer(ip) + ":";
 
 			out.printLabel(ipString).print(" ");
