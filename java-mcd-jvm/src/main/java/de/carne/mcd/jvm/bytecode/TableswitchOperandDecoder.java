@@ -42,7 +42,7 @@ public class TableswitchOperandDecoder implements OperandType {
 	public void decode(int pc, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
 		int basePc = pc + 1;
 
-		buffer.skip(((basePc + 0x3) & ~0x3) - Integer.toUnsignedLong(basePc));
+		buffer.decodeI8Array(((basePc + 0x3) & ~0x3) - basePc);
 
 		int tsDefault = buffer.decodeI32();
 		int tsLow = buffer.decodeI32();
