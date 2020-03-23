@@ -77,6 +77,7 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 		InstructionIndex.LookupResult lookupResult;
 		long pc = offset;
 
+		codeBuffer.setAutoCommit(false);
 		while ((lookupResult = instructionIndex.lookupNextInstruction(codeBuffer, false)) != null) {
 			String pcString = HexFormat.LOWER_CASE.format((short) pc) + ":";
 
@@ -91,6 +92,7 @@ public class BytecodeDecoder extends MachineCodeDecoder {
 
 				out.printlnError(opcodeString);
 			}
+			codeBuffer.commit();
 		}
 		return in.getTotalRead();
 	}
