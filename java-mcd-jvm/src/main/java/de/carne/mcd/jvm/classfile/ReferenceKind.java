@@ -38,13 +38,19 @@ enum ReferenceKind {
 	REF_invokeInterface(9);
 
 	private final int value;
+	private final String symbol;
 
 	private ReferenceKind(int value) {
 		this.value = value;
+		this.symbol = name().substring(4);
 	}
 
 	public int value() {
 		return this.value;
+	}
+
+	public String symbol() {
+		return this.symbol;
 	}
 
 }

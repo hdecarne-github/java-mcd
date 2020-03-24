@@ -18,6 +18,8 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
+import de.carne.boot.check.Check;
+
 class MethodHandleConstant extends Constant {
 
 	public static final int TAG = 15;
@@ -33,12 +35,20 @@ class MethodHandleConstant extends Constant {
 
 	@Override
 	public void print(ClassPrinter out, ClassContext context) throws IOException {
+		// Should never be called
+		Check.fail();
+	}
 
+	@Override
+	public String resolveSymbol() throws IOException {
+		MethodRefConstant reference = this.classInfo.resolveConstant(this.referenceIndex, MethodRefConstant.class);
+
+		return this.referenceKind.symbol() + " " + reference.resolveSymbol();
 	}
 
 	@Override
 	public String toString() {
-		return this.referenceKind + " #" + this.referenceIndex;
+		return this.referenceKind.symbol() + " #" + this.referenceIndex;
 	}
 
 }

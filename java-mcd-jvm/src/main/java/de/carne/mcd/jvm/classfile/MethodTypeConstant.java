@@ -18,6 +18,8 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
+import de.carne.boot.check.Check;
+
 class MethodTypeConstant extends Constant {
 
 	public static final int TAG = 16;
@@ -31,7 +33,13 @@ class MethodTypeConstant extends Constant {
 
 	@Override
 	public void print(ClassPrinter out, ClassContext context) throws IOException {
+		// Should never be called
+		Check.fail();
+	}
 
+	@Override
+	public String resolveSymbol() throws IOException {
+		return this.classInfo.resolveConstant(this.descriptorIndex, Utf8Constant.class).getValue();
 	}
 
 	@Override

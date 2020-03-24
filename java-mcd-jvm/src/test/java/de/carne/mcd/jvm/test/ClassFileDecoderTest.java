@@ -31,8 +31,6 @@ import java.util.Optional;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import javax.crypto.Cipher;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
@@ -52,8 +50,8 @@ class ClassFileDecoderTest {
 	private static final Log LOG = new Log();
 
 	@Test
-	void testDecodeJceJar() throws IOException {
-		testDecodeAll(Cipher.class);
+	void testDecodeNashornJar() throws Exception {
+		testDecodeAll(Class.forName("jdk.nashorn.tools.Shell"));
 	}
 
 	@Test
