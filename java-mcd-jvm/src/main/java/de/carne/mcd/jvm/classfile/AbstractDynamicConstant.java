@@ -18,6 +18,8 @@ package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
 
+import de.carne.boot.check.Check;
+
 abstract class AbstractDynamicConstant extends Constant {
 
 	private final int bootstrapMethodAttrIndex;
@@ -32,6 +34,7 @@ abstract class AbstractDynamicConstant extends Constant {
 	@Override
 	public void print(ClassPrinter out, ClassContext context) throws IOException {
 		// Should never be called
+		Check.fail();
 	}
 
 	@Override
