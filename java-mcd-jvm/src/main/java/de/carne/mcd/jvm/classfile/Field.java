@@ -21,8 +21,10 @@ import java.util.Collections;
 import java.util.List;
 
 import de.carne.boot.check.Check;
+import de.carne.mcd.jvm.classfile.attribute.Attribute;
+import de.carne.mcd.jvm.classfile.constant.Utf8Constant;
 
-class Field extends ClassElement implements FieldInfo {
+class Field extends ClassInfoElement implements FieldInfo {
 
 	private final int accessFlags;
 	private final NameDescriptorIndex nameDescriptorIndex;

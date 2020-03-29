@@ -13,7 +13,7 @@ public abstract /* super */ class InputStream implements Closeable {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0001: invokespecial #1 // Object.<init> ()V
+        0001: invokespecial #1 // void Object.<init>()
         0004: return
     }
     
@@ -27,7 +27,7 @@ public abstract /* super */ class InputStream implements Closeable {
         0002: iconst_0
         0003: aload_1
         0004: arraylength
-        0005: invokevirtual #2 // InputStream.read ([BII)I
+        0005: invokevirtual #2 // int InputStream.read(byte[], int, int)
         0008: ireturn
     }
     
@@ -38,7 +38,7 @@ public abstract /* super */ class InputStream implements Closeable {
         0001: ifnonnull +11 // 000c
         0004: new #3 // java/lang/NullPointerException
         0007: dup
-        0008: invokespecial #4 // NullPointerException.<init> ()V
+        0008: invokespecial #4 // void NullPointerException.<init>()
         000b: athrow
         000c: iload_2
         000d: iflt +15 // 001c
@@ -52,14 +52,14 @@ public abstract /* super */ class InputStream implements Closeable {
         0019: if_icmple +11 // 0024
         001c: new #5 // java/lang/IndexOutOfBoundsException
         001f: dup
-        0020: invokespecial #6 // IndexOutOfBoundsException.<init> ()V
+        0020: invokespecial #6 // void IndexOutOfBoundsException.<init>()
         0023: athrow
         0024: iload_3
         0025: ifne +5 // 002a
         0028: iconst_0
         0029: ireturn
         002a: aload_0
-        002b: invokevirtual #7 // InputStream.read ()I
+        002b: invokevirtual #7 // int InputStream.read()
         002e: istore local_4
         0030: iload local_4
         0032: iconst_m1
@@ -77,7 +77,7 @@ public abstract /* super */ class InputStream implements Closeable {
         0043: iload_3
         0044: if_icmpge +33 // 0065
         0047: aload_0
-        0048: invokevirtual #7 // InputStream.read ()I
+        0048: invokevirtual #7 // int InputStream.read()
         004b: istore local_4
         004d: iload local_4
         004f: iconst_m1
@@ -111,7 +111,7 @@ public abstract /* super */ class InputStream implements Closeable {
         0009: lreturn
         000a: ldc2_w #10 // 2048l
         000d: lload_3
-        000e: invokestatic #12 // Math.min (JJ)J
+        000e: invokestatic #12 // long Math.min(long, long)
         0011: l2i
         0012: istore local_6
         0014: iload local_6
@@ -127,9 +127,9 @@ public abstract /* super */ class InputStream implements Closeable {
         0024: iload local_6
         0026: i2l
         0027: lload_3
-        0028: invokestatic #12 // Math.min (JJ)J
+        0028: invokestatic #12 // long Math.min(long, long)
         002b: l2i
-        002c: invokevirtual #2 // InputStream.read ([BII)I
+        002c: invokevirtual #2 // int InputStream.read(byte[], int, int)
         002f: istore local_5
         0031: iload local_5
         0033: ifge +6 // 0039
@@ -171,7 +171,7 @@ public abstract /* super */ class InputStream implements Closeable {
         0000: new #8 // java/io/IOException
         0003: dup
         0004: ldc #13 // "mark/reset not supported"
-        0006: invokespecial #14 // IOException.<init> (Ljava/lang/String;)V
+        0006: invokespecial #14 // void IOException.<init>(String)
         0009: athrow
     }
     

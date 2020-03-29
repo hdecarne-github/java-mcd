@@ -15,8 +15,7 @@ public /* super */ class Object {
     
     private static native void registerNatives();
     
-    // Signature: ()Ljava/lang/Class<*>;
-    public final native Class getClass();
+    public final native Class<?> getClass();
     
     public native int hashCode();
     
@@ -39,18 +38,18 @@ public /* super */ class Object {
         // max_locals: 1
         0000: new #1 // java/lang/StringBuilder
         0003: dup
-        0004: invokespecial #2 // StringBuilder.<init> ()V
+        0004: invokespecial #2 // void StringBuilder.<init>()
         0007: aload_0
-        0008: invokevirtual #3 // Object.getClass ()Ljava/lang/Class;
-        000b: invokevirtual #4 // Class.getName ()Ljava/lang/String;
-        000e: invokevirtual #5 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        0008: invokevirtual #3 // Class Object.getClass()
+        000b: invokevirtual #4 // String Class.getName()
+        000e: invokevirtual #5 // StringBuilder StringBuilder.append(String)
         0011: ldc #6 // "@"
-        0013: invokevirtual #5 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        0013: invokevirtual #5 // StringBuilder StringBuilder.append(String)
         0016: aload_0
-        0017: invokevirtual #7 // Object.hashCode ()I
-        001a: invokestatic #8 // Integer.toHexString (I)Ljava/lang/String;
-        001d: invokevirtual #5 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
-        0020: invokevirtual #9 // StringBuilder.toString ()Ljava/lang/String;
+        0017: invokevirtual #7 // int Object.hashCode()
+        001a: invokestatic #8 // String Integer.toHexString(int)
+        001d: invokevirtual #5 // StringBuilder StringBuilder.append(String)
+        0020: invokevirtual #9 // String StringBuilder.toString()
         0023: areturn
     }
     
@@ -70,7 +69,7 @@ public /* super */ class Object {
         0006: new #10 // java/lang/IllegalArgumentException
         0009: dup
         000a: ldc #11 // "timeout value is negative"
-        000c: invokespecial #12 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        000c: invokespecial #12 // void IllegalArgumentException.<init>(String)
         000f: athrow
         0010: iload_3
         0011: iflt +9 // 001a
@@ -80,7 +79,7 @@ public /* super */ class Object {
         001a: new #10 // java/lang/IllegalArgumentException
         001d: dup
         001e: ldc #14 // "nanosecond timeout value out of range"
-        0020: invokespecial #12 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        0020: invokespecial #12 // void IllegalArgumentException.<init>(String)
         0023: athrow
         0024: iload_3
         0025: ifle +7 // 002c
@@ -90,7 +89,7 @@ public /* super */ class Object {
         002b: lstore_1
         002c: aload_0
         002d: lload_1
-        002e: invokevirtual #15 // Object.wait (J)V
+        002e: invokevirtual #15 // void Object.wait(long)
         0031: return
     }
     
@@ -99,7 +98,7 @@ public /* super */ class Object {
         // max_locals: 1
         0000: aload_0
         0001: lconst_0
-        0002: invokevirtual #15 // Object.wait (J)V
+        0002: invokevirtual #15 // void Object.wait(long)
         0005: return
     }
     
@@ -112,7 +111,7 @@ public /* super */ class Object {
     static void <clinit>() {
         // max_stack: 0
         // max_locals: 0
-        0000: invokestatic #16 // Object.registerNatives ()V
+        0000: invokestatic #16 // void Object.registerNatives()
         0003: return
     }
 

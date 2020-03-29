@@ -35,10 +35,10 @@ public /* super */ class Calendar$Builder {
         // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0001: invokespecial #2 // Object.<init> ()V
+        0001: invokespecial #2 // void Object.<init>()
         0004: aload_0
         0005: iconst_1
-        0006: putfield #3 // Calendar$Builder.lenient Z
+        0006: putfield #3 // boolean Calendar$Builder.lenient
         0009: return
     }
     
@@ -46,18 +46,18 @@ public /* super */ class Calendar$Builder {
         // max_stack: 3
         // max_locals: 3
         0000: aload_0
-        0001: getfield #4 // Calendar$Builder.fields [I
+        0001: getfield #4 // int[] Calendar$Builder.fields
         0004: ifnull +11 // 000f
         0007: new #5 // java/lang/IllegalStateException
         000a: dup
-        000b: invokespecial #6 // IllegalStateException.<init> ()V
+        000b: invokespecial #6 // void IllegalStateException.<init>()
         000e: athrow
         000f: aload_0
         0010: lload_1
-        0011: putfield #7 // Calendar$Builder.instant J
+        0011: putfield #7 // long Calendar$Builder.instant
         0014: aload_0
         0015: iconst_1
-        0016: putfield #8 // Calendar$Builder.nextStamp I
+        0016: putfield #8 // int Calendar$Builder.nextStamp
         0019: aload_0
         001a: areturn
     }
@@ -67,8 +67,8 @@ public /* super */ class Calendar$Builder {
         // max_locals: 2
         0000: aload_0
         0001: aload_1
-        0002: invokevirtual #9 // Date.getTime ()J
-        0005: invokevirtual #10 // Calendar$Builder.setInstant (J)Ljava/util/Calendar$Builder;
+        0002: invokevirtual #9 // long Date.getTime()
+        0005: invokevirtual #10 // Calendar$Builder Calendar$Builder.setInstant(long)
         0008: areturn
     }
     
@@ -83,22 +83,22 @@ public /* super */ class Calendar$Builder {
         000a: new #11 // java/lang/IllegalArgumentException
         000d: dup
         000e: ldc #12 // "field is invalid"
-        0010: invokespecial #13 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        0010: invokespecial #13 // void IllegalArgumentException.<init>(String)
         0013: athrow
         0014: aload_0
-        0015: invokespecial #14 // Calendar$Builder.isInstantSet ()Z
+        0015: invokespecial #14 // boolean Calendar$Builder.isInstantSet()
         0018: ifeq +13 // 0025
         001b: new #5 // java/lang/IllegalStateException
         001e: dup
         001f: ldc #15 // "instant has been set"
-        0021: invokespecial #16 // IllegalStateException.<init> (Ljava/lang/String;)V
+        0021: invokespecial #16 // void IllegalStateException.<init>(String)
         0024: athrow
         0025: aload_0
-        0026: invokespecial #17 // Calendar$Builder.allocateFields ()V
+        0026: invokespecial #17 // void Calendar$Builder.allocateFields()
         0029: aload_0
         002a: iload_1
         002b: iload_2
-        002c: invokespecial #18 // Calendar$Builder.internalSet (II)V
+        002c: invokespecial #18 // void Calendar$Builder.internalSet(int, int)
         002f: aload_0
         0030: areturn
     }
@@ -115,18 +115,18 @@ public /* super */ class Calendar$Builder {
         0006: ifeq +11 // 0011
         0009: new #11 // java/lang/IllegalArgumentException
         000c: dup
-        000d: invokespecial #19 // IllegalArgumentException.<init> ()V
+        000d: invokespecial #19 // void IllegalArgumentException.<init>()
         0010: athrow
         0011: aload_0
-        0012: invokespecial #14 // Calendar$Builder.isInstantSet ()Z
+        0012: invokespecial #14 // boolean Calendar$Builder.isInstantSet()
         0015: ifeq +13 // 0022
         0018: new #5 // java/lang/IllegalStateException
         001b: dup
         001c: ldc #15 // "instant has been set"
-        001e: invokespecial #16 // IllegalStateException.<init> (Ljava/lang/String;)V
+        001e: invokespecial #16 // void IllegalStateException.<init>(String)
         0021: athrow
         0022: aload_0
-        0023: getfield #8 // Calendar$Builder.nextStamp I
+        0023: getfield #8 // int Calendar$Builder.nextStamp
         0026: iload_2
         0027: iconst_2
         0028: idiv
@@ -135,10 +135,10 @@ public /* super */ class Calendar$Builder {
         002d: new #5 // java/lang/IllegalStateException
         0030: dup
         0031: ldc #20 // "stamp counter overflow"
-        0033: invokespecial #16 // IllegalStateException.<init> (Ljava/lang/String;)V
+        0033: invokespecial #16 // void IllegalStateException.<init>(String)
         0036: athrow
         0037: aload_0
-        0038: invokespecial #17 // Calendar$Builder.allocateFields ()V
+        0038: invokespecial #17 // void Calendar$Builder.allocateFields()
         003b: iconst_0
         003c: istore_3
         003d: iload_3
@@ -157,7 +157,7 @@ public /* super */ class Calendar$Builder {
         0056: new #11 // java/lang/IllegalArgumentException
         0059: dup
         005a: ldc #12 // "field is invalid"
-        005c: invokespecial #13 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        005c: invokespecial #13 // void IllegalArgumentException.<init>(String)
         005f: athrow
         0060: aload_0
         0061: iload local_4
@@ -165,7 +165,7 @@ public /* super */ class Calendar$Builder {
         0064: iload_3
         0065: iinc local_3, 1
         0068: iaload
-        0069: invokespecial #18 // Calendar$Builder.internalSet (II)V
+        0069: invokespecial #18 // void Calendar$Builder.internalSet(int, int)
         006c: goto -47 // 003d
         006f: aload_0
         0070: areturn
@@ -201,7 +201,7 @@ public /* super */ class Calendar$Builder {
         001a: iconst_5
         001b: iload_3
         001c: iastore
-        001d: invokevirtual #21 // Calendar$Builder.setFields ([I)Ljava/util/Calendar$Builder;
+        001d: invokevirtual #21 // Calendar$Builder Calendar$Builder.setFields(int[])
         0020: areturn
     }
     
@@ -213,7 +213,7 @@ public /* super */ class Calendar$Builder {
         0002: iload_2
         0003: iload_3
         0004: iconst_0
-        0005: invokevirtual #22 // Calendar$Builder.setTimeOfDay (IIII)Ljava/util/Calendar$Builder;
+        0005: invokevirtual #22 // Calendar$Builder Calendar$Builder.setTimeOfDay(int, int, int, int)
         0008: areturn
     }
     
@@ -255,7 +255,7 @@ public /* super */ class Calendar$Builder {
         0027: bipush 7
         0029: iload local_4
         002b: iastore
-        002c: invokevirtual #21 // Calendar$Builder.setFields ([I)Ljava/util/Calendar$Builder;
+        002c: invokevirtual #21 // Calendar$Builder Calendar$Builder.setFields(int[])
         002f: areturn
     }
     
@@ -263,19 +263,19 @@ public /* super */ class Calendar$Builder {
         // max_stack: 3
         // max_locals: 4
         0000: aload_0
-        0001: invokespecial #17 // Calendar$Builder.allocateFields ()V
+        0001: invokespecial #17 // void Calendar$Builder.allocateFields()
         0004: aload_0
         0005: bipush 17
         0007: iload_1
-        0008: invokespecial #18 // Calendar$Builder.internalSet (II)V
+        0008: invokespecial #18 // void Calendar$Builder.internalSet(int, int)
         000b: aload_0
         000c: iconst_3
         000d: iload_2
-        000e: invokespecial #18 // Calendar$Builder.internalSet (II)V
+        000e: invokespecial #18 // void Calendar$Builder.internalSet(int, int)
         0011: aload_0
         0012: bipush 7
         0014: iload_3
-        0015: invokespecial #18 // Calendar$Builder.internalSet (II)V
+        0015: invokespecial #18 // void Calendar$Builder.internalSet(int, int)
         0018: aload_0
         0019: areturn
     }
@@ -287,11 +287,11 @@ public /* super */ class Calendar$Builder {
         0001: ifnonnull +11 // 000c
         0004: new #24 // java/lang/NullPointerException
         0007: dup
-        0008: invokespecial #25 // NullPointerException.<init> ()V
+        0008: invokespecial #25 // void NullPointerException.<init>()
         000b: athrow
         000c: aload_0
         000d: aload_1
-        000e: putfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        000e: putfield #26 // TimeZone Calendar$Builder.zone
         0011: aload_0
         0012: areturn
     }
@@ -301,7 +301,7 @@ public /* super */ class Calendar$Builder {
         // max_locals: 2
         0000: aload_0
         0001: iload_1
-        0002: putfield #3 // Calendar$Builder.lenient Z
+        0002: putfield #3 // boolean Calendar$Builder.lenient
         0005: aload_0
         0006: areturn
     }
@@ -311,46 +311,46 @@ public /* super */ class Calendar$Builder {
         // max_locals: 2
         0000: aload_1
         0001: ldc #27 // "gregorian"
-        0003: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        0003: invokevirtual #28 // boolean String.equals(Object)
         0006: ifeq +6 // 000c
         0009: ldc #29 // "gregory"
         000b: astore_1
-        000c: invokestatic #30 // Calendar.getAvailableCalendarTypes ()Ljava/util/Set;
+        000c: invokestatic #30 // Set Calendar.getAvailableCalendarTypes()
         000f: aload_1
-        0010: invokeinterface #31 // Set.contains (Ljava/lang/Object;)Z
+        0010: invokeinterface #31 // boolean Set.contains(Object)
         0015: ifne +39 // 003c
         0018: aload_1
         0019: ldc #32 // "iso8601"
-        001b: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        001b: invokevirtual #28 // boolean String.equals(Object)
         001e: ifne +30 // 003c
         0021: new #11 // java/lang/IllegalArgumentException
         0024: dup
         0025: new #33 // java/lang/StringBuilder
         0028: dup
-        0029: invokespecial #34 // StringBuilder.<init> ()V
+        0029: invokespecial #34 // void StringBuilder.<init>()
         002c: ldc #35 // "unknown calendar type: "
-        002e: invokevirtual #36 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        002e: invokevirtual #36 // StringBuilder StringBuilder.append(String)
         0031: aload_1
-        0032: invokevirtual #36 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
-        0035: invokevirtual #37 // StringBuilder.toString ()Ljava/lang/String;
-        0038: invokespecial #13 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        0032: invokevirtual #36 // StringBuilder StringBuilder.append(String)
+        0035: invokevirtual #37 // String StringBuilder.toString()
+        0038: invokespecial #13 // void IllegalArgumentException.<init>(String)
         003b: athrow
         003c: aload_0
-        003d: getfield #38 // Calendar$Builder.type Ljava/lang/String;
+        003d: getfield #38 // String Calendar$Builder.type
         0040: ifnonnull +11 // 004b
         0043: aload_0
         0044: aload_1
-        0045: putfield #38 // Calendar$Builder.type Ljava/lang/String;
+        0045: putfield #38 // String Calendar$Builder.type
         0048: goto +24 // 0060
         004b: aload_0
-        004c: getfield #38 // Calendar$Builder.type Ljava/lang/String;
+        004c: getfield #38 // String Calendar$Builder.type
         004f: aload_1
-        0050: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        0050: invokevirtual #28 // boolean String.equals(Object)
         0053: ifne +13 // 0060
         0056: new #5 // java/lang/IllegalStateException
         0059: dup
         005a: ldc #39 // "calendar type override"
-        005c: invokespecial #16 // IllegalStateException.<init> (Ljava/lang/String;)V
+        005c: invokespecial #16 // void IllegalStateException.<init>(String)
         005f: athrow
         0060: aload_0
         0061: areturn
@@ -363,11 +363,11 @@ public /* super */ class Calendar$Builder {
         0001: ifnonnull +11 // 000c
         0004: new #24 // java/lang/NullPointerException
         0007: dup
-        0008: invokespecial #25 // NullPointerException.<init> ()V
+        0008: invokespecial #25 // void NullPointerException.<init>()
         000b: athrow
         000c: aload_0
         000d: aload_1
-        000e: putfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        000e: putfield #40 // Locale Calendar$Builder.locale
         0011: aload_0
         0012: areturn
     }
@@ -377,22 +377,22 @@ public /* super */ class Calendar$Builder {
         // max_locals: 3
         0000: aload_0
         0001: iload_1
-        0002: invokespecial #41 // Calendar$Builder.isValidWeekParameter (I)Z
+        0002: invokespecial #41 // boolean Calendar$Builder.isValidWeekParameter(int)
         0005: ifeq +11 // 0010
         0008: aload_0
         0009: iload_2
-        000a: invokespecial #41 // Calendar$Builder.isValidWeekParameter (I)Z
+        000a: invokespecial #41 // boolean Calendar$Builder.isValidWeekParameter(int)
         000d: ifne +11 // 0018
         0010: new #11 // java/lang/IllegalArgumentException
         0013: dup
-        0014: invokespecial #19 // IllegalArgumentException.<init> ()V
+        0014: invokespecial #19 // void IllegalArgumentException.<init>()
         0017: athrow
         0018: aload_0
         0019: iload_1
-        001a: putfield #42 // Calendar$Builder.firstDayOfWeek I
+        001a: putfield #42 // int Calendar$Builder.firstDayOfWeek
         001d: aload_0
         001e: iload_2
-        001f: putfield #43 // Calendar$Builder.minimalDaysInFirstWeek I
+        001f: putfield #43 // int Calendar$Builder.minimalDaysInFirstWeek
         0022: aload_0
         0023: areturn
     }
@@ -401,78 +401,78 @@ public /* super */ class Calendar$Builder {
         // max_stack: 5
         // max_locals: 5
         0000: aload_0
-        0001: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        0001: getfield #40 // Locale Calendar$Builder.locale
         0004: ifnonnull +10 // 000e
         0007: aload_0
-        0008: invokestatic #44 // Locale.getDefault ()Ljava/util/Locale;
-        000b: putfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        0008: invokestatic #44 // Locale Locale.getDefault()
+        000b: putfield #40 // Locale Calendar$Builder.locale
         000e: aload_0
-        000f: getfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        000f: getfield #26 // TimeZone Calendar$Builder.zone
         0012: ifnonnull +10 // 001c
         0015: aload_0
-        0016: invokestatic #45 // TimeZone.getDefault ()Ljava/util/TimeZone;
-        0019: putfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        0016: invokestatic #45 // TimeZone TimeZone.getDefault()
+        0019: putfield #26 // TimeZone Calendar$Builder.zone
         001c: aload_0
-        001d: getfield #38 // Calendar$Builder.type Ljava/lang/String;
+        001d: getfield #38 // String Calendar$Builder.type
         0020: ifnonnull +16 // 0030
         0023: aload_0
         0024: aload_0
-        0025: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        0025: getfield #40 // Locale Calendar$Builder.locale
         0028: ldc #46 // "ca"
-        002a: invokevirtual #47 // Locale.getUnicodeLocaleType (Ljava/lang/String;)Ljava/lang/String;
-        002d: putfield #38 // Calendar$Builder.type Ljava/lang/String;
+        002a: invokevirtual #47 // String Locale.getUnicodeLocaleType(String)
+        002d: putfield #38 // String Calendar$Builder.type
         0030: aload_0
-        0031: getfield #38 // Calendar$Builder.type Ljava/lang/String;
+        0031: getfield #38 // String Calendar$Builder.type
         0034: ifnonnull +42 // 005e
         0037: aload_0
-        0038: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
-        003b: invokevirtual #48 // Locale.getCountry ()Ljava/lang/String;
+        0038: getfield #40 // Locale Calendar$Builder.locale
+        003b: invokevirtual #48 // String Locale.getCountry()
         003e: ldc #49 // "TH"
         0040: if_acmpne +24 // 0058
         0043: aload_0
-        0044: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
-        0047: invokevirtual #50 // Locale.getLanguage ()Ljava/lang/String;
+        0044: getfield #40 // Locale Calendar$Builder.locale
+        0047: invokevirtual #50 // String Locale.getLanguage()
         004a: ldc #51 // "th"
         004c: if_acmpne +12 // 0058
         004f: aload_0
         0050: ldc #52 // "buddhist"
-        0052: putfield #38 // Calendar$Builder.type Ljava/lang/String;
+        0052: putfield #38 // String Calendar$Builder.type
         0055: goto +9 // 005e
         0058: aload_0
         0059: ldc #29 // "gregory"
-        005b: putfield #38 // Calendar$Builder.type Ljava/lang/String;
+        005b: putfield #38 // String Calendar$Builder.type
         005e: aload_0
-        005f: getfield #38 // Calendar$Builder.type Ljava/lang/String;
+        005f: getfield #38 // String Calendar$Builder.type
         0062: astore_2
         0063: iconst_m1
         0064: istore_3
         0065: aload_2
-        0066: invokevirtual #53 // String.hashCode ()I
+        0066: invokevirtual #53 // int String.hashCode()
         0069: lookupswitch // -1581060683:00b0 -752730191:00be 283776265:0094 2095190916:00a2 default:00c9
         0094: aload_2
         0095: ldc #29 // "gregory"
-        0097: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        0097: invokevirtual #28 // boolean String.equals(Object)
         009a: ifeq +47 // 00c9
         009d: iconst_0
         009e: istore_3
         009f: goto +42 // 00c9
         00a2: aload_2
         00a3: ldc #32 // "iso8601"
-        00a5: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        00a5: invokevirtual #28 // boolean String.equals(Object)
         00a8: ifeq +33 // 00c9
         00ab: iconst_1
         00ac: istore_3
         00ad: goto +28 // 00c9
         00b0: aload_2
         00b1: ldc #52 // "buddhist"
-        00b3: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        00b3: invokevirtual #28 // boolean String.equals(Object)
         00b6: ifeq +19 // 00c9
         00b9: iconst_2
         00ba: istore_3
         00bb: goto +14 // 00c9
         00be: aload_2
         00bf: ldc #54 // "japanese"
-        00c1: invokevirtual #28 // String.equals (Ljava/lang/Object;)Z
+        00c1: invokevirtual #28 // boolean String.equals(Object)
         00c4: ifeq +5 // 00c9
         00c7: iconst_3
         00c8: istore_3
@@ -481,32 +481,32 @@ public /* super */ class Calendar$Builder {
         00e8: new #55 // java/util/GregorianCalendar
         00eb: dup
         00ec: aload_0
-        00ed: getfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        00ed: getfield #26 // TimeZone Calendar$Builder.zone
         00f0: aload_0
-        00f1: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        00f1: getfield #40 // Locale Calendar$Builder.locale
         00f4: iconst_1
-        00f5: invokespecial #56 // GregorianCalendar.<init> (Ljava/util/TimeZone;Ljava/util/Locale;Z)V
+        00f5: invokespecial #56 // void GregorianCalendar.<init>(TimeZone, Locale, boolean)
         00f8: astore_1
         00f9: goto +122 // 0173
         00fc: new #55 // java/util/GregorianCalendar
         00ff: dup
         0100: aload_0
-        0101: getfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        0101: getfield #26 // TimeZone Calendar$Builder.zone
         0104: aload_0
-        0105: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        0105: getfield #40 // Locale Calendar$Builder.locale
         0108: iconst_1
-        0109: invokespecial #56 // GregorianCalendar.<init> (Ljava/util/TimeZone;Ljava/util/Locale;Z)V
+        0109: invokespecial #56 // void GregorianCalendar.<init>(TimeZone, Locale, boolean)
         010c: astore local_4
         010e: aload local_4
         0110: new #57 // java/util/Date
         0113: dup
         0114: ldc2_w #59 // -9223372036854775808l
-        0117: invokespecial #61 // Date.<init> (J)V
-        011a: invokevirtual #62 // GregorianCalendar.setGregorianChange (Ljava/util/Date;)V
+        0117: invokespecial #61 // void Date.<init>(long)
+        011a: invokevirtual #62 // void GregorianCalendar.setGregorianChange(Date)
         011d: aload_0
         011e: iconst_2
         011f: iconst_4
-        0120: invokevirtual #63 // Calendar$Builder.setWeekDefinition (II)Ljava/util/Calendar$Builder;
+        0120: invokevirtual #63 // Calendar$Builder Calendar$Builder.setWeekDefinition(int, int)
         0123: pop
         0124: aload local_4
         0126: astore_1
@@ -514,76 +514,76 @@ public /* super */ class Calendar$Builder {
         012a: new #64 // sun/util/BuddhistCalendar
         012d: dup
         012e: aload_0
-        012f: getfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        012f: getfield #26 // TimeZone Calendar$Builder.zone
         0132: aload_0
-        0133: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
-        0136: invokespecial #65 // sun.util.BuddhistCalendar.<init> (Ljava/util/TimeZone;Ljava/util/Locale;)V
+        0133: getfield #40 // Locale Calendar$Builder.locale
+        0136: invokespecial #65 // void sun.util.BuddhistCalendar.<init>(TimeZone, Locale)
         0139: astore_1
         013a: aload_1
-        013b: invokevirtual #66 // Calendar.clear ()V
+        013b: invokevirtual #66 // void Calendar.clear()
         013e: goto +53 // 0173
         0141: new #67 // java/util/JapaneseImperialCalendar
         0144: dup
         0145: aload_0
-        0146: getfield #26 // Calendar$Builder.zone Ljava/util/TimeZone;
+        0146: getfield #26 // TimeZone Calendar$Builder.zone
         0149: aload_0
-        014a: getfield #40 // Calendar$Builder.locale Ljava/util/Locale;
+        014a: getfield #40 // Locale Calendar$Builder.locale
         014d: iconst_1
-        014e: invokespecial #68 // JapaneseImperialCalendar.<init> (Ljava/util/TimeZone;Ljava/util/Locale;Z)V
+        014e: invokespecial #68 // void JapaneseImperialCalendar.<init>(TimeZone, Locale, boolean)
         0151: astore_1
         0152: goto +33 // 0173
         0155: new #11 // java/lang/IllegalArgumentException
         0158: dup
         0159: new #33 // java/lang/StringBuilder
         015c: dup
-        015d: invokespecial #34 // StringBuilder.<init> ()V
+        015d: invokespecial #34 // void StringBuilder.<init>()
         0160: ldc #35 // "unknown calendar type: "
-        0162: invokevirtual #36 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        0162: invokevirtual #36 // StringBuilder StringBuilder.append(String)
         0165: aload_0
-        0166: getfield #38 // Calendar$Builder.type Ljava/lang/String;
-        0169: invokevirtual #36 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
-        016c: invokevirtual #37 // StringBuilder.toString ()Ljava/lang/String;
-        016f: invokespecial #13 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        0166: getfield #38 // String Calendar$Builder.type
+        0169: invokevirtual #36 // StringBuilder StringBuilder.append(String)
+        016c: invokevirtual #37 // String StringBuilder.toString()
+        016f: invokespecial #13 // void IllegalArgumentException.<init>(String)
         0172: athrow
         0173: aload_1
         0174: aload_0
-        0175: getfield #3 // Calendar$Builder.lenient Z
-        0178: invokevirtual #69 // Calendar.setLenient (Z)V
+        0175: getfield #3 // boolean Calendar$Builder.lenient
+        0178: invokevirtual #69 // void Calendar.setLenient(boolean)
         017b: aload_0
-        017c: getfield #42 // Calendar$Builder.firstDayOfWeek I
+        017c: getfield #42 // int Calendar$Builder.firstDayOfWeek
         017f: ifeq +19 // 0192
         0182: aload_1
         0183: aload_0
-        0184: getfield #42 // Calendar$Builder.firstDayOfWeek I
-        0187: invokevirtual #70 // Calendar.setFirstDayOfWeek (I)V
+        0184: getfield #42 // int Calendar$Builder.firstDayOfWeek
+        0187: invokevirtual #70 // void Calendar.setFirstDayOfWeek(int)
         018a: aload_1
         018b: aload_0
-        018c: getfield #43 // Calendar$Builder.minimalDaysInFirstWeek I
-        018f: invokevirtual #71 // Calendar.setMinimalDaysInFirstWeek (I)V
+        018c: getfield #43 // int Calendar$Builder.minimalDaysInFirstWeek
+        018f: invokevirtual #71 // void Calendar.setMinimalDaysInFirstWeek(int)
         0192: aload_0
-        0193: invokespecial #14 // Calendar$Builder.isInstantSet ()Z
+        0193: invokespecial #14 // boolean Calendar$Builder.isInstantSet()
         0196: ifeq +17 // 01a7
         0199: aload_1
         019a: aload_0
-        019b: getfield #7 // Calendar$Builder.instant J
-        019e: invokevirtual #72 // Calendar.setTimeInMillis (J)V
+        019b: getfield #7 // long Calendar$Builder.instant
+        019e: invokevirtual #72 // void Calendar.setTimeInMillis(long)
         01a1: aload_1
-        01a2: invokevirtual #73 // Calendar.complete ()V
+        01a2: invokevirtual #73 // void Calendar.complete()
         01a5: aload_1
         01a6: areturn
         01a7: aload_0
-        01a8: getfield #4 // Calendar$Builder.fields [I
+        01a8: getfield #4 // int[] Calendar$Builder.fields
         01ab: ifnull +206 // 0279
         01ae: aload_0
         01af: bipush 17
-        01b1: invokespecial #74 // Calendar$Builder.isSet (I)Z
+        01b1: invokespecial #74 // boolean Calendar$Builder.isSet(int)
         01b4: ifeq +23 // 01cb
         01b7: aload_0
-        01b8: getfield #4 // Calendar$Builder.fields [I
+        01b8: getfield #4 // int[] Calendar$Builder.fields
         01bb: bipush 17
         01bd: iaload
         01be: aload_0
-        01bf: getfield #4 // Calendar$Builder.fields [I
+        01bf: getfield #4 // int[] Calendar$Builder.fields
         01c2: iconst_1
         01c3: iaload
         01c4: if_icmple +7 // 01cb
@@ -594,35 +594,35 @@ public /* super */ class Calendar$Builder {
         01cd: iload_2
         01ce: ifeq +40 // 01f6
         01d1: aload_1
-        01d2: invokevirtual #75 // Calendar.isWeekDateSupported ()Z
+        01d2: invokevirtual #75 // boolean Calendar.isWeekDateSupported()
         01d5: ifne +33 // 01f6
         01d8: new #11 // java/lang/IllegalArgumentException
         01db: dup
         01dc: new #33 // java/lang/StringBuilder
         01df: dup
-        01e0: invokespecial #34 // StringBuilder.<init> ()V
+        01e0: invokespecial #34 // void StringBuilder.<init>()
         01e3: ldc #76 // "week date is unsupported by "
-        01e5: invokevirtual #36 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+        01e5: invokevirtual #36 // StringBuilder StringBuilder.append(String)
         01e8: aload_0
-        01e9: getfield #38 // Calendar$Builder.type Ljava/lang/String;
-        01ec: invokevirtual #36 // StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
-        01ef: invokevirtual #37 // StringBuilder.toString ()Ljava/lang/String;
-        01f2: invokespecial #13 // IllegalArgumentException.<init> (Ljava/lang/String;)V
+        01e9: getfield #38 // String Calendar$Builder.type
+        01ec: invokevirtual #36 // StringBuilder StringBuilder.append(String)
+        01ef: invokevirtual #37 // String StringBuilder.toString()
+        01f2: invokespecial #13 // void IllegalArgumentException.<init>(String)
         01f5: athrow
         01f6: iconst_2
         01f7: istore_3
         01f8: iload_3
         01f9: aload_0
-        01fa: getfield #8 // Calendar$Builder.nextStamp I
+        01fa: getfield #8 // int Calendar$Builder.nextStamp
         01fd: if_icmpge +57 // 0236
         0200: iconst_0
         0201: istore local_4
         0203: iload local_4
         0205: aload_0
-        0206: getfield #77 // Calendar$Builder.maxFieldIndex I
+        0206: getfield #77 // int Calendar$Builder.maxFieldIndex
         0209: if_icmpgt +39 // 0230
         020c: aload_0
-        020d: getfield #4 // Calendar$Builder.fields [I
+        020d: getfield #4 // int[] Calendar$Builder.fields
         0210: iload local_4
         0212: iaload
         0213: iload_3
@@ -630,12 +630,12 @@ public /* super */ class Calendar$Builder {
         0217: aload_1
         0218: iload local_4
         021a: aload_0
-        021b: getfield #4 // Calendar$Builder.fields [I
+        021b: getfield #4 // int[] Calendar$Builder.fields
         021e: bipush 18
         0220: iload local_4
         0222: iadd
         0223: iaload
-        0224: invokevirtual #78 // Calendar.set (II)V
+        0224: invokevirtual #78 // void Calendar.set(int, int)
         0227: goto +9 // 0230
         022a: iinc local_4, 1
         022d: goto -42 // 0203
@@ -645,10 +645,10 @@ public /* super */ class Calendar$Builder {
         0237: ifeq +62 // 0275
         023a: aload_0
         023b: iconst_3
-        023c: invokespecial #74 // Calendar$Builder.isSet (I)Z
+        023c: invokespecial #74 // boolean Calendar$Builder.isSet(int)
         023f: ifeq +13 // 024c
         0242: aload_0
-        0243: getfield #4 // Calendar$Builder.fields [I
+        0243: getfield #4 // int[] Calendar$Builder.fields
         0246: bipush 21
         0248: iaload
         0249: goto +4 // 024d
@@ -656,26 +656,26 @@ public /* super */ class Calendar$Builder {
         024d: istore_3
         024e: aload_0
         024f: bipush 7
-        0251: invokespecial #74 // Calendar$Builder.isSet (I)Z
+        0251: invokespecial #74 // boolean Calendar$Builder.isSet(int)
         0254: ifeq +13 // 0261
         0257: aload_0
-        0258: getfield #4 // Calendar$Builder.fields [I
+        0258: getfield #4 // int[] Calendar$Builder.fields
         025b: bipush 25
         025d: iaload
         025e: goto +7 // 0265
         0261: aload_1
-        0262: invokevirtual #79 // Calendar.getFirstDayOfWeek ()I
+        0262: invokevirtual #79 // int Calendar.getFirstDayOfWeek()
         0265: istore local_4
         0267: aload_1
         0268: aload_0
-        0269: getfield #4 // Calendar$Builder.fields [I
+        0269: getfield #4 // int[] Calendar$Builder.fields
         026c: bipush 35
         026e: iaload
         026f: iload_3
         0270: iload local_4
-        0272: invokevirtual #80 // Calendar.setWeekDate (III)V
+        0272: invokevirtual #80 // void Calendar.setWeekDate(int, int, int)
         0275: aload_1
-        0276: invokevirtual #73 // Calendar.complete ()V
+        0276: invokevirtual #73 // void Calendar.complete()
         0279: aload_1
         027a: areturn
     }
@@ -684,18 +684,18 @@ public /* super */ class Calendar$Builder {
         // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0001: getfield #4 // Calendar$Builder.fields [I
+        0001: getfield #4 // int[] Calendar$Builder.fields
         0004: ifnonnull +21 // 0019
         0007: aload_0
         0008: bipush 36
         000a: newarray 10 // int[]
-        000c: putfield #4 // Calendar$Builder.fields [I
+        000c: putfield #4 // int[] Calendar$Builder.fields
         000f: aload_0
         0010: iconst_2
-        0011: putfield #8 // Calendar$Builder.nextStamp I
+        0011: putfield #8 // int Calendar$Builder.nextStamp
         0014: aload_0
         0015: iconst_m1
-        0016: putfield #77 // Calendar$Builder.maxFieldIndex I
+        0016: putfield #77 // int Calendar$Builder.maxFieldIndex
         0019: return
     }
     
@@ -703,26 +703,26 @@ public /* super */ class Calendar$Builder {
         // max_stack: 6
         // max_locals: 3
         0000: aload_0
-        0001: getfield #4 // Calendar$Builder.fields [I
+        0001: getfield #4 // int[] Calendar$Builder.fields
         0004: iload_1
         0005: aload_0
         0006: dup
-        0007: getfield #8 // Calendar$Builder.nextStamp I
+        0007: getfield #8 // int Calendar$Builder.nextStamp
         000a: dup_x1
         000b: iconst_1
         000c: iadd
-        000d: putfield #8 // Calendar$Builder.nextStamp I
+        000d: putfield #8 // int Calendar$Builder.nextStamp
         0010: iastore
         0011: aload_0
-        0012: getfield #8 // Calendar$Builder.nextStamp I
+        0012: getfield #8 // int Calendar$Builder.nextStamp
         0015: ifge +13 // 0022
         0018: new #5 // java/lang/IllegalStateException
         001b: dup
         001c: ldc #20 // "stamp counter overflow"
-        001e: invokespecial #16 // IllegalStateException.<init> (Ljava/lang/String;)V
+        001e: invokespecial #16 // void IllegalStateException.<init>(String)
         0021: athrow
         0022: aload_0
-        0023: getfield #4 // Calendar$Builder.fields [I
+        0023: getfield #4 // int[] Calendar$Builder.fields
         0026: bipush 18
         0028: iload_1
         0029: iadd
@@ -730,14 +730,14 @@ public /* super */ class Calendar$Builder {
         002b: iastore
         002c: iload_1
         002d: aload_0
-        002e: getfield #77 // Calendar$Builder.maxFieldIndex I
+        002e: getfield #77 // int Calendar$Builder.maxFieldIndex
         0031: if_icmple +14 // 003f
         0034: iload_1
         0035: bipush 17
         0037: if_icmpge +8 // 003f
         003a: aload_0
         003b: iload_1
-        003c: putfield #77 // Calendar$Builder.maxFieldIndex I
+        003c: putfield #77 // int Calendar$Builder.maxFieldIndex
         003f: return
     }
     
@@ -745,7 +745,7 @@ public /* super */ class Calendar$Builder {
         // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0001: getfield #8 // Calendar$Builder.nextStamp I
+        0001: getfield #8 // int Calendar$Builder.nextStamp
         0004: iconst_1
         0005: if_icmpne +7 // 000c
         0008: iconst_1
@@ -758,10 +758,10 @@ public /* super */ class Calendar$Builder {
         // max_stack: 2
         // max_locals: 2
         0000: aload_0
-        0001: getfield #4 // Calendar$Builder.fields [I
+        0001: getfield #4 // int[] Calendar$Builder.fields
         0004: ifnull +16 // 0014
         0007: aload_0
-        0008: getfield #4 // Calendar$Builder.fields [I
+        0008: getfield #4 // int[] Calendar$Builder.fields
         000b: iload_1
         000c: iaload
         000d: ifle +7 // 0014

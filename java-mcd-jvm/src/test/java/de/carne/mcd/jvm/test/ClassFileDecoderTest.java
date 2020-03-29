@@ -61,52 +61,57 @@ class ClassFileDecoderTest {
 
 	@Test
 	void testDecodeObject() throws IOException {
-		testDecode(Object.class);
+		testDecode(Object.class, true);
 	}
 
 	@Test
 	void testDecodeAbstractClass() throws IOException {
-		testDecode(InputStream.class);
+		testDecode(InputStream.class, true);
 	}
 
 	@Test
 	void testDecodeFinalClass() throws IOException {
-		testDecode(String.class);
+		testDecode(String.class, true);
 	}
 
 	@Test
 	void testDecodeGenericClass() throws IOException {
-		testDecode(Optional.class);
+		testDecode(Optional.class, true);
 	}
 
 	@Test
 	void testDecodeNestedClass() throws IOException {
-		testDecode(Calendar.Builder.class);
+		testDecode(Calendar.Builder.class, true);
 	}
 
 	@Test
 	void testDecodeInterfaceClass() throws IOException {
-		testDecode(ReadableByteChannel.class);
+		testDecode(ReadableByteChannel.class, true);
 	}
 
 	@Test
 	void testDecodeEnumClass() throws IOException {
-		testDecode(StandardOpenOption.class);
+		testDecode(StandardOpenOption.class, true);
 	}
 
 	@Test
 	void testDecodeAnnotationClass() throws IOException {
-		testDecode(DisabledOnOs.class);
+		testDecode(DisabledOnOs.class, true);
 	}
 
 	@Test
 	void testDecodePackageClass() throws IOException {
-		testDecode("/de/carne/boot/package-info.class");
+		testDecode("/de/carne/boot/package-info.class", true);
 	}
 
 	@Test
 	void testDecodeTypeAnnotations() throws IOException {
-		testDecode(Closeables.class);
+		testDecode(Closeables.class, true);
+	}
+
+	@Test
+	void testDecodeDecoderTestClass() throws IOException {
+		testDecode(DecoderTestClass.class, false);
 	}
 
 	private String getClassResourceName(Class<?> clazz) {
@@ -145,11 +150,11 @@ class ClassFileDecoderTest {
 		}
 	}
 
-	private void testDecode(Class<?> clazz) throws IOException {
-		testDecode(getClassResourceName(clazz));
+	private void testDecode(Class<?> clazz, boolean verify) throws IOException {
+		testDecode(getClassResourceName(clazz), verify);
 	}
 
-	private void testDecode(String resource) throws IOException {
+	private void testDecode(String resource, boolean verify) throws IOException {
 		LOG.info("Decode class {0}...", resource);
 
 		ClassFileDecoder decoder = new ClassFileDecoder();
@@ -159,11 +164,12 @@ class ClassFileDecoderTest {
 				PlainMCDOutput out = new PlainMCDOutput(decodeBuffer, false)) {
 			decoder.decode(in, out);
 		}
+		if (verify) {
+			String decodeOutput = decodeBuffer.toString();
+			String referenceOutput = getReferenceOutput(resource);
 
-		String decodeOutput = decodeBuffer.toString();
-		String referenceOutput = getReferenceOutput(resource);
-
-		Assertions.assertEquals(referenceOutput, decodeOutput);
+			Assertions.assertEquals(referenceOutput, decodeOutput);
+		}
 	}
 
 	private ReadableByteChannel getByteCode(String resource) {

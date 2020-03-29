@@ -20,6 +20,8 @@ import java.io.IOException;
 
 import org.eclipse.jdt.annotation.Nullable;
 
+import de.carne.mcd.jvm.classfile.constant.NameConstant;
+
 /**
  * A class name.
  */

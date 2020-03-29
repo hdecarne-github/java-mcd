@@ -11,7 +11,7 @@ public final /* super */ class Closeables {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0001: invokespecial #1 // Object.<init> ()V
+        0001: invokespecial #1 // void Object.<init>()
         0004: return
     }
     
@@ -23,7 +23,7 @@ public final /* super */ class Closeables {
         0004: ifeq +12 // 0010
         0007: aload_0
         0008: checkcast #2 // java/io/Closeable
-        000b: invokeinterface #3 // java.io.Closeable.close ()V
+        000b: invokeinterface #3 // void java.io.Closeable.close()
         0010: return
     }
     
@@ -49,7 +49,7 @@ public final /* super */ class Closeables {
         0016: aload local_5
         0018: ifnull +31 // 0037
         001b: aload local_5
-        001d: invokeinterface #3 // java.io.Closeable.close ()V
+        001d: invokeinterface #3 // void java.io.Closeable.close()
         0022: goto +21 // 0037
         0025: astore local_6
         0027: aload_1
@@ -59,7 +59,7 @@ public final /* super */ class Closeables {
         002e: goto +9 // 0037
         0031: aload_1
         0032: aload local_6
-        0034: invokevirtual #5 // java.io.IOException.addSuppressed (Ljava/lang/Throwable;)V
+        0034: invokevirtual #5 // void java.io.IOException.addSuppressed(Throwable)
         0037: iinc local_4, 1
         003a: goto -48 // 000a
         003d: aload_1
@@ -77,11 +77,11 @@ public final /* super */ class Closeables {
         0004: ifeq +20 // 0018
         0007: aload_0
         0008: checkcast #2 // java/io/Closeable
-        000b: invokeinterface #3 // java.io.Closeable.close ()V
+        000b: invokeinterface #3 // void java.io.Closeable.close()
         0010: goto +8 // 0018
         0013: astore_1
         0014: aload_1
-        0015: invokestatic #6 // de.carne.boot.Exceptions.ignore (Ljava/lang/Throwable;)V
+        0015: invokestatic #6 // void de.carne.boot.Exceptions.ignore(Throwable)
         0018: return
     }
     
@@ -93,12 +93,12 @@ public final /* super */ class Closeables {
         0004: ifeq +21 // 0019
         0007: aload_1
         0008: checkcast #2 // java/io/Closeable
-        000b: invokeinterface #3 // java.io.Closeable.close ()V
+        000b: invokeinterface #3 // void java.io.Closeable.close()
         0010: goto +9 // 0019
         0013: astore_2
         0014: aload_0
         0015: aload_2
-        0016: invokevirtual #7 // Throwable.addSuppressed (Ljava/lang/Throwable;)V
+        0016: invokevirtual #7 // void Throwable.addSuppressed(Throwable)
         0019: return
     }
 

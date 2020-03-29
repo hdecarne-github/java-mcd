@@ -5,85 +5,79 @@
  */
 package java.util;
 
-// Signature: <T:Ljava/lang/Object;>Ljava/lang/Object;
-public final /* super */ class Optional {
+public final /* super */ class Optional<T> {
     
-    private static final Optional EMPTY;
+    private static final Optional<?> EMPTY;
     
-    private final Object value;
+    private final T value;
     
     private void <init>() {
         // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0001: invokespecial #1 // Object.<init> ()V
+        0001: invokespecial #1 // void Object.<init>()
         0004: aload_0
         0005: aconst_null
-        0006: putfield #2 // Optional.value Ljava/lang/Object;
+        0006: putfield #2 // Object Optional.value
         0009: return
     }
     
-    // Signature: <T:Ljava/lang/Object;>()Ljava/util/Optional<TT;>;
-    public static Optional empty() {
+    public static Optional<T> empty<T>() {
         // max_stack: 1
         // max_locals: 1
-        0000: getstatic #3 // Optional.EMPTY Ljava/util/Optional;
+        0000: getstatic #3 // Optional Optional.EMPTY
         0003: astore_0
         0004: aload_0
         0005: areturn
     }
     
-    // Signature: (TT;)V
-    private void <init>(Object) {
+    private void <init>(T) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_0
-        0001: invokespecial #1 // Object.<init> ()V
+        0001: invokespecial #1 // void Object.<init>()
         0004: aload_0
         0005: aload_1
-        0006: invokestatic #4 // Objects.requireNonNull (Ljava/lang/Object;)Ljava/lang/Object;
-        0009: putfield #2 // Optional.value Ljava/lang/Object;
+        0006: invokestatic #4 // Object Objects.requireNonNull(Object)
+        0009: putfield #2 // Object Optional.value
         000c: return
     }
     
-    // Signature: <T:Ljava/lang/Object;>(TT;)Ljava/util/Optional<TT;>;
-    public static Optional of(Object) {
+    public static Optional<T> of<T>(T) {
         // max_stack: 3
         // max_locals: 1
         0000: new #5 // java/util/Optional
         0003: dup
         0004: aload_0
-        0005: invokespecial #6 // Optional.<init> (Ljava/lang/Object;)V
+        0005: invokespecial #6 // void Optional.<init>(Object)
         0008: areturn
     }
     
-    // Signature: <T:Ljava/lang/Object;>(TT;)Ljava/util/Optional<TT;>;
-    public static Optional ofNullable(Object) {
+    public static Optional<T> ofNullable<T>(T) {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
         0001: ifnonnull +9 // 000a
-        0004: invokestatic #7 // Optional.empty ()Ljava/util/Optional;
+        0004: invokestatic #7 // Optional Optional.empty()
         0007: goto +7 // 000e
         000a: aload_0
-        000b: invokestatic #8 // Optional.of (Ljava/lang/Object;)Ljava/util/Optional;
+        000b: invokestatic #8 // Optional Optional.of(Object)
         000e: areturn
     }
     
-    // Signature: ()TT;
-    public Object get() {
+    public T get() {
         // max_stack: 3
         // max_locals: 1
         0000: aload_0
-        0001: getfield #2 // Optional.value Ljava/lang/Object;
+        0001: getfield #2 // Object Optional.value
         0004: ifnonnull +13 // 0011
         0007: new #9 // java/util/NoSuchElementException
         000a: dup
         000b: ldc #10 // "No value present"
-        000d: invokespecial #11 // NoSuchElementException.<init> (Ljava/lang/String;)V
+        000d: invokespecial #11 // void NoSuchElementException.<init>(String)
         0010: athrow
         0011: aload_0
-        0012: getfield #2 // Optional.value Ljava/lang/Object;
+        0012: getfield #2 // Object Optional.value
         0015: areturn
     }
     
@@ -91,7 +85,7 @@ public final /* super */ class Optional {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0001: getfield #2 // Optional.value Ljava/lang/Object;
+        0001: getfield #2 // Object Optional.value
         0004: ifnull +7 // 000b
         0007: iconst_1
         0008: goto +4 // 000c
@@ -99,125 +93,118 @@ public final /* super */ class Optional {
         000c: ireturn
     }
     
-    // Signature: (Ljava/util/function/Consumer<-TT;>;)V
-    public void ifPresent(java.util.function.Consumer) {
+    public void ifPresent(java.util.function.Consumer<? super T>) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_0
-        0001: getfield #2 // Optional.value Ljava/lang/Object;
+        0001: getfield #2 // Object Optional.value
         0004: ifnull +13 // 0011
         0007: aload_1
         0008: aload_0
-        0009: getfield #2 // Optional.value Ljava/lang/Object;
-        000c: invokeinterface #12 // java.util.function.Consumer.accept (Ljava/lang/Object;)V
+        0009: getfield #2 // Object Optional.value
+        000c: invokeinterface #12 // void java.util.function.Consumer.accept(Object)
         0011: return
     }
     
-    // Signature: (Ljava/util/function/Predicate<-TT;>;)Ljava/util/Optional<TT;>;
-    public Optional filter(java.util.function.Predicate) {
+    public Optional<T> filter(java.util.function.Predicate<? super T>) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_1
-        0001: invokestatic #4 // Objects.requireNonNull (Ljava/lang/Object;)Ljava/lang/Object;
+        0001: invokestatic #4 // Object Objects.requireNonNull(Object)
         0004: pop
         0005: aload_0
-        0006: invokevirtual #13 // Optional.isPresent ()Z
+        0006: invokevirtual #13 // boolean Optional.isPresent()
         0009: ifne +5 // 000e
         000c: aload_0
         000d: areturn
         000e: aload_1
         000f: aload_0
-        0010: getfield #2 // Optional.value Ljava/lang/Object;
-        0013: invokeinterface #14 // java.util.function.Predicate.test (Ljava/lang/Object;)Z
+        0010: getfield #2 // Object Optional.value
+        0013: invokeinterface #14 // boolean java.util.function.Predicate.test(Object)
         0018: ifeq +7 // 001f
         001b: aload_0
         001c: goto +6 // 0022
-        001f: invokestatic #7 // Optional.empty ()Ljava/util/Optional;
+        001f: invokestatic #7 // Optional Optional.empty()
         0022: areturn
     }
     
-    // Signature: <U:Ljava/lang/Object;>(Ljava/util/function/Function<-TT;+TU;>;)Ljava/util/Optional<TU;>;
-    public Optional map(java.util.function.Function) {
+    public Optional<U> map<U>(java.util.function.Function<? super T, ? extends U>) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_1
-        0001: invokestatic #4 // Objects.requireNonNull (Ljava/lang/Object;)Ljava/lang/Object;
+        0001: invokestatic #4 // Object Objects.requireNonNull(Object)
         0004: pop
         0005: aload_0
-        0006: invokevirtual #13 // Optional.isPresent ()Z
+        0006: invokevirtual #13 // boolean Optional.isPresent()
         0009: ifne +7 // 0010
-        000c: invokestatic #7 // Optional.empty ()Ljava/util/Optional;
+        000c: invokestatic #7 // Optional Optional.empty()
         000f: areturn
         0010: aload_1
         0011: aload_0
-        0012: getfield #2 // Optional.value Ljava/lang/Object;
-        0015: invokeinterface #15 // java.util.function.Function.apply (Ljava/lang/Object;)Ljava/lang/Object;
-        001a: invokestatic #16 // Optional.ofNullable (Ljava/lang/Object;)Ljava/util/Optional;
+        0012: getfield #2 // Object Optional.value
+        0015: invokeinterface #15 // Object java.util.function.Function.apply(Object)
+        001a: invokestatic #16 // Optional Optional.ofNullable(Object)
         001d: areturn
     }
     
-    // Signature: <U:Ljava/lang/Object;>(Ljava/util/function/Function<-TT;Ljava/util/Optional<TU;>;>;)Ljava/util/Optional<TU;>;
-    public Optional flatMap(java.util.function.Function) {
+    public Optional<U> flatMap<U>(java.util.function.Function<? super T, Optional<U>>) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_1
-        0001: invokestatic #4 // Objects.requireNonNull (Ljava/lang/Object;)Ljava/lang/Object;
+        0001: invokestatic #4 // Object Objects.requireNonNull(Object)
         0004: pop
         0005: aload_0
-        0006: invokevirtual #13 // Optional.isPresent ()Z
+        0006: invokevirtual #13 // boolean Optional.isPresent()
         0009: ifne +7 // 0010
-        000c: invokestatic #7 // Optional.empty ()Ljava/util/Optional;
+        000c: invokestatic #7 // Optional Optional.empty()
         000f: areturn
         0010: aload_1
         0011: aload_0
-        0012: getfield #2 // Optional.value Ljava/lang/Object;
-        0015: invokeinterface #15 // java.util.function.Function.apply (Ljava/lang/Object;)Ljava/lang/Object;
-        001a: invokestatic #4 // Objects.requireNonNull (Ljava/lang/Object;)Ljava/lang/Object;
+        0012: getfield #2 // Object Optional.value
+        0015: invokeinterface #15 // Object java.util.function.Function.apply(Object)
+        001a: invokestatic #4 // Object Objects.requireNonNull(Object)
         001d: checkcast #5 // java/util/Optional
         0020: areturn
     }
     
-    // Signature: (TT;)TT;
-    public Object orElse(Object) {
+    public T orElse(T) {
         // max_stack: 1
         // max_locals: 2
         0000: aload_0
-        0001: getfield #2 // Optional.value Ljava/lang/Object;
+        0001: getfield #2 // Object Optional.value
         0004: ifnull +10 // 000e
         0007: aload_0
-        0008: getfield #2 // Optional.value Ljava/lang/Object;
+        0008: getfield #2 // Object Optional.value
         000b: goto +4 // 000f
         000e: aload_1
         000f: areturn
     }
     
-    // Signature: (Ljava/util/function/Supplier<+TT;>;)TT;
-    public Object orElseGet(java.util.function.Supplier) {
+    public T orElseGet(java.util.function.Supplier<? extends T>) {
         // max_stack: 1
         // max_locals: 2
         0000: aload_0
-        0001: getfield #2 // Optional.value Ljava/lang/Object;
+        0001: getfield #2 // Object Optional.value
         0004: ifnull +10 // 000e
         0007: aload_0
-        0008: getfield #2 // Optional.value Ljava/lang/Object;
+        0008: getfield #2 // Object Optional.value
         000b: goto +9 // 0014
         000e: aload_1
-        000f: invokeinterface #17 // java.util.function.Supplier.get ()Ljava/lang/Object;
+        000f: invokeinterface #17 // Object java.util.function.Supplier.get()
         0014: areturn
     }
     
-    // Signature: <X:Ljava/lang/Throwable;>(Ljava/util/function/Supplier<+TX;>;)TT;^TX;
-    public Object orElseThrow(java.util.function.Supplier) throws Throwable {
+    public T orElseThrow<X extends Throwable>(java.util.function.Supplier<? extends X>) throws X {
         // max_stack: 1
         // max_locals: 2
         0000: aload_0
-        0001: getfield #2 // Optional.value Ljava/lang/Object;
+        0001: getfield #2 // Object Optional.value
         0004: ifnull +8 // 000c
         0007: aload_0
-        0008: getfield #2 // Optional.value Ljava/lang/Object;
+        0008: getfield #2 // Object Optional.value
         000b: areturn
         000c: aload_1
-        000d: invokeinterface #17 // java.util.function.Supplier.get ()Ljava/lang/Object;
+        000d: invokeinterface #17 // Object java.util.function.Supplier.get()
         0012: checkcast #18 // java/lang/Throwable
         0015: athrow
     }
@@ -239,10 +226,10 @@ public final /* super */ class Optional {
         0011: checkcast #5 // java/util/Optional
         0014: astore_2
         0015: aload_0
-        0016: getfield #2 // Optional.value Ljava/lang/Object;
+        0016: getfield #2 // Object Optional.value
         0019: aload_2
-        001a: getfield #2 // Optional.value Ljava/lang/Object;
-        001d: invokestatic #19 // Objects.equals (Ljava/lang/Object;Ljava/lang/Object;)Z
+        001a: getfield #2 // Object Optional.value
+        001d: invokestatic #19 // boolean Objects.equals(Object, Object)
         0020: ireturn
     }
     
@@ -250,8 +237,8 @@ public final /* super */ class Optional {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0001: getfield #2 // Optional.value Ljava/lang/Object;
-        0004: invokestatic #20 // Objects.hashCode (Ljava/lang/Object;)I
+        0001: getfield #2 // Object Optional.value
+        0004: invokestatic #20 // int Objects.hashCode(Object)
         0007: ireturn
     }
     
@@ -259,7 +246,7 @@ public final /* super */ class Optional {
         // max_stack: 5
         // max_locals: 1
         0000: aload_0
-        0001: getfield #2 // Optional.value Ljava/lang/Object;
+        0001: getfield #2 // Object Optional.value
         0004: ifnull +22 // 001a
         0007: ldc #21 // "Optional[%s]"
         0009: iconst_1
@@ -267,9 +254,9 @@ public final /* super */ class Optional {
         000d: dup
         000e: iconst_0
         000f: aload_0
-        0010: getfield #2 // Optional.value Ljava/lang/Object;
+        0010: getfield #2 // Object Optional.value
         0013: aastore
-        0014: invokestatic #23 // String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+        0014: invokestatic #23 // String String.format(String, Object[])
         0017: goto +5 // 001c
         001a: ldc #24 // "Optional.empty"
         001c: areturn
@@ -280,8 +267,8 @@ public final /* super */ class Optional {
         // max_locals: 0
         0000: new #5 // java/util/Optional
         0003: dup
-        0004: invokespecial #25 // Optional.<init> ()V
-        0007: putstatic #3 // Optional.EMPTY Ljava/util/Optional;
+        0004: invokespecial #25 // void Optional.<init>()
+        0007: putstatic #3 // Optional Optional.EMPTY
         000a: return
     }
 

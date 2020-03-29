@@ -23,10 +23,20 @@ import java.util.Map;
 import java.util.Optional;
 
 import de.carne.mcd.common.io.MCDOutputBuffer;
-import de.carne.mcd.jvm.classfile.descriptor.Descriptor;
-import de.carne.mcd.jvm.classfile.descriptor.FieldDescriptor;
-import de.carne.mcd.jvm.classfile.descriptor.FieldTypeDescriptor;
-import de.carne.mcd.jvm.classfile.descriptor.MethodDescriptor;
+import de.carne.mcd.jvm.classfile.attribute.Attribute;
+import de.carne.mcd.jvm.classfile.attribute.Attributes;
+import de.carne.mcd.jvm.classfile.attribute.CodeAttribute;
+import de.carne.mcd.jvm.classfile.attribute.ConstantValueAttribute;
+import de.carne.mcd.jvm.classfile.attribute.ExceptionsAttribute;
+import de.carne.mcd.jvm.classfile.attribute.RuntimeAnnotationsAttribute;
+import de.carne.mcd.jvm.classfile.attribute.SignatureAttribute;
+import de.carne.mcd.jvm.classfile.attribute.SourceFileAttribute;
+import de.carne.mcd.jvm.classfile.decl.DeclDecoder;
+import de.carne.mcd.jvm.classfile.decl.DecodedClassSignature;
+import de.carne.mcd.jvm.classfile.decl.DecodedFieldDescriptor;
+import de.carne.mcd.jvm.classfile.decl.DecodedFieldSignature;
+import de.carne.mcd.jvm.classfile.decl.DecodedMethodDescriptor;
+import de.carne.mcd.jvm.classfile.decl.DecodedMethodSignature;
 import de.carne.util.Strings;
 
 /**
@@ -404,46 +414,46 @@ public abstract class ClassPrinter {
 		Attributes.print(Attributes.resolveAttributes(attributes, RuntimeAnnotationsAttribute.class), this, context);
 	}
 
-	protected void printInterfaceClassSignature() throws IOException {
-		Attributes.print(Attributes.resolveOptionalAttribute(this.classInfo.attributes(), SignatureAttribute.class),
-				this, ClassContext.CLASS);
+	protected void printClassSignature(String classKeyword) throws IOException {
 		printClassAccessFLagsKeywords();
 		printClassAccessFlagsComment();
-		this.out.printKeyword(S_INTERFACE);
-		this.out.print(" ").print(this.classInfo.thisClass().getEffectiveName(this.classPackage));
-		printClassImplements();
+		this.out.printKeyword(classKeyword).print(" ")
+				.print(this.classInfo.thisClass().getEffectiveName(this.classPackage));
+
+		Optional<SignatureAttribute> signature = Attributes.resolveOptionalAttribute(this.classInfo.attributes(),
+				SignatureAttribute.class);
+
+		if (signature.isPresent()) {
+			DecodedClassSignature decodedSignature = DeclDecoder.decodeClassSignature(signature.get().getValue(),
+					this.classInfo.thisClass().getPackageName());
+
+			printTypeParameters(decodedSignature.typeParameters(), ClassContext.CLASS);
+			printClassExtends(decodedSignature.superClass());
+			printClassImplements(decodedSignature.superInterfaces());
+		} else {
+			printClassExtends();
+			printClassImplements();
+		}
 	}
 
-	protected void printAnnotationClassSignature() throws IOException {
-		Attributes.print(Attributes.resolveOptionalAttribute(this.classInfo.attributes(), SignatureAttribute.class),
-				this, ClassContext.CLASS);
-		printClassAccessFLagsKeywords();
-		printClassAccessFlagsComment();
-		this.out.printKeyword(S_ANNOTATION);
-		this.out.print(" ").print(this.classInfo.thisClass().getEffectiveName(this.classPackage));
-		printClassImplements();
+	private void printTypeParameters(List<PrintBuffer> typeParameters, ClassContext context) throws IOException {
+		if (!typeParameters.isEmpty()) {
+			PrintSeparator separator = new PrintSeparator();
+
+			this.out.print("<");
+			for (PrintBuffer typeParameter : typeParameters) {
+				separator.print(this, context);
+				typeParameter.print(this, context);
+			}
+			this.out.print(">");
+		}
 	}
 
-	protected void printEnumClassSignature() throws IOException {
-		Attributes.print(Attributes.resolveOptionalAttribute(this.classInfo.attributes(), SignatureAttribute.class),
-				this, ClassContext.CLASS);
-		printClassAccessFLagsKeywords();
-		printClassAccessFlagsComment();
-		this.out.printKeyword(S_ENUM);
-		this.out.print(" ").print(this.classInfo.thisClass().getEffectiveName(this.classPackage));
-		printClassExtends();
-		printClassImplements();
-	}
-
-	protected void printDefaultClassSignature() throws IOException {
-		Attributes.print(Attributes.resolveOptionalAttribute(this.classInfo.attributes(), SignatureAttribute.class),
-				this, ClassContext.CLASS);
-		printClassAccessFLagsKeywords();
-		printClassAccessFlagsComment();
-		this.out.printKeyword(S_CLASS);
-		this.out.print(" ").print(this.classInfo.thisClass().getEffectiveName(this.classPackage));
-		printClassExtends();
-		printClassImplements();
+	private void printClassExtends(PrintBuffer superClass) throws IOException {
+		if (!superClass.isEmpty()) {
+			this.out.print(" ").printKeyword(S_EXTENDS).print(" ");
+			superClass.print(this, ClassContext.CLASS);
+		}
 	}
 
 	private void printClassExtends() throws IOException {
@@ -455,6 +465,21 @@ public abstract class ClassPrinter {
 		}
 	}
 
+	private void printClassImplements(List<PrintBuffer> superInterfaces) throws IOException {
+		if (!superInterfaces.isEmpty()) {
+			boolean interfaceClass = ClassUtil.isInterface(this.classInfo.accessFlags());
+
+			this.out.print(" ").printKeyword(interfaceClass ? S_EXTENDS : S_IMPLEMENTS).print(" ");
+
+			PrintSeparator separator = new PrintSeparator();
+
+			for (PrintBuffer superInterface : superInterfaces) {
+				separator.print(this, ClassContext.CLASS);
+				superInterface.print(this, ClassContext.CLASS);
+			}
+		}
+	}
+
 	private void printClassImplements() throws IOException {
 		List<ClassName> interfaces = this.classInfo.interfaces();
 
@@ -463,10 +488,10 @@ public abstract class ClassPrinter {
 
 			this.out.print(" ").printKeyword(interfaceClass ? S_EXTENDS : S_IMPLEMENTS).print(" ");
 
-			PrintSeparator interfaceSeparator = new PrintSeparator();
+			PrintSeparator separator = new PrintSeparator();
 
 			for (ClassName interfaceName : interfaces) {
-				interfaceSeparator.print(this, ClassContext.CLASS);
+				separator.print(this, ClassContext.CLASS);
 				this.out.print(interfaceName.getEffectiveName(this.classPackage));
 			}
 		}
@@ -603,10 +628,20 @@ public abstract class ClassPrinter {
 		printAnnotations(field.attributes(), ClassContext.FIELD);
 		printFieldAccessFLagsKeywords(field.accessFlags());
 		printFieldAccessFLagsComment(field.accessFlags());
+		Optional<SignatureAttribute> signature = Attributes.resolveOptionalAttribute(field.attributes(),
+				SignatureAttribute.class);
 
-		FieldDescriptor descriptor = Descriptor.decodeFieldDescriptor(field.descriptor(), this.classPackage);
+		if (signature.isPresent()) {
+			DecodedFieldSignature decodedSignature = DeclDecoder.decodeFieldSignature(signature.get().getValue(),
+					this.classPackage);
 
-		descriptor.print(this, ClassContext.FIELD);
+			decodedSignature.type().print(this, ClassContext.FIELD);
+		} else {
+			DecodedFieldDescriptor decodedDescriptor = DeclDecoder.decodeFieldDescriptor(field.descriptor(),
+					this.classPackage);
+
+			decodedDescriptor.type().print(this, ClassContext.FIELD);
+		}
 		this.out.print(" ").print(field.name());
 
 		Optional<ConstantValueAttribute> optionalValue = Attributes.resolveOptionalAttribute(field.attributes(),
@@ -631,25 +666,59 @@ public abstract class ClassPrinter {
 	private void printMethod(MethodInfo method) throws IOException {
 		this.out.println();
 		printAnnotations(method.attributes(), ClassContext.METHOD);
-		Attributes.print(Attributes.resolveOptionalAttribute(method.attributes(), SignatureAttribute.class), this,
-				ClassContext.CLASS);
 		printMethodAccessFLagsKeywords(method.accessFlags());
 		printMethodAccessFLagsComment(method.accessFlags());
 
-		MethodDescriptor descriptor = Descriptor.decodeMethodDescriptor(method.descriptor(), this.classPackage);
+		Optional<SignatureAttribute> signature = Attributes.resolveOptionalAttribute(method.attributes(),
+				SignatureAttribute.class);
 
-		descriptor.getReturnType().print(this, ClassContext.METHOD);
-		this.out.print(" ").print(method.name()).print("(");
+		if (signature.isPresent()) {
+			DecodedMethodSignature decodedSignature = DeclDecoder.decodeMethodSignature(signature.get().getValue(),
+					this.classPackage);
 
-		PrintSeparator parameterSeparator = new PrintSeparator();
+			decodedSignature.returnType().print(this, ClassContext.METHOD);
+			this.out.print(" ").print(method.name());
+			printTypeParameters(decodedSignature.typeParameters(), ClassContext.METHOD);
+			this.out.print("(");
 
-		for (FieldTypeDescriptor parameterType : descriptor.getParameterTypes()) {
-			parameterSeparator.print(this, ClassContext.METHOD);
-			parameterType.print(this, ClassContext.METHOD);
+			PrintSeparator separator = new PrintSeparator();
+
+			for (PrintBuffer parameterType : decodedSignature.parameterTypes()) {
+				separator.print(this, ClassContext.METHOD);
+				parameterType.print(this, ClassContext.METHOD);
+			}
+			this.out.print(")");
+
+			List<PrintBuffer> throwsTypes = decodedSignature.throwsTypes();
+
+			if (!throwsTypes.isEmpty()) {
+				this.out.print(" ").printKeyword(S_THROWS).print(" ");
+				separator.reset();
+				for (PrintBuffer throwsType : throwsTypes) {
+					separator.print(this, ClassContext.METHOD);
+					throwsType.print(this, ClassContext.METHOD);
+				}
+			} else {
+				Attributes.print(Attributes.resolveOptionalAttribute(method.attributes(), ExceptionsAttribute.class),
+						this, ClassContext.METHOD);
+			}
+		} else {
+			DecodedMethodDescriptor decodedDescriptor = DeclDecoder.decodeMethodDescriptor(method.descriptor(),
+					this.classPackage);
+
+			decodedDescriptor.returnType().print(this, ClassContext.METHOD);
+			this.out.print(" ").print(method.name()).print("(");
+
+			PrintSeparator separator = new PrintSeparator();
+
+			for (PrintBuffer parameterType : decodedDescriptor.parameterTypes()) {
+				separator.print(this, ClassContext.METHOD);
+				parameterType.print(this, ClassContext.METHOD);
+			}
+			this.out.print(")");
+			Attributes.print(Attributes.resolveOptionalAttribute(method.attributes(), ExceptionsAttribute.class), this,
+					ClassContext.METHOD);
 		}
-		this.out.print(")");
-		Attributes.print(Attributes.resolveOptionalAttribute(method.attributes(), ExceptionsAttribute.class), this,
-				ClassContext.METHOD);
 
 		Optional<CodeAttribute> optionalCode = Attributes.resolveOptionalAttribute(method.attributes(),
 				CodeAttribute.class);
@@ -707,7 +776,7 @@ public abstract class ClassPrinter {
 			printClassPackage();
 			this.out.println();
 			printClassAnnotation();
-			printInterfaceClassSignature();
+			printClassSignature(S_INTERFACE);
 			this.out.println(" {");
 			printFields();
 			printMethods();
@@ -728,7 +797,7 @@ public abstract class ClassPrinter {
 			printClassPackage();
 			this.out.println();
 			printClassAnnotation();
-			printAnnotationClassSignature();
+			printClassSignature(S_ANNOTATION);
 			this.out.println(" {");
 			printFields();
 			printMethods();
@@ -749,7 +818,7 @@ public abstract class ClassPrinter {
 			printClassPackage();
 			this.out.println();
 			printClassAnnotation();
-			printEnumClassSignature();
+			printClassSignature(S_ENUM);
 			this.out.println(" {");
 			printFields();
 			printMethods();
@@ -770,7 +839,7 @@ public abstract class ClassPrinter {
 			printClassPackage();
 			this.out.println();
 			printClassAnnotation();
-			printDefaultClassSignature();
+			printClassSignature(S_CLASS);
 			this.out.println(" {");
 			printFields();
 			printMethods();

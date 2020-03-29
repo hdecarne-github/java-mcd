@@ -28,6 +28,54 @@ import java.util.Map;
 
 import de.carne.boot.logging.Log;
 import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.jvm.classfile.attribute.Attribute;
+import de.carne.mcd.jvm.classfile.attribute.CodeAttribute;
+import de.carne.mcd.jvm.classfile.attribute.ConstantValueAttribute;
+import de.carne.mcd.jvm.classfile.attribute.ExceptionsAttribute;
+import de.carne.mcd.jvm.classfile.attribute.RuntimeInvisibleAnnotationsAttribute;
+import de.carne.mcd.jvm.classfile.attribute.RuntimeInvisibleTypeAnnotationsAttribute;
+import de.carne.mcd.jvm.classfile.attribute.RuntimeVisibleAnnotationsAttribute;
+import de.carne.mcd.jvm.classfile.attribute.RuntimeVisibleTypeAnnotationsAttribute;
+import de.carne.mcd.jvm.classfile.attribute.SignatureAttribute;
+import de.carne.mcd.jvm.classfile.attribute.SourceFileAttribute;
+import de.carne.mcd.jvm.classfile.attribute.annotation.Annotation;
+import de.carne.mcd.jvm.classfile.attribute.annotation.AnnotationAnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.AnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.AnnotationElementValue;
+import de.carne.mcd.jvm.classfile.attribute.annotation.ArrayAnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.BooleanAnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.ByteAnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.CharAnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.ClassAnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.DoubleAnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.EnumAnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.FloatAnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.IntAnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.LongAnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.ShortAnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.StringAnnotationElement;
+import de.carne.mcd.jvm.classfile.attribute.annotation.TypeAnnotation;
+import de.carne.mcd.jvm.classfile.attribute.annotation.TypeAnnotationPath;
+import de.carne.mcd.jvm.classfile.attribute.annotation.TypeAnnotationTarget;
+import de.carne.mcd.jvm.classfile.constant.ClassConstant;
+import de.carne.mcd.jvm.classfile.constant.Constant;
+import de.carne.mcd.jvm.classfile.constant.DoubleConstant;
+import de.carne.mcd.jvm.classfile.constant.DynamicConstant;
+import de.carne.mcd.jvm.classfile.constant.FieldRefConstant;
+import de.carne.mcd.jvm.classfile.constant.FloatConstant;
+import de.carne.mcd.jvm.classfile.constant.IntegerConstant;
+import de.carne.mcd.jvm.classfile.constant.InterfaceMethodRefConstant;
+import de.carne.mcd.jvm.classfile.constant.InvokeDynamicConstant;
+import de.carne.mcd.jvm.classfile.constant.LongConstant;
+import de.carne.mcd.jvm.classfile.constant.MethodHandleConstant;
+import de.carne.mcd.jvm.classfile.constant.MethodRefConstant;
+import de.carne.mcd.jvm.classfile.constant.MethodTypeConstant;
+import de.carne.mcd.jvm.classfile.constant.ModuleConstant;
+import de.carne.mcd.jvm.classfile.constant.NameAndTypeConstant;
+import de.carne.mcd.jvm.classfile.constant.PackageConstant;
+import de.carne.mcd.jvm.classfile.constant.ReferenceKind;
+import de.carne.mcd.jvm.classfile.constant.StringConstant;
+import de.carne.mcd.jvm.classfile.constant.Utf8Constant;
 import de.carne.util.Late;
 
 /**
@@ -499,7 +547,7 @@ public class DecodedClassInfo implements ClassInfo {
 		int typeIndex = Short.toUnsignedInt(buffer.decodeI16());
 		List<AnnotationElement> elements = decodeAnnotationElements(buffer);
 
-		return new TypeAnnotation(this, typeIndex, target, path, elements);
+		return new TypeAnnotation(this, typeIndex, elements, target, path);
 	}
 
 	private TypeAnnotationTarget decodeTypeAnnotationTarget(MCDInputBuffer buffer) throws IOException {
@@ -575,8 +623,7 @@ public class DecodedClassInfo implements ClassInfo {
 		return new TypeAnnotationTarget.TypeParameterBound(targetType, parameterIndex, boundIndex);
 	}
 
-	private TypeAnnotationTarget decodeFormalParameterTarget(int targetType, MCDInputBuffer buffer)
-			throws IOException {
+	private TypeAnnotationTarget decodeFormalParameterTarget(int targetType, MCDInputBuffer buffer) throws IOException {
 		int parameterIndex = Byte.toUnsignedInt(buffer.decodeI8());
 
 		return new TypeAnnotationTarget.FormalParameter(targetType, parameterIndex);

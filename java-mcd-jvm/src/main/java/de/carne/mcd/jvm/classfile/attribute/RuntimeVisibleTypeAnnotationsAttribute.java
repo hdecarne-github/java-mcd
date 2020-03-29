@@ -1,0 +1,44 @@
+/*
+ * Copyright (c) 2019-2020 Holger de Carne and contributors, All Rights Reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package de.carne.mcd.jvm.classfile.attribute;
+
+import java.util.List;
+
+import de.carne.mcd.jvm.classfile.ClassInfo;
+import de.carne.mcd.jvm.classfile.attribute.annotation.TypeAnnotation;
+
+/**
+ * RuntimeVisibleTypeAnnotations attribute.
+ */
+public class RuntimeVisibleTypeAnnotationsAttribute extends RuntimeTypeAnnotationsAttribute {
+
+	/**
+	 * The RuntimeVisibleTypeAnnotations attribute name.
+	 */
+	public static final String NAME = "RuntimeVisibleTypeAnnotations";
+
+	/**
+	 * Constructs a new {@linkplain RuntimeVisibleTypeAnnotationsAttribute} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this attribute is part of.
+	 * @param annotations the attribute's type annotations.
+	 */
+	public RuntimeVisibleTypeAnnotationsAttribute(ClassInfo classInfo, List<TypeAnnotation> annotations) {
+		super(classInfo, annotations);
+	}
+
+}

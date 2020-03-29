@@ -16,20 +16,39 @@
  */
 package de.carne.mcd.jvm.classfile;
 
-final class NameDescriptorIndex {
+/**
+ * Name and descriptor index pair used reference fields and methods.
+ */
+public final class NameDescriptorIndex {
 
 	private final int nameIndex;
 	private final int descriptorIndex;
 
+	/**
+	 * Constructs an new {@linkplain NameDescriptorIndex}.
+	 *
+	 * @param nameIndex the name index.
+	 * @param descriptorIndex the descriptor index.
+	 */
 	public NameDescriptorIndex(int nameIndex, int descriptorIndex) {
 		this.nameIndex = nameIndex;
 		this.descriptorIndex = descriptorIndex;
 	}
 
+	/**
+	 * Gets the name index.
+	 * 
+	 * @return the name index.
+	 */
 	public int nameIndex() {
 		return this.nameIndex;
 	}
 
+	/**
+	 * Gets the descriptor index.
+	 * 
+	 * @return the descriptor index.
+	 */
 	public int descriptorIndex() {
 		return this.descriptorIndex;
 	}
