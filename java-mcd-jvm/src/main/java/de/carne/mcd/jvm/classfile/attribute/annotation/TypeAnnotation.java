@@ -20,11 +20,23 @@ import java.util.List;
 
 import de.carne.mcd.jvm.classfile.ClassInfo;
 
+/**
+ * A type annotation element.
+ */
 public class TypeAnnotation extends Annotation {
 
 	private final TypeAnnotationTarget target;
 	private final TypeAnnotationPath path;
 
+	/**
+	 * Constructs a new {@linkplain TypeAnnotation} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this annotation attribute is part of.
+	 * @param typeIndex the annotation type index.
+	 * @param elements the annotation elements.
+	 * @param target the annotation target.
+	 * @param path the annotation path.
+	 */
 	public TypeAnnotation(ClassInfo classInfo, int typeIndex, List<AnnotationElement> elements,
 			TypeAnnotationTarget target, TypeAnnotationPath path) {
 		super(classInfo, typeIndex, elements);

@@ -22,17 +22,34 @@ import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 
+/**
+ * Integer constant.
+ */
 public class IntegerConstant extends Constant {
 
+	/**
+	 * Integer constant tag.
+	 */
 	public static final int TAG = 3;
 
 	private final int value;
 
+	/**
+	 * Constructs a new {@linkplain IntegerConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param value the constant value.
+	 */
 	public IntegerConstant(ClassInfo classInfo, int value) {
 		super(classInfo);
 		this.value = value;
 	}
 
+	/**
+	 * Gets this constant's value.
+	 * 
+	 * @return this constant's value.
+	 */
 	public int getValue() {
 		return this.value;
 	}

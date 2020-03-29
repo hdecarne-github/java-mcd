@@ -23,10 +23,22 @@ import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.constant.IntegerConstant;
 
+/**
+ * Integer annotation element.
+ */
 public class IntAnnotationElement extends AbstractConstantValueAnnotationElement {
 
+	/**
+	 * Integer annotation element tag.
+	 */
 	public static final int TAG = 'I';
 
+	/**
+	 * Constructs a new {@linkplain IntAnnotationElement}} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this annotation attribute is part of.
+	 * @param valueIndex the annotation element value index.
+	 */
 	public IntAnnotationElement(ClassInfo classInfo, int valueIndex) {
 		super(classInfo, valueIndex);
 	}

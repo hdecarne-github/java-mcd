@@ -25,6 +25,8 @@ import java.util.Optional;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+@DecoderTestAnnotation
+@DecoderTestAnnotation
 final class DecoderTestClass<@NonNull T extends InputStream & Comparable<? extends Cloneable> & Serializable> {
 
 	@SuppressWarnings({ "null", "unused" })

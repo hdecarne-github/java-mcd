@@ -17,13 +17,37 @@
 package de.carne.mcd.jvm.classfile.constant;
 
 import de.carne.mcd.jvm.classfile.ClassInfo;
+import de.carne.mcd.jvm.classfile.decl.DeclDecoder;
+import de.carne.mcd.jvm.classfile.decl.DecodedFieldDescriptor;
 
+/**
+ * Dynamic constant.
+ */
 public class DynamicConstant extends AbstractDynamicConstant {
 
+	/**
+	 * Dynamic constant tag.
+	 */
 	public static final int TAG = 17;
 
+	/**
+	 * Constructs a new {@linkplain DynamicConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param bootstrapMethodAttrIndex bootstrap method index.
+	 * @param nameAndTypeIndex the referenced name and time index.
+	 */
 	public DynamicConstant(ClassInfo classInfo, int bootstrapMethodAttrIndex, int nameAndTypeIndex) {
 		super(classInfo, bootstrapMethodAttrIndex, nameAndTypeIndex);
+	}
+
+	@Override
+	protected String decodeNameAndDescriptor(String constantName, String name, String descriptor, String classPackage) {
+		DecodedFieldDescriptor field = DeclDecoder.decodeFieldDescriptor(descriptor, classPackage);
+		StringBuilder buffer = new StringBuilder();
+
+		buffer.append(field.type()).append(' ').append(constantName).append('.').append(name);
+		return buffer.toString();
 	}
 
 }

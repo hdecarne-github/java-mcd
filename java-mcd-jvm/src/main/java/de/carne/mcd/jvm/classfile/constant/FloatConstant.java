@@ -22,12 +22,24 @@ import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 
+/**
+ * Float constant.
+ */
 public class FloatConstant extends Constant {
 
+	/**
+	 * Float constant tag.
+	 */
 	public static final int TAG = 4;
 
 	private final float value;
 
+	/**
+	 * Constructs a new {@linkplain FloatConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param value the constant value.
+	 */
 	public FloatConstant(ClassInfo classInfo, float value) {
 		super(classInfo);
 		this.value = value;

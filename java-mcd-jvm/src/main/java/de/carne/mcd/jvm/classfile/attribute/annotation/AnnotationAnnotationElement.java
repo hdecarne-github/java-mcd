@@ -22,12 +22,24 @@ import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 
+/**
+ * Annotation annotation element.
+ */
 public class AnnotationAnnotationElement extends AnnotationElementValue {
 
+	/**
+	 * Annotation annotation element tag.
+	 */
 	public static final int TAG = '@';
 
 	private final Annotation annotation;
 
+	/**
+	 * Constructs a new {@linkplain AnnotationAnnotationElement}} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this annotation attribute is part of.
+	 * @param annotation the annotation annotation element.
+	 */
 	public AnnotationAnnotationElement(ClassInfo classInfo, Annotation annotation) {
 		super(classInfo);
 		this.annotation = annotation;
@@ -35,7 +47,7 @@ public class AnnotationAnnotationElement extends AnnotationElementValue {
 
 	@Override
 	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		// TODO Auto-generated method stub
+		this.annotation.print(out, ClassContext.ANNOTATION);
 	}
 
 }

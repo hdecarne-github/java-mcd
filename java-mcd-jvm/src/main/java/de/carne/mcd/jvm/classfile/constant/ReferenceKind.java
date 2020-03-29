@@ -16,39 +16,68 @@
  */
 package de.carne.mcd.jvm.classfile.constant;
 
+/**
+ * Reference types as used by {@linkplain MethodHandleConstant}.
+ */
 @SuppressWarnings("squid:S00115")
 public enum ReferenceKind {
 
-	REF_getField(1),
+	/**
+	 * getField = 1
+	 */
+	REF_getField,
 
-	REF_getStatic(2),
+	/**
+	 * getStatic = 2
+	 */
+	REF_getStatic,
 
-	REF_putField(3),
+	/**
+	 * putField = 3
+	 */
+	REF_putField,
 
-	REF_putStatic(4),
+	/**
+	 * putStatic = 4
+	 */
+	REF_putStatic,
 
-	REF_invokeVirtual(5),
+	/**
+	 * invokeVirtual = 5
+	 */
+	REF_invokeVirtual,
 
-	REF_invokeStatic(6),
+	/**
+	 * invokeStatic = 6
+	 */
+	REF_invokeStatic,
 
-	REF_invokeSpecial(7),
+	/**
+	 * invokeSpecial = 7
+	 */
+	REF_invokeSpecial,
 
-	REF_newInvokeSpecial(8),
+	/**
+	 * newInvokeSpecial = 8
+	 */
+	REF_newInvokeSpecial,
 
-	REF_invokeInterface(9);
+	/**
+	 * invokeInterface = 9
+	 */
+	REF_invokeInterface;
 
-	private final int value;
 	private final String symbol;
 
-	private ReferenceKind(int value) {
-		this.value = value;
+	private ReferenceKind() {
 		this.symbol = name().substring(4);
 	}
 
-	public int value() {
-		return this.value;
-	}
-
+	/**
+	 * Gets the symbol of this reference kind instance.
+	 * 
+	 * @return the symbol of this reference kind instance.
+	 */
 	public String symbol() {
 		return this.symbol;
 	}

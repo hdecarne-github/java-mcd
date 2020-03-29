@@ -25,17 +25,35 @@ import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.util.Strings;
 
+/**
+ * String constant.
+ */
 public class StringConstant extends Constant {
 
+	/**
+	 * String constant tag.
+	 */
 	public static final int TAG = 8;
 
 	private int stringIndex;
 
+	/**
+	 * Constructs a new {@linkplain DoubleConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param stringIndex the constant value index.
+	 */
 	public StringConstant(ClassInfo classInfo, int stringIndex) {
 		super(classInfo);
 		this.stringIndex = stringIndex;
 	}
 
+	/**
+	 * Gets this constant's value.
+	 * 
+	 * @return this constant's value.
+	 * @throws IOException if the value cannot be resolved.
+	 */
 	public String getValue() throws IOException {
 		return this.classInfo.resolveConstant(this.stringIndex, Utf8Constant.class).getValue();
 	}

@@ -42,16 +42,17 @@ abstract class AbstractDynamicConstant extends Constant {
 
 	@Override
 	public String resolveSymbol() throws IOException {
-		NameAndTypeConstant nameAndTypeValue = getNameAndTypeValue();
+		NameAndTypeConstant nameAndTypeValue = this.classInfo.resolveConstant(this.nameAndTypeIndex,
+				NameAndTypeConstant.class);
 		String name = nameAndTypeValue.getNameValue();
 		String descriptor = nameAndTypeValue.getDescriptorValue();
 
-		return "#" + this.bootstrapMethodAttrIndex + "." + name + " " + descriptor;
+		return decodeNameAndDescriptor("bootstrapMethod#" + this.bootstrapMethodAttrIndex, name, descriptor,
+				this.classInfo.thisClass().getPackageName());
 	}
 
-	private NameAndTypeConstant getNameAndTypeValue() throws IOException {
-		return this.classInfo.resolveConstant(this.nameAndTypeIndex, NameAndTypeConstant.class);
-	}
+	protected abstract String decodeNameAndDescriptor(String constantName, String name, String descriptor,
+			String classPackage);
 
 	@Override
 	public String toString() {

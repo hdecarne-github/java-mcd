@@ -23,13 +23,26 @@ import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 
+/**
+ * MethodHandle constant.
+ */
 public class MethodHandleConstant extends Constant {
 
+	/**
+	 * MethodHandle constant tag.
+	 */
 	public static final int TAG = 15;
 
 	private final ReferenceKind referenceKind;
 	private final int referenceIndex;
 
+	/**
+	 * Constructs a new {@linkplain MethodHandleConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param referenceKind the reference type.
+	 * @param referenceIndex the referenced {@linkplain MethodRefConstant} index.
+	 */
 	public MethodHandleConstant(ClassInfo classInfo, ReferenceKind referenceKind, int referenceIndex) {
 		super(classInfo);
 		this.referenceKind = referenceKind;

@@ -23,10 +23,22 @@ import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.constant.DoubleConstant;
 
+/**
+ * Double annotation element.
+ */
 public class DoubleAnnotationElement extends AbstractConstantValueAnnotationElement {
 
+	/**
+	 * Double annotation element tag.
+	 */
 	public static final int TAG = 'D';
 
+	/**
+	 * Constructs a new {@linkplain DoubleAnnotationElement}} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this annotation attribute is part of.
+	 * @param valueIndex the annotation element value index.
+	 */
 	public DoubleAnnotationElement(ClassInfo classInfo, int valueIndex) {
 		super(classInfo, valueIndex);
 	}

@@ -23,10 +23,22 @@ import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.constant.LongConstant;
 
+/**
+ * Long annotation element.
+ */
 public class LongAnnotationElement extends AbstractConstantValueAnnotationElement {
 
+	/**
+	 * Long annotation element tag.
+	 */
 	public static final int TAG = 'J';
 
+	/**
+	 * Constructs a new {@linkplain LongAnnotationElement}} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this annotation attribute is part of.
+	 * @param valueIndex the annotation element value index.
+	 */
 	public LongAnnotationElement(ClassInfo classInfo, int valueIndex) {
 		super(classInfo, valueIndex);
 	}

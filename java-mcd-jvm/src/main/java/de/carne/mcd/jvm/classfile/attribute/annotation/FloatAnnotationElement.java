@@ -23,10 +23,22 @@ import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.constant.FloatConstant;
 
+/**
+ * Float annotation element.
+ */
 public class FloatAnnotationElement extends AbstractConstantValueAnnotationElement {
 
+	/**
+	 * Float annotation element tag.
+	 */
 	public static final int TAG = 'F';
 
+	/**
+	 * Constructs a new {@linkplain FloatAnnotationElement}} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this annotation attribute is part of.
+	 * @param valueIndex the annotation element value index.
+	 */
 	public FloatAnnotationElement(ClassInfo classInfo, int valueIndex) {
 		super(classInfo, valueIndex);
 	}

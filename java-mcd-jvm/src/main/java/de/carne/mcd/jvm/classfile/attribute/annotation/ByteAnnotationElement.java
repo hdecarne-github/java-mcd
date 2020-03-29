@@ -23,10 +23,22 @@ import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.constant.IntegerConstant;
 
+/**
+ * Byte annotation element.
+ */
 public class ByteAnnotationElement extends AbstractConstantValueAnnotationElement {
 
+	/**
+	 * Byte annotation element tag.
+	 */
 	public static final int TAG = 'B';
 
+	/**
+	 * Constructs a new {@linkplain ByteAnnotationElement}} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this annotation attribute is part of.
+	 * @param valueIndex the annotation element value index.
+	 */
 	public ByteAnnotationElement(ClassInfo classInfo, int valueIndex) {
 		super(classInfo, valueIndex);
 	}

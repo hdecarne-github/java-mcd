@@ -24,21 +24,46 @@ import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.NameDescriptorIndex;
 
+/**
+ * NameAndType constant.
+ */
 public class NameAndTypeConstant extends Constant {
 
+	/**
+	 * NameAndType constant tag.
+	 */
 	public static final int TAG = 12;
 
 	private final NameDescriptorIndex nameDescriptorIndex;
 
+	/**
+	 * Constructs a new {@linkplain NameAndTypeConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param nameIndex the name index.
+	 * @param descriptorIndex the type descriptor index.
+	 */
 	public NameAndTypeConstant(ClassInfo classInfo, int nameIndex, int descriptorIndex) {
 		super(classInfo);
 		this.nameDescriptorIndex = new NameDescriptorIndex(nameIndex, descriptorIndex);
 	}
 
+	/**
+	 * Gets this constant's name value.
+	 * 
+	 * @return this constant's name value.
+	 * @throws IOException if the value cannot be resolved.
+	 */
 	public String getNameValue() throws IOException {
 		return this.classInfo.resolveConstant(this.nameDescriptorIndex.nameIndex(), Utf8Constant.class).getValue();
 	}
 
+	/**
+	 * Gets this constant's descriptor value.
+	 * 
+	 * @return this constant's descriptor value.
+	 * @throws IOException if the value cannot be resolved.
+	 */
 	public String getDescriptorValue() throws IOException {
 		return this.classInfo.resolveConstant(this.nameDescriptorIndex.descriptorIndex(), Utf8Constant.class)
 				.getValue();

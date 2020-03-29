@@ -23,17 +23,34 @@ import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.util.Strings;
 
+/**
+ * Utf8 constant.
+ */
 public class Utf8Constant extends Constant {
 
+	/**
+	 * Utf8 constant tag.
+	 */
 	public static final byte TAG = 1;
 
 	private final String value;
 
+	/**
+	 * Constructs a new {@linkplain Utf8Constant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param value the constant value.
+	 */
 	public Utf8Constant(ClassInfo classInfo, String value) {
 		super(classInfo);
 		this.value = value;
 	}
 
+	/**
+	 * Gets this constant's value.
+	 *
+	 * @return this constant's value.
+	 */
 	public String getValue() {
 		return this.value;
 	}

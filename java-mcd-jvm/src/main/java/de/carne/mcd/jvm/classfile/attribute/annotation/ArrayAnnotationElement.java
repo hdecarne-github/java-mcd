@@ -25,12 +25,24 @@ import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.PrintSeparator;
 
+/**
+ * Array annotation element.
+ */
 public class ArrayAnnotationElement extends AnnotationElementValue {
 
+	/**
+	 * Array annotation element tag.
+	 */
 	public static final int TAG = '[';
 
 	private final List<AnnotationElementValue> elementValues;
 
+	/**
+	 * Constructs a new {@linkplain ArrayAnnotationElement} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this annotation attribute is part of.
+	 * @param elementValues the array annotation elements.
+	 */
 	public ArrayAnnotationElement(ClassInfo classInfo, List<AnnotationElementValue> elementValues) {
 		super(classInfo);
 		this.elementValues = Collections.unmodifiableList(elementValues);

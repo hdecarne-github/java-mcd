@@ -23,10 +23,22 @@ import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassName;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 
+/**
+ * Class constant.
+ */
 public class ClassConstant extends NameConstant {
 
+	/**
+	 * Class constant tag.
+	 */
 	public static final byte TAG = 7;
 
+	/**
+	 * Constructs a new {@linkplain ClassConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param nameIndex the class constant name index.
+	 */
 	public ClassConstant(ClassInfo classInfo, int nameIndex) {
 		super(classInfo, nameIndex);
 	}

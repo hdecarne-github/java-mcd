@@ -22,10 +22,23 @@ import de.carne.mcd.jvm.classfile.PrintSeparator;
 import de.carne.mcd.jvm.classfile.decl.DeclDecoder;
 import de.carne.mcd.jvm.classfile.decl.DecodedMethodDescriptor;
 
+/**
+ * MethodRef constant.
+ */
 public class MethodRefConstant extends AbstractRefConstant {
 
+	/**
+	 * MethodRef constant tag.
+	 */
 	public static final int TAG = 10;
 
+	/**
+	 * Constructs a new {@linkplain MethodRefConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param classIndex the class constant name index.
+	 * @param nameAndTypeIndex the referenced name and type index.
+	 */
 	public MethodRefConstant(ClassInfo classInfo, int classIndex, int nameAndTypeIndex) {
 		super(classInfo, classIndex, nameAndTypeIndex);
 	}

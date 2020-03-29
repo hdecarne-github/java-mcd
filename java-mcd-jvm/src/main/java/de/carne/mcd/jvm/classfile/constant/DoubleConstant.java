@@ -22,12 +22,24 @@ import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 
+/**
+ * Double constant.
+ */
 public class DoubleConstant extends Constant {
 
+	/**
+	 * Double constant tag.
+	 */
 	public static final int TAG = 6;
 
 	private final double value;
 
+	/**
+	 * Constructs a new {@linkplain DoubleConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param value the constant value.
+	 */
 	public DoubleConstant(ClassInfo classInfo, double value) {
 		super(classInfo);
 		this.value = value;

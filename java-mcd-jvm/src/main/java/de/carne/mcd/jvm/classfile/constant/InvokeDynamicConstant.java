@@ -17,13 +17,47 @@
 package de.carne.mcd.jvm.classfile.constant;
 
 import de.carne.mcd.jvm.classfile.ClassInfo;
+import de.carne.mcd.jvm.classfile.PrintBuffer;
+import de.carne.mcd.jvm.classfile.PrintSeparator;
+import de.carne.mcd.jvm.classfile.decl.DeclDecoder;
+import de.carne.mcd.jvm.classfile.decl.DecodedMethodDescriptor;
 
+/**
+ * InvokeDynamic constant.
+ */
 public class InvokeDynamicConstant extends AbstractDynamicConstant {
 
+	/**
+	 * InvokeDynamic constant tag.
+	 */
 	public static final int TAG = 18;
 
+	/**
+	 * Constructs a new {@linkplain InvokeDynamicConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param bootstrapMethodAttrIndex bootstrap method index.
+	 * @param nameAndTypeIndex the referenced name and type index.
+	 */
 	public InvokeDynamicConstant(ClassInfo classInfo, int bootstrapMethodAttrIndex, int nameAndTypeIndex) {
 		super(classInfo, bootstrapMethodAttrIndex, nameAndTypeIndex);
+	}
+
+	@Override
+	protected String decodeNameAndDescriptor(String constantName, String name, String descriptor, String classPackage) {
+		DecodedMethodDescriptor method = DeclDecoder.decodeMethodDescriptor(descriptor, classPackage);
+		StringBuilder buffer = new StringBuilder();
+
+		buffer.append(method.returnType()).append(' ').append(constantName).append('.').append(name).append('(');
+
+		PrintSeparator separator = new PrintSeparator();
+
+		for (PrintBuffer parameter : method.parameterTypes()) {
+			buffer.append(separator.next());
+			buffer.append(parameter);
+		}
+		buffer.append(')');
+		return buffer.toString();
 	}
 
 }

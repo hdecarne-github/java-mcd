@@ -23,10 +23,22 @@ import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.constant.IntegerConstant;
 
+/**
+ * Short annotation element.
+ */
 public class ShortAnnotationElement extends AbstractConstantValueAnnotationElement {
 
+	/**
+	 * Short annotation element tag.
+	 */
 	public static final int TAG = 'S';
 
+	/**
+	 * Constructs a new {@linkplain ShortAnnotationElement}} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this annotation attribute is part of.
+	 * @param valueIndex the annotation element value index.
+	 */
 	public ShortAnnotationElement(ClassInfo classInfo, int valueIndex) {
 		super(classInfo, valueIndex);
 	}

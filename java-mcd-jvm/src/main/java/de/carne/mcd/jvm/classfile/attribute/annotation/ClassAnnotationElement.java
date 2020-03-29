@@ -25,12 +25,24 @@ import de.carne.mcd.jvm.classfile.constant.Utf8Constant;
 import de.carne.mcd.jvm.classfile.decl.DeclDecoder;
 import de.carne.mcd.jvm.classfile.decl.DecodedFieldDescriptor;
 
+/**
+ * Class annotation element.
+ */
 public class ClassAnnotationElement extends AnnotationElementValue {
 
+	/**
+	 * Class annotation element tag.
+	 */
 	public static final int TAG = 'c';
 
 	private final int descriptorIndex;
 
+	/**
+	 * Constructs a new {@linkplain ClassAnnotationElement}} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this annotation attribute is part of.
+	 * @param descriptorIndex the annotation element value index.
+	 */
 	public ClassAnnotationElement(ClassInfo classInfo, int descriptorIndex) {
 		super(classInfo);
 		this.descriptorIndex = descriptorIndex;

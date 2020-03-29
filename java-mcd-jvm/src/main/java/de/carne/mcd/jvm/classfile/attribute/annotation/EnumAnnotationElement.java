@@ -25,13 +25,26 @@ import de.carne.mcd.jvm.classfile.constant.Utf8Constant;
 import de.carne.mcd.jvm.classfile.decl.DeclDecoder;
 import de.carne.mcd.jvm.classfile.decl.DecodedFieldDescriptor;
 
+/**
+ * Enum annotation element.
+ */
 public class EnumAnnotationElement extends AnnotationElementValue {
 
+	/**
+	 * Enum annotation element tag.
+	 */
 	public static final int TAG = 'e';
 
 	private final int nameIndex;
 	private final int valueIndex;
 
+	/**
+	 * Constructs a new {@linkplain EnumAnnotationElement}} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this annotation attribute is part of.
+	 * @param nameIndex the annotation element name index.
+	 * @param valueIndex the annotation element value index.
+	 */
 	public EnumAnnotationElement(ClassInfo classInfo, int nameIndex, int valueIndex) {
 		super(classInfo);
 		this.nameIndex = nameIndex;

@@ -22,13 +22,29 @@ import de.carne.boot.check.Check;
 import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
+import de.carne.mcd.jvm.classfile.PrintBuffer;
+import de.carne.mcd.jvm.classfile.PrintSeparator;
+import de.carne.mcd.jvm.classfile.decl.DeclDecoder;
+import de.carne.mcd.jvm.classfile.decl.DecodedMethodDescriptor;
 
+/**
+ * MethodType constant.
+ */
 public class MethodTypeConstant extends Constant {
 
+	/**
+	 * MethodType constant tag.
+	 */
 	public static final int TAG = 16;
 
 	private final int descriptorIndex;
 
+	/**
+	 * Constructs a new {@linkplain MethodTypeConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param descriptorIndex the method descriptor index.
+	 */
 	public MethodTypeConstant(ClassInfo classInfo, int descriptorIndex) {
 		super(classInfo);
 		this.descriptorIndex = descriptorIndex;
@@ -42,7 +58,21 @@ public class MethodTypeConstant extends Constant {
 
 	@Override
 	public String resolveSymbol() throws IOException {
-		return this.classInfo.resolveConstant(this.descriptorIndex, Utf8Constant.class).getValue();
+		String descriptor = this.classInfo.resolveConstant(this.descriptorIndex, Utf8Constant.class).getValue();
+		DecodedMethodDescriptor method = DeclDecoder.decodeMethodDescriptor(descriptor,
+				this.classInfo.thisClass().getPackageName());
+		StringBuilder buffer = new StringBuilder();
+
+		buffer.append(method.returnType()).append(' ').append("::").append('(');
+
+		PrintSeparator separator = new PrintSeparator();
+
+		for (PrintBuffer parameter : method.parameterTypes()) {
+			buffer.append(separator.next());
+			buffer.append(parameter);
+		}
+		buffer.append(')');
+		return buffer.toString();
 	}
 
 	@Override

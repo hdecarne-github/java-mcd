@@ -24,10 +24,22 @@ import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.constant.IntegerConstant;
 import de.carne.util.Strings;
 
+/**
+ * Character annotation element.
+ */
 public class CharAnnotationElement extends AbstractConstantValueAnnotationElement {
 
+	/**
+	 * Character annotation element tag.
+	 */
 	public static final int TAG = 'C';
 
+	/**
+	 * Constructs a new {@linkplain CharAnnotationElement}} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this annotation attribute is part of.
+	 * @param valueIndex the annotation element value index.
+	 */
 	public CharAnnotationElement(ClassInfo classInfo, int valueIndex) {
 		super(classInfo, valueIndex);
 	}

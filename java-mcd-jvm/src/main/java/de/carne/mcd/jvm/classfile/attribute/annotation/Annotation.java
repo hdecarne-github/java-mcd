@@ -74,7 +74,7 @@ public class Annotation extends ClassInfoElement {
 		}
 		if (context.isOneOf(ClassContext.CLASS, ClassContext.METHOD)) {
 			out.println();
-		} else {
+		} else if (context != ClassContext.ANNOTATION) {
 			out.print(" ");
 		}
 	}

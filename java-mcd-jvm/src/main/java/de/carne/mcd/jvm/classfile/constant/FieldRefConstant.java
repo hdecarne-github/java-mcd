@@ -20,10 +20,23 @@ import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.decl.DeclDecoder;
 import de.carne.mcd.jvm.classfile.decl.DecodedFieldDescriptor;
 
+/**
+ * FieldRef constant.
+ */
 public class FieldRefConstant extends AbstractRefConstant {
 
+	/**
+	 * FieldRef constant tag.
+	 */
 	public static final int TAG = 9;
 
+	/**
+	 * Constructs a new {@linkplain FieldRefConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param classIndex the class constant name index.
+	 * @param nameAndTypeIndex the referenced name and type index.
+	 */
 	public FieldRefConstant(ClassInfo classInfo, int classIndex, int nameAndTypeIndex) {
 		super(classInfo, classIndex, nameAndTypeIndex);
 	}

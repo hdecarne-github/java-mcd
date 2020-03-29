@@ -22,12 +22,24 @@ import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 
+/**
+ * Long constant.
+ */
 public class LongConstant extends Constant {
 
+	/**
+	 * Long constant tag.
+	 */
 	public static final int TAG = 5;
 
 	private final long value;
 
+	/**
+	 * Constructs a new {@linkplain LongConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param value the constant value.
+	 */
 	public LongConstant(ClassInfo classInfo, long value) {
 		super(classInfo);
 		this.value = value;

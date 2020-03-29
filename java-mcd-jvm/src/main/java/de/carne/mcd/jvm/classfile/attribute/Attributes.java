@@ -39,7 +39,7 @@ public final class Attributes {
 	 * @param <T> the actual attribute type to resolve.
 	 * @param attributes the attribute list to examine.
 	 * @param type the attribute type to resolve.
-	 * @return the resolved lised of attribute objects (may be empty).
+	 * @return the resolved list of attribute objects (may be empty).
 	 */
 	public static <T extends Attribute> List<T> resolveAttributes(List<Attribute> attributes, Class<T> type) {
 		return attributes.stream().filter(a -> type.isAssignableFrom(a.getClass())).map(type::cast)
@@ -109,7 +109,7 @@ public final class Attributes {
 	 * @param context the {@linkplain ClassContext} to use for printing.
 	 * @throws IOException if an I/O error occurs.
 	 */
-	public static <T extends Attribute> void print(Optional<T> attribute, ClassPrinter out, ClassContext context)
+	public static void print(Optional<? extends Attribute> attribute, ClassPrinter out, ClassContext context)
 			throws IOException {
 		if (attribute.isPresent()) {
 			attribute.get().print(out, context);

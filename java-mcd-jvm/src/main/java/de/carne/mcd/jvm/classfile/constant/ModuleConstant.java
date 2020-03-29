@@ -18,21 +18,35 @@ package de.carne.mcd.jvm.classfile.constant;
 
 import java.io.IOException;
 
+import de.carne.boot.check.Check;
 import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 
+/**
+ * Module constant.
+ */
 public class ModuleConstant extends NameConstant {
 
+	/**
+	 * Module constant tag.
+	 */
 	public static final byte TAG = 19;
 
+	/**
+	 * Constructs a new {@linkplain ModuleConstant} instance.
+	 *
+	 * @param classInfo the {@linkplain ClassInfo} instance this constant is part of.
+	 * @param nameIndex the module constant name index.
+	 */
 	public ModuleConstant(ClassInfo classInfo, int nameIndex) {
 		super(classInfo, nameIndex);
 	}
 
 	@Override
 	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		// TODO Auto-generated method stub
+		// Should never be called
+		Check.fail();
 	}
 
 }
