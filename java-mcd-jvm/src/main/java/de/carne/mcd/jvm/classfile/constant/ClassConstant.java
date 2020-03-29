@@ -18,6 +18,8 @@ package de.carne.mcd.jvm.classfile.constant;
 
 import java.io.IOException;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassName;
@@ -44,9 +46,13 @@ public class ClassConstant extends NameConstant {
 	}
 
 	@Override
+	public @NonNull String resolveSymbol() throws IOException {
+		return ClassName.effectiveName(ClassName.decode(getNameValue()), this.classInfo.thisClass().getPackageName());
+	}
+
+	@Override
 	public void print(ClassPrinter out, ClassContext context) throws IOException {
-		out.print(
-				ClassName.effectiveName(ClassName.decode(getNameValue()), this.classInfo.thisClass().getPackageName()));
+		out.print(resolveSymbol());
 	}
 
 }

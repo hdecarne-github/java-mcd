@@ -36,7 +36,7 @@ public abstract /* super */ class InputStream implements Closeable {
         // max_locals: 7
         0000: aload_1
         0001: ifnonnull +11 // 000c
-        0004: new #3 // java/lang/NullPointerException
+        0004: new #3 // NullPointerException
         0007: dup
         0008: invokespecial #4 // void NullPointerException.<init>()
         000b: athrow
@@ -50,7 +50,7 @@ public abstract /* super */ class InputStream implements Closeable {
         0017: iload_2
         0018: isub
         0019: if_icmple +11 // 0024
-        001c: new #5 // java/lang/IndexOutOfBoundsException
+        001c: new #5 // IndexOutOfBoundsException
         001f: dup
         0020: invokespecial #6 // void IndexOutOfBoundsException.<init>()
         0023: athrow
@@ -168,7 +168,7 @@ public abstract /* super */ class InputStream implements Closeable {
     public synchronized void reset() throws IOException {
         // max_stack: 3
         // max_locals: 1
-        0000: new #8 // java/io/IOException
+        0000: new #8 // IOException
         0003: dup
         0004: ldc #13 // "mark/reset not supported"
         0006: invokespecial #14 // void IOException.<init>(String)

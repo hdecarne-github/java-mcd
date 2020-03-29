@@ -19,10 +19,10 @@ public final /* super */ class Closeables {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0001: instanceof #2 // java/io/Closeable
+        0001: instanceof #2 // java.io.Closeable
         0004: ifeq +12 // 0010
         0007: aload_0
-        0008: checkcast #2 // java/io/Closeable
+        0008: checkcast #2 // java.io.Closeable
         000b: invokeinterface #3 // void java.io.Closeable.close()
         0010: return
     }
@@ -73,10 +73,10 @@ public final /* super */ class Closeables {
         // max_stack: 1
         // max_locals: 2
         0000: aload_0
-        0001: instanceof #2 // java/io/Closeable
+        0001: instanceof #2 // java.io.Closeable
         0004: ifeq +20 // 0018
         0007: aload_0
-        0008: checkcast #2 // java/io/Closeable
+        0008: checkcast #2 // java.io.Closeable
         000b: invokeinterface #3 // void java.io.Closeable.close()
         0010: goto +8 // 0018
         0013: astore_1
@@ -89,10 +89,10 @@ public final /* super */ class Closeables {
         // max_stack: 2
         // max_locals: 3
         0000: aload_1
-        0001: instanceof #2 // java/io/Closeable
+        0001: instanceof #2 // java.io.Closeable
         0004: ifeq +21 // 0019
         0007: aload_1
-        0008: checkcast #2 // java/io/Closeable
+        0008: checkcast #2 // java.io.Closeable
         000b: invokeinterface #3 // void java.io.Closeable.close()
         0010: goto +9 // 0019
         0013: astore_2

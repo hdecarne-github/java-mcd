@@ -46,7 +46,7 @@ public final /* super */ class Optional<T> {
     public static Optional<T> of<T>(T) {
         // max_stack: 3
         // max_locals: 1
-        0000: new #5 // java/util/Optional
+        0000: new #5 // Optional
         0003: dup
         0004: aload_0
         0005: invokespecial #6 // void Optional.<init>(Object)
@@ -71,7 +71,7 @@ public final /* super */ class Optional<T> {
         0000: aload_0
         0001: getfield #2 // Object Optional.value
         0004: ifnonnull +13 // 0011
-        0007: new #9 // java/util/NoSuchElementException
+        0007: new #9 // NoSuchElementException
         000a: dup
         000b: ldc #10 // "No value present"
         000d: invokespecial #11 // void NoSuchElementException.<init>(String)
@@ -163,7 +163,7 @@ public final /* super */ class Optional<T> {
         0012: getfield #2 // Object Optional.value
         0015: invokeinterface #15 // Object java.util.function.Function.apply(Object)
         001a: invokestatic #4 // Object Objects.requireNonNull(Object)
-        001d: checkcast #5 // java/util/Optional
+        001d: checkcast #5 // Optional
         0020: areturn
     }
     
@@ -205,7 +205,7 @@ public final /* super */ class Optional<T> {
         000b: areturn
         000c: aload_1
         000d: invokeinterface #17 // Object java.util.function.Supplier.get()
-        0012: checkcast #18 // java/lang/Throwable
+        0012: checkcast #18 // Throwable
         0015: athrow
     }
     
@@ -218,12 +218,12 @@ public final /* super */ class Optional<T> {
         0005: iconst_1
         0006: ireturn
         0007: aload_1
-        0008: instanceof #5 // java/util/Optional
+        0008: instanceof #5 // Optional
         000b: ifne +5 // 0010
         000e: iconst_0
         000f: ireturn
         0010: aload_1
-        0011: checkcast #5 // java/util/Optional
+        0011: checkcast #5 // Optional
         0014: astore_2
         0015: aload_0
         0016: getfield #2 // Object Optional.value
@@ -250,7 +250,7 @@ public final /* super */ class Optional<T> {
         0004: ifnull +22 // 001a
         0007: ldc #21 // "Optional[%s]"
         0009: iconst_1
-        000a: anewarray #22 // java/lang/Object
+        000a: anewarray #22 // Object
         000d: dup
         000e: iconst_0
         000f: aload_0
@@ -265,7 +265,7 @@ public final /* super */ class Optional<T> {
     static void <clinit>() {
         // max_stack: 2
         // max_locals: 0
-        0000: new #5 // java/util/Optional
+        0000: new #5 // Optional
         0003: dup
         0004: invokespecial #25 // void Optional.<init>()
         0007: putstatic #3 // Optional Optional.EMPTY

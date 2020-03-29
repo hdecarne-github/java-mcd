@@ -34,17 +34,17 @@ public final /* super */ enum StandardOpenOption extends Enum<StandardOpenOption
         // max_locals: 0
         0000: getstatic #1 // StandardOpenOption[] StandardOpenOption.$VALUES
         0003: invokevirtual #2 // Object [Ljava.nio.file.StandardOpenOption;.clone()
-        0006: checkcast #3 // [Ljava/nio/file/StandardOpenOption;
+        0006: checkcast #3 // [Ljava.nio.file.StandardOpenOption;
         0009: areturn
     }
     
     public static StandardOpenOption valueOf(String) {
         // max_stack: 2
         // max_locals: 1
-        0000: ldc #4 // java/nio/file/StandardOpenOption
+        0000: ldc #4 // StandardOpenOption
         0002: aload_0
         0003: invokestatic #5 // Enum Enum.valueOf(Class, String)
-        0006: checkcast #4 // java/nio/file/StandardOpenOption
+        0006: checkcast #4 // StandardOpenOption
         0009: areturn
     }
     
@@ -61,68 +61,68 @@ public final /* super */ enum StandardOpenOption extends Enum<StandardOpenOption
     static void <clinit>() {
         // max_stack: 4
         // max_locals: 0
-        0000: new #4 // java/nio/file/StandardOpenOption
+        0000: new #4 // StandardOpenOption
         0003: dup
         0004: ldc #7 // "READ"
         0006: iconst_0
         0007: invokespecial #8 // void StandardOpenOption.<init>(String, int)
         000a: putstatic #9 // StandardOpenOption StandardOpenOption.READ
-        000d: new #4 // java/nio/file/StandardOpenOption
+        000d: new #4 // StandardOpenOption
         0010: dup
         0011: ldc #10 // "WRITE"
         0013: iconst_1
         0014: invokespecial #8 // void StandardOpenOption.<init>(String, int)
         0017: putstatic #11 // StandardOpenOption StandardOpenOption.WRITE
-        001a: new #4 // java/nio/file/StandardOpenOption
+        001a: new #4 // StandardOpenOption
         001d: dup
         001e: ldc #12 // "APPEND"
         0020: iconst_2
         0021: invokespecial #8 // void StandardOpenOption.<init>(String, int)
         0024: putstatic #13 // StandardOpenOption StandardOpenOption.APPEND
-        0027: new #4 // java/nio/file/StandardOpenOption
+        0027: new #4 // StandardOpenOption
         002a: dup
         002b: ldc #14 // "TRUNCATE_EXISTING"
         002d: iconst_3
         002e: invokespecial #8 // void StandardOpenOption.<init>(String, int)
         0031: putstatic #15 // StandardOpenOption StandardOpenOption.TRUNCATE_EXISTING
-        0034: new #4 // java/nio/file/StandardOpenOption
+        0034: new #4 // StandardOpenOption
         0037: dup
         0038: ldc #16 // "CREATE"
         003a: iconst_4
         003b: invokespecial #8 // void StandardOpenOption.<init>(String, int)
         003e: putstatic #17 // StandardOpenOption StandardOpenOption.CREATE
-        0041: new #4 // java/nio/file/StandardOpenOption
+        0041: new #4 // StandardOpenOption
         0044: dup
         0045: ldc #18 // "CREATE_NEW"
         0047: iconst_5
         0048: invokespecial #8 // void StandardOpenOption.<init>(String, int)
         004b: putstatic #19 // StandardOpenOption StandardOpenOption.CREATE_NEW
-        004e: new #4 // java/nio/file/StandardOpenOption
+        004e: new #4 // StandardOpenOption
         0051: dup
         0052: ldc #20 // "DELETE_ON_CLOSE"
         0054: bipush 6
         0056: invokespecial #8 // void StandardOpenOption.<init>(String, int)
         0059: putstatic #21 // StandardOpenOption StandardOpenOption.DELETE_ON_CLOSE
-        005c: new #4 // java/nio/file/StandardOpenOption
+        005c: new #4 // StandardOpenOption
         005f: dup
         0060: ldc #22 // "SPARSE"
         0062: bipush 7
         0064: invokespecial #8 // void StandardOpenOption.<init>(String, int)
         0067: putstatic #23 // StandardOpenOption StandardOpenOption.SPARSE
-        006a: new #4 // java/nio/file/StandardOpenOption
+        006a: new #4 // StandardOpenOption
         006d: dup
         006e: ldc #24 // "SYNC"
         0070: bipush 8
         0072: invokespecial #8 // void StandardOpenOption.<init>(String, int)
         0075: putstatic #25 // StandardOpenOption StandardOpenOption.SYNC
-        0078: new #4 // java/nio/file/StandardOpenOption
+        0078: new #4 // StandardOpenOption
         007b: dup
         007c: ldc #26 // "DSYNC"
         007e: bipush 9
         0080: invokespecial #8 // void StandardOpenOption.<init>(String, int)
         0083: putstatic #27 // StandardOpenOption StandardOpenOption.DSYNC
         0086: bipush 10
-        0088: anewarray #4 // java/nio/file/StandardOpenOption
+        0088: anewarray #4 // StandardOpenOption
         008b: dup
         008c: iconst_0
         008d: getstatic #9 // StandardOpenOption StandardOpenOption.READ

@@ -48,7 +48,7 @@ public /* super */ class Calendar$Builder {
         0000: aload_0
         0001: getfield #4 // int[] Calendar$Builder.fields
         0004: ifnull +11 // 000f
-        0007: new #5 // java/lang/IllegalStateException
+        0007: new #5 // IllegalStateException
         000a: dup
         000b: invokespecial #6 // void IllegalStateException.<init>()
         000e: athrow
@@ -80,7 +80,7 @@ public /* super */ class Calendar$Builder {
         0004: iload_1
         0005: bipush 17
         0007: if_icmplt +13 // 0014
-        000a: new #11 // java/lang/IllegalArgumentException
+        000a: new #11 // IllegalArgumentException
         000d: dup
         000e: ldc #12 // "field is invalid"
         0010: invokespecial #13 // void IllegalArgumentException.<init>(String)
@@ -88,7 +88,7 @@ public /* super */ class Calendar$Builder {
         0014: aload_0
         0015: invokespecial #14 // boolean Calendar$Builder.isInstantSet()
         0018: ifeq +13 // 0025
-        001b: new #5 // java/lang/IllegalStateException
+        001b: new #5 // IllegalStateException
         001e: dup
         001f: ldc #15 // "instant has been set"
         0021: invokespecial #16 // void IllegalStateException.<init>(String)
@@ -113,14 +113,14 @@ public /* super */ class Calendar$Builder {
         0004: iconst_2
         0005: irem
         0006: ifeq +11 // 0011
-        0009: new #11 // java/lang/IllegalArgumentException
+        0009: new #11 // IllegalArgumentException
         000c: dup
         000d: invokespecial #19 // void IllegalArgumentException.<init>()
         0010: athrow
         0011: aload_0
         0012: invokespecial #14 // boolean Calendar$Builder.isInstantSet()
         0015: ifeq +13 // 0022
-        0018: new #5 // java/lang/IllegalStateException
+        0018: new #5 // IllegalStateException
         001b: dup
         001c: ldc #15 // "instant has been set"
         001e: invokespecial #16 // void IllegalStateException.<init>(String)
@@ -132,7 +132,7 @@ public /* super */ class Calendar$Builder {
         0028: idiv
         0029: iadd
         002a: ifge +13 // 0037
-        002d: new #5 // java/lang/IllegalStateException
+        002d: new #5 // IllegalStateException
         0030: dup
         0031: ldc #20 // "stamp counter overflow"
         0033: invokespecial #16 // void IllegalStateException.<init>(String)
@@ -154,7 +154,7 @@ public /* super */ class Calendar$Builder {
         004f: iload local_4
         0051: bipush 17
         0053: if_icmplt +13 // 0060
-        0056: new #11 // java/lang/IllegalArgumentException
+        0056: new #11 // IllegalArgumentException
         0059: dup
         005a: ldc #12 // "field is invalid"
         005c: invokespecial #13 // void IllegalArgumentException.<init>(String)
@@ -285,7 +285,7 @@ public /* super */ class Calendar$Builder {
         // max_locals: 2
         0000: aload_1
         0001: ifnonnull +11 // 000c
-        0004: new #24 // java/lang/NullPointerException
+        0004: new #24 // NullPointerException
         0007: dup
         0008: invokespecial #25 // void NullPointerException.<init>()
         000b: athrow
@@ -323,9 +323,9 @@ public /* super */ class Calendar$Builder {
         0019: ldc #32 // "iso8601"
         001b: invokevirtual #28 // boolean String.equals(Object)
         001e: ifne +30 // 003c
-        0021: new #11 // java/lang/IllegalArgumentException
+        0021: new #11 // IllegalArgumentException
         0024: dup
-        0025: new #33 // java/lang/StringBuilder
+        0025: new #33 // StringBuilder
         0028: dup
         0029: invokespecial #34 // void StringBuilder.<init>()
         002c: ldc #35 // "unknown calendar type: "
@@ -347,7 +347,7 @@ public /* super */ class Calendar$Builder {
         004f: aload_1
         0050: invokevirtual #28 // boolean String.equals(Object)
         0053: ifne +13 // 0060
-        0056: new #5 // java/lang/IllegalStateException
+        0056: new #5 // IllegalStateException
         0059: dup
         005a: ldc #39 // "calendar type override"
         005c: invokespecial #16 // void IllegalStateException.<init>(String)
@@ -361,7 +361,7 @@ public /* super */ class Calendar$Builder {
         // max_locals: 2
         0000: aload_1
         0001: ifnonnull +11 // 000c
-        0004: new #24 // java/lang/NullPointerException
+        0004: new #24 // NullPointerException
         0007: dup
         0008: invokespecial #25 // void NullPointerException.<init>()
         000b: athrow
@@ -383,7 +383,7 @@ public /* super */ class Calendar$Builder {
         0009: iload_2
         000a: invokespecial #41 // boolean Calendar$Builder.isValidWeekParameter(int)
         000d: ifne +11 // 0018
-        0010: new #11 // java/lang/IllegalArgumentException
+        0010: new #11 // IllegalArgumentException
         0013: dup
         0014: invokespecial #19 // void IllegalArgumentException.<init>()
         0017: athrow
@@ -478,7 +478,7 @@ public /* super */ class Calendar$Builder {
         00c8: istore_3
         00c9: iload_3
         00ca: tableswitch // 0:00e8 1:00fc 2:012a 3:0141 default:0155
-        00e8: new #55 // java/util/GregorianCalendar
+        00e8: new #55 // GregorianCalendar
         00eb: dup
         00ec: aload_0
         00ed: getfield #26 // TimeZone Calendar$Builder.zone
@@ -488,7 +488,7 @@ public /* super */ class Calendar$Builder {
         00f5: invokespecial #56 // void GregorianCalendar.<init>(TimeZone, Locale, boolean)
         00f8: astore_1
         00f9: goto +122 // 0173
-        00fc: new #55 // java/util/GregorianCalendar
+        00fc: new #55 // GregorianCalendar
         00ff: dup
         0100: aload_0
         0101: getfield #26 // TimeZone Calendar$Builder.zone
@@ -498,7 +498,7 @@ public /* super */ class Calendar$Builder {
         0109: invokespecial #56 // void GregorianCalendar.<init>(TimeZone, Locale, boolean)
         010c: astore local_4
         010e: aload local_4
-        0110: new #57 // java/util/Date
+        0110: new #57 // Date
         0113: dup
         0114: ldc2_w #59 // -9223372036854775808l
         0117: invokespecial #61 // void Date.<init>(long)
@@ -511,7 +511,7 @@ public /* super */ class Calendar$Builder {
         0124: aload local_4
         0126: astore_1
         0127: goto +76 // 0173
-        012a: new #64 // sun/util/BuddhistCalendar
+        012a: new #64 // sun.util.BuddhistCalendar
         012d: dup
         012e: aload_0
         012f: getfield #26 // TimeZone Calendar$Builder.zone
@@ -522,7 +522,7 @@ public /* super */ class Calendar$Builder {
         013a: aload_1
         013b: invokevirtual #66 // void Calendar.clear()
         013e: goto +53 // 0173
-        0141: new #67 // java/util/JapaneseImperialCalendar
+        0141: new #67 // JapaneseImperialCalendar
         0144: dup
         0145: aload_0
         0146: getfield #26 // TimeZone Calendar$Builder.zone
@@ -532,9 +532,9 @@ public /* super */ class Calendar$Builder {
         014e: invokespecial #68 // void JapaneseImperialCalendar.<init>(TimeZone, Locale, boolean)
         0151: astore_1
         0152: goto +33 // 0173
-        0155: new #11 // java/lang/IllegalArgumentException
+        0155: new #11 // IllegalArgumentException
         0158: dup
-        0159: new #33 // java/lang/StringBuilder
+        0159: new #33 // StringBuilder
         015c: dup
         015d: invokespecial #34 // void StringBuilder.<init>()
         0160: ldc #35 // "unknown calendar type: "
@@ -596,9 +596,9 @@ public /* super */ class Calendar$Builder {
         01d1: aload_1
         01d2: invokevirtual #75 // boolean Calendar.isWeekDateSupported()
         01d5: ifne +33 // 01f6
-        01d8: new #11 // java/lang/IllegalArgumentException
+        01d8: new #11 // IllegalArgumentException
         01db: dup
-        01dc: new #33 // java/lang/StringBuilder
+        01dc: new #33 // StringBuilder
         01df: dup
         01e0: invokespecial #34 // void StringBuilder.<init>()
         01e3: ldc #76 // "week date is unsupported by "
@@ -716,7 +716,7 @@ public /* super */ class Calendar$Builder {
         0011: aload_0
         0012: getfield #8 // int Calendar$Builder.nextStamp
         0015: ifge +13 // 0022
-        0018: new #5 // java/lang/IllegalStateException
+        0018: new #5 // IllegalStateException
         001b: dup
         001c: ldc #20 // "stamp counter overflow"
         001e: invokespecial #16 // void IllegalStateException.<init>(String)

@@ -66,7 +66,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0001: invokespecial #1 // void Object.<init>()
         0004: iload_2
         0005: ifge +12 // 0011
-        0008: new #6 // java/lang/StringIndexOutOfBoundsException
+        0008: new #6 // StringIndexOutOfBoundsException
         000b: dup
         000c: iload_2
         000d: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -75,7 +75,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0012: ifgt +32 // 0032
         0015: iload_3
         0016: ifge +12 // 0022
-        0019: new #6 // java/lang/StringIndexOutOfBoundsException
+        0019: new #6 // StringIndexOutOfBoundsException
         001c: dup
         001d: iload_3
         001e: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -95,7 +95,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0035: iload_3
         0036: isub
         0037: if_icmple +14 // 0045
-        003a: new #6 // java/lang/StringIndexOutOfBoundsException
+        003a: new #6 // StringIndexOutOfBoundsException
         003d: dup
         003e: iload_2
         003f: iload_3
@@ -120,7 +120,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0001: invokespecial #1 // void Object.<init>()
         0004: iload_2
         0005: ifge +12 // 0011
-        0008: new #6 // java/lang/StringIndexOutOfBoundsException
+        0008: new #6 // StringIndexOutOfBoundsException
         000b: dup
         000c: iload_2
         000d: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -129,7 +129,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0012: ifgt +32 // 0032
         0015: iload_3
         0016: ifge +12 // 0022
-        0019: new #6 // java/lang/StringIndexOutOfBoundsException
+        0019: new #6 // StringIndexOutOfBoundsException
         001c: dup
         001d: iload_3
         001e: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -149,7 +149,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0035: iload_3
         0036: isub
         0037: if_icmple +14 // 0045
-        003a: new #6 // java/lang/StringIndexOutOfBoundsException
+        003a: new #6 // StringIndexOutOfBoundsException
         003d: dup
         003e: iload_2
         003f: iload_3
@@ -180,7 +180,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         006d: ifeq +9 // 0076
         0070: iinc local_5, 1
         0073: goto +16 // 0083
-        0076: new #11 // java/lang/IllegalArgumentException
+        0076: new #11 // IllegalArgumentException
         0079: dup
         007a: iload local_7
         007c: invokestatic #12 // String Integer.toString(int)
@@ -306,14 +306,14 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 3
         0000: iload_2
         0001: ifge +12 // 000d
-        0004: new #6 // java/lang/StringIndexOutOfBoundsException
+        0004: new #6 // StringIndexOutOfBoundsException
         0007: dup
         0008: iload_2
         0009: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
         000c: athrow
         000d: iload_1
         000e: ifge +12 // 001a
-        0011: new #6 // java/lang/StringIndexOutOfBoundsException
+        0011: new #6 // StringIndexOutOfBoundsException
         0014: dup
         0015: iload_1
         0016: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -324,7 +324,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         001d: iload_2
         001e: isub
         001f: if_icmple +14 // 002d
-        0022: new #6 // java/lang/StringIndexOutOfBoundsException
+        0022: new #6 // StringIndexOutOfBoundsException
         0025: dup
         0026: iload_1
         0027: iload_2
@@ -341,7 +341,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0001: invokespecial #1 // void Object.<init>()
         0004: aload local_4
         0006: ifnonnull +13 // 0013
-        0009: new #17 // java/lang/NullPointerException
+        0009: new #17 // NullPointerException
         000c: dup
         000d: ldc #18 // "charsetName"
         000f: invokespecial #19 // void NullPointerException.<init>(String)
@@ -367,7 +367,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0001: invokespecial #1 // void Object.<init>()
         0004: aload local_4
         0006: ifnonnull +13 // 0013
-        0009: new #17 // java/lang/NullPointerException
+        0009: new #17 // NullPointerException
         000c: dup
         000d: ldc #21 // "charset"
         000f: invokespecial #19 // void NullPointerException.<init>(String)
@@ -527,7 +527,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0006: getfield #3 // char[] String.value
         0009: arraylength
         000a: if_icmplt +12 // 0016
-        000d: new #6 // java/lang/StringIndexOutOfBoundsException
+        000d: new #6 // StringIndexOutOfBoundsException
         0010: dup
         0011: iload_1
         0012: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -549,7 +549,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0006: getfield #3 // char[] String.value
         0009: arraylength
         000a: if_icmplt +12 // 0016
-        000d: new #6 // java/lang/StringIndexOutOfBoundsException
+        000d: new #6 // StringIndexOutOfBoundsException
         0010: dup
         0011: iload_1
         0012: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -578,7 +578,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         000a: getfield #3 // char[] String.value
         000d: arraylength
         000e: if_icmplt +12 // 001a
-        0011: new #6 // java/lang/StringIndexOutOfBoundsException
+        0011: new #6 // StringIndexOutOfBoundsException
         0014: dup
         0015: iload_1
         0016: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -604,7 +604,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         000d: iload_1
         000e: iload_2
         000f: if_icmple +11 // 001a
-        0012: new #33 // java/lang/IndexOutOfBoundsException
+        0012: new #33 // IndexOutOfBoundsException
         0015: dup
         0016: invokespecial #34 // void IndexOutOfBoundsException.<init>()
         0019: athrow
@@ -628,7 +628,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0006: getfield #3 // char[] String.value
         0009: arraylength
         000a: if_icmple +11 // 0015
-        000d: new #33 // java/lang/IndexOutOfBoundsException
+        000d: new #33 // IndexOutOfBoundsException
         0010: dup
         0011: invokespecial #34 // void IndexOutOfBoundsException.<init>()
         0014: athrow
@@ -664,7 +664,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 5
         0000: iload_1
         0001: ifge +12 // 000d
-        0004: new #6 // java/lang/StringIndexOutOfBoundsException
+        0004: new #6 // StringIndexOutOfBoundsException
         0007: dup
         0008: iload_1
         0009: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -674,7 +674,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         000f: getfield #3 // char[] String.value
         0012: arraylength
         0013: if_icmple +12 // 001f
-        0016: new #6 // java/lang/StringIndexOutOfBoundsException
+        0016: new #6 // StringIndexOutOfBoundsException
         0019: dup
         001a: iload_2
         001b: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -682,7 +682,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         001f: iload_1
         0020: iload_2
         0021: if_icmple +14 // 002f
-        0024: new #6 // java/lang/StringIndexOutOfBoundsException
+        0024: new #6 // StringIndexOutOfBoundsException
         0027: dup
         0028: iload_2
         0029: iload_1
@@ -707,7 +707,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 9
         0000: iload_1
         0001: ifge +12 // 000d
-        0004: new #6 // java/lang/StringIndexOutOfBoundsException
+        0004: new #6 // StringIndexOutOfBoundsException
         0007: dup
         0008: iload_1
         0009: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -717,7 +717,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         000f: getfield #3 // char[] String.value
         0012: arraylength
         0013: if_icmple +12 // 001f
-        0016: new #6 // java/lang/StringIndexOutOfBoundsException
+        0016: new #6 // StringIndexOutOfBoundsException
         0019: dup
         001a: iload_2
         001b: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -725,7 +725,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         001f: iload_1
         0020: iload_2
         0021: if_icmple +14 // 002f
-        0024: new #6 // java/lang/StringIndexOutOfBoundsException
+        0024: new #6 // StringIndexOutOfBoundsException
         0027: dup
         0028: iload_2
         0029: iload_1
@@ -765,7 +765,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 2
         0000: aload_1
         0001: ifnonnull +11 // 000c
-        0004: new #17 // java/lang/NullPointerException
+        0004: new #17 // NullPointerException
         0007: dup
         0008: invokespecial #39 // void NullPointerException.<init>()
         000b: athrow
@@ -785,7 +785,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 2
         0000: aload_1
         0001: ifnonnull +11 // 000c
-        0004: new #17 // java/lang/NullPointerException
+        0004: new #17 // NullPointerException
         0007: dup
         0008: invokespecial #39 // void NullPointerException.<init>()
         000b: athrow
@@ -822,10 +822,10 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0005: iconst_1
         0006: ireturn
         0007: aload_1
-        0008: instanceof #43 // java/lang/String
+        0008: instanceof #43 // String
         000b: ifeq +68 // 004f
         000e: aload_1
-        000f: checkcast #43 // java/lang/String
+        000f: checkcast #43 // String
         0012: astore_2
         0013: aload_0
         0014: getfield #3 // char[] String.value
@@ -915,10 +915,10 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 3
         // max_locals: 5
         0000: aload_1
-        0001: instanceof #47 // java/lang/AbstractStringBuilder
+        0001: instanceof #47 // AbstractStringBuilder
         0004: ifeq +39 // 002b
         0007: aload_1
-        0008: instanceof #48 // java/lang/StringBuffer
+        0008: instanceof #48 // StringBuffer
         000b: ifeq +23 // 0022
         000e: aload_1
         000f: dup
@@ -926,7 +926,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0011: monitorenter
         0012: aload_0
         0013: aload_1
-        0014: checkcast #47 // java/lang/AbstractStringBuilder
+        0014: checkcast #47 // AbstractStringBuilder
         0017: invokespecial #49 // boolean String.nonSyncContentEquals(AbstractStringBuilder)
         001a: aload_2
         001b: monitorexit
@@ -938,11 +938,11 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0021: athrow
         0022: aload_0
         0023: aload_1
-        0024: checkcast #47 // java/lang/AbstractStringBuilder
+        0024: checkcast #47 // AbstractStringBuilder
         0027: invokespecial #49 // boolean String.nonSyncContentEquals(AbstractStringBuilder)
         002a: ireturn
         002b: aload_1
-        002c: instanceof #43 // java/lang/String
+        002c: instanceof #43 // String
         002f: ifeq +9 // 0038
         0032: aload_0
         0033: aload_1
@@ -1806,7 +1806,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 3
         0000: iload_1
         0001: ifge +12 // 000d
-        0004: new #6 // java/lang/StringIndexOutOfBoundsException
+        0004: new #6 // StringIndexOutOfBoundsException
         0007: dup
         0008: iload_1
         0009: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -1819,7 +1819,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0014: istore_2
         0015: iload_2
         0016: ifge +12 // 0022
-        0019: new #6 // java/lang/StringIndexOutOfBoundsException
+        0019: new #6 // StringIndexOutOfBoundsException
         001c: dup
         001d: iload_2
         001e: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -1828,7 +1828,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0023: ifne +7 // 002a
         0026: aload_0
         0027: goto +16 // 0037
-        002a: new #43 // java/lang/String
+        002a: new #43 // String
         002d: dup
         002e: aload_0
         002f: getfield #3 // char[] String.value
@@ -1843,7 +1843,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 4
         0000: iload_1
         0001: ifge +12 // 000d
-        0004: new #6 // java/lang/StringIndexOutOfBoundsException
+        0004: new #6 // StringIndexOutOfBoundsException
         0007: dup
         0008: iload_1
         0009: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -1853,7 +1853,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         000f: getfield #3 // char[] String.value
         0012: arraylength
         0013: if_icmple +12 // 001f
-        0016: new #6 // java/lang/StringIndexOutOfBoundsException
+        0016: new #6 // StringIndexOutOfBoundsException
         0019: dup
         001a: iload_2
         001b: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -1864,7 +1864,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0022: istore_3
         0023: iload_3
         0024: ifge +12 // 0030
-        0027: new #6 // java/lang/StringIndexOutOfBoundsException
+        0027: new #6 // StringIndexOutOfBoundsException
         002a: dup
         002b: iload_3
         002c: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
@@ -1878,7 +1878,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         003a: if_icmpne +7 // 0041
         003d: aload_0
         003e: goto +16 // 004e
-        0041: new #43 // java/lang/String
+        0041: new #43 // String
         0044: dup
         0045: aload_0
         0046: getfield #3 // char[] String.value
@@ -1923,7 +1923,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         001e: aload local_4
         0020: iload_3
         0021: invokevirtual #75 // void String.getChars(char[], int)
-        0024: new #43 // java/lang/String
+        0024: new #43 // String
         0027: dup
         0028: aload local_4
         002a: iconst_1
@@ -1993,7 +1993,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         006b: castore
         006c: iinc local_4, 1
         006f: goto -33 // 004e
-        0072: new #43 // java/lang/String
+        0072: new #43 // String
         0075: dup
         0076: aload local_6
         0078: iconst_1
@@ -2139,7 +2139,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         006e: goto +4 // 0072
         0071: iconst_0
         0072: istore local_6
-        0074: new #92 // java/util/ArrayList
+        0074: new #92 // java.util.ArrayList
         0077: dup
         0078: invokespecial #93 // void java.util.ArrayList.<init>()
         007b: astore local_7
@@ -2188,7 +2188,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         00cd: iload local_4
         00cf: ifne +12 // 00db
         00d2: iconst_1
-        00d3: anewarray #43 // java/lang/String
+        00d3: anewarray #43 // String
         00d6: dup
         00d7: iconst_0
         00d8: aload_0
@@ -2221,13 +2221,13 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         010e: iconst_1
         010f: isub
         0110: invokevirtual #96 // Object java.util.ArrayList.get(int)
-        0113: checkcast #43 // java/lang/String
+        0113: checkcast #43 // String
         0116: invokevirtual #74 // int String.length()
         0119: ifne +9 // 0122
         011c: iinc local_8, -1
         011f: goto -26 // 0105
         0122: iload local_8
-        0124: anewarray #43 // java/lang/String
+        0124: anewarray #43 // String
         0127: astore local_9
         0129: aload local_7
         012b: iconst_0
@@ -2235,7 +2235,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         012e: invokevirtual #97 // java.util.List java.util.ArrayList.subList(int, int)
         0131: aload local_9
         0133: invokeinterface #98 // Object[] java.util.List.toArray(Object[])
-        0138: checkcast #99 // [Ljava/lang/String;
+        0138: checkcast #99 // [Ljava.lang.String;
         013b: areturn
         013c: aload_1
         013d: invokestatic #80 // java.util.regex.Pattern java.util.regex.Pattern.compile(String)
@@ -2264,7 +2264,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0005: aload_1
         0006: invokestatic #38 // Object java.util.Objects.requireNonNull(Object)
         0009: pop
-        000a: new #102 // java/util/StringJoiner
+        000a: new #102 // java.util.StringJoiner
         000d: dup
         000e: aload_0
         000f: invokespecial #103 // void java.util.StringJoiner.<init>(CharSequence)
@@ -2303,7 +2303,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0005: aload_1
         0006: invokestatic #38 // Object java.util.Objects.requireNonNull(Object)
         0009: pop
-        000a: new #102 // java/util/StringJoiner
+        000a: new #102 // java.util.StringJoiner
         000d: dup
         000e: aload_0
         000f: invokespecial #103 // void java.util.StringJoiner.<init>(CharSequence)
@@ -2316,7 +2316,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0020: ifeq +24 // 0038
         0023: aload_3
         0024: invokeinterface #108 // Object java.util.Iterator.next()
-        0029: checkcast #109 // java/lang/CharSequence
+        0029: checkcast #109 // CharSequence
         002c: astore local_4
         002e: aload_2
         002f: aload local_4
@@ -2333,7 +2333,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 15
         0000: aload_1
         0001: ifnonnull +11 // 000c
-        0004: new #17 // java/lang/NullPointerException
+        0004: new #17 // NullPointerException
         0007: dup
         0008: invokespecial #39 // void NullPointerException.<init>()
         000b: athrow
@@ -2547,7 +2547,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         01a2: iadd
         01a3: istore local_12
         01a5: goto -265 // 009c
-        01a8: new #43 // java/lang/String
+        01a8: new #43 // String
         01ab: dup
         01ac: aload local_4
         01ae: iconst_0
@@ -2572,7 +2572,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 15
         0000: aload_1
         0001: ifnonnull +11 // 000c
-        0004: new #17 // java/lang/NullPointerException
+        0004: new #17 // NullPointerException
         0007: dup
         0008: invokespecial #39 // void NullPointerException.<init>()
         000b: athrow
@@ -2789,7 +2789,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         01a2: iadd
         01a3: istore local_12
         01a5: goto -264 // 009d
-        01a8: new #43 // java/lang/String
+        01a8: new #43 // String
         01ab: dup
         01ac: aload local_5
         01ae: iconst_0
@@ -2890,7 +2890,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
     public static /* varargs */ String format(String, Object[]) {
         // max_stack: 3
         // max_locals: 2
-        0000: new #129 // java/util/Formatter
+        0000: new #129 // java.util.Formatter
         0003: dup
         0004: invokespecial #130 // void java.util.Formatter.<init>()
         0007: aload_0
@@ -2903,7 +2903,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
     public static /* varargs */ String format(java.util.Locale, String, Object[]) {
         // max_stack: 3
         // max_locals: 3
-        0000: new #129 // java/util/Formatter
+        0000: new #129 // java.util.Formatter
         0003: dup
         0004: aload_0
         0005: invokespecial #133 // void java.util.Formatter.<init>(java.util.Locale)
@@ -2929,7 +2929,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
     public static String valueOf(char[]) {
         // max_stack: 3
         // max_locals: 1
-        0000: new #43 // java/lang/String
+        0000: new #43 // String
         0003: dup
         0004: aload_0
         0005: invokespecial #136 // void String.<init>(char[])
@@ -2939,7 +2939,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
     public static String valueOf(char[], int, int) {
         // max_stack: 5
         // max_locals: 3
-        0000: new #43 // java/lang/String
+        0000: new #43 // String
         0003: dup
         0004: aload_0
         0005: iload_1
@@ -2951,7 +2951,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
     public static String copyValueOf(char[], int, int) {
         // max_stack: 5
         // max_locals: 3
-        0000: new #43 // java/lang/String
+        0000: new #43 // String
         0003: dup
         0004: aload_0
         0005: iload_1
@@ -2963,7 +2963,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
     public static String copyValueOf(char[]) {
         // max_stack: 3
         // max_locals: 1
-        0000: new #43 // java/lang/String
+        0000: new #43 // String
         0003: dup
         0004: aload_0
         0005: invokespecial #136 // void String.<init>(char[])
@@ -2991,7 +2991,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0005: iload_0
         0006: castore
         0007: astore_1
-        0008: new #43 // java/lang/String
+        0008: new #43 // String
         000b: dup
         000c: aload_1
         000d: iconst_1
@@ -3038,7 +3038,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 2
         0000: aload_0
         0001: aload_1
-        0002: checkcast #43 // java/lang/String
+        0002: checkcast #43 // String
         0005: invokevirtual #142 // int String.compareTo(String)
         0008: ireturn
     }
@@ -3047,9 +3047,9 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 3
         // max_locals: 0
         0000: iconst_0
-        0001: anewarray #143 // java/io/ObjectStreamField
+        0001: anewarray #143 // java.io.ObjectStreamField
         0004: putstatic #144 // java.io.ObjectStreamField[] String.serialPersistentFields
-        0007: new #145 // java/lang/String$CaseInsensitiveComparator
+        0007: new #145 // String$CaseInsensitiveComparator
         000a: dup
         000b: aconst_null
         000c: invokespecial #146 // void String$CaseInsensitiveComparator.<init>(String$1)

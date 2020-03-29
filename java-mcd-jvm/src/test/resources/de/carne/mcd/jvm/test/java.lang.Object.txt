@@ -36,7 +36,7 @@ public /* super */ class Object {
     public String toString() {
         // max_stack: 2
         // max_locals: 1
-        0000: new #1 // java/lang/StringBuilder
+        0000: new #1 // StringBuilder
         0003: dup
         0004: invokespecial #2 // void StringBuilder.<init>()
         0007: aload_0
@@ -66,7 +66,7 @@ public /* super */ class Object {
         0001: lconst_0
         0002: lcmp
         0003: ifge +13 // 0010
-        0006: new #10 // java/lang/IllegalArgumentException
+        0006: new #10 // IllegalArgumentException
         0009: dup
         000a: ldc #11 // "timeout value is negative"
         000c: invokespecial #12 // void IllegalArgumentException.<init>(String)
@@ -76,7 +76,7 @@ public /* super */ class Object {
         0014: iload_3
         0015: ldc #13 // 999999
         0017: if_icmple +13 // 0024
-        001a: new #10 // java/lang/IllegalArgumentException
+        001a: new #10 // IllegalArgumentException
         001d: dup
         001e: ldc #14 // "nanosecond timeout value out of range"
         0020: invokespecial #12 // void IllegalArgumentException.<init>(String)
