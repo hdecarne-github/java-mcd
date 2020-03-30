@@ -162,30 +162,23 @@ public final class InstructionIndex implements InstructionIndexParameters, Close
 
 		if (opcodeByte >= 0) {
 			byte[] opcode = new byte[this.opcodeBytes];
-			int opcodeOffset = 0;
 			int opcodeLength = 0;
 			int previousMatch = -1;
 
-			while (lookupResult == null) {
+			do {
 				int match = -1;
 
 				if (opcodeByte >= 0) {
-					opcode[opcodeOffset + opcodeLength] = (byte) opcodeByte;
+					opcode[opcodeLength] = (byte) opcodeByte;
 					opcodeLength++;
-					match = matchOpcode(opcode, opcodeOffset, opcodeLength);
+					match = matchOpcode(opcode, 0, opcodeLength);
 				}
 				if (match >= 0) {
-					if (opcodeOffset == 0) {
-						if (!eager) {
-							lookupResult = new LookupResult(opcode, 0, opcodeLength, loadInstruction(match));
-						} else {
-							previousMatch = match;
-							opcodeByte = buffer.read();
-						}
+					if (!eager) {
+						lookupResult = new LookupResult(opcode, 0, opcodeLength, loadInstruction(match));
 					} else {
-						lookupResult = new LookupResult(opcode, 0, opcodeOffset,
-								this.instructionFactory.getDefaultInstruction());
-						buffer.discard(-opcodeLength);
+						previousMatch = match;
+						opcodeByte = buffer.read();
 					}
 				} else if (previousMatch >= 0) {
 					if (opcodeByte >= 0) {
@@ -199,20 +192,11 @@ public final class InstructionIndex implements InstructionIndexParameters, Close
 					}
 				} else if (opcodeByte >= 0 && opcodeLength < this.opcodeBytes - 1) {
 					opcodeByte = buffer.read();
-				} else if (opcodeOffset < 1) {
-					opcodeOffset++;
-					buffer.discard(-Math.max(0, opcodeLength - 1));
-					opcodeLength = 0;
-					opcodeByte = buffer.read();
-				} else if (opcodeLength > 0) {
-					lookupResult = new LookupResult(opcode, 0, opcodeOffset,
-							this.instructionFactory.getDefaultInstruction());
-					buffer.discard(-opcodeLength);
 				} else {
-					lookupResult = new LookupResult(opcode, 0, opcodeOffset + opcodeLength,
-							this.instructionFactory.getDefaultInstruction());
+					lookupResult = new LookupResult(opcode, 0, 1, this.instructionFactory.getDefaultInstruction());
+					buffer.discard(-opcodeLength + 1);
 				}
-			}
+			} while (lookupResult == null);
 		}
 		return lookupResult;
 	}
