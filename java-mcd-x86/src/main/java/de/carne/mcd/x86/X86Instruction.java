@@ -104,12 +104,12 @@ public class X86Instruction implements Instruction {
 	}
 
 	@Override
-	public void decode(long ip, InstructionOpcode opcode, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
+	public void decode(long ip, InstructionOpcode opcode, MCDInputBuffer in, MCDOutputBuffer out) throws IOException {
 		X86InstructionSignature signature = this.signatures.get(X86InstructionSignature.NO_OPCODE_EXTENSION);
 		byte modrmByte = 0;
 
 		if (signature == null) {
-			modrmByte = buffer.decodeI8();
+			modrmByte = in.decodeI8();
 
 			Byte opcodeExtension = Byte.valueOf((byte) ((modrmByte >> 3) & 0x7));
 
@@ -118,7 +118,7 @@ public class X86Instruction implements Instruction {
 				throw new IOException("Failed to decode extended opcode: " + opcode + " /" + opcodeExtension);
 			}
 		} else if (signature.hasModRM()) {
-			modrmByte = buffer.decodeI8();
+			modrmByte = in.decodeI8();
 		}
 		out.printKeyword(signature.mnemonic());
 
@@ -126,7 +126,7 @@ public class X86Instruction implements Instruction {
 
 		for (OperandType operand : signature.operands()) {
 			out.print(operandIndex == 0 ? " " : ", ");
-			operand.decode(ip, modrmByte, buffer, out);
+			operand.decode(ip, modrmByte, in, out);
 			operandIndex++;
 		}
 		out.println();

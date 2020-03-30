@@ -94,12 +94,12 @@ public class BytecodeInstruction implements Instruction {
 	}
 
 	@Override
-	public void decode(long ip, InstructionOpcode opcode, MCDInputBuffer buffer, MCDOutputBuffer out)
+	public void decode(long ip, InstructionOpcode opcode, MCDInputBuffer in, MCDOutputBuffer out)
 			throws IOException {
 		if (this.operands.length > 0) {
 			out.printKeyword(this.mnemonic).print(" ");
 			for (OperandType operand : this.operands) {
-				operand.decode((int) ip, buffer, out);
+				operand.decode((int) ip, in, out);
 			}
 			out.println();
 		} else {

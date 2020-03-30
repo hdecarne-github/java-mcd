@@ -58,4 +58,23 @@ public final class X86InstructionSignature {
 		return this.operands;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder buffer = new StringBuilder();
+
+		buffer.append(this.mnemonic);
+		if (this.hasModRM) {
+			buffer.append(" ModR/M");
+		}
+
+		int operandIndex = 0;
+
+		for (OperandType operand : this.operands) {
+			buffer.append(operandIndex == 0 ? " " : ", ");
+			buffer.append(operand.name());
+			operandIndex++;
+		}
+		return buffer.toString();
+	}
+
 }

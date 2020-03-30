@@ -36,26 +36,11 @@ public interface InstructionFactory {
 	Instruction loadInstruction(DataInput in) throws IOException;
 
 	/**
-	 * Creates a default {@linkplain Instruction} instance from opcode bytes not assigned to any specific
+	 * Creates a default {@linkplain Instruction} instance for handling opcodes not assigned to any specific
 	 * {@linkplain Instruction} instance.
 	 *
-	 * @param opcode the opcode bytes to use for default {@linkplain Instruction} creation.
-	 * @param offset the offset of the first byte to use.
-	 * @param length the number of bytes to use.
 	 * @return the created default {@linkplain Instruction} instance.
-	 * @throws IOException if an I/O error occurs.
 	 */
-	Instruction getDefaultInstruction(byte[] opcode, int offset, int length) throws IOException;
-
-	/**
-	 * Gets the maximum number of opcode bytes to use for a call to
-	 * {@linkplain #getDefaultInstruction(byte[], int, int)}.
-	 *
-	 * @return the maximum number of opcode bytes to use for a call to
-	 * {@linkplain #getDefaultInstruction(byte[], int, int)}.
-	 */
-	default int getMaximumDefaultOpcodeBytes() {
-		return 16;
-	}
+	Instruction getDefaultInstruction();
 
 }

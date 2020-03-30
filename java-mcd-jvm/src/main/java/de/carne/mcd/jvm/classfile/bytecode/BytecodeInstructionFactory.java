@@ -30,8 +30,8 @@ class BytecodeInstructionFactory implements InstructionFactory {
 	}
 
 	@Override
-	public Instruction getDefaultInstruction(byte[] opcode, int offset, int length) throws IOException {
-		return new UnknownBytecodeInstruction(opcode, offset, length);
+	public Instruction getDefaultInstruction() {
+		return new UnknownBytecodeInstruction();
 	}
 
 }

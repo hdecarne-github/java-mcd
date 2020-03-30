@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import de.carne.boot.check.Check;
 import de.carne.mcd.common.bootstrap.InstructionIndexBuilder;
 import de.carne.mcd.common.instruction.Instruction;
 import de.carne.mcd.common.instruction.InstructionFactory;
@@ -54,12 +55,10 @@ class InstructionIndexTest {
 	private static final InstructionOpcode OPCODE_0201 = InstructionOpcode.wrap(new byte[] { 0x02, 0x01 });
 	private static final InstructionOpcode OPCODE_0202 = InstructionOpcode.wrap(new byte[] { 0x02, 0x02 });
 
-	private static final InstructionOpcode OPCODE_UNKNOWN1 = InstructionOpcode.wrap(new byte[] { 0x03, 0x04, 0x05, 0x06,
-			0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12 });
-	private static final InstructionOpcode OPCODE_UNKNOWN2 = InstructionOpcode.wrap(new byte[] { 0x13, 0x14 });
+	private static final InstructionOpcode OPCODE_UNKNOWN1 = InstructionOpcode.wrap(new byte[] { 0x03 });
+	private static final InstructionOpcode OPCODE_UNKNOWN2 = InstructionOpcode.wrap(new byte[] { 0x04 });
 
-	private static final byte[] TEST_CODE = { 0x00, 0x01, 0x01, 0x02, 0x01, 0x01, 0x02, 0x02, 0x02, 0x03, 0x04, 0x05,
-			0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x00 };
+	private static final byte[] TEST_CODE = { 0x00, 0x01, 0x01, 0x02, 0x01, 0x01, 0x02, 0x02, 0x02, 0x03, 0x04, 0x00 };
 
 	private static final InstructionFactory INSTRUCTION_FACTORY = new InstructionFactory() {
 
@@ -73,8 +72,8 @@ class InstructionIndexTest {
 		}
 
 		@Override
-		public Instruction getDefaultInstruction(byte[] opcode, int offset, int length) throws IOException {
-			return new TestInstruction(InstructionOpcode.wrap(opcode, offset, length));
+		public Instruction getDefaultInstruction() {
+			return new TestInstruction(InstructionOpcode.EMPTY);
 		}
 
 	};
@@ -200,6 +199,8 @@ class InstructionIndexTest {
 
 		@Override
 		public void save(DataOutput out) throws IOException {
+			Check.assertTrue(!InstructionOpcode.EMPTY.equals(this.instructionOpcode));
+
 			byte[] opcodeBytes = this.instructionOpcode.encode(1 + this.instructionOpcode.length());
 
 			out.writeInt(opcodeBytes.length);

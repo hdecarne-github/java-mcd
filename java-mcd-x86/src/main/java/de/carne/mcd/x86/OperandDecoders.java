@@ -57,21 +57,21 @@ final class OperandDecoders {
 	public static void rel8(long ip, byte modrmByte, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
 		byte value = buffer.decodeI8();
 
-		out.printValue(value >= 0 ? "+" : "").printValue(Byte.toString(value)).print(" ").printComment("// ")
+		out.printValue(value >= 0 ? "+" : "").printValue(Byte.toString(value)).print(" ").printComment("; ")
 				.printComment(Long.toHexString(ip + value));
 	}
 
 	public static void rel16(long ip, byte modrmByte, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
 		short value = buffer.decodeI16();
 
-		out.printValue(value >= 0 ? "+" : "").printValue(Short.toString(value)).print(" ").printComment("// ")
+		out.printValue(value >= 0 ? "+" : "").printValue(Short.toString(value)).print(" ").printComment("; ")
 				.printComment(Long.toHexString(ip + value));
 	}
 
 	public static void rel32(long ip, byte modrmByte, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
 		int value = buffer.decodeI32();
 
-		out.printValue(value >= 0 ? "+" : "").printValue(Integer.toString(value)).print(" ").printComment("// ")
+		out.printValue(value >= 0 ? "+" : "").printValue(Integer.toString(value)).print(" ").printComment("; ")
 				.printComment(Long.toHexString(ip + value));
 	}
 

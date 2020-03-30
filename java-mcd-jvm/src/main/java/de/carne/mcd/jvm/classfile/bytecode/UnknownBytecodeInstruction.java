@@ -27,12 +27,6 @@ import de.carne.mcd.common.io.MCDOutputBuffer;
 
 class UnknownBytecodeInstruction implements Instruction {
 
-	private final String opcodeString;
-
-	UnknownBytecodeInstruction(byte[] opcode, int offset, int length) {
-		this.opcodeString = InstructionOpcode.toString(opcode, offset, length);
-	}
-
 	@Override
 	public void save(DataOutput out) throws IOException {
 		// Should never be called
@@ -42,7 +36,7 @@ class UnknownBytecodeInstruction implements Instruction {
 	@Override
 	public void decode(long ip, InstructionOpcode opcode, MCDInputBuffer buffer, MCDOutputBuffer out)
 			throws IOException {
-		out.printlnError(this.opcodeString);
+		out.printlnError(opcode.toString());
 	}
 
 }

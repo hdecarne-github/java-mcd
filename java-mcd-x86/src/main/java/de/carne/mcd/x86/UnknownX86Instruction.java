@@ -28,13 +28,6 @@ import de.carne.text.HexFormat;
 
 class UnknownX86Instruction implements Instruction {
 
-	private final byte[] opcode;
-
-	UnknownX86Instruction(byte[] opcode, int offset, int length) {
-		this.opcode = new byte[length];
-		System.arraycopy(opcode, offset, this.opcode, 0, length);
-	}
-
 	@Override
 	public void save(DataOutput out) throws IOException {
 		// Should never be called
@@ -42,13 +35,20 @@ class UnknownX86Instruction implements Instruction {
 	}
 
 	@Override
-	public void decode(long ip, InstructionOpcode opcode, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
+	public void decode(long ip, InstructionOpcode opcode, MCDInputBuffer in, MCDOutputBuffer out) throws IOException {
+		decode(opcode, out);
+	}
+
+	public static void decode(InstructionOpcode opcode, MCDOutputBuffer out) throws IOException {
 		out.printKeyword("db");
-		for (int opcodeByteIndex = 0; opcodeByteIndex < this.opcode.length; opcodeByteIndex++) {
-			out.print(opcodeByteIndex > 0 ? ", " : " ").printValue("0x")
-					.printValue(HexFormat.LOWER_CASE.format(this.opcode[opcodeByteIndex]));
+
+		String separator = " ";
+
+		for (byte opcodeByte : opcode.bytes()) {
+			out.print(separator).printValue("0x").printValue(HexFormat.LOWER_CASE.format(opcodeByte));
+			separator = ", ";
 		}
-		out.println(";");
+		out.println();
 	}
 
 }

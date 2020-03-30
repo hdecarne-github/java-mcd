@@ -28,6 +28,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Objects;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import de.carne.boot.check.Check;
@@ -638,6 +639,12 @@ public final class MCDInputBuffer implements MCDBuffer {
 			}
 			remaining -= readLimit;
 		}
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return "commit: " + this.commitPosition + "; uncommitted: " + this.uncommittedPosition + "; total: "
+				+ this.totalRead;
 	}
 
 	@FunctionalInterface

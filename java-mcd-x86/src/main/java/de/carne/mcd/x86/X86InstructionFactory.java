@@ -30,8 +30,8 @@ class X86InstructionFactory implements InstructionFactory {
 	}
 
 	@Override
-	public Instruction getDefaultInstruction(byte[] opcode, int offset, int length) throws IOException {
-		return new UnknownX86Instruction(opcode, offset, length);
+	public Instruction getDefaultInstruction() {
+		return new UnknownX86Instruction();
 	}
 
 }

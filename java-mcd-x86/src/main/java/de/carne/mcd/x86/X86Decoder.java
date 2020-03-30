@@ -19,9 +19,11 @@ package de.carne.mcd.x86;
 import java.io.IOException;
 import java.nio.ByteOrder;
 
+import de.carne.boot.Exceptions;
 import de.carne.boot.logging.Log;
 import de.carne.mcd.common.MachineCodeDecoder;
 import de.carne.mcd.common.instruction.InstructionIndex;
+import de.carne.mcd.common.instruction.InstructionOpcode;
 import de.carne.mcd.common.io.MCDInputBuffer;
 import de.carne.mcd.common.io.MCDOutputBuffer;
 
@@ -51,14 +53,17 @@ public abstract class X86Decoder extends MachineCodeDecoder {
 			String ipString = formatInstructionPointer(ip) + ":";
 
 			out.printLabel(ipString).print(" ");
+			out.commit();
 			try {
 				lookupResult.decode(ip, in, out);
 			} catch (IOException e) {
-				String opcodeString = lookupResult.opcode().toString();
+				Exceptions.ignore(e);
 
-				LOG.warning(e, "Decode failure at {0} for opcode: {1}", ipString, opcodeString);
+				InstructionOpcode unknownOpcode = lookupResult.opcode();
 
-				out.printlnError(opcodeString);
+				in.discard(unknownOpcode.length());
+				out.discard();
+				UnknownX86Instruction.decode(unknownOpcode, out);
 			}
 			in.commit();
 			out.commit();

@@ -17,8 +17,11 @@
 package de.carne.mcd.common.io;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.Deque;
 import java.util.LinkedList;
+
+import de.carne.boot.Exceptions;
 
 /**
  * Buffered {@linkplain MCDOutput} wrapper.
@@ -26,7 +29,7 @@ import java.util.LinkedList;
 public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	private final MCDOutput out;
-	private final Deque<Entry> buffer = new LinkedList<>();
+	private final Deque<Entry> commitBuffer = new LinkedList<>();
 	private boolean autoCommit = true;
 
 	/**
@@ -48,21 +51,21 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public void discard() {
-		this.buffer.clear();
+		this.commitBuffer.clear();
 	}
 
 	@Override
 	public void commit() throws IOException {
 		Entry entry;
 
-		while ((entry = this.buffer.pollFirst()) != null) {
+		while ((entry = this.commitBuffer.pollFirst()) != null) {
 			entry.run(this.out);
 		}
 	}
 
 	@Override
 	public MCDOutput increaseIndent() throws IOException {
-		this.buffer.add(MCDOutput::increaseIndent);
+		this.commitBuffer.add(MCDOutput::increaseIndent);
 		if (this.autoCommit) {
 			commit();
 		}
@@ -71,7 +74,7 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput decreaseIndent() throws IOException {
-		this.buffer.add(MCDOutput::decreaseIndent);
+		this.commitBuffer.add(MCDOutput::decreaseIndent);
 		if (this.autoCommit) {
 			commit();
 		}
@@ -80,13 +83,13 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput println() throws IOException {
-		this.buffer.add(MCDOutput::println);
+		this.commitBuffer.add(MCDOutput::println);
 		return this;
 	}
 
 	@Override
 	public MCDOutput print(String text) throws IOException {
-		this.buffer.add(out0 -> out0.print(text));
+		this.commitBuffer.add(out0 -> out0.print(text));
 		if (this.autoCommit) {
 			commit();
 		}
@@ -95,7 +98,7 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput println(String text) throws IOException {
-		this.buffer.add(out0 -> out0.println(text));
+		this.commitBuffer.add(out0 -> out0.println(text));
 		if (this.autoCommit) {
 			commit();
 		}
@@ -104,7 +107,7 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput printValue(String value) throws IOException {
-		this.buffer.add(out0 -> out0.printValue(value));
+		this.commitBuffer.add(out0 -> out0.printValue(value));
 		if (this.autoCommit) {
 			commit();
 		}
@@ -113,7 +116,7 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput printlnValue(String value) throws IOException {
-		this.buffer.add(out0 -> out0.printlnValue(value));
+		this.commitBuffer.add(out0 -> out0.printlnValue(value));
 		if (this.autoCommit) {
 			commit();
 		}
@@ -122,7 +125,7 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput printComment(String comment) throws IOException {
-		this.buffer.add(out0 -> out0.printComment(comment));
+		this.commitBuffer.add(out0 -> out0.printComment(comment));
 		if (this.autoCommit) {
 			commit();
 		}
@@ -131,7 +134,7 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput printlnComment(String comment) throws IOException {
-		this.buffer.add(out0 -> out0.printlnComment(comment));
+		this.commitBuffer.add(out0 -> out0.printlnComment(comment));
 		if (this.autoCommit) {
 			commit();
 		}
@@ -140,7 +143,7 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput printKeyword(String keyword) throws IOException {
-		this.buffer.add(out0 -> out0.printKeyword(keyword));
+		this.commitBuffer.add(out0 -> out0.printKeyword(keyword));
 		if (this.autoCommit) {
 			commit();
 		}
@@ -149,7 +152,7 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput printlnKeyword(String keyword) throws IOException {
-		this.buffer.add(out0 -> out0.printlnKeyword(keyword));
+		this.commitBuffer.add(out0 -> out0.printlnKeyword(keyword));
 		if (this.autoCommit) {
 			commit();
 		}
@@ -158,7 +161,7 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput printOperator(String operator) throws IOException {
-		this.buffer.add(out0 -> out0.printOperator(operator));
+		this.commitBuffer.add(out0 -> out0.printOperator(operator));
 		if (this.autoCommit) {
 			commit();
 		}
@@ -167,7 +170,7 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput printlnOperator(String operator) throws IOException {
-		this.buffer.add(out0 -> out0.printlnOperator(operator));
+		this.commitBuffer.add(out0 -> out0.printlnOperator(operator));
 		if (this.autoCommit) {
 			commit();
 		}
@@ -176,7 +179,7 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput printLabel(String label) throws IOException {
-		this.buffer.add(out0 -> out0.printLabel(label));
+		this.commitBuffer.add(out0 -> out0.printLabel(label));
 		if (this.autoCommit) {
 			commit();
 		}
@@ -185,7 +188,7 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput printlnLabel(String label) throws IOException {
-		this.buffer.add(out0 -> out0.printlnLabel(label));
+		this.commitBuffer.add(out0 -> out0.printlnLabel(label));
 		if (this.autoCommit) {
 			commit();
 		}
@@ -194,7 +197,7 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput printError(String error) throws IOException {
-		this.buffer.add(out0 -> out0.printError(error));
+		this.commitBuffer.add(out0 -> out0.printError(error));
 		if (this.autoCommit) {
 			commit();
 		}
@@ -203,11 +206,25 @@ public class MCDOutputBuffer implements MCDOutput, MCDBuffer {
 
 	@Override
 	public MCDOutput printlnError(String error) throws IOException {
-		this.buffer.add(out0 -> out0.printlnError(error));
+		this.commitBuffer.add(out0 -> out0.printlnError(error));
 		if (this.autoCommit) {
 			commit();
 		}
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		StringWriter buffer = new StringWriter();
+
+		try (PlainMCDOutput bufferOut = new PlainMCDOutput(buffer, true)) {
+			for (Entry entry : this.commitBuffer) {
+				entry.run(bufferOut);
+			}
+		} catch (IOException e) {
+			Exceptions.ignore(e);
+		}
+		return buffer.toString();
 	}
 
 	@FunctionalInterface
