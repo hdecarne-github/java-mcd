@@ -48,7 +48,7 @@ subprojects {
 		exclude('**/bootstrap/**')
 		manifest {
 			attributes(
-				'Automatic-Module-Name': automaticModuleNameBase + "." + project.name.substring(rootProject.name.length() + 1),
+				'Automatic-Module-Name': (project.name.endsWith("-default") ? automaticModuleNameBase : automaticModuleNameBase + "." + project.name.substring(rootProject.name.length() + 1)),
 				'Created-By': "Gradle ${gradle.gradleVersion} (${System.properties['os.name']}:${System.properties['os.arch']}:${System.properties['os.version']})",
 				'Build-Jdk' : System.properties['java.version'],
 				'Build-Timestamp': new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ").format(new Date()),
