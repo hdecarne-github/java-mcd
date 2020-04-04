@@ -115,101 +115,211 @@ final class OperandDecoders {
 		rmXb16(modrmByte, R64_REGS, buffer, out);
 	}
 
+	public static void rm16b32(long ip, byte modrmByte, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
+		rmXb32(modrmByte, R16_REGS, buffer, out);
+	}
+
+	public static void rm32b32(long ip, byte modrmByte, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
+		rmXb32(modrmByte, R32_REGS, buffer, out);
+	}
+
+	public static void rm64b32(long ip, byte modrmByte, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
+		rmXb32(modrmByte, R64_REGS, buffer, out);
+	}
+
 	private static void rmXb16(byte modrmByte, @NonNull String[] regs, MCDInputBuffer buffer, MCDOutputBuffer out)
 			throws IOException {
-		int modrmKey = ((modrmByte >> 3) & 0x18) | (modrmByte & 0x7);
+		int modrmKey = modrmByte & 0b11000111;
 
 		switch (modrmKey) {
-		case 0x00:
+		case 0b0000000:
 			out.print("[").printKeyword("bx").printOperator("+").printKeyword("si").print("]");
 			break;
-		case 0x01:
+		case 0b0000001:
 			out.print("[").printKeyword("bx").printOperator("+").printKeyword("di").print("]");
 			break;
-		case 0x02:
+		case 0b0000010:
 			out.print("[").printKeyword("bp").printOperator("+").printKeyword("si").print("]");
 			break;
-		case 0x03:
+		case 0b0000011:
 			out.print("[").printKeyword("bp").printOperator("+").printKeyword("di").print("]");
 			break;
-		case 0x04:
+		case 0b0000100:
 			out.print("[").printKeyword("si").print("]");
 			break;
-		case 0x05:
+		case 0b0000101:
 			out.print("[").printKeyword("di").print("]");
 			break;
-		case 0x06:
+		case 0b0000110:
 			out.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI16()));
 			break;
-		case 0x07:
+		case 0b0000111:
 			out.print("[").printKeyword("bx").print("]");
 			break;
-		case 0x08:
+		case 0b0100000:
 			out.print("[").printKeyword("bx").printOperator("+").printKeyword("si").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
 			break;
-		case 0x09:
+		case 0b0100001:
 			out.print("[").printKeyword("bx").printOperator("+").printKeyword("di").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
 			break;
-		case 0x0a:
+		case 0b0100010:
 			out.print("[").printKeyword("bp").printOperator("+").printKeyword("si").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
 			break;
-		case 0x0b:
+		case 0b0100011:
 			out.print("[").printKeyword("bp").printOperator("+").printKeyword("di").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
 			break;
-		case 0x0c:
+		case 0b0100100:
 			out.print("[").printKeyword("si").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
 			break;
-		case 0x0d:
+		case 0b0100101:
 			out.print("[").printKeyword("di").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
 			break;
-		case 0x0e:
+		case 0b0100110:
 			out.print("[").printKeyword("bp").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
 			break;
-		case 0x0f:
+		case 0b0100111:
 			out.print("[").printKeyword("bx").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
 			break;
-		case 0x10:
+		case 0b1000000:
 			out.print("[").printKeyword("bx").printOperator("+").printKeyword("si").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI16()));
 			break;
-		case 0x11:
+		case 0b1000001:
 			out.print("[").printKeyword("bx").printOperator("+").printKeyword("di").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI16()));
 			break;
-		case 0x12:
+		case 0b1000010:
 			out.print("[").printKeyword("bp").printOperator("+").printKeyword("si").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI16()));
 			break;
-		case 0x13:
+		case 0b1000011:
 			out.print("[").printKeyword("bp").printOperator("+").printKeyword("di").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI16()));
 			break;
-		case 0x14:
+		case 0b1000100:
 			out.print("[").printKeyword("si").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI16()));
 			break;
-		case 0x15:
+		case 0b1000101:
 			out.print("[").printKeyword("di").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI16()));
 			break;
-		case 0x16:
+		case 0b1000110:
 			out.print("[").printKeyword("bp").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI16()));
 			break;
-		case 0x17:
+		case 0b1000111:
 			out.print("[").printKeyword("bx").print("]").printOperator("+")
 					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI16()));
 			break;
 		default:
-			out.printKeyword(regs[modrmKey & 0x7]);
+			out.printKeyword(regs[modrmKey & 0b00000111]);
+		}
+	}
+
+	private static void rmXb32(byte modrmByte, @NonNull String[] regs, MCDInputBuffer buffer, MCDOutputBuffer out)
+			throws IOException {
+		int modrmKey = modrmByte & 0b11000111;
+
+		switch (modrmKey) {
+		case 0b0000000:
+			out.print("[").printKeyword("eax").print("]");
+			break;
+		case 0b0000001:
+			out.print("[").printKeyword("ecx").print("]");
+			break;
+		case 0b0000010:
+			out.print("[").printKeyword("edx").print("]");
+			break;
+		case 0b0000011:
+			out.print("[").printKeyword("ebx").print("]");
+			break;
+		case 0b0000100:
+			out.print("[").printKeyword("?").print("]");
+			break;
+		case 0b0000101:
+			out.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI32()));
+			break;
+		case 0b0000110:
+			out.print("[").printKeyword("esi").print("]");
+			break;
+		case 0b0000111:
+			out.print("[").printKeyword("edi").print("]");
+			break;
+		case 0b0100000:
+			out.print("[").printKeyword("eax").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
+			break;
+		case 0b0100001:
+			out.print("[").printKeyword("ecx").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
+			break;
+		case 0b0100010:
+			out.print("[").printKeyword("edx").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
+			break;
+		case 0b0100011:
+			out.print("[").printKeyword("ebx").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
+			break;
+		case 0b0100100:
+			out.print("[").printKeyword("?").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
+			break;
+		case 0b0100101:
+			out.print("[").printKeyword("ebx").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
+			break;
+		case 0b0100110:
+			out.print("[").printKeyword("esi").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
+			break;
+		case 0b0100111:
+			out.print("[").printKeyword("edi").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI8()));
+			break;
+		case 0b1000000:
+			out.print("[").printKeyword("eax").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI32()));
+			break;
+		case 0b1000001:
+			out.print("[").printKeyword("ecx").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI32()));
+			break;
+		case 0b1000010:
+			out.print("[").printKeyword("edx").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI32()));
+			break;
+		case 0b1000011:
+			out.print("[").printKeyword("ebx").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI32()));
+			break;
+		case 0b1000100:
+			out.print("[").printKeyword("?").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI32()));
+			break;
+		case 0b1000101:
+			out.print("[").printKeyword("ebp").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI32()));
+			break;
+		case 0b1000110:
+			out.print("[").printKeyword("esi").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI32()));
+			break;
+		case 0b1000111:
+			out.print("[").printKeyword("edi").print("]").printOperator("+")
+					.printValue(HexFormat.LOWER_CASE.format(buffer.decodeI32()));
+			break;
+		default:
+			out.printKeyword(regs[modrmKey & 0b00000111]);
 		}
 	}
 

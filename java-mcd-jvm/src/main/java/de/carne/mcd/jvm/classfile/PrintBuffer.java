@@ -17,8 +17,8 @@
 package de.carne.mcd.jvm.classfile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Deque;
+import java.util.LinkedList;
 
 import de.carne.util.Strings;
 
@@ -27,7 +27,7 @@ import de.carne.util.Strings;
  */
 public final class PrintBuffer implements Printable {
 
-	private final List<Entry> entries = new ArrayList<>();
+	private final Deque<Entry> entries = new LinkedList<>();
 
 	/**
 	 * Prints token using default style.

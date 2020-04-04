@@ -228,8 +228,8 @@ E4;in;al,imm8
 E5;in;eax,imm8
 E6;out;imm8,al
 E7;out;imm8,eax
-E8;call;jvds
-E9;jmp;jvds
+E8;call;rel16
+E9;jmp;rel16
 EA;jmpf;ptr16:16
 EB;jmp;rel8
 EC;in;al,dx
@@ -350,22 +350,22 @@ FF;inc;/0:inc,r/m16;/1:dec,r/m16;/2:call,r/m16;/3:callf,mptp;/4:jmp,r/m16;/5:jmp
 0F 77;emms
 0F 7E;movd;ed,pq
 0F 7F;movq;qq,pq
-0F 80;jo;jvds
-0F 81;jno;jvds
-0F 82;jb;jvds
-0F 83;jnb;jvds
-0F 84;jz;jvds
-0F 85;jnz;jvds
-0F 86;jbe;jvds
-0F 87;jnbe;jvds
-0F 88;js;jvds
-0F 89;jns;jvds
-0F 8A;jp;jvds
-0F 8B;jnp;jvds
-0F 8C;jl;jvds
-0F 8D;jnl;jvds
-0F 8E;jle;jvds
-0F 8F;jnle;jvds
+0F 80;jo;rel16
+0F 81;jno;rel16
+0F 82;jb;rel16
+0F 83;jnb;rel16
+0F 84;jz;rel16
+0F 85;jnz;rel16
+0F 86;jbe;rel16
+0F 87;jnbe;rel16
+0F 88;js;rel16
+0F 89;jns;rel16
+0F 8A;jp;rel16
+0F 8B;jnp;rel16
+0F 8C;jl;rel16
+0F 8D;jnl;rel16
+0F 8E;jle;rel16
+0F 8F;jnle;rel16
 0F 90;seto;/0:seto,r/m8
 0F 91;setno;/0:setno,r/m8
 0F 92;setb;/0:setb,r/m8

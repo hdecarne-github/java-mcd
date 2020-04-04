@@ -48,6 +48,7 @@ class X86b16Mode extends X86Mode {
 		OPERAND_MAP.put("Ivs", X86Symbol.IMM16.symbol());
 
 		OPERAND_MAP.put("Ivds", X86Symbol.IMM16.symbol());
+		OPERAND_MAP.put("Jvds", X86Symbol.REL16.symbol());
 
 		OPERAND_MAP.put("Evqp", X86Symbol.RM16.symbol());
 		OPERAND_MAP.put("Gvqp", X86Symbol.R16.symbol());

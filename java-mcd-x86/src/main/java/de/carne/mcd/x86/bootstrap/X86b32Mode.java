@@ -48,6 +48,7 @@ class X86b32Mode extends X86Mode {
 		OPERAND_MAP.put("Ivs", X86Symbol.IMM32.symbol());
 
 		OPERAND_MAP.put("Ivds", X86Symbol.IMM32.symbol());
+		OPERAND_MAP.put("Jvds", X86Symbol.REL32.symbol());
 
 		OPERAND_MAP.put("Evqp", X86Symbol.RM32.symbol());
 		OPERAND_MAP.put("Gvqp", X86Symbol.R32.symbol());
