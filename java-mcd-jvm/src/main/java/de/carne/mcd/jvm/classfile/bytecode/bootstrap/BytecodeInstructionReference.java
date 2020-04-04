@@ -18,8 +18,8 @@ package de.carne.mcd.jvm.classfile.bytecode.bootstrap;
 
 import java.io.IOException;
 
-import de.carne.mcd.common.bootstrap.InstructionReference;
-import de.carne.mcd.common.bootstrap.InstructionReferenceEntry;
+import de.carne.mcd.bootstrap.InstructionReference;
+import de.carne.mcd.bootstrap.InstructionReferenceEntry;
 
 /**
  *

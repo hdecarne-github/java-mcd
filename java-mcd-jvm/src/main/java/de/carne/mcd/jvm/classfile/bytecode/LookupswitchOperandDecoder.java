@@ -19,8 +19,8 @@ package de.carne.mcd.jvm.classfile.bytecode;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-import de.carne.mcd.common.io.MCDInputBuffer;
-import de.carne.mcd.common.io.MCDOutputBuffer;
+import de.carne.mcd.io.MCDInputBuffer;
+import de.carne.mcd.io.MCDOutputBuffer;
 import de.carne.text.HexFormat;
 
 /**

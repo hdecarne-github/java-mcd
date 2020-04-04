@@ -25,9 +25,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import de.carne.mcd.common.bootstrap.InstructionReferenceEntry;
-import de.carne.mcd.common.instruction.Instruction;
-import de.carne.mcd.common.instruction.InstructionOpcode;
+import de.carne.mcd.bootstrap.InstructionReferenceEntry;
+import de.carne.mcd.instruction.Instruction;
+import de.carne.mcd.instruction.InstructionOpcode;
 import de.carne.mcd.x86.ImplicitOperandDecoder;
 import de.carne.mcd.x86.ModRMOperandType;
 import de.carne.mcd.x86.OperandType;

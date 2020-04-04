@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import de.carne.mcd.common.io.MCDOutputBuffer;
+import de.carne.mcd.io.MCDOutputBuffer;
 import de.carne.mcd.jvm.classfile.attribute.Attribute;
 import de.carne.mcd.jvm.classfile.attribute.Attributes;
 import de.carne.mcd.jvm.classfile.attribute.CodeAttribute;

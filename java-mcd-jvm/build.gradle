@@ -8,7 +8,7 @@ configurations {
 }
 
 dependencies {
-	api project(":java-mcd-common")
+	api project(":java-mcd-default")
 	implementation(group: "org.antlr", name: "antlr4-runtime", version: project.antlrVersion)
 	antlr(group: "org.antlr", name: "antlr4", version: project.antlrVersion)
 }

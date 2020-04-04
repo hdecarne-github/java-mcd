@@ -22,10 +22,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.carne.mcd.common.instruction.Instruction;
-import de.carne.mcd.common.instruction.InstructionOpcode;
-import de.carne.mcd.common.io.MCDInputBuffer;
-import de.carne.mcd.common.io.MCDOutputBuffer;
+import de.carne.mcd.instruction.Instruction;
+import de.carne.mcd.instruction.InstructionOpcode;
+import de.carne.mcd.io.MCDInputBuffer;
+import de.carne.mcd.io.MCDOutputBuffer;
 
 /**
  * A single bytecode instruction with a variable number of operands.

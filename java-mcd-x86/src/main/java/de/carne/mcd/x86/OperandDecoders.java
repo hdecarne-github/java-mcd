@@ -20,8 +20,8 @@ import java.io.IOException;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import de.carne.mcd.common.io.MCDInputBuffer;
-import de.carne.mcd.common.io.MCDOutputBuffer;
+import de.carne.mcd.io.MCDInputBuffer;
+import de.carne.mcd.io.MCDOutputBuffer;
 import de.carne.text.HexFormat;
 
 final class OperandDecoders {

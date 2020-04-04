@@ -40,6 +40,7 @@ subprojects {
 	dependencies {
 		compileOnly(group: "org.eclipse.jdt", name: "org.eclipse.jdt.annotation", version: project.annotationVersion)
 		testCompileOnly(group: "org.eclipse.jdt", name: "org.eclipse.jdt.annotation", version: project.annotationVersion)
+		implementation(group: "de.carne.common", name: "java-default", version: project.javaDefaultVersion)
 		testImplementation(group: "de.carne.common", name: "java-test", version: project.javaTestVersion)
 	}
 

@@ -19,9 +19,9 @@ package de.carne.mcd.jvm;
 import java.io.IOException;
 import java.nio.ByteOrder;
 
-import de.carne.mcd.common.MachineCodeDecoder;
-import de.carne.mcd.common.io.MCDInputBuffer;
-import de.carne.mcd.common.io.MCDOutputBuffer;
+import de.carne.mcd.MachineCodeDecoder;
+import de.carne.mcd.io.MCDInputBuffer;
+import de.carne.mcd.io.MCDOutputBuffer;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.DecodedClassInfo;
 

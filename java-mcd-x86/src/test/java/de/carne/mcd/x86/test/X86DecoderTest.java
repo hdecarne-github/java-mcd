@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 
 import de.carne.boot.logging.Log;
 import de.carne.io.IOUtil;
-import de.carne.mcd.common.io.PlainMCDOutput;
+import de.carne.mcd.io.PlainMCDOutput;
 import de.carne.mcd.x86.X86Decoder;
 import de.carne.mcd.x86.X86b16Decoder;
 import de.carne.mcd.x86.X86b32Decoder;

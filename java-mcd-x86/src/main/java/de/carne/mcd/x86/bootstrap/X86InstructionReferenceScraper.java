@@ -39,8 +39,8 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import de.carne.boot.check.Check;
 import de.carne.boot.logging.Log;
-import de.carne.mcd.common.bootstrap.InstructionReferenceEntry;
-import de.carne.mcd.common.instruction.InstructionOpcode;
+import de.carne.mcd.bootstrap.InstructionReferenceEntry;
+import de.carne.mcd.instruction.InstructionOpcode;
 import de.carne.util.Strings;
 
 final class X86InstructionReferenceScraper extends DefaultHandler implements Iterable<X86InstructionReferenceEntry> {

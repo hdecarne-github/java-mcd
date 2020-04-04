@@ -18,8 +18,8 @@ package de.carne.mcd.x86.bootstrap;
 
 import java.io.IOException;
 
-import de.carne.mcd.common.bootstrap.InstructionReference;
-import de.carne.mcd.common.bootstrap.InstructionReferenceEntry;
+import de.carne.mcd.bootstrap.InstructionReference;
+import de.carne.mcd.bootstrap.InstructionReferenceEntry;
 
 class X86InstructionReference extends InstructionReference<X86InstructionReferenceEntry> {
 

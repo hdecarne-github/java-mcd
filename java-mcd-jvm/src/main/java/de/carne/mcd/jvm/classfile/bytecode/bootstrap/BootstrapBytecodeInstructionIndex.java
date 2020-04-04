@@ -24,7 +24,7 @@ import java.util.Objects;
 
 import de.carne.boot.check.Check;
 import de.carne.boot.logging.Log;
-import de.carne.mcd.common.bootstrap.InstructionIndexBuilder;
+import de.carne.mcd.bootstrap.InstructionIndexBuilder;
 import de.carne.util.Strings;
 
 /**

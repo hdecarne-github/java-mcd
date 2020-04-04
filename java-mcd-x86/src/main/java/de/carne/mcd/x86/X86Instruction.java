@@ -24,10 +24,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.carne.mcd.common.instruction.Instruction;
-import de.carne.mcd.common.instruction.InstructionOpcode;
-import de.carne.mcd.common.io.MCDInputBuffer;
-import de.carne.mcd.common.io.MCDOutputBuffer;
+import de.carne.mcd.instruction.Instruction;
+import de.carne.mcd.instruction.InstructionOpcode;
+import de.carne.mcd.io.MCDInputBuffer;
+import de.carne.mcd.io.MCDOutputBuffer;
 
 /**
  * A single x86 instruction.

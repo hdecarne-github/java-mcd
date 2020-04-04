@@ -23,9 +23,9 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import de.carne.mcd.common.bootstrap.InstructionReferenceEntry;
-import de.carne.mcd.common.instruction.Instruction;
-import de.carne.mcd.common.instruction.InstructionOpcode;
+import de.carne.mcd.bootstrap.InstructionReferenceEntry;
+import de.carne.mcd.instruction.Instruction;
+import de.carne.mcd.instruction.InstructionOpcode;
 import de.carne.mcd.jvm.classfile.bytecode.ByteOperandType;
 import de.carne.mcd.jvm.classfile.bytecode.BytecodeInstruction;
 import de.carne.mcd.jvm.classfile.bytecode.IntOperandType;

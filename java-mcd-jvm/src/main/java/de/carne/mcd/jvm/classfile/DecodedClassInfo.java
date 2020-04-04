@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.carne.boot.logging.Log;
-import de.carne.mcd.common.io.MCDInputBuffer;
+import de.carne.mcd.io.MCDInputBuffer;
 import de.carne.mcd.jvm.classfile.attribute.Attribute;
 import de.carne.mcd.jvm.classfile.attribute.CodeAttribute;
 import de.carne.mcd.jvm.classfile.attribute.ConstantValueAttribute;

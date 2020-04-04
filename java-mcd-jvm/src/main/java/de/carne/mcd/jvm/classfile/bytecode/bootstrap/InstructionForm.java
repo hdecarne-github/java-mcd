@@ -16,7 +16,7 @@
  */
 package de.carne.mcd.jvm.classfile.bytecode.bootstrap;
 
-import de.carne.mcd.common.instruction.InstructionOpcode;
+import de.carne.mcd.instruction.InstructionOpcode;
 
 final class InstructionForm {
 

@@ -19,7 +19,7 @@ package de.carne.mcd.x86;
 import java.io.IOException;
 import java.util.Optional;
 
-import de.carne.mcd.common.instruction.InstructionIndex;
+import de.carne.mcd.instruction.InstructionIndex;
 import de.carne.text.HexFormat;
 import de.carne.util.Late;
 

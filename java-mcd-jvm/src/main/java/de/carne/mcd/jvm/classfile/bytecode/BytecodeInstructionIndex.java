@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
-import de.carne.mcd.common.instruction.InstructionIndex;
+import de.carne.mcd.instruction.InstructionIndex;
 
 /**
  * Helper class providing access to the bytecode instruction index.

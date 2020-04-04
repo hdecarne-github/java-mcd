@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.carne.mcd.common.MachineCodeDecoder;
-import de.carne.mcd.common.io.MCDInputBuffer;
-import de.carne.mcd.common.io.MCDOutputBuffer;
+import de.carne.mcd.MachineCodeDecoder;
+import de.carne.mcd.io.MCDInputBuffer;
+import de.carne.mcd.io.MCDOutputBuffer;
 
 /**
  * Possible byte operand types.

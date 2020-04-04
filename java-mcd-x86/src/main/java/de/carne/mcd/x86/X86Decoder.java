@@ -21,11 +21,11 @@ import java.nio.ByteOrder;
 
 import de.carne.boot.Exceptions;
 import de.carne.boot.logging.Log;
-import de.carne.mcd.common.MachineCodeDecoder;
-import de.carne.mcd.common.instruction.InstructionIndex;
-import de.carne.mcd.common.instruction.InstructionOpcode;
-import de.carne.mcd.common.io.MCDInputBuffer;
-import de.carne.mcd.common.io.MCDOutputBuffer;
+import de.carne.mcd.MachineCodeDecoder;
+import de.carne.mcd.instruction.InstructionIndex;
+import de.carne.mcd.instruction.InstructionOpcode;
+import de.carne.mcd.io.MCDInputBuffer;
+import de.carne.mcd.io.MCDOutputBuffer;
 
 /**
  * Common base class for all x86 machine code decoders.
