@@ -28,11 +28,12 @@ import java.util.StringTokenizer;
 import de.carne.mcd.bootstrap.InstructionReferenceEntry;
 import de.carne.mcd.instruction.Instruction;
 import de.carne.mcd.instruction.InstructionOpcode;
-import de.carne.mcd.x86.ImplicitOperandDecoder;
-import de.carne.mcd.x86.ModRMOperandType;
-import de.carne.mcd.x86.OperandType;
+import de.carne.mcd.x86.ImplicitDecoder;
+import de.carne.mcd.x86.NamedDecoder;
+import de.carne.mcd.x86.PrefixDecoder;
 import de.carne.mcd.x86.X86Instruction;
-import de.carne.mcd.x86.X86InstructionSignature;
+import de.carne.mcd.x86.X86InstructionOpcodes;
+import de.carne.mcd.x86.X86InstructionVariant;
 import de.carne.util.Strings;
 
 @SuppressWarnings("squid:S2160")
@@ -52,62 +53,67 @@ class X86InstructionReferenceEntry extends InstructionReferenceEntry {
 
 	@Override
 	public Instruction toInstruction() throws IOException {
-		Map<Byte, X86InstructionSignature> signatures = new HashMap<>();
-		List<String> signatureStrings = extraFields();
+		InstructionOpcode opcode = opcode();
+		Map<Byte, X86InstructionVariant> variants = new HashMap<>();
+		List<String> variantStrings = extraFields();
+		PrefixDecoder prefixDecoder = X86InstructionOpcodes.getPrefixDecoder(opcode);
 
-		if (!signatureStrings.isEmpty()) {
-			for (String signatureString : signatureStrings) {
-				StringTokenizer signatureTokens = new StringTokenizer(signatureString, ",");
-				Byte opcodeExtension = X86InstructionSignature.NO_OPCODE_EXTENSION;
+		if (prefixDecoder != null) {
+			List<NamedDecoder> decoders = new ArrayList<>();
+
+			decoders.add(prefixDecoder);
+			variants.put(X86InstructionVariant.NO_OPCODE_EXTENSION, new X86InstructionVariant(mnemonic(), decoders));
+		} else if (!variantStrings.isEmpty()) {
+			for (String variantString : variantStrings) {
+				StringTokenizer variantStringTokens = new StringTokenizer(variantString, ",");
+				Byte opcodeExtension = X86InstructionVariant.NO_OPCODE_EXTENSION;
 				String mnemonic = mnemonic();
-				boolean hasModRM = false;
-				List<OperandType> operands = new ArrayList<>();
+				List<NamedDecoder> decoders = new ArrayList<>();
 
-				while (signatureTokens.hasMoreElements()) {
-					String signatureToken = signatureTokens.nextToken().trim();
+				while (variantStringTokens.hasMoreElements()) {
+					String variantStringToken = variantStringTokens.nextToken().trim();
 
-					if (signatureToken.startsWith("/")) {
-						opcodeExtension = decodeOpcodeExtension(signatureToken);
-						mnemonic = decodeMnemonic(signatureToken);
+					if (variantStringToken.startsWith("/")) {
+						opcodeExtension = decodeOpcodeExtension(variantStringToken);
+						mnemonic = decodeMnemonic(variantStringToken);
 					} else {
-						OperandType operand = getOperandDecoder(signatureToken);
+						NamedDecoder decoder = getDecoder(variantStringToken);
 
-						hasModRM = operand instanceof ModRMOperandType;
-						operands.add(operand);
+						decoders.add(decoder);
 					}
 				}
-				signatures.put(opcodeExtension, new X86InstructionSignature(mnemonic, hasModRM, operands));
+				variants.put(opcodeExtension, new X86InstructionVariant(mnemonic, decoders));
 			}
 		} else {
-			signatures.put(X86InstructionSignature.NO_OPCODE_EXTENSION, new X86InstructionSignature(mnemonic(), false));
+			variants.put(X86InstructionVariant.NO_OPCODE_EXTENSION, new X86InstructionVariant(mnemonic()));
 		}
-		return new X86Instruction(signatures);
+		return new X86Instruction(variants);
 	}
 
-	private Byte decodeOpcodeExtension(String signatureToken) throws IOException {
-		int opcodeExtension = signatureToken.charAt(1) - '0';
+	private Byte decodeOpcodeExtension(String variantStringToken) throws IOException {
+		int opcodeExtension = variantStringToken.charAt(1) - '0';
 
 		if (opcodeExtension < 0 || 7 < opcodeExtension) {
-			throw new IOException("Invalid signature token: " + signatureToken);
+			throw new IOException("Invalid signature token: " + variantStringToken);
 		}
 		return Byte.valueOf((byte) opcodeExtension);
 	}
 
-	private String decodeMnemonic(String signatureToken) {
-		return signatureToken.substring(3);
+	private String decodeMnemonic(String variantStringToken) {
+		return variantStringToken.substring(3);
 	}
 
-	private OperandType getOperandDecoder(String signatureToken) {
-		OperandType decoder = null;
+	private NamedDecoder getDecoder(String variantStringToken) {
+		NamedDecoder decoder = null;
 
 		for (X86Symbol symbol : X86Symbol.values()) {
-			if (symbol.symbol().equals(signatureToken)) {
+			if (symbol.symbol().equals(variantStringToken)) {
 				decoder = symbol.decoder();
 				break;
 			}
 		}
 		if (decoder == null) {
-			decoder = ImplicitOperandDecoder.fromName(signatureToken);
+			decoder = ImplicitDecoder.getInstance(variantStringToken);
 		}
 		return decoder;
 	}

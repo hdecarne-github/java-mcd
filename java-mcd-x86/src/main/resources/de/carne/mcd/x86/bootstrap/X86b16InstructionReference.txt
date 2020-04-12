@@ -2,64 +2,46 @@
 01;add;r/m16,r16
 02;add;r8,r/m8
 03;add;r16,r/m16
-04;add;al,imm8
-05;add;ax,imm16
 06;push;es
 07;pop;es
 08;or;r/m8,r8
 09;or;r/m16,r16
 0A;or;r8,r/m8
 0B;or;r16,r/m16
-0C;or;al,imm8
-0D;or;ax,imm16
 0E;push;cs
-0F;pop;cs
 10;adc;r/m8,r8
 11;adc;r/m16,r16
 12;adc;r8,r/m8
 13;adc;r16,r/m16
-14;adc;al,imm8
-15;adc;ax,imm16
 16;push;ss
-17;pop;ss
 18;sbb;r/m8,r8
 19;sbb;r/m16,r16
 1A;sbb;r8,r/m8
 1B;sbb;r16,r/m16
-1C;sbb;al,imm8
-1D;sbb;ax,imm16
 1E;push;ds
 1F;pop;ds
 20;and;r/m8,r8
 21;and;r/m16,r16
 22;and;r8,r/m8
 23;and;r16,r/m16
-24;and;al,imm8
-25;and;ax,imm16
 26;es
 27;daa
 28;sub;r/m8,r8
 29;sub;r/m16,r16
 2A;sub;r8,r/m8
 2B;sub;r16,r/m16
-2C;sub;al,imm8
-2D;sub;ax,imm16
 2E;cs
 2F;das
 30;xor;r/m8,r8
 31;xor;r/m16,r16
 32;xor;r8,r/m8
 33;xor;r16,r/m16
-34;xor;al,imm8
-35;xor;ax,imm16
 36;ss
 37;aaa
 38;cmp;r/m8,r8
 39;cmp;r/m16,r16
 3A;cmp;r8,r/m8
 3B;cmp;r16,r/m16
-3C;cmp;al,imm8
-3D;cmp;ax,imm16
 3E;ds
 3F;aas
 40;inc;ax
@@ -100,6 +82,8 @@
 63;arpl;r/m16,r16
 64;fs
 65;gs
+66;-
+67;-
 68;push;imm16
 69;imul;r16,r/m16,imm16
 6A;push;imm8
@@ -140,14 +124,7 @@
 8D;lea;r16,m
 8E;mov;Sreg,r/m16
 8F;pop;/0:pop,r/m16
-90;xchg;ax,ax
-91;xchg;cx,ax
-92;xchg;dx,ax
-93;xchg;bx,ax
-94;xchg;sp,ax
-95;xchg;bp,ax
-96;xchg;si,ax
-97;xchg;di,ax
+90;nop
 98;cbw
 99;cwd
 9A;callf;ptr16:16
@@ -164,8 +141,6 @@ A4;movs;es:[di],ds:[si]
 A5;movs;es:[di],ds:[si]
 A6;cmps;es:[di],ds:[si]
 A7;cmps;es:[di],ds:[si]
-A8;test;al,imm8
-A9;test;ax,imm16
 AA;stos;es:[di]
 AB;stos;es:[di]
 AC;lods;ds:[si]
@@ -247,17 +222,13 @@ F7;test;/0:test,r/m16,imm16;/1:test,r/m16,imm16;/2:not,r/m16;/3:neg,r/m16;/4:mul
 F8;clc
 F9;stc
 FA;cli
-FB;sti
 FC;cld
 FD;std
 FE;inc;/0:inc,r/m8;/1:dec,r/m8
 FF;inc;/0:inc,r/m16;/1:dec,r/m16;/2:call,r/m16;/3:callf,mptp;/4:jmp,r/m16;/5:jmpf,mptp;/6:push,r/m16
 0F 00;jmpe;/6:jmpe
-0F 01;sgdt;/0:sgdt,ms;/1:sidt,ms;/2:lgdt,ms;/3:lidt,ms;/4:smsw,r/m16;/6:lmsw,r/m16;/7:invlpg,m
+0F 01;sgdt;/0:sgdt,ms;/1:sidt,ms;/4:smsw,r/m16
 0F 06;clts
-0F 08;invd
-0F 09;wbinvd
-0F 0B;ud2
 0F 0D;nop;r/m16
 0F 10;movups;vps,wps
 0F 11;movups;wps,vps
@@ -277,8 +248,6 @@ FF;inc;/0:inc,r/m16;/1:dec,r/m16;/2:call,r/m16;/3:callf,mptp;/4:jmp,r/m16;/5:jmp
 0F 1F;hint_nop;r/m16
 0F 20;mov;rd,cd
 0F 21;mov;rd,dd
-0F 22;mov;cd,rd
-0F 23;mov;dd,rd
 0F 24;mov;rd,td
 0F 26;mov;td,rd
 0F 28;movaps;vps,wps
@@ -289,7 +258,6 @@ FF;inc;/0:inc,r/m16;/1:dec,r/m16;/2:call,r/m16;/3:callf,mptp;/4:jmp,r/m16;/5:jmp
 0F 2D;cvtps2pi;ppi,wpsq
 0F 2E;ucomiss;vss,wss
 0F 2F;comiss;vss,wss
-0F 30;wrmsr
 0F 31;rdtsc
 0F 32;rdmsr
 0F 33;rdpmc
@@ -384,7 +352,6 @@ FF;inc;/0:inc,r/m16;/1:dec,r/m16;/2:call,r/m16;/3:callf,mptp;/4:jmp,r/m16;/5:jmp
 0F 9F;setnle;/0:setnle,r/m8
 0F A0;push;fs
 0F A1;pop;fs
-0F A2;cpuid
 0F A3;bt;r/m16,r16
 0F A4;shld;r/m16,r16,imm8
 0F A5;shld;r/m16,r16,cl
@@ -404,7 +371,6 @@ FF;inc;/0:inc,r/m16;/1:dec,r/m16;/2:call,r/m16;/3:callf,mptp;/4:jmp,r/m16;/5:jmp
 0F B6;movzx;r16,r/m8
 0F B7;movzx;r16,r/m16
 0F B8;jmpe
-0F B9;ud;g,e
 0F BA;bt;/4:bt,r/m16,imm8;/5:bts,r/m16,imm8;/6:btr,r/m16,imm8;/7:btc,r/m16,imm8
 0F BB;btc;r/m16,r16
 0F BC;bsf;r16,r/m16
@@ -506,11 +472,11 @@ D9 FD;fscale;/7:fscale
 D9 FE;fsin;/7:fsin
 D9 FF;fcos;/7:fcos
 DA E9;fucompp;/5:fucompp
-DB E0;fneni;/4:fneni;/4:fneni
-DB E1;fndisi;/4:fndisi;/4:fndisi
+DB E0;fneni;/4:fneni
+DB E1;fndisi;/4:fndisi
 DB E2;fnclex;/4:fnclex
 DB E3;fninit;/4:fninit
-DB E4;fnsetpm;/4:fnsetpm;/4:fnsetpm
+DB E4;fnsetpm;/4:fnsetpm
 DD E1;fucom;/4:fucom
 DD E9;fucomp;/5:fucomp
 DE C1;faddp;/0:faddp
@@ -521,12 +487,11 @@ DE E9;fsubp;/5:fsubp
 DE F1;fdivrp;/6:fdivrp
 DE F9;fdivp;/7:fdivp
 DF E0;fnstsw;/4:fnstsw,ax
-F3 90;nop
+F3 90;pause
 0F 01 C8;monitor;/1:monitor
 0F 01 C9;mwait;/1:mwait
 0F 01 D0;xgetbv;/2:xgetbv
 0F 01 D1;xsetbv;/2:xsetbv
-0F 01 F9;rdtscp;/7:rdtscp
 0F 38 00;pshufb;pq,qq
 0F 38 01;phaddw;pq,qq
 0F 38 02;phaddd;pq,qq

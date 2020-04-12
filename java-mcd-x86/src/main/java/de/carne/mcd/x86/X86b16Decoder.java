@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.Optional;
 
 import de.carne.mcd.instruction.InstructionIndex;
-import de.carne.text.HexFormat;
 import de.carne.util.Late;
 
 /**
@@ -40,7 +39,7 @@ public class X86b16Decoder extends X86Decoder {
 	 * Constructs a new {@linkplain X86b16Decoder} instance.
 	 */
 	public X86b16Decoder() {
-		super(NAME);
+		super(NAME, X86DecoderState.x86b16());
 	}
 
 	@Override
@@ -58,11 +57,6 @@ public class X86b16Decoder extends X86Decoder {
 			}
 		}
 		return instructionIndex;
-	}
-
-	@Override
-	protected String formatInstructionPointer(long ip) {
-		return HexFormat.LOWER_CASE.format((short) ip);
 	}
 
 }

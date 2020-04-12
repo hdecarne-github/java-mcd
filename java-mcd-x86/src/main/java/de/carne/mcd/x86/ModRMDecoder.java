@@ -22,29 +22,53 @@ import de.carne.mcd.io.MCDInputBuffer;
 import de.carne.mcd.io.MCDOutputBuffer;
 
 /**
- *
+ * ModR/M operand decoder.
  */
-public enum ModRMOperandType implements OperandType {
+public enum ModRMDecoder implements NamedDecoder {
 
-	R8(OperandDecoders::r8),
+	/**
+	 * r8
+	 */
+	R8(Decoders::r8),
 
-	R16(OperandDecoders::r16),
+	/**
+	 * r16
+	 */
+	R16(Decoders::r16),
 
-	R32(OperandDecoders::r32),
+	/**
+	 * r32
+	 */
+	R32(Decoders::r32),
 
-	R64(OperandDecoders::r64),
+	/**
+	 * r64
+	 */
+	R64(Decoders::r64),
 
-	RM8(OperandDecoders::rm8b16),
+	/**
+	 * rm8
+	 */
+	RM8(Decoders::rm8),
 
-	RM16(OperandDecoders::rm16b16),
+	/**
+	 * rm16
+	 */
+	RM16(Decoders::rm16),
 
-	RM32(OperandDecoders::rm32b16),
+	/**
+	 * rm32
+	 */
+	RM32(Decoders::rm32),
 
-	RM64(OperandDecoders::rm64b16);
+	/**
+	 * rm64
+	 */
+	RM64(Decoders::rm64);
 
-	private final OperandDecoder decoder;
+	private final Decoder decoder;
 
-	private ModRMOperandType(OperandDecoder decoder) {
+	private ModRMDecoder(Decoder decoder) {
 		this.decoder = decoder;
 	}
 
@@ -54,8 +78,8 @@ public enum ModRMOperandType implements OperandType {
 	}
 
 	@Override
-	public void decode(long ip, byte modrmByte, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
-		this.decoder.decode(ip, modrmByte, buffer, out);
+	public void decode(X86DecoderState decoderState, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
+		this.decoder.decode(decoderState, buffer, out);
 	}
 
 }

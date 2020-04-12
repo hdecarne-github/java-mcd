@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.nio.ByteOrder;
 
 import de.carne.boot.Exceptions;
-import de.carne.boot.logging.Log;
 import de.carne.mcd.MachineCodeDecoder;
 import de.carne.mcd.instruction.InstructionIndex;
+import de.carne.mcd.instruction.InstructionIndex.LookupResult;
 import de.carne.mcd.instruction.InstructionOpcode;
 import de.carne.mcd.io.MCDInputBuffer;
 import de.carne.mcd.io.MCDOutputBuffer;
@@ -32,30 +32,53 @@ import de.carne.mcd.io.MCDOutputBuffer;
  */
 public abstract class X86Decoder extends MachineCodeDecoder {
 
-	private static final Log LOG = new Log();
-
 	private static final long DECODE_LIMIT = 0x1000;
 
-	protected X86Decoder(String name) {
+	private final X86DecoderState decoderState;
+
+	protected X86Decoder(String name, X86DecoderState decoderState) {
 		super(name, ByteOrder.LITTLE_ENDIAN, DECODE_LIMIT);
+		this.decoderState = decoderState;
+	}
+
+	/**
+	 * Gets this {@linkplain X86Decoder} instance's current state.
+	 *
+	 * @return this {@linkplain X86Decoder} instance's current state.
+	 */
+	public X86DecoderState state() {
+		return this.decoderState;
 	}
 
 	@Override
 	protected long decode0(MCDInputBuffer in, MCDOutputBuffer out, long offset, long limit) throws IOException {
 		InstructionIndex instructionIndex = getInstructionIndex();
 		InstructionIndex.LookupResult lookupResult;
-		long ip = offset;
-		long ipLimit = offset + limit;
+		long instructionPointerBase = offset - in.getTotalRead();
+		long instructionPointerLimit = offset + limit;
+		long instructionPointer;
 
 		in.setAutoCommit(false);
 		out.setAutoCommit(false);
-		while (ip < ipLimit && (lookupResult = instructionIndex.lookupNextInstruction(in, true)) != null) {
-			String ipString = formatInstructionPointer(ip) + ":";
+		while ((instructionPointer = this.decoderState.reset(instructionPointerBase,
+				in.getTotalRead())) < instructionPointerLimit
+				&& (lookupResult = instructionIndex.lookupNextInstruction(in, true)) != null) {
+			String ipString = this.decoderState.addressFormat().apply(instructionPointer) + ":";
 
 			out.printLabel(ipString).print(" ");
 			out.commit();
 			try {
-				lookupResult.decode(ip, in, out);
+				lookupResult.decode(instructionPointer, in, out);
+
+				LookupResult lastLookupResult = lookupResult;
+
+				while (X86InstructionOpcodes.isPrefix(lastLookupResult.opcode())) {
+					lastLookupResult = instructionIndex.lookupNextInstruction(in, true);
+					if (lastLookupResult == null) {
+						throw new IOException();
+					}
+					lastLookupResult.decode(instructionPointer, in, out);
+				}
 			} catch (IOException e) {
 				Exceptions.ignore(e);
 
@@ -67,13 +90,10 @@ public abstract class X86Decoder extends MachineCodeDecoder {
 			}
 			in.commit();
 			out.commit();
-			ip = offset + in.getTotalRead();
 		}
 		return in.getTotalRead();
 	}
 
 	protected abstract InstructionIndex getInstructionIndex() throws IOException;
-
-	protected abstract String formatInstructionPointer(long ip);
 
 }

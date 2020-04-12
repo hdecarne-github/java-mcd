@@ -79,6 +79,8 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 	private int priOpcode = -1;
 	// x86reference/*/pri_opcd/entry
 	private String mode = InstructionReferenceEntry.NO_VALUE;
+	private String attr = InstructionReferenceEntry.NO_VALUE;
+	private String ref = InstructionReferenceEntry.NO_VALUE;
 	private String sFlag = InstructionReferenceEntry.NO_VALUE;
 	private String dFlag = InstructionReferenceEntry.NO_VALUE;
 	private String rFlag = InstructionReferenceEntry.NO_VALUE;
@@ -130,6 +132,8 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 
 	private void resetEntry() {
 		this.mode = "r";
+		this.attr = InstructionReferenceEntry.NO_VALUE;
+		this.ref = InstructionReferenceEntry.NO_VALUE;
 		this.sFlag = InstructionReferenceEntry.NO_VALUE;
 		this.dFlag = InstructionReferenceEntry.NO_VALUE;
 		this.rFlag = InstructionReferenceEntry.NO_VALUE;
@@ -283,18 +287,26 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 
 	private void startEntryElement(Attributes attributes) {
 		this.mode = getOptionalAttribute(attributes, "mode", this.mode);
+		this.attr = getOptionalAttribute(attributes, "attr", this.attr);
+		this.ref = getOptionalAttribute(attributes, "ref", this.ref);
 		this.dFlag = getOptionalAttribute(attributes, "direction", this.dFlag);
 		this.sFlag = getOptionalAttribute(attributes, "op_size", this.sFlag);
 		this.rFlag = getOptionalAttribute(attributes, "r", this.rFlag);
 	}
 
 	private void endEntryElement() {
-		if (this.mnemonic.equals(InstructionReferenceEntry.NO_VALUE)) {
-			X86InstructionReferenceEntry entry = this.entries.getLast();
+		InstructionOpcode opcode = getOpcode();
 
-			if ("e".equals(this.mode)) {
-				entry.disableX86b64();
-			}
+		if ("e".equals(this.mode)) {
+			this.entries.stream().filter(entry -> entry.opcode().equals(opcode) && entry.isX86b32()).forEach(prev -> {
+				prev.disableX86b64();
+			});
+		} else if ("invd".equals(this.attr)) {
+			this.entries.stream().filter(entry -> entry.opcode().equals(opcode)).forEach(prev -> {
+				prev.disableX86b16();
+				prev.disableX86b32();
+				prev.disableX86b64();
+			});
 		}
 		resetEntry();
 	}
@@ -340,7 +352,8 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 	}
 
 	private void endSyntaxElement() {
-		if (!this.mnemonic.equals(InstructionReferenceEntry.NO_VALUE) && this.syntaxCount == 1) {
+		if (InstructionReferenceEntry.NO_VALUE.equals(this.attr) && InstructionReferenceEntry.NO_VALUE.equals(this.ref)
+				&& this.syntaxCount == 1) {
 			InstructionOpcode opcode = getOpcode();
 
 			for (String expandedSignature : expandSignature()) {
@@ -359,7 +372,7 @@ final class X86InstructionReferenceScraper extends DefaultHandler implements Ite
 					entry.disableX86b32();
 					entry.disableX86b64();
 				}
-				this.entries.add(entry);
+				this.entries.addLast(entry);
 				opcode = nextOpcode(opcode);
 			}
 		}

@@ -7,82 +7,76 @@
 000c: int 0x21
 000e: push sp
 000f: push 0x7369
-0012: and [bx+si]+6f72, dh
-0016: db 0x67
-0017: jb +97 ; 78
-0019: ins ?, dx
-001a: and [bp+di]+6e61, ah
-001e: outs dx, ?
-001f: outs dx, ?
-0020: jz +32 ; 40
-0022: bound sp, ?
-0024: and [bp+si]+6e75, dh
-0028: and [bx+di]+206e, ch
-002c: inc sp
-002d: dec di
+0012: and [bx+si+114], dh
+0015: outs dx, ds:[si]
+0016: jb +97 ; 007a
+0019: ins es:[di], dx
+001a: and [bp+di+97], ah
+001d: outs dx, ds:[si]
+001e: outs dx, ds:[si]
+001f: outs dx, ds:[si]
+0020: jz +32 ; 0042
+0022: bound sp, m16
+0024: and [bp+si+117], dh
+0027: outs dx, ds:[si]
+0028: and [bx+di+110], ch
+002b: and [si+79], al
 002e: push bx
-002f: and [di]+646f, ch
-0033: gs
-0034: cs
-0035: or ax, 0x0a0d
-0038: and al, 0x00
-003a: add [bx+si], al
-003c: add [bx+si], al
-003e: add [bx+si], al
-0040: jle -6 ; 3a
+002f: and [di+111], ch
+0032: db 0x0d
+0036: db 0x0d
+0037: or ah, [si]
+0039: add [bx+si], al
+003b: add [bx+si], al
+003d: add [bx+si], al
+003f: add [bp-6], bh
 0042: add dl, al
-0044: cmp bl, bl
-0046: ins ?, dx
-0047: cmp [bp+si], 0x9b
-004a: ins ?, dx
-004b: cmp [bp+si], 0x9b
-004e: ins ?, dx
-004f: add di, 0xd4
+0044: cmp bl, [bp+di-31892]
+0048: cmp bl, [bp+di-31892]
+004c: cmp bl, [bp+di-31892]
+0050: xchg dx, sp
 0052: cli
-0053: xor 6c9b, 0x83
+0053: xor [0x6c9b], 0x83
 0058: xor sp, bx
 005a: stc
 005b: and [bx], 0x9b
-005e: ins ?, dx
+005e: ins es:[di], dx
 005f: sbb [di], 0x5d
-0062: add bx, ax
-0064: cmp bx, bx
-0066: ins ?, dx
+0062: add [bp+di-25799], ax
+0066: ins es:[di], dx
 0067: sbb [di], 0x5d
-006a: add al, bl
-006c: cmp bx, bx
-006e: ins ?, dx
+006a: add al, [bp+di-25797]
+006e: ins es:[di], dx
 006f: sbb [di], 0x5d
-0072: pop ss
+0072: db 0x17
 0073: xor [bx+di], 0x9b
-0076: ins ?, dx
+0076: ins es:[di], dx
 0077: cmp [bp+si], 0x9b
-007a: ins ?, dx
+007a: ins es:[di], dx
 007b: cmp [bp+di], 0x9a
-007e: ins ?, dx
+007e: ins es:[di], dx
 007f: xor [bp+di], 0xe3
 0082: out dx, eax
 0083: xor di, 0x9b
-0086: ins ?, dx
+0086: ins es:[di], dx
 0087: xor [bp+di], 0xe3
-008a: call +23683 ; 5d0d
+008a: call +23683 ; 5d10
 008d: fwait
-008e: ins ?, dx
+008e: ins es:[di], dx
 008f: xor [bp+di], 0xe3
-0092: inc bl
-0094: cmp bx, bx
-0096: ins ?, dx
+0092: inc [bp+di-25797]
+0096: ins es:[di], dx
 0097: xor [bp+di], 0xe3
 009a: clc
 009b: cmp [bp+di], 0x9b
-009e: ins ?, dx
+009e: ins es:[di], dx
 009f: xor [bp+di], 0xe3
 00a2: std
 00a3: cmp [bp+di], 0x9b
-00a6: ins ?, dx
-00a7: adc [bp+si]+6369, 0x68
-00ac: cmp bl, bl
-00ae: ins ?, dx
+00a6: ins es:[di], dx
+00a7: adc [bp+si+105], 0x63
+00ab: push 0x9b3a
+00ae: ins es:[di], dx
 00af: add [bx+si], 0x00
 00b2: add [bx+si], al
 00b4: add [bx+si], al

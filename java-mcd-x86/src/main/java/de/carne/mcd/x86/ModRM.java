@@ -16,13 +16,26 @@
  */
 package de.carne.mcd.x86;
 
-/**
- *
- */
-public interface OperandType extends OperandDecoder {
+final class ModRM {
 
-	char type();
+	public static final ModRM NOT_PRESENT = new ModRM(-1);
 
-	String name();
+	private final int value;
+
+	ModRM(int value) {
+		this.value = value;
+	}
+
+	public int regOrOpcodeIndex() {
+		return (this.value >> 3) & 0b111;
+	}
+
+	public int modRMIndex() {
+		return (this.value >> 3 & 0b11000) | (this.value & 0b00111);
+	}
+
+	public int rmIndex() {
+		return (this.value & 0b00111);
+	}
 
 }

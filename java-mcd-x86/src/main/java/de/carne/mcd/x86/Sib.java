@@ -16,17 +16,24 @@
  */
 package de.carne.mcd.x86;
 
-import java.io.IOException;
+final class Sib {
 
-import de.carne.mcd.io.MCDInputBuffer;
-import de.carne.mcd.io.MCDOutputBuffer;
+	private final int value;
 
-/**
- *
- */
-@FunctionalInterface
-public interface OperandDecoder {
+	Sib(int value) {
+		this.value = value;
+	}
 
-	void decode(long ip, byte modrmByte, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException;
+	public int baseIndex() {
+		return this.value & 0b111;
+	}
+
+	public int indexIndex() {
+		return (this.value >> 3) & 0b00111;
+	}
+
+	public int ss() {
+		return (this.value >> 6) & 0b11;
+	}
 
 }

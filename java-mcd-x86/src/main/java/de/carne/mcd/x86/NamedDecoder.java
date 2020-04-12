@@ -16,41 +16,23 @@
  */
 package de.carne.mcd.x86;
 
-import java.io.IOException;
-
-import de.carne.mcd.io.MCDInputBuffer;
-import de.carne.mcd.io.MCDOutputBuffer;
-
 /**
- *
+ * A named {@linkplain Decoder} to be stored and loaded from an instruction index.
  */
-public class ImplicitOperandDecoder implements OperandType {
+public interface NamedDecoder extends Decoder {
 
-	public static final char TAG = '*';
+	/**
+	 * Gets this decoder's type tag.
+	 * 
+	 * @return this decoder's type tag.
+	 */
+	char type();
 
-	private final String name;
-
-	private ImplicitOperandDecoder(String name) {
-		this.name = name;
-	}
-
-	public static ImplicitOperandDecoder fromName(String name) {
-		return new ImplicitOperandDecoder(name);
-	}
-
-	@Override
-	public char type() {
-		return TAG;
-	}
-
-	@Override
-	public String name() {
-		return this.name;
-	}
-
-	@Override
-	public void decode(long ip, byte modrmByte, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
-		out.print(this.name);
-	}
+	/**
+	 * Gets this decoder's name.
+	 * 
+	 * @return this decoder's name.
+	 */
+	String name();
 
 }

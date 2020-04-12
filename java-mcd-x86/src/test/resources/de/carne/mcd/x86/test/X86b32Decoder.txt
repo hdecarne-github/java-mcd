@@ -1,46 +1,40 @@
 00000000: push ebp
 00000001: mov ebp, esp
-00000003: push [di]+ff14
-00000007: jnz +16 ; 17
-00000009: push [di]+ff0c
-0000000d: jnz +8 ; 15
-0000000f: call -5705 ; ffffffffffffe9c6
-00000012: add [bx+si], eax
-00000014: mov eax, [di]+8308
-00000018: les edx, ?
+00000003: push [ebp+20]
+00000006: push [ebp+16]
+00000009: push [ebp+12]
+0000000c: push [ebp+8]
+0000000f: call +125367 ; 0001e9cb
+00000014: mov eax, [ebp+8]
+00000017: add esp, 0x10
 0000001a: pop ebp
 0000001b: retn
 0000001c: push ebp
 0000001d: mov ebp, esp
-0000001f: push [di]+ff14
-00000023: jnz +16 ; 33
-00000025: push [di]+ff0c
-00000029: jnz +8 ; 31
-0000002b: call -5608 ; ffffffffffffea43
-0000002e: add [bx+si], eax
-00000030: mov eax, [di]+8308
-00000034: les edx, ?
+0000001f: push [ebp+20]
+00000022: push [ebp+16]
+00000025: push [ebp+12]
+00000028: push [ebp+8]
+0000002b: call +125464 ; 0001ea48
+00000030: mov eax, [ebp+8]
+00000033: add esp, 0x10
 00000036: pop ebp
 00000037: retn
-00000038: mov [bx+di], 0x0043a44c
-0000003e: jmp -5312 ; ffffffffffffeb7e
-00000041: add [bx+si], eax
+00000038: mov [ecx], 0x0043a44c
+0000003e: jmp +125760 ; 0001eb83
 00000043: push esi
 00000044: mov esi, ecx
-00000046: mov a44c, 0x32e80043
-0000004e: jmp +1 ; 4f
-00000050: add dh, dh
-00000052: inc esp
-00000053: and al, 0x08
-00000055: add [si]+5607, esi
-00000059: call -5190 ; ffffffffffffec13
-0000005c: add [bx+si], eax
+00000046: mov [esi], 0x0043a44c
+0000004c: call +125746 ; 0001eb83
+00000051: test [ah+8], 0x01
+00000056: jz +7 ; 0000005f
+00000058: push esi
+00000059: call +125882 ; 0001ec18
 0000005e: pop ecx
 0000005f: mov eax, esi
 00000061: pop esi
 00000062: retn 0x0004
-00000065: mov eax, ?
-00000066: add [bp]+0045, bl
+00000065: mov eax, [0x455e00]
 0000006a: retn
 0000006b: push esi
 0000006c: push 0x00
@@ -49,37 +43,25 @@
 00000075: push 0x00
 00000077: push 0x03
 00000079: push 0x80000000
-0000007e: call +17357 ; 444b
-00000081: add [bx+si], al
+0000007e: call +17357 ; 00004450
 00000083: push eax
-00000084: call [di]
-00000086: pop eax
-00000087: mov eax, ?
-00000088: inc ebx
-00000089: add bl, cl
-0000008b: lock
+00000084: call [0x0043a158]
+0000008a: mov esi, eax
 0000008c: test esi, esi
-0000008e: jz +5 ; 93
+0000008e: jz +5 ; 00000095
 00000090: cmp esi, 0xff
-00000093: jnz +41 ; bc
+00000093: jnz +41 ; 000000be
 00000095: push edi
-00000096: call [di]
-00000098: push esp
-00000099: mov eax, ?
-0000009a: inc ebx
-0000009b: add bl, cl
-0000009d: clc
-0000009e: call +17325 ; 444b
-000000a1: add [bx+si], al
+00000096: call [0x0043a154]
+0000009c: mov edi, eax
+0000009e: call +17325 ; 00004450
 000000a3: push eax
 000000a4: push edi
 000000a5: push esi
 000000a6: push 0x0043a488
-000000ab: call -20482 ; ffffffffffffb0a9
-000000ae: add [bx+si], al
+000000ab: call +45054 ; 0000b0ae
 000000b0: push 0x0043a454
-000000b5: call +11978 ; 2f7f
-000000b8: add [bx+si], al
+000000b5: call +11978 ; 00002f84
 000000ba: add esp, 0x14
 000000bd: pop edi
 000000be: mov eax, esi
@@ -87,75 +69,55 @@
 000000c1: retn
 000000c2: push esi
 000000c3: push 0x03
-000000c5: call -6365 ; ffffffffffffe7e8
-000000c8: add [bx+si], eax
-000000ca: mov esi, [si]+0c24
+000000c5: call +124707 ; 0001e7ed
+000000ca: mov esi, [esp+12]
 000000ce: push 0x02
 000000d0: push esi
 000000d1: push eax
-000000d2: mov ?, eax
-000000d3: or al, 0x5e
-000000d5: inc ebp
-000000d6: add al, ch
-000000d8: push esp
-000000d9: jmp +1 ; da
-000000db: add cl, ah
-000000dd: or al, 0x5e
-000000df: inc ebp
-000000e0: add [bp]+40c6, dl
-000000e4: add al, [bx+si]
-000000e6: call -6059 ; ffffffffffffe93b
-000000e9: add [bx+si], eax
+000000d2: mov [0x455e0c], eax
+000000d7: call +125780 ; 0001ec30
+000000dc: mov eax, [0x455e0c]
+000000e1: push esi
+000000e2: mov [eax+2], 0x00
+000000e6: call +125013 ; 0001e940
 000000eb: add esp, 0x14
 000000ee: cmp eax, 0x05
-000000f1: jnz +46 ; 11f
-000000f3: mov eax, ?
-000000f4: add al, 0x5e
-000000f6: inc ebp
-000000f7: add ch, al
-000000f9: sal [di]+6a0d, 0x03
-000000fe: call -6422 ; ffffffffffffe7e8
-00000101: add [bx+si], eax
+000000f1: jnz +46 ; 00000121
+000000f3: mov eax, [0x455e04]
+000000f8: test eax, eax
+000000fa: jnz +13 ; 00000109
+000000fc: push 0x03
+000000fe: call +124650 ; 0001e7ed
 00000103: pop ecx
-00000104: mov ?, eax
-00000105: add al, 0x5e
-00000107: inc ebp
-00000108: add [bp+si]+8302, ch
-0000010c: mov [bp+di], 0x56
+00000104: mov [0x455e04], eax
+00000109: push 0x02
+0000010b: add esi, 0x03
+0000010e: push esi
 0000010f: push eax
-00000110: call -5349 ; ffffffffffffec2b
-00000113: add [bx+si], eax
-00000115: mov eax, ?
-00000116: add al, 0x5e
-00000118: inc ebp
-00000119: add bl, al
-0000011b: les ecx, ?
-0000011d: mov [bx+si]+0002, 0x5e
+00000110: call +125723 ; 0001ec30
+00000115: mov eax, [0x455e04]
+0000011a: add esp, 0x0c
+0000011d: mov [eax+2], 0x00
+00000121: pop esi
 00000122: retn
-00000123: mov eax, ?
-00000124: or al, 0x5e
-00000126: inc ebp
-00000127: add ch, al
-00000129: sal [si]+500f, 0xff
-0000012e: jz +36 ; 152
-00000130: or al, ch
-00000132: sub ch, ah
-00000134: add [bx+si], eax
+00000123: mov eax, [0x455e0c]
+00000128: test eax, eax
+0000012a: jz +15 ; 0000013b
+0000012c: push eax
+0000012d: push [esp+8]
+00000131: call +125994 ; 0001ed60
 00000136: pop ecx
 00000137: pop ecx
 00000138: mov al, 0x01
 0000013a: retn
 0000013b: xor al, al
 0000013d: retn
-0000013e: mov eax, ?
-0000013f: add al, 0x5e
-00000141: inc ebp
-00000142: add ch, al
-00000144: sal [si]+500f, 0xff
-00000149: jz +36 ; 16d
-0000014b: or al, ch
-0000014d: paddsb pq, qq
-0000014f: add [bx+si], eax
+0000013e: mov eax, [0x455e04]
+00000143: test eax, eax
+00000145: jz +15 ; 00000156
+00000147: push eax
+00000148: push [esp+8]
+0000014c: call +125967 ; 0001ed60
 00000151: pop ecx
 00000152: pop ecx
 00000153: mov al, 0x01
@@ -166,12 +128,9 @@
 0000015a: push ebx
 0000015b: push ebp
 0000015c: push esi
-0000015d: mov esi, [di]
-0000015f: pop esp
-00000160: mov eax, ?
-00000161: inc ebx
-00000162: add [bx]+7c8b, dl
-00000166: and al, 0x18
+0000015d: mov esi, [0x0043a15c]
+00000163: push edi
+00000164: mov edi, [esp+24]
 00000168: xor ebp, ebp
 0000016a: push ebp
 0000016b: push ebp
@@ -179,56 +138,45 @@
 0000016e: push edi
 0000016f: call esi
 00000171: push edi
-00000172: call +12626 ; 32c4
-00000175: add [bx+si], al
+00000172: call +12626 ; 000032c9
 00000177: pop ecx
 00000178: mov ebx, eax
 0000017a: push ebp
 0000017b: add ebx, 0x04
 0000017e: push ebp
-0000017f: lea eax, ?
-00000181: add dl, [bx+si]+ff57
+0000017f: lea eax, [ebp-11055102]
 00000185: salc
 00000186: push edi
-00000187: call +12679 ; 330e
-0000018a: add [bx+si], al
+00000187: call +12679 ; 00003313
 0000018c: movsx ebp, ax
 0000018f: push ebp
 00000190: push 0x0043a570
-00000195: call -20611 ; ffffffffffffb112
-00000198: add [bx+si], al
+00000195: call +44925 ; 0000b117
 0000019a: add esp, 0x0c
 0000019d: push 0x00
 0000019f: push 0x00
-000001a1: lea eax, ?
-000001a3: adc [bx+si]+ff57, dl
+000001a1: lea eax, [ebp-11055088]
 000001a7: salc
 000001a8: push edi
-000001a9: call +12645 ; 330e
-000001ac: add [bx+si], al
+000001a9: call +12645 ; 00003313
 000001ae: cbw
 000001af: push eax
 000001b0: push 0x0043a534
-000001b5: mov [si]+1c24, eax
-000001b9: call -20647 ; ffffffffffffb112
-000001bc: add [bx+si], al
+000001b5: mov [esp+28], eax
+000001b9: call +44889 ; 0000b117
 000001be: imul ebp, ebp, 0x28
-000001c1: add ebp, [si]+1c24
-000001c5: lea ebx, ?
-000001c7: sub ebp, esp
-000001c9: push ebx
-000001ca: push 0x0043a500
-000001cf: call -20669 ; ffffffffffffb112
-000001d2: add [bx+si], al
+000001c1: add ebp, [esp+28]
+000001c5: lea ebx, [ebp+1750330411]
+000001cb: add [ebp+1139277891], ah
+000001d1: scas es:[di]
+000001d2: add [eax], al
 000001d4: add esp, 0x14
 000001d7: push 0x00
 000001d9: push 0x00
-000001db: lea eax, ?
-000001dd: adc [bx+si]+ff57, dl
+000001db: lea eax, [ebp-11055088]
 000001e1: salc
 000001e2: push edi
-000001e3: call +12513 ; 32c4
-000001e6: add [bx+si], al
+000001e3: call +12513 ; 000032c9
 000001e8: pop ecx
 000001e9: push 0x00
 000001eb: push 0x00
@@ -238,14 +186,12 @@
 000001f2: mov ebp, eax
 000001f4: call esi
 000001f6: push edi
-000001f7: call +12493 ; 32c4
-000001fa: add [bx+si], al
+000001f7: call +12493 ; 000032c9
 000001fc: mov ebx, eax
 000001fe: push ebx
 000001ff: push ebp
 00000200: push 0x0043a4b8
-00000205: call -20723 ; ffffffffffffb112
-00000208: add [bx+si], al
+00000205: call +44813 ; 0000b117
 0000020a: add esp, 0x10
 0000020d: push 0x00
 0000020f: push 0x00
@@ -260,286 +206,220 @@
 0000021b: pop ecx
 0000021c: retn
 0000021d: push ebp
-0000021e: lea ebp, ?
-00000220: and al, 0xec
-00000222: call -1 ; 221
+0000021e: lea ebp, [ebp-1512412]
+00000224: db 0xff
 00000225: mov eax, 0x00001794
-0000022a: call -5055 ; ffffffffffffee6b
-0000022d: add [bx+si], eax
-0000022f: mov eax, ?
-00000230: or [bx+di]+0045, 0x33
-00000235: lds ecx, ?
-00000237: test [bx+si], edx
-00000239: pop ss
-0000023a: add [bx+si], al
-0000023c: mov eax, ebp
-0000023e: sbb al, 0x17
-00000240: add [bx+si], al
+0000022a: call +126017 ; 0001ee70
+0000022f: mov eax, [0x454980]
+00000234: xor eax, ebp
+00000236: mov [ebp+5904], eax
+0000023c: mov eax, [ebp+5916]
 00000242: push ebx
 00000243: push esi
 00000244: xor ebx, ebx
 00000246: push edi
-00000247: mov [di]+8b8c, eax
-0000024b: test [bx+si], esp
-0000024d: pop ss
-0000024e: add [bx+si], al
+00000247: mov [ebp-116], eax
+0000024a: mov eax, [ebp+5920]
 00000250: xor edi, edi
-00000252: cmp ebp, ebx
-00000254: sub [bx], dl
-00000256: add [bx+si], al
-00000258: mov [di]+8988, eax
-0000025c: pop ebp
-0000025d: xchg esp, eax
-0000025e: jl +194 ; 320
-00000262: add [bx+si], al
-00000264: jnle +12 ; 270
-00000266: cmp ebp, ebx
-00000268: and al, 0x17
-0000026a: add [bx+si], al
-0000026c: jbe +180 ; 320
-00000270: add [bx+si], al
-00000272: mov ecx, ebp
-00000274: and al, 0x17
-00000276: add [bx+si], al
-00000278: sub ecx, [di]+8b94
-0000027c: test [bx+si], ebp
-0000027e: pop ss
-0000027f: add [bx+si], al
+00000252: cmp [ebp+5928], ebx
+00000258: mov [ebp-120], eax
+0000025b: mov [ebp-108], ebx
+0000025e: jl +194 ; 00000326
+00000264: jnle +12 ; 00000272
+00000266: cmp [ebp+5924], ebx
+0000026c: jbe +180 ; 00000326
+00000272: mov ecx, [ebp+5924]
+00000278: sub ecx, [ebp-108]
+0000027b: mov eax, [ebp+5928]
 00000281: sbb eax, edi
-00000283: js +20 ; 297
-00000285: jnle +8 ; 28d
+00000283: js +20 ; 00000299
+00000285: jnle +8 ; 0000028f
 00000287: cmp ecx, 0x00001770
-0000028d: jbe +10 ; 297
+0000028d: jbe +10 ; 00000299
 0000028f: mov ecx, 0x00001770
-00000294: mov [di]+eb84, ebx
-00000298: add ecx, ecx
-0000029a: inc ebp
-0000029b: test [bp+di]+458d, dl
-0000029f: pushf
-000002a0: push eax
-000002a1: push ecx
-000002a2: lea eax, ?
-000002a4: mov al, ?
-000002a5: push eax
-000002a6: push [di]+ff8c
-000002aa: adc eax, 0x0043a164
+00000294: mov [ebp-124], ebx
+00000297: jmp +3 ; 0000029c
+00000299: mov [ebp-124], eax
+0000029c: push ebx
+0000029d: lea eax, [ebp-1924050788]
+000002a3: mov al, [0x50]
+000002a6: push [ebp-116]
+000002a9: call [0x0043a164]
 000002af: test eax, eax
-000002b1: jz +168 ; 359
-000002b5: add [bx+si], al
-000002b7: mov eax, [di]+3b9c
-000002bb: retn
-000002bc: jz +157 ; 359
-000002c0: add [bx+si], al
-000002c2: cmp ch, bl
-000002c4: sub al, 0x17
-000002c6: add [bx+si], al
-000002c8: jz +16 ; 2d8
+000002b1: jz +168 ; 0000035f
+000002b7: mov eax, [ebp-100]
+000002ba: cmp eax, ebx
+000002bc: jz +157 ; 0000035f
+000002c2: cmp [ebp+5932], bl
+000002c8: jz +16 ; 000002da
 000002ca: xor ecx, ecx
 000002cc: cmp eax, ebx
-000002ce: jbe +10 ; 2d8
-000002d0: xor [si]+a00d, 0x88
-000002d5: inc ecx
-000002d6: cmp ecx, eax
-000002d8: jb -10 ; 2ce
+000002ce: jbe +10 ; 000002da
+000002d0: xor [ch-96+cl], 0x88
+000002d5: cmp ecx, eax
+000002d8: jb -10 ; 000002d0
 000002da: xor esi, esi
 000002dc: cmp eax, ebx
-000002de: jbe +36 ; 302
+000002de: jbe +36 ; 00000304
 000002e0: push ebx
-000002e1: lea ecx, ?
-000002e3: xchg eax, eax
-000002e4: push ecx
-000002e5: sub eax, esi
+000002e1: lea ecx, [ebp-970239600]
 000002e7: push eax
-000002e8: lea eax, ?
-000002ea: xor eax, 0x75ff50a0
-000002ef: mov bh, bh
-000002f1: adc eax, 0x0043a160
+000002e8: lea eax, [ebp-11493323]
+000002ee: jnz -120 ; 00000278
+000002f0: call [0x0043a160]
 000002f6: test eax, eax
-000002f8: jz +70 ; 33e
-000002fa: add esi, [di]+8b90
-000002fe: inc ebp
-000002ff: pushf
+000002f8: jz +70 ; 00000340
+000002fa: add esi, [ebp-112]
+000002fd: mov eax, [ebp-100]
 00000300: cmp esi, eax
-00000302: jb -36 ; 2de
-00000304: add [di]+1394, eax
-00000308: sti
-00000309: cmp edi, ebp
-0000030b: sub [bx], dl
-0000030d: add [bx+si], al
-0000030f: jl -163 ; 26c
-00000313: db 0xff
-00000314: db 0xff
-00000315: jnle +15 ; 324
-00000317: mov eax, ebp
-00000319: and al, 0x17
-0000031b: add [bx+si], al
-0000031d: cmp [di]+0f94, eax
-00000321: or [si]+ffff, 0xff
+00000302: jb -36 ; 000002e0
+00000304: add [ebp-108], eax
+00000307: adc edi, ebx
+00000309: cmp edi, [ebp+5928]
+0000030f: jl +4294967133 ; 00000272
+00000315: jnle +15 ; 00000326
+00000317: mov eax, [ebp+5924]
+0000031d: cmp [ebp-108], eax
+00000320: jb +4294967116 ; 00000272
 00000326: xor eax, eax
-00000328: mov ecx, ebp
-0000032a: adc [bx], dl
-0000032c: add [bx+si], al
+00000328: mov ecx, [ebp+5904]
 0000032e: pop edi
 0000032f: pop esi
 00000330: xor ecx, ebp
 00000332: pop ebx
-00000333: call -5344 ; ffffffffffffee53
-00000336: add [bx+si], eax
+00000333: call +125728 ; 0001ee58
 00000338: add ebp, 0x00001714
 0000033e: leave
 0000033f: retn
-00000340: call [di]
-00000342: push esp
-00000343: mov eax, ?
-00000344: inc ebx
-00000345: add [bx+si]+458b, dl
-00000349: pushf
+00000340: call [0x0043a154]
+00000346: push eax
+00000347: mov eax, [ebp-100]
 0000034a: sub eax, esi
 0000034c: push eax
 0000034d: push 0x0043a5d8
-00000352: call -21161 ; ffffffffffffb0a9
-00000355: add [bx+si], al
+00000352: call +44375 ; 0000b0ae
 00000357: add esp, 0x0c
 0000035a: push 0x02
 0000035c: pop eax
-0000035d: jmp -55 ; 326
+0000035d: jmp -55 ; 00000328
 0000035f: push edi
-00000360: push [di]+ff94
-00000364: adc eax, 0x0043a154
+00000360: push [ebp-108]
+00000363: call [0x0043a154]
 00000369: push eax
-0000036a: push [di]+689c
-0000036e: mov al, ?
-0000036f: movs ?, ?
-00000370: inc ebx
-00000371: add al, ch
-00000373: aaa
-00000374: lods ?
-00000375: add [bx+si], al
+0000036a: push [ebp-100]
+0000036d: push 0x0043a5a0
+00000372: call +44343 ; 0000b0ae
 00000377: xor eax, eax
 00000379: add esp, 0x14
-0000037c: inc eax
-0000037d: jmp -87 ; 326
+0000037c: jmp -87 ; 00000328
 0000037f: push esi
 00000380: mov esi, ecx
-00000382: mov eax, c085
-00000386: jnz +11 ; 391
-00000388: call -5013 ; ffffffffffffeff3
-0000038b: add [bx+si], eax
-0000038d: mov eax, c085
-00000391: jz +4 ; 395
-00000393: mov eax, [bx+si]
-00000395: jmp +2 ; 397
+00000382: mov eax, [esi]
+00000384: test eax, eax
+00000386: jnz +11 ; 00000393
+00000388: call +126059 ; 0001eff8
+0000038d: mov eax, [esi]
+0000038f: test eax, eax
+00000391: jz +4 ; 00000397
+00000393: mov eax, [eax]
+00000395: jmp +2 ; 00000399
 00000397: xor eax, eax
-00000399: mov ecx, [bp]+3b04
-0000039d: dec eax
-0000039e: sbb [di]+e805, dh
-000003a2: push edx
-000003a3: in al, dx
-000003a4: add [bx+si], eax
-000003a6: mov eax, [bp]+8304
-000003aa: ror [si], 0x5e
+00000399: mov ecx, [esi+4]
+0000039c: cmp ecx, [eax+24]
+0000039f: jnz +5 ; 000003a6
+000003a1: call +126034 ; 0001eff8
+000003a6: mov eax, [esi+4]
+000003a9: add eax, 0x0c
+000003ac: pop esi
 000003ad: retn
-000003ae: cmp [si]+0424, 0x00
+000003ae: cmp [esp+4], 0x00
 000003b3: push esi
-000003b4: jz +45 ; 3e1
-000003b6: mov esi, [bx+di]+8d18
-000003ba: inc ecx
-000003bb: add al, 0x83
-000003bd: db 0xfe
-000003be: adc [bp+si]+8b04, dh
-000003c2: adc bl, ch
-000003c4: add cl, bl
-000003c6: sar [bx+di], 1
-000003c8: push esp
-000003c9: and al, 0x08
-000003cb: jb +22 ; 3e1
+000003b4: jz +45 ; 000003e3
+000003b6: mov esi, [ecx+24]
+000003b9: lea eax, [ebp+285115140]
+000003bf: jb +4 ; 000003c5
+000003c1: mov edx, [eax]
+000003c3: jmp +2 ; 000003c7
+000003c5: mov edx, eax
+000003c7: cmp [esp+8], edx
+000003cb: jb +22 ; 000003e3
 000003cd: cmp esi, 0x10
-000003d0: jb +2 ; 3d2
-000003d2: mov eax, [bx+si]
-000003d4: mov ecx, [bx+di]+0314
-000003d8: enter 0x4c3b, 0x24
-000003dc: or [bp]+b004, dh
-000003e0: add ebx, ebp
-000003e2: add dh, [bp+si]
-000003e4: rcr [bp]+04c2, 0x00
-000003e9: mov edx, [si]+0424
-000003ed: mov eax, [bp+si]
+000003d0: jb +2 ; 000003d4
+000003d2: mov eax, [eax]
+000003d4: mov ecx, [ecx+20]
+000003d7: add ecx, eax
+000003d9: cmp ecx, [esp+8]
+000003dd: jbe +4 ; 000003e3
+000003df: mov al, 0x01
+000003e1: jmp +2 ; 000003e5
+000003e3: xor al, al
+000003e5: pop esi
+000003e6: retn 0x0004
+000003e9: mov edx, [esp+4]
+000003ed: mov eax, [edx]
 000003ef: push esi
-000003f0: mov esi, [bx+si]+8908
-000003f4: xor cl, bl
-000003f6: jo +8 ; 3fe
-000003f8: cmp [bp]+0015, 0x75
-000003fd: add ecx, ecx
-000003ff: push esi
-00000400: add al, 0x8b
-00000402: jb +4 ; 406
-00000404: mov [bx+si]+8b04, esi
-00000408: dec ecx
-00000409: sbb [bp]+513b, bl
-0000040d: add al, 0x75
-0000040f: add eax, 0xeb044189
-00000414: jnp +1098 ; 85e
-00000418: cmp edx, [bx+di]+7508
-0000041c: add eax, 0xeb084189
-00000421: add cl, cl
-00000423: add ecx, ecx
-00000425: push eax
-00000426: or cl, cl
-00000428: inc edx
-00000429: add al, 0xc2
-0000042b: add al, 0x00
+000003f0: mov esi, [eax+8]
+000003f3: mov [edx], esi
+000003f5: mov esi, [eax+8]
+000003f8: cmp [esi+21], 0x00
+000003fc: jnz +3 ; 00000401
+000003fe: mov [esi+4], edx
+00000401: mov esi, [edx+4]
+00000404: mov [eax+4], esi
+00000407: mov ecx, [ecx+24]
+0000040a: pop esi
+0000040b: cmp edx, [ecx+4]
+0000040e: jnz +5 ; 00000415
+00000410: mov [ecx+4], eax
+00000413: jmp +15 ; 00000424
+00000415: mov ecx, [edx+4]
+00000418: cmp edx, [ecx+8]
+0000041b: jnz +5 ; 00000422
+0000041d: mov [ecx+8], eax
+00000420: jmp +2 ; 00000424
+00000422: mov [ecx], eax
+00000424: mov [eax+8], edx
+00000427: mov [edx+4], eax
+0000042a: retn 0x0004
 0000042d: push ebp
 0000042e: mov ebp, esp
 00000430: mov eax, ecx
-00000432: mov ecx, [di]+8908
-00000436: or bl, cl
-00000438: dec ebp
-00000439: or al, 0x89
-0000043b: dec eax
-0000043c: add al, 0x8b
-0000043e: dec ebp
-0000043f: adc cl, cl
-00000441: dec eax
-00000442: or bl, cl
-00000444: dec ebp
-00000445: adc al, 0x8b
-00000447: adc ecx, ecx
-00000449: push eax
-0000044a: or al, 0x8b
-0000044c: dec ecx
-0000044d: add al, 0x89
-0000044f: dec eax
-00000450: adc dl, cl
-00000452: dec ebp
-00000453: sbb al, cl
-00000455: dec eax
-00000456: adc al, 0xc6
-00000458: inc eax
-00000459: adc eax, 0x14c25d00
-0000045e: add bl, cl
-00000460: inc esp
-00000461: and al, 0x04
-00000463: mov ecx, [si]+0824
+00000432: mov ecx, [ebp+8]
+00000435: mov [eax], ecx
+00000437: mov ecx, [ebp+12]
+0000043a: mov [eax+4], ecx
+0000043d: mov ecx, [ebp+16]
+00000440: mov [eax+8], ecx
+00000443: mov ecx, [ebp+20]
+00000446: mov edx, [ecx]
+00000448: mov [eax+12], edx
+0000044b: mov ecx, [ecx+4]
+0000044e: mov [eax+16], ecx
+00000451: mov cl, [ebp+24]
+00000454: mov [eax+20], cl
+00000457: mov [eax+21], 0x00
+0000045b: pop ebp
+0000045c: retn 0x0014
+0000045f: mov eax, [esp+4]
+00000463: mov ecx, [esp+8]
 00000467: cmp eax, ecx
-00000469: jz +10 ; 473
-0000046b: mov dl, [bx+si]
+00000469: jz +10 ; 00000475
+0000046b: mov dl, [eax]
 0000046d: push ebx
-0000046e: mov bl, [bx+di]
-00000470: mov [bx+si], bl
-00000472: mov [bx+di], dl
+0000046e: mov bl, [ecx]
+00000470: mov [eax], bl
+00000472: mov [ecx], dl
 00000474: pop ebx
 00000475: retn
 00000476: push ebp
 00000477: mov ebp, esp
-00000479: mov ecx, [di]+8308
-0000047d: in al, dx
-0000047e: or al, 0x85
-00000480: leave
-00000481: jnbe +11 ; 48c
+00000479: mov ecx, [ebp+8]
+0000047c: sub esp, 0x0c
+0000047f: test ecx, ecx
+00000481: jnbe +11 ; 0000048e
 00000483: xor ecx, ecx
 00000485: push ecx
-00000486: call -5224 ; fffffffffffff01e
-00000489: add [bx+si], eax
+00000486: call +125848 ; 0001f023
 0000048b: pop ecx
 0000048c: leave
 0000048d: retn
@@ -547,33 +427,29 @@
 00000491: xor edx, edx
 00000493: div ecx
 00000495: cmp eax, 0x01
-00000498: jnb -21 ; 483
-0000049a: and [di]+0008, 0x8d
-0000049f: inc ebp
-000004a0: or [bx+si]+4d8d, dl
+00000498: jnb -21 ; 00000485
+0000049a: and [ebp+8], 0x00
+0000049e: lea eax, [ebp+1301106696]
 000004a4: hlt
-000004a5: call -6644 ; ffffffffffffeab1
-000004a8: add [bx+si], eax
+000004a5: call +124428 ; 0001eab6
 000004aa: push 0x0044ef68
-000004af: lea eax, ?
-000004b1: hlt
-000004b2: push eax
-000004b3: mov [di]+4cf4, 0xe80043a4
+000004af: lea eax, [ebp+1170690292]
+000004b5: hlt
+000004b6: movs es:[edi], ds:[esi]
+000004b8: add al, ch
 000004bb: leave
-000004bc: jmp +1 ; 4bd
+000004bc: jmp +1 ; 000004bf
 000004be: add ah, cl
 000004c0: push ebp
 000004c1: mov ebp, esp
-000004c3: mov ecx, [di]+8308
-000004c7: in al, dx
-000004c8: or al, 0x85
-000004ca: leave
-000004cb: jnbe +14 ; 4d9
+000004c3: mov ecx, [ebp+8]
+000004c6: sub esp, 0x0c
+000004c9: test ecx, ecx
+000004cb: jnbe +14 ; 000004db
 000004cd: xor ecx, ecx
 000004cf: imul ecx, ecx, 0x18
 000004d2: push ecx
-000004d3: call -5301 ; fffffffffffff01e
-000004d6: add [bx+si], eax
+000004d3: call +125771 ; 0001f023
 000004d8: pop ecx
 000004d9: leave
 000004da: retn
@@ -581,27 +457,25 @@
 000004de: xor edx, edx
 000004e0: div ecx
 000004e2: cmp eax, 0x18
-000004e5: jnb -24 ; 4cd
-000004e7: and [di]+0008, 0x8d
-000004ec: inc ebp
-000004ed: or [bx+si]+4d8d, dl
+000004e5: jnb -24 ; 000004cf
+000004e7: and [ebp+8], 0x00
+000004eb: lea eax, [ebp+1301106696]
 000004f1: hlt
-000004f2: call -6721 ; ffffffffffffeab1
-000004f5: add [bx+si], eax
+000004f2: call +124351 ; 0001eab6
 000004f7: push 0x0044ef68
-000004fc: lea eax, ?
-000004fe: hlt
-000004ff: push eax
-00000500: mov [di]+4cf4, 0xe80043a4
-00000508: jl -21 ; 4f3
-0000050a: add [bx+si], eax
+000004fc: lea eax, [ebp+1170690292]
+00000502: hlt
+00000503: movs es:[edi], ds:[esi]
+00000505: add al, ch
+00000508: jl -21 ; 000004f5
+0000050a: add [eax], eax
 0000050c: int 3
 0000050d: push esi
-0000050e: push [si]+0824
+0000050e: push [esp+8]
 00000512: mov esi, ecx
-00000514: call -6643 ; ffffffffffffeb21
-00000517: add [bx+si], eax
-00000519: mov a44c, 0xc68b0043
+00000514: call +124429 ; 0001eb26
+00000519: mov [esi], 0x0043a44c
+0000051f: mov eax, esi
 00000521: pop esi
 00000522: retn 0x0004
 00000525: int 3
@@ -613,1529 +487,523 @@
 00000531: push edi
 00000532: mov esi, 0x0043ac80
 00000537: push esi
-00000538: push [di]+e80c
-0000053c: and al, ch
-0000053e: add [bx+si], eax
+00000538: push [ebp+12]
+0000053b: call +124960 ; 0001ed60
 00000540: pop ecx
 00000541: pop ecx
-00000542: call [di]
-00000544: jo -95 ; 4e5
-00000546: inc ebx
-00000547: add bl, cl
-00000549: jnl +8 ; 551
+00000542: call [0x0043a170]
+00000548: mov edi, [ebp+8]
 0000054b: movzx eax, ax
-0000054e: mov [di]+c6f8, eax
-00000552: inc ebp
-00000553: inc [bx+si]
+0000054e: mov [ebp-8], eax
+00000551: mov [ebp-1], 0x00
 00000555: test edi, edi
-00000557: jz +149 ; 5ec
-0000055b: add [bx+si], al
-0000055d: mov eax, [bx]+2b10
-00000561: inc edi
-00000562: or al, 0x83
-00000564: gs
-00000565: or [bx+si], al
+00000557: jz +149 ; 000005f2
+0000055d: mov eax, [edi+16]
+00000560: sub eax, [edi+12]
+00000563: and [ebp+8], 0x00
 00000567: sar eax, 0x02
 0000056a: test eax, eax
-0000056c: jbe +108 ; 5d8
+0000056c: jbe +108 ; 000005da
 0000056e: mov ebx, 0x0043ac44
-00000573: push [di]+8b08
-00000577: iret
-00000578: call +22181 ; 5c1d
-0000057b: add [bx+si], al
+00000573: push [ebp+8]
+00000576: mov ecx, edi
+00000578: call +22181 ; 00005c22
 0000057d: push 0x0043ac00
-00000582: push [bx+si]
-00000584: call -5220 ; fffffffffffff120
-00000587: add [bx+si], eax
+00000582: push [eax]
+00000584: call +125852 ; 0001f125
 00000589: pop ecx
 0000058a: pop ecx
 0000058b: test eax, eax
-0000058d: jnz +6 ; 593
-0000058f: mov [di]+01ff, 0xeb
-00000594: sub edi, edi
-00000596: jnz +8 ; 59e
+0000058d: jnz +6 ; 00000595
+0000058f: mov [ebp-1], 0x01
+00000593: jmp +41 ; 000005be
+00000595: push [ebp+8]
 00000598: mov ecx, edi
-0000059a: call +22147 ; 5c1d
-0000059d: add [bx+si], al
+0000059a: call +22147 ; 00005c22
 0000059f: push ebx
-000005a0: mov [di]+e8f4, eax
-000005a4: arpl bx, bp
-000005a6: add [bx+si], eax
+000005a0: mov [ebp-12], eax
+000005a3: call +125795 ; 0001f10b
 000005a8: push eax
-000005a9: mov eax, [di]+53f4
-000005ad: push [bx+si]
-000005af: call -5344 ; fffffffffffff0cf
-000005b2: add [bx+si], eax
+000005a9: mov eax, [ebp-12]
+000005ac: push ebx
+000005ad: push [eax]
+000005af: call +125728 ; 0001f0d4
 000005b4: add esp, 0x10
 000005b7: test eax, eax
-000005b9: jnz +3 ; 5bc
-000005bb: mov [di]+8bff, al
-000005bf: inc edi
-000005c0: adc [bp+di], ch
-000005c2: inc edi
-000005c3: or al, 0xff
-000005c5: inc ebp
-000005c6: or cl, al
-000005c8: clc
-000005c9: add bh, [bx+di]
-000005cb: inc ebp
-000005cc: or [bp+si]+80a4, dh
-000005d0: jnl -1 ; 5cf
-000005d2: add al, bh
-000005d4: hlt
-000005d5: stos ?
-000005d6: inc ebx
-000005d7: add [di]+b805, dh
-000005db: in al, dx
-000005dc: stos ?
-000005dd: inc ebx
-000005de: add [bx+si]+a868, dl
-000005e2: stos ?
-000005e3: inc ebx
-000005e4: add al, ch
-000005e6: sub eax, 0x800000ab
-000005eb: jnl -1 ; 5ea
-000005ed: add [bx+di]+7559, bl
-000005f1: daa
+000005b9: jnz +3 ; 000005be
+000005bb: mov [ebp-1], al
+000005be: mov eax, [edi+16]
+000005c1: sub eax, [edi+12]
+000005c4: inc [ebp+8]
+000005c7: sar eax, 0x02
+000005ca: cmp [ebp+8], eax
+000005cd: jb -92 ; 00000573
+000005cf: cmp [ebp-1], 0x00
+000005d3: mov eax, 0x0043abf4
+000005d8: jnz +5 ; 000005df
+000005da: mov eax, 0x0043abec
+000005df: push eax
+000005e0: push 0x0043aba8
+000005e5: call +43821 ; 0000b117
+000005ea: cmp [ebp-1], 0x00
+000005ee: pop ecx
+000005ef: pop ecx
+000005f0: jnz +39 ; 00000619
 000005f2: push 0x0043ab98
-000005f7: call [di]
-000005f9: ins ?, dx
-000005fa: mov eax, ?
-000005fb: inc ebx
-000005fc: add ch, al
-000005fe: sal [si]+6818, 0x7c
-00000603: stos ?
-00000604: inc ebx
-00000605: add [bx+si]+15ff, dl
-00000609: push 0x850043a1
-0000060e: sal [si]+ff08, 0xd0
+000005f7: call [0x0043a16c]
+000005fd: test eax, eax
+000005ff: jz +24 ; 00000619
+00000601: push 0x0043ab7c
+00000606: push eax
+00000607: call [0x0043a168]
+0000060d: test eax, eax
+0000060f: jz +8 ; 00000619
+00000611: call eax
 00000613: movzx eax, ax
-00000616: mov [di]+6af8, eax
-0000061a: add dh, [bp+di]
-0000061c: rol [bx+si]+8966, 0x85
-00000621: cmp al, 0xf9
-00000623: db 0xff
-00000624: callf mptp
+00000616: mov [ebp-8], eax
+00000619: push 0x02
+0000061b: xor eax, eax
+0000061d: mov [ebp-1732], eax
+00000625: pop eax
 00000626: push 0x03
-00000628: db 0x66
-00000629: mov ebp, eax
-0000062b: inc esp
-0000062c: stc
-0000062d: db 0xff
-0000062e: callf mptp
+00000628: mov [ebp-1724], eax
+0000062f: pop eax
 00000630: push 0x04
-00000632: db 0x66
-00000633: mov ebp, eax
-00000635: dec esp
-00000636: stc
-00000637: db 0xff
-00000638: callf mptp
+00000632: mov [ebp-1716], eax
+00000639: pop eax
 0000063a: push 0x05
-0000063c: db 0x66
-0000063d: mov ebp, eax
-0000063f: push esp
-00000640: stc
-00000641: db 0xff
-00000642: callf mptp
+0000063c: mov [ebp-1708], eax
+00000643: pop eax
 00000644: push 0x06
-00000646: db 0x66
-00000647: mov ebp, eax
-00000649: pop esp
-0000064a: stc
-0000064b: db 0xff
-0000064c: callf mptp
+00000646: mov [ebp-1700], eax
+0000064d: pop eax
 0000064e: push 0x07
-00000650: db 0x66
-00000651: mov ebp, eax
-00000653: fs
-00000654: stc
-00000655: db 0xff
-00000656: callf mptp
+00000650: mov [ebp-1692], eax
+00000657: pop eax
 00000658: push 0x08
-0000065a: db 0x66
-0000065b: mov ebp, eax
-0000065d: ins ?, dx
-0000065e: stc
-0000065f: db 0xff
-00000660: callf mptp
+0000065a: mov [ebp-1684], eax
+00000661: pop eax
 00000662: push 0x09
-00000664: db 0x66
-00000665: mov ebp, eax
-00000667: jz -7 ; 660
-00000669: db 0xff
-0000066a: callf mptp
+00000664: mov [ebp-1676], eax
+0000066b: pop eax
 0000066c: push 0x0a
-0000066e: db 0x66
-0000066f: mov ebp, eax
-00000671: jl -7 ; 66a
-00000673: db 0xff
-00000674: callf mptp
+0000066e: mov [ebp-1668], eax
+00000675: pop eax
 00000676: push 0x0b
-00000678: db 0x66
-00000679: mov ebp, eax
-0000067b: test cl, bh
-0000067d: db 0xff
-0000067e: callf mptp
+00000678: mov [ebp-1660], eax
+0000067f: pop eax
 00000680: push 0x0c
-00000682: db 0x66
-00000683: mov ebp, eax
-00000685: mov cx, ?
-00000687: db 0xff
-00000688: callf mptp
+00000682: mov [ebp-1652], eax
+00000689: pop eax
 0000068a: push 0x0d
-0000068c: db 0x66
-0000068d: mov ebp, eax
-0000068f: xchg esp, eax
-00000690: stc
-00000691: db 0xff
-00000692: callf mptp
+0000068c: mov [ebp-1644], eax
+00000693: pop eax
 00000694: push 0x0e
-00000696: db 0x66
-00000697: mov ebp, eax
-00000699: pushf
-0000069a: stc
-0000069b: db 0xff
-0000069c: callf mptp
+00000696: mov [ebp-1636], eax
+0000069d: pop eax
 0000069e: push 0x0f
-000006a0: db 0x66
-000006a1: mov ebp, eax
-000006a3: movs ?, ?
-000006a4: stc
-000006a5: db 0xff
-000006a6: callf mptp
+000006a0: mov [ebp-1628], eax
+000006a7: pop eax
 000006a8: push 0x10
-000006aa: db 0x66
-000006ab: mov ebp, eax
-000006ad: lods ?
-000006ae: stc
-000006af: db 0xff
-000006b0: callf mptp
+000006aa: mov [ebp-1620], eax
+000006b1: pop eax
 000006b2: push 0x11
-000006b4: db 0x66
-000006b5: mov ebp, eax
-000006b7: mov ah, 0xf9
-000006b9: db 0xff
-000006ba: callf mptp
+000006b4: mov [ebp-1612], eax
+000006bb: pop eax
 000006bc: push 0x12
-000006be: db 0x66
-000006bf: mov ebp, eax
-000006c1: mov esp, 0x58fffff9
+000006be: mov [ebp-1604], eax
+000006c5: pop eax
 000006c6: push 0x13
-000006c8: db 0x66
-000006c9: mov ebp, eax
-000006cb: les edi, ?
-000006cd: db 0xff
-000006ce: callf mptp
+000006c8: mov [ebp-1596], eax
+000006cf: pop eax
 000006d0: push 0x14
-000006d2: db 0x66
-000006d3: mov ebp, eax
-000006d5: int 3
-000006d6: stc
-000006d7: db 0xff
-000006d8: callf mptp
-000006da: mov ebp, 0xfffff940
-000006e0: js -85 ; 68b
-000006e2: inc ebx
-000006e3: add bh, al
-000006e5: test [bx+si]+fff9, ecx
-000006e9: push [si]+43ab
-000006ed: add bh, al
-000006ef: test [bx+si]+fff9, edx
-000006f3: push [bx+si]+43ab
-000006f7: add bh, al
-000006f9: test [bx+si]+fff9, ebx
-000006fd: jmpf mptp
-000006ff: stos ?
-00000700: inc ebx
-00000701: add bh, al
-00000703: test [bx+si]+fff9, esp
-00000707: jmpf mptp
-00000709: stos ?
-0000070a: inc ebx
-0000070b: add bh, al
-0000070d: test [bx+si]+fff9, ebp
-00000711: jmp [si]+43ab
-00000715: add bh, al
-00000717: test [bx+si]+fff9, esi
-0000071b: jmp [bx+si]+43ab
-0000071f: add bh, al
-00000721: test [bx+si]+fff9, edi
-00000725: callf mptp
-00000727: stos ?
-00000728: inc ebx
-00000729: add cl, cl
-0000072b: mov ch, 0x80
-0000072d: stc
-0000072e: db 0xff
-0000072f: inc edi
-00000731: test eax, ecx
-00000733: stc
-00000734: db 0xff
-00000735: callf mptp
-00000737: stos ?
-00000738: inc ebx
-00000739: add bh, al
-0000073b: test eax, edx
-0000073d: stc
-0000073e: db 0xff
-0000073f: call [si]+43ab
-00000743: add bh, al
-00000745: test eax, ebx
-00000747: stc
-00000748: db 0xff
-00000749: call [bx+si]+43ab
-0000074d: add bh, al
-0000074f: test eax, esp
-00000751: stc
-00000752: db 0xff
-00000753: dec [si]+43ab
-00000757: add bh, al
-00000759: test eax, ebp
-0000075b: stc
-0000075c: db 0xff
-0000075d: dec [bx+si]+43ab
-00000761: add bh, al
-00000763: test eax, esi
-00000765: stc
-00000766: db 0xff
-00000767: inc [si]+43ab
-0000076b: add bh, al
-0000076d: test eax, edi
-0000076f: stc
-00000770: db 0xff
-00000771: inc [bx+si]+43ab
-00000775: add bh, al
-00000777: test eax, eax
-00000779: stc
-0000077a: db 0xff
-0000077b: db 0xff
-0000077c: cmp al, 0xab
-0000077e: inc ebx
-0000077f: add bh, al
-00000781: test eax, ecx
-00000783: stc
-00000784: db 0xff
-00000785: db 0xff
-00000786: cmp bl, ch
-00000788: inc ebx
-00000789: add bh, al
-0000078b: test eax, edx
-0000078d: stc
-0000078e: db 0xff
-0000078f: push [si]
-00000791: stos ?
-00000792: inc ebx
-00000793: add [bp]+8589, ah
-00000797: amx 0xf9
-00000799: db 0xff
-0000079a: inc edi
-0000079c: test eax, ebx
-0000079e: stc
-0000079f: db 0xff
-000007a0: push [bx+si]
-000007a2: stos ?
-000007a3: inc ebx
-000007a4: add [bp+si]+5815, ch
+000006d2: mov [ebp-1588], eax
+000006d9: pop eax
+000006da: mov [ebp-1728], 0x0043ab78
+000006e4: mov [ebp-1720], 0x0043ab74
+000006ee: mov [ebp-1712], 0x0043ab70
+000006f8: mov [ebp-1704], 0x0043ab6c
+00000702: mov [ebp-1696], 0x0043ab68
+0000070c: mov [ebp-1688], 0x0043ab64
+00000716: mov [ebp-1680], 0x0043ab60
+00000720: mov [ebp-1672], 0x0043ab5c
+0000072a: mov [ebp-1664], esi
+00000730: mov [ebp-1656], 0x0043ab58
+0000073a: mov [ebp-1648], 0x0043ab54
+00000744: mov [ebp-1640], 0x0043ab50
+0000074e: mov [ebp-1632], 0x0043ab4c
+00000758: mov [ebp-1624], 0x0043ab48
+00000762: mov [ebp-1616], 0x0043ab44
+0000076c: mov [ebp-1608], 0x0043ab40
+00000776: mov [ebp-1600], 0x0043ab3c
+00000780: mov [ebp-1592], 0x0043ab38
+0000078a: mov [ebp-1584], 0x0043ab34
+00000794: mov [ebp-1580], eax
+0000079b: mov [ebp-1576], 0x0043ab30
+000007a5: push 0x15
+000007a7: pop eax
 000007a8: push 0x16
-000007aa: db 0x66
-000007ab: mov ebp, eax
-000007ad: fdiv est, st
-000007af: db 0xff
-000007b0: callf mptp
+000007aa: mov [ebp-1572], eax
+000007b1: pop eax
 000007b2: push 0x17
-000007b4: db 0x66
-000007b5: mov ebp, eax
-000007b7: in al, 0xf9
-000007b9: db 0xff
-000007ba: callf mptp
+000007b4: mov [ebp-1564], eax
+000007bb: pop eax
 000007bc: push 0x18
-000007be: db 0x66
-000007bf: mov ebp, eax
-000007c1: in al, dx
-000007c2: stc
-000007c3: db 0xff
-000007c4: callf mptp
+000007be: mov [ebp-1556], eax
+000007c5: pop eax
 000007c6: push 0x19
-000007c8: db 0x66
-000007c9: mov ebp, eax
-000007cb: hlt
-000007cc: stc
-000007cd: db 0xff
-000007ce: callf mptp
+000007c8: mov [ebp-1548], eax
+000007cf: pop eax
 000007d0: push 0x1a
-000007d2: db 0x66
-000007d3: mov ebp, eax
-000007d5: cld
-000007d6: stc
-000007d7: db 0xff
-000007d8: callf mptp
+000007d2: mov [ebp-1540], eax
+000007d9: pop eax
 000007da: push 0x1b
-000007dc: db 0x66
-000007dd: mov ebp, eax
-000007df: add al, 0xfa
-000007e1: db 0xff
-000007e2: callf mptp
+000007dc: mov [ebp-1532], eax
+000007e3: pop eax
 000007e4: push 0x1c
-000007e6: db 0x66
-000007e7: mov ebp, eax
-000007e9: or al, 0xfa
-000007eb: db 0xff
-000007ec: callf mptp
+000007e6: mov [ebp-1524], eax
+000007ed: pop eax
 000007ee: push 0x1d
-000007f0: db 0x66
-000007f1: mov ebp, eax
-000007f3: adc al, 0xfa
-000007f5: db 0xff
-000007f6: callf mptp
+000007f0: mov [ebp-1516], eax
+000007f7: pop eax
 000007f8: push 0x1e
-000007fa: db 0x66
-000007fb: mov ebp, eax
-000007fd: sbb al, 0xfa
-000007ff: db 0xff
-00000800: callf mptp
+000007fa: mov [ebp-1508], eax
+00000801: pop eax
 00000802: push 0x1f
-00000804: db 0x66
-00000805: mov ebp, eax
-00000807: and al, 0xfa
-00000809: db 0xff
-0000080a: callf mptp
+00000804: mov [ebp-1500], eax
+0000080b: pop eax
 0000080c: push 0x20
-0000080e: db 0x66
-0000080f: mov ebp, eax
-00000811: sub al, 0xfa
-00000813: db 0xff
-00000814: callf mptp
+0000080e: mov [ebp-1492], eax
+00000815: pop eax
 00000816: push 0x21
-00000818: db 0x66
-00000819: mov ebp, eax
-0000081b: xor al, 0xfa
-0000081d: db 0xff
-0000081e: callf mptp
+00000818: mov [ebp-1484], eax
+0000081f: pop eax
 00000820: push 0x22
-00000822: db 0x66
-00000823: mov ebp, eax
-00000825: cmp al, 0xfa
-00000827: db 0xff
-00000828: callf mptp
+00000822: mov [ebp-1476], eax
+00000829: pop eax
 0000082a: push 0x23
-0000082c: db 0x66
-0000082d: mov ebp, eax
-0000082f: inc esp
-00000830: cli
-00000831: db 0xff
-00000832: callf mptp
+0000082c: mov [ebp-1468], eax
+00000833: pop eax
 00000834: push 0x24
-00000836: db 0x66
-00000837: mov ebp, eax
-00000839: dec esp
-0000083a: cli
-0000083b: db 0xff
-0000083c: callf mptp
+00000836: mov [ebp-1460], eax
+0000083d: pop eax
 0000083e: push 0x25
-00000840: db 0x66
-00000841: mov ebp, eax
-00000843: push esp
-00000844: cli
-00000845: db 0xff
-00000846: callf mptp
+00000840: mov [ebp-1452], eax
+00000847: pop eax
 00000848: push 0x26
-0000084a: db 0x66
-0000084b: mov ebp, eax
-0000084d: pop esp
-0000084e: cli
-0000084f: db 0xff
-00000850: callf mptp
+0000084a: mov [ebp-1444], eax
+00000851: pop eax
 00000852: push 0x27
-00000854: db 0x66
-00000855: mov ebp, eax
-00000857: fs
-00000858: cli
-00000859: db 0xff
-0000085a: callf mptp
+00000854: mov [ebp-1436], eax
+0000085b: pop eax
 0000085c: push 0x29
-0000085e: db 0x66
-0000085f: mov ebp, eax
-00000861: ins ?, dx
-00000862: cli
-00000863: db 0xff
-00000864: callf mptp
+0000085e: mov [ebp-1428], eax
+00000865: pop eax
 00000866: push 0x2a
-00000868: db 0x66
-00000869: mov ebp, eax
-0000086b: jz -6 ; 865
-0000086d: db 0xff
-0000086e: inc edi
-00000870: test eax, esp
-00000872: stc
-00000873: db 0xff
-00000874: jmpf mptp
-00000876: stos ?
-00000877: inc ebx
-00000878: add bh, al
-0000087a: test eax, ebp
-0000087c: stc
-0000087d: db 0xff
-0000087e: jmpf mptp
-00000880: stos ?
-00000881: inc ebx
-00000882: add bh, al
-00000884: test eax, esi
-00000886: stc
-00000887: db 0xff
-00000888: jmp [si]
-0000088a: stos ?
-0000088b: inc ebx
-0000088c: add bh, al
-0000088e: test eax, edi
-00000890: stc
-00000891: db 0xff
-00000892: jmp [bx+si]
-00000894: stos ?
-00000895: inc ebx
-00000896: add bh, al
-00000898: test [bx+si], eax
-0000089a: cli
-0000089b: db 0xff
-0000089c: callf mptp
-0000089e: stos ?
-0000089f: inc ebx
-000008a0: add bh, al
-000008a2: test [bx+si], ecx
-000008a4: cli
-000008a5: db 0xff
-000008a6: callf mptp
-000008a8: stos ?
-000008a9: inc ebx
-000008aa: add bh, al
-000008ac: test [bx+si], edx
-000008ae: cli
-000008af: db 0xff
-000008b0: call [si]
-000008b2: stos ?
-000008b3: inc ebx
-000008b4: add bh, al
-000008b6: test [bx+si], ebx
-000008b8: cli
-000008b9: db 0xff
-000008ba: call [bx+si]
-000008bc: stos ?
-000008bd: inc ebx
-000008be: add bh, al
-000008c0: test [bx+si], esp
-000008c2: cli
-000008c3: db 0xff
-000008c4: dec [si]
-000008c6: stos ?
-000008c7: inc ebx
-000008c8: add bh, al
-000008ca: test [bx+si], ebp
-000008cc: cli
-000008cd: db 0xff
-000008ce: dec [bx+si]
-000008d0: stos ?
-000008d1: inc ebx
-000008d2: add bh, al
-000008d4: test [bx+si], esi
-000008d6: cli
-000008d7: db 0xff
-000008d8: inc [si]
-000008da: stos ?
-000008db: inc ebx
-000008dc: add bh, al
-000008de: test [bx+si], edi
-000008e0: cli
-000008e1: db 0xff
-000008e2: inc [bx+si]
-000008e4: stos ?
-000008e5: inc ebx
-000008e6: add bh, al
-000008e8: test [bx+si]+fffa, eax
-000008ec: db 0xff
-000008ed: cld
-000008ee: stos ?
-000008ef: inc ebx
-000008f0: add bh, al
-000008f2: test [bx+si]+fffa, ecx
-000008f6: db 0xff
-000008f7: clc
-000008f8: stos ?
-000008f9: inc ebx
-000008fa: add bh, al
-000008fc: test [bx+si]+fffa, edx
-00000900: push esp
-00000902: stos ?
-00000903: inc ebx
-00000904: add bh, al
-00000906: test [bx+si]+fffa, ebx
-0000090a: push eax
-0000090c: stos ?
-0000090d: inc ebx
-0000090e: add bh, al
-00000910: test [bx+si]+fffa, esp
-00000914: jmpf mptp
-00000916: stos ?
-00000917: inc ebx
-00000918: add bh, al
-0000091a: test [bx+si]+fffa, ebp
-0000091e: jmpf mptp
-00000920: stos ?
-00000921: inc ebx
-00000922: add bh, al
-00000924: test [bx+si]+fffa, esi
-00000928: jmp esp
-0000092a: stos ?
-0000092b: inc ebx
-0000092c: add bh, al
-0000092e: test [bx+si]+fffa, edi
-00000932: jmp eax
-00000934: stos ?
-00000935: inc ebx
-00000936: add [bx+si]+2b6a, bl
-0000093a: db 0x66
-0000093b: mov ebp, eax
-0000093d: jl -6 ; 937
-0000093f: db 0xff
-00000940: callf mptp
+00000868: mov [ebp-1420], eax
+0000086f: mov [ebp-1568], 0x0043ab2c
+00000879: mov [ebp-1560], 0x0043ab28
+00000883: mov [ebp-1552], 0x0043ab24
+0000088d: mov [ebp-1544], 0x0043ab20
+00000897: mov [ebp-1536], 0x0043ab1c
+000008a1: mov [ebp-1528], 0x0043ab18
+000008ab: mov [ebp-1520], 0x0043ab14
+000008b5: mov [ebp-1512], 0x0043ab10
+000008bf: mov [ebp-1504], 0x0043ab0c
+000008c9: mov [ebp-1496], 0x0043ab08
+000008d3: mov [ebp-1488], 0x0043ab04
+000008dd: mov [ebp-1480], 0x0043ab00
+000008e7: mov [ebp-1472], 0x0043aafc
+000008f1: mov [ebp-1464], 0x0043aaf8
+000008fb: mov [ebp-1456], 0x0043aaf4
+00000905: mov [ebp-1448], 0x0043aaf0
+0000090f: mov [ebp-1440], 0x0043aaec
+00000919: mov [ebp-1432], 0x0043aae8
+00000923: mov [ebp-1424], 0x0043aae4
+0000092d: mov [ebp-1416], 0x0043aae0
+00000937: pop eax
+00000938: push 0x2b
+0000093a: mov [ebp-1412], eax
+00000941: pop eax
 00000942: push 0x2c
-00000944: db 0x66
-00000945: mov ebp, eax
-00000947: test dl, bh
-00000949: db 0xff
-0000094a: callf mptp
+00000944: mov [ebp-1404], eax
+0000094b: pop eax
 0000094c: push 0x2d
-0000094e: db 0x66
-0000094f: mov ebp, eax
-00000951: mov dx, ?
-00000953: db 0xff
-00000954: callf mptp
+0000094e: mov [ebp-1396], eax
+00000955: pop eax
 00000956: push 0x2f
-00000958: db 0x66
-00000959: mov ebp, eax
-0000095b: xchg esp, eax
-0000095c: cli
-0000095d: db 0xff
-0000095e: callf mptp
+00000958: mov [ebp-1388], eax
+0000095f: pop eax
 00000960: push 0x31
-00000962: db 0x66
-00000963: mov ebp, eax
-00000965: pushf
-00000966: cli
-00000967: db 0xff
-00000968: callf mptp
+00000962: mov [ebp-1380], eax
+00000969: pop eax
 0000096a: push 0x32
-0000096c: db 0x66
-0000096d: mov ebp, eax
-0000096f: movs ?, ?
-00000970: cli
-00000971: db 0xff
-00000972: callf mptp
+0000096c: mov [ebp-1372], eax
+00000973: pop eax
 00000974: push 0x34
-00000976: db 0x66
-00000977: mov ebp, eax
-00000979: lods ?
-0000097a: cli
-0000097b: db 0xff
-0000097c: callf mptp
+00000976: mov [ebp-1364], eax
+0000097d: pop eax
 0000097e: push 0x35
-00000980: db 0x66
-00000981: mov ebp, eax
-00000983: mov ah, 0xfa
-00000985: db 0xff
-00000986: callf mptp
+00000980: mov [ebp-1356], eax
+00000987: pop eax
 00000988: push 0x36
-0000098a: db 0x66
-0000098b: mov ebp, eax
-0000098d: mov esp, 0x58fffffa
+0000098a: mov [ebp-1348], eax
+00000991: pop eax
 00000992: push 0x37
-00000994: db 0x66
-00000995: mov ebp, eax
-00000997: les edi, ?
-00000999: db 0xff
-0000099a: callf mptp
+00000994: mov [ebp-1340], eax
+0000099b: pop eax
 0000099c: push 0x38
-0000099e: db 0x66
-0000099f: mov ebp, eax
-000009a1: int 3
-000009a2: cli
-000009a3: db 0xff
-000009a4: callf mptp
+0000099e: mov [ebp-1332], eax
+000009a5: pop eax
 000009a6: push 0x39
-000009a8: db 0x66
-000009a9: mov ebp, eax
-000009ab: amx 0xfa
-000009ad: db 0xff
-000009ae: callf mptp
+000009a8: mov [ebp-1324], eax
+000009af: pop eax
 000009b0: push 0x3a
-000009b2: db 0x66
-000009b3: mov ebp, eax
-000009b5: fdiv est, st
-000009b7: db 0xff
-000009b8: callf mptp
+000009b2: mov [ebp-1316], eax
+000009b9: pop eax
 000009ba: push 0x3c
-000009bc: db 0x66
-000009bd: mov ebp, eax
-000009bf: in al, 0xfa
-000009c1: db 0xff
-000009c2: callf mptp
+000009bc: mov [ebp-1308], eax
+000009c3: pop eax
 000009c4: push 0x3d
-000009c6: db 0x66
-000009c7: mov ebp, eax
-000009c9: in al, dx
-000009ca: cli
-000009cb: db 0xff
-000009cc: callf mptp
+000009c6: mov [ebp-1300], eax
+000009cd: pop eax
 000009ce: push 0x3e
-000009d0: db 0x66
-000009d1: mov ebp, eax
-000009d3: hlt
-000009d4: cli
-000009d5: db 0xff
-000009d6: callf mptp
+000009d0: mov [ebp-1292], eax
+000009d7: pop eax
 000009d8: push 0x3f
-000009da: db 0x66
-000009db: mov ebp, eax
-000009dd: cld
-000009de: cli
-000009df: db 0xff
-000009e0: callf mptp
+000009da: mov [ebp-1284], eax
+000009e1: pop eax
 000009e2: push 0x40
-000009e4: db 0x66
-000009e5: mov ebp, eax
-000009e7: add al, 0xfb
-000009e9: db 0xff
-000009ea: callf mptp
+000009e4: mov [ebp-1276], eax
+000009eb: pop eax
 000009ec: push 0x41
-000009ee: db 0x66
-000009ef: mov ebp, eax
-000009f1: or al, 0xfb
-000009f3: db 0xff
-000009f4: callf mptp
+000009ee: mov [ebp-1268], eax
+000009f5: pop eax
 000009f6: mov ecx, 0x0043aadc
 000009fb: push 0x43
-000009fd: db 0x66
-000009fe: mov ebp, eax
-00000a00: adc al, 0xfb
-00000a02: db 0xff
-00000a03: inc edi
-00000a05: test eax, eax
-00000a07: cli
-00000a08: db 0xff
-00000a09: callf mptp
-00000a0b: stos ?
-00000a0c: inc ebx
-00000a0d: add bh, al
-00000a0f: test eax, ecx
-00000a11: cli
-00000a12: db 0xff
-00000a13: call esp
-00000a15: stos ?
-00000a16: inc ebx
-00000a17: add bh, al
-00000a19: test eax, edx
-00000a1b: cli
-00000a1c: db 0xff
-00000a1d: call eax
-00000a1f: stos ?
-00000a20: inc ebx
-00000a21: add bh, al
-00000a23: test eax, ebx
-00000a25: cli
-00000a26: db 0xff
-00000a27: dec esp
-00000a29: stos ?
-00000a2a: inc ebx
-00000a2b: add bh, al
-00000a2d: test eax, esp
-00000a2f: cli
-00000a30: db 0xff
-00000a31: dec eax
-00000a33: stos ?
-00000a34: inc ebx
-00000a35: add bh, al
-00000a37: test eax, ebp
-00000a39: cli
-00000a3a: db 0xff
-00000a3b: inc esp
-00000a3d: stos ?
-00000a3e: inc ebx
-00000a3f: add bh, al
-00000a41: test eax, esi
-00000a43: cli
-00000a44: db 0xff
-00000a45: inc eax
-00000a47: stos ?
-00000a48: inc ebx
-00000a49: add bh, al
-00000a4b: test eax, edi
-00000a4d: cli
-00000a4e: db 0xff
-00000a4f: db 0xff
-00000a50: mov esp, 0xc70043aa
-00000a55: test eax, eax
-00000a57: cli
-00000a58: db 0xff
-00000a59: db 0xff
-00000a5a: mov eax, 0xc70043aa
-00000a5f: test eax, ecx
-00000a61: cli
-00000a62: db 0xff
-00000a63: push esp
-00000a65: stos ?
-00000a66: inc ebx
-00000a67: add bh, al
-00000a69: test eax, edx
-00000a6b: cli
-00000a6c: db 0xff
-00000a6d: push eax
-00000a6f: stos ?
-00000a70: inc ebx
-00000a71: add bh, al
-00000a73: test eax, ebx
-00000a75: cli
-00000a76: db 0xff
-00000a77: jmpf mptp
-00000a79: stos ?
-00000a7a: inc ebx
-00000a7b: add bh, al
-00000a7d: test eax, esp
-00000a7f: cli
-00000a80: db 0xff
-00000a81: jmpf mptp
-00000a83: stos ?
-00000a84: inc ebx
-00000a85: add bh, al
-00000a87: test eax, ebp
-00000a89: cli
-00000a8a: db 0xff
-00000a8b: jmp esp
-00000a8d: stos ?
-00000a8e: inc ebx
-00000a8f: add bh, al
-00000a91: test eax, esi
-00000a93: cli
-00000a94: db 0xff
-00000a95: jmp eax
-00000a97: stos ?
-00000a98: inc ebx
-00000a99: add cl, cl
-00000a9b: lea edi, ?
-00000a9d: cli
-00000a9e: db 0xff
-00000a9f: inc edi
-00000aa1: test [bx+si], eax
-00000aa3: sti
-00000aa4: db 0xff
-00000aa5: callf mptp
-00000aa7: stos ?
-00000aa8: inc ebx
-00000aa9: add bh, al
-00000aab: test [bx+si], ecx
-00000aad: sti
-00000aae: db 0xff
-00000aaf: callf mptp
-00000ab1: stos ?
-00000ab2: inc ebx
-00000ab3: add bh, al
-00000ab5: test [bx+si], edx
-00000ab7: sti
-00000ab8: db 0xff
-00000ab9: call esp
-00000abb: stos ?
-00000abc: inc ebx
-00000abd: add bh, al
-00000abf: test [bx+si], ebx
-00000ac1: sti
-00000ac2: db 0xff
-00000ac3: call eax
-00000ac5: stos ?
-00000ac6: inc ebx
-00000ac7: add [bx+si]+8966, bl
-00000acb: test [si], ebx
-00000acd: sti
-00000ace: db 0xff
-00000acf: jmpf mptp
-00000ad1: inc esp
+000009fd: mov [ebp-1260], eax
+00000a04: mov [ebp-1408], 0x0043aad8
+00000a0e: mov [ebp-1400], 0x0043aad4
+00000a18: mov [ebp-1392], 0x0043aad0
+00000a22: mov [ebp-1384], 0x0043aacc
+00000a2c: mov [ebp-1376], 0x0043aac8
+00000a36: mov [ebp-1368], 0x0043aac4
+00000a40: mov [ebp-1360], 0x0043aac0
+00000a4a: mov [ebp-1352], 0x0043aabc
+00000a54: mov [ebp-1344], 0x0043aab8
+00000a5e: mov [ebp-1336], 0x0043aab4
+00000a68: mov [ebp-1328], 0x0043aab0
+00000a72: mov [ebp-1320], 0x0043aaac
+00000a7c: mov [ebp-1312], 0x0043aaa8
+00000a86: mov [ebp-1304], 0x0043aaa4
+00000a90: mov [ebp-1296], 0x0043aaa0
+00000a9a: mov [ebp-1288], ecx
+00000aa0: mov [ebp-1280], 0x0043aa9c
+00000aaa: mov [ebp-1272], 0x0043aa98
+00000ab4: mov [ebp-1264], 0x0043aa94
+00000abe: mov [ebp-1256], 0x0043aa90
+00000ac8: pop eax
+00000ac9: mov [ebp-1252], eax
+00000ad0: push 0x44
 00000ad2: pop eax
-00000ad3: db 0x66
-00000ad4: mov ebp, eax
-00000ad6: and al, 0xfb
-00000ad8: db 0xff
-00000ad9: jmpf mptp
-00000adb: inc esi
+00000ad3: mov [ebp-1244], eax
+00000ada: push 0x46
 00000adc: pop eax
-00000add: db 0x66
-00000ade: mov ebp, eax
-00000ae0: sub al, 0xfb
-00000ae2: db 0xff
-00000ae3: jmpf mptp
-00000ae5: inc edi
+00000add: mov [ebp-1236], eax
+00000ae4: push 0x47
 00000ae6: pop eax
-00000ae7: db 0x66
-00000ae8: mov ebp, eax
-00000aea: xor al, 0xfb
-00000aec: db 0xff
-00000aed: jmpf mptp
-00000aef: dec ecx
+00000ae7: mov [ebp-1228], eax
+00000aee: push 0x49
 00000af0: pop eax
-00000af1: db 0x66
-00000af2: mov ebp, eax
-00000af4: cmp al, 0xfb
-00000af6: db 0xff
-00000af7: jmpf mptp
-00000af9: dec edx
+00000af1: mov [ebp-1220], eax
+00000af8: push 0x4a
 00000afa: pop eax
-00000afb: db 0x66
-00000afc: mov ebp, eax
-00000afe: inc esp
-00000aff: sti
-00000b00: db 0xff
-00000b01: jmpf mptp
-00000b03: dec ebx
+00000afb: mov [ebp-1212], eax
+00000b02: push 0x4b
 00000b04: pop eax
-00000b05: db 0x66
-00000b06: mov ebp, eax
-00000b08: dec esp
-00000b09: sti
-00000b0a: db 0xff
-00000b0b: jmpf mptp
-00000b0d: dec esi
+00000b05: mov [ebp-1204], eax
+00000b0c: push 0x4e
 00000b0e: pop eax
-00000b0f: db 0x66
-00000b10: mov ebp, eax
-00000b12: push esp
-00000b13: sti
-00000b14: db 0xff
-00000b15: jmpf mptp
-00000b17: dec edi
+00000b0f: mov [ebp-1196], eax
+00000b16: push 0x4f
 00000b18: pop eax
-00000b19: db 0x66
-00000b1a: mov ebp, eax
-00000b1c: pop esp
-00000b1d: sti
-00000b1e: db 0xff
-00000b1f: jmpf mptp
-00000b21: push eax
+00000b19: mov [ebp-1188], eax
+00000b20: push 0x50
 00000b22: pop eax
-00000b23: db 0x66
-00000b24: mov ebp, eax
-00000b26: fs
-00000b27: sti
-00000b28: db 0xff
-00000b29: jmpf mptp
-00000b2b: push esi
+00000b23: mov [ebp-1180], eax
+00000b2a: push 0x56
 00000b2c: pop eax
-00000b2d: db 0x66
-00000b2e: mov ebp, eax
-00000b30: ins ?, dx
-00000b31: sti
-00000b32: db 0xff
-00000b33: db 0xff
+00000b2d: mov [ebp-1172], eax
 00000b34: mov eax, 0x00000401
-00000b39: db 0x66
-00000b3a: mov ebp, eax
-00000b3c: jz -5 ; b37
-00000b3e: db 0xff
-00000b3f: inc [bx+si]+8966
-00000b43: test [si]+fffb, edi
-00000b47: db 0xff
+00000b39: mov [ebp-1164], eax
+00000b40: mov [ebp-1156], eax
 00000b48: mov eax, 0x00000403
-00000b4d: db 0x66
-00000b4e: mov ebp, eax
-00000b50: test bl, bh
-00000b52: db 0xff
-00000b53: inc [bx+si]+8966
-00000b57: test esp, ecx
-00000b59: sti
-00000b5a: db 0xff
-00000b5b: db 0xff
+00000b4d: mov [ebp-1148], eax
+00000b54: mov [ebp-1140], eax
 00000b5c: mov eax, 0x00000405
-00000b61: db 0x66
-00000b62: mov ebp, eax
-00000b64: xchg esp, eax
-00000b65: sti
-00000b66: db 0xff
-00000b67: inc [bx+si]+8966
-00000b6b: test esp, ebx
-00000b6d: sti
-00000b6e: db 0xff
-00000b6f: db 0xff
+00000b61: mov [ebp-1132], eax
+00000b68: mov [ebp-1124], eax
 00000b70: mov eax, 0x00000407
-00000b75: db 0x66
-00000b76: mov ebp, eax
-00000b78: movs ?, ?
-00000b79: sti
-00000b7a: db 0xff
-00000b7b: inc [bx+si]+8966
-00000b7f: test esp, ebp
-00000b81: sti
-00000b82: db 0xff
-00000b83: db 0xff
+00000b75: mov [ebp-1116], eax
+00000b7c: mov [ebp-1108], eax
 00000b84: mov eax, 0x00000409
-00000b89: db 0x66
-00000b8a: mov ebp, eax
-00000b8c: mov ah, 0xfb
-00000b8e: db 0xff
-00000b8f: inc [bx+si]+8966
-00000b93: test esp, edi
-00000b95: sti
-00000b96: db 0xff
-00000b97: db 0xff
+00000b89: mov [ebp-1100], eax
+00000b90: mov [ebp-1092], eax
 00000b98: mov eax, 0x0000040b
-00000b9d: db 0x66
-00000b9e: mov ebp, eax
-00000ba0: les edi, ?
-00000ba2: db 0xff
-00000ba3: inc [bx+si]+8cbf
-00000ba7: stos ?
-00000ba8: inc ebx
-00000ba9: add dh, bh
-00000bab: test dl, ch
-00000bad: inc ebx
-00000bae: add [bp]+8589, ah
-00000bb2: int 3
-00000bb3: sti
-00000bb4: db 0xff
-00000bb5: inc edi
-00000bb7: test [bx+si], esp
-00000bb9: sti
-00000bba: db 0xff
-00000bbb: inc eax
-00000bbd: stos ?
-00000bbe: inc ebx
-00000bbf: add cl, cl
-00000bc1: mov ebp, 0xfffffb28
-00000bc6: mov ebp, 0xfffffb30
-00000bcc: jl -86 ; b76
-00000bce: inc ebx
-00000bcf: add bh, al
-00000bd1: test [bx+si], edi
-00000bd3: sti
-00000bd4: db 0xff
-00000bd5: db 0xff
-00000bd6: js -86 ; b80
-00000bd8: inc ebx
-00000bd9: add bh, al
-00000bdb: test [bx+si]+fffb, eax
-00000bdf: push [si]+43aa
-00000be3: add bh, al
-00000be5: test [bx+si]+fffb, ecx
-00000be9: push [bx+si]+43aa
-00000bed: add bh, al
-00000bef: test [bx+si]+fffb, edx
-00000bf3: jmpf mptp
-00000bf5: stos ?
-00000bf6: inc ebx
-00000bf7: add bh, al
-00000bf9: test [bx+si]+fffb, ebx
-00000bfd: jmpf mptp
-00000bff: stos ?
-00000c00: inc ebx
-00000c01: add bh, al
-00000c03: test [bx+si]+fffb, esp
-00000c07: jmp [si]+43aa
-00000c0b: add bh, al
-00000c0d: test [bx+si]+fffb, ebp
-00000c11: jmp [bx+si]+43aa
-00000c15: add bh, al
-00000c17: test [bx+si]+fffb, esi
-00000c1b: callf mptp
-00000c1d: stos ?
-00000c1e: inc ebx
-00000c1f: add bh, al
-00000c21: test [bx+si]+fffb, edi
-00000c25: call [si]+43aa
-00000c29: add bh, al
-00000c2b: test eax, eax
-00000c2d: sti
-00000c2e: db 0xff
-00000c2f: dec [si]+43aa
-00000c33: add bh, al
-00000c35: test eax, ecx
-00000c37: sti
-00000c38: db 0xff
-00000c39: inc [si]+43aa
-00000c3d: add bh, al
-00000c3f: test eax, edx
-00000c41: sti
-00000c42: db 0xff
-00000c43: db 0xff
-00000c44: cmp al, 0xaa
-00000c46: inc ebx
-00000c47: add bh, al
-00000c49: test eax, ebx
-00000c4b: sti
-00000c4c: db 0xff
-00000c4d: push [si]
-00000c4f: stos ?
-00000c50: inc ebx
-00000c51: add bh, al
-00000c53: test eax, esp
-00000c55: sti
-00000c56: db 0xff
-00000c57: jmpf mptp
-00000c59: stos ?
-00000c5a: inc ebx
-00000c5b: add bh, al
-00000c5d: test eax, ebp
-00000c5f: sti
-00000c60: db 0xff
-00000c61: jmp [si]
-00000c63: stos ?
-00000c64: inc ebx
-00000c65: add bh, al
-00000c67: test eax, esi
-00000c69: sti
-00000c6a: db 0xff
-00000c6b: callf mptp
-00000c6d: stos ?
-00000c6e: inc ebx
-00000c6f: add bh, al
-00000c71: test eax, edi
-00000c73: sti
-00000c74: db 0xff
-00000c75: call [si]
-00000c77: stos ?
-00000c78: inc ebx
-00000c79: add cl, cl
-00000c7b: mov ch, 0xc0
-00000c7d: sti
-00000c7e: db 0xff
-00000c7f: inc edi
-00000c81: test eax, ecx
-00000c83: sti
-00000c84: db 0xff
-00000c85: dec [si]
-00000c87: stos ?
-00000c88: inc ebx
-00000c89: add bh, al
-00000c8b: test eax, edx
-00000c8d: sti
-00000c8e: db 0xff
-00000c8f: inc [si]
-00000c91: stos ?
-00000c92: inc ebx
-00000c93: add al, bh
-00000c95: or eax, 0x66000004
-00000c9a: mov ebp, eax
-00000c9c: amx 0xfb
-00000c9e: db 0xff
-00000c9f: inc [bx+si]+8966
-00000ca3: test esp, ebx
-00000ca5: sti
-00000ca6: db 0xff
-00000ca7: db 0xff
+00000b9d: mov [ebp-1084], eax
+00000ba4: mov edi, 0x0043aa8c
+00000baa: mov esi, 0x0043aa84
+00000baf: mov [ebp-1076], eax
+00000bb6: mov [ebp-1248], 0x0043aa80
+00000bc0: mov [ebp-1240], edi
+00000bc6: mov [ebp-1232], 0x0043aa7c
+00000bd0: mov [ebp-1224], 0x0043aa78
+00000bda: mov [ebp-1216], 0x0043aa74
+00000be4: mov [ebp-1208], 0x0043aa70
+00000bee: mov [ebp-1200], 0x0043aa6c
+00000bf8: mov [ebp-1192], 0x0043aa68
+00000c02: mov [ebp-1184], 0x0043aa64
+00000c0c: mov [ebp-1176], 0x0043aa60
+00000c16: mov [ebp-1168], 0x0043aa5c
+00000c20: mov [ebp-1160], 0x0043aa54
+00000c2a: mov [ebp-1152], 0x0043aa4c
+00000c34: mov [ebp-1144], 0x0043aa44
+00000c3e: mov [ebp-1136], 0x0043aa3c
+00000c48: mov [ebp-1128], 0x0043aa34
+00000c52: mov [ebp-1120], 0x0043aa2c
+00000c5c: mov [ebp-1112], 0x0043aa24
+00000c66: mov [ebp-1104], 0x0043aa1c
+00000c70: mov [ebp-1096], 0x0043aa14
+00000c7a: mov [ebp-1088], esi
+00000c80: mov [ebp-1080], 0x0043aa0c
+00000c8a: mov [ebp-1072], 0x0043aa04
+00000c94: mov eax, 0x0000040d
+00000c99: mov [ebp-1068], eax
+00000ca0: mov [ebp-1060], eax
 00000ca8: mov eax, 0x0000040f
-00000cad: db 0x66
-00000cae: mov ebp, eax
-00000cb0: in al, 0xfb
-00000cb2: db 0xff
-00000cb3: inc [bx+si]+8966
-00000cb7: test esp, ebp
-00000cb9: sti
-00000cba: db 0xff
-00000cbb: db 0xff
+00000cad: mov [ebp-1052], eax
+00000cb4: mov [ebp-1044], eax
 00000cbc: mov eax, 0x00000411
 00000cc1: mov edx, 0x00000413
-00000cc6: db 0x66
-00000cc7: mov ebp, edx
-00000cc9: add al, 0xfc
-00000ccb: db 0xff
-00000ccc: jmp [bp]+8589
-00000cd0: hlt
-00000cd1: sti
-00000cd2: db 0xff
-00000cd3: inc [bx+si]+6642
-00000cd7: mov ebp, edx
-00000cd9: or al, 0xfc
-00000cdb: db 0xff
-00000cdc: db 0xff
+00000cc6: mov [ebp-1020], edx
+00000ccd: mov [ebp-1036], eax
+00000cd4: mov [ebp-1012], edx
 00000cdd: mov edx, 0x00000415
-00000ce2: db 0x66
-00000ce3: mov ebp, edx
-00000ce5: adc al, 0xfc
-00000ce7: db 0xff
-00000ce8: inc [bp+si]+8966
-00000cec: xchg ebp, eax
-00000ced: sbb al, 0xfc
-00000cef: db 0xff
-00000cf0: db 0xff
+00000ce2: mov [ebp-1004], edx
+00000ce9: mov [ebp-996], edx
 00000cf1: mov edx, 0x00000417
-00000cf6: db 0x66
-00000cf7: mov ebp, edx
-00000cf9: and al, 0xfc
-00000cfb: db 0xff
-00000cfc: inc [bp+si]+8966
-00000d00: xchg ebp, eax
-00000d01: sub al, 0xfc
-00000d03: db 0xff
-00000d04: db 0xff
+00000cf6: mov [ebp-988], edx
+00000cfd: mov [ebp-980], edx
 00000d05: mov edx, 0x00000419
-00000d0a: db 0x66
-00000d0b: mov ebp, edx
-00000d0d: xor al, 0xfc
-00000d0f: db 0xff
-00000d10: inc [bp+si]+8966
-00000d14: xchg ebp, eax
-00000d15: cmp al, 0xfc
-00000d17: db 0xff
-00000d18: db 0xff
+00000d0a: mov [ebp-972], edx
+00000d11: mov [ebp-964], edx
 00000d19: mov edx, 0x0000041b
-00000d1e: db 0x66
-00000d1f: mov ebp, edx
-00000d21: inc esp
-00000d22: cld
-00000d23: db 0xff
-00000d24: inc [bp+si]+8966
-00000d28: xchg ebp, eax
-00000d29: dec esp
-00000d2a: cld
-00000d2b: db 0xff
-00000d2c: db 0xff
+00000d1e: mov [ebp-956], edx
+00000d25: mov [ebp-948], edx
 00000d2d: mov edx, 0x0000041d
-00000d32: db 0x66
-00000d33: mov ebp, edx
-00000d35: push esp
-00000d36: cld
-00000d37: db 0xff
-00000d38: inc [bp+si]+8966
-00000d3c: xchg ebp, eax
-00000d3d: pop esp
-00000d3e: cld
-00000d3f: db 0xff
-00000d40: db 0xff
+00000d32: mov [ebp-940], edx
+00000d39: mov [ebp-932], edx
 00000d41: mov edx, 0x0000041f
-00000d46: db 0x66
-00000d47: mov ebp, edx
-00000d49: fs
-00000d4a: cld
-00000d4b: db 0xff
-00000d4c: inc [bp+si]+8966
-00000d50: xchg ebp, eax
-00000d51: ins ?, dx
-00000d52: cld
-00000d53: db 0xff
-00000d54: db 0xff
+00000d46: mov [ebp-924], edx
+00000d4d: mov [ebp-916], edx
 00000d55: mov edx, 0x00000421
-00000d5a: db 0x66
-00000d5b: mov ebp, edx
-00000d5d: jz -4 ; d59
-00000d5f: db 0xff
-00000d60: inc [bp+si]+8966
-00000d64: xchg ebp, eax
-00000d65: jl -4 ; d61
-00000d67: db 0xff
-00000d68: db 0xff
+00000d5a: mov [ebp-908], edx
+00000d61: mov [ebp-900], edx
 00000d69: mov edx, 0x00000423
-00000d6e: db 0x66
-00000d6f: mov ebp, edx
-00000d71: test ah, bh
-00000d73: db 0xff
-00000d74: inc [bp+si]+8966
-00000d78: xchg ebp, eax
-00000d79: mov sp, ?
-00000d7b: db 0xff
-00000d7c: db 0xff
+00000d6e: mov [ebp-892], edx
+00000d75: mov [ebp-884], edx
 00000d7d: mov edx, 0x00000425
-00000d82: db 0x66
-00000d83: mov ebp, edx
-00000d85: xchg esp, eax
-00000d86: cld
-00000d87: db 0xff
-00000d88: inc [bp+si]+8966
-00000d8c: test esp, edi
-00000d8e: sti
-00000d8f: db 0xff
-00000d90: jmp [bp]+9589
-00000d94: pushf
-00000d95: cld
-00000d96: db 0xff
-00000d97: db 0xff
+00000d82: mov [ebp-876], edx
+00000d89: mov [ebp-1028], eax
+00000d91: mov [ebp-868], edx
 00000d98: mov eax, 0x0043a9fc
 00000d9d: mov edx, 0x00000427
-00000da2: mov ebp, 0xfffffbd8
-00000da8: hlt
-00000da9: test eax, 0x85c70043
-00000dae: loopnz -5 ; da9
-00000db0: db 0xff
-00000db1: jmpf mptp
-00000db3: test eax, 0x85c70043
-00000db8: call -5 ; db3
-00000dbb: jmp esp
-00000dbd: test eax, 0x85c70043
-00000dc2: lock
-00000dc3: sti
-00000dc4: db 0xff
-00000dc5: callf mptp
-00000dc7: test eax, 0x85c70043
-00000dcc: clc
-00000dcd: sti
-00000dce: db 0xff
-00000dcf: call esp
-00000dd1: test eax, 0x85890043
-00000dd6: add ah, bh
-00000dd8: db 0xff
-00000dd9: inc edi
-00000ddb: test [bx+si], ecx
-00000ddd: cld
-00000dde: db 0xff
-00000ddf: dec esp
-00000de1: test eax, 0x85c70043
-00000de6: adc ah, bh
-00000de8: db 0xff
-00000de9: inc esp
-00000deb: test eax, 0x85c70043
-00000df0: sbb ah, bh
-00000df2: db 0xff
-00000df3: db 0xff
-00000df4: mov esp, 0xc70043a9
-00000df9: test [bx+si], esp
-00000dfb: cld
-00000dfc: db 0xff
-00000dfd: push esp
-00000dff: test eax, 0x85c70043
-00000e04: sub ah, bh
-00000e06: db 0xff
-00000e07: jmpf mptp
-00000e09: test eax, 0x85c70043
-00000e0e: xor ah, bh
-00000e10: db 0xff
-00000e11: jmp esp
-00000e13: test eax, 0x85c70043
-00000e18: cmp ah, bh
-00000e1a: db 0xff
-00000e1b: callf mptp
-00000e1d: test eax, 0x85c70043
-00000e22: inc eax
-00000e23: cld
-00000e24: db 0xff
-00000e25: call esp
-00000e27: test eax, 0x85c70043
-00000e2c: dec eax
-00000e2d: cld
-00000e2e: db 0xff
-00000e2f: dec esp
-00000e31: test eax, 0x85c70043
-00000e36: push eax
-00000e37: cld
-00000e38: db 0xff
-00000e39: inc esp
-00000e3b: test eax, 0x85c70043
-00000e40: pop eax
-00000e41: cld
-00000e42: db 0xff
-00000e43: db 0xff
-00000e44: jl -87 ; ded
-00000e46: inc ebx
-00000e47: add bh, al
-00000e49: test [bx+si]+fffc, esp
-00000e4d: push [si]+43a9
-00000e51: add bh, al
-00000e53: test [bx+si]+fffc, ebp
-00000e57: jmpf mptp
-00000e59: test eax, 0x85c70043
-00000e5e: jo -4 ; e5a
-00000e60: db 0xff
-00000e61: jmp [si]+43a9
-00000e65: add bh, al
-00000e67: test [bx+si]+fffc, edi
-00000e6b: callf mptp
-00000e6d: test eax, 0x85c70043
-00000e72: cmp ah, 0xff
-00000e75: call [si]+43a9
-00000e79: add bh, al
-00000e7b: test eax, ecx
-00000e7d: cld
-00000e7e: db 0xff
-00000e7f: dec [si]+43a9
-00000e83: add bh, al
-00000e85: test eax, edx
-00000e87: cld
-00000e88: db 0xff
-00000e89: inc [si]+43a9
-00000e8d: add bh, al
-00000e8f: test eax, ebx
-00000e91: cld
-00000e92: db 0xff
-00000e93: db 0xff
-00000e94: cmp al, 0xa9
-00000e96: inc ebx
-00000e97: add bh, al
-00000e99: test eax, esp
-00000e9b: cld
-00000e9c: db 0xff
-00000e9d: push [si]
-00000e9f: test eax, 0x89660043
-00000ea4: xchg ebp, eax
-00000ea5: movs ?, ?
-00000ea6: cld
-00000ea7: db 0xff
-00000ea8: inc edi
-00000eaa: test eax, ebp
-00000eac: cld
-00000ead: db 0xff
-00000eae: jmpf mptp
-00000eb0: test eax, 0xc2830043
-00000eb5: add bh, bl
-00000eb7: sub eax, 0x66000004
-00000ebc: mov ebp, ebx
-00000ebe: int 3
-00000ebf: cld
-00000ec0: db 0xff
-00000ec1: inc ebx
-00000ec3: retn
-00000ec4: add ah, [bp]+9d89
-00000ec8: amx 0xfc
-00000eca: db 0xff
-00000ecb: jmp [bp]+9589
-00000ecf: lods ?
-00000ed0: cld
-00000ed1: db 0xff
-00000ed2: db 0xff
+00000da2: mov [ebp-1064], 0x0043a9f4
+00000dac: mov [ebp-1056], 0x0043a9ec
+00000db6: mov [ebp-1048], 0x0043a9e4
+00000dc0: mov [ebp-1040], 0x0043a9dc
+00000dca: mov [ebp-1032], 0x0043a9d4
+00000dd4: mov [ebp-1024], eax
+00000dda: mov [ebp-1016], 0x0043a9cc
+00000de4: mov [ebp-1008], 0x0043a9c4
+00000dee: mov [ebp-1000], 0x0043a9bc
+00000df8: mov [ebp-992], 0x0043a9b4
+00000e02: mov [ebp-984], 0x0043a9ac
+00000e0c: mov [ebp-976], 0x0043a9a4
+00000e16: mov [ebp-968], 0x0043a99c
+00000e20: mov [ebp-960], 0x0043a994
+00000e2a: mov [ebp-952], 0x0043a98c
+00000e34: mov [ebp-944], 0x0043a984
+00000e3e: mov [ebp-936], 0x0043a97c
+00000e48: mov [ebp-928], 0x0043a974
+00000e52: mov [ebp-920], 0x0043a96c
+00000e5c: mov [ebp-912], 0x0043a964
+00000e66: mov [ebp-904], 0x0043a95c
+00000e70: mov [ebp-896], 0x0043a954
+00000e7a: mov [ebp-888], 0x0043a94c
+00000e84: mov [ebp-880], 0x0043a944
+00000e8e: mov [ebp-872], 0x0043a93c
+00000e98: mov [ebp-864], 0x0043a934
+00000ea2: mov [ebp-860], edx
+00000ea9: mov [ebp-856], 0x0043a92c
+00000eb3: add edx, 0x02
+00000eb6: mov ebx, 0x0000042d
+00000ebb: mov [ebp-820], ebx
+00000ec2: add ebx, 0x02
+00000ec5: mov [ebp-812], ebx
+00000ecc: mov [ebp-852], edx
 00000ed3: mov edx, 0x0000042a
-00000ed8: db 0x66
-00000ed9: mov ebp, edx
-00000edb: mov ah, 0xfc
-00000edd: db 0xff
-00000ede: inc [bp+si]+31bb
-00000ee2: add al, 0x00
-00000ee4: add [bp]+9d89, ah
-00000ee8: fdiv est, st
-00000eea: db 0xff
-00000eeb: inc [bp+di]+8966
-00000eef: popf
-00000ef0: in al, 0xfc
-00000ef2: db 0xff
-00000ef3: db 0xff
+00000ed8: mov [ebp-844], edx
+00000edf: mov ebx, 0x00000431
+00000ee5: mov [ebp-804], ebx
+00000eec: mov [ebp-796], ebx
 00000ef4: mov ebx, 0x00000434
-00000ef9: db 0x66
-00000efa: mov ebp, ebx
-00000efc: in al, dx
-00000efd: cld
-00000efe: db 0xff
-00000eff: inc [bp+di]+8966
-00000f03: popf
-00000f04: hlt
-00000f05: cld
-00000f06: db 0xff
-00000f07: db 0xff
+00000ef9: mov [ebp-788], ebx
+00000f00: mov [ebp-780], ebx
 00000f08: mov ebx, 0x00000436
-00000f0d: db 0x66
-00000f0e: mov ebp, ebx
-00000f10: cld
-00000f11: cld
-00000f12: db 0xff
-00000f13: inc [bp+di]+8966
-00000f17: popf
-00000f18: add al, 0xfd
-00000f1a: db 0xff
-00000f1b: db 0xff
+00000f0d: mov [ebp-772], ebx
+00000f14: mov [ebp-764], ebx
 00000f1c: mov ebx, 0x00000438
-00000f21: db 0x66
-00000f22: mov ebp, ebx
-00000f24: or al, 0xfd
-00000f26: db 0xff
-00000f27: inc [bp+di]+8966
-00000f2b: popf
-00000f2c: adc al, 0xfd
-00000f2e: db 0xff
-00000f2f: db 0xff
+00000f21: mov [ebp-756], ebx
+00000f28: mov [ebp-748], ebx
 00000f30: mov ebx, 0x0000043a
-00000f35: db 0x66
-00000f36: mov ebp, ebx
-00000f38: sbb al, 0xfd
-00000f3a: db 0xff
-00000f3b: inc ebx
-00000f3d: retn
-00000f3e: add cl, cl
-00000f40: lea esi, ?
-00000f42: std
-00000f43: db 0xff
-00000f44: jmp [bp]+9d89
-00000f48: and al, 0xfd
-00000f4a: db 0xff
-00000f4b: db 0xff
+00000f35: mov [ebp-740], ebx
+00000f3c: add ebx, 0x02
+00000f3f: mov [ebp-720], ecx
+00000f45: mov [ebp-732], ebx
 00000f4c: mov ebx, 0x0000043d
-00000f51: lea ecx, ?
-00000f53: add [bp]+8d89, esp
-00000f57: xor al, 0xfd
+00000f51: lea ecx, [ebp-1920375295]
+00000f57: db 0x34
+00000f58: std
 00000f59: db 0xff
-00000f5a: inc [bx+di]+8966
-00000f5e: lea edi, ?
-00000f60: std
-00000f61: db 0xff
-00000f62: dec ebp
-00000f64: dec ebx
-00000f65: add esp, [bp]+8d89
-00000f69: inc esp
-00000f6a: std
+00000f5a: inc [ecx+102]
+00000f5d: mov [ebp-708], ecx
+00000f63: lea ecx, [ebp-1920375293]
+00000f69: std
 00000f6b: db 0xff
-00000f6c: inc [bx+di]+bd89
-00000f70: pusha
-00000f71: std
-00000f72: db 0xff
-00000f73: jmp [bp]+8d89
-00000f77: dec esp
-00000f78: std
-00000f79: db 0xff
-00000f7a: dec ebp
-00000f7c: dec ebx
-00000f7d: push es
-00000f7e: mov edi, 0x00000446
-00000f83: db 0x66
-00000f84: mov ebp, edi
-00000f86: fs
-00000f87: std
-00000f88: db 0xff
-00000f89: jmp [bp]+9d89
-00000f8d: sub al, 0xfd
-00000f8f: db 0xff
-00000f90: inc ebx
-00000f92: retn
-00000f93: pop es
-00000f94: inc edi
-00000f95: db 0x66
-00000f96: mov ebp, edx
-00000f98: mov esp, 0xbafffffc
-00000f9d: sub al, 0x04
-00000f9f: add [bx+si], al
-00000fa1: db 0x66
-00000fa2: mov ebp, edi
-00000fa4: ins ?, dx
-00000fa5: std
-00000fa6: db 0xff
-00000fa7: db 0xff
+00000f6c: inc [ecx-119]
+00000f6f: mov ebp, 0xfffffd60
+00000f74: mov [ebp-692], ecx
+00000f7b: lea ecx, [ebp+71745286]
+00000f81: add [eax], al
+00000f83: mov [ebp-668], edi
+00000f8a: mov [ebp-724], ebx
+00000f91: add ebx, 0x07
+00000f94: mov [ebp-836], edx
+00000f9c: mov edx, 0x0000042c
+00000fa1: mov [ebp-660], edi
 00000fa8: mov edi, 0x00000449
-00000fad: db 0x66
-00000fae: mov ebp, edx
-00000fb0: les edi, ?
-00000fb2: db 0xff
-00000fb3: jmp [bp]+8d89
-00000fb7: push esp
-00000fb8: std
-00000fb9: db 0xff
-00000fba: db 0xff
+00000fad: mov [ebp-828], edx
+00000fb4: mov [ebp-684], ecx
 00000fbb: mov edx, 0x0043a924
 00000fc0: mov ecx, 0x0043a91c
-00000fc5: db 0x66
-00000fc6: mov ebp, edi
-00000fc8: jz -3 ; fc5
-00000fca: db 0xff
-00000fcb: inc edi
-00000fcd: test eax, esi
-00000fcf: cld
-00000fd0: db 0xff
-00000fd1: call [si]
-00000fd3: test eax, 0x85c70043
-00000fd8: mov eax, 0x0cfffffc
-00000fdd: test eax, 0x85c70043
-00000fe2: sar ah, 0xff
-00000fe5: inc [si]
-00000fe7: test eax, 0x95890043
-00000fec: enter 0xfffc, 0xff
-00000ff0: mov ebp, 0xfffffcd0
-00000ff6: cld
-00000ff7: test al, 0x43
-00000ff9: add bh, al
+00000fc5: mov [ebp-652], edi
+00000fcc: mov [ebp-848], 0x0043a914
+00000fd6: mov [ebp-840], 0x0043a90c
+00000fe0: mov [ebp-832], 0x0043a904
+00000fea: mov [ebp-824], edx
+00000ff0: mov [ebp-816], 0x0043a8fc
+00000ffa: db 0xc7
 00000ffb: test eax, ebx
 00000ffd: cld
 00000ffe: db 0xff

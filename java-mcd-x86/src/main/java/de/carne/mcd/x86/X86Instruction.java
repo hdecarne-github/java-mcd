@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.carne.mcd.MachineCodeDecoder;
 import de.carne.mcd.instruction.Instruction;
 import de.carne.mcd.instruction.InstructionOpcode;
 import de.carne.mcd.io.MCDInputBuffer;
@@ -34,67 +35,75 @@ import de.carne.mcd.io.MCDOutputBuffer;
  */
 public class X86Instruction implements Instruction {
 
-	private final Map<Byte, X86InstructionSignature> signatures;
+	private final Map<Byte, X86InstructionVariant> variants;
 
 	/**
 	 * Constructs a new {@linkplain X86Instruction} instance.
 	 *
-	 * @param signatures the instruction signatures to use.
+	 * @param variants the possible instruction variants.
 	 */
-	public X86Instruction(Map<Byte, X86InstructionSignature> signatures) {
-		this.signatures = signatures;
+	public X86Instruction(Map<Byte, X86InstructionVariant> variants) {
+		this.variants = variants;
 	}
 
-	static X86Instruction load(DataInput in) throws IOException {
-		Map<Byte, X86InstructionSignature> signatures = new HashMap<>();
-		int signatureCount = in.readInt();
+	/**
+	 * Loads a {@linkplain X86Instruction} instance from a stream.
+	 *
+	 * @param in the {@linkplain DataInput} instance to load from.
+	 * @return the loaded {@linkplain X86Instruction} instance.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public static X86Instruction load(DataInput in) throws IOException {
+		Map<Byte, X86InstructionVariant> variants = new HashMap<>();
+		int variantCount = in.readInt();
 
-		for (int signatureIndex = 0; signatureIndex < signatureCount; signatureIndex++) {
+		for (int variantIndex = 0; variantIndex < variantCount; variantIndex++) {
 			Byte opcodeExtension = Byte.valueOf(in.readByte());
 			String mnemonic = in.readUTF();
-			boolean hasModRM = false;
-			List<OperandType> operands = new ArrayList<>();
-			char operandType;
+			List<NamedDecoder> decoders = new ArrayList<>();
+			char decoderType;
 
 			do {
-				operandType = in.readChar();
+				decoderType = in.readChar();
 
-				String operandName = in.readUTF();
+				String decoderName = in.readUTF();
 
-				switch (operandType) {
-				case 'i':
-					operands.add(ImmediateOperandType.valueOf(operandName));
+				switch (decoderType) {
+				case 'p':
+					decoders.add(PrefixDecoder.valueOf(decoderName));
 					break;
 				case 'm':
-					hasModRM = true;
-					operands.add(ModRMOperandType.valueOf(operandName));
+					decoders.add(ModRMDecoder.valueOf(decoderName));
+					break;
+				case 'i':
+					decoders.add(ImmediateDecoder.valueOf(decoderName));
 					break;
 				case '*':
-					operands.add(ImplicitOperandDecoder.fromName(operandName));
+					decoders.add(ImplicitDecoder.getInstance(decoderName));
 					break;
 				case '\0':
 					// instruction complete
 					break;
 				default:
-					throw new IOException("Unrecognized operand type: " + operandType + ":" + operandName);
+					throw new IOException("Unrecognized decoder type: " + decoderType + ":" + decoderName);
 				}
-			} while (operandType != '\0');
-			signatures.put(opcodeExtension, new X86InstructionSignature(mnemonic, hasModRM, operands));
+			} while (decoderType != '\0');
+			variants.put(opcodeExtension, new X86InstructionVariant(mnemonic, decoders));
 		}
-		return new X86Instruction(signatures);
+		return new X86Instruction(variants);
 	}
 
 	@Override
 	public void save(DataOutput out) throws IOException {
-		out.writeInt(this.signatures.size());
-		for (Map.Entry<Byte, X86InstructionSignature> entry : this.signatures.entrySet()) {
+		out.writeInt(this.variants.size());
+		for (Map.Entry<Byte, X86InstructionVariant> entry : this.variants.entrySet()) {
 			out.write(entry.getKey().byteValue());
 
-			X86InstructionSignature signature = entry.getValue();
+			X86InstructionVariant variant = entry.getValue();
 
-			out.writeUTF(signature.mnemonic());
+			out.writeUTF(variant.mnemonic());
 
-			for (OperandType operand : signature.operands()) {
+			for (NamedDecoder operand : variant.decoders()) {
 				out.writeChar(operand.type());
 				out.writeUTF(operand.name());
 			}
@@ -105,31 +114,49 @@ public class X86Instruction implements Instruction {
 
 	@Override
 	public void decode(long ip, InstructionOpcode opcode, MCDInputBuffer in, MCDOutputBuffer out) throws IOException {
-		X86InstructionSignature signature = this.signatures.get(X86InstructionSignature.NO_OPCODE_EXTENSION);
-		byte modrmByte = 0;
+		X86DecoderState decoderState = MachineCodeDecoder.getDecoder(X86Decoder.class).state();
+		X86InstructionVariant signature = this.variants.get(X86InstructionVariant.NO_OPCODE_EXTENSION);
 
 		if (signature == null) {
-			modrmByte = in.decodeI8();
+			ModRM modRM = decoderState.setModRM(in.decodeI8());
+			Byte opcodeExtension = Byte.valueOf((byte) modRM.regOrOpcodeIndex());
 
-			Byte opcodeExtension = Byte.valueOf((byte) ((modrmByte >> 3) & 0x7));
-
-			signature = this.signatures.get(opcodeExtension);
+			signature = this.variants.get(opcodeExtension);
 			if (signature == null) {
 				throw new IOException("Failed to decode extended opcode: " + opcode + " /" + opcodeExtension);
 			}
 		} else if (signature.hasModRM()) {
-			modrmByte = in.decodeI8();
+			decoderState.setModRM(in.decodeI8());
 		}
-		out.printKeyword(signature.mnemonic());
+		if (!signature.isPrefix()) {
+			out.printKeyword(signature.mnemonic());
 
-		int operandIndex = 0;
+			int operandIndex = 0;
 
-		for (OperandType operand : signature.operands()) {
-			out.print(operandIndex == 0 ? " " : ", ");
-			operand.decode(ip, modrmByte, in, out);
-			operandIndex++;
+			for (NamedDecoder operand : signature.decoders()) {
+				out.print(operandIndex == 0 ? " " : ", ");
+				operand.decode(decoderState, in, out);
+				operandIndex++;
+			}
+			out.println();
+		} else {
+			for (NamedDecoder operand : signature.decoders()) {
+				operand.decode(decoderState, in, out);
+			}
 		}
-		out.println();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder buffer = new StringBuilder();
+
+		for (X86InstructionVariant signature : this.variants.values()) {
+			if (buffer.length() > 0) {
+				buffer.append(", ");
+			}
+			buffer.append(signature);
+		}
+		return buffer.toString();
 	}
 
 }

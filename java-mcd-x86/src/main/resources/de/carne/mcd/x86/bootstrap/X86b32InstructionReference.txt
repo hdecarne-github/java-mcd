@@ -2,64 +2,46 @@
 01;add;r/m32,r32
 02;add;r8,r/m8
 03;add;r32,r/m32
-04;add;al,imm8
-05;add;eax,imm32
 06;push;es
 07;pop;es
 08;or;r/m8,r8
 09;or;r/m32,r32
 0A;or;r8,r/m8
 0B;or;r32,r/m32
-0C;or;al,imm8
-0D;or;eax,imm32
 0E;push;cs
-0F;pop;cs
 10;adc;r/m8,r8
 11;adc;r/m32,r32
 12;adc;r8,r/m8
 13;adc;r32,r/m32
-14;adc;al,imm8
-15;adc;eax,imm32
 16;push;ss
-17;pop;ss
 18;sbb;r/m8,r8
 19;sbb;r/m32,r32
 1A;sbb;r8,r/m8
 1B;sbb;r32,r/m32
-1C;sbb;al,imm8
-1D;sbb;eax,imm32
 1E;push;ds
 1F;pop;ds
 20;and;r/m8,r8
 21;and;r/m32,r32
 22;and;r8,r/m8
 23;and;r32,r/m32
-24;and;al,imm8
-25;and;eax,imm32
 26;es
 27;daa
 28;sub;r/m8,r8
 29;sub;r/m32,r32
 2A;sub;r8,r/m8
 2B;sub;r32,r/m32
-2C;sub;al,imm8
-2D;sub;eax,imm32
 2E;cs
 2F;das
 30;xor;r/m8,r8
 31;xor;r/m32,r32
 32;xor;r8,r/m8
 33;xor;r32,r/m32
-34;xor;al,imm8
-35;xor;eax,imm32
 36;ss
 37;aaa
 38;cmp;r/m8,r8
 39;cmp;r/m32,r32
 3A;cmp;r8,r/m8
 3B;cmp;r32,r/m32
-3C;cmp;al,imm8
-3D;cmp;eax,imm32
 3E;ds
 3F;aas
 40;inc;eax
@@ -100,6 +82,8 @@
 63;arpl;r/m16,r16
 64;fs
 65;gs
+66;-
+67;-
 68;push;imm32
 69;imul;r32,r/m32,imm32
 6A;push;imm8
@@ -140,14 +124,7 @@
 8D;lea;r32,m
 8E;mov;Sreg,r/m16
 8F;pop;/0:pop,r/m32
-90;xchg;eax,eax
-91;xchg;ecx,eax
-92;xchg;edx,eax
-93;xchg;ebx,eax
-94;xchg;esp,eax
-95;xchg;ebp,eax
-96;xchg;esi,eax
-97;xchg;edi,eax
+90;nop
 98;cbw
 99;cwd
 9A;callf;ptr16:32
@@ -164,8 +141,6 @@ A4;movs;es:[edi],ds:[esi]
 A5;movs;es:[di],ds:[si]
 A6;cmps;es:[edi],ds:[esi]
 A7;cmps;es:[di],ds:[si]
-A8;test;al,imm8
-A9;test;eax,imm32
 AA;stos;es:[edi]
 AB;stos;es:[di]
 AC;lods;ds:[esi]
@@ -247,19 +222,15 @@ F7;test;/0:test,r/m32,imm32;/1:test,r/m32,imm32;/2:not,r/m32;/3:neg,r/m32;/4:mul
 F8;clc
 F9;stc
 FA;cli
-FB;sti
 FC;cld
 FD;std
 FE;inc;/0:inc,r/m8;/1:dec,r/m8
 FF;inc;/0:inc,r/m32;/1:dec,r/m32;/2:call,r/m32;/3:callf,mptp;/4:jmp,r/m32;/5:jmpf,mptp;/6:push,r/m32
-0F 00;sldt;/0:sldt,r/m16;/1:str,r/m16;/2:lldt,r/m16;/3:ltr,r/m16;/4:verr,r/m16;/5:verw,r/m16;/6:jmpe
-0F 01;sgdt;/0:sgdt,ms;/1:sidt,ms;/2:lgdt,ms;/3:lidt,ms;/4:smsw,r/m16;/6:lmsw,r/m16;/7:invlpg,m
+0F 00;sldt;/0:sldt,r/m16;/1:str,r/m16;/4:verr,r/m16;/5:verw,r/m16;/6:jmpe
+0F 01;sgdt;/0:sgdt,ms;/1:sidt,ms;/4:smsw,r/m16
 0F 02;lar;r32,r/m16
 0F 03;lsl;r32,r/m16
 0F 06;clts
-0F 08;invd
-0F 09;wbinvd
-0F 0B;ud2
 0F 0D;nop;r/m32
 0F 10;movups;vps,wps
 0F 11;movups;wps,vps
@@ -279,8 +250,6 @@ FF;inc;/0:inc,r/m32;/1:dec,r/m32;/2:call,r/m32;/3:callf,mptp;/4:jmp,r/m32;/5:jmp
 0F 1F;hint_nop;r/m32
 0F 20;mov;rd,cd
 0F 21;mov;rd,dd
-0F 22;mov;cd,rd
-0F 23;mov;dd,rd
 0F 24;mov;rd,td
 0F 26;mov;td,rd
 0F 28;movaps;vps,wps
@@ -291,7 +260,6 @@ FF;inc;/0:inc,r/m32;/1:dec,r/m32;/2:call,r/m32;/3:callf,mptp;/4:jmp,r/m32;/5:jmp
 0F 2D;cvtps2pi;ppi,wpsq
 0F 2E;ucomiss;vss,wss
 0F 2F;comiss;vss,wss
-0F 30;wrmsr
 0F 31;rdtsc
 0F 32;rdmsr
 0F 33;rdpmc
@@ -390,7 +358,6 @@ FF;inc;/0:inc,r/m32;/1:dec,r/m32;/2:call,r/m32;/3:callf,mptp;/4:jmp,r/m32;/5:jmp
 0F 9F;setnle;/0:setnle,r/m8
 0F A0;push;fs
 0F A1;pop;fs
-0F A2;cpuid
 0F A3;bt;r/m32,r32
 0F A4;shld;r/m32,r32,imm8
 0F A5;shld;r/m32,r32,cl
@@ -410,7 +377,6 @@ FF;inc;/0:inc,r/m32;/1:dec,r/m32;/2:call,r/m32;/3:callf,mptp;/4:jmp,r/m32;/5:jmp
 0F B6;movzx;r32,r/m8
 0F B7;movzx;r32,r/m16
 0F B8;jmpe
-0F B9;ud;g,e
 0F BA;bt;/4:bt,r/m32,imm8;/5:bts,r/m32,imm8;/6:btr,r/m32,imm8;/7:btc,r/m32,imm8
 0F BB;btc;r/m32,r32
 0F BC;bsf;r32,r/m32
@@ -512,11 +478,11 @@ D9 FD;fscale;/7:fscale
 D9 FE;fsin;/7:fsin
 D9 FF;fcos;/7:fcos
 DA E9;fucompp;/5:fucompp
-DB E0;fneni;/4:fneni;/4:fneni
-DB E1;fndisi;/4:fndisi;/4:fndisi
+DB E0;fneni;/4:fneni
+DB E1;fndisi;/4:fndisi
 DB E2;fnclex;/4:fnclex
 DB E3;fninit;/4:fninit
-DB E4;fnsetpm;/4:fnsetpm;/4:fnsetpm
+DB E4;fnsetpm;/4:fnsetpm
 DD E1;fucom;/4:fucom
 DD E9;fucomp;/5:fucomp
 DE C1;faddp;/0:faddp
@@ -527,7 +493,7 @@ DE E9;fsubp;/5:fsubp
 DE F1;fdivrp;/6:fdivrp
 DE F9;fdivp;/7:fdivp
 DF E0;fnstsw;/4:fnstsw,ax
-F3 90;nop
+F3 90;pause
 0F 01 C1;vmcall;/0:vmcall
 0F 01 C2;vmlaunch;/0:vmlaunch
 0F 01 C3;vmresume;/0:vmresume
@@ -536,7 +502,6 @@ F3 90;nop
 0F 01 C9;mwait;/1:mwait
 0F 01 D0;xgetbv;/2:xgetbv
 0F 01 D1;xsetbv;/2:xsetbv
-0F 01 F9;rdtscp;/7:rdtscp
 0F 38 00;pshufb;pq,qq
 0F 38 01;phaddw;pq,qq
 0F 38 02;phaddd;pq,qq

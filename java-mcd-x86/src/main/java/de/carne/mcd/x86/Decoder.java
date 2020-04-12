@@ -22,38 +22,19 @@ import de.carne.mcd.io.MCDInputBuffer;
 import de.carne.mcd.io.MCDOutputBuffer;
 
 /**
- *
+ * Functional interface for a single decode step.
  */
-public enum ImmediateOperandType implements OperandType {
+@FunctionalInterface
+public interface Decoder {
 
-	REL8(OperandDecoders::rel8),
-
-	REL16(OperandDecoders::rel16),
-
-	REL32(OperandDecoders::rel32),
-
-	IMM8(OperandDecoders::imm8),
-
-	IMM16(OperandDecoders::imm16),
-
-	IMM32(OperandDecoders::imm32),
-
-	IMM64(OperandDecoders::imm64);
-
-	private final OperandDecoder decoder;
-
-	private ImmediateOperandType(OperandDecoder decoder) {
-		this.decoder = decoder;
-	}
-
-	@Override
-	public char type() {
-		return 'i';
-	}
-
-	@Override
-	public void decode(long ip, byte modrmByte, MCDInputBuffer buffer, MCDOutputBuffer out) throws IOException {
-		this.decoder.decode(ip, modrmByte, buffer, out);
-	}
+	/**
+	 * Performs the decode step.
+	 *
+	 * @param decoderState the current decoder state.
+	 * @param in the {@linkplain MCDInputBuffer} instance to decode from.
+	 * @param out the {@linkplain MCDOutputBuffer} instance to decode to.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	void decode(X86DecoderState decoderState, MCDInputBuffer in, MCDOutputBuffer out) throws IOException;
 
 }

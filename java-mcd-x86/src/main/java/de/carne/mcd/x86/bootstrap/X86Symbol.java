@@ -16,34 +16,30 @@
  */
 package de.carne.mcd.x86.bootstrap;
 
-import java.util.Objects;
-
-import org.eclipse.jdt.annotation.Nullable;
-
-import de.carne.mcd.x86.ImmediateOperandType;
-import de.carne.mcd.x86.ImplicitOperandDecoder;
-import de.carne.mcd.x86.ModRMOperandType;
-import de.carne.mcd.x86.OperandType;
+import de.carne.mcd.x86.ImmediateDecoder;
+import de.carne.mcd.x86.ImplicitDecoder;
+import de.carne.mcd.x86.ModRMDecoder;
+import de.carne.mcd.x86.NamedDecoder;
 
 enum X86Symbol {
 
-	REL8("rel8", ImmediateOperandType.REL8),
+	REL8("rel8", ImmediateDecoder.REL8),
 
-	REL16("rel16", ImmediateOperandType.REL16),
+	REL16("rel16", ImmediateDecoder.REL16),
 
-	REL32("rel32", ImmediateOperandType.REL16),
+	REL32("rel32", ImmediateDecoder.REL32),
 
-	PTR16_16("ptr16:16", ImplicitOperandDecoder.fromName("?")),
+	PTR16_16("ptr16:16", ImplicitDecoder.getInstance("?")),
 
-	PTR16_32("ptr16:32", ImplicitOperandDecoder.fromName("?")),
+	PTR16_32("ptr16:32", ImplicitDecoder.getInstance("?")),
 
-	R8("r8", ModRMOperandType.R8),
+	R8("r8", ModRMDecoder.R8),
 
-	R16("r16", ModRMOperandType.R16),
+	R16("r16", ModRMDecoder.R16),
 
-	R32("r32", ModRMOperandType.R32),
+	R32("r32", ModRMDecoder.R32),
 
-	R64("r64", ModRMOperandType.R64),
+	R64("r64", ModRMDecoder.R64),
 
 	OPCD_R8("+r8", null),
 
@@ -53,126 +49,126 @@ enum X86Symbol {
 
 	OPCD_R64("+r64", null),
 
-	IMM8("imm8", ImmediateOperandType.IMM8),
+	IMM8("imm8", ImmediateDecoder.IMM8),
 
-	IMM16("imm16", ImmediateOperandType.IMM16),
+	IMM16("imm16", ImmediateDecoder.IMM16),
 
-	IMM32("imm32", ImmediateOperandType.IMM32),
+	IMM32("imm32", ImmediateDecoder.IMM32),
 
-	IMM64("imm64", ImmediateOperandType.IMM64),
+	IMM64("imm64", ImmediateDecoder.IMM64),
 
-	RM8("r/m8", ModRMOperandType.RM8),
+	M("m", ImmediateDecoder.M),
 
-	RM16("r/m16", ModRMOperandType.RM16),
+	RM8("r/m8", ModRMDecoder.RM8),
 
-	RM32("r/m32", ModRMOperandType.RM32),
+	RM16("r/m16", ModRMDecoder.RM16),
 
-	RM64("r/m64", ModRMOperandType.RM64),
+	RM32("r/m32", ModRMDecoder.RM32),
 
-	M("m", ImplicitOperandDecoder.fromName("?")),
+	RM64("r/m64", ModRMDecoder.RM64),
 
-	M16("m16", ImplicitOperandDecoder.fromName("?")),
+	M16("m16", ImplicitDecoder.getInstance("m16")),
 
-	M32("m32", ImplicitOperandDecoder.fromName("?")),
+	M32("m32", ImplicitDecoder.getInstance("m32")),
 
-	M64("m64", ImplicitOperandDecoder.fromName("?")),
+	M64("m64", ImplicitDecoder.getInstance("m64")),
 
-	M128("m128", ImplicitOperandDecoder.fromName("?")),
+	M128("m128", ImplicitDecoder.getInstance("m128")),
 
-	M16_16("m16:16", ImplicitOperandDecoder.fromName("?")),
+	M16_16("m16:16", ImplicitDecoder.getInstance("m16:16")),
 
-	M16_32("m16:32", ImplicitOperandDecoder.fromName("?")),
+	M16_32("m16:32", ImplicitDecoder.getInstance("m16:32")),
 
-	M16_64("m16:64", ImplicitOperandDecoder.fromName("?")),
+	M16_64("m16:64", ImplicitDecoder.getInstance("m16:64")),
 
-	MOFFS8("moffs8", ImplicitOperandDecoder.fromName("?")),
+	MOFFS8("moffs8", ImmediateDecoder.MOFFS8),
 
-	MOFFS16("moffs16", ImplicitOperandDecoder.fromName("?")),
+	MOFFS16("moffs16", ImmediateDecoder.MOFFS16),
 
-	MOFFS32("moffs32", ImplicitOperandDecoder.fromName("?")),
+	MOFFS32("moffs32", ImmediateDecoder.MOFFS32),
 
-	MOFFS64("moffs64", ImplicitOperandDecoder.fromName("?")),
+	MOFFS64("moffs64", ImmediateDecoder.MOFFS64),
 
-	SREG("Sreg", ImplicitOperandDecoder.fromName("?")),
+	SREG("Sreg", ImplicitDecoder.getInstance("?")),
 
-	M32FP("m32fp", ImplicitOperandDecoder.fromName("?")),
+	M32FP("m32fp", ImplicitDecoder.getInstance("?")),
 
-	M64FP("m64fp", ImplicitOperandDecoder.fromName("?")),
+	M64FP("m64fp", ImplicitDecoder.getInstance("?")),
 
-	M80FP("m80fp", ImplicitOperandDecoder.fromName("?")),
+	M80FP("m80fp", ImplicitDecoder.getInstance("?")),
 
-	M16INT("m16int", ImplicitOperandDecoder.fromName("?")),
+	M16INT("m16int", ImplicitDecoder.getInstance("?")),
 
-	M32INT("m32int", ImplicitOperandDecoder.fromName("?")),
+	M32INT("m32int", ImplicitDecoder.getInstance("?")),
 
-	M64INT("m64int", ImplicitOperandDecoder.fromName("?")),
+	M64INT("m64int", ImplicitDecoder.getInstance("?")),
 
-	AL("al", ImplicitOperandDecoder.fromName("al")),
+	AL("al", ImplicitDecoder.getInstance("al")),
 
-	CL("cl", ImplicitOperandDecoder.fromName("cl")),
+	CL("cl", ImplicitDecoder.getInstance("cl")),
 
-	DL("dl", ImplicitOperandDecoder.fromName("dl")),
+	DL("dl", ImplicitDecoder.getInstance("dl")),
 
-	BL("bl", ImplicitOperandDecoder.fromName("bl")),
+	BL("bl", ImplicitDecoder.getInstance("bl")),
 
-	AH("ah", ImplicitOperandDecoder.fromName("ah")),
+	AH("ah", ImplicitDecoder.getInstance("ah")),
 
-	CH("ch", ImplicitOperandDecoder.fromName("ch")),
+	CH("ch", ImplicitDecoder.getInstance("ch")),
 
-	DH("dh", ImplicitOperandDecoder.fromName("dh")),
+	DH("dh", ImplicitDecoder.getInstance("dh")),
 
-	BH("bh", ImplicitOperandDecoder.fromName("bh")),
+	BH("bh", ImplicitDecoder.getInstance("bh")),
 
-	AX("ax", ImplicitOperandDecoder.fromName("ax")),
+	AX("ax", ImplicitDecoder.getInstance("ax")),
 
-	CX("cx", ImplicitOperandDecoder.fromName("cx")),
+	CX("cx", ImplicitDecoder.getInstance("cx")),
 
-	DX("dx", ImplicitOperandDecoder.fromName("dx")),
+	DX("dx", ImplicitDecoder.getInstance("dx")),
 
-	BX("bx", ImplicitOperandDecoder.fromName("bx")),
+	BX("bx", ImplicitDecoder.getInstance("bx")),
 
-	SP("sp", ImplicitOperandDecoder.fromName("sp")),
+	SP("sp", ImplicitDecoder.getInstance("sp")),
 
-	BP("bp", ImplicitOperandDecoder.fromName("bp")),
+	BP("bp", ImplicitDecoder.getInstance("bp")),
 
-	SI("si", ImplicitOperandDecoder.fromName("si")),
+	SI("si", ImplicitDecoder.getInstance("si")),
 
-	DI("di", ImplicitOperandDecoder.fromName("di")),
+	DI("di", ImplicitDecoder.getInstance("di")),
 
-	EAX("eax", ImplicitOperandDecoder.fromName("eax")),
+	EAX("eax", ImplicitDecoder.getInstance("eax")),
 
-	ECX("ecx", ImplicitOperandDecoder.fromName("ecx")),
+	ECX("ecx", ImplicitDecoder.getInstance("ecx")),
 
-	EDX("edx", ImplicitOperandDecoder.fromName("edx")),
+	EDX("edx", ImplicitDecoder.getInstance("edx")),
 
-	EBX("ebx", ImplicitOperandDecoder.fromName("ebx")),
+	EBX("ebx", ImplicitDecoder.getInstance("ebx")),
 
-	ESP("esp", ImplicitOperandDecoder.fromName("esp")),
+	ESP("esp", ImplicitDecoder.getInstance("esp")),
 
-	EBP("ebp", ImplicitOperandDecoder.fromName("ebp")),
+	EBP("ebp", ImplicitDecoder.getInstance("ebp")),
 
-	ESI("esi", ImplicitOperandDecoder.fromName("esi")),
+	ESI("esi", ImplicitDecoder.getInstance("esi")),
 
-	EDI("edi", ImplicitOperandDecoder.fromName("edi")),
+	EDI("edi", ImplicitDecoder.getInstance("edi")),
 
-	RAX("rax", ImplicitOperandDecoder.fromName("rax")),
+	RAX("rax", ImplicitDecoder.getInstance("rax")),
 
-	MDI("es:[di]", ImplicitOperandDecoder.fromName("?")),
+	MDI("es:[di]", ImplicitDecoder.getInstance("es:[di]")),
 
-	MEDI("es:[edi]", ImplicitOperandDecoder.fromName("?")),
+	MEDI("es:[edi]", ImplicitDecoder.getInstance("es:[edi]")),
 
-	MRDI("[rdi]", ImplicitOperandDecoder.fromName("?")),
+	MRDI("[rdi]", ImplicitDecoder.getInstance("[rdi]")),
 
-	MSI("ds:[si]", ImplicitOperandDecoder.fromName("?")),
+	MSI("ds:[si]", ImplicitDecoder.getInstance("ds:[si]")),
 
-	MESI("ds:[esi]", ImplicitOperandDecoder.fromName("?")),
+	MESI("ds:[esi]", ImplicitDecoder.getInstance("ds:[esi]")),
 
-	MRSI("[rsi]", ImplicitOperandDecoder.fromName("?"));
+	MRSI("[rsi]", ImplicitDecoder.getInstance("[rsi]"));
 
 	private final String symbol;
-	private final @Nullable OperandType decoder;
+	private final NamedDecoder decoder;
 
-	private X86Symbol(String symbol, @Nullable OperandType decoder) {
+	private X86Symbol(String symbol, NamedDecoder decoder) {
 		this.symbol = symbol;
 		this.decoder = decoder;
 	}
@@ -181,8 +177,8 @@ enum X86Symbol {
 		return this.symbol;
 	}
 
-	public OperandType decoder() {
-		return Objects.requireNonNull(this.decoder);
+	public NamedDecoder decoder() {
+		return this.decoder;
 	}
 
 }
