@@ -143,6 +143,11 @@ public final class InstructionIndex implements InstructionIndexParameters, Close
 			this.instruction.decode(ip, this.opcode, in, out);
 		}
 
+		@Override
+		public String toString() {
+			return this.opcode + " " + this.instruction;
+		}
+
 	}
 
 	/**

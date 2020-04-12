@@ -24,7 +24,7 @@ import de.carne.mcd.instruction.InstructionOpcode;
 /**
  * Test {@linkplain InstructionOpcode} class.
  */
-class OpcodeTest {
+class InstructionOpcodeTest {
 
 	private static final byte[] TEST_BYTES_A = {};
 	private static final byte[] TEST_BYTES_B = { 10, 11, 12, 13, 14, 15, 16 };
@@ -68,6 +68,17 @@ class OpcodeTest {
 		Assertions.assertEquals(1, opcodeD.compareTo(opcodeB));
 		Assertions.assertEquals(1, opcodeD.compareTo(opcodeC));
 		Assertions.assertEquals(0, opcodeD.compareTo(opcodeD));
+	}
+
+	@Test
+	void testByteAccess() {
+		InstructionOpcode opcodeB = InstructionOpcode.wrap(TEST_BYTES_B);
+
+		Assertions.assertArrayEquals(TEST_BYTES_B, opcodeB.bytes());
+		Assertions.assertEquals(TEST_BYTES_B.length, opcodeB.length());
+		for (int n = 0; n < TEST_BYTES_B.length; n++) {
+			Assertions.assertEquals(TEST_BYTES_B[n], opcodeB.byteAt(n));
+		}
 	}
 
 	@Test

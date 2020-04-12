@@ -60,25 +60,25 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput increaseIndent() throws IOException {
+	public MCDPrintBuffer increaseIndent() throws IOException {
 		this.buffer.add(MCDOutput::increaseIndent);
 		return this;
 	}
 
 	@Override
-	public MCDOutput decreaseIndent() throws IOException {
+	public MCDPrintBuffer decreaseIndent() throws IOException {
 		this.buffer.add(MCDOutput::decreaseIndent);
 		return this;
 	}
 
 	@Override
-	public MCDOutput println() throws IOException {
+	public MCDPrintBuffer println() throws IOException {
 		this.buffer.add(MCDOutput::println);
 		return this;
 	}
 
 	@Override
-	public MCDOutput print(String text) throws IOException {
+	public MCDPrintBuffer print(String text) throws IOException {
 		if (!Strings.isEmpty(text)) {
 			this.buffer.add(out -> out.print(text));
 		}
@@ -86,7 +86,7 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput println(String text) throws IOException {
+	public MCDPrintBuffer println(String text) throws IOException {
 		if (!Strings.isEmpty(text)) {
 			this.buffer.add(out -> out.println(text));
 		} else {
@@ -96,7 +96,7 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput printValue(String value) throws IOException {
+	public MCDPrintBuffer printValue(String value) throws IOException {
 		if (!Strings.isEmpty(value)) {
 			this.buffer.add(out -> out.printValue(value));
 		}
@@ -104,7 +104,7 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput printlnValue(String value) throws IOException {
+	public MCDPrintBuffer printlnValue(String value) throws IOException {
 		if (!Strings.isEmpty(value)) {
 			this.buffer.add(out -> out.printlnValue(value));
 		} else {
@@ -114,7 +114,7 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput printComment(String comment) throws IOException {
+	public MCDPrintBuffer printComment(String comment) throws IOException {
 		if (!Strings.isEmpty(comment)) {
 			this.buffer.add(out -> out.printComment(comment));
 		}
@@ -122,7 +122,7 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput printlnComment(String comment) throws IOException {
+	public MCDPrintBuffer printlnComment(String comment) throws IOException {
 		if (!Strings.isEmpty(comment)) {
 			this.buffer.add(out -> out.printlnComment(comment));
 		} else {
@@ -132,7 +132,7 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput printKeyword(String keyword) throws IOException {
+	public MCDPrintBuffer printKeyword(String keyword) throws IOException {
 		if (!Strings.isEmpty(keyword)) {
 			this.buffer.add(out -> out.printKeyword(keyword));
 		}
@@ -140,7 +140,7 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput printlnKeyword(String keyword) throws IOException {
+	public MCDPrintBuffer printlnKeyword(String keyword) throws IOException {
 		if (!Strings.isEmpty(keyword)) {
 			this.buffer.add(out -> out.printlnKeyword(keyword));
 		} else {
@@ -150,7 +150,7 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput printOperator(String operator) throws IOException {
+	public MCDPrintBuffer printOperator(String operator) throws IOException {
 		if (!Strings.isEmpty(operator)) {
 			this.buffer.add(out -> out.printOperator(operator));
 		}
@@ -158,7 +158,7 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput printlnOperator(String operator) throws IOException {
+	public MCDPrintBuffer printlnOperator(String operator) throws IOException {
 		if (!Strings.isEmpty(operator)) {
 			this.buffer.add(out -> out.printlnOperator(operator));
 		} else {
@@ -168,7 +168,7 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput printLabel(String label) throws IOException {
+	public MCDPrintBuffer printLabel(String label) throws IOException {
 		if (!Strings.isEmpty(label)) {
 			this.buffer.add(out -> out.printLabel(label));
 		}
@@ -176,7 +176,7 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput printlnLabel(String label) throws IOException {
+	public MCDPrintBuffer printlnLabel(String label) throws IOException {
 		if (!Strings.isEmpty(label)) {
 			this.buffer.add(out -> out.printlnLabel(label));
 		} else {
@@ -186,7 +186,7 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput printError(String error) throws IOException {
+	public MCDPrintBuffer printError(String error) throws IOException {
 		if (!Strings.isEmpty(error)) {
 			this.buffer.add(out -> out.printError(error));
 		}
@@ -194,7 +194,7 @@ public final class MCDPrintBuffer implements MCDOutput {
 	}
 
 	@Override
-	public MCDOutput printlnError(String error) throws IOException {
+	public MCDPrintBuffer printlnError(String error) throws IOException {
 		if (!Strings.isEmpty(error)) {
 			this.buffer.add(out -> out.printlnError(error));
 		} else {

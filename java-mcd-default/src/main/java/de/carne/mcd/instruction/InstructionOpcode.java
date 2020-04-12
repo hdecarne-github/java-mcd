@@ -80,17 +80,27 @@ public class InstructionOpcode implements Comparable<InstructionOpcode> {
 	}
 
 	/**
-	 * Gets the length of this {@linkplain InstructionOpcode} instance.
+	 * Gets the number of bytes represented by this {@linkplain InstructionOpcode} instance.
 	 *
-	 * @return the length of this {@linkplain InstructionOpcode} instance.
+	 * @return the number of bytes represented by this {@linkplain InstructionOpcode} instance.
 	 */
 	public int length() {
 		return this.length;
 	}
 
 	/**
+	 * Gets the nth opcode byte.
+	 *
+	 * @param n the offset of the byte to get.
+	 * @return the nth opcode byte.
+	 */
+	public byte byteAt(int n) {
+		return this.bytes[this.offset + n];
+	}
+
+	/**
 	 * Gets the byte array represented by this opcode.
-	 * 
+	 *
 	 * @return the byte array represented by this opcode.
 	 */
 	public byte[] bytes() {
