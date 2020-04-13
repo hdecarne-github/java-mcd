@@ -1,5 +1,5 @@
 /*
- * Class file version: 52.0
+ * Class file version: 55.0
  *
  * Source file: InputStream.java
  */
@@ -9,12 +9,25 @@ public abstract /* super */ class InputStream implements Closeable {
     
     private static final int MAX_SKIP_BUFFER_SIZE = 2048;
     
+    private static final int DEFAULT_BUFFER_SIZE = 8192;
+    
+    private static final int MAX_BUFFER_SIZE = 2147483639;
+    
     public void <init>() {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0001: invokespecial #1 // void Object.<init>()
+        0001: invokespecial #2 // void Object.<init>()
         0004: return
+    }
+    
+    public static InputStream nullInputStream() {
+        // max_stack: 2
+        // max_locals: 0
+        0000: new #3 // InputStream$1
+        0003: dup
+        0004: invokespecial #4 // void InputStream$1.<init>()
+        0007: areturn
     }
     
     public abstract int read() throws IOException;
@@ -27,75 +40,250 @@ public abstract /* super */ class InputStream implements Closeable {
         0002: iconst_0
         0003: aload_1
         0004: arraylength
-        0005: invokevirtual #2 // int InputStream.read(byte[], int, int)
+        0005: invokevirtual #5 // int InputStream.read(byte[], int, int)
         0008: ireturn
     }
     
     public int read(byte[], int, int) throws IOException {
         // max_stack: 3
         // max_locals: 7
-        0000: aload_1
-        0001: ifnonnull +11 // 000c
-        0004: new #3 // NullPointerException
+        0000: iload_2
+        0001: iload_3
+        0002: aload_1
+        0003: arraylength
+        0004: invokestatic #6 // int java.util.Objects.checkFromIndexSize(int, int, int)
+        0007: pop
+        0008: iload_3
+        0009: ifne +5 // 000e
+        000c: iconst_0
+        000d: ireturn
+        000e: aload_0
+        000f: invokevirtual #7 // int InputStream.read()
+        0012: istore local_4
+        0014: iload local_4
+        0016: iconst_m1
+        0017: if_icmpne +5 // 001c
+        001a: iconst_m1
+        001b: ireturn
+        001c: aload_1
+        001d: iload_2
+        001e: iload local_4
+        0020: i2b
+        0021: bastore
+        0022: iconst_1
+        0023: istore local_5
+        0025: iload local_5
+        0027: iload_3
+        0028: if_icmpge +33 // 0049
+        002b: aload_0
+        002c: invokevirtual #7 // int InputStream.read()
+        002f: istore local_4
+        0031: iload local_4
+        0033: iconst_m1
+        0034: if_icmpne +6 // 003a
+        0037: goto +18 // 0049
+        003a: aload_1
+        003b: iload_2
+        003c: iload local_5
+        003e: iadd
+        003f: iload local_4
+        0041: i2b
+        0042: bastore
+        0043: iinc local_5, 1
+        0046: goto -33 // 0025
+        0049: goto +5 // 004e
+        004c: astore local_6
+        004e: iload local_5
+        0050: ireturn
+    }
+    
+    public byte[] readAllBytes() throws IOException {
+        // max_stack: 2
+        // max_locals: 1
+        0000: aload_0
+        0001: ldc #9 // 2147483647
+        0003: invokevirtual #10 // byte[] InputStream.readNBytes(int)
+        0006: areturn
+    }
+    
+    public byte[] readNBytes(int) throws IOException {
+        // max_stack: 5
+        // max_locals: 11
+        0000: iload_1
+        0001: ifge +13 // 000e
+        0004: new #11 // IllegalArgumentException
         0007: dup
-        0008: invokespecial #4 // void NullPointerException.<init>()
-        000b: athrow
-        000c: iload_2
-        000d: iflt +15 // 001c
-        0010: iload_3
-        0011: iflt +11 // 001c
-        0014: iload_3
-        0015: aload_1
-        0016: arraylength
-        0017: iload_2
-        0018: isub
-        0019: if_icmple +11 // 0024
-        001c: new #5 // IndexOutOfBoundsException
-        001f: dup
-        0020: invokespecial #6 // void IndexOutOfBoundsException.<init>()
-        0023: athrow
-        0024: iload_3
-        0025: ifne +5 // 002a
-        0028: iconst_0
-        0029: ireturn
-        002a: aload_0
-        002b: invokevirtual #7 // int InputStream.read()
-        002e: istore local_4
-        0030: iload local_4
-        0032: iconst_m1
-        0033: if_icmpne +5 // 0038
-        0036: iconst_m1
-        0037: ireturn
-        0038: aload_1
-        0039: iload_2
-        003a: iload local_4
-        003c: i2b
-        003d: bastore
-        003e: iconst_1
-        003f: istore local_5
-        0041: iload local_5
-        0043: iload_3
-        0044: if_icmpge +33 // 0065
-        0047: aload_0
-        0048: invokevirtual #7 // int InputStream.read()
-        004b: istore local_4
-        004d: iload local_4
-        004f: iconst_m1
-        0050: if_icmpne +6 // 0056
-        0053: goto +18 // 0065
-        0056: aload_1
-        0057: iload_2
-        0058: iload local_5
-        005a: iadd
-        005b: iload local_4
-        005d: i2b
-        005e: bastore
-        005f: iinc local_5, 1
-        0062: goto -33 // 0041
-        0065: goto +5 // 006a
-        0068: astore local_6
-        006a: iload local_5
-        006c: ireturn
+        0008: ldc #12 // "len < 0"
+        000a: invokespecial #13 // void IllegalArgumentException.<init>(String)
+        000d: athrow
+        000e: aconst_null
+        000f: astore_2
+        0010: aconst_null
+        0011: astore_3
+        0012: iconst_0
+        0013: istore local_4
+        0015: iload_1
+        0016: istore local_5
+        0018: iload local_5
+        001a: sipush 8192
+        001d: invokestatic #15 // int Math.min(int, int)
+        0020: newarray 8 // byte[]
+        0022: astore local_7
+        0024: iconst_0
+        0025: istore local_8
+        0027: aload_0
+        0028: aload local_7
+        002a: iload local_8
+        002c: aload local_7
+        002e: arraylength
+        002f: iload local_8
+        0031: isub
+        0032: iload local_5
+        0034: invokestatic #15 // int Math.min(int, int)
+        0037: invokevirtual #5 // int InputStream.read(byte[], int, int)
+        003a: dup
+        003b: istore local_6
+        003d: ifle +20 // 0051
+        0040: iload local_8
+        0042: iload local_6
+        0044: iadd
+        0045: istore local_8
+        0047: iload local_5
+        0049: iload local_6
+        004b: isub
+        004c: istore local_5
+        004e: goto -39 // 0027
+        0051: iload local_8
+        0053: ifle +69 // 0098
+        0056: ldc #16 // 2147483639
+        0058: iload local_4
+        005a: isub
+        005b: iload local_8
+        005d: if_icmpge +13 // 006a
+        0060: new #17 // OutOfMemoryError
+        0063: dup
+        0064: ldc #18 // "Required array size too large"
+        0066: invokespecial #19 // void OutOfMemoryError.<init>(String)
+        0069: athrow
+        006a: iload local_4
+        006c: iload local_8
+        006e: iadd
+        006f: istore local_4
+        0071: aload_3
+        0072: ifnonnull +9 // 007b
+        0075: aload local_7
+        0077: astore_3
+        0078: goto +32 // 0098
+        007b: aload_2
+        007c: ifnonnull +19 // 008f
+        007f: new #20 // java.util.ArrayList
+        0082: dup
+        0083: invokespecial #21 // void java.util.ArrayList.<init>()
+        0086: astore_2
+        0087: aload_2
+        0088: aload_3
+        0089: invokeinterface #22 // boolean java.util.List.add(Object)
+        008e: pop
+        008f: aload_2
+        0090: aload local_7
+        0092: invokeinterface #22 // boolean java.util.List.add(Object)
+        0097: pop
+        0098: iload local_6
+        009a: iflt +8 // 00a2
+        009d: iload local_5
+        009f: ifgt -135 // 0018
+        00a2: aload_2
+        00a3: ifnonnull +29 // 00c0
+        00a6: aload_3
+        00a7: ifnonnull +7 // 00ae
+        00aa: iconst_0
+        00ab: newarray 8 // byte[]
+        00ad: areturn
+        00ae: aload_3
+        00af: arraylength
+        00b0: iload local_4
+        00b2: if_icmpne +7 // 00b9
+        00b5: aload_3
+        00b6: goto +9 // 00bf
+        00b9: aload_3
+        00ba: iload local_4
+        00bc: invokestatic #23 // byte[] java.util.Arrays.copyOf(byte[], int)
+        00bf: areturn
+        00c0: iload local_4
+        00c2: newarray 8 // byte[]
+        00c4: astore_3
+        00c5: iconst_0
+        00c6: istore local_7
+        00c8: iload local_4
+        00ca: istore local_5
+        00cc: aload_2
+        00cd: invokeinterface #24 // java.util.Iterator java.util.List.iterator()
+        00d2: astore local_8
+        00d4: aload local_8
+        00d6: invokeinterface #25 // boolean java.util.Iterator.hasNext()
+        00db: ifeq +53 // 0110
+        00de: aload local_8
+        00e0: invokeinterface #26 // Object java.util.Iterator.next()
+        00e5: checkcast #27 // [B
+        00e8: astore local_9
+        00ea: aload local_9
+        00ec: arraylength
+        00ed: iload local_5
+        00ef: invokestatic #15 // int Math.min(int, int)
+        00f2: istore local_10
+        00f4: aload local_9
+        00f6: iconst_0
+        00f7: aload_3
+        00f8: iload local_7
+        00fa: iload local_10
+        00fc: invokestatic #28 // void System.arraycopy(Object, int, Object, int, int)
+        00ff: iload local_7
+        0101: iload local_10
+        0103: iadd
+        0104: istore local_7
+        0106: iload local_5
+        0108: iload local_10
+        010a: isub
+        010b: istore local_5
+        010d: goto -57 // 00d4
+        0110: aload_3
+        0111: areturn
+    }
+    
+    public int readNBytes(byte[], int, int) throws IOException {
+        // max_stack: 5
+        // max_locals: 6
+        0000: iload_2
+        0001: iload_3
+        0002: aload_1
+        0003: arraylength
+        0004: invokestatic #6 // int java.util.Objects.checkFromIndexSize(int, int, int)
+        0007: pop
+        0008: iconst_0
+        0009: istore local_4
+        000b: iload local_4
+        000d: iload_3
+        000e: if_icmpge +36 // 0032
+        0011: aload_0
+        0012: aload_1
+        0013: iload_2
+        0014: iload local_4
+        0016: iadd
+        0017: iload_3
+        0018: iload local_4
+        001a: isub
+        001b: invokevirtual #5 // int InputStream.read(byte[], int, int)
+        001e: istore local_5
+        0020: iload local_5
+        0022: ifge +6 // 0028
+        0025: goto +13 // 0032
+        0028: iload local_4
+        002a: iload local_5
+        002c: iadd
+        002d: istore local_4
+        002f: goto -36 // 000b
+        0032: iload local_4
+        0034: ireturn
     }
     
     public long skip(long) throws IOException {
@@ -109,9 +297,9 @@ public abstract /* super */ class InputStream implements Closeable {
         0005: ifgt +5 // 000a
         0008: lconst_0
         0009: lreturn
-        000a: ldc2_w #10 // 2048l
+        000a: ldc2_w #29 // 2048l
         000d: lload_3
-        000e: invokestatic #12 // long Math.min(long, long)
+        000e: invokestatic #31 // long Math.min(long, long)
         0011: l2i
         0012: istore local_6
         0014: iload local_6
@@ -127,9 +315,9 @@ public abstract /* super */ class InputStream implements Closeable {
         0024: iload local_6
         0026: i2l
         0027: lload_3
-        0028: invokestatic #12 // long Math.min(long, long)
+        0028: invokestatic #31 // long Math.min(long, long)
         002b: l2i
-        002c: invokevirtual #2 // int InputStream.read(byte[], int, int)
+        002c: invokevirtual #5 // int InputStream.read(byte[], int, int)
         002f: istore local_5
         0031: iload local_5
         0033: ifge +6 // 0039
@@ -170,8 +358,8 @@ public abstract /* super */ class InputStream implements Closeable {
         // max_locals: 1
         0000: new #8 // IOException
         0003: dup
-        0004: ldc #13 // "mark/reset not supported"
-        0006: invokespecial #14 // void IOException.<init>(String)
+        0004: ldc #32 // "mark/reset not supported"
+        0006: invokespecial #33 // void IOException.<init>(String)
         0009: athrow
     }
     
@@ -180,6 +368,41 @@ public abstract /* super */ class InputStream implements Closeable {
         // max_locals: 1
         0000: iconst_0
         0001: ireturn
+    }
+    
+    public long transferTo(OutputStream) throws IOException {
+        // max_stack: 4
+        // max_locals: 6
+        0000: aload_1
+        0001: ldc #34 // "out"
+        0003: invokestatic #35 // Object java.util.Objects.requireNonNull(Object, String)
+        0006: pop
+        0007: lconst_0
+        0008: lstore_2
+        0009: sipush 8192
+        000c: newarray 8 // byte[]
+        000e: astore local_4
+        0010: aload_0
+        0011: aload local_4
+        0013: iconst_0
+        0014: sipush 8192
+        0017: invokevirtual #5 // int InputStream.read(byte[], int, int)
+        001a: dup
+        001b: istore local_5
+        001d: iflt +21 // 0032
+        0020: aload_1
+        0021: aload local_4
+        0023: iconst_0
+        0024: iload local_5
+        0026: invokevirtual #36 // void OutputStream.write(byte[], int, int)
+        0029: lload_2
+        002a: iload local_5
+        002c: i2l
+        002d: ladd
+        002e: lstore_2
+        002f: goto -31 // 0010
+        0032: lload_2
+        0033: lreturn
     }
 
 }

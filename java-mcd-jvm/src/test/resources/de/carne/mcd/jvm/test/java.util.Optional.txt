@@ -1,5 +1,5 @@
 /*
- * Class file version: 52.0
+ * Class file version: 55.0
  *
  * Source file: Optional.java
  */
@@ -93,6 +93,18 @@ public final /* super */ class Optional<T> {
         000c: ireturn
     }
     
+    public boolean isEmpty() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0001: getfield #2 // Object Optional.value
+        0004: ifnonnull +7 // 000b
+        0007: iconst_1
+        0008: goto +4 // 000c
+        000b: iconst_0
+        000c: ireturn
+    }
+    
     public void ifPresent(java.util.function.Consumer<? super T>) {
         // max_stack: 2
         // max_locals: 2
@@ -106,6 +118,22 @@ public final /* super */ class Optional<T> {
         0011: return
     }
     
+    public void ifPresentOrElse(java.util.function.Consumer<? super T>, Runnable) {
+        // max_stack: 2
+        // max_locals: 3
+        0000: aload_0
+        0001: getfield #2 // Object Optional.value
+        0004: ifnull +16 // 0014
+        0007: aload_1
+        0008: aload_0
+        0009: getfield #2 // Object Optional.value
+        000c: invokeinterface #12 // void java.util.function.Consumer.accept(Object)
+        0011: goto +9 // 001a
+        0014: aload_2
+        0015: invokeinterface #13 // void Runnable.run()
+        001a: return
+    }
+    
     public Optional<T> filter(java.util.function.Predicate<? super T>) {
         // max_stack: 2
         // max_locals: 2
@@ -113,14 +141,14 @@ public final /* super */ class Optional<T> {
         0001: invokestatic #4 // Object Objects.requireNonNull(Object)
         0004: pop
         0005: aload_0
-        0006: invokevirtual #13 // boolean Optional.isPresent()
+        0006: invokevirtual #14 // boolean Optional.isPresent()
         0009: ifne +5 // 000e
         000c: aload_0
         000d: areturn
         000e: aload_1
         000f: aload_0
         0010: getfield #2 // Object Optional.value
-        0013: invokeinterface #14 // boolean java.util.function.Predicate.test(Object)
+        0013: invokeinterface #15 // boolean java.util.function.Predicate.test(Object)
         0018: ifeq +7 // 001f
         001b: aload_0
         001c: goto +6 // 0022
@@ -135,36 +163,74 @@ public final /* super */ class Optional<T> {
         0001: invokestatic #4 // Object Objects.requireNonNull(Object)
         0004: pop
         0005: aload_0
-        0006: invokevirtual #13 // boolean Optional.isPresent()
+        0006: invokevirtual #14 // boolean Optional.isPresent()
         0009: ifne +7 // 0010
         000c: invokestatic #7 // Optional Optional.empty()
         000f: areturn
         0010: aload_1
         0011: aload_0
         0012: getfield #2 // Object Optional.value
-        0015: invokeinterface #15 // Object java.util.function.Function.apply(Object)
-        001a: invokestatic #16 // Optional Optional.ofNullable(Object)
+        0015: invokeinterface #16 // Object java.util.function.Function.apply(Object)
+        001a: invokestatic #17 // Optional Optional.ofNullable(Object)
         001d: areturn
     }
     
-    public Optional<U> flatMap<U>(java.util.function.Function<? super T, Optional<U>>) {
+    public Optional<U> flatMap<U>(java.util.function.Function<? super T, ? extends Optional<? extends U>>) {
         // max_stack: 2
-        // max_locals: 2
+        // max_locals: 3
         0000: aload_1
         0001: invokestatic #4 // Object Objects.requireNonNull(Object)
         0004: pop
         0005: aload_0
-        0006: invokevirtual #13 // boolean Optional.isPresent()
+        0006: invokevirtual #14 // boolean Optional.isPresent()
         0009: ifne +7 // 0010
         000c: invokestatic #7 // Optional Optional.empty()
         000f: areturn
         0010: aload_1
         0011: aload_0
         0012: getfield #2 // Object Optional.value
-        0015: invokeinterface #15 // Object java.util.function.Function.apply(Object)
-        001a: invokestatic #4 // Object Objects.requireNonNull(Object)
-        001d: checkcast #5 // Optional
-        0020: areturn
+        0015: invokeinterface #16 // Object java.util.function.Function.apply(Object)
+        001a: checkcast #5 // Optional
+        001d: astore_2
+        001e: aload_2
+        001f: invokestatic #4 // Object Objects.requireNonNull(Object)
+        0022: checkcast #5 // Optional
+        0025: areturn
+    }
+    
+    public Optional<T> or(java.util.function.Supplier<? extends Optional<? extends T>>) {
+        // max_stack: 1
+        // max_locals: 3
+        0000: aload_1
+        0001: invokestatic #4 // Object Objects.requireNonNull(Object)
+        0004: pop
+        0005: aload_0
+        0006: invokevirtual #14 // boolean Optional.isPresent()
+        0009: ifeq +5 // 000e
+        000c: aload_0
+        000d: areturn
+        000e: aload_1
+        000f: invokeinterface #18 // Object java.util.function.Supplier.get()
+        0014: checkcast #5 // Optional
+        0017: astore_2
+        0018: aload_2
+        0019: invokestatic #4 // Object Objects.requireNonNull(Object)
+        001c: checkcast #5 // Optional
+        001f: areturn
+    }
+    
+    public java.util.stream.Stream<T> stream() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0001: invokevirtual #14 // boolean Optional.isPresent()
+        0004: ifne +7 // 000b
+        0007: invokestatic #19 // java.util.stream.Stream java.util.stream.Stream.empty()
+        000a: areturn
+        000b: aload_0
+        000c: getfield #2 // Object Optional.value
+        000f: invokestatic #20 // java.util.stream.Stream java.util.stream.Stream.of(Object)
+        0012: areturn
     }
     
     public T orElse(T) {
@@ -190,8 +256,24 @@ public final /* super */ class Optional<T> {
         0008: getfield #2 // Object Optional.value
         000b: goto +9 // 0014
         000e: aload_1
-        000f: invokeinterface #17 // Object java.util.function.Supplier.get()
+        000f: invokeinterface #18 // Object java.util.function.Supplier.get()
         0014: areturn
+    }
+    
+    public T orElseThrow() {
+        // max_stack: 3
+        // max_locals: 1
+        0000: aload_0
+        0001: getfield #2 // Object Optional.value
+        0004: ifnonnull +13 // 0011
+        0007: new #9 // NoSuchElementException
+        000a: dup
+        000b: ldc #10 // "No value present"
+        000d: invokespecial #11 // void NoSuchElementException.<init>(String)
+        0010: athrow
+        0011: aload_0
+        0012: getfield #2 // Object Optional.value
+        0015: areturn
     }
     
     public T orElseThrow<X extends Throwable>(java.util.function.Supplier<? extends X>) throws X {
@@ -204,8 +286,8 @@ public final /* super */ class Optional<T> {
         0008: getfield #2 // Object Optional.value
         000b: areturn
         000c: aload_1
-        000d: invokeinterface #17 // Object java.util.function.Supplier.get()
-        0012: checkcast #18 // Throwable
+        000d: invokeinterface #18 // Object java.util.function.Supplier.get()
+        0012: checkcast #21 // Throwable
         0015: athrow
     }
     
@@ -229,7 +311,7 @@ public final /* super */ class Optional<T> {
         0016: getfield #2 // Object Optional.value
         0019: aload_2
         001a: getfield #2 // Object Optional.value
-        001d: invokestatic #19 // boolean Objects.equals(Object, Object)
+        001d: invokestatic #22 // boolean Objects.equals(Object, Object)
         0020: ireturn
     }
     
@@ -238,7 +320,7 @@ public final /* super */ class Optional<T> {
         // max_locals: 1
         0000: aload_0
         0001: getfield #2 // Object Optional.value
-        0004: invokestatic #20 // int Objects.hashCode(Object)
+        0004: invokestatic #23 // int Objects.hashCode(Object)
         0007: ireturn
     }
     
@@ -248,17 +330,17 @@ public final /* super */ class Optional<T> {
         0000: aload_0
         0001: getfield #2 // Object Optional.value
         0004: ifnull +22 // 001a
-        0007: ldc #21 // "Optional[%s]"
+        0007: ldc #24 // "Optional[%s]"
         0009: iconst_1
-        000a: anewarray #22 // Object
+        000a: anewarray #25 // Object
         000d: dup
         000e: iconst_0
         000f: aload_0
         0010: getfield #2 // Object Optional.value
         0013: aastore
-        0014: invokestatic #23 // String String.format(String, Object[])
+        0014: invokestatic #26 // String String.format(String, Object[])
         0017: goto +5 // 001c
-        001a: ldc #24 // "Optional.empty"
+        001a: ldc #27 // "Optional.empty"
         001c: areturn
     }
     
@@ -267,7 +349,7 @@ public final /* super */ class Optional<T> {
         // max_locals: 0
         0000: new #5 // Optional
         0003: dup
-        0004: invokespecial #25 // void Optional.<init>()
+        0004: invokespecial #28 // void Optional.<init>()
         0007: putstatic #3 // Optional Optional.EMPTY
         000a: return
     }

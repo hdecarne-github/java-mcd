@@ -1,5 +1,5 @@
 /*
- * Class file version: 52.0
+ * Class file version: 55.0
  *
  * Source file: String.java
  */
@@ -7,15 +7,23 @@ package java.lang;
 
 public final /* super */ class String implements java.io.Serializable, Comparable<String>, CharSequence {
     
-    private final char[] value;
+    @jdk.internal.vm.annotation.Stable private final byte[] value;
+    
+    private final byte coder;
     
     private int hash;
     
     private static final long serialVersionUID = -6849794470754667710l;
     
+    static final boolean COMPACT_STRINGS;
+    
     private static final java.io.ObjectStreamField[] serialPersistentFields;
     
     public static final java.util.Comparator<String> CASE_INSENSITIVE_ORDER;
+    
+    static final byte LATIN1 = 0;
+    
+    static final byte UTF16 = 1;
     
     public void <init>() {
         // max_stack: 2
@@ -24,11 +32,16 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0001: invokespecial #1 // void Object.<init>()
         0004: aload_0
         0005: ldc #2 // ""
-        0007: getfield #3 // char[] String.value
-        000a: putfield #3 // char[] String.value
-        000d: return
+        0007: getfield #3 // byte[] String.value
+        000a: putfield #3 // byte[] String.value
+        000d: aload_0
+        000e: ldc #2 // ""
+        0010: getfield #4 // byte String.coder
+        0013: putfield #4 // byte String.coder
+        0016: return
     }
     
+    @jdk.internal.HotSpotIntrinsicCandidate
     public void <init>(String) {
         // max_stack: 2
         // max_locals: 2
@@ -36,258 +49,182 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0001: invokespecial #1 // void Object.<init>()
         0004: aload_0
         0005: aload_1
-        0006: getfield #3 // char[] String.value
-        0009: putfield #3 // char[] String.value
+        0006: getfield #3 // byte[] String.value
+        0009: putfield #3 // byte[] String.value
         000c: aload_0
         000d: aload_1
-        000e: getfield #4 // int String.hash
-        0011: putfield #4 // int String.hash
-        0014: return
+        000e: getfield #4 // byte String.coder
+        0011: putfield #4 // byte String.coder
+        0014: aload_0
+        0015: aload_1
+        0016: getfield #5 // int String.hash
+        0019: putfield #5 // int String.hash
+        001c: return
     }
     
     public void <init>(char[]) {
-        // max_stack: 3
+        // max_stack: 5
         // max_locals: 2
         0000: aload_0
-        0001: invokespecial #1 // void Object.<init>()
-        0004: aload_0
-        0005: aload_1
-        0006: aload_1
-        0007: arraylength
-        0008: invokestatic #5 // char[] java.util.Arrays.copyOf(char[], int)
-        000b: putfield #3 // char[] String.value
-        000e: return
+        0001: aload_1
+        0002: iconst_0
+        0003: aload_1
+        0004: arraylength
+        0005: aconst_null
+        0006: invokespecial #6 // void String.<init>(char[], int, int, Void)
+        0009: return
     }
     
     public void <init>(char[], int, int) {
-        // max_stack: 5
+        // max_stack: 7
         // max_locals: 4
         0000: aload_0
-        0001: invokespecial #1 // void Object.<init>()
-        0004: iload_2
-        0005: ifge +12 // 0011
-        0008: new #6 // StringIndexOutOfBoundsException
-        000b: dup
-        000c: iload_2
-        000d: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        0010: athrow
-        0011: iload_3
-        0012: ifgt +32 // 0032
-        0015: iload_3
-        0016: ifge +12 // 0022
-        0019: new #6 // StringIndexOutOfBoundsException
-        001c: dup
-        001d: iload_3
-        001e: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        0021: athrow
-        0022: iload_2
-        0023: aload_1
-        0024: arraylength
-        0025: if_icmpgt +13 // 0032
-        0028: aload_0
-        0029: ldc #2 // ""
-        002b: getfield #3 // char[] String.value
-        002e: putfield #3 // char[] String.value
-        0031: return
-        0032: iload_2
-        0033: aload_1
-        0034: arraylength
-        0035: iload_3
-        0036: isub
-        0037: if_icmple +14 // 0045
-        003a: new #6 // StringIndexOutOfBoundsException
-        003d: dup
-        003e: iload_2
-        003f: iload_3
-        0040: iadd
-        0041: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        0044: athrow
-        0045: aload_0
-        0046: aload_1
-        0047: iload_2
-        0048: iload_2
-        0049: iload_3
-        004a: iadd
-        004b: invokestatic #8 // char[] java.util.Arrays.copyOfRange(char[], int, int)
-        004e: putfield #3 // char[] String.value
-        0051: return
+        0001: aload_1
+        0002: iload_2
+        0003: iload_3
+        0004: aload_1
+        0005: iload_2
+        0006: iload_3
+        0007: invokestatic #7 // Void String.rangeCheck(char[], int, int)
+        000a: invokespecial #6 // void String.<init>(char[], int, int, Void)
+        000d: return
+    }
+    
+    private static Void rangeCheck(char[], int, int) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: iload_1
+        0001: iload_2
+        0002: aload_0
+        0003: arraylength
+        0004: invokestatic #8 // void String.checkBoundsOffCount(int, int, int)
+        0007: aconst_null
+        0008: areturn
     }
     
     public void <init>(int[], int, int) {
         // max_stack: 4
-        // max_locals: 10
+        // max_locals: 5
         0000: aload_0
         0001: invokespecial #1 // void Object.<init>()
         0004: iload_2
-        0005: ifge +12 // 0011
-        0008: new #6 // StringIndexOutOfBoundsException
-        000b: dup
-        000c: iload_2
-        000d: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        0010: athrow
-        0011: iload_3
-        0012: ifgt +32 // 0032
-        0015: iload_3
-        0016: ifge +12 // 0022
-        0019: new #6 // StringIndexOutOfBoundsException
-        001c: dup
-        001d: iload_3
-        001e: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        0021: athrow
-        0022: iload_2
-        0023: aload_1
-        0024: arraylength
-        0025: if_icmpgt +13 // 0032
-        0028: aload_0
-        0029: ldc #2 // ""
-        002b: getfield #3 // char[] String.value
-        002e: putfield #3 // char[] String.value
-        0031: return
-        0032: iload_2
-        0033: aload_1
-        0034: arraylength
-        0035: iload_3
-        0036: isub
-        0037: if_icmple +14 // 0045
-        003a: new #6 // StringIndexOutOfBoundsException
-        003d: dup
-        003e: iload_2
-        003f: iload_3
-        0040: iadd
-        0041: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        0044: athrow
-        0045: iload_2
-        0046: iload_3
-        0047: iadd
-        0048: istore local_4
-        004a: iload_3
-        004b: istore local_5
-        004d: iload_2
-        004e: istore local_6
-        0050: iload local_6
-        0052: iload local_4
-        0054: if_icmpge +53 // 0089
-        0057: aload_1
-        0058: iload local_6
-        005a: iaload
-        005b: istore local_7
-        005d: iload local_7
-        005f: invokestatic #9 // boolean Character.isBmpCodePoint(int)
-        0062: ifeq +6 // 0068
-        0065: goto +30 // 0083
-        0068: iload local_7
-        006a: invokestatic #10 // boolean Character.isValidCodePoint(int)
-        006d: ifeq +9 // 0076
-        0070: iinc local_5, 1
-        0073: goto +16 // 0083
-        0076: new #11 // IllegalArgumentException
-        0079: dup
-        007a: iload local_7
-        007c: invokestatic #12 // String Integer.toString(int)
-        007f: invokespecial #13 // void IllegalArgumentException.<init>(String)
-        0082: athrow
-        0083: iinc local_6, 1
-        0086: goto -54 // 0050
-        0089: iload local_5
-        008b: newarray 5 // char[]
-        008d: astore local_6
-        008f: iload_2
-        0090: istore local_7
-        0092: iconst_0
-        0093: istore local_8
-        0095: iload local_7
-        0097: iload local_4
-        0099: if_icmpge +49 // 00ca
-        009c: aload_1
-        009d: iload local_7
-        009f: iaload
-        00a0: istore local_9
-        00a2: iload local_9
-        00a4: invokestatic #9 // boolean Character.isBmpCodePoint(int)
-        00a7: ifeq +14 // 00b5
-        00aa: aload local_6
-        00ac: iload local_8
-        00ae: iload local_9
-        00b0: i2c
-        00b1: castore
-        00b2: goto +15 // 00c1
-        00b5: iload local_9
-        00b7: aload local_6
-        00b9: iload local_8
-        00bb: iinc local_8, 1
-        00be: invokestatic #14 // void Character.toSurrogates(int, char[], int)
-        00c1: iinc local_7, 1
-        00c4: iinc local_8, 1
-        00c7: goto -50 // 0095
-        00ca: aload_0
-        00cb: aload local_6
-        00cd: putfield #3 // char[] String.value
-        00d0: return
+        0005: iload_3
+        0006: aload_1
+        0007: arraylength
+        0008: invokestatic #8 // void String.checkBoundsOffCount(int, int, int)
+        000b: iload_3
+        000c: ifne +22 // 0022
+        000f: aload_0
+        0010: ldc #2 // ""
+        0012: getfield #3 // byte[] String.value
+        0015: putfield #3 // byte[] String.value
+        0018: aload_0
+        0019: ldc #2 // ""
+        001b: getfield #4 // byte String.coder
+        001e: putfield #4 // byte String.coder
+        0021: return
+        0022: getstatic #9 // boolean String.COMPACT_STRINGS
+        0025: ifeq +28 // 0041
+        0028: aload_1
+        0029: iload_2
+        002a: iload_3
+        002b: invokestatic #10 // byte[] StringLatin1.toBytes(int[], int, int)
+        002e: astore local_4
+        0030: aload local_4
+        0032: ifnull +15 // 0041
+        0035: aload_0
+        0036: iconst_0
+        0037: putfield #4 // byte String.coder
+        003a: aload_0
+        003b: aload local_4
+        003d: putfield #3 // byte[] String.value
+        0040: return
+        0041: aload_0
+        0042: iconst_1
+        0043: putfield #4 // byte String.coder
+        0046: aload_0
+        0047: aload_1
+        0048: iload_2
+        0049: iload_3
+        004a: invokestatic #12 // byte[] StringUTF16.toBytes(int[], int, int)
+        004d: putfield #3 // byte[] String.value
+        0050: return
     }
     
-    @Deprecated
+    @Deprecated(since = "1.1")
     public void <init>(byte[], int, int, int) {
-        // max_stack: 6
+        // max_stack: 5
         // max_locals: 7
         0000: aload_0
         0001: invokespecial #1 // void Object.<init>()
-        0004: aload_1
-        0005: iload_3
-        0006: iload local_4
-        0008: invokestatic #15 // void String.checkBounds(byte[], int, int)
-        000b: iload local_4
-        000d: newarray 5 // char[]
-        000f: astore local_5
-        0011: iload_2
-        0012: ifne +37 // 0037
-        0015: iload local_4
-        0017: istore local_6
-        0019: iload local_6
-        001b: iinc local_6, -1
-        001e: ifle +22 // 0034
-        0021: aload local_5
-        0023: iload local_6
-        0025: aload_1
-        0026: iload local_6
-        0028: iload_3
-        0029: iadd
-        002a: baload
-        002b: sipush 255
-        002e: iand
-        002f: i2c
-        0030: castore
-        0031: goto -24 // 0019
-        0034: goto +41 // 005d
-        0037: iload_2
-        0038: bipush 8
-        003a: ishl
-        003b: istore_2
-        003c: iload local_4
-        003e: istore local_6
-        0040: iload local_6
-        0042: iinc local_6, -1
-        0045: ifle +24 // 005d
-        0048: aload local_5
-        004a: iload local_6
-        004c: iload_2
-        004d: aload_1
-        004e: iload local_6
-        0050: iload_3
-        0051: iadd
-        0052: baload
-        0053: sipush 255
-        0056: iand
-        0057: ior
-        0058: i2c
-        0059: castore
-        005a: goto -26 // 0040
-        005d: aload_0
-        005e: aload local_5
-        0060: putfield #3 // char[] String.value
-        0063: return
+        0004: iload_3
+        0005: iload local_4
+        0007: aload_1
+        0008: arraylength
+        0009: invokestatic #8 // void String.checkBoundsOffCount(int, int, int)
+        000c: iload local_4
+        000e: ifne +22 // 0024
+        0011: aload_0
+        0012: ldc #2 // ""
+        0014: getfield #3 // byte[] String.value
+        0017: putfield #3 // byte[] String.value
+        001a: aload_0
+        001b: ldc #2 // ""
+        001d: getfield #4 // byte String.coder
+        0020: putfield #4 // byte String.coder
+        0023: return
+        0024: getstatic #9 // boolean String.COMPACT_STRINGS
+        0027: ifeq +29 // 0044
+        002a: iload_2
+        002b: i2b
+        002c: ifne +24 // 0044
+        002f: aload_0
+        0030: aload_1
+        0031: iload_3
+        0032: iload_3
+        0033: iload local_4
+        0035: iadd
+        0036: invokestatic #13 // byte[] java.util.Arrays.copyOfRange(byte[], int, int)
+        0039: putfield #3 // byte[] String.value
+        003c: aload_0
+        003d: iconst_0
+        003e: putfield #4 // byte String.coder
+        0041: goto +61 // 007e
+        0044: iload_2
+        0045: bipush 8
+        0047: ishl
+        0048: istore_2
+        0049: iload local_4
+        004b: invokestatic #14 // byte[] StringUTF16.newBytesFor(int)
+        004e: astore local_5
+        0050: iconst_0
+        0051: istore local_6
+        0053: iload local_6
+        0055: iload local_4
+        0057: if_icmpge +28 // 0073
+        005a: aload local_5
+        005c: iload local_6
+        005e: iload_2
+        005f: aload_1
+        0060: iload_3
+        0061: iinc local_3, 1
+        0064: baload
+        0065: sipush 255
+        0068: iand
+        0069: ior
+        006a: invokestatic #15 // void StringUTF16.putChar(byte[], int, int)
+        006d: iinc local_6, 1
+        0070: goto -29 // 0053
+        0073: aload_0
+        0074: aload local_5
+        0076: putfield #3 // byte[] String.value
+        0079: aload_0
+        007a: iconst_1
+        007b: putfield #4 // byte String.coder
+        007e: return
     }
     
-    @Deprecated
+    @Deprecated(since = "1.1")
     public void <init>(byte[], int) {
         // max_stack: 5
         // max_locals: 3
@@ -301,42 +238,9 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0009: return
     }
     
-    private static void checkBounds(byte[], int, int) {
-        // max_stack: 4
-        // max_locals: 3
-        0000: iload_2
-        0001: ifge +12 // 000d
-        0004: new #6 // StringIndexOutOfBoundsException
-        0007: dup
-        0008: iload_2
-        0009: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        000c: athrow
-        000d: iload_1
-        000e: ifge +12 // 001a
-        0011: new #6 // StringIndexOutOfBoundsException
-        0014: dup
-        0015: iload_1
-        0016: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        0019: athrow
-        001a: iload_1
-        001b: aload_0
-        001c: arraylength
-        001d: iload_2
-        001e: isub
-        001f: if_icmple +14 // 002d
-        0022: new #6 // StringIndexOutOfBoundsException
-        0025: dup
-        0026: iload_1
-        0027: iload_2
-        0028: iadd
-        0029: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        002c: athrow
-        002d: return
-    }
-    
     public void <init>(byte[], int, int, String) throws java.io.UnsupportedEncodingException {
-        // max_stack: 5
-        // max_locals: 5
+        // max_stack: 4
+        // max_locals: 6
         0000: aload_0
         0001: invokespecial #1 // void Object.<init>()
         0004: aload local_4
@@ -346,44 +250,60 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         000d: ldc #18 // "charsetName"
         000f: invokespecial #19 // void NullPointerException.<init>(String)
         0012: athrow
-        0013: aload_1
-        0014: iload_2
-        0015: iload_3
-        0016: invokestatic #15 // void String.checkBounds(byte[], int, int)
-        0019: aload_0
+        0013: iload_2
+        0014: iload_3
+        0015: aload_1
+        0016: arraylength
+        0017: invokestatic #8 // void String.checkBoundsOffCount(int, int, int)
         001a: aload local_4
         001c: aload_1
         001d: iload_2
         001e: iload_3
-        001f: invokestatic #20 // char[] StringCoding.decode(String, byte[], int, int)
-        0022: putfield #3 // char[] String.value
-        0025: return
+        001f: invokestatic #20 // StringCoding$Result StringCoding.decode(String, byte[], int, int)
+        0022: astore local_5
+        0024: aload_0
+        0025: aload local_5
+        0027: getfield #21 // byte[] StringCoding$Result.value
+        002a: putfield #3 // byte[] String.value
+        002d: aload_0
+        002e: aload local_5
+        0030: getfield #22 // byte StringCoding$Result.coder
+        0033: putfield #4 // byte String.coder
+        0036: return
     }
     
     public void <init>(byte[], int, int, java.nio.charset.Charset) {
-        // max_stack: 5
-        // max_locals: 5
+        // max_stack: 4
+        // max_locals: 6
         0000: aload_0
         0001: invokespecial #1 // void Object.<init>()
         0004: aload local_4
         0006: ifnonnull +13 // 0013
         0009: new #17 // NullPointerException
         000c: dup
-        000d: ldc #21 // "charset"
+        000d: ldc #23 // "charset"
         000f: invokespecial #19 // void NullPointerException.<init>(String)
         0012: athrow
-        0013: aload_1
-        0014: iload_2
-        0015: iload_3
-        0016: invokestatic #15 // void String.checkBounds(byte[], int, int)
-        0019: aload_0
+        0013: iload_2
+        0014: iload_3
+        0015: aload_1
+        0016: arraylength
+        0017: invokestatic #8 // void String.checkBoundsOffCount(int, int, int)
         001a: aload local_4
         001c: aload_1
         001d: iload_2
         001e: iload_3
-        001f: invokestatic #22 // char[] StringCoding.decode(java.nio.charset.Charset, byte[], int, int)
-        0022: putfield #3 // char[] String.value
-        0025: return
+        001f: invokestatic #24 // StringCoding$Result StringCoding.decode(java.nio.charset.Charset, byte[], int, int)
+        0022: astore local_5
+        0024: aload_0
+        0025: aload local_5
+        0027: getfield #21 // byte[] StringCoding$Result.value
+        002a: putfield #3 // byte[] String.value
+        002d: aload_0
+        002e: aload local_5
+        0030: getfield #22 // byte StringCoding$Result.coder
+        0033: putfield #4 // byte String.coder
+        0036: return
     }
     
     public void <init>(byte[], String) throws java.io.UnsupportedEncodingException {
@@ -395,7 +315,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0003: aload_1
         0004: arraylength
         0005: aload_2
-        0006: invokespecial #23 // void String.<init>(byte[], int, int, String)
+        0006: invokespecial #25 // void String.<init>(byte[], int, int, String)
         0009: return
     }
     
@@ -408,26 +328,34 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0003: aload_1
         0004: arraylength
         0005: aload_2
-        0006: invokespecial #24 // void String.<init>(byte[], int, int, java.nio.charset.Charset)
+        0006: invokespecial #26 // void String.<init>(byte[], int, int, java.nio.charset.Charset)
         0009: return
     }
     
     public void <init>(byte[], int, int) {
-        // max_stack: 4
-        // max_locals: 4
+        // max_stack: 3
+        // max_locals: 5
         0000: aload_0
         0001: invokespecial #1 // void Object.<init>()
-        0004: aload_1
-        0005: iload_2
-        0006: iload_3
-        0007: invokestatic #15 // void String.checkBounds(byte[], int, int)
-        000a: aload_0
+        0004: iload_2
+        0005: iload_3
+        0006: aload_1
+        0007: arraylength
+        0008: invokestatic #8 // void String.checkBoundsOffCount(int, int, int)
         000b: aload_1
         000c: iload_2
         000d: iload_3
-        000e: invokestatic #25 // char[] StringCoding.decode(byte[], int, int)
-        0011: putfield #3 // char[] String.value
-        0014: return
+        000e: invokestatic #27 // StringCoding$Result StringCoding.decode(byte[], int, int)
+        0011: astore local_4
+        0013: aload_0
+        0014: aload local_4
+        0016: getfield #21 // byte[] StringCoding$Result.value
+        0019: putfield #3 // byte[] String.value
+        001c: aload_0
+        001d: aload local_4
+        001f: getfield #22 // byte StringCoding$Result.coder
+        0022: putfield #4 // byte String.coder
+        0025: return
     }
     
     public void <init>(byte[]) {
@@ -438,77 +366,47 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0002: iconst_0
         0003: aload_1
         0004: arraylength
-        0005: invokespecial #26 // void String.<init>(byte[], int, int)
+        0005: invokespecial #28 // void String.<init>(byte[], int, int)
         0008: return
     }
     
     public void <init>(StringBuffer) {
-        // max_stack: 3
-        // max_locals: 4
+        // max_stack: 2
+        // max_locals: 2
         0000: aload_0
-        0001: invokespecial #1 // void Object.<init>()
-        0004: aload_1
-        0005: dup
-        0006: astore_2
-        0007: monitorenter
-        0008: aload_0
-        0009: aload_1
-        000a: invokevirtual #27 // char[] StringBuffer.getValue()
-        000d: aload_1
-        000e: invokevirtual #28 // int StringBuffer.length()
-        0011: invokestatic #5 // char[] java.util.Arrays.copyOf(char[], int)
-        0014: putfield #3 // char[] String.value
-        0017: aload_2
-        0018: monitorexit
-        0019: goto +8 // 0021
-        001c: astore_3
-        001d: aload_2
-        001e: monitorexit
-        001f: aload_3
-        0020: athrow
-        0021: return
+        0001: aload_1
+        0002: invokevirtual #29 // String StringBuffer.toString()
+        0005: invokespecial #30 // void String.<init>(String)
+        0008: return
     }
     
     public void <init>(StringBuilder) {
         // max_stack: 3
         // max_locals: 2
         0000: aload_0
-        0001: invokespecial #1 // void Object.<init>()
-        0004: aload_0
-        0005: aload_1
-        0006: invokevirtual #29 // char[] StringBuilder.getValue()
-        0009: aload_1
-        000a: invokevirtual #30 // int StringBuilder.length()
-        000d: invokestatic #5 // char[] java.util.Arrays.copyOf(char[], int)
-        0010: putfield #3 // char[] String.value
-        0013: return
-    }
-    
-    void <init>(char[], boolean) {
-        // max_stack: 2
-        // max_locals: 3
-        0000: aload_0
-        0001: invokespecial #1 // void Object.<init>()
-        0004: aload_0
-        0005: aload_1
-        0006: putfield #3 // char[] String.value
-        0009: return
+        0001: aload_1
+        0002: aconst_null
+        0003: invokespecial #31 // void String.<init>(AbstractStringBuilder, Void)
+        0006: return
     }
     
     public int length() {
-        // max_stack: 1
+        // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0001: getfield #3 // char[] String.value
+        0001: getfield #3 // byte[] String.value
         0004: arraylength
-        0005: ireturn
+        0005: aload_0
+        0006: invokevirtual #32 // byte String.coder()
+        0009: ishr
+        000a: ireturn
     }
     
     public boolean isEmpty() {
         // max_stack: 1
         // max_locals: 1
         0000: aload_0
-        0001: getfield #3 // char[] String.value
+        0001: getfield #3 // byte[] String.value
         0004: arraylength
         0005: ifne +7 // 000c
         0008: iconst_1
@@ -518,50 +416,56 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
     }
     
     public char charAt(int) {
-        // max_stack: 3
+        // max_stack: 2
         // max_locals: 2
-        0000: iload_1
-        0001: iflt +12 // 000d
-        0004: iload_1
-        0005: aload_0
-        0006: getfield #3 // char[] String.value
-        0009: arraylength
-        000a: if_icmplt +12 // 0016
-        000d: new #6 // StringIndexOutOfBoundsException
-        0010: dup
-        0011: iload_1
-        0012: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        0015: athrow
-        0016: aload_0
-        0017: getfield #3 // char[] String.value
-        001a: iload_1
-        001b: caload
-        001c: ireturn
+        0000: aload_0
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +12 // 0010
+        0007: aload_0
+        0008: getfield #3 // byte[] String.value
+        000b: iload_1
+        000c: invokestatic #34 // char StringLatin1.charAt(byte[], int)
+        000f: ireturn
+        0010: aload_0
+        0011: getfield #3 // byte[] String.value
+        0014: iload_1
+        0015: invokestatic #35 // char StringUTF16.charAt(byte[], int)
+        0018: ireturn
     }
     
     public int codePointAt(int) {
         // max_stack: 3
-        // max_locals: 2
-        0000: iload_1
-        0001: iflt +12 // 000d
-        0004: iload_1
-        0005: aload_0
-        0006: getfield #3 // char[] String.value
-        0009: arraylength
-        000a: if_icmplt +12 // 0016
-        000d: new #6 // StringIndexOutOfBoundsException
-        0010: dup
-        0011: iload_1
-        0012: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        0015: athrow
-        0016: aload_0
-        0017: getfield #3 // char[] String.value
-        001a: iload_1
+        // max_locals: 3
+        0000: aload_0
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +23 // 001b
+        0007: iload_1
+        0008: aload_0
+        0009: getfield #3 // byte[] String.value
+        000c: arraylength
+        000d: invokestatic #36 // void String.checkIndex(int, int)
+        0010: aload_0
+        0011: getfield #3 // byte[] String.value
+        0014: iload_1
+        0015: baload
+        0016: sipush 255
+        0019: iand
+        001a: ireturn
         001b: aload_0
-        001c: getfield #3 // char[] String.value
+        001c: getfield #3 // byte[] String.value
         001f: arraylength
-        0020: invokestatic #31 // int Character.codePointAtImpl(char[], int, int)
-        0023: ireturn
+        0020: iconst_1
+        0021: ishr
+        0022: istore_2
+        0023: iload_1
+        0024: iload_2
+        0025: invokestatic #36 // void String.checkIndex(int, int)
+        0028: aload_0
+        0029: getfield #3 // byte[] String.value
+        002c: iload_1
+        002d: iload_2
+        002e: invokestatic #37 // int StringUTF16.codePointAt(byte[], int, int)
+        0031: ireturn
     }
     
     public int codePointBefore(int) {
@@ -572,296 +476,243 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0002: isub
         0003: istore_2
         0004: iload_2
-        0005: iflt +12 // 0011
+        0005: iflt +11 // 0010
         0008: iload_2
         0009: aload_0
-        000a: getfield #3 // char[] String.value
-        000d: arraylength
-        000e: if_icmplt +12 // 001a
-        0011: new #6 // StringIndexOutOfBoundsException
-        0014: dup
-        0015: iload_1
-        0016: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        0019: athrow
-        001a: aload_0
-        001b: getfield #3 // char[] String.value
-        001e: iload_1
-        001f: iconst_0
-        0020: invokestatic #32 // int Character.codePointBeforeImpl(char[], int, int)
-        0023: ireturn
+        000a: invokevirtual #38 // int String.length()
+        000d: if_icmplt +12 // 0019
+        0010: new #39 // StringIndexOutOfBoundsException
+        0013: dup
+        0014: iload_1
+        0015: invokespecial #40 // void StringIndexOutOfBoundsException.<init>(int)
+        0018: athrow
+        0019: aload_0
+        001a: invokevirtual #33 // boolean String.isLatin1()
+        001d: ifeq +14 // 002b
+        0020: aload_0
+        0021: getfield #3 // byte[] String.value
+        0024: iload_2
+        0025: baload
+        0026: sipush 255
+        0029: iand
+        002a: ireturn
+        002b: aload_0
+        002c: getfield #3 // byte[] String.value
+        002f: iload_1
+        0030: invokestatic #41 // int StringUTF16.codePointBefore(byte[], int)
+        0033: ireturn
     }
     
     public int codePointCount(int, int) {
-        // max_stack: 4
+        // max_stack: 3
         // max_locals: 3
         0000: iload_1
-        0001: iflt +17 // 0012
-        0004: iload_2
-        0005: aload_0
-        0006: getfield #3 // char[] String.value
-        0009: arraylength
-        000a: if_icmpgt +8 // 0012
-        000d: iload_1
-        000e: iload_2
-        000f: if_icmple +11 // 001a
-        0012: new #33 // IndexOutOfBoundsException
-        0015: dup
-        0016: invokespecial #34 // void IndexOutOfBoundsException.<init>()
-        0019: athrow
-        001a: aload_0
-        001b: getfield #3 // char[] String.value
-        001e: iload_1
-        001f: iload_2
-        0020: iload_1
-        0021: isub
-        0022: invokestatic #35 // int Character.codePointCountImpl(char[], int, int)
-        0025: ireturn
+        0001: iflt +16 // 0011
+        0004: iload_1
+        0005: iload_2
+        0006: if_icmpgt +11 // 0011
+        0009: iload_2
+        000a: aload_0
+        000b: invokevirtual #38 // int String.length()
+        000e: if_icmple +11 // 0019
+        0011: new #42 // IndexOutOfBoundsException
+        0014: dup
+        0015: invokespecial #43 // void IndexOutOfBoundsException.<init>()
+        0018: athrow
+        0019: aload_0
+        001a: invokevirtual #33 // boolean String.isLatin1()
+        001d: ifeq +7 // 0024
+        0020: iload_2
+        0021: iload_1
+        0022: isub
+        0023: ireturn
+        0024: aload_0
+        0025: getfield #3 // byte[] String.value
+        0028: iload_1
+        0029: iload_2
+        002a: invokestatic #44 // int StringUTF16.codePointCount(byte[], int, int)
+        002d: ireturn
     }
     
     public int offsetByCodePoints(int, int) {
-        // max_stack: 5
+        // max_stack: 3
         // max_locals: 3
         0000: iload_1
-        0001: iflt +12 // 000d
+        0001: iflt +11 // 000c
         0004: iload_1
         0005: aload_0
-        0006: getfield #3 // char[] String.value
-        0009: arraylength
-        000a: if_icmple +11 // 0015
-        000d: new #33 // IndexOutOfBoundsException
-        0010: dup
-        0011: invokespecial #34 // void IndexOutOfBoundsException.<init>()
-        0014: athrow
-        0015: aload_0
-        0016: getfield #3 // char[] String.value
-        0019: iconst_0
-        001a: aload_0
-        001b: getfield #3 // char[] String.value
-        001e: arraylength
-        001f: iload_1
-        0020: iload_2
-        0021: invokestatic #36 // int Character.offsetByCodePointsImpl(char[], int, int, int, int)
-        0024: ireturn
-    }
-    
-    void getChars(char[], int) {
-        // max_stack: 5
-        // max_locals: 3
-        0000: aload_0
-        0001: getfield #3 // char[] String.value
-        0004: iconst_0
-        0005: aload_1
-        0006: iload_2
-        0007: aload_0
-        0008: getfield #3 // char[] String.value
-        000b: arraylength
-        000c: invokestatic #37 // void System.arraycopy(Object, int, Object, int, int)
-        000f: return
+        0006: invokevirtual #38 // int String.length()
+        0009: if_icmple +11 // 0014
+        000c: new #42 // IndexOutOfBoundsException
+        000f: dup
+        0010: invokespecial #43 // void IndexOutOfBoundsException.<init>()
+        0013: athrow
+        0014: aload_0
+        0015: iload_1
+        0016: iload_2
+        0017: invokestatic #45 // int Character.offsetByCodePoints(CharSequence, int, int)
+        001a: ireturn
     }
     
     public void getChars(int, int, char[], int) {
-        // max_stack: 6
+        // max_stack: 5
         // max_locals: 5
         0000: iload_1
-        0001: ifge +12 // 000d
-        0004: new #6 // StringIndexOutOfBoundsException
-        0007: dup
-        0008: iload_1
-        0009: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        000c: athrow
-        000d: iload_2
-        000e: aload_0
-        000f: getfield #3 // char[] String.value
-        0012: arraylength
-        0013: if_icmple +12 // 001f
-        0016: new #6 // StringIndexOutOfBoundsException
-        0019: dup
-        001a: iload_2
-        001b: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        001e: athrow
-        001f: iload_1
-        0020: iload_2
-        0021: if_icmple +14 // 002f
-        0024: new #6 // StringIndexOutOfBoundsException
-        0027: dup
-        0028: iload_2
-        0029: iload_1
-        002a: isub
-        002b: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        002e: athrow
-        002f: aload_0
-        0030: getfield #3 // char[] String.value
-        0033: iload_1
-        0034: aload_3
-        0035: iload local_4
-        0037: iload_2
-        0038: iload_1
-        0039: isub
-        003a: invokestatic #37 // void System.arraycopy(Object, int, Object, int, int)
-        003d: return
+        0001: iload_2
+        0002: aload_0
+        0003: invokevirtual #38 // int String.length()
+        0006: invokestatic #46 // void String.checkBoundsBeginEnd(int, int, int)
+        0009: iload local_4
+        000b: iload_2
+        000c: iload_1
+        000d: isub
+        000e: aload_3
+        000f: arraylength
+        0010: invokestatic #8 // void String.checkBoundsOffCount(int, int, int)
+        0013: aload_0
+        0014: invokevirtual #33 // boolean String.isLatin1()
+        0017: ifeq +18 // 0029
+        001a: aload_0
+        001b: getfield #3 // byte[] String.value
+        001e: iload_1
+        001f: iload_2
+        0020: aload_3
+        0021: iload local_4
+        0023: invokestatic #47 // void StringLatin1.getChars(byte[], int, int, char[], int)
+        0026: goto +15 // 0035
+        0029: aload_0
+        002a: getfield #3 // byte[] String.value
+        002d: iload_1
+        002e: iload_2
+        002f: aload_3
+        0030: iload local_4
+        0032: invokestatic #48 // void StringUTF16.getChars(byte[], int, int, char[], int)
+        0035: return
     }
     
-    @Deprecated
+    @Deprecated(since = "1.1")
     public void getBytes(int, int, byte[], int) {
-        // max_stack: 4
-        // max_locals: 9
+        // max_stack: 5
+        // max_locals: 5
         0000: iload_1
-        0001: ifge +12 // 000d
-        0004: new #6 // StringIndexOutOfBoundsException
-        0007: dup
-        0008: iload_1
-        0009: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        000c: athrow
-        000d: iload_2
-        000e: aload_0
-        000f: getfield #3 // char[] String.value
-        0012: arraylength
-        0013: if_icmple +12 // 001f
-        0016: new #6 // StringIndexOutOfBoundsException
-        0019: dup
-        001a: iload_2
-        001b: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        001e: athrow
-        001f: iload_1
-        0020: iload_2
-        0021: if_icmple +14 // 002f
-        0024: new #6 // StringIndexOutOfBoundsException
-        0027: dup
-        0028: iload_2
-        0029: iload_1
-        002a: isub
-        002b: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        002e: athrow
-        002f: aload_3
-        0030: invokestatic #38 // Object java.util.Objects.requireNonNull(Object)
-        0033: pop
-        0034: iload local_4
-        0036: istore local_5
-        0038: iload_2
-        0039: istore local_6
-        003b: iload_1
-        003c: istore local_7
-        003e: aload_0
-        003f: getfield #3 // char[] String.value
-        0042: astore local_8
-        0044: iload local_7
-        0046: iload local_6
-        0048: if_icmpge +22 // 005e
-        004b: aload_3
-        004c: iload local_5
-        004e: iinc local_5, 1
-        0051: aload local_8
-        0053: iload local_7
-        0055: iinc local_7, 1
-        0058: caload
-        0059: i2b
-        005a: bastore
-        005b: goto -23 // 0044
-        005e: return
+        0001: iload_2
+        0002: aload_0
+        0003: invokevirtual #38 // int String.length()
+        0006: invokestatic #46 // void String.checkBoundsBeginEnd(int, int, int)
+        0009: aload_3
+        000a: invokestatic #49 // Object java.util.Objects.requireNonNull(Object)
+        000d: pop
+        000e: iload local_4
+        0010: iload_2
+        0011: iload_1
+        0012: isub
+        0013: aload_3
+        0014: arraylength
+        0015: invokestatic #8 // void String.checkBoundsOffCount(int, int, int)
+        0018: aload_0
+        0019: invokevirtual #33 // boolean String.isLatin1()
+        001c: ifeq +18 // 002e
+        001f: aload_0
+        0020: getfield #3 // byte[] String.value
+        0023: iload_1
+        0024: iload_2
+        0025: aload_3
+        0026: iload local_4
+        0028: invokestatic #50 // void StringLatin1.getBytes(byte[], int, int, byte[], int)
+        002b: goto +15 // 003a
+        002e: aload_0
+        002f: getfield #3 // byte[] String.value
+        0032: iload_1
+        0033: iload_2
+        0034: aload_3
+        0035: iload local_4
+        0037: invokestatic #51 // void StringUTF16.getBytes(byte[], int, int, byte[], int)
+        003a: return
     }
     
     public byte[] getBytes(String) throws java.io.UnsupportedEncodingException {
-        // max_stack: 4
+        // max_stack: 3
         // max_locals: 2
         0000: aload_1
         0001: ifnonnull +11 // 000c
         0004: new #17 // NullPointerException
         0007: dup
-        0008: invokespecial #39 // void NullPointerException.<init>()
+        0008: invokespecial #52 // void NullPointerException.<init>()
         000b: athrow
         000c: aload_1
         000d: aload_0
-        000e: getfield #3 // char[] String.value
-        0011: iconst_0
-        0012: aload_0
-        0013: getfield #3 // char[] String.value
-        0016: arraylength
-        0017: invokestatic #40 // byte[] StringCoding.encode(String, char[], int, int)
-        001a: areturn
+        000e: invokevirtual #32 // byte String.coder()
+        0011: aload_0
+        0012: getfield #3 // byte[] String.value
+        0015: invokestatic #53 // byte[] StringCoding.encode(String, byte, byte[])
+        0018: areturn
     }
     
     public byte[] getBytes(java.nio.charset.Charset) {
-        // max_stack: 4
+        // max_stack: 3
         // max_locals: 2
         0000: aload_1
         0001: ifnonnull +11 // 000c
         0004: new #17 // NullPointerException
         0007: dup
-        0008: invokespecial #39 // void NullPointerException.<init>()
+        0008: invokespecial #52 // void NullPointerException.<init>()
         000b: athrow
         000c: aload_1
         000d: aload_0
-        000e: getfield #3 // char[] String.value
-        0011: iconst_0
-        0012: aload_0
-        0013: getfield #3 // char[] String.value
-        0016: arraylength
-        0017: invokestatic #41 // byte[] StringCoding.encode(java.nio.charset.Charset, char[], int, int)
-        001a: areturn
+        000e: invokevirtual #32 // byte String.coder()
+        0011: aload_0
+        0012: getfield #3 // byte[] String.value
+        0015: invokestatic #54 // byte[] StringCoding.encode(java.nio.charset.Charset, byte, byte[])
+        0018: areturn
     }
     
     public byte[] getBytes() {
-        // max_stack: 3
+        // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0001: getfield #3 // char[] String.value
-        0004: iconst_0
-        0005: aload_0
-        0006: getfield #3 // char[] String.value
-        0009: arraylength
-        000a: invokestatic #42 // byte[] StringCoding.encode(char[], int, int)
-        000d: areturn
+        0001: invokevirtual #32 // byte String.coder()
+        0004: aload_0
+        0005: getfield #3 // byte[] String.value
+        0008: invokestatic #55 // byte[] StringCoding.encode(byte, byte[])
+        000b: areturn
     }
     
     public boolean equals(Object) {
-        // max_stack: 3
-        // max_locals: 7
+        // max_stack: 2
+        // max_locals: 3
         0000: aload_0
         0001: aload_1
         0002: if_acmpne +5 // 0007
         0005: iconst_1
         0006: ireturn
         0007: aload_1
-        0008: instanceof #43 // String
-        000b: ifeq +68 // 004f
+        0008: instanceof #11 // String
+        000b: ifeq +52 // 003f
         000e: aload_1
-        000f: checkcast #43 // String
+        000f: checkcast #11 // String
         0012: astore_2
         0013: aload_0
-        0014: getfield #3 // char[] String.value
-        0017: arraylength
-        0018: istore_3
-        0019: iload_3
-        001a: aload_2
-        001b: getfield #3 // char[] String.value
-        001e: arraylength
-        001f: if_icmpne +48 // 004f
-        0022: aload_0
-        0023: getfield #3 // char[] String.value
-        0026: astore local_4
-        0028: aload_2
-        0029: getfield #3 // char[] String.value
-        002c: astore local_5
-        002e: iconst_0
-        002f: istore local_6
-        0031: iload_3
-        0032: iinc local_3, -1
-        0035: ifeq +24 // 004d
-        0038: aload local_4
-        003a: iload local_6
-        003c: caload
-        003d: aload local_5
-        003f: iload local_6
-        0041: caload
-        0042: if_icmpeq +5 // 0047
-        0045: iconst_0
-        0046: ireturn
-        0047: iinc local_6, 1
-        004a: goto -25 // 0031
-        004d: iconst_1
-        004e: ireturn
-        004f: iconst_0
-        0050: ireturn
+        0014: invokevirtual #32 // byte String.coder()
+        0017: aload_2
+        0018: invokevirtual #32 // byte String.coder()
+        001b: if_icmpne +36 // 003f
+        001e: aload_0
+        001f: invokevirtual #33 // boolean String.isLatin1()
+        0022: ifeq +17 // 0033
+        0025: aload_0
+        0026: getfield #3 // byte[] String.value
+        0029: aload_2
+        002a: getfield #3 // byte[] String.value
+        002d: invokestatic #56 // boolean StringLatin1.equals(byte[], byte[])
+        0030: goto +14 // 003e
+        0033: aload_0
+        0034: getfield #3 // byte[] String.value
+        0037: aload_2
+        0038: getfield #3 // byte[] String.value
+        003b: invokestatic #57 // boolean StringUTF16.equals(byte[], byte[])
+        003e: ireturn
+        003f: iconst_0
+        0040: ireturn
     }
     
     public boolean contentEquals(StringBuffer) {
@@ -869,56 +720,75 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 2
         0000: aload_0
         0001: aload_1
-        0002: invokevirtual #44 // boolean String.contentEquals(CharSequence)
+        0002: invokevirtual #58 // boolean String.contentEquals(CharSequence)
         0005: ireturn
     }
     
     private boolean nonSyncContentEquals(AbstractStringBuilder) {
         // max_stack: 3
-        // max_locals: 6
+        // max_locals: 7
         0000: aload_0
-        0001: getfield #3 // char[] String.value
-        0004: astore_2
-        0005: aload_1
-        0006: invokevirtual #45 // char[] AbstractStringBuilder.getValue()
-        0009: astore_3
-        000a: aload_2
-        000b: arraylength
-        000c: istore local_4
-        000e: iload local_4
-        0010: aload_1
-        0011: invokevirtual #46 // int AbstractStringBuilder.length()
-        0014: if_icmpeq +5 // 0019
-        0017: iconst_0
-        0018: ireturn
-        0019: iconst_0
-        001a: istore local_5
-        001c: iload local_5
-        001e: iload local_4
-        0020: if_icmpge +22 // 0036
-        0023: aload_2
-        0024: iload local_5
-        0026: caload
-        0027: aload_3
-        0028: iload local_5
-        002a: caload
-        002b: if_icmpeq +5 // 0030
-        002e: iconst_0
-        002f: ireturn
-        0030: iinc local_5, 1
-        0033: goto -23 // 001c
-        0036: iconst_1
-        0037: ireturn
+        0001: invokevirtual #38 // int String.length()
+        0004: istore_2
+        0005: iload_2
+        0006: aload_1
+        0007: invokevirtual #59 // int AbstractStringBuilder.length()
+        000a: if_icmpeq +5 // 000f
+        000d: iconst_0
+        000e: ireturn
+        000f: aload_0
+        0010: getfield #3 // byte[] String.value
+        0013: astore_3
+        0014: aload_1
+        0015: invokevirtual #60 // byte[] AbstractStringBuilder.getValue()
+        0018: astore local_4
+        001a: aload_0
+        001b: invokevirtual #32 // byte String.coder()
+        001e: aload_1
+        001f: invokevirtual #61 // byte AbstractStringBuilder.getCoder()
+        0022: if_icmpne +40 // 004a
+        0025: aload_3
+        0026: arraylength
+        0027: istore local_5
+        0029: iconst_0
+        002a: istore local_6
+        002c: iload local_6
+        002e: iload local_5
+        0030: if_icmpge +23 // 0047
+        0033: aload_3
+        0034: iload local_6
+        0036: baload
+        0037: aload local_4
+        0039: iload local_6
+        003b: baload
+        003c: if_icmpeq +5 // 0041
+        003f: iconst_0
+        0040: ireturn
+        0041: iinc local_6, 1
+        0044: goto -24 // 002c
+        0047: goto +20 // 005b
+        004a: aload_0
+        004b: invokevirtual #33 // boolean String.isLatin1()
+        004e: ifne +5 // 0053
+        0051: iconst_0
+        0052: ireturn
+        0053: aload_3
+        0054: aload local_4
+        0056: iload_2
+        0057: invokestatic #62 // boolean StringUTF16.contentEquals(byte[], byte[], int)
+        005a: ireturn
+        005b: iconst_1
+        005c: ireturn
     }
     
     public boolean contentEquals(CharSequence) {
         // max_stack: 3
         // max_locals: 5
         0000: aload_1
-        0001: instanceof #47 // AbstractStringBuilder
+        0001: instanceof #63 // AbstractStringBuilder
         0004: ifeq +39 // 002b
         0007: aload_1
-        0008: instanceof #48 // StringBuffer
+        0008: instanceof #64 // StringBuffer
         000b: ifeq +23 // 0022
         000e: aload_1
         000f: dup
@@ -926,8 +796,8 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0011: monitorenter
         0012: aload_0
         0013: aload_1
-        0014: checkcast #47 // AbstractStringBuilder
-        0017: invokespecial #49 // boolean String.nonSyncContentEquals(AbstractStringBuilder)
+        0014: checkcast #63 // AbstractStringBuilder
+        0017: invokevirtual #65 // boolean String.nonSyncContentEquals(AbstractStringBuilder)
         001a: aload_2
         001b: monitorexit
         001c: ireturn
@@ -938,46 +808,59 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0021: athrow
         0022: aload_0
         0023: aload_1
-        0024: checkcast #47 // AbstractStringBuilder
-        0027: invokespecial #49 // boolean String.nonSyncContentEquals(AbstractStringBuilder)
+        0024: checkcast #63 // AbstractStringBuilder
+        0027: invokevirtual #65 // boolean String.nonSyncContentEquals(AbstractStringBuilder)
         002a: ireturn
         002b: aload_1
-        002c: instanceof #43 // String
+        002c: instanceof #11 // String
         002f: ifeq +9 // 0038
         0032: aload_0
         0033: aload_1
-        0034: invokevirtual #50 // boolean String.equals(Object)
+        0034: invokevirtual #66 // boolean String.equals(Object)
         0037: ireturn
-        0038: aload_0
-        0039: getfield #3 // char[] String.value
-        003c: astore_2
-        003d: aload_2
-        003e: arraylength
-        003f: istore_3
-        0040: iload_3
-        0041: aload_1
-        0042: invokeinterface #51 // int CharSequence.length()
-        0047: if_icmpeq +5 // 004c
-        004a: iconst_0
-        004b: ireturn
-        004c: iconst_0
-        004d: istore local_4
-        004f: iload local_4
-        0051: iload_3
-        0052: if_icmpge +26 // 006c
-        0055: aload_2
-        0056: iload local_4
-        0058: caload
-        0059: aload_1
-        005a: iload local_4
-        005c: invokeinterface #52 // char CharSequence.charAt(int)
-        0061: if_icmpeq +5 // 0066
-        0064: iconst_0
-        0065: ireturn
-        0066: iinc local_4, 1
-        0069: goto -26 // 004f
-        006c: iconst_1
-        006d: ireturn
+        0038: aload_1
+        0039: invokeinterface #67 // int CharSequence.length()
+        003e: istore_2
+        003f: iload_2
+        0040: aload_0
+        0041: invokevirtual #38 // int String.length()
+        0044: if_icmpeq +5 // 0049
+        0047: iconst_0
+        0048: ireturn
+        0049: aload_0
+        004a: getfield #3 // byte[] String.value
+        004d: astore_3
+        004e: aload_0
+        004f: invokevirtual #33 // boolean String.isLatin1()
+        0052: ifeq +42 // 007c
+        0055: iconst_0
+        0056: istore local_4
+        0058: iload local_4
+        005a: iload_2
+        005b: if_icmpge +30 // 0079
+        005e: aload_3
+        005f: iload local_4
+        0061: baload
+        0062: sipush 255
+        0065: iand
+        0066: aload_1
+        0067: iload local_4
+        0069: invokeinterface #68 // char CharSequence.charAt(int)
+        006e: if_icmpeq +5 // 0073
+        0071: iconst_0
+        0072: ireturn
+        0073: iinc local_4, 1
+        0076: goto -30 // 0058
+        0079: goto +14 // 0087
+        007c: aload_3
+        007d: aload_1
+        007e: iload_2
+        007f: invokestatic #69 // boolean StringUTF16.contentEquals(byte[], CharSequence, int)
+        0082: ifne +5 // 0087
+        0085: iconst_0
+        0086: ireturn
+        0087: iconst_1
+        0088: ireturn
     }
     
     public boolean equalsIgnoreCase(String) {
@@ -987,276 +870,345 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0001: aload_1
         0002: if_acmpne +7 // 0009
         0005: iconst_1
-        0006: goto +41 // 002f
+        0006: goto +38 // 002c
         0009: aload_1
-        000a: ifnull +36 // 002e
+        000a: ifnull +33 // 002b
         000d: aload_1
-        000e: getfield #3 // char[] String.value
-        0011: arraylength
-        0012: aload_0
-        0013: getfield #3 // char[] String.value
-        0016: arraylength
-        0017: if_icmpne +23 // 002e
-        001a: aload_0
-        001b: iconst_1
+        000e: invokevirtual #38 // int String.length()
+        0011: aload_0
+        0012: invokevirtual #38 // int String.length()
+        0015: if_icmpne +22 // 002b
+        0018: aload_0
+        0019: iconst_1
+        001a: iconst_0
+        001b: aload_1
         001c: iconst_0
-        001d: aload_1
-        001e: iconst_0
-        001f: aload_0
-        0020: getfield #3 // char[] String.value
-        0023: arraylength
-        0024: invokevirtual #53 // boolean String.regionMatches(boolean, int, String, int, int)
-        0027: ifeq +7 // 002e
-        002a: iconst_1
-        002b: goto +4 // 002f
-        002e: iconst_0
-        002f: ireturn
+        001d: aload_0
+        001e: invokevirtual #38 // int String.length()
+        0021: invokevirtual #70 // boolean String.regionMatches(boolean, int, String, int, int)
+        0024: ifeq +7 // 002b
+        0027: iconst_1
+        0028: goto +4 // 002c
+        002b: iconst_0
+        002c: ireturn
     }
     
     public int compareTo(String) {
         // max_stack: 2
-        // max_locals: 10
+        // max_locals: 4
         0000: aload_0
-        0001: getfield #3 // char[] String.value
-        0004: arraylength
-        0005: istore_2
-        0006: aload_1
-        0007: getfield #3 // char[] String.value
-        000a: arraylength
-        000b: istore_3
-        000c: iload_2
-        000d: iload_3
-        000e: invokestatic #54 // int Math.min(int, int)
-        0011: istore local_4
-        0013: aload_0
-        0014: getfield #3 // char[] String.value
-        0017: astore local_5
-        0019: aload_1
-        001a: getfield #3 // char[] String.value
-        001d: astore local_6
-        001f: iconst_0
-        0020: istore local_7
-        0022: iload local_7
-        0024: iload local_4
-        0026: if_icmpge +36 // 004a
-        0029: aload local_5
-        002b: iload local_7
-        002d: caload
-        002e: istore local_8
-        0030: aload local_6
-        0032: iload local_7
-        0034: caload
-        0035: istore local_9
-        0037: iload local_8
-        0039: iload local_9
-        003b: if_icmpeq +9 // 0044
-        003e: iload local_8
-        0040: iload local_9
-        0042: isub
-        0043: ireturn
-        0044: iinc local_7, 1
-        0047: goto -37 // 0022
-        004a: iload_2
-        004b: iload_3
-        004c: isub
-        004d: ireturn
+        0001: getfield #3 // byte[] String.value
+        0004: astore_2
+        0005: aload_1
+        0006: getfield #3 // byte[] String.value
+        0009: astore_3
+        000a: aload_0
+        000b: invokevirtual #32 // byte String.coder()
+        000e: aload_1
+        000f: invokevirtual #32 // byte String.coder()
+        0012: if_icmpne +24 // 002a
+        0015: aload_0
+        0016: invokevirtual #33 // boolean String.isLatin1()
+        0019: ifeq +11 // 0024
+        001c: aload_2
+        001d: aload_3
+        001e: invokestatic #71 // int StringLatin1.compareTo(byte[], byte[])
+        0021: goto +8 // 0029
+        0024: aload_2
+        0025: aload_3
+        0026: invokestatic #72 // int StringUTF16.compareTo(byte[], byte[])
+        0029: ireturn
+        002a: aload_0
+        002b: invokevirtual #33 // boolean String.isLatin1()
+        002e: ifeq +11 // 0039
+        0031: aload_2
+        0032: aload_3
+        0033: invokestatic #73 // int StringLatin1.compareToUTF16(byte[], byte[])
+        0036: goto +8 // 003e
+        0039: aload_2
+        003a: aload_3
+        003b: invokestatic #74 // int StringUTF16.compareToLatin1(byte[], byte[])
+        003e: ireturn
     }
     
     public int compareToIgnoreCase(String) {
         // max_stack: 3
         // max_locals: 2
-        0000: getstatic #55 // java.util.Comparator String.CASE_INSENSITIVE_ORDER
+        0000: getstatic #75 // java.util.Comparator String.CASE_INSENSITIVE_ORDER
         0003: aload_0
         0004: aload_1
-        0005: invokeinterface #56 // int java.util.Comparator.compare(Object, Object)
+        0005: invokeinterface #76 // int java.util.Comparator.compare(Object, Object)
         000a: ireturn
     }
     
     public boolean regionMatches(int, String, int, int) {
         // max_stack: 6
-        // max_locals: 9
+        // max_locals: 7
         0000: aload_0
-        0001: getfield #3 // char[] String.value
+        0001: getfield #3 // byte[] String.value
         0004: astore local_5
-        0006: iload_1
-        0007: istore local_6
-        0009: aload_2
-        000a: getfield #3 // char[] String.value
-        000d: astore local_7
-        000f: iload_3
-        0010: istore local_8
-        0012: iload_3
-        0013: iflt +39 // 003a
-        0016: iload_1
-        0017: iflt +35 // 003a
-        001a: iload_1
-        001b: i2l
-        001c: aload_0
-        001d: getfield #3 // char[] String.value
-        0020: arraylength
-        0021: i2l
-        0022: iload local_4
+        0006: aload_2
+        0007: getfield #3 // byte[] String.value
+        000a: astore local_6
+        000c: iload_3
+        000d: iflt +37 // 0032
+        0010: iload_1
+        0011: iflt +33 // 0032
+        0014: iload_1
+        0015: i2l
+        0016: aload_0
+        0017: invokevirtual #38 // int String.length()
+        001a: i2l
+        001b: iload local_4
+        001d: i2l
+        001e: lsub
+        001f: lcmp
+        0020: ifgt +18 // 0032
+        0023: iload_3
         0024: i2l
-        0025: lsub
-        0026: lcmp
-        0027: ifgt +19 // 003a
-        002a: iload_3
-        002b: i2l
-        002c: aload_2
-        002d: getfield #3 // char[] String.value
-        0030: arraylength
-        0031: i2l
-        0032: iload local_4
-        0034: i2l
-        0035: lsub
-        0036: lcmp
-        0037: ifle +5 // 003c
-        003a: iconst_0
-        003b: ireturn
-        003c: iload local_4
-        003e: iinc local_4, -1
-        0041: ifle +24 // 0059
-        0044: aload local_5
-        0046: iload local_6
-        0048: iinc local_6, 1
-        004b: caload
-        004c: aload local_7
-        004e: iload local_8
-        0050: iinc local_8, 1
-        0053: caload
-        0054: if_icmpeq -24 // 003c
-        0057: iconst_0
-        0058: ireturn
-        0059: iconst_1
-        005a: ireturn
+        0025: aload_2
+        0026: invokevirtual #38 // int String.length()
+        0029: i2l
+        002a: iload local_4
+        002c: i2l
+        002d: lsub
+        002e: lcmp
+        002f: ifle +5 // 0034
+        0032: iconst_0
+        0033: ireturn
+        0034: aload_0
+        0035: invokevirtual #32 // byte String.coder()
+        0038: aload_2
+        0039: invokevirtual #32 // byte String.coder()
+        003c: if_icmpne +56 // 0074
+        003f: aload_0
+        0040: invokevirtual #33 // boolean String.isLatin1()
+        0043: ifne +22 // 0059
+        0046: iload local_4
+        0048: ifle +17 // 0059
+        004b: iload_1
+        004c: iconst_1
+        004d: ishl
+        004e: istore_1
+        004f: iload_3
+        0050: iconst_1
+        0051: ishl
+        0052: istore_3
+        0053: iload local_4
+        0055: iconst_1
+        0056: ishl
+        0057: istore local_4
+        0059: iload local_4
+        005b: iinc local_4, -1
+        005e: ifle +91 // 00b9
+        0061: aload local_5
+        0063: iload_1
+        0064: iinc local_1, 1
+        0067: baload
+        0068: aload local_6
+        006a: iload_3
+        006b: iinc local_3, 1
+        006e: baload
+        006f: if_icmpeq -22 // 0059
+        0072: iconst_0
+        0073: ireturn
+        0074: aload_0
+        0075: invokevirtual #32 // byte String.coder()
+        0078: ifne +34 // 009a
+        007b: iload local_4
+        007d: iinc local_4, -1
+        0080: ifle +57 // 00b9
+        0083: aload local_5
+        0085: iload_1
+        0086: iinc local_1, 1
+        0089: invokestatic #77 // char StringLatin1.getChar(byte[], int)
+        008c: aload local_6
+        008e: iload_3
+        008f: iinc local_3, 1
+        0092: invokestatic #78 // char StringUTF16.getChar(byte[], int)
+        0095: if_icmpeq -26 // 007b
+        0098: iconst_0
+        0099: ireturn
+        009a: iload local_4
+        009c: iinc local_4, -1
+        009f: ifle +26 // 00b9
+        00a2: aload local_5
+        00a4: iload_1
+        00a5: iinc local_1, 1
+        00a8: invokestatic #78 // char StringUTF16.getChar(byte[], int)
+        00ab: aload local_6
+        00ad: iload_3
+        00ae: iinc local_3, 1
+        00b1: invokestatic #77 // char StringLatin1.getChar(byte[], int)
+        00b4: if_icmpeq -26 // 009a
+        00b7: iconst_0
+        00b8: ireturn
+        00b9: iconst_1
+        00ba: ireturn
     }
     
     public boolean regionMatches(boolean, int, String, int, int) {
         // max_stack: 6
-        // max_locals: 14
-        0000: aload_0
-        0001: getfield #3 // char[] String.value
-        0004: astore local_6
-        0006: iload_2
-        0007: istore local_7
-        0009: aload_3
-        000a: getfield #3 // char[] String.value
-        000d: astore local_8
+        // max_locals: 8
+        0000: iload_1
+        0001: ifne +14 // 000f
+        0004: aload_0
+        0005: iload_2
+        0006: aload_3
+        0007: iload local_4
+        0009: iload local_5
+        000b: invokevirtual #79 // boolean String.regionMatches(int, String, int, int)
+        000e: ireturn
         000f: iload local_4
-        0011: istore local_9
-        0013: iload local_4
-        0015: iflt +40 // 003d
+        0011: iflt +38 // 0037
+        0014: iload_2
+        0015: iflt +34 // 0037
         0018: iload_2
-        0019: iflt +36 // 003d
-        001c: iload_2
-        001d: i2l
-        001e: aload_0
-        001f: getfield #3 // char[] String.value
-        0022: arraylength
-        0023: i2l
-        0024: iload local_5
-        0026: i2l
-        0027: lsub
-        0028: lcmp
-        0029: ifgt +20 // 003d
-        002c: iload local_4
+        0019: i2l
+        001a: aload_0
+        001b: invokevirtual #38 // int String.length()
+        001e: i2l
+        001f: iload local_5
+        0021: i2l
+        0022: lsub
+        0023: lcmp
+        0024: ifgt +19 // 0037
+        0027: iload local_4
+        0029: i2l
+        002a: aload_3
+        002b: invokevirtual #38 // int String.length()
         002e: i2l
-        002f: aload_3
-        0030: getfield #3 // char[] String.value
-        0033: arraylength
-        0034: i2l
-        0035: iload local_5
-        0037: i2l
-        0038: lsub
-        0039: lcmp
-        003a: ifle +5 // 003f
-        003d: iconst_0
-        003e: ireturn
-        003f: iload local_5
-        0041: iinc local_5, -1
-        0044: ifle +79 // 0093
-        0047: aload local_6
-        0049: iload local_7
-        004b: iinc local_7, 1
-        004e: caload
-        004f: istore local_10
-        0051: aload local_8
-        0053: iload local_9
-        0055: iinc local_9, 1
-        0058: caload
-        0059: istore local_11
-        005b: iload local_10
-        005d: iload local_11
-        005f: if_icmpne +6 // 0065
-        0062: goto -35 // 003f
-        0065: iload_1
-        0066: ifeq +43 // 0091
-        0069: iload local_10
-        006b: invokestatic #57 // char Character.toUpperCase(char)
-        006e: istore local_12
-        0070: iload local_11
-        0072: invokestatic #57 // char Character.toUpperCase(char)
-        0075: istore local_13
-        0077: iload local_12
-        0079: iload local_13
-        007b: if_icmpne +6 // 0081
-        007e: goto -63 // 003f
-        0081: iload local_12
-        0083: invokestatic #58 // char Character.toLowerCase(char)
-        0086: iload local_13
-        0088: invokestatic #58 // char Character.toLowerCase(char)
-        008b: if_icmpne +6 // 0091
-        008e: goto -79 // 003f
-        0091: iconst_0
-        0092: ireturn
-        0093: iconst_1
-        0094: ireturn
+        002f: iload local_5
+        0031: i2l
+        0032: lsub
+        0033: lcmp
+        0034: ifle +5 // 0039
+        0037: iconst_0
+        0038: ireturn
+        0039: aload_0
+        003a: getfield #3 // byte[] String.value
+        003d: astore local_6
+        003f: aload_3
+        0040: getfield #3 // byte[] String.value
+        0043: astore local_7
+        0045: aload_0
+        0046: invokevirtual #32 // byte String.coder()
+        0049: aload_3
+        004a: invokevirtual #32 // byte String.coder()
+        004d: if_icmpne +38 // 0073
+        0050: aload_0
+        0051: invokevirtual #33 // boolean String.isLatin1()
+        0054: ifeq +18 // 0066
+        0057: aload local_6
+        0059: iload_2
+        005a: aload local_7
+        005c: iload local_4
+        005e: iload local_5
+        0060: invokestatic #80 // boolean StringLatin1.regionMatchesCI(byte[], int, byte[], int, int)
+        0063: goto +15 // 0072
+        0066: aload local_6
+        0068: iload_2
+        0069: aload local_7
+        006b: iload local_4
+        006d: iload local_5
+        006f: invokestatic #81 // boolean StringUTF16.regionMatchesCI(byte[], int, byte[], int, int)
+        0072: ireturn
+        0073: aload_0
+        0074: invokevirtual #33 // boolean String.isLatin1()
+        0077: ifeq +18 // 0089
+        007a: aload local_6
+        007c: iload_2
+        007d: aload local_7
+        007f: iload local_4
+        0081: iload local_5
+        0083: invokestatic #82 // boolean StringLatin1.regionMatchesCI_UTF16(byte[], int, byte[], int, int)
+        0086: goto +15 // 0095
+        0089: aload local_6
+        008b: iload_2
+        008c: aload local_7
+        008e: iload local_4
+        0090: iload local_5
+        0092: invokestatic #83 // boolean StringUTF16.regionMatchesCI_Latin1(byte[], int, byte[], int, int)
+        0095: ireturn
     }
     
     public boolean startsWith(String, int) {
         // max_stack: 3
         // max_locals: 8
-        0000: aload_0
-        0001: getfield #3 // char[] String.value
-        0004: astore_3
-        0005: iload_2
-        0006: istore local_4
-        0008: aload_1
-        0009: getfield #3 // char[] String.value
-        000c: astore local_5
-        000e: iconst_0
-        000f: istore local_6
-        0011: aload_1
-        0012: getfield #3 // char[] String.value
-        0015: arraylength
-        0016: istore local_7
-        0018: iload_2
-        0019: iflt +15 // 0028
-        001c: iload_2
-        001d: aload_0
-        001e: getfield #3 // char[] String.value
-        0021: arraylength
-        0022: iload local_7
-        0024: isub
-        0025: if_icmple +5 // 002a
-        0028: iconst_0
-        0029: ireturn
-        002a: iinc local_7, -1
-        002d: iload local_7
-        002f: iflt +23 // 0046
-        0032: aload_3
-        0033: iload local_4
-        0035: iinc local_4, 1
-        0038: caload
-        0039: aload local_5
-        003b: iload local_6
-        003d: iinc local_6, 1
-        0040: caload
-        0041: if_icmpeq -23 // 002a
-        0044: iconst_0
-        0045: ireturn
-        0046: iconst_1
-        0047: ireturn
+        0000: iload_2
+        0001: iflt +16 // 0011
+        0004: iload_2
+        0005: aload_0
+        0006: invokevirtual #38 // int String.length()
+        0009: aload_1
+        000a: invokevirtual #38 // int String.length()
+        000d: isub
+        000e: if_icmple +5 // 0013
+        0011: iconst_0
+        0012: ireturn
+        0013: aload_0
+        0014: getfield #3 // byte[] String.value
+        0017: astore_3
+        0018: aload_1
+        0019: getfield #3 // byte[] String.value
+        001c: astore local_4
+        001e: iconst_0
+        001f: istore local_5
+        0021: aload local_4
+        0023: arraylength
+        0024: istore local_6
+        0026: aload_0
+        0027: invokevirtual #32 // byte String.coder()
+        002a: aload_1
+        002b: invokevirtual #32 // byte String.coder()
+        002e: if_icmpne +49 // 005f
+        0031: aload_0
+        0032: invokevirtual #33 // boolean String.isLatin1()
+        0035: ifeq +7 // 003c
+        0038: iload_2
+        0039: goto +6 // 003f
+        003c: iload_2
+        003d: iconst_1
+        003e: ishl
+        003f: istore local_7
+        0041: iload local_5
+        0043: iload local_6
+        0045: if_icmpge +23 // 005c
+        0048: aload_3
+        0049: iload local_7
+        004b: iinc local_7, 1
+        004e: baload
+        004f: aload local_4
+        0051: iload local_5
+        0053: iinc local_5, 1
+        0056: baload
+        0057: if_icmpeq -22 // 0041
+        005a: iconst_0
+        005b: ireturn
+        005c: goto +44 // 0088
+        005f: aload_0
+        0060: invokevirtual #33 // boolean String.isLatin1()
+        0063: ifeq +5 // 0068
+        0066: iconst_0
+        0067: ireturn
+        0068: iload local_5
+        006a: iload local_6
+        006c: if_icmpge +28 // 0088
+        006f: aload_3
+        0070: iload_2
+        0071: iinc local_2, 1
+        0074: invokestatic #78 // char StringUTF16.getChar(byte[], int)
+        0077: aload local_4
+        0079: iload local_5
+        007b: iinc local_5, 1
+        007e: baload
+        007f: sipush 255
+        0082: iand
+        0083: if_icmpeq -27 // 0068
+        0086: iconst_0
+        0087: ireturn
+        0088: iconst_1
+        0089: ireturn
     }
     
     public boolean startsWith(String) {
@@ -1265,7 +1217,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0000: aload_0
         0001: aload_1
         0002: iconst_0
-        0003: invokevirtual #59 // boolean String.startsWith(String, int)
+        0003: invokevirtual #84 // boolean String.startsWith(String, int)
         0006: ireturn
     }
     
@@ -1275,53 +1227,42 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0000: aload_0
         0001: aload_1
         0002: aload_0
-        0003: getfield #3 // char[] String.value
-        0006: arraylength
-        0007: aload_1
-        0008: getfield #3 // char[] String.value
-        000b: arraylength
-        000c: isub
-        000d: invokevirtual #59 // boolean String.startsWith(String, int)
-        0010: ireturn
+        0003: invokevirtual #38 // int String.length()
+        0006: aload_1
+        0007: invokevirtual #38 // int String.length()
+        000a: isub
+        000b: invokevirtual #84 // boolean String.startsWith(String, int)
+        000e: ireturn
     }
     
     public int hashCode() {
         // max_stack: 3
-        // max_locals: 4
+        // max_locals: 2
         0000: aload_0
-        0001: getfield #4 // int String.hash
+        0001: getfield #5 // int String.hash
         0004: istore_1
         0005: iload_1
-        0006: ifne +47 // 0035
+        0006: ifne +41 // 002f
         0009: aload_0
-        000a: getfield #3 // char[] String.value
+        000a: getfield #3 // byte[] String.value
         000d: arraylength
-        000e: ifle +39 // 0035
+        000e: ifle +33 // 002f
         0011: aload_0
-        0012: getfield #3 // char[] String.value
-        0015: astore_2
-        0016: iconst_0
-        0017: istore_3
-        0018: iload_3
+        0012: aload_0
+        0013: invokevirtual #33 // boolean String.isLatin1()
+        0016: ifeq +13 // 0023
         0019: aload_0
-        001a: getfield #3 // char[] String.value
-        001d: arraylength
-        001e: if_icmpge +18 // 0030
-        0021: bipush 31
-        0023: iload_1
-        0024: imul
-        0025: aload_2
-        0026: iload_3
-        0027: caload
-        0028: iadd
-        0029: istore_1
-        002a: iinc local_3, 1
-        002d: goto -21 // 0018
-        0030: aload_0
-        0031: iload_1
-        0032: putfield #4 // int String.hash
-        0035: iload_1
-        0036: ireturn
+        001a: getfield #3 // byte[] String.value
+        001d: invokestatic #85 // int StringLatin1.hashCode(byte[])
+        0020: goto +10 // 002a
+        0023: aload_0
+        0024: getfield #3 // byte[] String.value
+        0027: invokestatic #86 // int StringUTF16.hashCode(byte[])
+        002a: dup
+        002b: istore_1
+        002c: putfield #5 // int String.hash
+        002f: iload_1
+        0030: ireturn
     }
     
     public int indexOf(int) {
@@ -1330,99 +1271,28 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0000: aload_0
         0001: iload_1
         0002: iconst_0
-        0003: invokevirtual #60 // int String.indexOf(int, int)
+        0003: invokevirtual #87 // int String.indexOf(int, int)
         0006: ireturn
     }
     
     public int indexOf(int, int) {
         // max_stack: 3
-        // max_locals: 6
+        // max_locals: 3
         0000: aload_0
-        0001: getfield #3 // char[] String.value
-        0004: arraylength
-        0005: istore_3
-        0006: iload_2
-        0007: ifge +8 // 000f
-        000a: iconst_0
-        000b: istore_2
-        000c: goto +10 // 0016
-        000f: iload_2
-        0010: iload_3
-        0011: if_icmplt +5 // 0016
-        0014: iconst_m1
-        0015: ireturn
-        0016: iload_1
-        0017: ldc #62 // 65536
-        0019: if_icmpge +38 // 003f
-        001c: aload_0
-        001d: getfield #3 // char[] String.value
-        0020: astore local_4
-        0022: iload_2
-        0023: istore local_5
-        0025: iload local_5
-        0027: iload_3
-        0028: if_icmpge +21 // 003d
-        002b: aload local_4
-        002d: iload local_5
-        002f: caload
-        0030: iload_1
-        0031: if_icmpne +6 // 0037
-        0034: iload local_5
-        0036: ireturn
-        0037: iinc local_5, 1
-        003a: goto -21 // 0025
-        003d: iconst_m1
-        003e: ireturn
-        003f: aload_0
-        0040: iload_1
-        0041: iload_2
-        0042: invokespecial #63 // int String.indexOfSupplementary(int, int)
-        0045: ireturn
-    }
-    
-    private int indexOfSupplementary(int, int) {
-        // max_stack: 3
-        // max_locals: 8
-        0000: iload_1
-        0001: invokestatic #10 // boolean Character.isValidCodePoint(int)
-        0004: ifeq +65 // 0045
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +15 // 0013
         0007: aload_0
-        0008: getfield #3 // char[] String.value
-        000b: astore_3
-        000c: iload_1
-        000d: invokestatic #64 // char Character.highSurrogate(int)
-        0010: istore local_4
-        0012: iload_1
-        0013: invokestatic #65 // char Character.lowSurrogate(int)
-        0016: istore local_5
-        0018: aload_3
-        0019: arraylength
-        001a: iconst_1
-        001b: isub
-        001c: istore local_6
-        001e: iload_2
-        001f: istore local_7
-        0021: iload local_7
-        0023: iload local_6
-        0025: if_icmpge +32 // 0045
-        0028: aload_3
-        0029: iload local_7
-        002b: caload
-        002c: iload local_4
-        002e: if_icmpne +17 // 003f
-        0031: aload_3
-        0032: iload local_7
-        0034: iconst_1
-        0035: iadd
-        0036: caload
-        0037: iload local_5
-        0039: if_icmpne +6 // 003f
-        003c: iload local_7
-        003e: ireturn
-        003f: iinc local_7, 1
-        0042: goto -33 // 0021
-        0045: iconst_m1
-        0046: ireturn
+        0008: getfield #3 // byte[] String.value
+        000b: iload_1
+        000c: iload_2
+        000d: invokestatic #88 // int StringLatin1.indexOf(byte[], int, int)
+        0010: goto +12 // 001c
+        0013: aload_0
+        0014: getfield #3 // byte[] String.value
+        0017: iload_1
+        0018: iload_2
+        0019: invokestatic #89 // int StringUTF16.indexOf(byte[], int, int)
+        001c: ireturn
     }
     
     public int lastIndexOf(int) {
@@ -1431,234 +1301,148 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0000: aload_0
         0001: iload_1
         0002: aload_0
-        0003: getfield #3 // char[] String.value
-        0006: arraylength
-        0007: iconst_1
-        0008: isub
-        0009: invokevirtual #66 // int String.lastIndexOf(int, int)
-        000c: ireturn
+        0003: invokevirtual #38 // int String.length()
+        0006: iconst_1
+        0007: isub
+        0008: invokevirtual #90 // int String.lastIndexOf(int, int)
+        000b: ireturn
     }
     
     public int lastIndexOf(int, int) {
         // max_stack: 3
-        // max_locals: 5
-        0000: iload_1
-        0001: ldc #62 // 65536
-        0003: if_icmpge +42 // 002d
-        0006: aload_0
-        0007: getfield #3 // char[] String.value
-        000a: astore_3
-        000b: iload_2
-        000c: aload_3
-        000d: arraylength
-        000e: iconst_1
-        000f: isub
-        0010: invokestatic #54 // int Math.min(int, int)
-        0013: istore local_4
-        0015: iload local_4
-        0017: iflt +20 // 002b
-        001a: aload_3
-        001b: iload local_4
-        001d: caload
-        001e: iload_1
-        001f: if_icmpne +6 // 0025
-        0022: iload local_4
-        0024: ireturn
-        0025: iinc local_4, -1
-        0028: goto -19 // 0015
-        002b: iconst_m1
-        002c: ireturn
-        002d: aload_0
-        002e: iload_1
-        002f: iload_2
-        0030: invokespecial #67 // int String.lastIndexOfSupplementary(int, int)
-        0033: ireturn
-    }
-    
-    private int lastIndexOfSupplementary(int, int) {
-        // max_stack: 3
-        // max_locals: 7
-        0000: iload_1
-        0001: invokestatic #10 // boolean Character.isValidCodePoint(int)
-        0004: ifeq +64 // 0044
+        // max_locals: 3
+        0000: aload_0
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +15 // 0013
         0007: aload_0
-        0008: getfield #3 // char[] String.value
-        000b: astore_3
-        000c: iload_1
-        000d: invokestatic #64 // char Character.highSurrogate(int)
-        0010: istore local_4
-        0012: iload_1
-        0013: invokestatic #65 // char Character.lowSurrogate(int)
-        0016: istore local_5
+        0008: getfield #3 // byte[] String.value
+        000b: iload_1
+        000c: iload_2
+        000d: invokestatic #91 // int StringLatin1.lastIndexOf(byte[], int, int)
+        0010: goto +12 // 001c
+        0013: aload_0
+        0014: getfield #3 // byte[] String.value
+        0017: iload_1
         0018: iload_2
-        0019: aload_3
-        001a: arraylength
-        001b: iconst_2
-        001c: isub
-        001d: invokestatic #54 // int Math.min(int, int)
-        0020: istore local_6
-        0022: iload local_6
-        0024: iflt +32 // 0044
-        0027: aload_3
-        0028: iload local_6
-        002a: caload
-        002b: iload local_4
-        002d: if_icmpne +17 // 003e
-        0030: aload_3
-        0031: iload local_6
-        0033: iconst_1
-        0034: iadd
-        0035: caload
-        0036: iload local_5
-        0038: if_icmpne +6 // 003e
-        003b: iload local_6
-        003d: ireturn
-        003e: iinc local_6, -1
-        0041: goto -31 // 0022
-        0044: iconst_m1
-        0045: ireturn
+        0019: invokestatic #92 // int StringUTF16.lastIndexOf(byte[], int, int)
+        001c: ireturn
     }
     
     public int indexOf(String) {
-        // max_stack: 3
+        // max_stack: 2
         // max_locals: 2
         0000: aload_0
-        0001: aload_1
-        0002: iconst_0
-        0003: invokevirtual #68 // int String.indexOf(String, int)
-        0006: ireturn
+        0001: invokevirtual #32 // byte String.coder()
+        0004: aload_1
+        0005: invokevirtual #32 // byte String.coder()
+        0008: if_icmpne +36 // 002c
+        000b: aload_0
+        000c: invokevirtual #33 // boolean String.isLatin1()
+        000f: ifeq +17 // 0020
+        0012: aload_0
+        0013: getfield #3 // byte[] String.value
+        0016: aload_1
+        0017: getfield #3 // byte[] String.value
+        001a: invokestatic #93 // int StringLatin1.indexOf(byte[], byte[])
+        001d: goto +14 // 002b
+        0020: aload_0
+        0021: getfield #3 // byte[] String.value
+        0024: aload_1
+        0025: getfield #3 // byte[] String.value
+        0028: invokestatic #94 // int StringUTF16.indexOf(byte[], byte[])
+        002b: ireturn
+        002c: aload_0
+        002d: invokevirtual #32 // byte String.coder()
+        0030: ifne +5 // 0035
+        0033: iconst_m1
+        0034: ireturn
+        0035: aload_0
+        0036: getfield #3 // byte[] String.value
+        0039: aload_1
+        003a: getfield #3 // byte[] String.value
+        003d: invokestatic #95 // int StringUTF16.indexOfLatin1(byte[], byte[])
+        0040: ireturn
     }
     
     public int indexOf(String, int) {
-        // max_stack: 7
+        // max_stack: 5
         // max_locals: 3
         0000: aload_0
-        0001: getfield #3 // char[] String.value
-        0004: iconst_0
-        0005: aload_0
-        0006: getfield #3 // char[] String.value
-        0009: arraylength
-        000a: aload_1
-        000b: getfield #3 // char[] String.value
-        000e: iconst_0
-        000f: aload_1
-        0010: getfield #3 // char[] String.value
-        0013: arraylength
+        0001: getfield #3 // byte[] String.value
+        0004: aload_0
+        0005: invokevirtual #32 // byte String.coder()
+        0008: aload_0
+        0009: invokevirtual #38 // int String.length()
+        000c: aload_1
+        000d: iload_2
+        000e: invokestatic #96 // int String.indexOf(byte[], byte, int, String, int)
+        0011: ireturn
+    }
+    
+    static int indexOf(byte[], byte, int, String, int) {
+        // max_stack: 5
+        // max_locals: 8
+        0000: aload_3
+        0001: getfield #3 // byte[] String.value
+        0004: astore local_5
+        0006: aload_3
+        0007: invokevirtual #32 // byte String.coder()
+        000a: istore local_6
+        000c: aload_3
+        000d: invokevirtual #38 // int String.length()
+        0010: istore local_7
+        0012: iload local_4
         0014: iload_2
-        0015: invokestatic #69 // int String.indexOf(char[], int, int, char[], int, int, int)
-        0018: ireturn
-    }
-    
-    static int indexOf(char[], int, int, String, int) {
-        // max_stack: 7
-        // max_locals: 5
-        0000: aload_0
-        0001: iload_1
-        0002: iload_2
-        0003: aload_3
-        0004: getfield #3 // char[] String.value
-        0007: iconst_0
-        0008: aload_3
-        0009: getfield #3 // char[] String.value
-        000c: arraylength
-        000d: iload local_4
-        000f: invokestatic #69 // int String.indexOf(char[], int, int, char[], int, int, int)
-        0012: ireturn
-    }
-    
-    static int indexOf(char[], int, int, char[], int, int, int) {
-        // max_stack: 3
-        // max_locals: 13
-        0000: iload local_6
-        0002: iload_2
-        0003: if_icmplt +14 // 0011
-        0006: iload local_5
-        0008: ifne +7 // 000f
-        000b: iload_2
-        000c: goto +4 // 0010
-        000f: iconst_m1
-        0010: ireturn
-        0011: iload local_6
-        0013: ifge +6 // 0019
-        0016: iconst_0
-        0017: istore local_6
-        0019: iload local_5
-        001b: ifne +6 // 0021
-        001e: iload local_6
-        0020: ireturn
-        0021: aload_3
-        0022: iload local_4
-        0024: caload
-        0025: istore local_7
-        0027: iload_1
-        0028: iload_2
-        0029: iload local_5
-        002b: isub
-        002c: iadd
-        002d: istore local_8
-        002f: iload_1
-        0030: iload local_6
-        0032: iadd
-        0033: istore local_9
-        0035: iload local_9
-        0037: iload local_8
-        0039: if_icmpgt +107 // 00a4
-        003c: aload_0
-        003d: iload local_9
-        003f: caload
-        0040: iload local_7
-        0042: if_icmpeq +25 // 005b
-        0045: iinc local_9, 1
-        0048: iload local_9
-        004a: iload local_8
-        004c: if_icmpgt +15 // 005b
-        004f: aload_0
-        0050: iload local_9
-        0052: caload
-        0053: iload local_7
-        0055: if_icmpeq +6 // 005b
-        0058: goto -19 // 0045
-        005b: iload local_9
-        005d: iload local_8
-        005f: if_icmpgt +63 // 009e
-        0062: iload local_9
-        0064: iconst_1
-        0065: iadd
-        0066: istore local_10
-        0068: iload local_10
-        006a: iload local_5
-        006c: iadd
-        006d: iconst_1
-        006e: isub
-        006f: istore local_11
-        0071: iload local_4
-        0073: iconst_1
-        0074: iadd
-        0075: istore local_12
-        0077: iload local_10
-        0079: iload local_11
-        007b: if_icmpge +23 // 0092
-        007e: aload_0
-        007f: iload local_10
-        0081: caload
-        0082: aload_3
-        0083: iload local_12
-        0085: caload
-        0086: if_icmpne +12 // 0092
-        0089: iinc local_10, 1
-        008c: iinc local_12, 1
-        008f: goto -24 // 0077
-        0092: iload local_10
-        0094: iload local_11
-        0096: if_icmpne +8 // 009e
-        0099: iload local_9
-        009b: iload_1
-        009c: isub
-        009d: ireturn
-        009e: iinc local_9, 1
-        00a1: goto -108 // 0035
-        00a4: iconst_m1
-        00a5: ireturn
+        0015: if_icmplt +14 // 0023
+        0018: iload local_7
+        001a: ifne +7 // 0021
+        001d: iload_2
+        001e: goto +4 // 0022
+        0021: iconst_m1
+        0022: ireturn
+        0023: iload local_4
+        0025: ifge +6 // 002b
+        0028: iconst_0
+        0029: istore local_4
+        002b: iload local_7
+        002d: ifne +6 // 0033
+        0030: iload local_4
+        0032: ireturn
+        0033: iload local_7
+        0035: iload_2
+        0036: if_icmple +5 // 003b
+        0039: iconst_m1
+        003a: ireturn
+        003b: iload_1
+        003c: iload local_6
+        003e: if_icmpne +33 // 005f
+        0041: iload_1
+        0042: ifne +17 // 0053
+        0045: aload_0
+        0046: iload_2
+        0047: aload local_5
+        0049: iload local_7
+        004b: iload local_4
+        004d: invokestatic #97 // int StringLatin1.indexOf(byte[], int, byte[], int, int)
+        0050: goto +14 // 005e
+        0053: aload_0
+        0054: iload_2
+        0055: aload local_5
+        0057: iload local_7
+        0059: iload local_4
+        005b: invokestatic #98 // int StringUTF16.indexOf(byte[], int, byte[], int, int)
+        005e: ireturn
+        005f: iload_1
+        0060: ifne +5 // 0065
+        0063: iconst_m1
+        0064: ireturn
+        0065: aload_0
+        0066: iload_2
+        0067: aload local_5
+        0069: iload local_7
+        006b: iload local_4
+        006d: invokestatic #99 // int StringUTF16.indexOfLatin1(byte[], int, byte[], int, int)
+        0070: ireturn
     }
     
     public int lastIndexOf(String) {
@@ -1667,225 +1451,166 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0000: aload_0
         0001: aload_1
         0002: aload_0
-        0003: getfield #3 // char[] String.value
-        0006: arraylength
-        0007: invokevirtual #70 // int String.lastIndexOf(String, int)
-        000a: ireturn
+        0003: invokevirtual #38 // int String.length()
+        0006: invokevirtual #100 // int String.lastIndexOf(String, int)
+        0009: ireturn
     }
     
     public int lastIndexOf(String, int) {
-        // max_stack: 7
+        // max_stack: 5
         // max_locals: 3
         0000: aload_0
-        0001: getfield #3 // char[] String.value
-        0004: iconst_0
-        0005: aload_0
-        0006: getfield #3 // char[] String.value
-        0009: arraylength
-        000a: aload_1
-        000b: getfield #3 // char[] String.value
-        000e: iconst_0
-        000f: aload_1
-        0010: getfield #3 // char[] String.value
-        0013: arraylength
-        0014: iload_2
-        0015: invokestatic #71 // int String.lastIndexOf(char[], int, int, char[], int, int, int)
-        0018: ireturn
+        0001: getfield #3 // byte[] String.value
+        0004: aload_0
+        0005: invokevirtual #32 // byte String.coder()
+        0008: aload_0
+        0009: invokevirtual #38 // int String.length()
+        000c: aload_1
+        000d: iload_2
+        000e: invokestatic #101 // int String.lastIndexOf(byte[], byte, int, String, int)
+        0011: ireturn
     }
     
-    static int lastIndexOf(char[], int, int, String, int) {
-        // max_stack: 7
-        // max_locals: 5
-        0000: aload_0
-        0001: iload_1
-        0002: iload_2
-        0003: aload_3
-        0004: getfield #3 // char[] String.value
-        0007: iconst_0
-        0008: aload_3
-        0009: getfield #3 // char[] String.value
-        000c: arraylength
-        000d: iload local_4
-        000f: invokestatic #71 // int String.lastIndexOf(char[], int, int, char[], int, int, int)
-        0012: ireturn
-    }
-    
-    static int lastIndexOf(char[], int, int, char[], int, int, int) {
-        // max_stack: 3
-        // max_locals: 15
-        0000: iload_2
-        0001: iload local_5
-        0003: isub
-        0004: istore local_7
-        0006: iload local_6
-        0008: ifge +5 // 000d
-        000b: iconst_m1
-        000c: ireturn
-        000d: iload local_6
-        000f: iload local_7
-        0011: if_icmple +7 // 0018
-        0014: iload local_7
-        0016: istore local_6
-        0018: iload local_5
-        001a: ifne +6 // 0020
-        001d: iload local_6
-        001f: ireturn
-        0020: iload local_4
-        0022: iload local_5
-        0024: iadd
-        0025: iconst_1
-        0026: isub
-        0027: istore local_8
-        0029: aload_3
-        002a: iload local_8
-        002c: caload
-        002d: istore local_9
-        002f: iload_1
-        0030: iload local_5
-        0032: iadd
-        0033: iconst_1
-        0034: isub
-        0035: istore local_10
-        0037: iload local_10
-        0039: iload local_6
-        003b: iadd
-        003c: istore local_11
-        003e: iload local_11
-        0040: iload local_10
-        0042: if_icmplt +18 // 0054
-        0045: aload_0
-        0046: iload local_11
-        0048: caload
-        0049: iload local_9
-        004b: if_icmpeq +9 // 0054
-        004e: iinc local_11, -1
-        0051: goto -19 // 003e
-        0054: iload local_11
-        0056: iload local_10
-        0058: if_icmpge +5 // 005d
-        005b: iconst_m1
-        005c: ireturn
-        005d: iload local_11
-        005f: iconst_1
-        0060: isub
-        0061: istore local_12
-        0063: iload local_12
-        0065: iload local_5
-        0067: iconst_1
-        0068: isub
-        0069: isub
-        006a: istore local_13
-        006c: iload local_8
-        006e: iconst_1
-        006f: isub
-        0070: istore local_14
-        0072: iload local_12
-        0074: iload local_13
-        0076: if_icmple +26 // 0090
-        0079: aload_0
-        007a: iload local_12
-        007c: iinc local_12, -1
-        007f: caload
-        0080: aload_3
-        0081: iload local_14
-        0083: iinc local_14, -1
-        0086: caload
-        0087: if_icmpeq -21 // 0072
-        008a: iinc local_11, -1
-        008d: goto -79 // 003e
-        0090: iload local_13
-        0092: iload_1
-        0093: isub
-        0094: iconst_1
-        0095: iadd
-        0096: ireturn
+    static int lastIndexOf(byte[], byte, int, String, int) {
+        // max_stack: 5
+        // max_locals: 9
+        0000: aload_3
+        0001: getfield #3 // byte[] String.value
+        0004: astore local_5
+        0006: aload_3
+        0007: invokevirtual #32 // byte String.coder()
+        000a: istore local_6
+        000c: aload_3
+        000d: invokevirtual #38 // int String.length()
+        0010: istore local_7
+        0012: iload_2
+        0013: iload local_7
+        0015: isub
+        0016: istore local_8
+        0018: iload local_4
+        001a: iload local_8
+        001c: if_icmple +7 // 0023
+        001f: iload local_8
+        0021: istore local_4
+        0023: iload local_4
+        0025: ifge +5 // 002a
+        0028: iconst_m1
+        0029: ireturn
+        002a: iload local_7
+        002c: ifne +6 // 0032
+        002f: iload local_4
+        0031: ireturn
+        0032: iload_1
+        0033: iload local_6
+        0035: if_icmpne +33 // 0056
+        0038: iload_1
+        0039: ifne +17 // 004a
+        003c: aload_0
+        003d: iload_2
+        003e: aload local_5
+        0040: iload local_7
+        0042: iload local_4
+        0044: invokestatic #102 // int StringLatin1.lastIndexOf(byte[], int, byte[], int, int)
+        0047: goto +14 // 0055
+        004a: aload_0
+        004b: iload_2
+        004c: aload local_5
+        004e: iload local_7
+        0050: iload local_4
+        0052: invokestatic #103 // int StringUTF16.lastIndexOf(byte[], int, byte[], int, int)
+        0055: ireturn
+        0056: iload_1
+        0057: ifne +5 // 005c
+        005a: iconst_m1
+        005b: ireturn
+        005c: aload_0
+        005d: iload_2
+        005e: aload local_5
+        0060: iload local_7
+        0062: iload local_4
+        0064: invokestatic #104 // int StringUTF16.lastIndexOfLatin1(byte[], int, byte[], int, int)
+        0067: ireturn
     }
     
     public String substring(int) {
-        // max_stack: 5
+        // max_stack: 3
         // max_locals: 3
         0000: iload_1
         0001: ifge +12 // 000d
-        0004: new #6 // StringIndexOutOfBoundsException
+        0004: new #39 // StringIndexOutOfBoundsException
         0007: dup
         0008: iload_1
-        0009: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
+        0009: invokespecial #40 // void StringIndexOutOfBoundsException.<init>(int)
         000c: athrow
         000d: aload_0
-        000e: getfield #3 // char[] String.value
-        0011: arraylength
-        0012: iload_1
-        0013: isub
-        0014: istore_2
-        0015: iload_2
-        0016: ifge +12 // 0022
-        0019: new #6 // StringIndexOutOfBoundsException
-        001c: dup
-        001d: iload_2
-        001e: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        0021: athrow
-        0022: iload_1
-        0023: ifne +7 // 002a
-        0026: aload_0
-        0027: goto +16 // 0037
-        002a: new #43 // String
-        002d: dup
+        000e: invokevirtual #38 // int String.length()
+        0011: iload_1
+        0012: isub
+        0013: istore_2
+        0014: iload_2
+        0015: ifge +12 // 0021
+        0018: new #39 // StringIndexOutOfBoundsException
+        001b: dup
+        001c: iload_2
+        001d: invokespecial #40 // void StringIndexOutOfBoundsException.<init>(int)
+        0020: athrow
+        0021: iload_1
+        0022: ifne +5 // 0027
+        0025: aload_0
+        0026: areturn
+        0027: aload_0
+        0028: invokevirtual #33 // boolean String.isLatin1()
+        002b: ifeq +15 // 003a
         002e: aload_0
-        002f: getfield #3 // char[] String.value
+        002f: getfield #3 // byte[] String.value
         0032: iload_1
         0033: iload_2
-        0034: invokespecial #72 // void String.<init>(char[], int, int)
-        0037: areturn
+        0034: invokestatic #105 // String StringLatin1.newString(byte[], int, int)
+        0037: goto +12 // 0043
+        003a: aload_0
+        003b: getfield #3 // byte[] String.value
+        003e: iload_1
+        003f: iload_2
+        0040: invokestatic #106 // String StringUTF16.newString(byte[], int, int)
+        0043: areturn
     }
     
     public String substring(int, int) {
-        // max_stack: 5
-        // max_locals: 4
-        0000: iload_1
-        0001: ifge +12 // 000d
-        0004: new #6 // StringIndexOutOfBoundsException
-        0007: dup
-        0008: iload_1
-        0009: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        000c: athrow
-        000d: iload_2
-        000e: aload_0
-        000f: getfield #3 // char[] String.value
-        0012: arraylength
-        0013: if_icmple +12 // 001f
-        0016: new #6 // StringIndexOutOfBoundsException
-        0019: dup
-        001a: iload_2
-        001b: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        001e: athrow
-        001f: iload_2
-        0020: iload_1
-        0021: isub
-        0022: istore_3
-        0023: iload_3
-        0024: ifge +12 // 0030
-        0027: new #6 // StringIndexOutOfBoundsException
-        002a: dup
-        002b: iload_3
-        002c: invokespecial #7 // void StringIndexOutOfBoundsException.<init>(int)
-        002f: athrow
-        0030: iload_1
-        0031: ifne +16 // 0041
-        0034: iload_2
-        0035: aload_0
-        0036: getfield #3 // char[] String.value
-        0039: arraylength
-        003a: if_icmpne +7 // 0041
-        003d: aload_0
-        003e: goto +16 // 004e
-        0041: new #43 // String
-        0044: dup
-        0045: aload_0
-        0046: getfield #3 // char[] String.value
-        0049: iload_1
-        004a: iload_3
-        004b: invokespecial #72 // void String.<init>(char[], int, int)
-        004e: areturn
+        // max_stack: 3
+        // max_locals: 5
+        0000: aload_0
+        0001: invokevirtual #38 // int String.length()
+        0004: istore_3
+        0005: iload_1
+        0006: iload_2
+        0007: iload_3
+        0008: invokestatic #46 // void String.checkBoundsBeginEnd(int, int, int)
+        000b: iload_2
+        000c: iload_1
+        000d: isub
+        000e: istore local_4
+        0010: iload_1
+        0011: ifne +10 // 001b
+        0014: iload_2
+        0015: iload_3
+        0016: if_icmpne +5 // 001b
+        0019: aload_0
+        001a: areturn
+        001b: aload_0
+        001c: invokevirtual #33 // boolean String.isLatin1()
+        001f: ifeq +16 // 002f
+        0022: aload_0
+        0023: getfield #3 // byte[] String.value
+        0026: iload_1
+        0027: iload local_4
+        0029: invokestatic #105 // String StringLatin1.newString(byte[], int, int)
+        002c: goto +13 // 0039
+        002f: aload_0
+        0030: getfield #3 // byte[] String.value
+        0033: iload_1
+        0034: iload local_4
+        0036: invokestatic #106 // String StringUTF16.newString(byte[], int, int)
+        0039: areturn
     }
     
     public CharSequence subSequence(int, int) {
@@ -1894,113 +1619,109 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0000: aload_0
         0001: iload_1
         0002: iload_2
-        0003: invokevirtual #73 // String String.substring(int, int)
+        0003: invokevirtual #107 // String String.substring(int, int)
         0006: areturn
     }
     
     public String concat(String) {
-        // max_stack: 4
-        // max_locals: 5
+        // max_stack: 5
+        // max_locals: 7
         0000: aload_1
-        0001: invokevirtual #74 // int String.length()
+        0001: invokevirtual #38 // int String.length()
         0004: istore_2
         0005: iload_2
         0006: ifne +5 // 000b
         0009: aload_0
         000a: areturn
         000b: aload_0
-        000c: getfield #3 // char[] String.value
-        000f: arraylength
-        0010: istore_3
-        0011: aload_0
-        0012: getfield #3 // char[] String.value
-        0015: iload_3
-        0016: iload_2
-        0017: iadd
-        0018: invokestatic #5 // char[] java.util.Arrays.copyOf(char[], int)
-        001b: astore local_4
-        001d: aload_1
-        001e: aload local_4
-        0020: iload_3
-        0021: invokevirtual #75 // void String.getChars(char[], int)
-        0024: new #43 // String
-        0027: dup
-        0028: aload local_4
-        002a: iconst_1
-        002b: invokespecial #76 // void String.<init>(char[], boolean)
-        002e: areturn
+        000c: invokevirtual #32 // byte String.coder()
+        000f: aload_1
+        0010: invokevirtual #32 // byte String.coder()
+        0013: if_icmpne +57 // 004c
+        0016: aload_0
+        0017: getfield #3 // byte[] String.value
+        001a: astore_3
+        001b: aload_1
+        001c: getfield #3 // byte[] String.value
+        001f: astore local_4
+        0021: aload_3
+        0022: arraylength
+        0023: aload local_4
+        0025: arraylength
+        0026: iadd
+        0027: istore local_5
+        0029: aload_3
+        002a: iload local_5
+        002c: invokestatic #108 // byte[] java.util.Arrays.copyOf(byte[], int)
+        002f: astore local_6
+        0031: aload local_4
+        0033: iconst_0
+        0034: aload local_6
+        0036: aload_3
+        0037: arraylength
+        0038: aload local_4
+        003a: arraylength
+        003b: invokestatic #109 // void System.arraycopy(Object, int, Object, int, int)
+        003e: new #11 // String
+        0041: dup
+        0042: aload local_6
+        0044: aload_0
+        0045: getfield #4 // byte String.coder
+        0048: invokespecial #110 // void String.<init>(byte[], byte)
+        004b: areturn
+        004c: aload_0
+        004d: invokevirtual #38 // int String.length()
+        0050: istore_3
+        0051: iload_3
+        0052: iload_2
+        0053: iadd
+        0054: invokestatic #14 // byte[] StringUTF16.newBytesFor(int)
+        0057: astore local_4
+        0059: aload_0
+        005a: aload local_4
+        005c: iconst_0
+        005d: iconst_1
+        005e: invokevirtual #111 // void String.getBytes(byte[], int, byte)
+        0061: aload_1
+        0062: aload local_4
+        0064: iload_3
+        0065: iconst_1
+        0066: invokevirtual #111 // void String.getBytes(byte[], int, byte)
+        0069: new #11 // String
+        006c: dup
+        006d: aload local_4
+        006f: iconst_1
+        0070: invokespecial #110 // void String.<init>(byte[], byte)
+        0073: areturn
     }
     
     public String replace(char, char) {
-        // max_stack: 4
-        // max_locals: 8
+        // max_stack: 3
+        // max_locals: 4
         0000: iload_1
         0001: iload_2
-        0002: if_icmpeq +123 // 007d
+        0002: if_icmpeq +38 // 0028
         0005: aload_0
-        0006: getfield #3 // char[] String.value
-        0009: arraylength
-        000a: istore_3
-        000b: iconst_m1
-        000c: istore local_4
-        000e: aload_0
-        000f: getfield #3 // char[] String.value
-        0012: astore local_5
-        0014: iinc local_4, 1
-        0017: iload local_4
-        0019: iload_3
-        001a: if_icmpge +15 // 0029
-        001d: aload local_5
-        001f: iload local_4
-        0021: caload
-        0022: iload_1
-        0023: if_icmpne -15 // 0014
-        0026: goto +3 // 0029
-        0029: iload local_4
-        002b: iload_3
-        002c: if_icmpge +81 // 007d
-        002f: iload_3
-        0030: newarray 5 // char[]
-        0032: astore local_6
-        0034: iconst_0
-        0035: istore local_7
-        0037: iload local_7
-        0039: iload local_4
-        003b: if_icmpge +19 // 004e
-        003e: aload local_6
-        0040: iload local_7
-        0042: aload local_5
-        0044: iload local_7
-        0046: caload
-        0047: castore
-        0048: iinc local_7, 1
-        004b: goto -20 // 0037
-        004e: iload local_4
-        0050: iload_3
-        0051: if_icmpge +33 // 0072
-        0054: aload local_5
-        0056: iload local_4
-        0058: caload
-        0059: istore local_7
-        005b: aload local_6
-        005d: iload local_4
-        005f: iload local_7
-        0061: iload_1
-        0062: if_icmpne +7 // 0069
-        0065: iload_2
-        0066: goto +5 // 006b
-        0069: iload local_7
-        006b: castore
-        006c: iinc local_4, 1
-        006f: goto -33 // 004e
-        0072: new #43 // String
-        0075: dup
-        0076: aload local_6
-        0078: iconst_1
-        0079: invokespecial #76 // void String.<init>(char[], boolean)
-        007c: areturn
-        007d: aload_0
-        007e: areturn
+        0006: invokevirtual #33 // boolean String.isLatin1()
+        0009: ifeq +15 // 0018
+        000c: aload_0
+        000d: getfield #3 // byte[] String.value
+        0010: iload_1
+        0011: iload_2
+        0012: invokestatic #112 // String StringLatin1.replace(byte[], char, char)
+        0015: goto +12 // 0021
+        0018: aload_0
+        0019: getfield #3 // byte[] String.value
+        001c: iload_1
+        001d: iload_2
+        001e: invokestatic #113 // String StringUTF16.replace(byte[], char, char)
+        0021: astore_3
+        0022: aload_3
+        0023: ifnull +5 // 0028
+        0026: aload_3
+        0027: areturn
+        0028: aload_0
+        0029: areturn
     }
     
     public boolean matches(String) {
@@ -2008,7 +1729,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 2
         0000: aload_1
         0001: aload_0
-        0002: invokestatic #77 // boolean java.util.regex.Pattern.matches(String, CharSequence)
+        0002: invokestatic #114 // boolean java.util.regex.Pattern.matches(String, CharSequence)
         0005: ireturn
     }
     
@@ -2017,25 +1738,24 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 2
         0000: aload_0
         0001: aload_1
-        0002: invokeinterface #78 // String CharSequence.toString()
-        0007: invokevirtual #79 // int String.indexOf(String)
-        000a: iconst_m1
-        000b: if_icmple +7 // 0012
-        000e: iconst_1
-        000f: goto +4 // 0013
-        0012: iconst_0
-        0013: ireturn
+        0002: invokeinterface #115 // String CharSequence.toString()
+        0007: invokevirtual #116 // int String.indexOf(String)
+        000a: iflt +7 // 0011
+        000d: iconst_1
+        000e: goto +4 // 0012
+        0011: iconst_0
+        0012: ireturn
     }
     
     public String replaceFirst(String, String) {
         // max_stack: 2
         // max_locals: 3
         0000: aload_1
-        0001: invokestatic #80 // java.util.regex.Pattern java.util.regex.Pattern.compile(String)
+        0001: invokestatic #117 // java.util.regex.Pattern java.util.regex.Pattern.compile(String)
         0004: aload_0
-        0005: invokevirtual #81 // java.util.regex.Matcher java.util.regex.Pattern.matcher(CharSequence)
+        0005: invokevirtual #118 // java.util.regex.Matcher java.util.regex.Pattern.matcher(CharSequence)
         0008: aload_2
-        0009: invokevirtual #82 // String java.util.regex.Matcher.replaceFirst(String)
+        0009: invokevirtual #119 // String java.util.regex.Matcher.replaceFirst(String)
         000c: areturn
     }
     
@@ -2043,28 +1763,92 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 2
         // max_locals: 3
         0000: aload_1
-        0001: invokestatic #80 // java.util.regex.Pattern java.util.regex.Pattern.compile(String)
+        0001: invokestatic #117 // java.util.regex.Pattern java.util.regex.Pattern.compile(String)
         0004: aload_0
-        0005: invokevirtual #81 // java.util.regex.Matcher java.util.regex.Pattern.matcher(CharSequence)
+        0005: invokevirtual #118 // java.util.regex.Matcher java.util.regex.Pattern.matcher(CharSequence)
         0008: aload_2
-        0009: invokevirtual #83 // String java.util.regex.Matcher.replaceAll(String)
+        0009: invokevirtual #120 // String java.util.regex.Matcher.replaceAll(String)
         000c: areturn
     }
     
     public String replace(CharSequence, CharSequence) {
-        // max_stack: 2
-        // max_locals: 3
+        // max_stack: 4
+        // max_locals: 12
         0000: aload_1
-        0001: invokeinterface #78 // String CharSequence.toString()
-        0006: bipush 16
-        0008: invokestatic #85 // java.util.regex.Pattern java.util.regex.Pattern.compile(String, int)
-        000b: aload_0
-        000c: invokevirtual #81 // java.util.regex.Matcher java.util.regex.Pattern.matcher(CharSequence)
-        000f: aload_2
-        0010: invokeinterface #78 // String CharSequence.toString()
-        0015: invokestatic #86 // String java.util.regex.Matcher.quoteReplacement(String)
-        0018: invokevirtual #83 // String java.util.regex.Matcher.replaceAll(String)
-        001b: areturn
+        0001: invokeinterface #115 // String CharSequence.toString()
+        0006: astore_3
+        0007: aload_2
+        0008: invokeinterface #115 // String CharSequence.toString()
+        000d: astore local_4
+        000f: aload_0
+        0010: aload_3
+        0011: invokevirtual #116 // int String.indexOf(String)
+        0014: istore local_5
+        0016: iload local_5
+        0018: ifge +5 // 001d
+        001b: aload_0
+        001c: areturn
+        001d: aload_3
+        001e: invokevirtual #38 // int String.length()
+        0021: istore local_6
+        0023: iload local_6
+        0025: iconst_1
+        0026: invokestatic #121 // int Math.max(int, int)
+        0029: istore local_7
+        002b: aload_0
+        002c: invokevirtual #38 // int String.length()
+        002f: istore local_8
+        0031: iload local_8
+        0033: iload local_6
+        0035: isub
+        0036: aload local_4
+        0038: invokevirtual #38 // int String.length()
+        003b: iadd
+        003c: istore local_9
+        003e: iload local_9
+        0040: ifge +11 // 004b
+        0043: new #122 // OutOfMemoryError
+        0046: dup
+        0047: invokespecial #123 // void OutOfMemoryError.<init>()
+        004a: athrow
+        004b: new #124 // StringBuilder
+        004e: dup
+        004f: iload local_9
+        0051: invokespecial #125 // void StringBuilder.<init>(int)
+        0054: astore local_10
+        0056: iconst_0
+        0057: istore local_11
+        0059: aload local_10
+        005b: aload_0
+        005c: iload local_11
+        005e: iload local_5
+        0060: invokevirtual #126 // StringBuilder StringBuilder.append(CharSequence, int, int)
+        0063: aload local_4
+        0065: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        0068: pop
+        0069: iload local_5
+        006b: iload local_6
+        006d: iadd
+        006e: istore local_11
+        0070: iload local_5
+        0072: iload local_8
+        0074: if_icmpge +19 // 0087
+        0077: aload_0
+        0078: aload_3
+        0079: iload local_5
+        007b: iload local_7
+        007d: iadd
+        007e: invokevirtual #128 // int String.indexOf(String, int)
+        0081: dup
+        0082: istore local_5
+        0084: ifgt -43 // 0059
+        0087: aload local_10
+        0089: aload_0
+        008a: iload local_11
+        008c: iload local_8
+        008e: invokevirtual #126 // StringBuilder StringBuilder.append(CharSequence, int, int)
+        0091: invokevirtual #129 // String StringBuilder.toString()
+        0094: areturn
     }
     
     public String[] split(String, int) {
@@ -2073,176 +1857,173 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0000: iconst_0
         0001: istore_3
         0002: aload_1
-        0003: getfield #3 // char[] String.value
-        0006: arraylength
-        0007: iconst_1
-        0008: if_icmpne +19 // 001b
-        000b: ldc #87 // ".$|()[{^?*+\\"
-        000d: aload_1
-        000e: iconst_0
-        000f: invokevirtual #88 // char String.charAt(int)
-        0012: dup
-        0013: istore_3
-        0014: invokevirtual #89 // int String.indexOf(int)
-        0017: iconst_m1
-        0018: if_icmpeq +63 // 0057
-        001b: aload_1
-        001c: invokevirtual #74 // int String.length()
-        001f: iconst_2
-        0020: if_icmpne +284 // 013c
-        0023: aload_1
-        0024: iconst_0
-        0025: invokevirtual #88 // char String.charAt(int)
-        0028: bipush 92
-        002a: if_icmpne +274 // 013c
-        002d: aload_1
-        002e: iconst_1
-        002f: invokevirtual #88 // char String.charAt(int)
-        0032: dup
-        0033: istore_3
-        0034: bipush 48
-        0036: isub
-        0037: bipush 57
-        0039: iload_3
-        003a: isub
-        003b: ior
-        003c: ifge +256 // 013c
-        003f: iload_3
-        0040: bipush 97
-        0042: isub
-        0043: bipush 122
-        0045: iload_3
-        0046: isub
-        0047: ior
-        0048: ifge +244 // 013c
-        004b: iload_3
-        004c: bipush 65
-        004e: isub
-        004f: bipush 90
-        0051: iload_3
-        0052: isub
-        0053: ior
-        0054: ifge +232 // 013c
-        0057: iload_3
-        0058: ldc #90 // 55296
-        005a: if_icmplt +9 // 0063
-        005d: iload_3
-        005e: ldc #91 // 57343
-        0060: if_icmple +220 // 013c
-        0063: iconst_0
-        0064: istore local_4
-        0066: iconst_0
-        0067: istore local_5
-        0069: iload_2
-        006a: ifle +7 // 0071
-        006d: iconst_1
-        006e: goto +4 // 0072
-        0071: iconst_0
-        0072: istore local_6
-        0074: new #92 // java.util.ArrayList
-        0077: dup
-        0078: invokespecial #93 // void java.util.ArrayList.<init>()
-        007b: astore local_7
-        007d: aload_0
-        007e: iload_3
-        007f: iload local_4
-        0081: invokevirtual #60 // int String.indexOf(int, int)
-        0084: dup
-        0085: istore local_5
-        0087: iconst_m1
-        0088: if_icmpeq +69 // 00cd
-        008b: iload local_6
-        008d: ifeq +14 // 009b
-        0090: aload local_7
-        0092: invokevirtual #94 // int java.util.ArrayList.size()
-        0095: iload_2
-        0096: iconst_1
-        0097: isub
-        0098: if_icmpge +26 // 00b2
-        009b: aload local_7
-        009d: aload_0
-        009e: iload local_4
-        00a0: iload local_5
-        00a2: invokevirtual #73 // String String.substring(int, int)
-        00a5: invokevirtual #95 // boolean java.util.ArrayList.add(Object)
-        00a8: pop
-        00a9: iload local_5
-        00ab: iconst_1
-        00ac: iadd
-        00ad: istore local_4
-        00af: goto -50 // 007d
-        00b2: aload local_7
-        00b4: aload_0
-        00b5: iload local_4
-        00b7: aload_0
-        00b8: getfield #3 // char[] String.value
-        00bb: arraylength
-        00bc: invokevirtual #73 // String String.substring(int, int)
-        00bf: invokevirtual #95 // boolean java.util.ArrayList.add(Object)
-        00c2: pop
-        00c3: aload_0
-        00c4: getfield #3 // char[] String.value
-        00c7: arraylength
-        00c8: istore local_4
-        00ca: goto +3 // 00cd
-        00cd: iload local_4
-        00cf: ifne +12 // 00db
-        00d2: iconst_1
-        00d3: anewarray #43 // String
-        00d6: dup
-        00d7: iconst_0
-        00d8: aload_0
-        00d9: aastore
-        00da: areturn
-        00db: iload local_6
-        00dd: ifeq +12 // 00e9
-        00e0: aload local_7
-        00e2: invokevirtual #94 // int java.util.ArrayList.size()
-        00e5: iload_2
-        00e6: if_icmpge +20 // 00fa
-        00e9: aload local_7
-        00eb: aload_0
-        00ec: iload local_4
-        00ee: aload_0
-        00ef: getfield #3 // char[] String.value
-        00f2: arraylength
-        00f3: invokevirtual #73 // String String.substring(int, int)
-        00f6: invokevirtual #95 // boolean java.util.ArrayList.add(Object)
-        00f9: pop
-        00fa: aload local_7
-        00fc: invokevirtual #94 // int java.util.ArrayList.size()
-        00ff: istore local_8
-        0101: iload_2
-        0102: ifne +32 // 0122
-        0105: iload local_8
-        0107: ifle +27 // 0122
-        010a: aload local_7
-        010c: iload local_8
-        010e: iconst_1
-        010f: isub
-        0110: invokevirtual #96 // Object java.util.ArrayList.get(int)
-        0113: checkcast #43 // String
-        0116: invokevirtual #74 // int String.length()
-        0119: ifne +9 // 0122
-        011c: iinc local_8, -1
-        011f: goto -26 // 0105
-        0122: iload local_8
-        0124: anewarray #43 // String
-        0127: astore local_9
-        0129: aload local_7
-        012b: iconst_0
-        012c: iload local_8
-        012e: invokevirtual #97 // java.util.List java.util.ArrayList.subList(int, int)
-        0131: aload local_9
-        0133: invokeinterface #98 // Object[] java.util.List.toArray(Object[])
-        0138: checkcast #99 // [Ljava.lang.String;
-        013b: areturn
-        013c: aload_1
-        013d: invokestatic #80 // java.util.regex.Pattern java.util.regex.Pattern.compile(String)
-        0140: aload_0
-        0141: iload_2
-        0142: invokevirtual #100 // String[] java.util.regex.Pattern.split(CharSequence, int)
-        0145: areturn
+        0003: invokevirtual #38 // int String.length()
+        0006: iconst_1
+        0007: if_icmpne +19 // 001a
+        000a: ldc #130 // ".$|()[{^?*+\\"
+        000c: aload_1
+        000d: iconst_0
+        000e: invokevirtual #131 // char String.charAt(int)
+        0011: dup
+        0012: istore_3
+        0013: invokevirtual #132 // int String.indexOf(int)
+        0016: iconst_m1
+        0017: if_icmpeq +63 // 0056
+        001a: aload_1
+        001b: invokevirtual #38 // int String.length()
+        001e: iconst_2
+        001f: if_icmpne +283 // 013a
+        0022: aload_1
+        0023: iconst_0
+        0024: invokevirtual #131 // char String.charAt(int)
+        0027: bipush 92
+        0029: if_icmpne +273 // 013a
+        002c: aload_1
+        002d: iconst_1
+        002e: invokevirtual #131 // char String.charAt(int)
+        0031: dup
+        0032: istore_3
+        0033: bipush 48
+        0035: isub
+        0036: bipush 57
+        0038: iload_3
+        0039: isub
+        003a: ior
+        003b: ifge +255 // 013a
+        003e: iload_3
+        003f: bipush 97
+        0041: isub
+        0042: bipush 122
+        0044: iload_3
+        0045: isub
+        0046: ior
+        0047: ifge +243 // 013a
+        004a: iload_3
+        004b: bipush 65
+        004d: isub
+        004e: bipush 90
+        0050: iload_3
+        0051: isub
+        0052: ior
+        0053: ifge +231 // 013a
+        0056: iload_3
+        0057: ldc #134 // 55296
+        0059: if_icmplt +9 // 0062
+        005c: iload_3
+        005d: ldc #135 // 57343
+        005f: if_icmple +219 // 013a
+        0062: iconst_0
+        0063: istore local_4
+        0065: iconst_0
+        0066: istore local_5
+        0068: iload_2
+        0069: ifle +7 // 0070
+        006c: iconst_1
+        006d: goto +4 // 0071
+        0070: iconst_0
+        0071: istore local_6
+        0073: new #136 // java.util.ArrayList
+        0076: dup
+        0077: invokespecial #137 // void java.util.ArrayList.<init>()
+        007a: astore local_7
+        007c: aload_0
+        007d: iload_3
+        007e: iload local_4
+        0080: invokevirtual #87 // int String.indexOf(int, int)
+        0083: dup
+        0084: istore local_5
+        0086: iconst_m1
+        0087: if_icmpeq +69 // 00cc
+        008a: iload local_6
+        008c: ifeq +14 // 009a
+        008f: aload local_7
+        0091: invokevirtual #138 // int java.util.ArrayList.size()
+        0094: iload_2
+        0095: iconst_1
+        0096: isub
+        0097: if_icmpge +26 // 00b1
+        009a: aload local_7
+        009c: aload_0
+        009d: iload local_4
+        009f: iload local_5
+        00a1: invokevirtual #107 // String String.substring(int, int)
+        00a4: invokevirtual #139 // boolean java.util.ArrayList.add(Object)
+        00a7: pop
+        00a8: iload local_5
+        00aa: iconst_1
+        00ab: iadd
+        00ac: istore local_4
+        00ae: goto -50 // 007c
+        00b1: aload_0
+        00b2: invokevirtual #38 // int String.length()
+        00b5: istore local_8
+        00b7: aload local_7
+        00b9: aload_0
+        00ba: iload local_4
+        00bc: iload local_8
+        00be: invokevirtual #107 // String String.substring(int, int)
+        00c1: invokevirtual #139 // boolean java.util.ArrayList.add(Object)
+        00c4: pop
+        00c5: iload local_8
+        00c7: istore local_4
+        00c9: goto +3 // 00cc
+        00cc: iload local_4
+        00ce: ifne +12 // 00da
+        00d1: iconst_1
+        00d2: anewarray #11 // String
+        00d5: dup
+        00d6: iconst_0
+        00d7: aload_0
+        00d8: aastore
+        00d9: areturn
+        00da: iload local_6
+        00dc: ifeq +12 // 00e8
+        00df: aload local_7
+        00e1: invokevirtual #138 // int java.util.ArrayList.size()
+        00e4: iload_2
+        00e5: if_icmpge +19 // 00f8
+        00e8: aload local_7
+        00ea: aload_0
+        00eb: iload local_4
+        00ed: aload_0
+        00ee: invokevirtual #38 // int String.length()
+        00f1: invokevirtual #107 // String String.substring(int, int)
+        00f4: invokevirtual #139 // boolean java.util.ArrayList.add(Object)
+        00f7: pop
+        00f8: aload local_7
+        00fa: invokevirtual #138 // int java.util.ArrayList.size()
+        00fd: istore local_8
+        00ff: iload_2
+        0100: ifne +32 // 0120
+        0103: iload local_8
+        0105: ifle +27 // 0120
+        0108: aload local_7
+        010a: iload local_8
+        010c: iconst_1
+        010d: isub
+        010e: invokevirtual #140 // Object java.util.ArrayList.get(int)
+        0111: checkcast #11 // String
+        0114: invokevirtual #38 // int String.length()
+        0117: ifne +9 // 0120
+        011a: iinc local_8, -1
+        011d: goto -26 // 0103
+        0120: iload local_8
+        0122: anewarray #11 // String
+        0125: astore local_9
+        0127: aload local_7
+        0129: iconst_0
+        012a: iload local_8
+        012c: invokevirtual #141 // java.util.List java.util.ArrayList.subList(int, int)
+        012f: aload local_9
+        0131: invokeinterface #142 // Object[] java.util.List.toArray(Object[])
+        0136: checkcast #143 // [Ljava.lang.String;
+        0139: areturn
+        013a: aload_1
+        013b: invokestatic #117 // java.util.regex.Pattern java.util.regex.Pattern.compile(String)
+        013e: aload_0
+        013f: iload_2
+        0140: invokevirtual #144 // String[] java.util.regex.Pattern.split(CharSequence, int)
+        0143: areturn
     }
     
     public String[] split(String) {
@@ -2251,7 +2032,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0000: aload_0
         0001: aload_1
         0002: iconst_0
-        0003: invokevirtual #101 // String[] String.split(String, int)
+        0003: invokevirtual #145 // String[] String.split(String, int)
         0006: areturn
     }
     
@@ -2259,15 +2040,15 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 3
         // max_locals: 7
         0000: aload_0
-        0001: invokestatic #38 // Object java.util.Objects.requireNonNull(Object)
+        0001: invokestatic #49 // Object java.util.Objects.requireNonNull(Object)
         0004: pop
         0005: aload_1
-        0006: invokestatic #38 // Object java.util.Objects.requireNonNull(Object)
+        0006: invokestatic #49 // Object java.util.Objects.requireNonNull(Object)
         0009: pop
-        000a: new #102 // java.util.StringJoiner
+        000a: new #146 // java.util.StringJoiner
         000d: dup
         000e: aload_0
-        000f: invokespecial #103 // void java.util.StringJoiner.<init>(CharSequence)
+        000f: invokespecial #147 // void java.util.StringJoiner.<init>(CharSequence)
         0012: astore_2
         0013: aload_1
         0014: astore_3
@@ -2285,12 +2066,12 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0027: astore local_6
         0029: aload_2
         002a: aload local_6
-        002c: invokevirtual #104 // java.util.StringJoiner java.util.StringJoiner.add(CharSequence)
+        002c: invokevirtual #148 // java.util.StringJoiner java.util.StringJoiner.add(CharSequence)
         002f: pop
         0030: iinc local_5, 1
         0033: goto -23 // 001c
         0036: aload_2
-        0037: invokevirtual #105 // String java.util.StringJoiner.toString()
+        0037: invokevirtual #149 // String java.util.StringJoiner.toString()
         003a: areturn
     }
     
@@ -2298,565 +2079,226 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 3
         // max_locals: 5
         0000: aload_0
-        0001: invokestatic #38 // Object java.util.Objects.requireNonNull(Object)
+        0001: invokestatic #49 // Object java.util.Objects.requireNonNull(Object)
         0004: pop
         0005: aload_1
-        0006: invokestatic #38 // Object java.util.Objects.requireNonNull(Object)
+        0006: invokestatic #49 // Object java.util.Objects.requireNonNull(Object)
         0009: pop
-        000a: new #102 // java.util.StringJoiner
+        000a: new #146 // java.util.StringJoiner
         000d: dup
         000e: aload_0
-        000f: invokespecial #103 // void java.util.StringJoiner.<init>(CharSequence)
+        000f: invokespecial #147 // void java.util.StringJoiner.<init>(CharSequence)
         0012: astore_2
         0013: aload_1
-        0014: invokeinterface #106 // java.util.Iterator Iterable.iterator()
+        0014: invokeinterface #150 // java.util.Iterator Iterable.iterator()
         0019: astore_3
         001a: aload_3
-        001b: invokeinterface #107 // boolean java.util.Iterator.hasNext()
+        001b: invokeinterface #151 // boolean java.util.Iterator.hasNext()
         0020: ifeq +24 // 0038
         0023: aload_3
-        0024: invokeinterface #108 // Object java.util.Iterator.next()
-        0029: checkcast #109 // CharSequence
+        0024: invokeinterface #152 // Object java.util.Iterator.next()
+        0029: checkcast #153 // CharSequence
         002c: astore local_4
         002e: aload_2
         002f: aload local_4
-        0031: invokevirtual #104 // java.util.StringJoiner java.util.StringJoiner.add(CharSequence)
+        0031: invokevirtual #148 // java.util.StringJoiner java.util.StringJoiner.add(CharSequence)
         0034: pop
         0035: goto -27 // 001a
         0038: aload_2
-        0039: invokevirtual #105 // String java.util.StringJoiner.toString()
+        0039: invokevirtual #149 // String java.util.StringJoiner.toString()
         003c: areturn
     }
     
     public String toLowerCase(java.util.Locale) {
-        // max_stack: 6
-        // max_locals: 15
-        0000: aload_1
-        0001: ifnonnull +11 // 000c
-        0004: new #17 // NullPointerException
-        0007: dup
-        0008: invokespecial #39 // void NullPointerException.<init>()
-        000b: athrow
-        000c: aload_0
-        000d: getfield #3 // char[] String.value
-        0010: arraylength
-        0011: istore_3
-        0012: iconst_0
-        0013: istore_2
-        0014: iload_2
-        0015: iload_3
-        0016: if_icmpge +75 // 0061
-        0019: aload_0
-        001a: getfield #3 // char[] String.value
-        001d: iload_2
-        001e: caload
-        001f: istore local_4
-        0021: iload local_4
-        0023: ldc #90 // 55296
-        0025: if_icmplt +41 // 004e
-        0028: iload local_4
-        002a: ldc #110 // 56319
-        002c: if_icmpgt +34 // 004e
-        002f: aload_0
-        0030: iload_2
-        0031: invokevirtual #111 // int String.codePointAt(int)
-        0034: istore local_5
-        0036: iload local_5
-        0038: iload local_5
-        003a: invokestatic #112 // int Character.toLowerCase(int)
-        003d: if_icmpeq +6 // 0043
-        0040: goto +35 // 0063
-        0043: iload_2
-        0044: iload local_5
-        0046: invokestatic #113 // int Character.charCount(int)
-        0049: iadd
-        004a: istore_2
-        004b: goto +19 // 005e
-        004e: iload local_4
-        0050: iload local_4
-        0052: invokestatic #58 // char Character.toLowerCase(char)
-        0055: if_icmpeq +6 // 005b
-        0058: goto +11 // 0063
-        005b: iinc local_2, 1
-        005e: goto -74 // 0014
-        0061: aload_0
-        0062: areturn
-        0063: iload_3
-        0064: newarray 5 // char[]
-        0066: astore local_4
-        0068: iconst_0
-        0069: istore local_5
-        006b: aload_0
-        006c: getfield #3 // char[] String.value
-        006f: iconst_0
-        0070: aload local_4
-        0072: iconst_0
-        0073: iload_2
-        0074: invokestatic #37 // void System.arraycopy(Object, int, Object, int, int)
-        0077: aload_1
-        0078: invokevirtual #114 // String java.util.Locale.getLanguage()
-        007b: astore local_6
-        007d: aload local_6
-        007f: ldc #115 // "tr"
-        0081: if_acmpeq +17 // 0092
-        0084: aload local_6
-        0086: ldc #116 // "az"
-        0088: if_acmpeq +10 // 0092
-        008b: aload local_6
-        008d: ldc #117 // "lt"
-        008f: if_acmpne +7 // 0096
-        0092: iconst_1
-        0093: goto +4 // 0097
-        0096: iconst_0
-        0097: istore local_7
-        0099: iload_2
-        009a: istore local_12
-        009c: iload local_12
-        009e: iload_3
-        009f: if_icmpge +265 // 01a8
-        00a2: aload_0
-        00a3: getfield #3 // char[] String.value
-        00a6: iload local_12
-        00a8: caload
-        00a9: istore local_10
-        00ab: iload local_10
-        00ad: i2c
-        00ae: ldc #90 // 55296
-        00b0: if_icmplt +29 // 00cd
-        00b3: iload local_10
-        00b5: i2c
-        00b6: ldc #110 // 56319
-        00b8: if_icmpgt +21 // 00cd
-        00bb: aload_0
-        00bc: iload local_12
-        00be: invokevirtual #111 // int String.codePointAt(int)
-        00c1: istore local_10
-        00c3: iload local_10
-        00c5: invokestatic #113 // int Character.charCount(int)
-        00c8: istore local_11
-        00ca: goto +6 // 00d0
-        00cd: iconst_1
-        00ce: istore local_11
-        00d0: iload local_7
-        00d2: ifne +19 // 00e5
-        00d5: iload local_10
-        00d7: sipush 931
-        00da: if_icmpeq +11 // 00e5
-        00dd: iload local_10
-        00df: sipush 304
-        00e2: if_icmpne +15 // 00f1
-        00e5: aload_0
-        00e6: iload local_12
-        00e8: aload_1
-        00e9: invokestatic #118 // int ConditionalSpecialCasing.toLowerCaseEx(String, int, java.util.Locale)
-        00ec: istore local_9
-        00ee: goto +10 // 00f8
-        00f1: iload local_10
-        00f3: invokestatic #112 // int Character.toLowerCase(int)
-        00f6: istore local_9
-        00f8: iload local_9
-        00fa: iconst_m1
-        00fb: if_icmpeq +10 // 0105
-        00fe: iload local_9
-        0100: ldc #62 // 65536
-        0102: if_icmplt +145 // 0193
-        0105: iload local_9
-        0107: iconst_m1
-        0108: if_icmpne +15 // 0117
-        010b: aload_0
-        010c: iload local_12
-        010e: aload_1
-        010f: invokestatic #119 // char[] ConditionalSpecialCasing.toLowerCaseCharArray(String, int, java.util.Locale)
-        0112: astore local_8
-        0114: goto +39 // 013b
-        0117: iload local_11
-        0119: iconst_2
-        011a: if_icmpne +26 // 0134
-        011d: iload local_5
-        011f: iload local_9
-        0121: aload local_4
-        0123: iload local_12
-        0125: iload local_5
-        0127: iadd
-        0128: invokestatic #120 // int Character.toChars(int, char[], int)
-        012b: iload local_11
-        012d: isub
-        012e: iadd
-        012f: istore local_5
-        0131: goto +109 // 019e
-        0134: iload local_9
-        0136: invokestatic #121 // char[] Character.toChars(int)
-        0139: astore local_8
-        013b: aload local_8
-        013d: arraylength
-        013e: istore local_13
-        0140: iload local_13
-        0142: iload local_11
-        0144: if_icmple +34 // 0166
-        0147: aload local_4
-        0149: arraylength
-        014a: iload local_13
-        014c: iadd
-        014d: iload local_11
-        014f: isub
-        0150: newarray 5 // char[]
-        0152: astore local_14
-        0154: aload local_4
-        0156: iconst_0
-        0157: aload local_14
-        0159: iconst_0
-        015a: iload local_12
-        015c: iload local_5
-        015e: iadd
-        015f: invokestatic #37 // void System.arraycopy(Object, int, Object, int, int)
-        0162: aload local_14
-        0164: astore local_4
-        0166: iconst_0
-        0167: istore local_14
-        0169: iload local_14
-        016b: iload local_13
-        016d: if_icmpge +25 // 0186
-        0170: aload local_4
-        0172: iload local_12
-        0174: iload local_5
-        0176: iadd
-        0177: iload local_14
-        0179: iadd
-        017a: aload local_8
-        017c: iload local_14
-        017e: caload
-        017f: castore
-        0180: iinc local_14, 1
-        0183: goto -26 // 0169
-        0186: iload local_5
-        0188: iload local_13
-        018a: iload local_11
-        018c: isub
-        018d: iadd
-        018e: istore local_5
-        0190: goto +14 // 019e
-        0193: aload local_4
-        0195: iload local_12
-        0197: iload local_5
-        0199: iadd
-        019a: iload local_9
-        019c: i2c
-        019d: castore
-        019e: iload local_12
-        01a0: iload local_11
-        01a2: iadd
-        01a3: istore local_12
-        01a5: goto -265 // 009c
-        01a8: new #43 // String
-        01ab: dup
-        01ac: aload local_4
-        01ae: iconst_0
-        01af: iload_3
-        01b0: iload local_5
-        01b2: iadd
-        01b3: invokespecial #72 // void String.<init>(char[], int, int)
-        01b6: areturn
+        // max_stack: 3
+        // max_locals: 2
+        0000: aload_0
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +15 // 0013
+        0007: aload_0
+        0008: aload_0
+        0009: getfield #3 // byte[] String.value
+        000c: aload_1
+        000d: invokestatic #154 // String StringLatin1.toLowerCase(String, byte[], java.util.Locale)
+        0010: goto +12 // 001c
+        0013: aload_0
+        0014: aload_0
+        0015: getfield #3 // byte[] String.value
+        0018: aload_1
+        0019: invokestatic #155 // String StringUTF16.toLowerCase(String, byte[], java.util.Locale)
+        001c: areturn
     }
     
     public String toLowerCase() {
         // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0001: invokestatic #122 // java.util.Locale java.util.Locale.getDefault()
-        0004: invokevirtual #123 // String String.toLowerCase(java.util.Locale)
+        0001: invokestatic #156 // java.util.Locale java.util.Locale.getDefault()
+        0004: invokevirtual #157 // String String.toLowerCase(java.util.Locale)
         0007: areturn
     }
     
     public String toUpperCase(java.util.Locale) {
-        // max_stack: 6
-        // max_locals: 15
-        0000: aload_1
-        0001: ifnonnull +11 // 000c
-        0004: new #17 // NullPointerException
-        0007: dup
-        0008: invokespecial #39 // void NullPointerException.<init>()
-        000b: athrow
-        000c: aload_0
-        000d: getfield #3 // char[] String.value
-        0010: arraylength
-        0011: istore_3
-        0012: iconst_0
-        0013: istore_2
-        0014: iload_2
-        0015: iload_3
-        0016: if_icmpge +76 // 0062
-        0019: aload_0
-        001a: getfield #3 // char[] String.value
-        001d: iload_2
-        001e: caload
-        001f: istore local_4
-        0021: iload local_4
-        0023: ldc #90 // 55296
-        0025: if_icmplt +27 // 0040
-        0028: iload local_4
-        002a: ldc #110 // 56319
-        002c: if_icmpgt +20 // 0040
-        002f: aload_0
-        0030: iload_2
-        0031: invokevirtual #111 // int String.codePointAt(int)
-        0034: istore local_4
-        0036: iload local_4
-        0038: invokestatic #113 // int Character.charCount(int)
-        003b: istore local_5
-        003d: goto +6 // 0043
-        0040: iconst_1
-        0041: istore local_5
-        0043: iload local_4
-        0045: invokestatic #124 // int Character.toUpperCaseEx(int)
-        0048: istore local_6
-        004a: iload local_6
-        004c: iconst_m1
-        004d: if_icmpeq +23 // 0064
-        0050: iload local_4
-        0052: iload local_6
-        0054: if_icmpeq +6 // 005a
-        0057: goto +13 // 0064
-        005a: iload_2
-        005b: iload local_5
-        005d: iadd
-        005e: istore_2
-        005f: goto -75 // 0014
-        0062: aload_0
-        0063: areturn
-        0064: iconst_0
-        0065: istore local_4
-        0067: iload_3
-        0068: newarray 5 // char[]
-        006a: astore local_5
-        006c: aload_0
-        006d: getfield #3 // char[] String.value
-        0070: iconst_0
-        0071: aload local_5
-        0073: iconst_0
-        0074: iload_2
-        0075: invokestatic #37 // void System.arraycopy(Object, int, Object, int, int)
-        0078: aload_1
-        0079: invokevirtual #114 // String java.util.Locale.getLanguage()
-        007c: astore local_6
-        007e: aload local_6
-        0080: ldc #115 // "tr"
-        0082: if_acmpeq +17 // 0093
-        0085: aload local_6
-        0087: ldc #116 // "az"
-        0089: if_acmpeq +10 // 0093
-        008c: aload local_6
-        008e: ldc #117 // "lt"
-        0090: if_acmpne +7 // 0097
-        0093: iconst_1
-        0094: goto +4 // 0098
-        0097: iconst_0
-        0098: istore local_7
-        009a: iload_2
-        009b: istore local_12
-        009d: iload local_12
-        009f: iload_3
-        00a0: if_icmpge +264 // 01a8
-        00a3: aload_0
-        00a4: getfield #3 // char[] String.value
-        00a7: iload local_12
-        00a9: caload
-        00aa: istore local_10
-        00ac: iload local_10
-        00ae: i2c
-        00af: ldc #90 // 55296
-        00b1: if_icmplt +29 // 00ce
-        00b4: iload local_10
-        00b6: i2c
-        00b7: ldc #110 // 56319
-        00b9: if_icmpgt +21 // 00ce
-        00bc: aload_0
-        00bd: iload local_12
-        00bf: invokevirtual #111 // int String.codePointAt(int)
-        00c2: istore local_10
-        00c4: iload local_10
-        00c6: invokestatic #113 // int Character.charCount(int)
-        00c9: istore local_11
-        00cb: goto +6 // 00d1
-        00ce: iconst_1
-        00cf: istore local_11
-        00d1: iload local_7
-        00d3: ifeq +15 // 00e2
-        00d6: aload_0
-        00d7: iload local_12
-        00d9: aload_1
-        00da: invokestatic #125 // int ConditionalSpecialCasing.toUpperCaseEx(String, int, java.util.Locale)
-        00dd: istore local_9
-        00df: goto +10 // 00e9
-        00e2: iload local_10
-        00e4: invokestatic #124 // int Character.toUpperCaseEx(int)
-        00e7: istore local_9
-        00e9: iload local_9
-        00eb: iconst_m1
-        00ec: if_icmpeq +10 // 00f6
-        00ef: iload local_9
-        00f1: ldc #62 // 65536
-        00f3: if_icmplt +160 // 0193
-        00f6: iload local_9
-        00f8: iconst_m1
-        00f9: if_icmpne +30 // 0117
-        00fc: iload local_7
-        00fe: ifeq +15 // 010d
-        0101: aload_0
-        0102: iload local_12
-        0104: aload_1
-        0105: invokestatic #126 // char[] ConditionalSpecialCasing.toUpperCaseCharArray(String, int, java.util.Locale)
-        0108: astore local_8
-        010a: goto +49 // 013b
-        010d: iload local_10
-        010f: invokestatic #127 // char[] Character.toUpperCaseCharArray(int)
-        0112: astore local_8
-        0114: goto +39 // 013b
-        0117: iload local_11
-        0119: iconst_2
-        011a: if_icmpne +26 // 0134
-        011d: iload local_4
-        011f: iload local_9
-        0121: aload local_5
-        0123: iload local_12
-        0125: iload local_4
-        0127: iadd
-        0128: invokestatic #120 // int Character.toChars(int, char[], int)
-        012b: iload local_11
-        012d: isub
-        012e: iadd
-        012f: istore local_4
-        0131: goto +109 // 019e
-        0134: iload local_9
-        0136: invokestatic #121 // char[] Character.toChars(int)
-        0139: astore local_8
-        013b: aload local_8
-        013d: arraylength
-        013e: istore local_13
-        0140: iload local_13
-        0142: iload local_11
-        0144: if_icmple +34 // 0166
-        0147: aload local_5
-        0149: arraylength
-        014a: iload local_13
-        014c: iadd
-        014d: iload local_11
-        014f: isub
-        0150: newarray 5 // char[]
-        0152: astore local_14
-        0154: aload local_5
-        0156: iconst_0
-        0157: aload local_14
-        0159: iconst_0
-        015a: iload local_12
-        015c: iload local_4
-        015e: iadd
-        015f: invokestatic #37 // void System.arraycopy(Object, int, Object, int, int)
-        0162: aload local_14
-        0164: astore local_5
-        0166: iconst_0
-        0167: istore local_14
-        0169: iload local_14
-        016b: iload local_13
-        016d: if_icmpge +25 // 0186
-        0170: aload local_5
-        0172: iload local_12
-        0174: iload local_4
-        0176: iadd
-        0177: iload local_14
-        0179: iadd
-        017a: aload local_8
-        017c: iload local_14
-        017e: caload
-        017f: castore
-        0180: iinc local_14, 1
-        0183: goto -26 // 0169
-        0186: iload local_4
-        0188: iload local_13
-        018a: iload local_11
-        018c: isub
-        018d: iadd
-        018e: istore local_4
-        0190: goto +14 // 019e
-        0193: aload local_5
-        0195: iload local_12
-        0197: iload local_4
-        0199: iadd
-        019a: iload local_9
-        019c: i2c
-        019d: castore
-        019e: iload local_12
-        01a0: iload local_11
-        01a2: iadd
-        01a3: istore local_12
-        01a5: goto -264 // 009d
-        01a8: new #43 // String
-        01ab: dup
-        01ac: aload local_5
-        01ae: iconst_0
-        01af: iload_3
-        01b0: iload local_4
-        01b2: iadd
-        01b3: invokespecial #72 // void String.<init>(char[], int, int)
-        01b6: areturn
+        // max_stack: 3
+        // max_locals: 2
+        0000: aload_0
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +15 // 0013
+        0007: aload_0
+        0008: aload_0
+        0009: getfield #3 // byte[] String.value
+        000c: aload_1
+        000d: invokestatic #158 // String StringLatin1.toUpperCase(String, byte[], java.util.Locale)
+        0010: goto +12 // 001c
+        0013: aload_0
+        0014: aload_0
+        0015: getfield #3 // byte[] String.value
+        0018: aload_1
+        0019: invokestatic #159 // String StringUTF16.toUpperCase(String, byte[], java.util.Locale)
+        001c: areturn
     }
     
     public String toUpperCase() {
         // max_stack: 2
         // max_locals: 1
         0000: aload_0
-        0001: invokestatic #122 // java.util.Locale java.util.Locale.getDefault()
-        0004: invokevirtual #128 // String String.toUpperCase(java.util.Locale)
+        0001: invokestatic #156 // java.util.Locale java.util.Locale.getDefault()
+        0004: invokevirtual #160 // String String.toUpperCase(java.util.Locale)
         0007: areturn
     }
     
     public String trim() {
-        // max_stack: 3
-        // max_locals: 4
+        // max_stack: 1
+        // max_locals: 2
         0000: aload_0
-        0001: getfield #3 // char[] String.value
-        0004: arraylength
-        0005: istore_1
-        0006: iconst_0
-        0007: istore_2
-        0008: aload_0
-        0009: getfield #3 // char[] String.value
-        000c: astore_3
-        000d: iload_2
-        000e: iload_1
-        000f: if_icmpge +17 // 0020
-        0012: aload_3
-        0013: iload_2
-        0014: caload
-        0015: bipush 32
-        0017: if_icmpgt +9 // 0020
-        001a: iinc local_2, 1
-        001d: goto -16 // 000d
-        0020: iload_2
-        0021: iload_1
-        0022: if_icmpge +19 // 0035
-        0025: aload_3
-        0026: iload_1
-        0027: iconst_1
-        0028: isub
-        0029: caload
-        002a: bipush 32
-        002c: if_icmpgt +9 // 0035
-        002f: iinc local_1, -1
-        0032: goto -18 // 0020
-        0035: iload_2
-        0036: ifgt +12 // 0042
-        0039: iload_1
-        003a: aload_0
-        003b: getfield #3 // char[] String.value
-        003e: arraylength
-        003f: if_icmpge +12 // 004b
-        0042: aload_0
-        0043: iload_2
-        0044: iload_1
-        0045: invokevirtual #73 // String String.substring(int, int)
-        0048: goto +4 // 004c
-        004b: aload_0
-        004c: areturn
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +13 // 0011
+        0007: aload_0
+        0008: getfield #3 // byte[] String.value
+        000b: invokestatic #161 // String StringLatin1.trim(byte[])
+        000e: goto +10 // 0018
+        0011: aload_0
+        0012: getfield #3 // byte[] String.value
+        0015: invokestatic #162 // String StringUTF16.trim(byte[])
+        0018: astore_1
+        0019: aload_1
+        001a: ifnonnull +7 // 0021
+        001d: aload_0
+        001e: goto +4 // 0022
+        0021: aload_1
+        0022: areturn
+    }
+    
+    public String strip() {
+        // max_stack: 1
+        // max_locals: 2
+        0000: aload_0
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +13 // 0011
+        0007: aload_0
+        0008: getfield #3 // byte[] String.value
+        000b: invokestatic #163 // String StringLatin1.strip(byte[])
+        000e: goto +10 // 0018
+        0011: aload_0
+        0012: getfield #3 // byte[] String.value
+        0015: invokestatic #164 // String StringUTF16.strip(byte[])
+        0018: astore_1
+        0019: aload_1
+        001a: ifnonnull +7 // 0021
+        001d: aload_0
+        001e: goto +4 // 0022
+        0021: aload_1
+        0022: areturn
+    }
+    
+    public String stripLeading() {
+        // max_stack: 1
+        // max_locals: 2
+        0000: aload_0
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +13 // 0011
+        0007: aload_0
+        0008: getfield #3 // byte[] String.value
+        000b: invokestatic #165 // String StringLatin1.stripLeading(byte[])
+        000e: goto +10 // 0018
+        0011: aload_0
+        0012: getfield #3 // byte[] String.value
+        0015: invokestatic #166 // String StringUTF16.stripLeading(byte[])
+        0018: astore_1
+        0019: aload_1
+        001a: ifnonnull +7 // 0021
+        001d: aload_0
+        001e: goto +4 // 0022
+        0021: aload_1
+        0022: areturn
+    }
+    
+    public String stripTrailing() {
+        // max_stack: 1
+        // max_locals: 2
+        0000: aload_0
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +13 // 0011
+        0007: aload_0
+        0008: getfield #3 // byte[] String.value
+        000b: invokestatic #167 // String StringLatin1.stripTrailing(byte[])
+        000e: goto +10 // 0018
+        0011: aload_0
+        0012: getfield #3 // byte[] String.value
+        0015: invokestatic #168 // String StringUTF16.stripTrailing(byte[])
+        0018: astore_1
+        0019: aload_1
+        001a: ifnonnull +7 // 0021
+        001d: aload_0
+        001e: goto +4 // 0022
+        0021: aload_1
+        0022: areturn
+    }
+    
+    public boolean isBlank() {
+        // max_stack: 2
+        // max_locals: 1
+        0000: aload_0
+        0001: invokevirtual #169 // int String.indexOfNonWhitespace()
+        0004: aload_0
+        0005: invokevirtual #38 // int String.length()
+        0008: if_icmpne +7 // 000f
+        000b: iconst_1
+        000c: goto +4 // 0010
+        000f: iconst_0
+        0010: ireturn
+    }
+    
+    private int indexOfNonWhitespace() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +11 // 000f
+        0007: aload_0
+        0008: getfield #3 // byte[] String.value
+        000b: invokestatic #170 // int StringLatin1.indexOfNonWhitespace(byte[])
+        000e: ireturn
+        000f: aload_0
+        0010: getfield #3 // byte[] String.value
+        0013: invokestatic #171 // int StringUTF16.indexOfNonWhitespace(byte[])
+        0016: ireturn
+    }
+    
+    public java.util.stream.Stream<String> lines() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +13 // 0011
+        0007: aload_0
+        0008: getfield #3 // byte[] String.value
+        000b: invokestatic #172 // java.util.stream.Stream StringLatin1.lines(byte[])
+        000e: goto +10 // 0018
+        0011: aload_0
+        0012: getfield #3 // byte[] String.value
+        0015: invokestatic #173 // java.util.stream.Stream StringUTF16.lines(byte[])
+        0018: areturn
     }
     
     public String toString() {
@@ -2866,51 +2308,94 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         0001: areturn
     }
     
-    public char[] toCharArray() {
-        // max_stack: 5
-        // max_locals: 2
+    public java.util.stream.IntStream chars() {
+        // max_stack: 4
+        // max_locals: 1
         0000: aload_0
-        0001: getfield #3 // char[] String.value
-        0004: arraylength
-        0005: newarray 5 // char[]
-        0007: astore_1
-        0008: aload_0
-        0009: getfield #3 // char[] String.value
-        000c: iconst_0
-        000d: aload_1
-        000e: iconst_0
-        000f: aload_0
-        0010: getfield #3 // char[] String.value
-        0013: arraylength
-        0014: invokestatic #37 // void System.arraycopy(Object, int, Object, int, int)
-        0017: aload_1
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +20 // 0018
+        0007: new #174 // StringLatin1$CharsSpliterator
+        000a: dup
+        000b: aload_0
+        000c: getfield #3 // byte[] String.value
+        000f: sipush 1024
+        0012: invokespecial #176 // void StringLatin1$CharsSpliterator.<init>(byte[], int)
+        0015: goto +17 // 0026
+        0018: new #177 // StringUTF16$CharsSpliterator
+        001b: dup
+        001c: aload_0
+        001d: getfield #3 // byte[] String.value
+        0020: sipush 1024
+        0023: invokespecial #178 // void StringUTF16$CharsSpliterator.<init>(byte[], int)
+        0026: iconst_0
+        0027: invokestatic #179 // java.util.stream.IntStream java.util.stream.StreamSupport.intStream(java.util.Spliterator$OfInt, boolean)
+        002a: areturn
+    }
+    
+    public java.util.stream.IntStream codePoints() {
+        // max_stack: 4
+        // max_locals: 1
+        0000: aload_0
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +20 // 0018
+        0007: new #174 // StringLatin1$CharsSpliterator
+        000a: dup
+        000b: aload_0
+        000c: getfield #3 // byte[] String.value
+        000f: sipush 1024
+        0012: invokespecial #176 // void StringLatin1$CharsSpliterator.<init>(byte[], int)
+        0015: goto +17 // 0026
+        0018: new #180 // StringUTF16$CodePointsSpliterator
+        001b: dup
+        001c: aload_0
+        001d: getfield #3 // byte[] String.value
+        0020: sipush 1024
+        0023: invokespecial #181 // void StringUTF16$CodePointsSpliterator.<init>(byte[], int)
+        0026: iconst_0
+        0027: invokestatic #179 // java.util.stream.IntStream java.util.stream.StreamSupport.intStream(java.util.Spliterator$OfInt, boolean)
+        002a: areturn
+    }
+    
+    public char[] toCharArray() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0001: invokevirtual #33 // boolean String.isLatin1()
+        0004: ifeq +13 // 0011
+        0007: aload_0
+        0008: getfield #3 // byte[] String.value
+        000b: invokestatic #182 // char[] StringLatin1.toChars(byte[])
+        000e: goto +10 // 0018
+        0011: aload_0
+        0012: getfield #3 // byte[] String.value
+        0015: invokestatic #183 // char[] StringUTF16.toChars(byte[])
         0018: areturn
     }
     
     public static /* varargs */ String format(String, Object[]) {
         // max_stack: 3
         // max_locals: 2
-        0000: new #129 // java.util.Formatter
+        0000: new #184 // java.util.Formatter
         0003: dup
-        0004: invokespecial #130 // void java.util.Formatter.<init>()
+        0004: invokespecial #185 // void java.util.Formatter.<init>()
         0007: aload_0
         0008: aload_1
-        0009: invokevirtual #131 // java.util.Formatter java.util.Formatter.format(String, Object[])
-        000c: invokevirtual #132 // String java.util.Formatter.toString()
+        0009: invokevirtual #186 // java.util.Formatter java.util.Formatter.format(String, Object[])
+        000c: invokevirtual #187 // String java.util.Formatter.toString()
         000f: areturn
     }
     
     public static /* varargs */ String format(java.util.Locale, String, Object[]) {
         // max_stack: 3
         // max_locals: 3
-        0000: new #129 // java.util.Formatter
+        0000: new #184 // java.util.Formatter
         0003: dup
         0004: aload_0
-        0005: invokespecial #133 // void java.util.Formatter.<init>(java.util.Locale)
+        0005: invokespecial #188 // void java.util.Formatter.<init>(java.util.Locale)
         0008: aload_1
         0009: aload_2
-        000a: invokevirtual #131 // java.util.Formatter java.util.Formatter.format(String, Object[])
-        000d: invokevirtual #132 // String java.util.Formatter.toString()
+        000a: invokevirtual #186 // java.util.Formatter java.util.Formatter.format(String, Object[])
+        000d: invokevirtual #187 // String java.util.Formatter.toString()
         0010: areturn
     }
     
@@ -2919,54 +2404,54 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 1
         0000: aload_0
         0001: ifnonnull +8 // 0009
-        0004: ldc #134 // "null"
+        0004: ldc #189 // "null"
         0006: goto +7 // 000d
         0009: aload_0
-        000a: invokevirtual #135 // String Object.toString()
+        000a: invokevirtual #190 // String Object.toString()
         000d: areturn
     }
     
     public static String valueOf(char[]) {
         // max_stack: 3
         // max_locals: 1
-        0000: new #43 // String
+        0000: new #11 // String
         0003: dup
         0004: aload_0
-        0005: invokespecial #136 // void String.<init>(char[])
+        0005: invokespecial #191 // void String.<init>(char[])
         0008: areturn
     }
     
     public static String valueOf(char[], int, int) {
         // max_stack: 5
         // max_locals: 3
-        0000: new #43 // String
+        0000: new #11 // String
         0003: dup
         0004: aload_0
         0005: iload_1
         0006: iload_2
-        0007: invokespecial #72 // void String.<init>(char[], int, int)
+        0007: invokespecial #192 // void String.<init>(char[], int, int)
         000a: areturn
     }
     
     public static String copyValueOf(char[], int, int) {
         // max_stack: 5
         // max_locals: 3
-        0000: new #43 // String
+        0000: new #11 // String
         0003: dup
         0004: aload_0
         0005: iload_1
         0006: iload_2
-        0007: invokespecial #72 // void String.<init>(char[], int, int)
+        0007: invokespecial #192 // void String.<init>(char[], int, int)
         000a: areturn
     }
     
     public static String copyValueOf(char[]) {
         // max_stack: 3
         // max_locals: 1
-        0000: new #43 // String
+        0000: new #11 // String
         0003: dup
         0004: aload_0
-        0005: invokespecial #136 // void String.<init>(char[])
+        0005: invokespecial #191 // void String.<init>(char[])
         0008: areturn
     }
     
@@ -2975,35 +2460,41 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_locals: 1
         0000: iload_0
         0001: ifeq +8 // 0009
-        0004: ldc #137 // "true"
+        0004: ldc #193 // "true"
         0006: goto +5 // 000b
-        0009: ldc #138 // "false"
+        0009: ldc #194 // "false"
         000b: areturn
     }
     
     public static String valueOf(char) {
         // max_stack: 4
-        // max_locals: 2
-        0000: iconst_1
-        0001: newarray 5 // char[]
-        0003: dup
-        0004: iconst_0
-        0005: iload_0
-        0006: castore
-        0007: astore_1
-        0008: new #43 // String
-        000b: dup
-        000c: aload_1
-        000d: iconst_1
-        000e: invokespecial #76 // void String.<init>(char[], boolean)
-        0011: areturn
+        // max_locals: 1
+        0000: getstatic #9 // boolean String.COMPACT_STRINGS
+        0003: ifeq +23 // 001a
+        0006: iload_0
+        0007: invokestatic #195 // boolean StringLatin1.canEncode(int)
+        000a: ifeq +16 // 001a
+        000d: new #11 // String
+        0010: dup
+        0011: iload_0
+        0012: invokestatic #196 // byte[] StringLatin1.toBytes(char)
+        0015: iconst_0
+        0016: invokespecial #110 // void String.<init>(byte[], byte)
+        0019: areturn
+        001a: new #11 // String
+        001d: dup
+        001e: iload_0
+        001f: invokestatic #197 // byte[] StringUTF16.toBytes(char)
+        0022: iconst_1
+        0023: invokespecial #110 // void String.<init>(byte[], byte)
+        0026: areturn
     }
     
     public static String valueOf(int) {
         // max_stack: 1
         // max_locals: 1
         0000: iload_0
-        0001: invokestatic #12 // String Integer.toString(int)
+        0001: invokestatic #198 // String Integer.toString(int)
         0004: areturn
     }
     
@@ -3011,7 +2502,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 2
         // max_locals: 2
         0000: lload_0
-        0001: invokestatic #139 // String Long.toString(long)
+        0001: invokestatic #199 // String Long.toString(long)
         0004: areturn
     }
     
@@ -3019,7 +2510,7 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 1
         // max_locals: 1
         0000: fload_0
-        0001: invokestatic #140 // String Float.toString(float)
+        0001: invokestatic #200 // String Float.toString(float)
         0004: areturn
     }
     
@@ -3027,34 +2518,510 @@ public final /* super */ class String implements java.io.Serializable, Comparabl
         // max_stack: 2
         // max_locals: 2
         0000: dload_0
-        0001: invokestatic #141 // String Double.toString(double)
+        0001: invokestatic #201 // String Double.toString(double)
         0004: areturn
     }
     
     public native String intern();
+    
+    public String repeat(int) {
+        // max_stack: 6
+        // max_locals: 6
+        0000: iload_1
+        0001: ifge +30 // 001f
+        0004: new #202 // IllegalArgumentException
+        0007: dup
+        0008: new #124 // StringBuilder
+        000b: dup
+        000c: invokespecial #203 // void StringBuilder.<init>()
+        000f: ldc #204 // "count is negative: "
+        0011: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        0014: iload_1
+        0015: invokevirtual #205 // StringBuilder StringBuilder.append(int)
+        0018: invokevirtual #129 // String StringBuilder.toString()
+        001b: invokespecial #206 // void IllegalArgumentException.<init>(String)
+        001e: athrow
+        001f: iload_1
+        0020: iconst_1
+        0021: if_icmpne +5 // 0026
+        0024: aload_0
+        0025: areturn
+        0026: aload_0
+        0027: getfield #3 // byte[] String.value
+        002a: arraylength
+        002b: istore_2
+        002c: iload_2
+        002d: ifeq +7 // 0034
+        0030: iload_1
+        0031: ifne +6 // 0037
+        0034: ldc #2 // ""
+        0036: areturn
+        0037: iload_2
+        0038: iconst_1
+        0039: if_icmpne +30 // 0057
+        003c: iload_1
+        003d: newarray 8 // byte[]
+        003f: astore_3
+        0040: aload_3
+        0041: aload_0
+        0042: getfield #3 // byte[] String.value
+        0045: iconst_0
+        0046: baload
+        0047: invokestatic #207 // void java.util.Arrays.fill(byte[], byte)
+        004a: new #11 // String
+        004d: dup
+        004e: aload_3
+        004f: aload_0
+        0050: getfield #4 // byte String.coder
+        0053: invokespecial #110 // void String.<init>(byte[], byte)
+        0056: areturn
+        0057: ldc #209 // 2147483647
+        0059: iload_1
+        005a: idiv
+        005b: iload_2
+        005c: if_icmpge +44 // 0088
+        005f: new #122 // OutOfMemoryError
+        0062: dup
+        0063: new #124 // StringBuilder
+        0066: dup
+        0067: invokespecial #203 // void StringBuilder.<init>()
+        006a: ldc #210 // "Repeating "
+        006c: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        006f: iload_2
+        0070: invokevirtual #205 // StringBuilder StringBuilder.append(int)
+        0073: ldc #211 // " bytes String "
+        0075: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        0078: iload_1
+        0079: invokevirtual #205 // StringBuilder StringBuilder.append(int)
+        007c: ldc #212 // " times will produce a String exceeding maximum size."
+        007e: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        0081: invokevirtual #129 // String StringBuilder.toString()
+        0084: invokespecial #213 // void OutOfMemoryError.<init>(String)
+        0087: athrow
+        0088: iload_2
+        0089: iload_1
+        008a: imul
+        008b: istore_3
+        008c: iload_3
+        008d: newarray 8 // byte[]
+        008f: astore local_4
+        0091: aload_0
+        0092: getfield #3 // byte[] String.value
+        0095: iconst_0
+        0096: aload local_4
+        0098: iconst_0
+        0099: iload_2
+        009a: invokestatic #109 // void System.arraycopy(Object, int, Object, int, int)
+        009d: iload_2
+        009e: istore local_5
+        00a0: iload local_5
+        00a2: iload_3
+        00a3: iload local_5
+        00a5: isub
+        00a6: if_icmpge +24 // 00be
+        00a9: aload local_4
+        00ab: iconst_0
+        00ac: aload local_4
+        00ae: iload local_5
+        00b0: iload local_5
+        00b2: invokestatic #109 // void System.arraycopy(Object, int, Object, int, int)
+        00b5: iload local_5
+        00b7: iconst_1
+        00b8: ishl
+        00b9: istore local_5
+        00bb: goto -27 // 00a0
+        00be: aload local_4
+        00c0: iconst_0
+        00c1: aload local_4
+        00c3: iload local_5
+        00c5: iload_3
+        00c6: iload local_5
+        00c8: isub
+        00c9: invokestatic #109 // void System.arraycopy(Object, int, Object, int, int)
+        00cc: new #11 // String
+        00cf: dup
+        00d0: aload local_4
+        00d2: aload_0
+        00d3: getfield #4 // byte String.coder
+        00d6: invokespecial #110 // void String.<init>(byte[], byte)
+        00d9: areturn
+    }
+    
+    void getBytes(byte[], int, byte) {
+        // max_stack: 5
+        // max_locals: 4
+        0000: aload_0
+        0001: invokevirtual #32 // byte String.coder()
+        0004: iload_3
+        0005: if_icmpne +23 // 001c
+        0008: aload_0
+        0009: getfield #3 // byte[] String.value
+        000c: iconst_0
+        000d: aload_1
+        000e: iload_2
+        000f: iload_3
+        0010: ishl
+        0011: aload_0
+        0012: getfield #3 // byte[] String.value
+        0015: arraylength
+        0016: invokestatic #109 // void System.arraycopy(Object, int, Object, int, int)
+        0019: goto +18 // 002b
+        001c: aload_0
+        001d: getfield #3 // byte[] String.value
+        0020: iconst_0
+        0021: aload_1
+        0022: iload_2
+        0023: aload_0
+        0024: getfield #3 // byte[] String.value
+        0027: arraylength
+        0028: invokestatic #214 // void StringLatin1.inflate(byte[], int, byte[], int, int)
+        002b: return
+    }
+    
+    void <init>(char[], int, int, Void) {
+        // max_stack: 4
+        // max_locals: 6
+        0000: aload_0
+        0001: invokespecial #1 // void Object.<init>()
+        0004: iload_3
+        0005: ifne +22 // 001b
+        0008: aload_0
+        0009: ldc #2 // ""
+        000b: getfield #3 // byte[] String.value
+        000e: putfield #3 // byte[] String.value
+        0011: aload_0
+        0012: ldc #2 // ""
+        0014: getfield #4 // byte String.coder
+        0017: putfield #4 // byte String.coder
+        001a: return
+        001b: getstatic #9 // boolean String.COMPACT_STRINGS
+        001e: ifeq +28 // 003a
+        0021: aload_1
+        0022: iload_2
+        0023: iload_3
+        0024: invokestatic #215 // byte[] StringUTF16.compress(char[], int, int)
+        0027: astore local_5
+        0029: aload local_5
+        002b: ifnull +15 // 003a
+        002e: aload_0
+        002f: aload local_5
+        0031: putfield #3 // byte[] String.value
+        0034: aload_0
+        0035: iconst_0
+        0036: putfield #4 // byte String.coder
+        0039: return
+        003a: aload_0
+        003b: iconst_1
+        003c: putfield #4 // byte String.coder
+        003f: aload_0
+        0040: aload_1
+        0041: iload_2
+        0042: iload_3
+        0043: invokestatic #216 // byte[] StringUTF16.toBytes(char[], int, int)
+        0046: putfield #3 // byte[] String.value
+        0049: return
+    }
+    
+    void <init>(AbstractStringBuilder, Void) {
+        // max_stack: 5
+        // max_locals: 6
+        0000: aload_0
+        0001: invokespecial #1 // void Object.<init>()
+        0004: aload_1
+        0005: invokevirtual #60 // byte[] AbstractStringBuilder.getValue()
+        0008: astore_3
+        0009: aload_1
+        000a: invokevirtual #59 // int AbstractStringBuilder.length()
+        000d: istore local_4
+        000f: aload_1
+        0010: invokevirtual #217 // boolean AbstractStringBuilder.isLatin1()
+        0013: ifeq +22 // 0029
+        0016: aload_0
+        0017: iconst_0
+        0018: putfield #4 // byte String.coder
+        001b: aload_0
+        001c: aload_3
+        001d: iconst_0
+        001e: iload local_4
+        0020: invokestatic #13 // byte[] java.util.Arrays.copyOfRange(byte[], int, int)
+        0023: putfield #3 // byte[] String.value
+        0026: goto +53 // 005b
+        0029: getstatic #9 // boolean String.COMPACT_STRINGS
+        002c: ifeq +29 // 0049
+        002f: aload_3
+        0030: iconst_0
+        0031: iload local_4
+        0033: invokestatic #218 // byte[] StringUTF16.compress(byte[], int, int)
+        0036: astore local_5
+        0038: aload local_5
+        003a: ifnull +15 // 0049
+        003d: aload_0
+        003e: iconst_0
+        003f: putfield #4 // byte String.coder
+        0042: aload_0
+        0043: aload local_5
+        0045: putfield #3 // byte[] String.value
+        0048: return
+        0049: aload_0
+        004a: iconst_1
+        004b: putfield #4 // byte String.coder
+        004e: aload_0
+        004f: aload_3
+        0050: iconst_0
+        0051: iload local_4
+        0053: iconst_1
+        0054: ishl
+        0055: invokestatic #13 // byte[] java.util.Arrays.copyOfRange(byte[], int, int)
+        0058: putfield #3 // byte[] String.value
+        005b: return
+    }
+    
+    void <init>(byte[], byte) {
+        // max_stack: 2
+        // max_locals: 3
+        0000: aload_0
+        0001: invokespecial #1 // void Object.<init>()
+        0004: aload_0
+        0005: aload_1
+        0006: putfield #3 // byte[] String.value
+        0009: aload_0
+        000a: iload_2
+        000b: putfield #4 // byte String.coder
+        000e: return
+    }
+    
+    byte coder() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: getstatic #9 // boolean String.COMPACT_STRINGS
+        0003: ifeq +10 // 000d
+        0006: aload_0
+        0007: getfield #4 // byte String.coder
+        000a: goto +4 // 000e
+        000d: iconst_1
+        000e: ireturn
+    }
+    
+    byte[] value() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0001: getfield #3 // byte[] String.value
+        0004: areturn
+    }
+    
+    private boolean isLatin1() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: getstatic #9 // boolean String.COMPACT_STRINGS
+        0003: ifeq +14 // 0011
+        0006: aload_0
+        0007: getfield #4 // byte String.coder
+        000a: ifne +7 // 0011
+        000d: iconst_1
+        000e: goto +4 // 0012
+        0011: iconst_0
+        0012: ireturn
+    }
+    
+    static void checkIndex(int, int) {
+        // max_stack: 4
+        // max_locals: 2
+        0000: iload_0
+        0001: iflt +8 // 0009
+        0004: iload_0
+        0005: iload_1
+        0006: if_icmplt +39 // 002d
+        0009: new #39 // StringIndexOutOfBoundsException
+        000c: dup
+        000d: new #124 // StringBuilder
+        0010: dup
+        0011: invokespecial #203 // void StringBuilder.<init>()
+        0014: ldc #219 // "index "
+        0016: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        0019: iload_0
+        001a: invokevirtual #205 // StringBuilder StringBuilder.append(int)
+        001d: ldc #220 // ",length "
+        001f: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        0022: iload_1
+        0023: invokevirtual #205 // StringBuilder StringBuilder.append(int)
+        0026: invokevirtual #129 // String StringBuilder.toString()
+        0029: invokespecial #221 // void StringIndexOutOfBoundsException.<init>(String)
+        002c: athrow
+        002d: return
+    }
+    
+    static void checkOffset(int, int) {
+        // max_stack: 4
+        // max_locals: 2
+        0000: iload_0
+        0001: iflt +8 // 0009
+        0004: iload_0
+        0005: iload_1
+        0006: if_icmple +39 // 002d
+        0009: new #39 // StringIndexOutOfBoundsException
+        000c: dup
+        000d: new #124 // StringBuilder
+        0010: dup
+        0011: invokespecial #203 // void StringBuilder.<init>()
+        0014: ldc #222 // "offset "
+        0016: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        0019: iload_0
+        001a: invokevirtual #205 // StringBuilder StringBuilder.append(int)
+        001d: ldc #220 // ",length "
+        001f: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        0022: iload_1
+        0023: invokevirtual #205 // StringBuilder StringBuilder.append(int)
+        0026: invokevirtual #129 // String StringBuilder.toString()
+        0029: invokespecial #221 // void StringIndexOutOfBoundsException.<init>(String)
+        002c: athrow
+        002d: return
+    }
+    
+    static void checkBoundsOffCount(int, int, int) {
+        // max_stack: 4
+        // max_locals: 3
+        0000: iload_0
+        0001: iflt +14 // 000f
+        0004: iload_1
+        0005: iflt +10 // 000f
+        0008: iload_0
+        0009: iload_2
+        000a: iload_1
+        000b: isub
+        000c: if_icmple +48 // 003c
+        000f: new #39 // StringIndexOutOfBoundsException
+        0012: dup
+        0013: new #124 // StringBuilder
+        0016: dup
+        0017: invokespecial #203 // void StringBuilder.<init>()
+        001a: ldc #222 // "offset "
+        001c: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        001f: iload_0
+        0020: invokevirtual #205 // StringBuilder StringBuilder.append(int)
+        0023: ldc #223 // ", count "
+        0025: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        0028: iload_1
+        0029: invokevirtual #205 // StringBuilder StringBuilder.append(int)
+        002c: ldc #224 // ", length "
+        002e: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        0031: iload_2
+        0032: invokevirtual #205 // StringBuilder StringBuilder.append(int)
+        0035: invokevirtual #129 // String StringBuilder.toString()
+        0038: invokespecial #221 // void StringIndexOutOfBoundsException.<init>(String)
+        003b: athrow
+        003c: return
+    }
+    
+    static void checkBoundsBeginEnd(int, int, int) {
+        // max_stack: 4
+        // max_locals: 3
+        0000: iload_0
+        0001: iflt +13 // 000e
+        0004: iload_0
+        0005: iload_1
+        0006: if_icmpgt +8 // 000e
+        0009: iload_1
+        000a: iload_2
+        000b: if_icmple +48 // 003b
+        000e: new #39 // StringIndexOutOfBoundsException
+        0011: dup
+        0012: new #124 // StringBuilder
+        0015: dup
+        0016: invokespecial #203 // void StringBuilder.<init>()
+        0019: ldc #225 // "begin "
+        001b: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        001e: iload_0
+        001f: invokevirtual #205 // StringBuilder StringBuilder.append(int)
+        0022: ldc #226 // ", end "
+        0024: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        0027: iload_1
+        0028: invokevirtual #205 // StringBuilder StringBuilder.append(int)
+        002b: ldc #224 // ", length "
+        002d: invokevirtual #127 // StringBuilder StringBuilder.append(String)
+        0030: iload_2
+        0031: invokevirtual #205 // StringBuilder StringBuilder.append(int)
+        0034: invokevirtual #129 // String StringBuilder.toString()
+        0037: invokespecial #221 // void StringIndexOutOfBoundsException.<init>(String)
+        003a: athrow
+        003b: return
+    }
+    
+    static String valueOfCodePoint(int) {
+        // max_stack: 7
+        // max_locals: 1
+        0000: getstatic #9 // boolean String.COMPACT_STRINGS
+        0003: ifeq +24 // 001b
+        0006: iload_0
+        0007: invokestatic #195 // boolean StringLatin1.canEncode(int)
+        000a: ifeq +17 // 001b
+        000d: new #11 // String
+        0010: dup
+        0011: iload_0
+        0012: i2c
+        0013: invokestatic #196 // byte[] StringLatin1.toBytes(char)
+        0016: iconst_0
+        0017: invokespecial #110 // void String.<init>(byte[], byte)
+        001a: areturn
+        001b: iload_0
+        001c: invokestatic #227 // boolean Character.isBmpCodePoint(int)
+        001f: ifeq +17 // 0030
+        0022: new #11 // String
+        0025: dup
+        0026: iload_0
+        0027: i2c
+        0028: invokestatic #197 // byte[] StringUTF16.toBytes(char)
+        002b: iconst_1
+        002c: invokespecial #110 // void String.<init>(byte[], byte)
+        002f: areturn
+        0030: iload_0
+        0031: invokestatic #228 // boolean Character.isSupplementaryCodePoint(int)
+        0034: ifeq +16 // 0044
+        0037: new #11 // String
+        003a: dup
+        003b: iload_0
+        003c: invokestatic #229 // byte[] StringUTF16.toBytesSupplementary(int)
+        003f: iconst_1
+        0040: invokespecial #110 // void String.<init>(byte[], byte)
+        0043: areturn
+        0044: new #202 // IllegalArgumentException
+        0047: dup
+        0048: ldc #230 // "Not a valid Unicode code point: 0x%X"
+        004a: iconst_1
+        004b: anewarray #231 // Object
+        004e: dup
+        004f: iconst_0
+        0050: iload_0
+        0051: invokestatic #232 // Integer Integer.valueOf(int)
+        0054: aastore
+        0055: invokestatic #233 // String String.format(String, Object[])
+        0058: invokespecial #206 // void IllegalArgumentException.<init>(String)
+        005b: athrow
+    }
     
     public /* bridge|synthetic */ int compareTo(Object) {
         // max_stack: 2
         // max_locals: 2
         0000: aload_0
         0001: aload_1
-        0002: checkcast #43 // String
-        0005: invokevirtual #142 // int String.compareTo(String)
+        0002: checkcast #11 // String
+        0005: invokevirtual #234 // int String.compareTo(String)
         0008: ireturn
     }
     
     static void <clinit>() {
-        // max_stack: 3
+        // max_stack: 2
         // max_locals: 0
-        0000: iconst_0
-        0001: anewarray #143 // java.io.ObjectStreamField
-        0004: putstatic #144 // java.io.ObjectStreamField[] String.serialPersistentFields
-        0007: new #145 // String$CaseInsensitiveComparator
-        000a: dup
-        000b: aconst_null
-        000c: invokespecial #146 // void String$CaseInsensitiveComparator.<init>(String$1)
-        000f: putstatic #55 // java.util.Comparator String.CASE_INSENSITIVE_ORDER
-        0012: return
+        0000: iconst_1
+        0001: putstatic #9 // boolean String.COMPACT_STRINGS
+        0004: iconst_0
+        0005: anewarray #235 // java.io.ObjectStreamField
+        0008: putstatic #236 // java.io.ObjectStreamField[] String.serialPersistentFields
+        000b: new #237 // String$CaseInsensitiveComparator
+        000e: dup
+        000f: invokespecial #238 // void String$CaseInsensitiveComparator.<init>()
+        0012: putstatic #75 // java.util.Comparator String.CASE_INSENSITIVE_ORDER
+        0015: return
     }
 
 }

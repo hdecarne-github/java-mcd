@@ -1,5 +1,5 @@
 /*
- * Class file version: 52.0
+ * Class file version: 55.0
  *
  * Source file: Object.java
  */
@@ -7,16 +7,19 @@ package java.lang;
 
 public /* super */ class Object {
     
+    private static native void registerNatives();
+    
+    @jdk.internal.HotSpotIntrinsicCandidate
     public void <init>() {
         // max_stack: 0
         // max_locals: 1
         0000: return
     }
     
-    private static native void registerNatives();
-    
+    @jdk.internal.HotSpotIntrinsicCandidate
     public final native Class<?> getClass();
     
+    @jdk.internal.HotSpotIntrinsicCandidate
     public native int hashCode();
     
     public boolean equals(Object) {
@@ -31,6 +34,7 @@ public /* super */ class Object {
         000a: ireturn
     }
     
+    @jdk.internal.HotSpotIntrinsicCandidate
     protected native Object clone() throws CloneNotSupportedException;
     
     public String toString() {
@@ -53,9 +57,20 @@ public /* super */ class Object {
         0023: areturn
     }
     
+    @jdk.internal.HotSpotIntrinsicCandidate
     public final native void notify();
     
+    @jdk.internal.HotSpotIntrinsicCandidate
     public final native void notifyAll();
+    
+    public final void wait() throws InterruptedException {
+        // max_stack: 3
+        // max_locals: 1
+        0000: aload_0
+        0001: lconst_0
+        0002: invokevirtual #10 // void Object.wait(long)
+        0005: return
+    }
     
     public final native void wait(long) throws InterruptedException;
     
@@ -66,20 +81,20 @@ public /* super */ class Object {
         0001: lconst_0
         0002: lcmp
         0003: ifge +13 // 0010
-        0006: new #10 // IllegalArgumentException
+        0006: new #11 // IllegalArgumentException
         0009: dup
-        000a: ldc #11 // "timeout value is negative"
-        000c: invokespecial #12 // void IllegalArgumentException.<init>(String)
+        000a: ldc #12 // "timeoutMillis value is negative"
+        000c: invokespecial #13 // void IllegalArgumentException.<init>(String)
         000f: athrow
         0010: iload_3
         0011: iflt +9 // 001a
         0014: iload_3
-        0015: ldc #13 // 999999
+        0015: ldc #14 // 999999
         0017: if_icmple +13 // 0024
-        001a: new #10 // IllegalArgumentException
+        001a: new #11 // IllegalArgumentException
         001d: dup
-        001e: ldc #14 // "nanosecond timeout value out of range"
-        0020: invokespecial #12 // void IllegalArgumentException.<init>(String)
+        001e: ldc #15 // "nanosecond timeout value out of range"
+        0020: invokespecial #13 // void IllegalArgumentException.<init>(String)
         0023: athrow
         0024: iload_3
         0025: ifle +7 // 002c
@@ -89,19 +104,11 @@ public /* super */ class Object {
         002b: lstore_1
         002c: aload_0
         002d: lload_1
-        002e: invokevirtual #15 // void Object.wait(long)
+        002e: invokevirtual #10 // void Object.wait(long)
         0031: return
     }
     
-    public final void wait() throws InterruptedException {
-        // max_stack: 3
-        // max_locals: 1
-        0000: aload_0
-        0001: lconst_0
-        0002: invokevirtual #15 // void Object.wait(long)
-        0005: return
-    }
-    
+    @Deprecated(since = "9")
     protected void finalize() throws Throwable {
         // max_stack: 0
         // max_locals: 1

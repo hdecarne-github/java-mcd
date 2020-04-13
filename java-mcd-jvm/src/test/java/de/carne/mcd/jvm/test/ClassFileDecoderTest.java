@@ -50,11 +50,6 @@ class ClassFileDecoderTest {
 	private static final Log LOG = new Log();
 
 	@Test
-	void testDecodeNashornJar() throws Exception {
-		testDecodeAll(Class.forName("jdk.nashorn.tools.Shell"));
-	}
-
-	@Test
 	void testJavaDefaultJar() throws IOException {
 		testDecodeAll(Debug.class);
 	}
