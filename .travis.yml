@@ -11,7 +11,7 @@ dist: bionic
 osx_image: xcode11.3
 
 env:
-  JAVA_OPTS="-Xmx4g -XX:MaxMetaspaceSize=2g -Dfile.encoding=UTF-8"
+  JAVA_OPTS="-Xmx8g -Dfile.encoding=UTF-8"
 
 addons:
   sonarcloud:
