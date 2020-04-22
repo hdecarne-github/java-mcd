@@ -37,6 +37,8 @@ import de.carne.mcd.x86.X86Decoder;
 import de.carne.mcd.x86.X86b16Decoder;
 import de.carne.mcd.x86.X86b32Decoder;
 import de.carne.mcd.x86.X86b64Decoder;
+import de.carne.test.diff.Diff;
+import de.carne.test.diff.DiffResult;
 
 /**
  * Test {@linkplain X86b16Decoder} class.
@@ -68,10 +70,11 @@ class X86DecoderTest {
 			decoder.decode(code, out);
 		}
 
-		String decodeOutput = decodeBuffer.toString();
 		String referenceOutput = getReferenceOutput(decoder.getClass().getSimpleName() + ".txt");
+		String decodeOutput = decodeBuffer.toString();
+		DiffResult<String> diffResult = Diff.lines(referenceOutput, decodeOutput);
 
-		Assertions.assertEquals(referenceOutput, decodeOutput);
+		Assertions.assertEquals(DiffResult.lineMatch(), diffResult);
 	}
 
 	private ReadableByteChannel getCode(Path path, long offset, int length) throws IOException {

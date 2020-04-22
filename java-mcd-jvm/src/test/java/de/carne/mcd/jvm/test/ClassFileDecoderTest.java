@@ -40,6 +40,8 @@ import de.carne.io.Closeables;
 import de.carne.io.IOUtil;
 import de.carne.mcd.io.PlainMCDOutput;
 import de.carne.mcd.jvm.ClassFileDecoder;
+import de.carne.test.diff.Diff;
+import de.carne.test.diff.DiffResult;
 import de.carne.util.Debug;
 
 /**
@@ -160,10 +162,11 @@ class ClassFileDecoderTest {
 			decoder.decode(in, out);
 		}
 		if (verify) {
-			String decodeOutput = decodeBuffer.toString();
 			String referenceOutput = getReferenceOutput(resource);
+			String decodeOutput = decodeBuffer.toString();
+			DiffResult<String> diffResult = Diff.lines(referenceOutput, decodeOutput);
 
-			Assertions.assertEquals(referenceOutput, decodeOutput);
+			Assertions.assertEquals(DiffResult.lineMatch(), diffResult);
 		}
 	}
 
