@@ -30,7 +30,6 @@ import java.nio.file.StandardOpenOption;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import de.carne.boot.logging.Log;
 import de.carne.io.IOUtil;
 import de.carne.mcd.io.PlainMCDOutput;
 import de.carne.mcd.x86.X86Decoder;
@@ -39,6 +38,7 @@ import de.carne.mcd.x86.X86b32Decoder;
 import de.carne.mcd.x86.X86b64Decoder;
 import de.carne.test.diff.Diff;
 import de.carne.test.diff.DiffResult;
+import de.carne.util.logging.Log;
 
 /**
  * Test {@linkplain X86b16Decoder} class.

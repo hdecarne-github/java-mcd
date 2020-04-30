@@ -18,11 +18,11 @@ package de.carne.mcd.jvm.classfile.attribute;
 
 import java.io.IOException;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.constant.Utf8Constant;
+import de.carne.util.Check;
 
 /**
  * SourceFile attribute.

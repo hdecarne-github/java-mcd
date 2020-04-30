@@ -24,9 +24,9 @@ import java.util.Objects;
 
 import org.eclipse.jdt.annotation.Nullable;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.instruction.Instruction;
 import de.carne.mcd.instruction.InstructionOpcode;
+import de.carne.util.Check;
 import de.carne.util.Strings;
 
 /**
@@ -110,7 +110,7 @@ public class InstructionReferenceEntry {
 
 	/**
 	 * Adds an additional number of extra fields to this entry.
-	 * 
+	 *
 	 * @param additionalExtraFields the additional extra fields to add.
 	 */
 	public void addExtraFields(List<String> additionalExtraFields) {

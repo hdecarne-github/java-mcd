@@ -29,7 +29,6 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
 import org.eclipse.jdt.annotation.Nullable;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.jvm.classfile.ClassName;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.PrintBuffer;
@@ -57,6 +56,7 @@ import de.carne.mcd.jvm.classfile.decl.grammar.DeclParser.TypeParameterContext;
 import de.carne.mcd.jvm.classfile.decl.grammar.DeclParser.TypeParametersContext;
 import de.carne.mcd.jvm.classfile.decl.grammar.DeclParser.TypeVariableSignatureContext;
 import de.carne.mcd.jvm.classfile.decl.grammar.DeclParser.WildcardIndicatorContext;
+import de.carne.util.Check;
 
 /**
  * Base class for all kinds of declaration decoders.

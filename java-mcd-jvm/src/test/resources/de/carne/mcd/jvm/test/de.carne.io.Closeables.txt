@@ -81,7 +81,7 @@ public final /* super */ class Closeables {
         0010: goto +8 // 0018
         0013: astore_1
         0014: aload_1
-        0015: invokestatic #6 // void de.carne.boot.Exceptions.ignore(Throwable)
+        0015: invokestatic #6 // void de.carne.util.Exceptions.ignore(Throwable)
         0018: return
     }
     

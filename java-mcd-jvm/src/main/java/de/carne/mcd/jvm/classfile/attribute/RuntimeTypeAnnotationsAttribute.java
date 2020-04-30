@@ -21,11 +21,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.attribute.annotation.TypeAnnotation;
+import de.carne.util.Check;
 
 /**
  * Base class for runtime type annotation related attributes.

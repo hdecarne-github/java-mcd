@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.nio.ByteOrder;
 import java.util.Optional;
 
-import de.carne.boot.logging.Log;
 import de.carne.mcd.MachineCodeDecoder;
 import de.carne.mcd.instruction.InstructionIndex;
 import de.carne.mcd.io.MCDInputBuffer;
@@ -28,6 +27,7 @@ import de.carne.mcd.io.MCDOutputBuffer;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.text.HexFormat;
 import de.carne.util.Late;
+import de.carne.util.logging.Log;
 
 /**
  * Java bytecode decoder

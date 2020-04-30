@@ -18,11 +18,11 @@ package de.carne.mcd.jvm.classfile.constant;
 
 import java.io.IOException;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
 import de.carne.mcd.jvm.classfile.NameDescriptorIndex;
+import de.carne.util.Check;
 
 /**
  * NameAndType constant.
@@ -50,7 +50,7 @@ public class NameAndTypeConstant extends Constant {
 
 	/**
 	 * Gets this constant's name value.
-	 * 
+	 *
 	 * @return this constant's name value.
 	 * @throws IOException if the value cannot be resolved.
 	 */
@@ -60,7 +60,7 @@ public class NameAndTypeConstant extends Constant {
 
 	/**
 	 * Gets this constant's descriptor value.
-	 * 
+	 *
 	 * @return this constant's descriptor value.
 	 * @throws IOException if the value cannot be resolved.
 	 */

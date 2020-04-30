@@ -35,7 +35,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 
-import de.carne.boot.logging.Log;
 import de.carne.io.Closeables;
 import de.carne.io.IOUtil;
 import de.carne.mcd.io.PlainMCDOutput;
@@ -43,6 +42,7 @@ import de.carne.mcd.jvm.ClassFileDecoder;
 import de.carne.test.diff.Diff;
 import de.carne.test.diff.DiffResult;
 import de.carne.util.Debug;
+import de.carne.util.logging.Log;
 
 /**
  * Test {@linkplain ClassFileDecoder} class.

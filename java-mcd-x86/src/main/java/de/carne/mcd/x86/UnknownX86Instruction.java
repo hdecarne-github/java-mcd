@@ -19,12 +19,12 @@ package de.carne.mcd.x86;
 import java.io.DataOutput;
 import java.io.IOException;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.instruction.Instruction;
 import de.carne.mcd.instruction.InstructionOpcode;
 import de.carne.mcd.io.MCDInputBuffer;
 import de.carne.mcd.io.MCDOutputBuffer;
 import de.carne.text.HexFormat;
+import de.carne.util.Check;
 
 class UnknownX86Instruction implements Instruction {
 

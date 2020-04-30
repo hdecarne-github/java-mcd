@@ -31,11 +31,11 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.Nullable;
 
-import de.carne.boot.logging.Log;
 import de.carne.io.IOUtil;
 import de.carne.mcd.bootstrap.InstructionIndexBuilder;
 import de.carne.mcd.io.MCDInputBuffer;
 import de.carne.mcd.io.MCDOutputBuffer;
+import de.carne.util.logging.Log;
 
 /**
  * Loads and searches a persistent index for mapping opcode bytes to {@linkplain Instruction} instances.

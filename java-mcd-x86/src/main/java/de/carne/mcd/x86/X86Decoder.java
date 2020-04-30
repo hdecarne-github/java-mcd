@@ -19,13 +19,13 @@ package de.carne.mcd.x86;
 import java.io.IOException;
 import java.nio.ByteOrder;
 
-import de.carne.boot.Exceptions;
 import de.carne.mcd.MachineCodeDecoder;
 import de.carne.mcd.instruction.InstructionIndex;
 import de.carne.mcd.instruction.InstructionIndex.LookupResult;
 import de.carne.mcd.instruction.InstructionOpcode;
 import de.carne.mcd.io.MCDInputBuffer;
 import de.carne.mcd.io.MCDOutputBuffer;
+import de.carne.util.Exceptions;
 
 /**
  * Common base class for all x86 machine code decoders.

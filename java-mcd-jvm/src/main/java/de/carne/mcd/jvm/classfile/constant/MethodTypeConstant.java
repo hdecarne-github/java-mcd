@@ -18,7 +18,6 @@ package de.carne.mcd.jvm.classfile.constant;
 
 import java.io.IOException;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
@@ -26,6 +25,7 @@ import de.carne.mcd.jvm.classfile.PrintBuffer;
 import de.carne.mcd.jvm.classfile.PrintSeparator;
 import de.carne.mcd.jvm.classfile.decl.DeclDecoder;
 import de.carne.mcd.jvm.classfile.decl.DecodedMethodDescriptor;
+import de.carne.util.Check;
 
 /**
  * MethodType constant.

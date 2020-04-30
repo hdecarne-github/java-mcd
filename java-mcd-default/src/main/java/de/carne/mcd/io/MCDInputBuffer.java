@@ -31,10 +31,10 @@ import java.util.Objects;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import de.carne.boot.check.Check;
 import de.carne.io.Defaults;
 import de.carne.nio.file.FileUtil;
 import de.carne.nio.file.attribute.FileAttributes;
+import de.carne.util.Check;
 
 /**
  * Buffered byte channel access during decoding.

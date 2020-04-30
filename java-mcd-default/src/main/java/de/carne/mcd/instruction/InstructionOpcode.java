@@ -22,8 +22,8 @@ import java.util.StringTokenizer;
 
 import org.eclipse.jdt.annotation.Nullable;
 
-import de.carne.boot.check.Check;
 import de.carne.text.HexFormat;
+import de.carne.util.Check;
 
 /**
  * Immutable byte sequence representing an opcode.

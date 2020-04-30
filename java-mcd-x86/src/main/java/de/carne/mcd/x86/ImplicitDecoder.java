@@ -20,10 +20,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.carne.boot.Exceptions;
 import de.carne.mcd.io.MCDInputBuffer;
 import de.carne.mcd.io.MCDOutputBuffer;
 import de.carne.mcd.io.MCDPrintBuffer;
+import de.carne.util.Exceptions;
 
 /**
  * Implicit operand decoder.

@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.jvm.classfile.attribute.Attribute;
 import de.carne.mcd.jvm.classfile.constant.Utf8Constant;
+import de.carne.util.Check;
 
 class Method extends ClassInfoElement implements MethodInfo {
 

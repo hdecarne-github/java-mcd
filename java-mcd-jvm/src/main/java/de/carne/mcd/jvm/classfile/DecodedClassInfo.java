@@ -26,7 +26,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import de.carne.boot.logging.Log;
 import de.carne.mcd.io.MCDInputBuffer;
 import de.carne.mcd.jvm.classfile.attribute.Attribute;
 import de.carne.mcd.jvm.classfile.attribute.CodeAttribute;
@@ -77,6 +76,7 @@ import de.carne.mcd.jvm.classfile.constant.ReferenceKind;
 import de.carne.mcd.jvm.classfile.constant.StringConstant;
 import de.carne.mcd.jvm.classfile.constant.Utf8Constant;
 import de.carne.util.Late;
+import de.carne.util.logging.Log;
 
 /**
  * The actual class file decoder.

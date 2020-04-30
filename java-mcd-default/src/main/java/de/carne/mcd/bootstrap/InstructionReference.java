@@ -37,10 +37,10 @@ import java.util.TreeMap;
 
 import org.eclipse.jdt.annotation.Nullable;
 
-import de.carne.boot.logging.Log;
 import de.carne.mcd.instruction.InstructionIndex;
 import de.carne.mcd.instruction.InstructionOpcode;
 import de.carne.util.Strings;
+import de.carne.util.logging.Log;
 
 /**
  * Helper class used to create and update a instruction reference file suitable for {@linkplain InstructionIndex}

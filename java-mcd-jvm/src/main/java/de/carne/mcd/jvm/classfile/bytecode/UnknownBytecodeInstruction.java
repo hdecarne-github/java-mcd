@@ -19,11 +19,11 @@ package de.carne.mcd.jvm.classfile.bytecode;
 import java.io.DataOutput;
 import java.io.IOException;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.instruction.Instruction;
 import de.carne.mcd.instruction.InstructionOpcode;
 import de.carne.mcd.io.MCDInputBuffer;
 import de.carne.mcd.io.MCDOutputBuffer;
+import de.carne.util.Check;
 
 class UnknownBytecodeInstruction implements Instruction {
 

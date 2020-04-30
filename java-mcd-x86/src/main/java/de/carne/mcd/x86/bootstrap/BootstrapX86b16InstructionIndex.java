@@ -20,10 +20,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-import de.carne.boot.check.Check;
-import de.carne.boot.logging.Log;
 import de.carne.mcd.bootstrap.InstructionIndexBuilder;
+import de.carne.util.Check;
 import de.carne.util.Strings;
+import de.carne.util.logging.Log;
 
 /**
  * Helper program used to fetch and process the x86_16 reference for instruction index bootstrapping.

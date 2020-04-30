@@ -34,8 +34,8 @@ import java.util.regex.Pattern;
 
 import org.eclipse.jdt.annotation.Nullable;
 
-import de.carne.boot.logging.Log;
 import de.carne.util.Strings;
+import de.carne.util.logging.Log;
 
 final class BytecodeInstructionReferenceScraper implements Closeable {
 

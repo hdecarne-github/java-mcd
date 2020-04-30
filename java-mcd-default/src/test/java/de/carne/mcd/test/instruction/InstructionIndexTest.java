@@ -30,7 +30,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.bootstrap.InstructionIndexBuilder;
 import de.carne.mcd.instruction.Instruction;
 import de.carne.mcd.instruction.InstructionFactory;
@@ -40,6 +39,7 @@ import de.carne.mcd.io.MCDInputBuffer;
 import de.carne.mcd.io.MCDOutputBuffer;
 import de.carne.test.api.io.TempFile;
 import de.carne.test.extension.TempPathExtension;
+import de.carne.util.Check;
 
 /**
  * Test {@linkplain InstructionIndex} class.

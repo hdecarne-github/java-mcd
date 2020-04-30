@@ -18,11 +18,11 @@ package de.carne.mcd.jvm.classfile.constant;
 
 import java.io.IOException;
 
-import de.carne.boot.check.Check;
 import de.carne.mcd.jvm.classfile.ClassContext;
 import de.carne.mcd.jvm.classfile.ClassInfo;
 import de.carne.mcd.jvm.classfile.ClassName;
 import de.carne.mcd.jvm.classfile.ClassPrinter;
+import de.carne.util.Check;
 
 abstract class AbstractRefConstant extends Constant {
 

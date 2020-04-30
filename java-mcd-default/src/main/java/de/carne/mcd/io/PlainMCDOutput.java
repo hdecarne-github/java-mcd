@@ -28,7 +28,7 @@ import java.nio.channels.WritableByteChannel;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import de.carne.boot.check.Check;
+import de.carne.util.Check;
 
 /**
  * {@linkplain MCDOutput} implementation which emits the decoded to data to a {@linkplain PrintWriter} or

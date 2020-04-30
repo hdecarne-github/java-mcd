@@ -26,12 +26,12 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import de.carne.boot.logging.Log;
 import de.carne.mcd.instruction.Instruction;
 import de.carne.mcd.instruction.InstructionFactory;
 import de.carne.mcd.instruction.InstructionIndex;
 import de.carne.mcd.instruction.InstructionIndexParameters;
 import de.carne.mcd.instruction.InstructionOpcode;
+import de.carne.util.logging.Log;
 
 /**
  * Helper class used to create an {@linkplain InstructionIndex} resource file.
