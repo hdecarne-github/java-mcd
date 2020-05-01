@@ -19,8 +19,8 @@ package de.carne.mcd.x86.test;
 import java.nio.file.Path;
 
 import de.carne.nio.file.FileUtil;
-import de.carne.test.io.RemoteTestFile;
-import de.carne.test.io.TestFile;
+import de.carne.test.helper.io.RemoteTestFile;
+import de.carne.test.helper.io.TestFile;
 
 /**
  * This class provides access to external test files used for the decode tests.

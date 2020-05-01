@@ -33,7 +33,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import de.carne.mcd.io.MCDInputBuffer;
 import de.carne.test.api.io.TempFile;
-import de.carne.test.extension.TempPathExtension;
+import de.carne.test.extension.io.TempPathExtension;
 
 /**
  * Test {@linkplain MCDInputBuffer} class.

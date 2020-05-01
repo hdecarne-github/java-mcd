@@ -36,8 +36,8 @@ import de.carne.mcd.x86.X86Decoder;
 import de.carne.mcd.x86.X86b16Decoder;
 import de.carne.mcd.x86.X86b32Decoder;
 import de.carne.mcd.x86.X86b64Decoder;
-import de.carne.test.diff.Diff;
-import de.carne.test.diff.DiffResult;
+import de.carne.test.helper.diff.Diff;
+import de.carne.test.helper.diff.DiffResult;
 import de.carne.util.logging.Log;
 
 /**

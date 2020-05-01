@@ -38,7 +38,7 @@ import de.carne.mcd.instruction.InstructionOpcode;
 import de.carne.mcd.io.MCDInputBuffer;
 import de.carne.mcd.io.MCDOutputBuffer;
 import de.carne.test.api.io.TempFile;
-import de.carne.test.extension.TempPathExtension;
+import de.carne.test.extension.io.TempPathExtension;
 import de.carne.util.Check;
 
 /**

@@ -39,8 +39,8 @@ import de.carne.io.Closeables;
 import de.carne.io.IOUtil;
 import de.carne.mcd.io.PlainMCDOutput;
 import de.carne.mcd.jvm.ClassFileDecoder;
-import de.carne.test.diff.Diff;
-import de.carne.test.diff.DiffResult;
+import de.carne.test.helper.diff.Diff;
+import de.carne.test.helper.diff.DiffResult;
 import de.carne.util.Debug;
 import de.carne.util.logging.Log;
 
