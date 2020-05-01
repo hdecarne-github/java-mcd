@@ -21,6 +21,8 @@ import java.io.StringWriter;
 import java.util.Deque;
 import java.util.LinkedList;
 
+import de.carne.mcd.MCDOutput;
+import de.carne.mcd.PlainMCDOutput;
 import de.carne.util.Exceptions;
 import de.carne.util.Strings;
 

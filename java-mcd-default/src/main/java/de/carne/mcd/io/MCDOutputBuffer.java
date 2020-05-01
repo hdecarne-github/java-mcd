@@ -18,6 +18,8 @@ package de.carne.mcd.io;
 
 import java.io.IOException;
 
+import de.carne.mcd.MCDOutput;
+
 /**
  * A buffered {@linkplain MCDOutput} implementation.
  */

@@ -28,6 +28,12 @@ subprojects {
 	sourceCompatibility = JavaVersion.VERSION_11
 	targetCompatibility = JavaVersion.VERSION_11
 
+	plugins.withType(JavaPlugin).configureEach {
+		java {
+			modularity.inferModulePath = true
+		}
+	}
+
 	repositories {
 		if(snapshotBuild) {
 			mavenLocal()
@@ -44,10 +50,8 @@ subprojects {
 	}
 
 	jar {
-		exclude('**/bootstrap/**')
 		manifest {
 			attributes(
-				'Automatic-Module-Name': (project.name.endsWith("-default") ? automaticModuleNameBase : automaticModuleNameBase + "." + project.name.substring(rootProject.name.length() + 1)),
 				'Created-By': "Gradle ${gradle.gradleVersion} (${System.properties['os.name']}:${System.properties['os.arch']}:${System.properties['os.version']})",
 				'Build-Jdk' : System.properties['java.version'],
 				'Build-Timestamp': new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ").format(new Date()),

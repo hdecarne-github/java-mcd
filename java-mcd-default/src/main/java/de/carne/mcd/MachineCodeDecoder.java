@@ -23,7 +23,6 @@ import java.nio.channels.ReadableByteChannel;
 import org.eclipse.jdt.annotation.Nullable;
 
 import de.carne.mcd.io.MCDInputBuffer;
-import de.carne.mcd.io.MCDOutput;
 import de.carne.mcd.io.MCDOutputBuffer;
 
 /**

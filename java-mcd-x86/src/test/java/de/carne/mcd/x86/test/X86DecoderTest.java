@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import de.carne.io.IOUtil;
-import de.carne.mcd.io.PlainMCDOutput;
+import de.carne.mcd.PlainMCDOutput;
 import de.carne.mcd.x86.X86Decoder;
 import de.carne.mcd.x86.X86b16Decoder;
 import de.carne.mcd.x86.X86b32Decoder;

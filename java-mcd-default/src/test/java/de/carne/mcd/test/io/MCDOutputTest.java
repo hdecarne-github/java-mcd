@@ -25,8 +25,8 @@ import java.nio.channels.Channels;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import de.carne.mcd.PlainMCDOutput;
 import de.carne.mcd.io.MCDOutputBuffer;
-import de.carne.mcd.io.PlainMCDOutput;
 
 /**
  * Test {@linkplain PlainMCDOutput} and {@linkplain MCDOutputBuffer} class.
