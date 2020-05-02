@@ -4,7 +4,7 @@
  * Source file: module-info.java
  */
 module de.carne.mcd.jvmdecoder {
-    requires /* mandated */ java.base;
+    requires /* mandated */ java.base /* 11.0.6 */;
     requires org.eclipse.jdt.annotation;
     requires de.carne;
     requires transitive de.carne.mcd;

@@ -27,6 +27,7 @@ import de.carne.mcd.jvmdecoder.classfile.ClassInfo;
 import de.carne.mcd.jvmdecoder.classfile.ClassPrinter;
 import de.carne.mcd.jvmdecoder.classfile.attribute.module.ModuleInfoElement;
 import de.carne.mcd.jvmdecoder.classfile.constant.ModuleConstant;
+import de.carne.mcd.jvmdecoder.classfile.constant.Utf8Constant;
 
 /**
  * Module attribute.
@@ -74,6 +75,12 @@ public class ModuleAttribute extends Attribute {
 		out.printKeyword(ClassPrinter.S_MODULE).print(" ");
 		out.printFlagsComment(MODULE_FLAG_SYMBOLS, this.moduleFlags);
 		this.classInfo.resolveConstant(this.moduleNameIndex, ModuleConstant.class).print(out, context);
+		if (this.moduleVersionIndex != 0) {
+			String versionValue = this.classInfo.resolveConstant(this.moduleVersionIndex, Utf8Constant.class)
+					.getValue();
+
+			out.print(" ").printComment("/* ").printComment(versionValue).printComment(" */");
+		}
 		out.println(" {");
 		out.output().increaseIndent();
 		for (ModuleInfoElement element : this.elements) {

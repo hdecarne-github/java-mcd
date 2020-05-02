@@ -27,6 +27,7 @@ import de.carne.mcd.jvmdecoder.classfile.ClassPrinter;
 import de.carne.mcd.jvmdecoder.classfile.constant.ClassConstant;
 import de.carne.mcd.jvmdecoder.classfile.constant.ModuleConstant;
 import de.carne.mcd.jvmdecoder.classfile.constant.PackageConstant;
+import de.carne.mcd.jvmdecoder.classfile.constant.Utf8Constant;
 
 /**
  * A single module-info element.
@@ -70,6 +71,12 @@ public abstract class ModuleInfoElement extends ClassInfoElement {
 				out.printFlagsComment(FLAG_COMMENT_SYMBOLS, requiresFlags);
 				out.printFlagsKeyword(REQUIRES_FLAG_KEYWORD_SYMBOLS, requiresFlags);
 				this.classInfo.resolveConstant(requiresIndex, ModuleConstant.class).print(out, context);
+				if (requiresVersionIndex != 0) {
+					String versionValue = this.classInfo.resolveConstant(requiresVersionIndex, Utf8Constant.class)
+							.getValue();
+
+					out.print(" ").printComment("/* ").printComment(versionValue).printComment(" */");
+				}
 				out.println(";");
 			}
 
