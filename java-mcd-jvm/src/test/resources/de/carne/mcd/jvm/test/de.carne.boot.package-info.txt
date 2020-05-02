@@ -1,7 +1,0 @@
-/*
- * Class file version: 55.0
- *
- * Source file: package-info.java
- */
-@org.eclipse.jdt.annotation.NonNullByDefault
-package de.carne.boot;
