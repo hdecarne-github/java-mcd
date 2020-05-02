@@ -1,5 +1,5 @@
 rootProject.name = 'java-mcd'
 
 include 'java-mcd-default'
-include 'java-mcd-jvm'
-include 'java-mcd-x86'
+include 'java-mcd-jvmdecoder'
+include 'java-mcd-x86decoder'
