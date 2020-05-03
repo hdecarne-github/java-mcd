@@ -26,7 +26,7 @@ git:
 before_install:
   - curl -sL https://github.com/shyiko/jabba/raw/master/install.sh | bash && . ~/.jabba/jabba.sh
 install:
-  - $JABBA_HOME/jabba install $BUILD_JDK
+  - $JABBA_HOME/bin/jabba install $BUILD_JDK
   - java -Xmx32m -version
   - ./gradlew -v
   - ./gradlew -s --no-daemon --refresh-dependencies clean classes testClasses
