@@ -13,6 +13,8 @@ def resolveProperty(propertyName, envName, defValue = "<undefined>") {
 	return ((project.findProperty(propertyName) ?: System.getenv(envName)) ?: defValue);
 }
 
+defaultTasks "classes", "testClasses"
+
 // Projects
 subprojects {
 
