@@ -12,7 +12,6 @@ osx_image: xcode11.3
 
 env:
   JAVA_OPTS="-Xmx4g -Dfile.encoding=UTF-8"
-  JABBA_HOME="/home/travis/.jabba"
   BUILD_JDK="adopt@1.11.0-6"
   DEPLOY_OS_NAME="linux"
 
@@ -23,10 +22,9 @@ addons:
 git:
   depth: false  
 
-before_install:
-  - curl -sL https://github.com/shyiko/jabba/raw/master/install.sh | bash && . ~/.jabba/jabba.sh
 install:
-  - $JABBA_HOME/bin/jabba install $BUILD_JDK
+  - curl -sL https://github.com/shyiko/jabba/raw/master/install.sh | bash && . ~/.jabba/jabba.sh
+  - jabba install $BUILD_JDK
   - java -Xmx32m -version
   - ./gradlew -v
   - ./gradlew -s --no-daemon --refresh-dependencies clean classes testClasses
