@@ -74,7 +74,7 @@ class ClassFileDecoderTest {
 
 	@Test
 	void testDecodeFinalClass() throws IOException {
-		testDecode(String.class, true);
+		testDecode(StringBuilder.class, true);
 	}
 
 	@Test

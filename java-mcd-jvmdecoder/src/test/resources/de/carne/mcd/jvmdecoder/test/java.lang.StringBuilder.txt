@@ -1,0 +1,1041 @@
+/*
+ * Class file version: 55.0
+ *
+ * Source file: StringBuilder.java
+ */
+package java.lang;
+
+public final /* super */ class StringBuilder extends AbstractStringBuilder implements java.io.Serializable, Comparable<StringBuilder>, CharSequence {
+    
+    static final long serialVersionUID = 4383685877147921099l;
+    
+    @jdk.internal.HotSpotIntrinsicCandidate
+    public void <init>() {
+        // max_stack: 2
+        // max_locals: 1
+        0000: aload_0
+        0001: bipush 16
+        0003: invokespecial #1 // void AbstractStringBuilder.<init>(int)
+        0006: return
+    }
+    
+    @jdk.internal.HotSpotIntrinsicCandidate
+    public void <init>(int) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokespecial #1 // void AbstractStringBuilder.<init>(int)
+        0005: return
+    }
+    
+    @jdk.internal.HotSpotIntrinsicCandidate
+    public void <init>(String) {
+        // max_stack: 3
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokevirtual #2 // int String.length()
+        0005: bipush 16
+        0007: iadd
+        0008: invokespecial #1 // void AbstractStringBuilder.<init>(int)
+        000b: aload_0
+        000c: aload_1
+        000d: invokevirtual #3 // StringBuilder StringBuilder.append(String)
+        0010: pop
+        0011: return
+    }
+    
+    public void <init>(CharSequence) {
+        // max_stack: 3
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokeinterface #4 // int CharSequence.length()
+        0007: bipush 16
+        0009: iadd
+        000a: invokespecial #5 // void StringBuilder.<init>(int)
+        000d: aload_0
+        000e: aload_1
+        000f: invokevirtual #6 // StringBuilder StringBuilder.append(CharSequence)
+        0012: pop
+        0013: return
+    }
+    
+    public int compareTo(StringBuilder) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokespecial #7 // int AbstractStringBuilder.compareTo(AbstractStringBuilder)
+        0005: ireturn
+    }
+    
+    public StringBuilder append(Object) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokestatic #8 // String String.valueOf(Object)
+        0005: invokevirtual #3 // StringBuilder StringBuilder.append(String)
+        0008: areturn
+    }
+    
+    @jdk.internal.HotSpotIntrinsicCandidate
+    public StringBuilder append(String) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokespecial #9 // AbstractStringBuilder AbstractStringBuilder.append(String)
+        0005: pop
+        0006: aload_0
+        0007: areturn
+    }
+    
+    public StringBuilder append(StringBuffer) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokespecial #10 // AbstractStringBuilder AbstractStringBuilder.append(StringBuffer)
+        0005: pop
+        0006: aload_0
+        0007: areturn
+    }
+    
+    public StringBuilder append(CharSequence) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokespecial #11 // AbstractStringBuilder AbstractStringBuilder.append(CharSequence)
+        0005: pop
+        0006: aload_0
+        0007: areturn
+    }
+    
+    public StringBuilder append(CharSequence, int, int) {
+        // max_stack: 4
+        // max_locals: 4
+        0000: aload_0
+        0001: aload_1
+        0002: iload_2
+        0003: iload_3
+        0004: invokespecial #12 // AbstractStringBuilder AbstractStringBuilder.append(CharSequence, int, int)
+        0007: pop
+        0008: aload_0
+        0009: areturn
+    }
+    
+    public StringBuilder append(char[]) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokespecial #13 // AbstractStringBuilder AbstractStringBuilder.append(char[])
+        0005: pop
+        0006: aload_0
+        0007: areturn
+    }
+    
+    public StringBuilder append(char[], int, int) {
+        // max_stack: 4
+        // max_locals: 4
+        0000: aload_0
+        0001: aload_1
+        0002: iload_2
+        0003: iload_3
+        0004: invokespecial #14 // AbstractStringBuilder AbstractStringBuilder.append(char[], int, int)
+        0007: pop
+        0008: aload_0
+        0009: areturn
+    }
+    
+    public StringBuilder append(boolean) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokespecial #15 // AbstractStringBuilder AbstractStringBuilder.append(boolean)
+        0005: pop
+        0006: aload_0
+        0007: areturn
+    }
+    
+    @jdk.internal.HotSpotIntrinsicCandidate
+    public StringBuilder append(char) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokespecial #16 // AbstractStringBuilder AbstractStringBuilder.append(char)
+        0005: pop
+        0006: aload_0
+        0007: areturn
+    }
+    
+    @jdk.internal.HotSpotIntrinsicCandidate
+    public StringBuilder append(int) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokespecial #17 // AbstractStringBuilder AbstractStringBuilder.append(int)
+        0005: pop
+        0006: aload_0
+        0007: areturn
+    }
+    
+    public StringBuilder append(long) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: lload_1
+        0002: invokespecial #18 // AbstractStringBuilder AbstractStringBuilder.append(long)
+        0005: pop
+        0006: aload_0
+        0007: areturn
+    }
+    
+    public StringBuilder append(float) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: fload_1
+        0002: invokespecial #19 // AbstractStringBuilder AbstractStringBuilder.append(float)
+        0005: pop
+        0006: aload_0
+        0007: areturn
+    }
+    
+    public StringBuilder append(double) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: dload_1
+        0002: invokespecial #20 // AbstractStringBuilder AbstractStringBuilder.append(double)
+        0005: pop
+        0006: aload_0
+        0007: areturn
+    }
+    
+    public StringBuilder appendCodePoint(int) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokespecial #21 // AbstractStringBuilder AbstractStringBuilder.appendCodePoint(int)
+        0005: pop
+        0006: aload_0
+        0007: areturn
+    }
+    
+    public StringBuilder delete(int, int) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: invokespecial #22 // AbstractStringBuilder AbstractStringBuilder.delete(int, int)
+        0006: pop
+        0007: aload_0
+        0008: areturn
+    }
+    
+    public StringBuilder deleteCharAt(int) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokespecial #23 // AbstractStringBuilder AbstractStringBuilder.deleteCharAt(int)
+        0005: pop
+        0006: aload_0
+        0007: areturn
+    }
+    
+    public StringBuilder replace(int, int, String) {
+        // max_stack: 4
+        // max_locals: 4
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: aload_3
+        0004: invokespecial #24 // AbstractStringBuilder AbstractStringBuilder.replace(int, int, String)
+        0007: pop
+        0008: aload_0
+        0009: areturn
+    }
+    
+    public StringBuilder insert(int, char[], int, int) {
+        // max_stack: 5
+        // max_locals: 5
+        0000: aload_0
+        0001: iload_1
+        0002: aload_2
+        0003: iload_3
+        0004: iload local_4
+        0006: invokespecial #25 // AbstractStringBuilder AbstractStringBuilder.insert(int, char[], int, int)
+        0009: pop
+        000a: aload_0
+        000b: areturn
+    }
+    
+    public StringBuilder insert(int, Object) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: aload_2
+        0003: invokespecial #26 // AbstractStringBuilder AbstractStringBuilder.insert(int, Object)
+        0006: pop
+        0007: aload_0
+        0008: areturn
+    }
+    
+    public StringBuilder insert(int, String) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: aload_2
+        0003: invokespecial #27 // AbstractStringBuilder AbstractStringBuilder.insert(int, String)
+        0006: pop
+        0007: aload_0
+        0008: areturn
+    }
+    
+    public StringBuilder insert(int, char[]) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: aload_2
+        0003: invokespecial #28 // AbstractStringBuilder AbstractStringBuilder.insert(int, char[])
+        0006: pop
+        0007: aload_0
+        0008: areturn
+    }
+    
+    public StringBuilder insert(int, CharSequence) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: aload_2
+        0003: invokespecial #29 // AbstractStringBuilder AbstractStringBuilder.insert(int, CharSequence)
+        0006: pop
+        0007: aload_0
+        0008: areturn
+    }
+    
+    public StringBuilder insert(int, CharSequence, int, int) {
+        // max_stack: 5
+        // max_locals: 5
+        0000: aload_0
+        0001: iload_1
+        0002: aload_2
+        0003: iload_3
+        0004: iload local_4
+        0006: invokespecial #30 // AbstractStringBuilder AbstractStringBuilder.insert(int, CharSequence, int, int)
+        0009: pop
+        000a: aload_0
+        000b: areturn
+    }
+    
+    public StringBuilder insert(int, boolean) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: invokespecial #31 // AbstractStringBuilder AbstractStringBuilder.insert(int, boolean)
+        0006: pop
+        0007: aload_0
+        0008: areturn
+    }
+    
+    public StringBuilder insert(int, char) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: invokespecial #32 // AbstractStringBuilder AbstractStringBuilder.insert(int, char)
+        0006: pop
+        0007: aload_0
+        0008: areturn
+    }
+    
+    public StringBuilder insert(int, int) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: invokespecial #33 // AbstractStringBuilder AbstractStringBuilder.insert(int, int)
+        0006: pop
+        0007: aload_0
+        0008: areturn
+    }
+    
+    public StringBuilder insert(int, long) {
+        // max_stack: 4
+        // max_locals: 4
+        0000: aload_0
+        0001: iload_1
+        0002: lload_2
+        0003: invokespecial #34 // AbstractStringBuilder AbstractStringBuilder.insert(int, long)
+        0006: pop
+        0007: aload_0
+        0008: areturn
+    }
+    
+    public StringBuilder insert(int, float) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: fload_2
+        0003: invokespecial #35 // AbstractStringBuilder AbstractStringBuilder.insert(int, float)
+        0006: pop
+        0007: aload_0
+        0008: areturn
+    }
+    
+    public StringBuilder insert(int, double) {
+        // max_stack: 4
+        // max_locals: 4
+        0000: aload_0
+        0001: iload_1
+        0002: dload_2
+        0003: invokespecial #36 // AbstractStringBuilder AbstractStringBuilder.insert(int, double)
+        0006: pop
+        0007: aload_0
+        0008: areturn
+    }
+    
+    public int indexOf(String) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokespecial #37 // int AbstractStringBuilder.indexOf(String)
+        0005: ireturn
+    }
+    
+    public int indexOf(String, int) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: aload_1
+        0002: iload_2
+        0003: invokespecial #38 // int AbstractStringBuilder.indexOf(String, int)
+        0006: ireturn
+    }
+    
+    public int lastIndexOf(String) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokespecial #39 // int AbstractStringBuilder.lastIndexOf(String)
+        0005: ireturn
+    }
+    
+    public int lastIndexOf(String, int) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: aload_1
+        0002: iload_2
+        0003: invokespecial #40 // int AbstractStringBuilder.lastIndexOf(String, int)
+        0006: ireturn
+    }
+    
+    public StringBuilder reverse() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0001: invokespecial #41 // AbstractStringBuilder AbstractStringBuilder.reverse()
+        0004: pop
+        0005: aload_0
+        0006: areturn
+    }
+    
+    @jdk.internal.HotSpotIntrinsicCandidate
+    public String toString() {
+        // max_stack: 3
+        // max_locals: 1
+        0000: aload_0
+        0001: invokevirtual #42 // boolean StringBuilder.isLatin1()
+        0004: ifeq +18 // 0016
+        0007: aload_0
+        0008: getfield #43 // byte[] StringBuilder.value
+        000b: iconst_0
+        000c: aload_0
+        000d: getfield #44 // int StringBuilder.count
+        0010: invokestatic #45 // String StringLatin1.newString(byte[], int, int)
+        0013: goto +15 // 0022
+        0016: aload_0
+        0017: getfield #43 // byte[] StringBuilder.value
+        001a: iconst_0
+        001b: aload_0
+        001c: getfield #44 // int StringBuilder.count
+        001f: invokestatic #46 // String StringUTF16.newString(byte[], int, int)
+        0022: areturn
+    }
+    
+    private void writeObject(java.io.ObjectOutputStream) throws java.io.IOException {
+        // max_stack: 5
+        // max_locals: 3
+        0000: aload_1
+        0001: invokevirtual #47 // void java.io.ObjectOutputStream.defaultWriteObject()
+        0004: aload_1
+        0005: aload_0
+        0006: getfield #44 // int StringBuilder.count
+        0009: invokevirtual #48 // void java.io.ObjectOutputStream.writeInt(int)
+        000c: aload_0
+        000d: invokevirtual #49 // int StringBuilder.capacity()
+        0010: newarray 5 // char[]
+        0012: astore_2
+        0013: aload_0
+        0014: invokevirtual #42 // boolean StringBuilder.isLatin1()
+        0017: ifeq +20 // 002b
+        001a: aload_0
+        001b: getfield #43 // byte[] StringBuilder.value
+        001e: iconst_0
+        001f: aload_0
+        0020: getfield #44 // int StringBuilder.count
+        0023: aload_2
+        0024: iconst_0
+        0025: invokestatic #50 // void StringLatin1.getChars(byte[], int, int, char[], int)
+        0028: goto +17 // 0039
+        002b: aload_0
+        002c: getfield #43 // byte[] StringBuilder.value
+        002f: iconst_0
+        0030: aload_0
+        0031: getfield #44 // int StringBuilder.count
+        0034: aload_2
+        0035: iconst_0
+        0036: invokestatic #51 // void StringUTF16.getChars(byte[], int, int, char[], int)
+        0039: aload_1
+        003a: aload_2
+        003b: invokevirtual #52 // void java.io.ObjectOutputStream.writeObject(Object)
+        003e: return
+    }
+    
+    private void readObject(java.io.ObjectInputStream) throws java.io.IOException, ClassNotFoundException {
+        // max_stack: 4
+        // max_locals: 3
+        0000: aload_1
+        0001: invokevirtual #53 // void java.io.ObjectInputStream.defaultReadObject()
+        0004: aload_0
+        0005: aload_1
+        0006: invokevirtual #54 // int java.io.ObjectInputStream.readInt()
+        0009: putfield #44 // int StringBuilder.count
+        000c: aload_1
+        000d: invokevirtual #55 // Object java.io.ObjectInputStream.readObject()
+        0010: checkcast #56 // [C
+        0013: astore_2
+        0014: aload_0
+        0015: aload_2
+        0016: iconst_0
+        0017: aload_2
+        0018: arraylength
+        0019: invokevirtual #57 // void StringBuilder.initBytes(char[], int, int)
+        001c: return
+    }
+    
+    public /* bridge|synthetic */ java.util.stream.IntStream codePoints() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0001: invokespecial #58 // java.util.stream.IntStream AbstractStringBuilder.codePoints()
+        0004: areturn
+    }
+    
+    public /* bridge|synthetic */ java.util.stream.IntStream chars() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0001: invokespecial #59 // java.util.stream.IntStream AbstractStringBuilder.chars()
+        0004: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder reverse() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0001: invokevirtual #60 // StringBuilder StringBuilder.reverse()
+        0004: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder insert(int, double) {
+        // max_stack: 4
+        // max_locals: 4
+        0000: aload_0
+        0001: iload_1
+        0002: dload_2
+        0003: invokevirtual #61 // StringBuilder StringBuilder.insert(int, double)
+        0006: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder insert(int, float) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: fload_2
+        0003: invokevirtual #62 // StringBuilder StringBuilder.insert(int, float)
+        0006: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder insert(int, long) {
+        // max_stack: 4
+        // max_locals: 4
+        0000: aload_0
+        0001: iload_1
+        0002: lload_2
+        0003: invokevirtual #63 // StringBuilder StringBuilder.insert(int, long)
+        0006: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder insert(int, int) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: invokevirtual #64 // StringBuilder StringBuilder.insert(int, int)
+        0006: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder insert(int, char) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: invokevirtual #65 // StringBuilder StringBuilder.insert(int, char)
+        0006: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder insert(int, boolean) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: invokevirtual #66 // StringBuilder StringBuilder.insert(int, boolean)
+        0006: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder insert(int, CharSequence, int, int) {
+        // max_stack: 5
+        // max_locals: 5
+        0000: aload_0
+        0001: iload_1
+        0002: aload_2
+        0003: iload_3
+        0004: iload local_4
+        0006: invokevirtual #67 // StringBuilder StringBuilder.insert(int, CharSequence, int, int)
+        0009: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder insert(int, CharSequence) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: aload_2
+        0003: invokevirtual #68 // StringBuilder StringBuilder.insert(int, CharSequence)
+        0006: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder insert(int, char[]) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: aload_2
+        0003: invokevirtual #69 // StringBuilder StringBuilder.insert(int, char[])
+        0006: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder insert(int, String) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: aload_2
+        0003: invokevirtual #70 // StringBuilder StringBuilder.insert(int, String)
+        0006: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder insert(int, Object) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: aload_2
+        0003: invokevirtual #71 // StringBuilder StringBuilder.insert(int, Object)
+        0006: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder insert(int, char[], int, int) {
+        // max_stack: 5
+        // max_locals: 5
+        0000: aload_0
+        0001: iload_1
+        0002: aload_2
+        0003: iload_3
+        0004: iload local_4
+        0006: invokevirtual #72 // StringBuilder StringBuilder.insert(int, char[], int, int)
+        0009: areturn
+    }
+    
+    public /* bridge|synthetic */ String substring(int, int) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: invokespecial #73 // String AbstractStringBuilder.substring(int, int)
+        0006: areturn
+    }
+    
+    public /* bridge|synthetic */ CharSequence subSequence(int, int) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: invokespecial #74 // CharSequence AbstractStringBuilder.subSequence(int, int)
+        0006: areturn
+    }
+    
+    public /* bridge|synthetic */ String substring(int) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokespecial #75 // String AbstractStringBuilder.substring(int)
+        0005: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder replace(int, int, String) {
+        // max_stack: 4
+        // max_locals: 4
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: aload_3
+        0004: invokevirtual #76 // StringBuilder StringBuilder.replace(int, int, String)
+        0007: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder deleteCharAt(int) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokevirtual #77 // StringBuilder StringBuilder.deleteCharAt(int)
+        0005: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder appendCodePoint(int) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokevirtual #78 // StringBuilder StringBuilder.appendCodePoint(int)
+        0005: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder delete(int, int) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: invokevirtual #79 // StringBuilder StringBuilder.delete(int, int)
+        0006: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder append(double) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: dload_1
+        0002: invokevirtual #80 // StringBuilder StringBuilder.append(double)
+        0005: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder append(float) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: fload_1
+        0002: invokevirtual #81 // StringBuilder StringBuilder.append(float)
+        0005: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder append(long) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: lload_1
+        0002: invokevirtual #82 // StringBuilder StringBuilder.append(long)
+        0005: areturn
+    }
+    
+    @jdk.internal.HotSpotIntrinsicCandidate
+    public /* bridge|synthetic */ AbstractStringBuilder append(int) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokevirtual #83 // StringBuilder StringBuilder.append(int)
+        0005: areturn
+    }
+    
+    @jdk.internal.HotSpotIntrinsicCandidate
+    public /* bridge|synthetic */ AbstractStringBuilder append(char) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokevirtual #84 // StringBuilder StringBuilder.append(char)
+        0005: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder append(boolean) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokevirtual #85 // StringBuilder StringBuilder.append(boolean)
+        0005: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder append(char[], int, int) {
+        // max_stack: 4
+        // max_locals: 4
+        0000: aload_0
+        0001: aload_1
+        0002: iload_2
+        0003: iload_3
+        0004: invokevirtual #86 // StringBuilder StringBuilder.append(char[], int, int)
+        0007: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder append(char[]) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokevirtual #87 // StringBuilder StringBuilder.append(char[])
+        0005: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder append(CharSequence, int, int) {
+        // max_stack: 4
+        // max_locals: 4
+        0000: aload_0
+        0001: aload_1
+        0002: iload_2
+        0003: iload_3
+        0004: invokevirtual #88 // StringBuilder StringBuilder.append(CharSequence, int, int)
+        0007: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder append(CharSequence) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokevirtual #6 // StringBuilder StringBuilder.append(CharSequence)
+        0005: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder append(StringBuffer) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokevirtual #89 // StringBuilder StringBuilder.append(StringBuffer)
+        0005: areturn
+    }
+    
+    @jdk.internal.HotSpotIntrinsicCandidate
+    public /* bridge|synthetic */ AbstractStringBuilder append(String) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokevirtual #3 // StringBuilder StringBuilder.append(String)
+        0005: areturn
+    }
+    
+    public /* bridge|synthetic */ AbstractStringBuilder append(Object) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokevirtual #90 // StringBuilder StringBuilder.append(Object)
+        0005: areturn
+    }
+    
+    public /* bridge|synthetic */ void setCharAt(int, char) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: invokespecial #91 // void AbstractStringBuilder.setCharAt(int, char)
+        0006: return
+    }
+    
+    public /* bridge|synthetic */ void getChars(int, int, char[], int) {
+        // max_stack: 5
+        // max_locals: 5
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: aload_3
+        0004: iload local_4
+        0006: invokespecial #92 // void AbstractStringBuilder.getChars(int, int, char[], int)
+        0009: return
+    }
+    
+    public /* bridge|synthetic */ int offsetByCodePoints(int, int) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: invokespecial #93 // int AbstractStringBuilder.offsetByCodePoints(int, int)
+        0006: ireturn
+    }
+    
+    public /* bridge|synthetic */ int codePointCount(int, int) {
+        // max_stack: 3
+        // max_locals: 3
+        0000: aload_0
+        0001: iload_1
+        0002: iload_2
+        0003: invokespecial #94 // int AbstractStringBuilder.codePointCount(int, int)
+        0006: ireturn
+    }
+    
+    public /* bridge|synthetic */ int codePointBefore(int) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokespecial #95 // int AbstractStringBuilder.codePointBefore(int)
+        0005: ireturn
+    }
+    
+    public /* bridge|synthetic */ int codePointAt(int) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokespecial #96 // int AbstractStringBuilder.codePointAt(int)
+        0005: ireturn
+    }
+    
+    public /* bridge|synthetic */ char charAt(int) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokespecial #97 // char AbstractStringBuilder.charAt(int)
+        0005: ireturn
+    }
+    
+    public /* bridge|synthetic */ void setLength(int) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokespecial #98 // void AbstractStringBuilder.setLength(int)
+        0005: return
+    }
+    
+    public /* bridge|synthetic */ void trimToSize() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0001: invokespecial #99 // void AbstractStringBuilder.trimToSize()
+        0004: return
+    }
+    
+    public /* bridge|synthetic */ void ensureCapacity(int) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokespecial #100 // void AbstractStringBuilder.ensureCapacity(int)
+        0005: return
+    }
+    
+    public /* bridge|synthetic */ int capacity() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0001: invokespecial #101 // int AbstractStringBuilder.capacity()
+        0004: ireturn
+    }
+    
+    public /* bridge|synthetic */ int length() {
+        // max_stack: 1
+        // max_locals: 1
+        0000: aload_0
+        0001: invokespecial #102 // int AbstractStringBuilder.length()
+        0004: ireturn
+    }
+    
+    @jdk.internal.HotSpotIntrinsicCandidate
+    public /* bridge|synthetic */ Appendable append(char) throws java.io.IOException {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: iload_1
+        0002: invokevirtual #84 // StringBuilder StringBuilder.append(char)
+        0005: areturn
+    }
+    
+    public /* bridge|synthetic */ Appendable append(CharSequence, int, int) throws java.io.IOException {
+        // max_stack: 4
+        // max_locals: 4
+        0000: aload_0
+        0001: aload_1
+        0002: iload_2
+        0003: iload_3
+        0004: invokevirtual #88 // StringBuilder StringBuilder.append(CharSequence, int, int)
+        0007: areturn
+    }
+    
+    public /* bridge|synthetic */ Appendable append(CharSequence) throws java.io.IOException {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: invokevirtual #6 // StringBuilder StringBuilder.append(CharSequence)
+        0005: areturn
+    }
+    
+    public /* bridge|synthetic */ int compareTo(Object) {
+        // max_stack: 2
+        // max_locals: 2
+        0000: aload_0
+        0001: aload_1
+        0002: checkcast #103 // StringBuilder
+        0005: invokevirtual #104 // int StringBuilder.compareTo(StringBuilder)
+        0008: ireturn
+    }
+
+}
