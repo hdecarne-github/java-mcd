@@ -13,9 +13,9 @@ def resolveProperty(propertyName, envName, defValue = "<undefined>") {
 	return ((project.findProperty(propertyName) ?: System.getenv(envName)) ?: defValue);
 }
 
+// Projects
 defaultTasks "classes", "testClasses"
 
-// Projects
 subprojects {
 
 	apply plugin: "java-library"
