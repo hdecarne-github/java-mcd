@@ -23,7 +23,8 @@ git:
   depth: false  
 
 install:
-  - if [[ -e "./.travis/$TRAVIS_OS_NAME/install.sh" ]]; then bash -x ./.travis/$TRAVIS_OS_NAME/install.sh; fi
+  - curl -sL https://github.com/shyiko/jabba/raw/master/install.sh | bash && . ~/.jabba/jabba.sh
+  - jabba install $BUILD_JDK
   - java -Xmx32m -version
   - ./gradlew -v
   - ./gradlew -s --no-daemon --refresh-dependencies clean assemble testClasses
@@ -44,4 +45,5 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+    - $HOME/.jabba/jdk
     - $HOME/.tests/
