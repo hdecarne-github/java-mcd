@@ -5,8 +5,8 @@
  */
 module de.carne.mcd.jvmdecoder {
     requires /* mandated */ java.base /* 11.0.6 */;
-    requires org.eclipse.jdt.annotation;
-    requires de.carne;
+    requires transitive org.eclipse.jdt.annotation;
     requires transitive de.carne.mcd;
+    requires de.carne;
     exports de.carne.mcd.jvmdecoder;
 }
