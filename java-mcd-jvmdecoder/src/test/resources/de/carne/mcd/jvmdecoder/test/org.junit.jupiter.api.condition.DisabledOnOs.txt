@@ -13,5 +13,7 @@ package org.junit.jupiter.api.condition;
 public @interface DisabledOnOs implements java.lang.annotation.Annotation {
     
     public abstract OS[] value();
+    
+    public abstract String disabledReason();
 
 }
