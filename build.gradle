@@ -2,7 +2,7 @@
 plugins {
 	id "de.carne.java-tools" version "0.9.0" apply false
 	id "org.sonarqube" version "3.0" apply false
-	id "com.jfrog.artifactory" version "4.17.2" apply false
+	id "com.jfrog.artifactory" version "4.18.0" apply false
 	id "com.jfrog.bintray" version "1.8.5" apply false
 }
 
@@ -42,12 +42,12 @@ subprojects {
 	}
 
 	repositories {
+		jcenter()
+		maven { url "https://oss.jfrog.org/libs-release/" }
 		if(snapshotBuild) {
 			mavenLocal()
 			maven { url "https://oss.jfrog.org/libs-snapshot/" }
 		}
-		jcenter()
-		maven { url "https://oss.jfrog.org/libs-release/" }
 	}
 
 	dependencies {
@@ -82,7 +82,7 @@ subprojects {
 	}
 
 	jacoco {
-		toolVersion = "0.8.5"
+		toolVersion = project.jacocoVersion
 	}
 
 	jacocoTestReport {
