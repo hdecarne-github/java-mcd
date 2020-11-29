@@ -14,7 +14,7 @@ def resolveProperty(propertyName, envName, defValue = "<undefined>") {
 }
 
 // Projects
-defaultTasks "classes", "testClasses"
+defaultTasks "classes", "testClasses", "javadoc"
 
 subprojects {
 
