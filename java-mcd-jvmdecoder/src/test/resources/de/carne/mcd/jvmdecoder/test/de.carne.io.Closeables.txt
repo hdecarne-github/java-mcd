@@ -69,6 +69,41 @@ public final /* super */ class Closeables {
         0043: return
     }
     
+    public static void closeAll(Iterable<java.io.Closeable>) throws java.io.IOException {
+        // max_stack: 2
+        // max_locals: 5
+        0000: aconst_null
+        0001: astore_1
+        0002: aload_0
+        0003: invokeinterface #6 // java.util.Iterator Iterable.iterator()
+        0008: astore_2
+        0009: aload_2
+        000a: invokeinterface #7 // boolean java.util.Iterator.hasNext()
+        000f: ifeq +43 // 003a
+        0012: aload_2
+        0013: invokeinterface #8 // Object java.util.Iterator.next()
+        0018: checkcast #2 // java.io.Closeable
+        001b: astore_3
+        001c: aload_3
+        001d: invokeinterface #3 // void java.io.Closeable.close()
+        0022: goto +21 // 0037
+        0025: astore local_4
+        0027: aload_1
+        0028: ifnonnull +9 // 0031
+        002b: aload local_4
+        002d: astore_1
+        002e: goto +9 // 0037
+        0031: aload_1
+        0032: aload local_4
+        0034: invokevirtual #5 // void java.io.IOException.addSuppressed(Throwable)
+        0037: goto -46 // 0009
+        003a: aload_1
+        003b: ifnull +5 // 0040
+        003e: aload_1
+        003f: athrow
+        0040: return
+    }
+    
     public static void safeClose(Object) {
         // max_stack: 1
         // max_locals: 2
@@ -81,7 +116,7 @@ public final /* super */ class Closeables {
         0010: goto +8 // 0018
         0013: astore_1
         0014: aload_1
-        0015: invokestatic #6 // void de.carne.util.Exceptions.ignore(Throwable)
+        0015: invokestatic #9 // void de.carne.util.Exceptions.ignore(Throwable)
         0018: return
     }
     
@@ -98,7 +133,7 @@ public final /* super */ class Closeables {
         0013: astore_2
         0014: aload_0
         0015: aload_2
-        0016: invokevirtual #7 // void Throwable.addSuppressed(Throwable)
+        0016: invokevirtual #10 // void Throwable.addSuppressed(Throwable)
         0019: return
     }
 
