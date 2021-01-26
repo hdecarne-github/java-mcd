@@ -38,8 +38,8 @@ class InstructionOpcodeTest {
 		InstructionOpcode bsAll = InstructionOpcode.wrap(TEST_BYTES_D);
 		InstructionOpcode bs3 = InstructionOpcode.wrap(TEST_BYTES_A);
 
-		Assertions.assertTrue(bsAll.equals(bsAll));
-		Assertions.assertTrue(bs3.equals(InstructionOpcode.EMPTY));
+		Assertions.assertEquals(bsAll, bsAll);
+		Assertions.assertEquals(InstructionOpcode.EMPTY, bs3);
 	}
 
 	@Test
