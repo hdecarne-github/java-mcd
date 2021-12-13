@@ -14,6 +14,7 @@ public @interface DisabledOnOs implements java.lang.annotation.Annotation {
     
     public abstract OS[] value();
     
+    @org.apiguardian.api.API(status = org.apiguardian.api.API$Status.STABLE, since = "5.7")
     public abstract String disabledReason();
 
 }
