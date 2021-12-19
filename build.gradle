@@ -9,6 +9,7 @@ plugins {
 def snapshotBuild = project.version.endsWith("-SNAPSHOT")
 def releaseBuild = !snapshotBuild
 
+def mavenPublicRepository = "https://s01.oss.sonatype.org/content/groups/public/"
 def mavenReleaseRepository = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
 def mavenSnapshotRepository = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
 
@@ -45,6 +46,7 @@ subprojects {
 
 	repositories {
 		mavenCentral()
+		maven { url mavenPublicRepository }
 		if(snapshotBuild) {
 			maven { url mavenSnapshotRepository }
 		}
